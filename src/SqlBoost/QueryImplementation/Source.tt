@@ -1,0 +1,68 @@
+﻿<#@ template language="C#" #>
+<#@ assembly name="System.Core" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Text" #>
+<#@ import namespace="System.Collections.Generic" #>
+using System;
+using System.Data;
+using System.Linq.Expressions;
+using SqlBoost.QueryInterfaces;
+using SqlBoost.Core.QueryParts;
+using SqlBoost.Core;
+namespace SqlBoost.QueryImplementation
+{
+
+<#
+int depth = 10;
+for (int i = 1;i<=depth; i++)
+{#>
+	internal class Source<<#=TemplatesSeq(i)#>> : QueryBase, ISource<<#=TemplatesSeq(i)#>>
+	{
+		public Source(QueryContext context)
+			: base(context)
+		{
+		}
+
+		public ISource<<#=TemplatesSeq(i)#>> Where(System.Linq.Expressions.Expression<Func<ITargetDatabase, <#=TemplatesSeq(i)#>, bool>> condition)
+		{
+			Context.AddQueryPart(new WherePart(true, condition));
+			return this;
+		}
+		public ISource<<#=TemplatesSeq(i)#>> GroupBy(System.Linq.Expressions.Expression<Func<ITargetDatabase, <#=TemplatesSeq(i)#>,object>> groupBy)
+		{
+			Context.AddQueryPart(new GroupByPart(groupBy));
+			return this;
+		}
+<# if (i!=depth) {#>
+		public ISource<<#=TemplatesSeq(i)#>,T<#=i+1#>> Join<T<#=i+1#>>(System.Linq.Expressions.Expression<Func<<#=TemplatesSeq(i)#>,T<#=i+1#>, bool>> condition)
+		{
+			Context.AddQueryPart(new JoinPart(condition));
+			return new Source<<#=TemplatesSeq(i)#>,T<#=i+1#>>(Context);
+		}
+<#}#>
+		public IQueryEnd<TNew> Select<TNew>(System.Linq.Expressions.Expression<Func<ITargetDatabase, <#=TemplatesSeq(i)#>, TNew>> select)
+		{
+			Context.AddQueryPart(new SelectPart(select));
+			return new QueryEnd<TNew>(Context);
+		}
+	}
+
+<#
+}
+#>
+}
+<#+
+private string TemplatesSeq(int depth)
+{
+	var sb = new StringBuilder();
+	for(int i = 1;i<=depth;i++)
+	{
+		if (i>1)
+			sb.Append(",");
+		sb.AppendFormat("T{0}",i);
+		
+	}
+	return sb.ToString();
+}
+
+#>
