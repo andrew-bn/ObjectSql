@@ -1,6 +1,6 @@
 namespace SqlBoost.Core.Bo
 {
-	internal enum BuilderState
+	public enum BuilderState
 	{
 		None,
 		FromAliasNeeded,

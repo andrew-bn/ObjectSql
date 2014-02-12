@@ -3,7 +3,7 @@ using System.Data;
 
 namespace SqlBoost.Core.Bo.CommandPreparatorDescriptor
 {
-	internal abstract class CommandPreparator
+	public abstract class CommandPreparator
 	{
 		protected CommandPreparator(Action<IDbCommand, object> preparationAction)
 		{

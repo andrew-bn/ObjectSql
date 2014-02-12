@@ -2,7 +2,7 @@
 
 namespace SqlBoost.Core.QueryBuilder.InfoExtractor
 {
-	internal interface IMaterializationInfoExtractor
+	public interface IMaterializationInfoExtractor
 	{
 		EntityMaterializationInformation ExtractFrom(Expression expression);
 	}

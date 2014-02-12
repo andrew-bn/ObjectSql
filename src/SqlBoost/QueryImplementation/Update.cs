@@ -8,7 +8,7 @@ using System.Linq.Expressions;
 namespace SqlBoost.QueryImplementation
 {
 
-	internal class Update<T> : QueryBase, IUpdate<T>
+	public class Update<T> : QueryBase, IUpdate<T>
 	{
 		public Update(QueryContext context)
 			: base(context)

@@ -1,13 +1,14 @@
 ﻿using SqlBoost.Core.Bo.EntitySchema;
+using SqlBoost.Core.SchemaManager;
 using SqlBoost.Exceptions;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Xml.Linq;
 
-namespace SqlBoost.Core.SchemaManager
+namespace SqlBoost.EF5
 {
-	internal class EdmEntitySchemaManager<TTypeEnum> : EntitySchemaManager<TTypeEnum>
+	public class EdmEntitySchemaManager<TTypeEnum> : EntitySchemaManager<TTypeEnum>
 		where TTypeEnum: struct
 	{
 		private readonly XDocument _csdlDocument;

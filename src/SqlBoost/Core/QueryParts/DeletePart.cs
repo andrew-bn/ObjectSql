@@ -3,7 +3,7 @@ using SqlBoost.Core.Bo;
 
 namespace SqlBoost.Core.QueryParts
 {
-	internal class DeletePart : QueryPartBase
+	public class DeletePart : QueryPartBase
 	{
 		public Type Entity { get; private set; }
 		public DeletePart(Type entity)

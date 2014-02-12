@@ -5,7 +5,7 @@ using System.Linq.Expressions;
 
 namespace SqlBoost.Core.QueryBuilder.LambdaBuilder
 {
-	internal interface IDelegatesBuilder
+	public interface IDelegatesBuilder
 	{
 		Action<IDbCommand, object> CreateDatabaseParameterFactoryAction(Expression parameterName, Expression valueAccessor, IStorageFieldType parameterType);
 		Action<IDbCommand, object> CreateInsertionParametersInitializerAction(EntitySchema entitySchema, EntityInsertionInformation insertionInfo);

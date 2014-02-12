@@ -3,7 +3,7 @@ using SqlBoost.Exceptions;
 
 namespace SqlBoost.Core.Bo
 {
-	internal struct QueryRoots
+	public struct QueryRoots
 	{
 		public static QueryRoots Empty = new QueryRoots();
 

@@ -2,7 +2,7 @@
 
 namespace SqlBoost.Core.QueryBuilder
 {
-	internal interface ISqlWriter
+	public interface ISqlWriter
 	{
 		CommandText WriteUpdate(CommandText commandText, EntitySchema entity, string updateSql);
 		CommandText WriteDelete(CommandText commandText, EntitySchema entity);

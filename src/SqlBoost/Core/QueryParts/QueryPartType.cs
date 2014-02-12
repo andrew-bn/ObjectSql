@@ -1,6 +1,6 @@
 ﻿namespace SqlBoost.Core.QueryParts
 {
-	internal enum QueryPartType
+	public enum QueryPartType
 	{
 		From,
 		Select,

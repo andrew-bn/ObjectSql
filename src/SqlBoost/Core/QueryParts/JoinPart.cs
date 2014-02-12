@@ -2,7 +2,7 @@
 
 namespace SqlBoost.Core.QueryParts
 {
-	internal class JoinPart: LambdaBasedQueryPart
+	public class JoinPart: LambdaBasedQueryPart
 	{
 		public JoinPart(LambdaExpression expression)
 			:base(expression)

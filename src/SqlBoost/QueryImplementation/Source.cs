@@ -1,12 +1,14 @@
 ﻿using System;
-using SqlBoost.Core.Bo;
+using System.Data;
+using System.Linq.Expressions;
 using SqlBoost.QueryInterfaces;
 using SqlBoost.Core.QueryParts;
-
+using SqlBoost.Core;
+using SqlBoost.Core.Bo;
 namespace SqlBoost.QueryImplementation
 {
 
-	internal class Source<T1> : QueryBase, ISource<T1>
+	public class Source<T1> : QueryBase, ISource<T1>
 	{
 		public Source(QueryContext context)
 			: base(context)
@@ -35,7 +37,7 @@ namespace SqlBoost.QueryImplementation
 		}
 	}
 
-	internal class Source<T1,T2> : QueryBase, ISource<T1,T2>
+	public class Source<T1,T2> : QueryBase, ISource<T1,T2>
 	{
 		public Source(QueryContext context)
 			: base(context)
@@ -64,7 +66,7 @@ namespace SqlBoost.QueryImplementation
 		}
 	}
 
-	internal class Source<T1,T2,T3> : QueryBase, ISource<T1,T2,T3>
+	public class Source<T1,T2,T3> : QueryBase, ISource<T1,T2,T3>
 	{
 		public Source(QueryContext context)
 			: base(context)
@@ -93,7 +95,7 @@ namespace SqlBoost.QueryImplementation
 		}
 	}
 
-	internal class Source<T1,T2,T3,T4> : QueryBase, ISource<T1,T2,T3,T4>
+	public class Source<T1,T2,T3,T4> : QueryBase, ISource<T1,T2,T3,T4>
 	{
 		public Source(QueryContext context)
 			: base(context)
@@ -122,7 +124,7 @@ namespace SqlBoost.QueryImplementation
 		}
 	}
 
-	internal class Source<T1,T2,T3,T4,T5> : QueryBase, ISource<T1,T2,T3,T4,T5>
+	public class Source<T1,T2,T3,T4,T5> : QueryBase, ISource<T1,T2,T3,T4,T5>
 	{
 		public Source(QueryContext context)
 			: base(context)
@@ -151,7 +153,7 @@ namespace SqlBoost.QueryImplementation
 		}
 	}
 
-	internal class Source<T1,T2,T3,T4,T5,T6> : QueryBase, ISource<T1,T2,T3,T4,T5,T6>
+	public class Source<T1,T2,T3,T4,T5,T6> : QueryBase, ISource<T1,T2,T3,T4,T5,T6>
 	{
 		public Source(QueryContext context)
 			: base(context)
@@ -180,7 +182,7 @@ namespace SqlBoost.QueryImplementation
 		}
 	}
 
-	internal class Source<T1,T2,T3,T4,T5,T6,T7> : QueryBase, ISource<T1,T2,T3,T4,T5,T6,T7>
+	public class Source<T1,T2,T3,T4,T5,T6,T7> : QueryBase, ISource<T1,T2,T3,T4,T5,T6,T7>
 	{
 		public Source(QueryContext context)
 			: base(context)
@@ -209,7 +211,7 @@ namespace SqlBoost.QueryImplementation
 		}
 	}
 
-	internal class Source<T1,T2,T3,T4,T5,T6,T7,T8> : QueryBase, ISource<T1,T2,T3,T4,T5,T6,T7,T8>
+	public class Source<T1,T2,T3,T4,T5,T6,T7,T8> : QueryBase, ISource<T1,T2,T3,T4,T5,T6,T7,T8>
 	{
 		public Source(QueryContext context)
 			: base(context)
@@ -238,7 +240,7 @@ namespace SqlBoost.QueryImplementation
 		}
 	}
 
-	internal class Source<T1,T2,T3,T4,T5,T6,T7,T8,T9> : QueryBase, ISource<T1,T2,T3,T4,T5,T6,T7,T8,T9>
+	public class Source<T1,T2,T3,T4,T5,T6,T7,T8,T9> : QueryBase, ISource<T1,T2,T3,T4,T5,T6,T7,T8,T9>
 	{
 		public Source(QueryContext context)
 			: base(context)
@@ -267,7 +269,7 @@ namespace SqlBoost.QueryImplementation
 		}
 	}
 
-	internal class Source<T1,T2,T3,T4,T5,T6,T7,T8,T9,T10> : QueryBase, ISource<T1,T2,T3,T4,T5,T6,T7,T8,T9,T10>
+	public class Source<T1,T2,T3,T4,T5,T6,T7,T8,T9,T10> : QueryBase, ISource<T1,T2,T3,T4,T5,T6,T7,T8,T9,T10>
 	{
 		public Source(QueryContext context)
 			: base(context)

@@ -6,7 +6,7 @@ using System.Collections.Generic;
 
 namespace SqlBoost.QueryImplementation
 {
-	internal class QueryEnd<T> : QueryBase, IQueryEnd<T>
+	public class QueryEnd<T> : QueryBase, IQueryEnd<T>
 	{
 		public QueryEnd(QueryContext context)
 			: base(context)

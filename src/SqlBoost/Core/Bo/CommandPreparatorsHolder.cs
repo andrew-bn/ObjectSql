@@ -2,7 +2,7 @@ using System.Collections.Generic;
 
 namespace SqlBoost.Core.Bo
 {
-	internal class CommandPreparatorsHolder : ICommandPreparatorsHolder
+	public class CommandPreparatorsHolder : ICommandPreparatorsHolder
 	{
 		public CommandPreparatorsHolder()
 		{

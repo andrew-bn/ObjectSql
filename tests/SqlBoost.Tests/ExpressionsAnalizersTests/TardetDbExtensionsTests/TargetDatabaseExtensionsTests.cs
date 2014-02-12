@@ -7,7 +7,7 @@ using SqlBoost.Core.Bo.EntitySchema;
 using SqlBoost.Core.QueryBuilder;
 using SqlBoost.Core.QueryBuilder.LambdaBuilder;
 using SqlBoost.Core.SchemaManager;
-using SqlBoost.Databases.SqlServer;
+using SqlBoost.SqlServer;
 using SqlBoost.QueryInterfaces;
 using SqlBoost;
 using System;

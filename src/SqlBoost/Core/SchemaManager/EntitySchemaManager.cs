@@ -7,7 +7,7 @@ using SqlBoost.Core.Bo.EntitySchema;
 
 namespace SqlBoost.Core.SchemaManager
 {
-	internal class EntitySchemaManager<TTypeEnum> : IEntitySchemaManager
+	public class EntitySchemaManager<TTypeEnum> : IEntitySchemaManager
 		where TTypeEnum : struct
 	{
 		readonly ConcurrentDictionary<Type, EntitySchema> _schemas = new ConcurrentDictionary<Type, EntitySchema>();

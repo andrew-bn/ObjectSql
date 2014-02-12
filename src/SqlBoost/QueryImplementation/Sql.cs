@@ -12,7 +12,7 @@ using System.Threading.Tasks;
 
 namespace SqlBoost.QueryImplementation
 {
-	internal class Sql : QueryBase, ISql, INonQueryEnd
+	public class Sql : QueryBase, ISql, INonQueryEnd
 	{
 		public Sql(QueryContext context)
 			: base(context)

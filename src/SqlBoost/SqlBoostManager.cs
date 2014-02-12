@@ -1,60 +1,48 @@
-﻿using System.Linq.Expressions;
-using System.Runtime.CompilerServices;
-using SqlBoost.Core;
-using SqlBoost.Core.Bo;
-using SqlBoost.Core.Misc;
-using SqlBoost.QueryImplementation;
-using SqlBoost.QueryInterfaces;
-using System;
+﻿using System;
+using System.Collections.Generic;
 using System.Data;
-using System.Data.EntityClient;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace SqlBoost
 {
-	public class SqlBoostManager<T> : ISqlBoostManager where T : IDbConnection, new()
+	public abstract class SqlBoostManager
 	{
-
-		private readonly string _connectionString;
-		public SqlBoostManager(string connectionString)
+		internal static List<ISchemaManagerFactory> ProviderManager = new List<ISchemaManagerFactory>();
+		internal static List<IDatabaseManager> DatabaseManager = new List<IDatabaseManager>();
+		
+		static SqlBoostManager()
 		{
-			_connectionString = connectionString;
+			ProviderManager.Add(new DefaultSchemaManagerFactory());
 		}
-		public ISql Query()
+		public static ISchemaManagerFactory FindSchemaManagerFactory(IDbConnection connection, string cs)
 		{
-			var connection = CreateConnection();
-			return connection.CreateCommand().Query(ResourcesTreatmentType.DisposeConnection);
-		}
-
-		public IDbConnection CreateConnection()
-		{
-			var connection = new T();
-			if (typeof(T) == typeof(EntityConnection))
-				connection.ConnectionString = _connectionString;
-			else
+			foreach (var p in ProviderManager)
 			{
-				EntityConnectionStringBuilder entityStringBuilder;
-				var isEf = ConnectionStringAnalizer.TryGetEfConnectionString(_connectionString, out entityStringBuilder);
-				connection.ConnectionString = isEf 
-												? entityStringBuilder.ProviderConnectionString 
-												: _connectionString;
-			}
-			return new SqlBoostConnection(_connectionString, connection);
-		}
-		public Func<TArgs, IQueryEnd<TEntity>> CompileQuery<TArgs, TEntity>(Expression<Func<TArgs, IQueryEnd<TEntity>>> query)
-		{
-			var func = query.Compile();
-			var result = (QueryEnd<TEntity>)func(default(TArgs));
-			var preparationData = QueryManager.GetQueryPreparationData(result.Context);
-
-			return (arg1) =>
+				if (p.MatchSchemaManager(connection, cs))
 				{
-					var context = new CompiledQueryContext(
-						CreateConnection().CreateCommand(),
-						new StrongBox<TArgs>(arg1), result.Context);
-					QueryManager.PrepareQuery(context, preparationData);
-					return new QueryEnd<TEntity>(context);
-				};
+					return p;
+				}
+			}
+			throw new NotImplementedException();
 		}
-
+		public static IDatabaseManager FindDatabaseManager(IDbConnection connection, string provider)
+		{
+			foreach (var m in DatabaseManager)
+			{
+				if (m.MatchManager(connection, provider))
+					return m;
+			}
+			throw new NotImplementedException();
+		}
+		public static void RegisterSqlProviderManager(ISchemaManagerFactory managerFactory)
+		{
+			ProviderManager.Insert(0, managerFactory);
+		}
+		public static void RegisterDatabaseManager(IDatabaseManager manager)
+		{
+			DatabaseManager.Add(manager);
+		}
 	}
 }

@@ -2,7 +2,7 @@
 
 namespace SqlBoost
 {
-	internal class CommandText
+	public class CommandText
 	{
 		private readonly StringBuilder _sb = new StringBuilder();
 

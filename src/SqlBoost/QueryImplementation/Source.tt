@@ -9,6 +9,7 @@ using System.Linq.Expressions;
 using SqlBoost.QueryInterfaces;
 using SqlBoost.Core.QueryParts;
 using SqlBoost.Core;
+using SqlBoost.Core.Bo;
 namespace SqlBoost.QueryImplementation
 {
 
@@ -16,7 +17,7 @@ namespace SqlBoost.QueryImplementation
 int depth = 10;
 for (int i = 1;i<=depth; i++)
 {#>
-	internal class Source<<#=TemplatesSeq(i)#>> : QueryBase, ISource<<#=TemplatesSeq(i)#>>
+	public class Source<<#=TemplatesSeq(i)#>> : QueryBase, ISource<<#=TemplatesSeq(i)#>>
 	{
 		public Source(QueryContext context)
 			: base(context)

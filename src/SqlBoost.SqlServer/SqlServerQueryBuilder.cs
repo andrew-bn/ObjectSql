@@ -3,7 +3,7 @@ using SqlBoost.Core.QueryBuilder.ExpressionsAnalizers;
 using SqlBoost.Core.SchemaManager;
 using SqlBoost.Core.QueryBuilder.InfoExtractor;
 
-namespace SqlBoost.Databases.SqlServer
+namespace SqlBoost.SqlServer
 {
 	internal class SqlServerQueryBuilder: QueryBuilder
 	{

@@ -3,7 +3,7 @@ using SqlBoost.Core.QueryParts;
 
 namespace SqlBoost.Core.QueryBuilder
 {
-	internal interface IQueryBuilder
+	public interface IQueryBuilder
 	{
 		QueryPreparationData BuildQuery(IQueryPart[] parts);
 	}

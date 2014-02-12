@@ -4,7 +4,7 @@ using System.Linq.Expressions;
 
 namespace SqlBoost.Core.QueryParts
 {
-	internal abstract class LambdaBasedQueryPart: QueryPartBase
+	public abstract class LambdaBasedQueryPart: QueryPartBase
 	{
 		public LambdaExpression Expression { get; private set; }
 		protected LambdaBasedQueryPart(LambdaExpression expression)

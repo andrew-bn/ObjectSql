@@ -2,7 +2,7 @@
 
 namespace SqlBoost.Core.QueryBuilder.ExpressionsAnalizers
 {
-	internal interface ISqlQueryBuilder
+	public interface ISqlQueryBuilder
 	{
 		string BuildSql(ICommandPreparatorsHolder commandPreparators, Expression expression,bool useAliases);
 	}

@@ -3,7 +3,7 @@ using SqlBoost.Core.Bo.CommandPreparatorDescriptor;
 
 namespace SqlBoost.Core.Bo
 {
-	internal class QueryPreparationData
+	public class QueryPreparationData
 	{
 		public CommandPreparator[] Parameters { get; private set; }
 		public string CommandText { get; private set; }

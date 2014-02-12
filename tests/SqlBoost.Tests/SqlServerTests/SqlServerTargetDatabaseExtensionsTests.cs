@@ -1,23 +1,17 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
-using SqlBoost.Core.Bo;
 using SqlBoost.Core.Bo.CommandPreparatorDescriptor;
 using SqlBoost.Core.Bo.EntitySchema;
-using SqlBoost.Databases.SqlServer;
-using SqlBoost.SqlServer;
 using SqlBoost.Core;
-using SqlBoost.Core.QueryBuilder;
 using SqlBoost.Core.QueryBuilder.LambdaBuilder;
 using SqlBoost.Core.SchemaManager;
 using SqlBoost.QueryInterfaces;
 using System;
 using System.Collections.Generic;
 using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Linq.Expressions;
 using SqlBoost.Core.QueryBuilder.ExpressionsAnalizers;
+using SqlBoost.SqlServer;
 
 namespace SqlBoost.Tests.SqlServerTests
 {

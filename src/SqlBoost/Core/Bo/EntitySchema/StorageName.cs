@@ -1,6 +1,6 @@
 namespace SqlBoost.Core.Bo.EntitySchema
 {
-	internal class StorageName
+	public class StorageName
 	{
 		public StorageName(string name, string schema)
 		{

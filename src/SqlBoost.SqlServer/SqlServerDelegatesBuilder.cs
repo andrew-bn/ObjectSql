@@ -5,7 +5,7 @@ using System.Data;
 using System.Data.SqlClient;
 using System.Linq.Expressions;
 
-namespace SqlBoost.Databases.SqlServer
+namespace SqlBoost.SqlServer
 {
 	internal class SqlServerDelegatesBuilder: DelegatesBuilder
 	{

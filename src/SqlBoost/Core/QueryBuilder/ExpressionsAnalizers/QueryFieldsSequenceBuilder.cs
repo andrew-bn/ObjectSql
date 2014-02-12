@@ -5,7 +5,7 @@ using System.Linq.Expressions;
 
 namespace SqlBoost.Core.QueryBuilder.ExpressionsAnalizers
 {
-	internal class QueryFieldsSequenceBuilder: QueryExpressionBuilder
+	public class QueryFieldsSequenceBuilder: QueryExpressionBuilder
 	{
 		public QueryFieldsSequenceBuilder(IEntitySchemaManager schemaManager, IDelegatesBuilder expressionBuilder, ISqlWriter sqlWriter)
 			: base(schemaManager, expressionBuilder, sqlWriter)

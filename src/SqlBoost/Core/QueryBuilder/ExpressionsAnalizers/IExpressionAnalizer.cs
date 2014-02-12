@@ -3,7 +3,7 @@ using SqlBoost.Core.Bo;
 
 namespace SqlBoost.Core.QueryBuilder.ExpressionsAnalizers
 {
-	internal interface IExpressionAnalizer
+	public interface IExpressionAnalizer
 	{
 		string AnalizeExpression(ICommandPreparatorsHolder commandPreparators, Expression expression, ExpressionAnalizerType expressionType, bool useAliases);
 	}

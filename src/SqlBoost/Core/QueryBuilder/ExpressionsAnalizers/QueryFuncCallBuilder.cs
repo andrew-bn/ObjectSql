@@ -10,7 +10,7 @@ using System.Linq.Expressions;
 
 namespace SqlBoost.Core.QueryBuilder.ExpressionsAnalizers
 {
-	internal class QueryFuncCallBuilder : ExpressionVisitor, ISqlQueryBuilder
+	public class QueryFuncCallBuilder : ExpressionVisitor, ISqlQueryBuilder
 	{
 		protected IEntitySchemaManager SchemaManager { get; private set; }
 		protected ICommandPreparatorsHolder CommandPreparatorsHolder { get; private set; }

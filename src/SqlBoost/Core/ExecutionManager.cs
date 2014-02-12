@@ -88,7 +88,7 @@ namespace SqlBoost.Core
 		}
 
 		#region async
-		internal class EntityEnumerable<T> : IAsyncEnumerable<T>, IEnumerable<T>, IAsyncEnumerator<T>, IEnumerator<T>
+		public class EntityEnumerable<T> : IAsyncEnumerable<T>, IEnumerable<T>, IAsyncEnumerator<T>, IEnumerator<T>
 		{
 			private readonly QueryContext _context;
 			private readonly IDataReader _dataReader;

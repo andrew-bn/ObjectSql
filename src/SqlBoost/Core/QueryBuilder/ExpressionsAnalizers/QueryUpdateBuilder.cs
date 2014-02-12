@@ -6,7 +6,7 @@ using System.Linq.Expressions;
 
 namespace SqlBoost.Core.QueryBuilder.ExpressionsAnalizers
 {
-	internal class QueryUpdateBuilder: QueryExpressionBuilder
+	public class QueryUpdateBuilder: QueryExpressionBuilder
 	{
 		private bool _initNodeEncountered;
 		public QueryUpdateBuilder(IEntitySchemaManager schemaManager, IDelegatesBuilder expressionBuilder, ISqlWriter sqlWriter)

@@ -3,7 +3,7 @@ using SqlBoost.Core.Bo;
 
 namespace SqlBoost.Core.QueryParts
 {
-	internal class WherePart: LambdaBasedQueryPart
+	public class WherePart: LambdaBasedQueryPart
 	{
 		public bool UseAliases { get; private set; }
 		public WherePart(bool useAliases, LambdaExpression expression)

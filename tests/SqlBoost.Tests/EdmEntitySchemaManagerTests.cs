@@ -2,6 +2,7 @@
 using SqlBoost.Core.Bo;
 using SqlBoost.Core.Bo.EntitySchema;
 using SqlBoost.Core.SchemaManager;
+using SqlBoost.EF5;
 using SqlBoost.Exceptions;
 using System;
 using System.Collections.Generic;

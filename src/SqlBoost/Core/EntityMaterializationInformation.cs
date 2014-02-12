@@ -4,7 +4,7 @@ using System.Reflection;
 
 namespace SqlBoost.Core
 {
-	internal class EntityMaterializationInformation
+	public class EntityMaterializationInformation
 	{
 		public bool IsConstructorBased
 		{

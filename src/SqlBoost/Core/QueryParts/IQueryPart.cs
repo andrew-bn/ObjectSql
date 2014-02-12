@@ -2,7 +2,7 @@
 
 namespace SqlBoost.Core.QueryParts
 {
-	internal interface IQueryPart
+	public interface IQueryPart
 	{
 		QueryPartType PartType { get; }
 		void CalculateQueryExpressionParameters(ref QueryRoots parameters);

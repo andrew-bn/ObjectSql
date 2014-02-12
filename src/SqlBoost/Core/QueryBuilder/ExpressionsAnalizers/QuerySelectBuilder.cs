@@ -5,7 +5,7 @@ using System.Linq.Expressions;
 
 namespace SqlBoost.Core.QueryBuilder.ExpressionsAnalizers
 {
-	internal class QuerySelectBuilder : QueryExpressionBuilder
+	public class QuerySelectBuilder : QueryExpressionBuilder
 	{
 		private bool _multiFieldSelectionFromTable = true;		
 		public QuerySelectBuilder(IEntitySchemaManager schemaManager, IDelegatesBuilder expressionBuilder, ISqlWriter sqlWriter)

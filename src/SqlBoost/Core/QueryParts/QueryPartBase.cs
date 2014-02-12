@@ -2,7 +2,7 @@
 
 namespace SqlBoost.Core.QueryParts
 {
-	internal abstract class QueryPartBase:IQueryPart
+	public abstract class QueryPartBase:IQueryPart
 	{
 		public const int PRIME = 397;
 		public abstract QueryPartType PartType {get;}

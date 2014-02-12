@@ -4,7 +4,7 @@ using SqlBoost.QueryInterfaces;
 
 namespace SqlBoost.QueryImplementation
 {
-	internal class Insert<TDst>: QueryBase, IInsert<TDst>
+	public class Insert<TDst>: QueryBase, IInsert<TDst>
 		where TDst : class
 	{
 		public Insert(QueryContext context)

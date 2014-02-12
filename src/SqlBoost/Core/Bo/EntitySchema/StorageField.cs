@@ -1,6 +1,6 @@
 namespace SqlBoost.Core.Bo.EntitySchema
 {
-	internal class StorageField
+	public class StorageField
 	{
 		public string Name { get; private set; }
 		public IStorageFieldType DbType { get; private set; }

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace SqlBoost.Core
 {
-	internal interface ICommandPreparatorsHolder
+	public interface ICommandPreparatorsHolder
 	{
 		IReadOnlyList<CommandPreparator> Preparators { get; }
 		int ParametersEncountered { get; set; }

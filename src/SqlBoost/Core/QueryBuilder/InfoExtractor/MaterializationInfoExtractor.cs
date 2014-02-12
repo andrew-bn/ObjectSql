@@ -4,7 +4,7 @@ using System.Linq.Expressions;
 
 namespace SqlBoost.Core.QueryBuilder.InfoExtractor
 {
-	internal class MaterializationInfoExtractor : ExpressionVisitor, IMaterializationInfoExtractor
+	public class MaterializationInfoExtractor : ExpressionVisitor, IMaterializationInfoExtractor
 	{
 		private readonly IEntitySchemaManager _schemaManager;
 		private EntityMaterializationInformation _result;

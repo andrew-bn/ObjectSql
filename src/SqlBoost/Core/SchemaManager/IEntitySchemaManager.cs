@@ -4,7 +4,7 @@ using SqlBoost.Core.Bo.EntitySchema;
 
 namespace SqlBoost.Core.SchemaManager
 {
-	internal interface IEntitySchemaManager
+	public interface IEntitySchemaManager
 	{
 		EntitySchema GetSchema(Type entityType);
 		FuncSchema GetFuncSchema(MethodInfo method);

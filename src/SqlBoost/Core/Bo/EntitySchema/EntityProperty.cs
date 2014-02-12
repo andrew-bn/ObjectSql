@@ -2,7 +2,7 @@ using System.Reflection;
 
 namespace SqlBoost.Core.Bo.EntitySchema
 {
-	internal class EntityProperty : EntityMember
+	public class EntityProperty : EntityMember
 	{
 		public PropertyInfo PropertyInfo { get; private set; }
 		public EntityProperty(PropertyInfo propertyInfo, int index, StorageField storageField)

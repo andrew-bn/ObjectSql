@@ -5,7 +5,7 @@ using SqlBoost.Core.Bo.EntitySchema;
 
 namespace SqlBoost.Core.Bo.CommandPreparatorDescriptor
 {
-	internal abstract class SingleParameterPreparator : CommandPreparator
+	public abstract class SingleParameterPreparator : CommandPreparator
 	{
 		protected SingleParameterPreparator(string name, 
 			IStorageFieldType type, Expression accessor, Action<IDbCommand, object> preparationAction) 

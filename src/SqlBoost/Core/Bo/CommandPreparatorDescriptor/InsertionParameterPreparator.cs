@@ -3,7 +3,7 @@ using System.Data;
 
 namespace SqlBoost.Core.Bo.CommandPreparatorDescriptor
 {
-	internal class InsertionParameterPreparator : CommandPreparator
+	public class InsertionParameterPreparator : CommandPreparator
 	{
 		public InsertionParameterPreparator(Action<IDbCommand, object> preparationAction) 
 			: base(preparationAction)

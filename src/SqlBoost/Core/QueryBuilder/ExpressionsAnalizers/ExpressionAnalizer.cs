@@ -6,7 +6,7 @@ using System.Linq.Expressions;
 
 namespace SqlBoost.Core.QueryBuilder.ExpressionsAnalizers
 {
-	internal class ExpressionAnalizer : IExpressionAnalizer
+	public class ExpressionAnalizer : IExpressionAnalizer
 	{
 		private readonly ISqlWriter _sqlWriter;
 		private readonly Dictionary<ExpressionAnalizerType, ISqlQueryBuilder> _analizers = new Dictionary<ExpressionAnalizerType, ISqlQueryBuilder>();

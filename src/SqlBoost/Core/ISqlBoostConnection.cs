@@ -2,7 +2,7 @@
 
 namespace SqlBoost.Core
 {
-	internal interface ISqlBoostConnection: IDbConnection
+	public interface ISqlBoostConnection: IDbConnection
 	{
 		IDbConnection UnderlyingConnection { get; }
 	}

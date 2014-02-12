@@ -4,7 +4,7 @@ using SqlBoost.QueryInterfaces;
 
 namespace SqlBoost.QueryImplementation
 {
-	internal class QueryBase: IQueryContextHolder
+	public class QueryBase: IQueryContextHolder
 	{
 		public QueryContext Context { get; private set; }
 

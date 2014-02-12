@@ -2,7 +2,7 @@
 
 namespace SqlBoost.Core
 {
-	internal interface ISqlBoostCommand: IDbCommand
+	public interface ISqlBoostCommand: IDbCommand
 	{
 		IDbCommand UnderlyingCommand { get; }
 	}

@@ -2,7 +2,7 @@
 
 namespace SqlBoost.Core.QueryParts
 {
-	internal class GroupByPart:LambdaBasedQueryPart
+	public class GroupByPart:LambdaBasedQueryPart
 	{
 		public GroupByPart(LambdaExpression expression)
 			:base(expression)

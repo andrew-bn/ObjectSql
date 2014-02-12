@@ -13,7 +13,7 @@ using System.Reflection;
 
 namespace SqlBoost.Core.QueryBuilder.ExpressionsAnalizers
 {
-	internal class QueryExpressionBuilder : ExpressionVisitor, ISqlQueryBuilder
+	public class QueryExpressionBuilder : ExpressionVisitor, ISqlQueryBuilder
 	{
 		private bool _valueWasNull;
 		protected IEntitySchemaManager SchemaManager { get; private set; }

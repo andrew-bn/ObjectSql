@@ -3,7 +3,7 @@ using System.Linq.Expressions;
 
 namespace SqlBoost.Core.QueryParts
 {
-	internal class StoredProcedurePart: LambdaBasedQueryPart
+	public class StoredProcedurePart: LambdaBasedQueryPart
 	{
 		public bool ReturnsCollection { get; private set; }
 		public Type EntityType{get;private set;}

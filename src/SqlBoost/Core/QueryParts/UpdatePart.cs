@@ -2,7 +2,7 @@
 
 namespace SqlBoost.Core.QueryParts
 {
-	internal class UpdatePart: LambdaBasedQueryPart
+	public class UpdatePart: LambdaBasedQueryPart
 	{
 		public UpdatePart(LambdaExpression expression)
 			:base(expression)

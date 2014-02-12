@@ -6,10 +6,12 @@ using SqlBoost.Core.QueryParts;
 
 namespace SqlBoost.Core.Bo
 {
-	internal class QueryContext
+	public class QueryContext
 	{
 		public const int PRIME = 397;
 		public IDbCommand DbCommand { get; private set; }
+		public IDatabaseManager DbManager { get; private set; }
+		public ISchemaManagerFactory SchemaManagerFactory { get; private set; }
 		public string ConnectionString { get; private set; }
 		public IReadOnlyList<IQueryPart> QueryParts { get { return _queryParts; } }
 		public QueryRoots QueryRoots { get { return QueryRootsStruct; } }
@@ -20,16 +22,18 @@ namespace SqlBoost.Core.Bo
 		private List<IQueryPart> _queryParts;
 		protected QueryRoots QueryRootsStruct;
 
-		internal QueryContext(IDbCommand command, string connectionString, ResourcesTreatmentType resTreatment)
+		internal QueryContext(IDbCommand command, IDatabaseManager dbManager, ISchemaManagerFactory schemaManagerFactory, string connectionString, ResourcesTreatmentType resTreatment)
 		{
 			DbCommand = command;
+			DbManager = dbManager;
+			SchemaManagerFactory = schemaManagerFactory;
 			ConnectionString = connectionString;
 			_queryParts = new List<IQueryPart>();
 			ResourcesTreatmentType = resTreatment;
 		}
 		internal QueryContext CopyWith(IDbCommand command)
 		{
-			var result = new QueryContext(command,ConnectionString,ResourcesTreatmentType)
+			var result = new QueryContext(command,DbManager, SchemaManagerFactory, ConnectionString,ResourcesTreatmentType)
 				{
 					QueryRootsStruct = QueryRootsStruct,
 					_queryParts = _queryParts,

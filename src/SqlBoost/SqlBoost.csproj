@@ -73,12 +73,12 @@
     <Compile Include="Core\Bo\ResourcesTreatmentType.cs" />
     <Compile Include="Core\Bo\StorageType.cs" />
     <Compile Include="Core\ExecutionManager.cs" />
+    <Compile Include="DefaultSchemaManagerFactory.cs" />
     <Compile Include="IAsyncEnumerable.cs" />
     <Compile Include="IAsyncEnumerator.cs" />
     <Compile Include="Core\ICommandPreparatorsHolder.cs" />
     <Compile Include="Core\ISqlBoostCommand.cs" />
     <Compile Include="Core\ISqlBoostConnection.cs" />
-    <Compile Include="Core\Misc\ConnectionStringAnalizer.cs" />
     <Compile Include="Core\Misc\CoreExtensions.cs" />
     <Compile Include="Core\Misc\ExpressionComparer.cs" />
     <Compile Include="Core\Misc\Reflect.cs" />
@@ -100,8 +100,6 @@
     <Compile Include="Core\QueryBuilder\ISqlWriter.cs" />
     <Compile Include="Core\QueryBuilder\LambdaBuilder\IDelegatesBuilder.cs" />
     <Compile Include="Core\QueryBuilder\LambdaBuilder\DelegatesBuilder.cs" />
-    <Compile Include="Databases\SqlServer\SqlServerQueryBuilder.cs" />
-    <Compile Include="Databases\SqlServer\SqlServerDelegatesBuilder.cs" />
     <Compile Include="Core\Misc\ExpressionEnumerator.cs" />
     <Compile Include="Core\Misc\ExpressionHashCalculator.cs" />
     <Compile Include="Core\QueryBuilder\QueryBuilder.cs" />
@@ -119,14 +117,13 @@
     <Compile Include="Core\QueryParts\UpdatePart.cs" />
     <Compile Include="Core\QueryParts\ValuesPart.cs" />
     <Compile Include="Core\QueryParts\WherePart.cs" />
-    <Compile Include="Core\SchemaManager\EdmEntitySchemaManager.cs" />
     <Compile Include="Core\SchemaManager\EntitySchemaManager.cs" />
     <Compile Include="Core\SchemaManager\IEntitySchemaManager.cs" />
     <Compile Include="Core\SqlBoostCommand.cs" />
     <Compile Include="Core\SqlBoostConnection.cs" />
-    <Compile Include="Databases\SqlServer\SqlServerTargetDatabaseExtensions.cs" />
-    <Compile Include="Databases\SqlServer\SqlServerSqlWriter.cs" />
     <Compile Include="Exceptions\SqlBoostException.cs" />
+    <Compile Include="IDatabaseManager.cs" />
+    <Compile Include="ISchemaManagerFactory.cs" />
     <Compile Include="ISqlBoostManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="QueryImplementation\Insert.cs" />
@@ -163,6 +160,7 @@
     <Compile Include="Core\QueryManager.cs" />
     <Compile Include="SqlBoostExtensions.cs" />
     <Compile Include="SqlBoostManager.cs" />
+    <Compile Include="SqlBoostManagerGeneric.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="QueryImplementation\Source.tt">

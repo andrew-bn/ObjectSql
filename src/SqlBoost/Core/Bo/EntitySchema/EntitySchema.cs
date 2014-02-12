@@ -5,7 +5,7 @@ using System.Linq.Expressions;
 
 namespace SqlBoost.Core.Bo.EntitySchema
 {
-	internal class EntitySchema
+	public class EntitySchema
 	{
 		private IDictionary<string, StorageField> _entityFieldsMap;
 

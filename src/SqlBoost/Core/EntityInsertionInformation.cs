@@ -1,6 +1,6 @@
 ﻿namespace SqlBoost.Core
 {
-	internal class EntityInsertionInformation
+	public class EntityInsertionInformation
 	{
 		public int[] PropertiesIndexesToInsert { get; private set; }
 

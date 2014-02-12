@@ -1,6 +1,6 @@
 ﻿namespace SqlBoost.Core.QueryBuilder.InfoExtractor
 {
-	internal interface IInsertionInfoExtractor
+	public interface IInsertionInfoExtractor
 	{
 		EntityInsertionInformation ExtractFrom(System.Linq.Expressions.Expression expression);
 	}

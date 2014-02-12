@@ -1,6 +1,6 @@
 namespace SqlBoost.Core.Bo
 {
-	internal enum ResourcesTreatmentType
+	public enum ResourcesTreatmentType
 	{
 		DisposeNone,
 		DisposeConnection,

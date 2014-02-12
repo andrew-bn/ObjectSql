@@ -2,10 +2,10 @@ using System.Data;
 
 namespace SqlBoost.Core.Bo
 {
-	internal class CompiledQueryContext: QueryContext
+	public class CompiledQueryContext: QueryContext
 	{
-		internal CompiledQueryContext(IDbCommand command, object newRootValue, QueryContext copyFromContext)
-			: base(command, copyFromContext.ConnectionString, copyFromContext.ResourcesTreatmentType)
+		internal CompiledQueryContext(IDbCommand command, IDatabaseManager dbManager, ISchemaManagerFactory schemaManagerFactory, object newRootValue, QueryContext copyFromContext)
+			: base(command, dbManager, schemaManagerFactory, copyFromContext.ConnectionString, copyFromContext.ResourcesTreatmentType)
 		{
 
 			QueryRootsStruct = copyFromContext.QueryRoots;

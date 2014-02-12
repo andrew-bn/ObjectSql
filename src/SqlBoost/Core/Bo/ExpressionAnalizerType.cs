@@ -1,6 +1,6 @@
 namespace SqlBoost.Core.Bo
 {
-	internal enum ExpressionAnalizerType
+	public enum ExpressionAnalizerType
 	{
 		FieldsSequence,
 		FieldsSelect,

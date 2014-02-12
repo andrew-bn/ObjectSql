@@ -1,6 +1,6 @@
 namespace SqlBoost.Core.Bo.CommandPreparatorDescriptor
 {
-	internal enum CommandPreparatorType
+	public enum CommandPreparatorType
 	{
 		CommandPreparator,
 		InsertionParameter,

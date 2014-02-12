@@ -2,9 +2,9 @@
 using SqlBoost.Core.Bo.EntitySchema;
 using SqlBoost.Core.QueryBuilder;
 
-namespace SqlBoost.Databases.SqlServer
+namespace SqlBoost.SqlServer
 {
-	internal class SqlServerSqlWriter : ISqlWriter
+	public class SqlServerSqlWriter : ISqlWriter
 	{
 		public CommandText WriteUpdate(CommandText commandText, EntitySchema entity, string updateSql)
 		{

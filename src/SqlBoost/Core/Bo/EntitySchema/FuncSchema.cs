@@ -1,6 +1,6 @@
 namespace SqlBoost.Core.Bo.EntitySchema
 {
-	internal class FuncSchema
+	public class FuncSchema
 	{
 		public FuncSchema(StorageName storageName, FuncParameter[] funcParameters)
 		{

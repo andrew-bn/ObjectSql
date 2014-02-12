@@ -14,6 +14,8 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 [assembly: InternalsVisibleTo("SqlBoost.Tests")]
+[assembly: InternalsVisibleTo("SqlBoost.EF5")]
+[assembly: InternalsVisibleTo("SqlBoost.SqlServer")]
 [assembly: InternalsVisibleTo("Moq")]
 [assembly:InternalsVisibleTo("DynamicProxyGenAssembly2")] 
 // Setting ComVisible to false makes the types in this assembly not visible 

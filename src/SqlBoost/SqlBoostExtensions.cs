@@ -1,10 +1,11 @@
-﻿using SqlBoost.Core;
+﻿using SqlBoost;
+using SqlBoost.Core;
 using SqlBoost.Core.Bo;
 using SqlBoost.QueryImplementation;
 using SqlBoost.QueryInterfaces;
 using System.Data;
 
-namespace SqlBoost
+namespace System
 {
 	public static class SqlBoostExtensions
 	{
@@ -20,7 +21,13 @@ namespace SqlBoost
 		{
 			var sqlBoostCommand = command as SqlBoostCommand;
 			var dbCommand = sqlBoostCommand == null ? command : sqlBoostCommand.UnderlyingCommand;
-			var context = QueryManager.CreateQueryContext(dbCommand, command.Connection.ConnectionString, treatType);
+			var initialCs = sqlBoostCommand == null ? command.Connection.ConnectionString : sqlBoostCommand.Connection.ConnectionString;
+			
+			var factory = SqlBoostManager.FindSchemaManagerFactory(dbCommand.Connection, initialCs);
+			var providerName = factory.TryGetProviderName(dbCommand.Connection, initialCs);
+			var dbManager = SqlBoostManager.FindDatabaseManager(dbCommand.Connection, providerName);
+
+			var context = QueryManager.CreateQueryContext(dbCommand, dbManager, factory, command.Connection.ConnectionString, treatType);
 			return new Sql(context);
 		}
 	}

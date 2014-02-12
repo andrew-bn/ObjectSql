@@ -8,7 +8,7 @@ using SqlBoost.Core.QueryBuilder;
 using SqlBoost.Core.QueryBuilder.ExpressionsAnalizers;
 using SqlBoost.Core.QueryBuilder.LambdaBuilder;
 using SqlBoost.Core.SchemaManager;
-using SqlBoost.Databases.SqlServer;
+using SqlBoost.SqlServer;
 using SqlBoost.Exceptions;
 using SqlBoost.QueryInterfaces;
 using System;

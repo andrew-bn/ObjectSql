@@ -2,7 +2,7 @@ using System;
 
 namespace SqlBoost.Core.Bo
 {
-	internal class BuilderContext
+	public class BuilderContext
 	{
 		public BuilderContext()
 		{

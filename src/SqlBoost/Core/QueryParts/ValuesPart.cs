@@ -3,7 +3,7 @@ using SqlBoost.Core.Bo;
 
 namespace SqlBoost.Core.QueryParts
 {
-	internal class ValuesPart: QueryPartBase
+	public class ValuesPart: QueryPartBase
 	{
 		public object[] Values { get; private set; }
 		public Type Type { get; private set; }

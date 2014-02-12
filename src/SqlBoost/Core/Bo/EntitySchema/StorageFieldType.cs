@@ -1,6 +1,6 @@
 namespace SqlBoost.Core.Bo.EntitySchema
 {
-	internal class StorageFieldType<TTypeEnum>: IStorageFieldType
+	public class StorageFieldType<TTypeEnum>: IStorageFieldType
 		where TTypeEnum:struct
 	{
 		public StorageFieldType(TTypeEnum value)
