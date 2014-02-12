@@ -1,6 +1,7 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SqlBoost;
 using SqlBoost.Core.Misc;
+using SqlBoost.EF5;
 using SqlBoost.QueryInterfaces;
 using System;
 using System.Collections.Generic;
@@ -10,6 +11,7 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
+using SqlBoost.SqlServer;
 
 namespace SqlBoost.Tests
 {
@@ -79,6 +81,12 @@ namespace SqlBoost.Tests
 	[TestClass]
 	public abstract class TestBase
 	{
+		static TestBase()
+		{
+			SqlBoostSqlServerInitializer.Initialize();
+			SqlBoostEf5Initializer.Initialize();
+			_sqlManager = new SqlBoostManager<SqlConnection>(EfConnectionString);
+		}
 		protected static string EfConnectionString
 		{
 			get
@@ -86,8 +94,8 @@ namespace SqlBoost.Tests
 				return System.Configuration.ConfigurationManager.ConnectionStrings["TestDatabaseEntities"].ConnectionString;
 			}
 		}
-		static SqlBoostManager<SqlConnection> _sqlManager = new SqlBoostManager<SqlConnection>(EfConnectionString);
-		
+
+		private static SqlBoostManager<SqlConnection> _sqlManager;
 		protected ISql EfQuery
 		{
 			get

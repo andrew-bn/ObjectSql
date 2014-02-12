@@ -31,7 +31,7 @@ namespace SqlBoost
 		public IEntitySchemaManager CreateSchemaManager(System.Type dbType, string connectionString)
 		{
 			return (IEntitySchemaManager)
-			       Activator.CreateInstance(typeof (EntitySchemaManager<>).MakeGenericType(dbType), connectionString);
+			       Activator.CreateInstance(typeof (EntitySchemaManager<>).MakeGenericType(dbType));
 		}
 	}
 }

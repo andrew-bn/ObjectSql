@@ -1,4 +1,5 @@
-﻿using SqlBoost.Core.Bo.EntitySchema;
+﻿using System.Data.EntityClient;
+using SqlBoost.Core.Bo.EntitySchema;
 using SqlBoost.Core.SchemaManager;
 using SqlBoost.Exceptions;
 using System;
@@ -18,8 +19,9 @@ namespace SqlBoost.EF5
 		private readonly string _csdlNamespace;
 		private readonly string _ssdlNamespace;
 
-		public EdmEntitySchemaManager(string metadata)
+		public EdmEntitySchemaManager(string connStr)
 		{
+			var metadata = new EntityConnectionStringBuilder(connStr).Metadata;
 			var resources = metadata.Split('|').Select(x => x.Replace(@"res://*/", "")).ToArray();
 
 			var csdlResName = resources.SingleOrDefault(x => x.EndsWith("csdl"));

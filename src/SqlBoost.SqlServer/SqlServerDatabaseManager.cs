@@ -10,7 +10,7 @@ namespace SqlBoost.SqlServer
 	{
 		public bool MatchManager(IDbConnection dbConnection,  string providerName)
 		{
-			return providerName == "System.Data.EntityClient" || (dbConnection is SqlConnection);
+			return providerName == "System.Data.SqlClient" || (dbConnection is SqlConnection);
 		}
 		public IQueryBuilder CreateQueryBuilder(IEntitySchemaManager schemaManager)
 		{
