@@ -74,7 +74,7 @@ namespace SqlBoost.Tests
 		}
 		private IEntitySchemaManager CreateManager()
 		{
-			return new EdmEntitySchemaManager<SqlDbType>("res://*/Northwind.csdl|res://*/Northwind.ssdl|res://*/Northwind.msl");
+			return new EdmEntitySchemaManager<SqlDbType>(@"metadata=res://*/Northwind.csdl|res://*/Northwind.ssdl|res://*/Northwind.msl;provider=System.Data.SqlClient;provider connection string=""data source=(LocalDB)\v11.0;attachdbfilename=D:\Work\Git\ObjectSql\tests\SqlBoost.Tests\TestDatabase.mdf;integrated security=True;connect timeout=30;MultipleActiveResultSets=True;App=EntityFramework""");
 		}
 	}
 }
