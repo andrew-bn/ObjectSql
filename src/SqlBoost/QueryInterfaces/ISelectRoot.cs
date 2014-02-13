@@ -6,6 +6,6 @@ namespace SqlBoost.QueryInterfaces
 	public interface ISelectRoot
 	{
 		ISource<TTable> From<TTable>();
-		IQueryEnd<TValue> Select<TValue>(Expression<Func<ITargetDatabase, TValue>> select);
+		IQueryEnd<TValue> Select<TValue>(Expression<Func<TValue>> select);
 	}
 }

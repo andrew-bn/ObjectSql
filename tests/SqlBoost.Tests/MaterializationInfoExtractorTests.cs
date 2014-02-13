@@ -69,7 +69,7 @@ namespace SqlBoost.Tests
 		[TestMethod]
 		public void ExtractFrom_MethodCallResultMaterialization()
 		{
-			Expression<Func<ITargetDatabase, Category, object>> exp = (db,c) => db.Count(c.CategoryID);
+			Expression<Func<Category, object>> exp = (c) => Sql.Count(c.CategoryID);
 			var extractor = CreateExtractor();
 			var result = extractor.ExtractFrom(exp.Body);
 

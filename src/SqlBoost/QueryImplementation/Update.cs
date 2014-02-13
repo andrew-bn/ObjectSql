@@ -14,11 +14,11 @@ namespace SqlBoost.QueryImplementation
 			: base(context)
 		{
 		}
-		public INonQueryEnd Where(Expression<Func<ITargetDatabase, T, bool>> condition)
+		public INonQueryEnd Where(Expression<Func<T, bool>> condition)
 		{
 			Context.AddQueryPart(new WherePart(false, condition));
 			PrepareQuery();
-			return new Sql(Context);
+			return new QueryRoot(Context);
 		}
 
 		public int ExecuteNonQuery()

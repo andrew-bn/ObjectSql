@@ -185,7 +185,7 @@ namespace SqlBoost.Core.QueryBuilder
 				context.State != BuilderState.FromAliasGenerated &&
 				context.State != BuilderState.GroupByGenerated)
 			{
-				if (expression.Parameters[0].Type != typeof (ITargetDatabase))
+				if (expression.Parameters[0].Type != typeof (DatabaseExtension))
 					_sqlWriter.WriteAlias(context.Text, expression.Parameters[0].Name);
 				else _sqlWriter.WriteAlias(context.Text, expression.Parameters[1].Name);
 				context.State = BuilderState.FromAliasGenerated;

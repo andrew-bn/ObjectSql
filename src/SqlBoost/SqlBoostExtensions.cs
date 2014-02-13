@@ -28,7 +28,7 @@ namespace System
 			var dbManager = SqlBoostManager.FindDatabaseManager(dbCommand.Connection, providerName);
 
 			var context = QueryManager.CreateQueryContext(dbCommand, dbManager, factory, command.Connection.ConnectionString, treatType);
-			return new Sql(context);
+			return new QueryRoot(context);
 		}
 	}
 }

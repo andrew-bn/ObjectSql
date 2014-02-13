@@ -63,7 +63,7 @@ namespace SqlBoost.Tests.ExpressionsAnalizersTests.TardetDbExtensionsTests
 		[TestMethod]
 		public void BuildSql_Avg()
 		{
-			Expression<Func<ITargetDatabase, Category, object>> exp = (db, c) => db.Avg(c.CategoryID);
+			Expression<Func<Category, object>> exp = (c) => Sql.Avg(c.CategoryID);
 			var result = CreateBuilder().BuildSql(_parametersHolder.Object, exp.Body, true).Prepare();
 
 			Assert.AreEqual("AVG([c].[CategoryID])", result);
@@ -71,7 +71,7 @@ namespace SqlBoost.Tests.ExpressionsAnalizersTests.TardetDbExtensionsTests
 		[TestMethod]
 		public void BuildSql_Count()
 		{
-			Expression<Func<ITargetDatabase, Category, object>> exp = (db, c) => db.Count(c.CategoryID);
+			Expression<Func<Category, object>> exp = c => Sql.Count(c.CategoryID);
 			var result = CreateBuilder().BuildSql(_parametersHolder.Object, exp.Body, true).Prepare();
 
 			Assert.AreEqual("COUNT([c].[CategoryID])", result);
@@ -79,7 +79,7 @@ namespace SqlBoost.Tests.ExpressionsAnalizersTests.TardetDbExtensionsTests
 		[TestMethod]
 		public void BuildSql_Min()
 		{
-			Expression<Func<ITargetDatabase, Category, object>> exp = (db, c) => db.Min(c.CategoryID);
+			Expression<Func<Category, object>> exp = ( c) => Sql.Min(c.CategoryID);
 			var result = CreateBuilder().BuildSql(_parametersHolder.Object, exp.Body, true).Prepare();
 
 			Assert.AreEqual("MIN([c].[CategoryID])", result);
@@ -87,7 +87,7 @@ namespace SqlBoost.Tests.ExpressionsAnalizersTests.TardetDbExtensionsTests
 		[TestMethod]
 		public void BuildSql_Max()
 		{
-			Expression<Func<ITargetDatabase, Category, object>> exp = (db, c) => db.Max(c.CategoryID);
+			Expression<Func<Category, object>> exp = (c) => Sql.Max(c.CategoryID);
 			var result = CreateBuilder().BuildSql(_parametersHolder.Object, exp.Body, true).Prepare();
 
 			Assert.AreEqual("MAX([c].[CategoryID])", result);
@@ -95,7 +95,7 @@ namespace SqlBoost.Tests.ExpressionsAnalizersTests.TardetDbExtensionsTests
 		[TestMethod]
 		public void BuildSql_Like()
 		{
-			Expression<Func<ITargetDatabase, Category, object>> exp = (db, c) => db.Like(c.CategoryName,"adf");
+			Expression<Func<Category, object>> exp = ( c) => Sql.Like(c.CategoryName,"adf");
 			var result = CreateBuilder().BuildSql(_parametersHolder.Object, exp.Body, true).Prepare();
 
 			Assert.AreEqual("([c].[CategoryName]LIKE@p0)", result);
@@ -103,7 +103,7 @@ namespace SqlBoost.Tests.ExpressionsAnalizersTests.TardetDbExtensionsTests
 		[TestMethod]
 		public void BuildSql_NotLike()
 		{
-			Expression<Func<ITargetDatabase, Category, object>> exp = (db, c) => db.NotLike(c.CategoryName, "adf");
+			Expression<Func<Category, object>> exp = ( c) => Sql.NotLike(c.CategoryName, "adf");
 			var result = CreateBuilder().BuildSql(_parametersHolder.Object, exp.Body, true).Prepare();
 
 			Assert.AreEqual("([c].[CategoryName]NOTLIKE@p0)", result);

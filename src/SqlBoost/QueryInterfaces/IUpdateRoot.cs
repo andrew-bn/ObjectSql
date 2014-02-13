@@ -5,6 +5,6 @@ namespace SqlBoost.QueryInterfaces
 {
 	public interface IUpdateRoot
 	{
-		IUpdate<T> Update<T>(Expression<Func<ITargetDatabase,T>> set);
+		IUpdate<T> Update<T>(Expression<Func<T>> set);
 	}
 }

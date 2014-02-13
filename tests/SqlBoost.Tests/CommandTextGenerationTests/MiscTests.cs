@@ -32,7 +32,7 @@ namespace SqlBoost.Tests.CommandTextGenerationTests
 		{
 			var c = "const";
 			var c2 = "ant";
-			EfQuery.Select((db) => c + c2)
+			EfQuery.Select(() => c + c2)
 				.Verify(@"SELECT (@p0 + @p1)",
 				c.DbType(SqlDbType.NVarChar), c2.DbType(SqlDbType.NVarChar));
 		}
@@ -41,7 +41,7 @@ namespace SqlBoost.Tests.CommandTextGenerationTests
 		{
 			var c = "_const";
 			EfQuery.From<Product>()
-			.Select((db,p) => new { Fld1 = p.ProductName + c })
+			.Select((p) => new { Fld1 = p.ProductName + c })
 			.Verify("SELECT([p].[ProductName]+@p0)AS[Fld1]" +
 						"FROM[dbo].[Products]AS[p]",
 						c.DbType(SqlDbType.NVarChar));
@@ -52,7 +52,7 @@ namespace SqlBoost.Tests.CommandTextGenerationTests
 		{
 			var c = "_const";
 			EfQuery.From<Product>()
-			.Select((db,p) => new { Fld1 = p.ProductName + p.ProductName })
+			.Select((p) => new { Fld1 = p.ProductName + p.ProductName })
 			.Verify("SELECT([p].[ProductName]+[p].[ProductName])AS[Fld1]" +
 						"FROM[dbo].[Products]AS[p]");
 		}

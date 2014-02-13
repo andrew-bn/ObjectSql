@@ -5,6 +5,6 @@ namespace SqlBoost.QueryInterfaces
 {
 	public interface IUpdate<T> : INonQueryEnd
 	{
-		INonQueryEnd Where(Expression<Func<ITargetDatabase, T, bool>> condition);
+		INonQueryEnd Where(Expression<Func<T, bool>> condition);
 	}
 }

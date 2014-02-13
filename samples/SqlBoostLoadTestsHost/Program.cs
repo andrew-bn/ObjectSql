@@ -50,11 +50,11 @@ namespace SqlBoostLoadTestsHost
 				_manager.Query()
 				        .From<Product>()
 				        .Join<Category>((p, c) => p.CategoryID == c.CategoryID)
-				        .Where((db, p, c) => p.ProductName != param.Val && p.ReorderLevel == 2 &&
+				        .Where((p, c) => p.ProductName != param.Val && p.ReorderLevel == 2 &&
 				                             p.QuantityPerUnit != null || p.QuantityPerUnit != param.Val)
-				        .GroupBy((db, p, c) => new {p.ProductName})
-				        .Where((db, p, c) => p.ProductName != param.Val2)
-						.Select((db, p, c) => new Result { P1=p.ProductName, P2=c.CategoryName })
+				        .GroupBy((p, c) => new {p.ProductName})
+				        .Where((p, c) => p.ProductName != param.Val2)
+						.Select((p, c) => new Result { P1=p.ProductName, P2=c.CategoryName })
 				);
 
 
@@ -88,11 +88,11 @@ namespace SqlBoostLoadTestsHost
 			var result = new SqlConnection().CreateCommand().Query()
 				.From<Product>()
 				.Join<Category>((p, c) => p.CategoryID == c.CategoryID)
-				.Where((db, p, c) => p.ProductName != val && p.ReorderLevel == 2 &&
+				.Where((p, c) => p.ProductName != val && p.ReorderLevel == 2 &&
 									 p.QuantityPerUnit != null || p.QuantityPerUnit != val)
-				.GroupBy((db, p, c) => new { p.ProductName })
-				.Where((db, p, c) => p.ProductName != val2)
-				.Select((db, p, c) => new { p.ProductName, c.CategoryName })
+				.GroupBy((p, c) => new { p.ProductName })
+				.Where((p, c) => p.ProductName != val2)
+				.Select((p, c) => new { p.ProductName, c.CategoryName })
 				.Command;
 		}
 		public partial class Category

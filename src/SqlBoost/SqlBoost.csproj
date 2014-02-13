@@ -134,9 +134,10 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Source.tt</DependentUpon>
     </Compile>
-    <Compile Include="QueryImplementation\Sql.cs" />
+    <Compile Include="QueryImplementation\QueryRoot.cs" />
     <Compile Include="QueryImplementation\TargetDatabaseExtensions.cs" />
     <Compile Include="QueryImplementation\Update.cs" />
+    <Compile Include="QueryInterfaces\DatabaseExtension.cs" />
     <Compile Include="QueryInterfaces\IDeleteRoot.cs" />
     <Compile Include="QueryInterfaces\IEmit.cs" />
     <Compile Include="QueryInterfaces\IInsert.cs" />
@@ -154,7 +155,6 @@
     <Compile Include="QueryInterfaces\ISql.cs" />
     <Compile Include="QueryInterfaces\ISqlEnd.cs" />
     <Compile Include="QueryInterfaces\IStoredProcedure.cs" />
-    <Compile Include="QueryInterfaces\ITargetDatabase.cs" />
     <Compile Include="QueryInterfaces\IUpdate.cs" />
     <Compile Include="QueryInterfaces\IUpdateRoot.cs" />
     <Compile Include="Core\QueryManager.cs" />

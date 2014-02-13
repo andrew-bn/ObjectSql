@@ -24,12 +24,12 @@ for (int i = 1;i<=depth; i++)
 		{
 		}
 
-		public ISource<<#=TemplatesSeq(i)#>> Where(System.Linq.Expressions.Expression<Func<ITargetDatabase, <#=TemplatesSeq(i)#>, bool>> condition)
+		public ISource<<#=TemplatesSeq(i)#>> Where(System.Linq.Expressions.Expression<Func<<#=TemplatesSeq(i)#>, bool>> condition)
 		{
 			Context.AddQueryPart(new WherePart(true, condition));
 			return this;
 		}
-		public ISource<<#=TemplatesSeq(i)#>> GroupBy(System.Linq.Expressions.Expression<Func<ITargetDatabase, <#=TemplatesSeq(i)#>,object>> groupBy)
+		public ISource<<#=TemplatesSeq(i)#>> GroupBy(System.Linq.Expressions.Expression<Func<<#=TemplatesSeq(i)#>,object>> groupBy)
 		{
 			Context.AddQueryPart(new GroupByPart(groupBy));
 			return this;
@@ -41,7 +41,7 @@ for (int i = 1;i<=depth; i++)
 			return new Source<<#=TemplatesSeq(i)#>,T<#=i+1#>>(Context);
 		}
 <#}#>
-		public IQueryEnd<TNew> Select<TNew>(System.Linq.Expressions.Expression<Func<ITargetDatabase, <#=TemplatesSeq(i)#>, TNew>> select)
+		public IQueryEnd<TNew> Select<TNew>(System.Linq.Expressions.Expression<Func<<#=TemplatesSeq(i)#>, TNew>> select)
 		{
 			Context.AddQueryPart(new SelectPart(select));
 			return new QueryEnd<TNew>(Context);

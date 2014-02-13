@@ -8,6 +8,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Data.SqlClient;
 using System.Reflection;
 using System.Data;
+
 namespace SqlBoost.Tests.CommandTextGenerationTests
 {
 	[TestClass]
@@ -21,11 +22,11 @@ namespace SqlBoost.Tests.CommandTextGenerationTests
 			var result = Query
 				.From<Product>()
 				.Join<Category>((p, c) => p.CategoryID == c.CategoryID)
-				.Where((db, p, c) => p.ProductName != val && p.ReorderLevel == 2 &&
+				.Where((p, c) => p.ProductName != val && p.ReorderLevel == 2 &&
 									 p.QuantityPerUnit != null || p.QuantityPerUnit != val)
-				.GroupBy((db, p, c) => new { p.ProductName })
-				.Where((db, p, c) => p.ProductName != val2)
-				.Select((db, p, c) => new { p.ProductName, c.CategoryName })
+				.GroupBy((p, c) => new { p.ProductName })
+				.Where((p, c) => p.ProductName != val2)
+				.Select((p, c) => new { p.ProductName, c.CategoryName })
 				.Verify(
 				@"SELECT [p].[ProductName] AS [ProductName],[c].[CategoryName] AS [CategoryName] 
 				  FROM [Product] AS [p] 
@@ -44,11 +45,11 @@ namespace SqlBoost.Tests.CommandTextGenerationTests
 			var result = Query
 				.From<Product>()
 				.Join<Category>((p, c) => p.CategoryID == c.CategoryID)
-				.Where((db, p, c) => p.ProductName != val && p.ReorderLevel == 2 &&
+				.Where((p, c) => p.ProductName != val && p.ReorderLevel == 2 &&
 									 p.QuantityPerUnit != null || p.QuantityPerUnit != val)
-				.GroupBy((db, p, c) => new { p.ProductName })
-				.Where((db, p, c) => p.ProductName != val2)
-				.Select((db, p, c) => new { p, c })
+				.GroupBy((p, c) => new { p.ProductName })
+				.Where((p, c) => p.ProductName != val2)
+				.Select((p, c) => new { p, c })
 				.Verify(
 				@"SELECT [p].[ProductName] AS [ProductName],[c].[CategoryName] AS [CategoryName] 
 				  FROM [Product] AS [p] 
@@ -67,11 +68,11 @@ namespace SqlBoost.Tests.CommandTextGenerationTests
 			var result = EfQuery
 				.From<Product>()
 				.Join<Category>((p, c) => p.CategoryID == c.CategoryID)
-				.Where((db, p, c) => p.ProductName != val && p.ReorderLevel == 2 &&
+				.Where((p, c) => p.ProductName != val && p.ReorderLevel == 2 &&
 									 p.QuantityPerUnit != null || p.QuantityPerUnit != val)
-				.GroupBy((db, p, c) => new { p.ProductName })
-				.Where((db, p, c) => p.ProductName != val2)
-				.Select((db, p, c) => new { p.ProductName, c.CategoryName })
+				.GroupBy((p, c) => new { p.ProductName })
+				.Where((p, c) => p.ProductName != val2)
+				.Select((p, c) => new { p.ProductName, c.CategoryName })
 				.Verify(
 				@"SELECT [p].[ProductName] AS [ProductName],[c].[CategoryName] AS [CategoryName] 
 				  FROM [dbo].[Products] AS [p] 
@@ -100,7 +101,7 @@ namespace SqlBoost.Tests.CommandTextGenerationTests
 		{
 			var val = "avsdf";
 			var result = EfQuery.
-							Delete<Product>((db, p) => p.CategoryID != 23 &&
+							Delete<Product>((p) => p.CategoryID != 23 &&
 													p.ProductName != val ||
 													p.ReorderLevel == null)
 							.Verify(@"DELETE FROM [dbo].[Products]
@@ -114,8 +115,8 @@ namespace SqlBoost.Tests.CommandTextGenerationTests
 		{
 			var val = "avsdf";
 			var result = EfQuery.
-							Update<Product>(_ => new Product() { ProductID = 23, QuantityPerUnit = val, Discontinued = false })
-							.Where((db, p) => p.UnitPrice == 23M && p.UnitsInStock == null &&
+							Update(() => new Product() { ProductID = 23, QuantityPerUnit = val, Discontinued = false })
+							.Where((p) => p.UnitPrice == 23M && p.UnitsInStock == null &&
 											p.ProductName != val)
 							.Verify(@"UPDATE [dbo].[Products]
 									  SET [ProductID] = @p0, [QuantityPerUnit] = @p1, [Discontinued] = @p2

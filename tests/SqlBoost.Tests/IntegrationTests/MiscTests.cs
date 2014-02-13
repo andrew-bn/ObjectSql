@@ -32,7 +32,7 @@ namespace SqlBoost.Tests.IntegrationTests
 		{
 			var c = "const";
 			var c2 = "ant";
-			var res = EfQuery.Select((db) => c + c2)
+			var res = EfQuery.Select(() => c + c2)
 				.ExecuteScalar();
 
 			Assert.AreEqual("constant", res);
@@ -42,7 +42,7 @@ namespace SqlBoost.Tests.IntegrationTests
 		{
 			var c = "_const";
 			var res = EfQuery.From<Product>()
-			.Select((db, p) => new { Fld1 = p.ProductName + c }).ExecuteQuery().ToArray();
+			.Select((p) => new { Fld1 = p.ProductName + c }).ExecuteQuery().ToArray();
 
 			Assert.AreEqual(77, res.Length);
 			Assert.AreEqual("Alice Mutton_const", res[0].Fld1);
@@ -53,7 +53,7 @@ namespace SqlBoost.Tests.IntegrationTests
 		{
 			var c = "_const";
 			var res = EfQuery.From<Product>()
-			.Select((db, p) => new { Fld1 = p.ProductName + p.ProductName }).ExecuteQuery().ToArray();
+			.Select((p) => new { Fld1 = p.ProductName + p.ProductName }).ExecuteQuery().ToArray();
 
 			Assert.AreEqual(77, res.Length);
 			Assert.AreEqual("Alice MuttonAlice Mutton", res[0].Fld1);

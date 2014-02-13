@@ -3,9 +3,13 @@ using SqlBoost.QueryInterfaces;
 
 namespace SqlBoost.SqlServer
 {
-	public static class SqlServerTargetDatabaseExtensions
+	public class MsSql : DatabaseExtension
 	{
-		public static long CountBig(this ITargetDatabase targetDatabase, params object[] columnSelector)
+		private MsSql()
+		{
+		}
+
+		public static long CountBig(params object[] columnSelector)
 		{
 			return default(long);
 		}
@@ -13,7 +17,7 @@ namespace SqlBoost.SqlServer
 		{
 			return BuildSql("COUNT_BIG", parts);
 		}
-		public static string Upper(this ITargetDatabase targetDatabase, string characterExpression)
+		public static string Upper(string characterExpression)
 		{
 			return default(string);
 		}
@@ -21,7 +25,7 @@ namespace SqlBoost.SqlServer
 		{
 			return BuildSql("UPPER", parts);
 		}
-		public static string Lower(this ITargetDatabase targetDatabase, string characterExpression)
+		public static string Lower(string characterExpression)
 		{
 			return default(string);
 		}
@@ -29,7 +33,7 @@ namespace SqlBoost.SqlServer
 		{
 			return BuildSql("LOWER", parts);
 		}
-		public static string Substring(this ITargetDatabase targetDatabase, string characterExpression, int start, int end)
+		public static string Substring(string characterExpression, int start, int end)
 		{
 			return default(string);
 		}
@@ -37,7 +41,7 @@ namespace SqlBoost.SqlServer
 		{
 			return BuildSql("SUBSTRING", parts);
 		}
-		public static string Replace(this ITargetDatabase targetDatabase, string target, string pattern, string replacement)
+		public static string Replace(string target, string pattern, string replacement)
 		{
 			return default(string);
 		}

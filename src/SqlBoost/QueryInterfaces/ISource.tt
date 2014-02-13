@@ -14,12 +14,12 @@ for (int i = 1;i<=depth; i++)
 {#>
 	public interface ISource<<#=TemplatesSeq(i)#>>
 	{
-		ISource<<#=TemplatesSeq(i)#>> Where(Expression<Func<ITargetDatabase, <#=TemplatesSeq(i)#>, bool>> condition);
+		ISource<<#=TemplatesSeq(i)#>> Where(Expression<Func<<#=TemplatesSeq(i)#>, bool>> condition);
 <# if (i != depth) { #>
 		ISource<<#=TemplatesSeq(i)#>, T<#=i+1#>> Join<T<#=i+1#>>(Expression<Func<<#=TemplatesSeq(i)#>, T<#=i+1#>, bool>> condition);
 <#}#>
-		IQueryEnd<TSelect> Select<TSelect>(Expression<Func<ITargetDatabase, <#=TemplatesSeq(i)#>,TSelect>> select);
-		ISource<<#=TemplatesSeq(i)#>> GroupBy(Expression<Func<ITargetDatabase, <#=TemplatesSeq(i)#>,object>> groupBy);
+		IQueryEnd<TSelect> Select<TSelect>(Expression<Func<<#=TemplatesSeq(i)#>,TSelect>> select);
+		ISource<<#=TemplatesSeq(i)#>> GroupBy(Expression<Func<<#=TemplatesSeq(i)#>,object>> groupBy);
 	}
 <#
 }

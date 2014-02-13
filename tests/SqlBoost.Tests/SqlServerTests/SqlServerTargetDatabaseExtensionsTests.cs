@@ -57,7 +57,7 @@ namespace SqlBoost.Tests.SqlServerTests
 		[TestMethod]
 		public void BuildSql_CountBig()
 		{
-			Expression<Func<ITargetDatabase, Category, object>> exp = (db, c) => db.CountBig(c.CategoryID);
+			Expression<Func<Category, object>> exp = (c) => MsSql.CountBig(c.CategoryID);
 			var result = CreateBuilder().BuildSql(_parametersHolder.Object, exp.Body, true).Prepare();
 
 			Assert.AreEqual("COUNT_BIG([c].[CategoryID])", result);
@@ -65,7 +65,7 @@ namespace SqlBoost.Tests.SqlServerTests
 		[TestMethod]
 		public void BuildSql_Lower()
 		{
-			Expression<Func<ITargetDatabase, Category, object>> exp = (db, c) => db.Lower(c.Description);
+			Expression<Func<Category, object>> exp = (c) => MsSql.Lower(c.Description);
 			var result = CreateBuilder().BuildSql(_parametersHolder.Object, exp.Body, true).Prepare();
 
 			Assert.AreEqual("LOWER([c].[Description])", result);
@@ -73,7 +73,7 @@ namespace SqlBoost.Tests.SqlServerTests
 		[TestMethod]
 		public void BuildSql_Replace()
 		{
-			Expression<Func<ITargetDatabase, Category, object>> exp = (db, c) => db.Replace(c.Description,"p","c");
+			Expression<Func<Category, object>> exp = c => MsSql.Replace(c.Description,"p","c");
 			var result = CreateBuilder().BuildSql(_parametersHolder.Object, exp.Body, true).Prepare();
 
 			Assert.AreEqual("REPLACE([c].[Description],@p0,@p1)", result);
@@ -81,7 +81,7 @@ namespace SqlBoost.Tests.SqlServerTests
 		[TestMethod]
 		public void BuildSql_Substring()
 		{
-			Expression<Func<ITargetDatabase, Category, object>> exp = (db, c) => db.Substring(c.Description,1,2);
+			Expression<Func<Category, object>> exp = ( c) => MsSql.Substring(c.Description,1,2);
 			var result = CreateBuilder().BuildSql(_parametersHolder.Object, exp.Body, true).Prepare();
 
 			Assert.AreEqual("SUBSTRING([c].[Description],@p0,@p1)", result);
@@ -89,7 +89,7 @@ namespace SqlBoost.Tests.SqlServerTests
 		[TestMethod]
 		public void BuildSql_Upper()
 		{
-			Expression<Func<ITargetDatabase, Category, object>> exp = (db, c) => db.Upper(c.CategoryName);
+			Expression<Func<Category, object>> exp = ( c) => MsSql.Upper(c.CategoryName);
 			var result = CreateBuilder().BuildSql(_parametersHolder.Object, exp.Body, true).Prepare();
 
 			Assert.AreEqual("UPPER([c].[CategoryName])", result);

@@ -15,7 +15,7 @@ namespace SqlBoost.QueryImplementation
 		{
 			Context.AddQueryPart(new ValuesPart(typeof(TDst), values));
 			PrepareQuery();
-			return new Sql(Context);
+			return new QueryRoot(Context);
 		}
 	}
 }

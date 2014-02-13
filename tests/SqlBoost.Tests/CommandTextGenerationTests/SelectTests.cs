@@ -32,7 +32,7 @@ namespace SqlBoost.Tests.CommandTextGenerationTests
 		public void Select_Constant()
 		{
 			var c = "cost";
-			EfQuery.Select((db) => c)
+			EfQuery.Select(() => c)
 				.Verify(@"SELECT @p0", c.DbType(SqlDbType.NVarChar));
 		}
 		[TestMethod]
@@ -40,7 +40,7 @@ namespace SqlBoost.Tests.CommandTextGenerationTests
 		{
 			var c = "cost";
 			var i = 43;
-			EfQuery.Select((db) => new { c, i })
+			EfQuery.Select(() => new { c, i })
 				.Verify(@"SELECT @p0 AS [c],  @p1 AS [i]",
 				c.DbType(SqlDbType.NVarChar), i.DbType(SqlDbType.Int));
 		}
@@ -49,7 +49,7 @@ namespace SqlBoost.Tests.CommandTextGenerationTests
 		{
 			var c = "cost";
 			var i = 43;
-			EfQuery.Select((db) => new Dto1(c, i))
+			EfQuery.Select(() => new Dto1(c, i))
 				.Verify(@"SELECT @p0 AS [fld1],  @p1 AS [fld2]",
 				c.DbType(SqlDbType.NVarChar), i.DbType(SqlDbType.Int));
 		}
@@ -58,14 +58,14 @@ namespace SqlBoost.Tests.CommandTextGenerationTests
 		{
 			var c = "cost";
 			var i = 43;
-			EfQuery.Select((db) => new Dto1() { Field1 = c, Field2 = i })
+			EfQuery.Select(() => new Dto1() { Field1 = c, Field2 = i })
 				.Verify(@"SELECT @p0 AS [Field1],  @p1 AS [Field2]",
 				c.DbType(SqlDbType.NVarChar), i.DbType(SqlDbType.Int));
 		}
 		[TestMethod]
 		public void Select_AllDbFields()
 		{
-			EfQuery.From<Product>().Select((db, p) => p)
+			EfQuery.From<Product>().Select((p) => p)
 			.Verify(
 		@"SELECT [p].[ProductID], [p].[ProductName],[p].[SupplierID],[p].[CategoryID],
 					[p].[QuantityPerUnit],[p].[UnitPrice],[p].[UnitsInStock],
@@ -76,7 +76,7 @@ namespace SqlBoost.Tests.CommandTextGenerationTests
 		[TestMethod]
 		public void Select_OneField()
 		{
-			EfQuery.From<Product>().Select((db,p) => p.ProductName)
+			EfQuery.From<Product>().Select((p) => p.ProductName)
 							.Verify("SELECT [p].[ProductName] FROM [dbo].[Products] AS [p]");
 		}
 		[TestMethod]
@@ -84,7 +84,7 @@ namespace SqlBoost.Tests.CommandTextGenerationTests
 		{
 			var c = "constant";
 			var res = EfQuery.From<Product>()
-				.Select((db,p) => c)
+				.Select(p => c)
 				.Verify("SELECT @p0 FROM [dbo].[Products] AS [p]"
 				, c.DbType(SqlDbType.NVarChar));
 		}
@@ -92,7 +92,7 @@ namespace SqlBoost.Tests.CommandTextGenerationTests
 		public void Select_Anonimus_ConcreteFields()
 		{
 			var res = EfQuery.From<Product>()
-			.Select((db,p) => new { Fld1 = p.CategoryID, Fld2 = p.Discontinued })
+			.Select(p => new { Fld1 = p.CategoryID, Fld2 = p.Discontinued })
 			.Verify("SELECT[p].[CategoryID]AS[Fld1],[p].[Discontinued]AS[Fld2]" +
 						"FROM[dbo].[Products]AS[p]");
 		}
@@ -101,7 +101,7 @@ namespace SqlBoost.Tests.CommandTextGenerationTests
 		{
 			EfQuery
 				.From<Product>()
-				.Select((db, p) => db.Substring(p.ProductName, 1, 5))
+				.Select((p) => MsSql.Substring(p.ProductName, 1, 5))
 				.Verify("SELECTSUBSTRING([p].[ProductName],@p0,@p1)FROM[dbo].[Products]AS[p]",
 						1.DbType(SqlDbType.Int), 5.DbType(SqlDbType.Int));
 		}
@@ -110,14 +110,14 @@ namespace SqlBoost.Tests.CommandTextGenerationTests
 		{
 			EfQuery
 				.From<Product>()
-				.Select((db, p) => db.Count(p.ProductID))
+				.Select((p) => Sql.Count(p.ProductID))
 				.Verify("SELECTCOUNT([p].[ProductID])FROM[dbo].[Products]AS[p]");
 		}
 		[TestMethod]
 		public void Select_WithoutSource_TSqlFunctionResult()
 		{
 			var c = "cost";
-			var res = EfQuery.Select(db => db.Substring(c, 1, 3))
+			var res = EfQuery.Select(() => MsSql.Substring(c, 1, 3))
 				.Verify(@"SELECTSUBSTRING(@p0,@p1,@p2)",
 				c.DbType(SqlDbType.NVarChar), 1.DbType(SqlDbType.Int), 3.DbType(SqlDbType.Int));
 		}
@@ -125,7 +125,7 @@ namespace SqlBoost.Tests.CommandTextGenerationTests
 		public void Select_WithoutSource_TSqlFunctionResult_AndConstant()
 		{
 			var c = "cost";
-			EfQuery.Select(db => new { res = db.Substring(c, 1, 3), c })
+			EfQuery.Select(() => new { res = MsSql.Substring(c, 1, 3), c })
 				.Verify(@"SELECT SUBSTRING(@p0,@p1,@p2) AS [res], @p0 AS [c]",
 				c.DbType(SqlDbType.NVarChar), 1.DbType(SqlDbType.Int), 3.DbType(SqlDbType.Int));
 
@@ -135,7 +135,7 @@ namespace SqlBoost.Tests.CommandTextGenerationTests
 		{
 			var c = "constant";
 			EfQuery.From<Product>()
-				.Select((db, p) => db.Substring(c, 1, 4))
+				.Select((p) => MsSql.Substring(c, 1, 4))
 				.Verify("SELECT SUBSTRING(@p0,@p1,@p2) FROM [dbo].[Products] AS [p]"
 				, c.DbType(SqlDbType.NVarChar), 1.DbType(SqlDbType.Int),
 				4.DbType(SqlDbType.Int));
@@ -144,8 +144,8 @@ namespace SqlBoost.Tests.CommandTextGenerationTests
 		public void Select_GroupBy()
 		{
 			EfQuery.From<Product>()
-				.GroupBy((db,p) => new { p.CategoryID })
-				.Select((db,p) => new { Fld1 = p.CategoryID })
+				.GroupBy((p) => new { p.CategoryID })
+				.Select((p) => new { Fld1 = p.CategoryID })
 				.Verify("SELECT[p].[CategoryID]AS[Fld1]" +
 							"FROM[dbo].[Products]AS[p]" +
 							"GROUPBY[p].[CategoryID]");
@@ -154,9 +154,9 @@ namespace SqlBoost.Tests.CommandTextGenerationTests
 		public void Select_GroupBy_Having()
 		{
 			EfQuery.From<Product>()
-				.GroupBy((db,p) => new { p.CategoryID })
-				.Where((db, p) => p.CategoryID > 5)
-				.Select((db, p) => new { Fld1 = p.CategoryID })
+				.GroupBy((p) => new { p.CategoryID })
+				.Where((p) => p.CategoryID > 5)
+				.Select((p) => new { Fld1 = p.CategoryID })
 				.Verify("SELECT[p].[CategoryID]AS[Fld1]" +
 							"FROM[dbo].[Products]AS[p]" +
 							"GROUPBY[p].[CategoryID]" +
@@ -167,9 +167,9 @@ namespace SqlBoost.Tests.CommandTextGenerationTests
 		public void Select_GroupBy_Having_AggregateFunction()
 		{
 			EfQuery.From<Product>()
-				.GroupBy((db, p) => new { p.CategoryID })
-				.Where((db, p) => p.CategoryID > 5 && db.Avg(p.UnitPrice) > 5)
-				.Select((db, p) => new { Fld1 = p.CategoryID, Fld2 = db.Avg(p.UnitPrice) })
+				.GroupBy((p) => new { p.CategoryID })
+				.Where((p) => p.CategoryID > 5 && Sql.Avg(p.UnitPrice) > 5)
+				.Select((p) => new { Fld1 = p.CategoryID, Fld2 = Sql.Avg(p.UnitPrice) })
 				.Verify("SELECT[p].[CategoryID]AS[Fld1],AVG([p].[UnitPrice])AS[Fld2]" +
 							"FROM[dbo].[Products]AS[p]" +
 							"GROUPBY[p].[CategoryID]" +

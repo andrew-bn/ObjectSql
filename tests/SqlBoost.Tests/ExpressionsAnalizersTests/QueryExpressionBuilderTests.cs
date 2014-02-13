@@ -393,7 +393,7 @@ namespace SqlBoost.Tests.ExpressionsAnalizersTests
 		public void BuildSql_TargetDatabaseExtensionMethodCall_ValidResult()
 		{
 			TestExtension.RenderLikeWasCalled = false;
-			Expression<Func<ITargetDatabase,Category,object>> exp = (db,c) => db.LikeForTests(c.Description,"%value%");
+			Expression<Func<Category,object>> exp = (c) => TestExtension.LikeForTests(c.Description,"%value%");
 			var builder = CreateBuilder();
 			var result = builder.BuildSql(_parametersHolder.Object, exp.Body, true).Prepare();
 
@@ -413,10 +413,9 @@ namespace SqlBoost.Tests.ExpressionsAnalizersTests
 			return new QueryExpressionBuilder(_schemaManager.Object, _delegatesBuilder.Object, new SqlServerSqlWriter());
 		}
 	}
-	public static class TestExtension
+	public class TestExtension:DatabaseExtension
 	{
-
-		public static bool LikeForTests(this ITargetDatabase db, string left, string right)
+		public static bool LikeForTests(string left, string right)
 		{
 			return false;
 		}

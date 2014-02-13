@@ -164,17 +164,17 @@ namespace SqlBoost.Core.QueryBuilder.ExpressionsAnalizers
 
 		protected override Expression VisitMethodCall(MethodCallExpression node)
 		{
-			if (node.Arguments.Count >= 1 && node.Arguments[0].Type == typeof(ITargetDatabase))
+			if (typeof(DatabaseExtension).IsAssignableFrom(node.Method.DeclaringType))
 			{
 				var buff = Text;
 
-				var parts = new string[node.Arguments.Count-1];
-				for (int i = 1; i < node.Arguments.Count; i++)
+				var parts = new string[node.Arguments.Count];
+				for (int i = 0; i < node.Arguments.Count; i++)
 				{
 					DbTypeInContext = null;
 					Text = new CommandText();
 					Visit(node.Arguments[i]);
-					parts[i-1] = Text.ToString();
+					parts[i] = Text.ToString();
 				}
 				Text = buff;
 				var meth = node.Method.DeclaringType.GetMethod("Render" + node.Method.Name, BindingFlags.Static | BindingFlags.IgnoreCase | BindingFlags.NonPublic);

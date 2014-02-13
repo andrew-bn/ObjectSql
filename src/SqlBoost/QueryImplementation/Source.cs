@@ -15,12 +15,12 @@ namespace SqlBoost.QueryImplementation
 		{
 		}
 
-		public ISource<T1> Where(System.Linq.Expressions.Expression<Func<ITargetDatabase, T1, bool>> condition)
+		public ISource<T1> Where(System.Linq.Expressions.Expression<Func<T1, bool>> condition)
 		{
 			Context.AddQueryPart(new WherePart(true, condition));
 			return this;
 		}
-		public ISource<T1> GroupBy(System.Linq.Expressions.Expression<Func<ITargetDatabase, T1,object>> groupBy)
+		public ISource<T1> GroupBy(System.Linq.Expressions.Expression<Func<T1,object>> groupBy)
 		{
 			Context.AddQueryPart(new GroupByPart(groupBy));
 			return this;
@@ -30,7 +30,7 @@ namespace SqlBoost.QueryImplementation
 			Context.AddQueryPart(new JoinPart(condition));
 			return new Source<T1,T2>(Context);
 		}
-		public IQueryEnd<TNew> Select<TNew>(System.Linq.Expressions.Expression<Func<ITargetDatabase, T1, TNew>> select)
+		public IQueryEnd<TNew> Select<TNew>(System.Linq.Expressions.Expression<Func<T1, TNew>> select)
 		{
 			Context.AddQueryPart(new SelectPart(select));
 			return new QueryEnd<TNew>(Context);
@@ -44,12 +44,12 @@ namespace SqlBoost.QueryImplementation
 		{
 		}
 
-		public ISource<T1,T2> Where(System.Linq.Expressions.Expression<Func<ITargetDatabase, T1,T2, bool>> condition)
+		public ISource<T1,T2> Where(System.Linq.Expressions.Expression<Func<T1,T2, bool>> condition)
 		{
 			Context.AddQueryPart(new WherePart(true, condition));
 			return this;
 		}
-		public ISource<T1,T2> GroupBy(System.Linq.Expressions.Expression<Func<ITargetDatabase, T1,T2,object>> groupBy)
+		public ISource<T1,T2> GroupBy(System.Linq.Expressions.Expression<Func<T1,T2,object>> groupBy)
 		{
 			Context.AddQueryPart(new GroupByPart(groupBy));
 			return this;
@@ -59,7 +59,7 @@ namespace SqlBoost.QueryImplementation
 			Context.AddQueryPart(new JoinPart(condition));
 			return new Source<T1,T2,T3>(Context);
 		}
-		public IQueryEnd<TNew> Select<TNew>(System.Linq.Expressions.Expression<Func<ITargetDatabase, T1,T2, TNew>> select)
+		public IQueryEnd<TNew> Select<TNew>(System.Linq.Expressions.Expression<Func<T1,T2, TNew>> select)
 		{
 			Context.AddQueryPart(new SelectPart(select));
 			return new QueryEnd<TNew>(Context);
@@ -73,12 +73,12 @@ namespace SqlBoost.QueryImplementation
 		{
 		}
 
-		public ISource<T1,T2,T3> Where(System.Linq.Expressions.Expression<Func<ITargetDatabase, T1,T2,T3, bool>> condition)
+		public ISource<T1,T2,T3> Where(System.Linq.Expressions.Expression<Func<T1,T2,T3, bool>> condition)
 		{
 			Context.AddQueryPart(new WherePart(true, condition));
 			return this;
 		}
-		public ISource<T1,T2,T3> GroupBy(System.Linq.Expressions.Expression<Func<ITargetDatabase, T1,T2,T3,object>> groupBy)
+		public ISource<T1,T2,T3> GroupBy(System.Linq.Expressions.Expression<Func<T1,T2,T3,object>> groupBy)
 		{
 			Context.AddQueryPart(new GroupByPart(groupBy));
 			return this;
@@ -88,7 +88,7 @@ namespace SqlBoost.QueryImplementation
 			Context.AddQueryPart(new JoinPart(condition));
 			return new Source<T1,T2,T3,T4>(Context);
 		}
-		public IQueryEnd<TNew> Select<TNew>(System.Linq.Expressions.Expression<Func<ITargetDatabase, T1,T2,T3, TNew>> select)
+		public IQueryEnd<TNew> Select<TNew>(System.Linq.Expressions.Expression<Func<T1,T2,T3, TNew>> select)
 		{
 			Context.AddQueryPart(new SelectPart(select));
 			return new QueryEnd<TNew>(Context);
@@ -102,12 +102,12 @@ namespace SqlBoost.QueryImplementation
 		{
 		}
 
-		public ISource<T1,T2,T3,T4> Where(System.Linq.Expressions.Expression<Func<ITargetDatabase, T1,T2,T3,T4, bool>> condition)
+		public ISource<T1,T2,T3,T4> Where(System.Linq.Expressions.Expression<Func<T1,T2,T3,T4, bool>> condition)
 		{
 			Context.AddQueryPart(new WherePart(true, condition));
 			return this;
 		}
-		public ISource<T1,T2,T3,T4> GroupBy(System.Linq.Expressions.Expression<Func<ITargetDatabase, T1,T2,T3,T4,object>> groupBy)
+		public ISource<T1,T2,T3,T4> GroupBy(System.Linq.Expressions.Expression<Func<T1,T2,T3,T4,object>> groupBy)
 		{
 			Context.AddQueryPart(new GroupByPart(groupBy));
 			return this;
@@ -117,7 +117,7 @@ namespace SqlBoost.QueryImplementation
 			Context.AddQueryPart(new JoinPart(condition));
 			return new Source<T1,T2,T3,T4,T5>(Context);
 		}
-		public IQueryEnd<TNew> Select<TNew>(System.Linq.Expressions.Expression<Func<ITargetDatabase, T1,T2,T3,T4, TNew>> select)
+		public IQueryEnd<TNew> Select<TNew>(System.Linq.Expressions.Expression<Func<T1,T2,T3,T4, TNew>> select)
 		{
 			Context.AddQueryPart(new SelectPart(select));
 			return new QueryEnd<TNew>(Context);
@@ -131,12 +131,12 @@ namespace SqlBoost.QueryImplementation
 		{
 		}
 
-		public ISource<T1,T2,T3,T4,T5> Where(System.Linq.Expressions.Expression<Func<ITargetDatabase, T1,T2,T3,T4,T5, bool>> condition)
+		public ISource<T1,T2,T3,T4,T5> Where(System.Linq.Expressions.Expression<Func<T1,T2,T3,T4,T5, bool>> condition)
 		{
 			Context.AddQueryPart(new WherePart(true, condition));
 			return this;
 		}
-		public ISource<T1,T2,T3,T4,T5> GroupBy(System.Linq.Expressions.Expression<Func<ITargetDatabase, T1,T2,T3,T4,T5,object>> groupBy)
+		public ISource<T1,T2,T3,T4,T5> GroupBy(System.Linq.Expressions.Expression<Func<T1,T2,T3,T4,T5,object>> groupBy)
 		{
 			Context.AddQueryPart(new GroupByPart(groupBy));
 			return this;
@@ -146,7 +146,7 @@ namespace SqlBoost.QueryImplementation
 			Context.AddQueryPart(new JoinPart(condition));
 			return new Source<T1,T2,T3,T4,T5,T6>(Context);
 		}
-		public IQueryEnd<TNew> Select<TNew>(System.Linq.Expressions.Expression<Func<ITargetDatabase, T1,T2,T3,T4,T5, TNew>> select)
+		public IQueryEnd<TNew> Select<TNew>(System.Linq.Expressions.Expression<Func<T1,T2,T3,T4,T5, TNew>> select)
 		{
 			Context.AddQueryPart(new SelectPart(select));
 			return new QueryEnd<TNew>(Context);
@@ -160,12 +160,12 @@ namespace SqlBoost.QueryImplementation
 		{
 		}
 
-		public ISource<T1,T2,T3,T4,T5,T6> Where(System.Linq.Expressions.Expression<Func<ITargetDatabase, T1,T2,T3,T4,T5,T6, bool>> condition)
+		public ISource<T1,T2,T3,T4,T5,T6> Where(System.Linq.Expressions.Expression<Func<T1,T2,T3,T4,T5,T6, bool>> condition)
 		{
 			Context.AddQueryPart(new WherePart(true, condition));
 			return this;
 		}
-		public ISource<T1,T2,T3,T4,T5,T6> GroupBy(System.Linq.Expressions.Expression<Func<ITargetDatabase, T1,T2,T3,T4,T5,T6,object>> groupBy)
+		public ISource<T1,T2,T3,T4,T5,T6> GroupBy(System.Linq.Expressions.Expression<Func<T1,T2,T3,T4,T5,T6,object>> groupBy)
 		{
 			Context.AddQueryPart(new GroupByPart(groupBy));
 			return this;
@@ -175,7 +175,7 @@ namespace SqlBoost.QueryImplementation
 			Context.AddQueryPart(new JoinPart(condition));
 			return new Source<T1,T2,T3,T4,T5,T6,T7>(Context);
 		}
-		public IQueryEnd<TNew> Select<TNew>(System.Linq.Expressions.Expression<Func<ITargetDatabase, T1,T2,T3,T4,T5,T6, TNew>> select)
+		public IQueryEnd<TNew> Select<TNew>(System.Linq.Expressions.Expression<Func<T1,T2,T3,T4,T5,T6, TNew>> select)
 		{
 			Context.AddQueryPart(new SelectPart(select));
 			return new QueryEnd<TNew>(Context);
@@ -189,12 +189,12 @@ namespace SqlBoost.QueryImplementation
 		{
 		}
 
-		public ISource<T1,T2,T3,T4,T5,T6,T7> Where(System.Linq.Expressions.Expression<Func<ITargetDatabase, T1,T2,T3,T4,T5,T6,T7, bool>> condition)
+		public ISource<T1,T2,T3,T4,T5,T6,T7> Where(System.Linq.Expressions.Expression<Func<T1,T2,T3,T4,T5,T6,T7, bool>> condition)
 		{
 			Context.AddQueryPart(new WherePart(true, condition));
 			return this;
 		}
-		public ISource<T1,T2,T3,T4,T5,T6,T7> GroupBy(System.Linq.Expressions.Expression<Func<ITargetDatabase, T1,T2,T3,T4,T5,T6,T7,object>> groupBy)
+		public ISource<T1,T2,T3,T4,T5,T6,T7> GroupBy(System.Linq.Expressions.Expression<Func<T1,T2,T3,T4,T5,T6,T7,object>> groupBy)
 		{
 			Context.AddQueryPart(new GroupByPart(groupBy));
 			return this;
@@ -204,7 +204,7 @@ namespace SqlBoost.QueryImplementation
 			Context.AddQueryPart(new JoinPart(condition));
 			return new Source<T1,T2,T3,T4,T5,T6,T7,T8>(Context);
 		}
-		public IQueryEnd<TNew> Select<TNew>(System.Linq.Expressions.Expression<Func<ITargetDatabase, T1,T2,T3,T4,T5,T6,T7, TNew>> select)
+		public IQueryEnd<TNew> Select<TNew>(System.Linq.Expressions.Expression<Func<T1,T2,T3,T4,T5,T6,T7, TNew>> select)
 		{
 			Context.AddQueryPart(new SelectPart(select));
 			return new QueryEnd<TNew>(Context);
@@ -218,12 +218,12 @@ namespace SqlBoost.QueryImplementation
 		{
 		}
 
-		public ISource<T1,T2,T3,T4,T5,T6,T7,T8> Where(System.Linq.Expressions.Expression<Func<ITargetDatabase, T1,T2,T3,T4,T5,T6,T7,T8, bool>> condition)
+		public ISource<T1,T2,T3,T4,T5,T6,T7,T8> Where(System.Linq.Expressions.Expression<Func<T1,T2,T3,T4,T5,T6,T7,T8, bool>> condition)
 		{
 			Context.AddQueryPart(new WherePart(true, condition));
 			return this;
 		}
-		public ISource<T1,T2,T3,T4,T5,T6,T7,T8> GroupBy(System.Linq.Expressions.Expression<Func<ITargetDatabase, T1,T2,T3,T4,T5,T6,T7,T8,object>> groupBy)
+		public ISource<T1,T2,T3,T4,T5,T6,T7,T8> GroupBy(System.Linq.Expressions.Expression<Func<T1,T2,T3,T4,T5,T6,T7,T8,object>> groupBy)
 		{
 			Context.AddQueryPart(new GroupByPart(groupBy));
 			return this;
@@ -233,7 +233,7 @@ namespace SqlBoost.QueryImplementation
 			Context.AddQueryPart(new JoinPart(condition));
 			return new Source<T1,T2,T3,T4,T5,T6,T7,T8,T9>(Context);
 		}
-		public IQueryEnd<TNew> Select<TNew>(System.Linq.Expressions.Expression<Func<ITargetDatabase, T1,T2,T3,T4,T5,T6,T7,T8, TNew>> select)
+		public IQueryEnd<TNew> Select<TNew>(System.Linq.Expressions.Expression<Func<T1,T2,T3,T4,T5,T6,T7,T8, TNew>> select)
 		{
 			Context.AddQueryPart(new SelectPart(select));
 			return new QueryEnd<TNew>(Context);
@@ -247,12 +247,12 @@ namespace SqlBoost.QueryImplementation
 		{
 		}
 
-		public ISource<T1,T2,T3,T4,T5,T6,T7,T8,T9> Where(System.Linq.Expressions.Expression<Func<ITargetDatabase, T1,T2,T3,T4,T5,T6,T7,T8,T9, bool>> condition)
+		public ISource<T1,T2,T3,T4,T5,T6,T7,T8,T9> Where(System.Linq.Expressions.Expression<Func<T1,T2,T3,T4,T5,T6,T7,T8,T9, bool>> condition)
 		{
 			Context.AddQueryPart(new WherePart(true, condition));
 			return this;
 		}
-		public ISource<T1,T2,T3,T4,T5,T6,T7,T8,T9> GroupBy(System.Linq.Expressions.Expression<Func<ITargetDatabase, T1,T2,T3,T4,T5,T6,T7,T8,T9,object>> groupBy)
+		public ISource<T1,T2,T3,T4,T5,T6,T7,T8,T9> GroupBy(System.Linq.Expressions.Expression<Func<T1,T2,T3,T4,T5,T6,T7,T8,T9,object>> groupBy)
 		{
 			Context.AddQueryPart(new GroupByPart(groupBy));
 			return this;
@@ -262,7 +262,7 @@ namespace SqlBoost.QueryImplementation
 			Context.AddQueryPart(new JoinPart(condition));
 			return new Source<T1,T2,T3,T4,T5,T6,T7,T8,T9,T10>(Context);
 		}
-		public IQueryEnd<TNew> Select<TNew>(System.Linq.Expressions.Expression<Func<ITargetDatabase, T1,T2,T3,T4,T5,T6,T7,T8,T9, TNew>> select)
+		public IQueryEnd<TNew> Select<TNew>(System.Linq.Expressions.Expression<Func<T1,T2,T3,T4,T5,T6,T7,T8,T9, TNew>> select)
 		{
 			Context.AddQueryPart(new SelectPart(select));
 			return new QueryEnd<TNew>(Context);
@@ -276,17 +276,17 @@ namespace SqlBoost.QueryImplementation
 		{
 		}
 
-		public ISource<T1,T2,T3,T4,T5,T6,T7,T8,T9,T10> Where(System.Linq.Expressions.Expression<Func<ITargetDatabase, T1,T2,T3,T4,T5,T6,T7,T8,T9,T10, bool>> condition)
+		public ISource<T1,T2,T3,T4,T5,T6,T7,T8,T9,T10> Where(System.Linq.Expressions.Expression<Func<T1,T2,T3,T4,T5,T6,T7,T8,T9,T10, bool>> condition)
 		{
 			Context.AddQueryPart(new WherePart(true, condition));
 			return this;
 		}
-		public ISource<T1,T2,T3,T4,T5,T6,T7,T8,T9,T10> GroupBy(System.Linq.Expressions.Expression<Func<ITargetDatabase, T1,T2,T3,T4,T5,T6,T7,T8,T9,T10,object>> groupBy)
+		public ISource<T1,T2,T3,T4,T5,T6,T7,T8,T9,T10> GroupBy(System.Linq.Expressions.Expression<Func<T1,T2,T3,T4,T5,T6,T7,T8,T9,T10,object>> groupBy)
 		{
 			Context.AddQueryPart(new GroupByPart(groupBy));
 			return this;
 		}
-		public IQueryEnd<TNew> Select<TNew>(System.Linq.Expressions.Expression<Func<ITargetDatabase, T1,T2,T3,T4,T5,T6,T7,T8,T9,T10, TNew>> select)
+		public IQueryEnd<TNew> Select<TNew>(System.Linq.Expressions.Expression<Func<T1,T2,T3,T4,T5,T6,T7,T8,T9,T10, TNew>> select)
 		{
 			Context.AddQueryPart(new SelectPart(select));
 			return new QueryEnd<TNew>(Context);
