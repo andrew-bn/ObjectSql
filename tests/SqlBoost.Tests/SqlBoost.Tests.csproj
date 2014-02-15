@@ -220,18 +220,13 @@
     <Compile Include="Territory.cs">
       <DependentUpon>Northwind.tt</DependentUpon>
     </Compile>
+    <Compile Include="TestDatabase.SqlServer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>TestDatabase.SqlServer.tt</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="TestDatabaseEntities.SqlServer.txt">
-      <DependentUpon>TestDatabaseEntities.SqlServer.tt</DependentUpon>
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-    </Content>
-    <Content Include="SchemaGenerator.txt">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>SchemaGenerator.tt</DependentUpon>
-    </Content>
     <Content Include="TestDatabase.mdf">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -249,9 +244,9 @@
     <None Include="App.Config">
       <SubType>Designer</SubType>
     </None>
-    <None Include="TestDatabaseEntities.SqlServer.tt">
+    <None Include="TestDatabase.SqlServer.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>TestDatabaseEntities.SqlServer.txt</LastGenOutput>
+      <LastGenOutput>TestDatabase.SqlServer.cs</LastGenOutput>
     </None>
     <None Include="Northwind.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
@@ -267,10 +262,6 @@
       <LastGenOutput>Northwind.cs</LastGenOutput>
     </None>
     <None Include="packages.config" />
-    <None Include="SchemaGenerator.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>SchemaGenerator.txt</LastGenOutput>
-    </None>
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />

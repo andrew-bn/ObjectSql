@@ -126,5 +126,14 @@ namespace SqlBoost.Tests
         {
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Ten_Most_Expensive_Products_Result>("Ten_Most_Expensive_Products");
         }
+    
+        public virtual ObjectResult<Nullable<int>> MyProcedure(Nullable<int> param1)
+        {
+            var param1Parameter = param1.HasValue ?
+                new ObjectParameter("param1", param1) :
+                new ObjectParameter("param1", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<int>>("MyProcedure", param1Parameter);
+        }
     }
 }
