@@ -32,9 +32,11 @@ namespace SqlBoost.Core.SchemaManager
 		protected virtual FuncSchema CreateFuncSchema(MethodInfo method)
 		{
 			int index = 0;
+
 			var parameters = method.GetParameters().Select(
-				p => new FuncParameter(p.Name, index++, new StorageField(p.Name, null))).ToArray();
-			return new FuncSchema(new StorageName(method.Name, ""), parameters);
+				p => new FuncParameter(p.Name, index++,ObtainStorageParameter(p))).ToArray();
+
+			return new FuncSchema(ObtainStorageProcedureName(method), parameters);
 		}
 
 		#region entitySchema
@@ -68,6 +70,20 @@ namespace SqlBoost.Core.SchemaManager
 			return annotationAttribute == null
 					? new StorageName(entity.Name, String.Empty)
 					: new StorageName(annotationAttribute.Name, annotationAttribute.Schema);
+		}
+		private StorageName ObtainStorageProcedureName(MethodInfo entity)
+		{
+			var annotationAttribute = entity.GetCustomAttribute(typeof(ProcedureAttribute)) as ProcedureAttribute;
+			return annotationAttribute == null
+					? new StorageName(entity.Name, String.Empty)
+					: new StorageName(annotationAttribute.Name, annotationAttribute.Schema);
+		}
+		private StorageField ObtainStorageParameter(ParameterInfo prop)
+		{
+			var annotationAttribute = prop.GetCustomAttribute(typeof(ParameterAttribute)) as ParameterAttribute;
+			return annotationAttribute == null
+					? new StorageField(prop.Name)
+					: new StorageField(annotationAttribute.Name, ParseDbType(annotationAttribute.TypeName));
 		}
 		#endregion
 		protected IStorageFieldType ParseDbType(string value)

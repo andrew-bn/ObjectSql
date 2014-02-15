@@ -127,6 +127,7 @@
     <Compile Include="IDatabaseManager.cs" />
     <Compile Include="ISchemaManagerFactory.cs" />
     <Compile Include="ISqlBoostManager.cs" />
+    <Compile Include="ParameterAttribute.cs" />
     <Compile Include="ProcedureAttribute.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="QueryImplementation\Insert.cs" />

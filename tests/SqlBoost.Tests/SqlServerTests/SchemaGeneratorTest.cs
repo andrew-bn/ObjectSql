@@ -13,7 +13,7 @@ namespace SqlBoost.Tests.SqlServerTests
 		[TestMethod]
 		public void Foo()
 		{
-			var result = SqlServer.SchemaGenerator.Generate(ConnectionString);
+			var result = SqlServer.Schema.SchemaGenerator.Generate("adf","CsName", ConnectionString);
 
 			Assert.Fail(result);
 		}
