@@ -94,7 +94,13 @@ namespace SqlBoost.Tests
 				return System.Configuration.ConfigurationManager.ConnectionStrings["TestDatabaseEntities"].ConnectionString;
 			}
 		}
-
+		protected static string ConnectionString
+		{
+			get
+			{
+				return System.Configuration.ConfigurationManager.ConnectionStrings["TestDatabase"].ConnectionString;
+			}
+		}
 		private static SqlBoostManager<SqlConnection> _sqlManager;
 		protected ISql EfQuery
 		{

@@ -18,6 +18,21 @@
     <TestProjectType>UnitTest</TestProjectType>
     <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\..\</SolutionDir>
     <RestorePackages>true</RestorePackages>
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -169,6 +184,7 @@
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="CommandTextGenerationTests\ComplexSqlGenerationTests.cs" />
+    <Compile Include="SqlServerTests\SchemaGeneratorTest.cs" />
     <Compile Include="SqlServerTests\SqlServerTargetDatabaseExtensionsTests.cs" />
     <Compile Include="TestBase.cs" />
     <Compile Include="Region.cs">
@@ -206,6 +222,16 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="TestDatabaseEntities.SqlServer.txt">
+      <DependentUpon>TestDatabaseEntities.SqlServer.tt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Content>
+    <Content Include="SchemaGenerator.txt">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>SchemaGenerator.tt</DependentUpon>
+    </Content>
     <Content Include="TestDatabase.mdf">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -223,6 +249,10 @@
     <None Include="App.Config">
       <SubType>Designer</SubType>
     </None>
+    <None Include="TestDatabaseEntities.SqlServer.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>TestDatabaseEntities.SqlServer.txt</LastGenOutput>
+    </None>
     <None Include="Northwind.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>Northwind.edmx</DependentUpon>
@@ -237,6 +267,10 @@
       <LastGenOutput>Northwind.cs</LastGenOutput>
     </None>
     <None Include="packages.config" />
+    <None Include="SchemaGenerator.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>SchemaGenerator.txt</LastGenOutput>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
@@ -254,6 +288,23 @@
       <Project>{6261f88c-20c4-49c6-8d12-97f46451a909}</Project>
       <Name>SqlBoost</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include=".NETFramework,Version=v4.5">
+      <Visible>False</Visible>
+      <ProductName>Microsoft .NET Framework 4.5 %28x86 and x64%29</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1 Client Profile</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
   </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">

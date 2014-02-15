@@ -1,0 +1,122 @@
+﻿<#@ template debug="false" hostspecific="true" language="C#" #>
+<#@ assembly name="System.Core" #>
+<#@ assembly name="System.Configuration" #>
+<#@ assembly name="EnvDTE" #> 
+<#@ assembly name="$(ProjectDir)bin\$(ConfigurationName)\SqlBoost.Dll" #>
+<#@ assembly name="$(ProjectDir)bin\$(ConfigurationName)\SqlBoost.SqlServer.Dll" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Text" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ import namespace="SqlBoost.SqlServer" #>
+
+<#@ import namespace="System.Configuration" #>
+<#@ import namespace="System.Text.RegularExpressions" #>
+<#@ output extension=".txt" #>
+
+<#= SchemaGenerator.Generate()  #>
+
+<#  
+var config = new ConfigurationAccessor((IServiceProvider)this.Host);
+Action<string> header=new Action<string>((s)=>   { 
+    this.WriteLine(""); 
+    this.WriteLine("--------------------------------------------------------------"); 
+    this.WriteLine(s); 
+    this.WriteLine("--------------------------------------------------------------"); 
+  });   
+  header("ConfigurationAccessor.Project");   
+  this.WriteLine("Project.FileName = {0}",config.Project.FileName); 
+  this.WriteLine("Project.FullName = {0}",config.Project.FullName); 
+  this.WriteLine("Project.Name = {0}",config.Project.Name);  
+  this.WriteLine("TemplateFile = {0}",this.Host.TemplateFile);  
+   this.WriteLine("Document.Name = {0}",config.Document.Name); 
+  header("ConfigurationAccessor.Properties"); 
+    var en = config.Properties.GetEnumerator();   while(en.MoveNext())   { 
+    var property = (EnvDTE.Property)en.Current; 
+    object propertyValue = null;     try     { 
+      propertyValue = property.Value;     } 
+    catch (Exception ex)     {       propertyValue = ex.Message; 
+    } 
+    this.WriteLine("{0} = {1}",property.Name,propertyValue.ToString()); 
+  }     
+  header("ConfigurationAccessor.Configuration");  
+  /* var appSettingsSection = (AppSettingsSection)config.Configuration.GetSection("appSettings"); 
+  this.WriteLine(appSettingsSection.Settings["MyAppSetting"].Value);  
+    header("ConfigurationAccessor.AppSettings"); 
+   this.WriteLine("\r\nString key access\r\nMyAppSetting = {0}\r\n",config.AppSettings["MyAppSetting"].Value); 
+  */
+  this.WriteLine("Enumerator access\r\n"); 
+  en = config.AppSettings.GetEnumerator();  
+   while(en.MoveNext())   { 
+    var kv = (KeyValueConfigurationElement)en.Current; 
+    this.WriteLine("{0} = {1}",kv.Key,kv.Value);   } 
+	
+  header("ConfigurationAccessor.ConnectionStrings"); 
+ 
+   this.WriteLine("Enumerator access\r\n"); 
+  en = config.ConnectionStrings.GetEnumerator();   while(en.MoveNext()) 
+  {     var cs = (ConnectionStringSettings)en.Current; 
+    this.WriteLine("{0}, {1}, {2}",cs.Name,cs.ProviderName,cs.ConnectionString); 
+  } 
+  #>
+
+
+  <#+
+public class ConfigurationAccessor
+{
+	public ConfigurationAccessor(IServiceProvider host)
+	{
+		EnvDTE.DTE env = (EnvDTE.DTE)host.GetService(typeof(EnvDTE.DTE));
+		_project = (EnvDTE.Project)((Array)env.ActiveSolutionProjects).GetValue(0);
+		_document = (EnvDTE.Document)env.ActiveDocument;
+		string configurationFilename=null;	
+		
+		// examine each project item's filename looking for app.config or web.config
+		foreach (EnvDTE.ProjectItem item in _project.ProjectItems)
+		{
+			if (Regex.IsMatch(item.Name,"(app|web).config",RegexOptions.IgnoreCase))
+			{
+				// TODO: try this with linked files. is the filename pointing to the source?
+				configurationFilename=item.get_FileNames(0);
+				break;
+			}
+		}
+
+		if(!string.IsNullOrEmpty(configurationFilename))
+		{
+			ExeConfigurationFileMap configFile = null;
+			configFile = new ExeConfigurationFileMap();
+			configFile.ExeConfigFilename=configurationFilename;
+			_configuration = System.Configuration.ConfigurationManager.OpenMappedExeConfiguration(configFile, ConfigurationUserLevel.None);
+ 		}
+	}
+	
+	private EnvDTE.Project _project;
+	private Configuration _configuration;
+	private EnvDTE.Document _document;
+	public EnvDTE.Document Document
+	{
+		get { return _document; }
+	}
+	public EnvDTE.Project Project
+	{
+		get { return _project; }
+	}
+	public EnvDTE.Properties Properties 
+	{
+		get { return _project.Properties;}
+	}
+	public Configuration Configuration
+	{
+		get { return _configuration; }
+	}	
+	public KeyValueConfigurationCollection AppSettings
+	{
+		get { return _configuration.AppSettings.Settings;}
+	}
+	public ConnectionStringSettingsCollection ConnectionStrings
+	{
+		get { return _configuration.ConnectionStrings.ConnectionStrings;}
+	}
+
+}
+#>
