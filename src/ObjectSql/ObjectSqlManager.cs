@@ -1,48 +1,61 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Linq.Expressions;
+using System.Runtime.CompilerServices;
+using ObjectSql.Core;
+using ObjectSql.Core.Bo;
+using ObjectSql.QueryImplementation;
+using ObjectSql.QueryInterfaces;
+using ObjectSql.Core.Misc;
+using System;
 using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Data.EntityClient;
 
 namespace ObjectSql
 {
-	public abstract class ObjectSqlManager
+
+	public class ObjectSqlManager<T> : IObjectSqlManager where T : IDbConnection, new()
 	{
-		internal static List<ISchemaManagerFactory> ProviderManager = new List<ISchemaManagerFactory>();
-		internal static List<IDatabaseManager> DatabaseManager = new List<IDatabaseManager>();
-		
-		static ObjectSqlManager()
+		private readonly string _connectionString;
+		public ObjectSqlManager(string connectionString)
 		{
-			ProviderManager.Add(new DefaultSchemaManagerFactory());
+			_connectionString = connectionString;
 		}
-		public static ISchemaManagerFactory FindSchemaManagerFactory(IDbConnection connection, string cs)
+		public ISql Query()
 		{
-			foreach (var p in ProviderManager)
-			{
-				if (p.MatchSchemaManager(connection, cs))
+			var connection = CreateConnection();
+			return connection.CreateCommand().Query(ResourcesTreatmentType.DisposeConnection);
+		}
+
+		public IDbConnection CreateConnection()
+		{
+			var connection = new T();
+
+			var factory = ObjectSqlRegistry.FindSchemaManagerFactory(connection, _connectionString);
+			factory.SetupConnectionString(connection, _connectionString);
+
+
+			return new ObjectSqlConnection(_connectionString, connection);
+		}
+		public Func<TArgs, IQueryEnd<TEntity>> CompileQuery<TArgs, TEntity>(Expression<Func<TArgs, IQueryEnd<TEntity>>> query)
+		{
+			var func = query.Compile();
+			var result = (QueryEnd<TEntity>)func(default(TArgs));
+			var preparationData = QueryManager.GetQueryPreparationData(result.Context);
+
+			return (arg1) =>
 				{
-					return p;
-				}
-			}
-			throw new NotImplementedException();
+					var conn = CreateConnection();
+					var factory = ObjectSqlRegistry.FindSchemaManagerFactory(conn, _connectionString);
+					var dbManager = ObjectSqlRegistry.FindDatabaseManager(conn, factory.TryGetProviderName(conn, _connectionString));
+					var sm = factory.CreateSchemaManager(dbManager.DbType, _connectionString);
+					var queryBuilder = dbManager.CreateQueryBuilder(sm);
+
+					var context = new CompiledQueryContext(
+						conn.CreateCommand(), queryBuilder, sm,
+						new StrongBox<TArgs>(arg1), result.Context);
+					QueryManager.PrepareQuery(context, preparationData);
+					return new QueryEnd<TEntity>(context);
+				};
 		}
-		public static IDatabaseManager FindDatabaseManager(IDbConnection connection, string provider)
-		{
-			foreach (var m in DatabaseManager)
-			{
-				if (m.MatchManager(connection, provider))
-					return m;
-			}
-			throw new NotImplementedException();
-		}
-		public static void RegisterSqlProviderManager(ISchemaManagerFactory managerFactory)
-		{
-			ProviderManager.Insert(0, managerFactory);
-		}
-		public static void RegisterDatabaseManager(IDatabaseManager manager)
-		{
-			DatabaseManager.Add(manager);
-		}
+
 	}
 }

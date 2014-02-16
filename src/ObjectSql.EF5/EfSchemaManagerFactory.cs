@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.EntityClient;
@@ -46,11 +47,13 @@ namespace ObjectSql.EF5
 			}
 		}
 
+		private readonly static ConcurrentDictionary<string, IEntitySchemaManager> _cache = new ConcurrentDictionary<string, IEntitySchemaManager>();
 		public IEntitySchemaManager CreateSchemaManager(Type dbType, string connectionString)
 		{
-			return
-				(IEntitySchemaManager)
-				Activator.CreateInstance(typeof (EdmEntitySchemaManager<>).MakeGenericType(dbType), new object[] {connectionString});
+			return _cache.GetOrAdd(connectionString,
+							   (cs) =>
+							   (IEntitySchemaManager)
+							   Activator.CreateInstance(typeof(EdmEntitySchemaManager<>).MakeGenericType(dbType), new object[] { cs }));
 		}
 
 

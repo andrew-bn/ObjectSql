@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using ObjectSql.Core.QueryBuilder;
+using ObjectSql.Core.QueryBuilder.LambdaBuilder;
 using ObjectSql.Core.SchemaManager;
 
 namespace ObjectSql
@@ -13,6 +14,8 @@ namespace ObjectSql
 	{
 		Type DbType { get; }
 		bool MatchManager(IDbConnection dbConnection, string providerName);
+		bool MatchManager(IDataReader dataReader);
 		IQueryBuilder CreateQueryBuilder(IEntitySchemaManager schemaManager);
+		DelegatesBuilder CreateDelegatesBuilder();
 	}
 }

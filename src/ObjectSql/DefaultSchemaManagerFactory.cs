@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Concurrent;
 using System.Data;
 using ObjectSql.Core.SchemaManager;
 
@@ -6,6 +7,7 @@ namespace ObjectSql
 {
 	public class DefaultSchemaManagerFactory: ISchemaManagerFactory
 	{
+
 		public bool MatchSchemaManager(IDbConnection connection, string connectionString)
 		{
 			return true;
@@ -16,22 +18,18 @@ namespace ObjectSql
 			connection.ConnectionString = connectionString;
 		}
 
-		public IEntitySchemaManager CreateSchemaManager(string connectionString)
-		{
-			return new EntitySchemaManager<SqlDbType>();
-		}
-
-
 		public string TryGetProviderName(IDbConnection connection, string connectionString)
 		{
 			return string.Empty;
 		}
 
-
-		public IEntitySchemaManager CreateSchemaManager(System.Type dbType, string connectionString)
+		private readonly static ConcurrentDictionary<string, IEntitySchemaManager> _cache = new ConcurrentDictionary<string, IEntitySchemaManager>();
+		public IEntitySchemaManager CreateSchemaManager(Type dbType, string connectionString)
 		{
-			return (IEntitySchemaManager)
-			       Activator.CreateInstance(typeof (EntitySchemaManager<>).MakeGenericType(dbType));
+			return _cache.GetOrAdd(connectionString,
+			                       (cs) =>
+			                       (IEntitySchemaManager)
+			                       Activator.CreateInstance(typeof (EntitySchemaManager<>).MakeGenericType(dbType)));
 		}
 	}
 }

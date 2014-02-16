@@ -12,6 +12,11 @@ namespace ObjectSql.SqlServer
 		{
 			return providerName == "System.Data.SqlClient" || (dbConnection is SqlConnection);
 		}
+
+		public bool MatchManager(IDataReader dataReader)
+		{
+			return dataReader is SqlDataReader;
+		}
 		public IQueryBuilder CreateQueryBuilder(IEntitySchemaManager schemaManager)
 		{
 			return new SqlServerQueryBuilder(schemaManager);
@@ -21,5 +26,13 @@ namespace ObjectSql.SqlServer
 		{
 			get { return typeof (SqlDbType); }
 		}
+
+
+		public Core.QueryBuilder.LambdaBuilder.DelegatesBuilder CreateDelegatesBuilder()
+		{
+			return SqlServerDelegatesBuilder.Instance;
+		}
+
+
 	}
 }

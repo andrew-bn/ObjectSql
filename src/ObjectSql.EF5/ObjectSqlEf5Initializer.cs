@@ -10,7 +10,7 @@ namespace ObjectSql.EF5
 	{
 		public static void Initialize()
 		{
-			ObjectSqlManager.RegisterSqlProviderManager(new EfSchemaManagerFactory());
+			ObjectSqlRegistry.RegisterSqlProviderManager(new EfSchemaManagerFactory());
 		}
 	}
 }

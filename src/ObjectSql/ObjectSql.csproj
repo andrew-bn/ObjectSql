@@ -98,6 +98,8 @@
     <Compile Include="Core\Bo\QueryRoots.cs" />
     <Compile Include="Core\Bo\ResourcesTreatmentType.cs" />
     <Compile Include="Core\Bo\StorageType.cs" />
+    <Compile Include="Core\QueryDataReader.cs" />
+    <Compile Include="Core\EntityEnumerable.cs" />
     <Compile Include="Core\ExecutionManager.cs" />
     <Compile Include="DefaultSchemaManagerFactory.cs" />
     <Compile Include="IAsyncEnumerable.cs" />
@@ -155,9 +157,10 @@
     <Compile Include="ParameterAttribute.cs" />
     <Compile Include="ProcedureAttribute.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="QueryImplementation\QueryEnd.cs" />
     <Compile Include="QueryImplementation\Insert.cs" />
     <Compile Include="QueryImplementation\QueryBase.cs" />
-    <Compile Include="QueryImplementation\QueryEnd.cs" />
+    <Compile Include="QueryImplementation\QueryEndGeneric.cs" />
     <Compile Include="QueryImplementation\Source.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -188,8 +191,8 @@
     <Compile Include="QueryInterfaces\IUpdateRoot.cs" />
     <Compile Include="Core\QueryManager.cs" />
     <Compile Include="ObjectSqlExtensions.cs" />
+    <Compile Include="ObjectSqlRegistry.cs" />
     <Compile Include="ObjectSqlManager.cs" />
-    <Compile Include="ObjectSqlManagerGeneric.cs" />
     <Compile Include="TableAttribute.cs" />
   </ItemGroup>
   <ItemGroup>

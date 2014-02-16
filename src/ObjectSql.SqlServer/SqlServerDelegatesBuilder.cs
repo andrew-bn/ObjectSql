@@ -9,6 +9,8 @@ namespace ObjectSql.SqlServer
 {
 	public class SqlServerDelegatesBuilder: DelegatesBuilder
 	{
+		public static SqlServerDelegatesBuilder Instance = new SqlServerDelegatesBuilder();
+		private SqlServerDelegatesBuilder(){}
 		protected override Expression CreateParameterFactory(Expression parameterName, Expression parameterAccessor, IStorageFieldType storageParameterType)
 		{
 			var fieldType = storageParameterType as StorageFieldType<SqlDbType>;

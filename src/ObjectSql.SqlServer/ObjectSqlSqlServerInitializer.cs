@@ -10,7 +10,7 @@ namespace ObjectSql.SqlServer
 	{
 		public static void Initialize()
 		{
-			ObjectSqlManager.RegisterDatabaseManager(new SqlServerDatabaseManager());
+			ObjectSqlRegistry.RegisterDatabaseManager(new SqlServerDatabaseManager());
 		}
 	}
 }
