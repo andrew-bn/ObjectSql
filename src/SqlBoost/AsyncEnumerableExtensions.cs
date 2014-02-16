@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 
 namespace SqlBoost
 {
+#if NET45
 	public static class AsyncEnumerableExtensions
 	{
 		public static Task ForEachEntityAsync<T>(this IAsyncEnumerable<T> enumerable, Action<T> action)
@@ -19,6 +20,7 @@ namespace SqlBoost
 									  e => { if (!predicate(e)) cancellationTokenSource.Cancel(); },
 									  cancellationTokenSource.Token);
 		}
+
 		private async static Task ForEachEntityAsync<T>(this IAsyncEnumerable<T> enumerable, Action<T> action, CancellationToken cancellationToken)
 		{
 			using (var enumerator = enumerable.GetAsyncEnumerator())
@@ -63,4 +65,5 @@ namespace SqlBoost
 			return result;
 		}
 	}
+#endif
 }

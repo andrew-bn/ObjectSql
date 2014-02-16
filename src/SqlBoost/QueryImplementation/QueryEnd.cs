@@ -22,12 +22,12 @@ namespace SqlBoost.QueryImplementation
 		{
 			return ExecutionManager.ExecuteQuery<T>(Context);
 		}
-
+#if NET45
 		public Task<IAsyncEnumerable<T>> ExecuteQueryAsync()
 		{
 			return ExecutionManager.ExecuteQueryAsync<T>(Context);
 		}
-
+#endif
 		public System.Data.IDbCommand Command
 		{
 			get

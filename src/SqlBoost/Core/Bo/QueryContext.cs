@@ -13,7 +13,7 @@ namespace SqlBoost.Core.Bo
 		public IDatabaseManager DbManager { get; private set; }
 		public ISchemaManagerFactory SchemaManagerFactory { get; private set; }
 		public string ConnectionString { get; private set; }
-		public IReadOnlyList<IQueryPart> QueryParts { get { return _queryParts; } }
+		public IList<IQueryPart> QueryParts { get { return _queryParts; } }
 		public QueryRoots QueryRoots { get { return QueryRootsStruct; } }
 		public Delegate MaterializationDelegate { get; set; }
 		public ResourcesTreatmentType ResourcesTreatmentType { get; private set; }

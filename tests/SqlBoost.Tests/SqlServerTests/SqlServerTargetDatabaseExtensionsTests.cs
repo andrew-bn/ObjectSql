@@ -29,7 +29,7 @@ namespace SqlBoost.Tests.SqlServerTests
 		[TestInitialize]
 		public void Setup()
 		{
-			_categorySchema = new EntitySchema(typeof(Category), new StorageName("Category", null),
+			_categorySchema = new EntitySchema(typeof(Category), new StorageName(false,"Category", null),
 									new Dictionary<string, StorageField>()
 									{
 										{ "CategoryID", new StorageField("CategoryID", null) }, 

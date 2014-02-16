@@ -7,6 +7,8 @@ namespace SqlBoost.QueryInterfaces
 	{
 		object ExecuteScalar();
 		IEnumerable<T> ExecuteQuery();
+#if NET45
 		Task<IAsyncEnumerable<T>> ExecuteQueryAsync();
+#endif
 	}
 }

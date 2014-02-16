@@ -78,7 +78,7 @@ namespace SqlBoost.SqlServer
 		{
 			return commandText.Append(".");
 		}
-		public CommandText WriteBlock(CommandText commandText,string expression)
+		public CommandText WriteBlock(CommandText commandText, string expression)
 		{
 			return commandText.Append("({0})", expression);
 		}
@@ -143,7 +143,7 @@ namespace SqlBoost.SqlServer
 		}
 		public CommandText WriteEqualNull(CommandText commandText, string left)
 		{
-			return commandText.Append("{0} IS NULL",left);
+			return commandText.Append("{0} IS NULL", left);
 		}
 
 		public CommandText WriteComma(CommandText commandText)
@@ -170,9 +170,16 @@ namespace SqlBoost.SqlServer
 
 		private static string PrepareStorageName(StorageName storageName)
 		{
-			return String.IsNullOrEmpty(storageName.Schema)
-					? String.Format("[{0}]", storageName.Name)
-					: String.Format("[{0}].[{1}]", storageName.Schema, storageName.Name);
+			if (storageName.NameOnly)
+			{
+				return String.Format("{0}", storageName.Name);
+			}
+			else
+			{
+				return String.IsNullOrEmpty(storageName.Schema)
+						   ? String.Format("[{0}]", storageName.Name)
+						   : String.Format("[{0}].[{1}]", storageName.Schema, storageName.Name);
+			}
 		}
 	}
 }

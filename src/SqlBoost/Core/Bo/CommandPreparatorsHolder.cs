@@ -12,7 +12,7 @@ namespace SqlBoost.Core.Bo
 
 		public int ParametersEncountered { get; set; }
 
-		public IReadOnlyList<CommandPreparatorDescriptor.CommandPreparator> Preparators
+		public IList<CommandPreparatorDescriptor.CommandPreparator> Preparators
 		{
 			get { return _parametersDescriptors; }
 		}

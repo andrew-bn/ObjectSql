@@ -33,7 +33,7 @@ namespace SqlBoost.Tests
 		public void Setup()
 		{
 			_categoryNameField = "Category Name Fld";
-			_categorySchema = new EntitySchema(typeof(Category), new StorageName("Category", null),
+			_categorySchema = new EntitySchema(typeof(Category), new StorageName(false,"Category", null),
 									new Dictionary<string, StorageField>()
 									{
 										{ "CategoryID", new StorageField("CategoryID", null) }, 
@@ -91,7 +91,7 @@ namespace SqlBoost.Tests
 		[TestMethod]
 		public void ExtractFrom_MemberInitMaterialization()
 		{
-			_categorySchema = new EntitySchema(typeof(Dto), new StorageName("Dto", null),
+			_categorySchema = new EntitySchema(typeof(Dto), new StorageName(false,"Dto", null),
 									new Dictionary<string, StorageField>()
 									{
 										{ "Id", new StorageField("Id", null) }, 

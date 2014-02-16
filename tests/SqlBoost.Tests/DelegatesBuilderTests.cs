@@ -72,7 +72,7 @@ namespace SqlBoost.Tests
 		public void Setup()
 		{
 			_fieldType = new Mock<IStorageFieldType>();
-			_entitySchema = new EntitySchema(typeof(Entity),new StorageName("Entity",null),
+			_entitySchema = new EntitySchema(typeof(Entity),new StorageName(false,"Entity",null),
 				new Dictionary<string, StorageField>() 
 				{ 
 					{ "Id", new StorageField("Id", _fieldType.Object) }, 
@@ -253,7 +253,7 @@ namespace SqlBoost.Tests
 			var info = new EntityMaterializationInformation(typeof(string));
 			var builder = CreateBuilder();
 			var result = builder.CreateEntityMaterializationDelegate(new EntitySchema(typeof(string),
-								new StorageName("unknown",null),new Dictionary<string,StorageField>()), info);
+								new StorageName(false,"unknown",null),new Dictionary<string,StorageField>()), info);
 			var entity = ((Func<IDataReader, string>)result)(_dataReader.Object);
 
 			Assert.AreEqual(val, entity);
@@ -264,7 +264,7 @@ namespace SqlBoost.Tests
 			var info = new EntityMaterializationInformation(typeof(string));
 			var builder = CreateBuilder();
 			var result = builder.CreateEntityMaterializationDelegate(new EntitySchema(typeof(string),
-								new StorageName("unknown", null), new Dictionary<string, StorageField>()), info);
+								new StorageName(false,"unknown", null), new Dictionary<string, StorageField>()), info);
 			((Func<IDataReader, string>)result)(_dataReader.Object);
 
 			_dataReader.Verify(r => r.GetString(0));

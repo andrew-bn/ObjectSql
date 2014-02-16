@@ -6,8 +6,19 @@ namespace SqlBoost.Core.Misc
 {
 	internal static class Reflect
 	{
-
-		public static ConstructorInfo FindCtor<T>(Expression<Func<T>> ctor)
+#if NET40
+		public static object GetCustomAttribute(this MemberInfo mi, Type attrType)
+		{
+			var attrs = mi.GetCustomAttributes(attrType,true);
+			return attrs.Length > 0 ? attrs[0] : null;
+		}
+		public static object GetCustomAttribute(this ParameterInfo mi, Type attrType)
+		{
+			var attrs = mi.GetCustomAttributes(attrType, true);
+			return attrs.Length > 0 ? attrs[0] : null;
+		}
+#endif
+	public static ConstructorInfo FindCtor<T>(Expression<Func<T>> ctor)
 		{
 			return ((NewExpression)ctor.Body).Constructor;
 		}

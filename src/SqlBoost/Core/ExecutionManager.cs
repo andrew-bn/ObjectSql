@@ -37,22 +37,6 @@ namespace SqlBoost.Core
 			var dataReader = cmd.ExecuteReader();
 			return new EntityEnumerable<T>(context, dataReader, connectionOpened);
 		}
-		public static async Task<IAsyncEnumerable<T>> ExecuteQueryAsync<T>(QueryContext context)
-		{
-			if (!(context.DbCommand is DbCommand))
-				throw new SqlBoostException("Provider does not support async operations");
-
-			PrepareQuery(context);
-
-			var cmd = (DbCommand)context.DbCommand;
-			var connection = cmd.Connection;
-			var connectionOpened = connection.State == ConnectionState.Closed;
-			if (connectionOpened) await connection.OpenAsync();
-
-			var dataReader = await cmd.ExecuteReaderAsync();
-
-			return new EntityEnumerable<T>(context, dataReader,connectionOpened);
-		}
 
 		private static T ExecuteCommand<T>(QueryContext context, Func<IDbCommand, T> executor)
 		{
@@ -86,9 +70,33 @@ namespace SqlBoost.Core
 				dbConnection.Open();
 			return openConnection;
 		}
-
+#if NET45
 		#region async
-		public class EntityEnumerable<T> : IAsyncEnumerable<T>, IEnumerable<T>, IAsyncEnumerator<T>, IEnumerator<T>
+		public static async Task<IAsyncEnumerable<T>> ExecuteQueryAsync<T>(QueryContext context)
+		{
+			if (!(context.DbCommand is DbCommand))
+				throw new SqlBoostException("Provider does not support async operations");
+
+			PrepareQuery(context);
+
+			var cmd = (DbCommand)context.DbCommand;
+			var connection = cmd.Connection;
+			var connectionOpened = connection.State == ConnectionState.Closed;
+			if (connectionOpened) await connection.OpenAsync();
+
+			var dataReader = await cmd.ExecuteReaderAsync();
+
+			return new EntityEnumerable<T>(context, dataReader, connectionOpened);
+		}
+
+		
+		#endregion async
+#endif
+		public class EntityEnumerable<T> : IEnumerable<T>, IEnumerator<T>
+#if NET45
+			, IAsyncEnumerable<T>
+			, IAsyncEnumerator<T>
+#endif
 		{
 			private readonly QueryContext _context;
 			private readonly IDataReader _dataReader;
@@ -108,17 +116,17 @@ namespace SqlBoost.Core
 			{
 				return GetValidEnumerator();
 			}
-			
+
 			IEnumerator IEnumerable.GetEnumerator()
 			{
 				return GetValidEnumerator();
 			}
-
+#if NET45
 			public IAsyncEnumerator<T> GetAsyncEnumerator()
 			{
 				return GetValidEnumerator();
 			}
-
+#endif
 			public T Current
 			{
 				get { return _materializer(_dataReader); }
@@ -133,11 +141,12 @@ namespace SqlBoost.Core
 			{
 				return _dataReader.Read();
 			}
-
+#if NET45
 			public Task<bool> MoveNextAsync()
 			{
 				return ((DbDataReader)_dataReader).ReadAsync();
 			}
+#endif
 
 			public void Reset()
 			{
@@ -159,6 +168,5 @@ namespace SqlBoost.Core
 				return this;
 			}
 		}
-		#endregion
 	}
 }

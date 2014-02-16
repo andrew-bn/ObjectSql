@@ -5,7 +5,7 @@ namespace SqlBoost.Core
 {
 	public interface ICommandPreparatorsHolder
 	{
-		IReadOnlyList<CommandPreparator> Preparators { get; }
+		IList<CommandPreparator> Preparators { get; }
 		int ParametersEncountered { get; set; }
 		void AddPreparator(CommandPreparator preparator);
 	}

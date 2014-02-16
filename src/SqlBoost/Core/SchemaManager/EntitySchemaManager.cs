@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Concurrent;
-using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Reflection;
 using SqlBoost.Core.Bo.EntitySchema;
+using SqlBoost.Core.Misc;
 
 namespace SqlBoost.Core.SchemaManager
 {
@@ -34,7 +34,7 @@ namespace SqlBoost.Core.SchemaManager
 			int index = 0;
 
 			var parameters = method.GetParameters().Select(
-				p => new FuncParameter(p.Name, index++,ObtainStorageParameter(p))).ToArray();
+				p => new FuncParameter(p.Name, index++, ObtainStorageParameter(p))).ToArray();
 
 			return new FuncSchema(ObtainStorageProcedureName(method), parameters);
 		}
@@ -54,29 +54,101 @@ namespace SqlBoost.Core.SchemaManager
 
 		private bool NotFilteredEntityProperty(PropertyInfo prop)
 		{
-			var notMappedAttr = prop.GetCustomAttribute(typeof(NotMappedAttribute)) as NotMappedAttribute;
+			object notMappedAttr = null;
+#if NET45
+			notMappedAttr = prop.GetCustomAttribute(typeof(System.ComponentModel.DataAnnotations.Schema.NotMappedAttribute)) as System.ComponentModel.DataAnnotations.Schema.NotMappedAttribute;
+#endif
+			if (notMappedAttr == null)
+				notMappedAttr = prop.GetCustomAttribute(typeof(NotMappedAttribute)) as NotMappedAttribute;
+
 			return notMappedAttr == null;
 		}
+
 		private StorageField ObtainStorageField(PropertyInfo prop)
 		{
-			var annotationAttribute = prop.GetCustomAttribute(typeof(ColumnAttribute)) as ColumnAttribute;
-			return annotationAttribute == null
-					? new StorageField(prop.Name)
-					: new StorageField(annotationAttribute.Name, ParseDbType(annotationAttribute.TypeName));
+			string entityName = prop.Name;
+			string dbType = string.Empty;
+			bool attrFound = false;
+
+			var objSqlAttr = prop.GetCustomAttribute(typeof(ColumnAttribute)) as ColumnAttribute;
+			if (attrFound = (objSqlAttr != null))
+			{
+				entityName = objSqlAttr.Name;
+				dbType = objSqlAttr.TypeName;
+			}
+
+#if NET45
+			if (!attrFound)
+			{
+				var netAttr = prop.GetCustomAttribute(typeof(System.ComponentModel.DataAnnotations.Schema.ColumnAttribute)) as System.ComponentModel.DataAnnotations.Schema.ColumnAttribute;
+				if (netAttr != null)
+				{
+					entityName = netAttr.Name;
+					dbType = netAttr.TypeName;
+				}
+			}
+#endif
+#if NET40
+			if (!attrFound)
+			{
+				var netAttr = prop.GetCustomAttribute(typeof(System.Data.Linq.Mapping.ColumnAttribute)) as System.Data.Linq.Mapping.ColumnAttribute;
+				if (netAttr != null)
+				{
+					entityName = netAttr.Name;
+					dbType = netAttr.DbType;
+				}
+			}
+#endif
+			return string.IsNullOrEmpty(dbType)
+					? new StorageField(entityName)
+					: new StorageField(entityName, ParseDbType(dbType));
 		}
+
 		private StorageName ObtainStorageName(Type entity)
 		{
-			var annotationAttribute = entity.GetCustomAttribute(typeof(TableAttribute)) as TableAttribute;
-			return annotationAttribute == null
-					? new StorageName(entity.Name, String.Empty)
-					: new StorageName(annotationAttribute.Name, annotationAttribute.Schema);
+			string entityName = entity.Name;
+			string schemaName = string.Empty;
+			var nameOnly = false;
+			bool attrFound = false;
+
+			var objSqlAttr = entity.GetCustomAttribute(typeof(TableAttribute)) as TableAttribute;
+			if (attrFound = (objSqlAttr != null))
+			{
+				entityName = objSqlAttr.Name;
+				schemaName = objSqlAttr.Schema;
+			}
+
+#if NET45
+			if (!attrFound)
+			{
+				var netAttr = entity.GetCustomAttribute(typeof(System.ComponentModel.DataAnnotations.Schema.TableAttribute)) as System.ComponentModel.DataAnnotations.Schema.TableAttribute;
+				if (netAttr != null)
+				{
+					entityName = netAttr.Name;
+					schemaName = netAttr.Schema;
+				}
+			}
+#endif
+#if NET40
+			if (!attrFound)
+			{
+				var netAttr = entity.GetCustomAttribute(typeof(System.Data.Linq.Mapping.TableAttribute)) as System.Data.Linq.Mapping.TableAttribute;
+				if (netAttr != null)
+				{
+					entityName = netAttr.Name;
+					nameOnly = true;
+				}
+			}
+#endif
+			return new StorageName(nameOnly, entityName, schemaName);
 		}
 		private StorageName ObtainStorageProcedureName(MethodInfo entity)
 		{
-			var annotationAttribute = entity.GetCustomAttribute(typeof(ProcedureAttribute)) as ProcedureAttribute;
-			return annotationAttribute == null
-					? new StorageName(entity.Name, String.Empty)
-					: new StorageName(annotationAttribute.Name, annotationAttribute.Schema);
+			var attr = entity.GetCustomAttribute(typeof(ProcedureAttribute)) as ProcedureAttribute;
+			return attr == null
+					? new StorageName(false, entity.Name, String.Empty)
+					: new StorageName(false, attr.Name, attr.Schema);
+
 		}
 		private StorageField ObtainStorageParameter(ParameterInfo prop)
 		{

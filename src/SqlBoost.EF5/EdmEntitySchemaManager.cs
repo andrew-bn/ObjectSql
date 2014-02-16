@@ -108,7 +108,7 @@ namespace SqlBoost.EF5
 								new
 								{
 									EntityType = item.Attribute("EntityType").Value.Replace(_ssdlNamespace, ""),
-									StorageName = new StorageName(item.Attribute("Table") != null ? item.Attribute("Table").Value : item.Attribute("EntityType").Value.Replace(_ssdlNamespace, ""),
+									StorageName = new StorageName(false, item.Attribute("Table") != null ? item.Attribute("Table").Value : item.Attribute("EntityType").Value.Replace(_ssdlNamespace, ""),
 																	item.Attribute("Schema") != null ? item.Attribute("Schema").Value : "")
 								}
 							  ).FirstOrDefault();
@@ -196,7 +196,7 @@ namespace SqlBoost.EF5
 				return false;
 
 			var storeFuncName = storageFuncDescription.Attribute("StoreFunctionName");
-			var storageName = new StorageName(storeFuncName != null ? storeFuncName.Value : storageFuncName,
+			var storageName = new StorageName(false, storeFuncName != null ? storeFuncName.Value : storageFuncName,
 											  storageFuncDescription.Attribute("Schema").Value);
 
 			var parameters = (from item in storageFuncDescription.Descendants()

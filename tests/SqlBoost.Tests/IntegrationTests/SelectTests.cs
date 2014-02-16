@@ -164,18 +164,7 @@ namespace SqlBoost.Tests.IntegrationTests
 			var arr = res.ExecuteQuery().ToArray();
 			Assert.AreEqual(8, arr.Length);
 		}
-		[TestMethod]
-		public void Select_GroupBy_Async()
-		{
-			var res = EfQuery.From<Product>()
-				.GroupBy((p) => new { p.CategoryID })
-				.Where((p) => p.CategoryID > 2 && Sql.Avg(p.ReorderLevel) > 15)
-				.Select((p) => new { Fld1 = p.CategoryID, Fld2 = Sql.Avg(p.ReorderLevel) });
-			var arr = res.ExecuteQueryAsync().Result.EntitiesToArrayAsync().Result;
-			var entity = arr[0];
-			Assert.AreEqual(5, entity.Fld1);
-			Assert.AreEqual(22, entity.Fld2);
-		}
+
 		[TestMethod]
 		public void Select_CompiledQuery()
 		{
@@ -202,5 +191,19 @@ namespace SqlBoost.Tests.IntegrationTests
 			Assert.AreEqual(9,result.Length);
 
 		}
+#if NET45
+		[TestMethod]
+		public void Select_GroupBy_Async()
+		{
+			var res = EfQuery.From<Product>()
+				.GroupBy((p) => new { p.CategoryID })
+				.Where((p) => p.CategoryID > 2 && Sql.Avg(p.ReorderLevel) > 15)
+				.Select((p) => new { Fld1 = p.CategoryID, Fld2 = Sql.Avg(p.ReorderLevel) });
+			var arr = res.ExecuteQueryAsync().Result.EntitiesToArrayAsync().Result;
+			var entity = arr[0];
+			Assert.AreEqual(5, entity.Fld1);
+			Assert.AreEqual(22, entity.Fld2);
+		}
+#endif
 	}
 }
