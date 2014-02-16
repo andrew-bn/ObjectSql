@@ -11,6 +11,7 @@ using System;
 using System.ComponentModel.DataAnnotations.Schema;
 using ObjectSql;
 using System.Collections.Generic;
+using ObjectSql.QueryInterfaces;
 
 namespace ObjectSql.Tests
 {
@@ -848,5 +849,49 @@ namespace ObjectSql.Tests
 
 		[Procedure("Ten Most Expensive Products", "dbo")]
 		public abstract void Ten_Most_Expensive_Products();
+	}
+
+	public static partial class TestDatabaseProceduresHolder
+	{
+
+		public static IQueryEnd CustOrderHist(this IStoredProcedureHolder<TestDatabase> holder, string @CustomerID)
+		{
+			return holder.Root.Exec<TestDatabase>(h=>h.CustOrderHist(@CustomerID));
+		}
+
+		public static IQueryEnd CustOrdersDetail(this IStoredProcedureHolder<TestDatabase> holder, int? @OrderID)
+		{
+			return holder.Root.Exec<TestDatabase>(h=>h.CustOrdersDetail(@OrderID));
+		}
+
+		public static IQueryEnd CustOrdersOrders(this IStoredProcedureHolder<TestDatabase> holder, string @CustomerID)
+		{
+			return holder.Root.Exec<TestDatabase>(h=>h.CustOrdersOrders(@CustomerID));
+		}
+
+		public static IQueryEnd Employee_Sales_by_Country(this IStoredProcedureHolder<TestDatabase> holder, DateTime? @Beginning_Date, DateTime? @Ending_Date)
+		{
+			return holder.Root.Exec<TestDatabase>(h=>h.Employee_Sales_by_Country(@Beginning_Date, @Ending_Date));
+		}
+
+		public static IQueryEnd MyProcedure(this IStoredProcedureHolder<TestDatabase> holder, int? @param1)
+		{
+			return holder.Root.Exec<TestDatabase>(h=>h.MyProcedure(@param1));
+		}
+
+		public static IQueryEnd Sales_by_Year(this IStoredProcedureHolder<TestDatabase> holder, DateTime? @Beginning_Date, DateTime? @Ending_Date)
+		{
+			return holder.Root.Exec<TestDatabase>(h=>h.Sales_by_Year(@Beginning_Date, @Ending_Date));
+		}
+
+		public static IQueryEnd SalesByCategory(this IStoredProcedureHolder<TestDatabase> holder, string @CategoryName, string @OrdYear)
+		{
+			return holder.Root.Exec<TestDatabase>(h=>h.SalesByCategory(@CategoryName, @OrdYear));
+		}
+
+		public static IQueryEnd Ten_Most_Expensive_Products(this IStoredProcedureHolder<TestDatabase> holder)
+		{
+			return holder.Root.Exec<TestDatabase>(h=>h.Ten_Most_Expensive_Products());
+		}
 	}
 }

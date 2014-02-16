@@ -16,6 +16,7 @@ using System;
 using System.ComponentModel.DataAnnotations.Schema;
 using ObjectSql;
 using System.Collections.Generic;
+using ObjectSql.QueryInterfaces;
 
 namespace <#= Namespace#>
 {
@@ -62,6 +63,24 @@ namespace <#= Namespace#>
 		[Procedure("<#=proc.Name#>", "<#=proc.Schema#>")]
 		public abstract void <#=ToValidName(proc.Name)#>(<#
 			foreach(var p in proc.Parameters){#><#=p.Position>1?", ":""#>[Parameter("<#=p.Name.Replace("@","")#>", "<#=p.DataType#>")]<#=ToTypeName(p.NetType,true)#> <#=ToValidName(p.Name)#><#}#>);
+<#
+		}
+#>
+	}
+
+	public static partial class <#=ConnStrName#>ProceduresHolder
+	{
+<# 
+		foreach(var proc in Schema.Procedures)
+		{
+#>
+
+		public static IQueryEnd <#=ToValidName(proc.Name)#>(this IStoredProcedureHolder<<#=ConnStrName#>> holder<#
+			foreach(var p in proc.Parameters){#>, <#=ToTypeName(p.NetType,true)#> <#=ToValidName(p.Name)#><#}#>)
+		{
+			return holder.Root.StoredProcedure<<#=ConnStrName#>>(h=>h.<#=ToValidName(proc.Name)#>(<#
+				foreach(var p in proc.Parameters){#><#=p.Position>1?", ":""#><#=ToValidName(p.Name)#><#}#>));
+		}
 <#
 		}
 #>

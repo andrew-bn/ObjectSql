@@ -60,15 +60,19 @@ namespace ObjectSql.QueryImplementation
 			Context.AddQueryPart(new DeletePart(typeof(T)));
 			return this;
 		}
-		public IQueryEnd<TEntity> StoredProcedure<THolder, TEntity>(Expression<Func<THolder, IEnumerable<TEntity>>> spExecutor)
+		public IQueryEnd<TEntity> Exec<THolder, TEntity>(Expression<Func<THolder, IEnumerable<TEntity>>> spExecutor)
 		{
 			Context.AddQueryPart(new StoredProcedurePart(spExecutor,typeof(TEntity),true));
 			return new QueryEnd<TEntity>(Context);
 		}
-		public IQueryEnd StoredProcedure<THolder>(Expression<Action<THolder>> spExecutor)
+		public IQueryEnd Exec<THolder>(Expression<Action<THolder>> spExecutor)
 		{
 			Context.AddQueryPart(new StoredProcedurePart(spExecutor, null, true));
 			return new QueryEnd(Context);
+		}
+		public IStoredProcedureHolder<THolder> Exec<THolder>()
+		{
+			return new StoredProcedureHolder<THolder>(this);
 		}
 		public int ExecuteNonQuery()
 		{

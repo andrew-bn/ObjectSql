@@ -10,7 +10,7 @@ namespace ObjectSql.Core.Bo
 		const int MAX_PARAMETERS_COUNT = sizeof(int)*8;
 		private int _rootsCount;
 		private Dictionary<object, int> _roots;
-		public ICollection<KeyValuePair<object, int>> Roots { get { return _roots != null ? _roots : new Dictionary<object, int>(); } }
+		public ICollection<KeyValuePair<object, int>> Roots { get { return _roots ?? new Dictionary<object, int>(); } }
 		public bool RootsGenerated
 		{
 			get { return _roots != null; }

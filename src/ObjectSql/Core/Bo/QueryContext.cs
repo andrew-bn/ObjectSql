@@ -77,9 +77,14 @@ namespace ObjectSql.Core.Bo
 		}
 		#endregion
 		#region GetHashCode
+
+		private int? _hashCode = null;
 		public override int GetHashCode()
 		{
-			return ExpressionCompareBasedGetHashCode();
+			if (!_hashCode.HasValue)
+				_hashCode = ExpressionCompareBasedGetHashCode();
+
+			return _hashCode.Value;
 		}
 
 		private int ExpressionCompareBasedGetHashCode()
