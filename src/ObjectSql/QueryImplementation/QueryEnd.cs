@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System.Data;
+using System.Threading.Tasks;
 using ObjectSql.Core;
 using ObjectSql.Core.Bo;
 using ObjectSql.QueryInterfaces;
@@ -6,7 +7,7 @@ using System.Collections.Generic;
 
 namespace ObjectSql.QueryImplementation
 {
-	public class QueryEnd<T> : QueryBase, IQueryEnd<T>
+	public class QueryEnd : QueryBase, IQueryEnd
 	{
 		public QueryEnd(QueryContext context)
 			: base(context)
@@ -18,17 +19,12 @@ namespace ObjectSql.QueryImplementation
 			return ExecutionManager.ExecuteScalar(Context);
 		}
 
-		public IEnumerable<T> ExecuteQuery()
+		public IQueryDataReader ExecuteReader()
 		{
-			return ExecutionManager.ExecuteQuery<T>(Context);
+			return ExecutionManager.ExecuteReader(Context);
 		}
-#if NET45
-		public Task<IAsyncEnumerable<T>> ExecuteQueryAsync()
-		{
-			return ExecutionManager.ExecuteQueryAsync<T>(Context);
-		}
-#endif
-		public System.Data.IDbCommand Command
+
+		public IDbCommand Command
 		{
 			get
 			{

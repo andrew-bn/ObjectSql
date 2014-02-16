@@ -14,21 +14,32 @@ namespace ObjectSql.Core
 		{
 			get { return SingleValueType != null; }
 		}
+		public bool UseResultMapping { get; private set; }
+
 		public Type SingleValueType { get; private set; }
 		public ConstructorInfo ConstructorInfo { get; private set; }
 		public int[] FieldsIndexes { get; private set; }
+
+		public EntityMaterializationInformation(Type singleValueType, bool useResultMapping)
+			: this(singleValueType, null, null)
+		{
+			UseResultMapping = useResultMapping;
+		}
 		public EntityMaterializationInformation(Type singleValueType)
 			: this(singleValueType, null, null)
 		{
 		}
+
 		public EntityMaterializationInformation(ConstructorInfo ctorInfo)
 			: this(null, ctorInfo, null)
 		{
 		}
+
 		public EntityMaterializationInformation(int[] fieldsIndexes)
 			: this(null, null, fieldsIndexes)
 		{
 		}
+
 		private EntityMaterializationInformation(
 			Type singleValueType, ConstructorInfo ctorInfo, int[] fieldsIndexes)
 		{
@@ -36,6 +47,7 @@ namespace ObjectSql.Core
 			FieldsIndexes = fieldsIndexes;
 			SingleValueType = singleValueType;
 		}
+
 		public override int GetHashCode()
 		{
 			unchecked
@@ -51,6 +63,7 @@ namespace ObjectSql.Core
 				return result;
 			}
 		}
+
 		public override bool Equals(object obj)
 		{
 			if (ReferenceEquals(this, obj))

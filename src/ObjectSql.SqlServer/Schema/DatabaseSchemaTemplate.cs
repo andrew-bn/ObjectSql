@@ -193,14 +193,14 @@ namespace ObjectSql.SqlServer.Schema
             
             #line default
             #line hidden
-            this.Write("\")]\r\n\t\tpublic abstract IEnumerable<T> ");
+            this.Write("\")]\r\n\t\tpublic abstract void ");
             
             #line 63 "D:\Work\Git\ObjectSql\src\ObjectSql.SqlServer\Schema\DatabaseSchemaTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(ToValidName(proc.Name)));
             
             #line default
             #line hidden
-            this.Write("<T>(");
+            this.Write("(");
             
             #line 63 "D:\Work\Git\ObjectSql\src\ObjectSql.SqlServer\Schema\DatabaseSchemaTemplate.tt"
 

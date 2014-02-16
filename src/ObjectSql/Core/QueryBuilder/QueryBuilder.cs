@@ -17,6 +17,7 @@ namespace ObjectSql.Core.QueryBuilder
 {
 	public abstract class QueryBuilder: IQueryBuilder
 	{
+		public IDelegatesBuilder DelegatesBuilder { get { return _delegatesBuilder; } }
 		private readonly IEntitySchemaManager _schemaManager;
 		private readonly ISqlWriter _sqlWriter;
 		private readonly IDelegatesBuilder _delegatesBuilder;
@@ -84,7 +85,7 @@ namespace ObjectSql.Core.QueryBuilder
 			var methodCall = ((MethodCallExpression)exp);
 
 			var funcSchema = _schemaManager.GetFuncSchema(methodCall.Method);
-			var entitySchema = _schemaManager.GetSchema(storedProcedurePart.EntityType);
+			
 
 			_sqlWriter.WriteProcedureCall(context.Text, funcSchema);
 
@@ -93,9 +94,14 @@ namespace ObjectSql.Core.QueryBuilder
 			var param = new SimpleCommandPreparator(changeDbCommandType);
 			context.Preparators.AddPreparator(param);
 
-			var indexes = entitySchema.EntityFields.Select(f => f.Index).ToArray();
-			var materializationInfo = new EntityMaterializationInformation(indexes);
-			context.MaterializationDelegate = _delegatesBuilder.CreateEntityMaterializationDelegate(entitySchema, materializationInfo);
+			if (storedProcedurePart.HasResultEntityType)
+			{
+				var entitySchema = _schemaManager.GetSchema(storedProcedurePart.EntityType);
+				var indexes = entitySchema.EntityFields.Select(f => f.Index).ToArray();
+				var materializationInfo = new EntityMaterializationInformation(indexes);
+				context.MaterializationDelegate = _delegatesBuilder.CreateEntityMaterializationDelegate(entitySchema, materializationInfo);
+			}
+
 			_expressionAnalizer.AnalizeExpression(context.Preparators, methodCall, ExpressionAnalizerType.FuncCall, false);
 		}
 

@@ -60,7 +60,7 @@ namespace <#= Namespace#>
 #>
 
 		[Procedure("<#=proc.Name#>", "<#=proc.Schema#>")]
-		public abstract IEnumerable<T> <#=ToValidName(proc.Name)#><T>(<#
+		public abstract void <#=ToValidName(proc.Name)#>(<#
 			foreach(var p in proc.Parameters){#><#=p.Position>1?", ":""#>[Parameter("<#=p.Name.Replace("@","")#>", "<#=p.DataType#>")]<#=ToTypeName(p.NetType,true)#> <#=ToValidName(p.Name)#><#}#>);
 <#
 		}

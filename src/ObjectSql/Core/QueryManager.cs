@@ -55,31 +55,12 @@ namespace ObjectSql.Core
 
 		private static QueryPreparationData GeneratePreparationData(QueryContext context)
 		{
-			return CreateQueryBuilder(context).BuildQuery(context.QueryParts.ToArray());
+			return context.QueryBuilder.BuildQuery(context.QueryParts.ToArray());
 		}
 
-		#region query builder factory
-		private static IQueryBuilder CreateQueryBuilder(QueryContext context)
+		internal static QueryContext CreateQueryContext(IDbCommand command, IQueryBuilder queryBuilder, IEntitySchemaManager schemaManager, string connectionString, ResourcesTreatmentType resTreatment)
 		{
-			var sm = GetSchemaManager(context.SchemaManagerFactory, context.DbManager, context.ConnectionString);
-			return context.DbManager.CreateQueryBuilder(sm);
-		}
-
-		#endregion
-		#region schema manager factory
-		private static readonly ConcurrentDictionary<ISchemaManagerFactory, ConcurrentDictionary<string, IEntitySchemaManager>> _schemaManagersCache = new ConcurrentDictionary<ISchemaManagerFactory, ConcurrentDictionary<string, IEntitySchemaManager>>();
-
-		private static IEntitySchemaManager GetSchemaManager(ISchemaManagerFactory schemaManager, IDatabaseManager dbManager, string connectionString)
-		{
-			var cache = _schemaManagersCache.GetOrAdd(schemaManager, sm => new ConcurrentDictionary<string, IEntitySchemaManager>());
-			return cache.GetOrAdd(connectionString, cs => schemaManager.CreateSchemaManager(dbManager.DbType, cs));
-		}
-
-		#endregion
-
-		internal static QueryContext CreateQueryContext(IDbCommand command, IDatabaseManager dbManager, ISchemaManagerFactory providerManagerFactory, string connectionString, ResourcesTreatmentType resTreatment)
-		{
-			return new QueryContext(command, dbManager, providerManagerFactory, connectionString, resTreatment);
+			return new QueryContext(command, queryBuilder, schemaManager, connectionString, resTreatment);
 		}
 	}
 }

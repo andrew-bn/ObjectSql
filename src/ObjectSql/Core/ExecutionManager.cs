@@ -1,11 +1,12 @@
-﻿using System.Collections;
-using System.Data.Common;
+﻿using System.Data.Common;
 using ObjectSql.Core.Bo;
 using ObjectSql.Exceptions;
 using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Threading.Tasks;
+using ObjectSql.QueryImplementation;
+using ObjectSql.QueryInterfaces;
 
 namespace ObjectSql.Core
 {
@@ -35,7 +36,18 @@ namespace ObjectSql.Core
 			if (connectionOpened) connection.Open();
 
 			var dataReader = cmd.ExecuteReader();
-			return new EntityEnumerable<T>(context, dataReader, connectionOpened);
+			return new EntityEnumerable<T>(context.MaterializationDelegate, dataReader, () => DisposeDataReader(context, dataReader, connectionOpened));
+		}
+		public static IQueryDataReader ExecuteReader(QueryContext context)
+		{
+			PrepareQuery(context);
+			var cmd = context.DbCommand;
+
+			var connection = cmd.Connection;
+			var connectionOpened = connection.State == ConnectionState.Closed;
+			if (connectionOpened) connection.Open();
+
+			return new QueryDataReader(context, cmd.ExecuteReader(), () => FreeResources(context, cmd, connectionOpened));
 		}
 
 		private static T ExecuteCommand<T>(QueryContext context, Func<IDbCommand, T> executor)
@@ -86,87 +98,16 @@ namespace ObjectSql.Core
 
 			var dataReader = await cmd.ExecuteReaderAsync();
 
-			return new EntityEnumerable<T>(context, dataReader, connectionOpened);
+			return new EntityEnumerable<T>(context.MaterializationDelegate, dataReader, () => DisposeDataReader(context, dataReader, connectionOpened));
 		}
 
-		
+
 		#endregion async
 #endif
-		public class EntityEnumerable<T> : IEnumerable<T>, IEnumerator<T>
-#if NET45
-			, IAsyncEnumerable<T>
-			, IAsyncEnumerator<T>
-#endif
+		private static void DisposeDataReader(QueryContext context, IDataReader dataReader, bool connectionOpened)
 		{
-			private readonly QueryContext _context;
-			private readonly IDataReader _dataReader;
-			private readonly bool _connectionOpened;
-			private readonly Func<IDataReader, T> _materializer;
-			private volatile bool _enumeratorReturned;
-
-			public EntityEnumerable(QueryContext context, IDataReader dataReader, bool connectionOpened)
-			{
-				_context = context;
-				_dataReader = dataReader;
-				_connectionOpened = connectionOpened;
-				_materializer = (Func<IDataReader, T>)_context.MaterializationDelegate;
-			}
-
-			public IEnumerator<T> GetEnumerator()
-			{
-				return GetValidEnumerator();
-			}
-
-			IEnumerator IEnumerable.GetEnumerator()
-			{
-				return GetValidEnumerator();
-			}
-#if NET45
-			public IAsyncEnumerator<T> GetAsyncEnumerator()
-			{
-				return GetValidEnumerator();
-			}
-#endif
-			public T Current
-			{
-				get { return _materializer(_dataReader); }
-			}
-
-			object IEnumerator.Current
-			{
-				get { return Current; }
-			}
-
-			public bool MoveNext()
-			{
-				return _dataReader.Read();
-			}
-#if NET45
-			public Task<bool> MoveNextAsync()
-			{
-				return ((DbDataReader)_dataReader).ReadAsync();
-			}
-#endif
-
-			public void Reset()
-			{
-
-			}
-
-			public void Dispose()
-			{
-				_dataReader.Dispose();
-				FreeResources(_context, _context.DbCommand, _connectionOpened);
-			}
-
-			private EntityEnumerable<T> GetValidEnumerator()
-			{
-				if (_enumeratorReturned)
-					throw new ObjectSqlException("You can use only one instance of enumerator. You have already got one");
-				_enumeratorReturned = true;
-
-				return this;
-			}
+			dataReader.Dispose();
+			FreeResources(context, context.DbCommand, connectionOpened);
 		}
 	}
 }

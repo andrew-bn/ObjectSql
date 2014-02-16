@@ -7,5 +7,6 @@ namespace ObjectSql.QueryInterfaces
 	public interface IStoredProcedure
 	{
 		IQueryEnd<TEntity> StoredProcedure<THolder,TEntity>(Expression<Func<THolder,IEnumerable<TEntity>>> spExecutor);
+		IQueryEnd StoredProcedure<THolder>(Expression<Action<THolder>> spExecutor);
 	}
 }

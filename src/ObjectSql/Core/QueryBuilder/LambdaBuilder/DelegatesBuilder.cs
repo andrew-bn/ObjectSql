@@ -149,13 +149,19 @@ namespace ObjectSql.Core.QueryBuilder.LambdaBuilder
 		public Delegate CreateEntityMaterializationDelegate(EntitySchema schema, EntityMaterializationInformation materializationInfo)
 		{
 			Type delegateType = typeof(Func<,>).MakeGenericType(typeof(IDataReader), schema.EntityType);
-			if (materializationInfo.IsSingleValue)
+
+			if (materializationInfo.IsSingleValue && !materializationInfo.UseResultMapping)
 				return CreateSingleValueRowFactory(schema, delegateType);
+			
 			if (materializationInfo.IsConstructorBased)
 				return CreateConstructorBasedRowFactory(materializationInfo.ConstructorInfo, delegateType);
 
+			if (materializationInfo.IsSingleValue && materializationInfo.UseResultMapping)
+				return CreateResultMappingFactory(schema, delegateType);
+
 			return CreatePropertyInitializationBasedRowFactory(schema, materializationInfo.FieldsIndexes, delegateType);
 		}
+		
 		private Delegate CreateSingleValueRowFactory(EntitySchema schema, Type delegateType)
 		{
 			var dataReaderParameter = Expression.Parameter(typeof(IDataReader));
@@ -201,6 +207,77 @@ namespace ObjectSql.Core.QueryBuilder.LambdaBuilder
 				Expression.New(ctorInfo, bindings.ToArray()),
 					dataReaderParameter)
 				.Compile();
+		}
+		/*IDataReader dr;
+			dynamic res = new object();
+			for (int i = 0; i < dr.FieldCount; i++)
+			{
+				var fieldName = dr.GetName(i);
+				var fieldType = dr.GetFieldType(i);
+				if (fieldName.Equals("myField", StringComparison.CurrentCultureIgnoreCase) && fieldType == typeof (string))
+					res.myField = (string) dr.GetValue(i);
+				else (fieldName.Equals("myField2", StringComparison.CurrentCultureIgnoreCase) && fieldType == typeof (string))
+					res.myField2 = (string) dr.GetValue(i);
+			}*/
+		private Delegate CreateResultMappingFactory(EntitySchema schema, Type delegateType)
+		{
+			var parts = new List<Expression>();
+			var fieldCountProp = (PropertyInfo)Reflect.FindProperty<IDataReader>(r => r.FieldCount);
+			var getName = Reflect.FindMethod<IDataReader>(r => r.GetName(0));
+			var getType = Reflect.FindMethod<IDataReader>(r => r.GetFieldType(0));
+			var getValue = Reflect.FindMethod<IDataReader>(r => r.GetValue(0));
+
+			var stringEquals = Reflect.FindMethod<string>(r => r.Equals("", StringComparison.OrdinalIgnoreCase));
+
+			var exitLabel = Expression.Label();
+			var continueLabel = Expression.Label();
+
+			var dataReaderParameter = Expression.Parameter(typeof(IDataReader));
+			
+			var index = Expression.Variable(typeof (int), "index");
+			var assignIndex = Expression.Assign(index, Expression.Constant(0));
+			parts.Add(assignIndex);
+
+			var newRow = Expression.Variable(schema.EntityType, "newRow");
+			var assignNewRow = Expression.Assign(newRow, Expression.New(schema.EntityType.GetConstructor(new Type[0])));
+			parts.Add(assignNewRow);
+
+			parts.Add(Expression.Label(continueLabel));
+			// Loop ---------
+			var loopExitCondition = Expression.IfThen(
+							Expression.Equal(index, Expression.Property(dataReaderParameter, fieldCountProp)),
+							Expression.Goto(exitLabel));
+			parts.Add(loopExitCondition);
+
+			var fieldName = Expression.Variable(typeof (string), "fieldName");
+			var fieldNameAssign = Expression.Assign(fieldName, Expression.Call(dataReaderParameter, getName, index));
+			parts.Add(fieldNameAssign);
+
+			var fieldType = Expression.Variable(typeof (Type), "fieldType");
+			var fieldTypeAssign = Expression.Assign(fieldType, Expression.Call(dataReaderParameter, getType, index));
+			parts.Add(fieldTypeAssign);
+				// ifs ---
+			foreach (var p in schema.EntityFields)
+			{
+				var ifExp = Expression.IfThen(
+									Expression.Call(fieldName, stringEquals, Expression.Constant(p.StorageField.Name),Expression.Constant(StringComparison.CurrentCultureIgnoreCase)),
+									Expression.Assign(Expression.Property(newRow, p.PropertyInfo),
+												Expression.Convert(Expression.Call(dataReaderParameter,getValue,index), p.PropertyInfo.PropertyType)));
+				parts.Add(ifExp);
+			}
+				// -------
+			parts.Add(Expression.Assign(index, Expression.Add(index, Expression.Constant(1))));
+			parts.Add(Expression.Goto(continueLabel));
+
+			//------------
+			parts.Add(Expression.Label(exitLabel));
+			parts.Add(newRow);
+
+			var body = Expression.Block(
+				new[]{index, newRow,fieldName,fieldType},
+				parts);
+
+			return Expression.Lambda(delegateType, body, dataReaderParameter).Compile();
 		}
 
 		private static Expression GenerateReadValueFromDatabase(ParameterExpression parameter, Type fieldType, int propertyIndex)
@@ -268,5 +345,6 @@ namespace ObjectSql.Core.QueryBuilder.LambdaBuilder
 						cmdParam,
 						rootParam).Compile();
 		}
+		
 	}
 }

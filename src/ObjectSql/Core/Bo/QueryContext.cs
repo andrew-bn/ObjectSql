@@ -2,16 +2,19 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 using ObjectSql.Core.Misc;
+using ObjectSql.Core.QueryBuilder;
 using ObjectSql.Core.QueryParts;
+using ObjectSql.Core.SchemaManager;
 
 namespace ObjectSql.Core.Bo
 {
 	public class QueryContext
 	{
 		public const int PRIME = 397;
+
 		public IDbCommand DbCommand { get; private set; }
-		public IDatabaseManager DbManager { get; private set; }
-		public ISchemaManagerFactory SchemaManagerFactory { get; private set; }
+		public IQueryBuilder QueryBuilder { get; set; }
+		public IEntitySchemaManager SchemaManager { get; set; }
 		public string ConnectionString { get; private set; }
 		public IList<IQueryPart> QueryParts { get { return _queryParts; } }
 		public QueryRoots QueryRoots { get { return QueryRootsStruct; } }
@@ -22,18 +25,18 @@ namespace ObjectSql.Core.Bo
 		private List<IQueryPart> _queryParts;
 		protected QueryRoots QueryRootsStruct;
 
-		internal QueryContext(IDbCommand command, IDatabaseManager dbManager, ISchemaManagerFactory schemaManagerFactory, string connectionString, ResourcesTreatmentType resTreatment)
+		internal QueryContext(IDbCommand command, IQueryBuilder queryBuilder, IEntitySchemaManager schemaManager, string connectionString, ResourcesTreatmentType resTreatment)
 		{
 			DbCommand = command;
-			DbManager = dbManager;
-			SchemaManagerFactory = schemaManagerFactory;
+			QueryBuilder = queryBuilder;
+			SchemaManager = schemaManager;
 			ConnectionString = connectionString;
 			_queryParts = new List<IQueryPart>();
 			ResourcesTreatmentType = resTreatment;
 		}
 		internal QueryContext CopyWith(IDbCommand command)
 		{
-			var result = new QueryContext(command,DbManager, SchemaManagerFactory, ConnectionString,ResourcesTreatmentType)
+			var result = new QueryContext(command,QueryBuilder, SchemaManager, ConnectionString,ResourcesTreatmentType)
 				{
 					QueryRootsStruct = QueryRootsStruct,
 					_queryParts = _queryParts,

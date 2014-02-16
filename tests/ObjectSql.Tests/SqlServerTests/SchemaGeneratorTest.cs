@@ -15,7 +15,7 @@ namespace ObjectSql.Tests.SqlServerTests
 		{
 			var result = SqlServer.Schema.SchemaGenerator.Generate("adf","CsName", ConnectionString);
 
-			Assert.Fail(result);
+			//Assert.Fail(result);
 		}
 	}
 }

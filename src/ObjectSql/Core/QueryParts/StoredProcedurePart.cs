@@ -7,7 +7,8 @@ namespace ObjectSql.Core.QueryParts
 	{
 		public bool ReturnsCollection { get; private set; }
 		public Type EntityType{get;private set;}
-		public StoredProcedurePart(LambdaExpression expression,Type entityType, bool returnsCollection)
+		public bool HasResultEntityType { get { return EntityType!=null; } }
+		public StoredProcedurePart(LambdaExpression expression, Type entityType, bool returnsCollection)
 			:base(expression)
 		{
 			ReturnsCollection = returnsCollection;

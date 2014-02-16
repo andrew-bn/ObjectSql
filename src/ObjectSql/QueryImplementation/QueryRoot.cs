@@ -65,6 +65,11 @@ namespace ObjectSql.QueryImplementation
 			Context.AddQueryPart(new StoredProcedurePart(spExecutor,typeof(TEntity),true));
 			return new QueryEnd<TEntity>(Context);
 		}
+		public IQueryEnd StoredProcedure<THolder>(Expression<Action<THolder>> spExecutor)
+		{
+			Context.AddQueryPart(new StoredProcedurePart(spExecutor, null, true));
+			return new QueryEnd(Context);
+		}
 		public int ExecuteNonQuery()
 		{
 			return ExecutionManager.ExecuteNonQuery(Context);
