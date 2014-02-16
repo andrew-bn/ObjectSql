@@ -1,4 +1,4 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using NUnit.Framework;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -9,7 +9,7 @@ using ObjectSql.SqlServer;
 using ObjectSql;
 namespace ObjectSql.Tests.CommandTextGenerationTests
 {
-	[TestClass]
+	[TestFixture]
 	public class SelectTests : TestBase
 	{
 		public class Dto1
@@ -28,14 +28,14 @@ namespace ObjectSql.Tests.CommandTextGenerationTests
 			public int Field2 { get; set; }
 			public string Field3 { get; set; }
 		}
-		[TestMethod]
+		[Test]
 		public void Select_Constant()
 		{
 			var c = "cost";
 			EfQuery.Select(() => c)
 				.Verify(@"SELECT @p0", c.DbType(SqlDbType.NVarChar));
 		}
-		[TestMethod]
+		[Test]
 		public void Select_Constants_In_AnonimusType()
 		{
 			var c = "cost";
@@ -44,7 +44,7 @@ namespace ObjectSql.Tests.CommandTextGenerationTests
 				.Verify(@"SELECT @p0 AS [c],  @p1 AS [i]",
 				c.DbType(SqlDbType.NVarChar), i.DbType(SqlDbType.Int));
 		}
-		[TestMethod]
+		[Test]
 		public void Select_Constants_In_DtoType_InitByConstructor()
 		{
 			var c = "cost";
@@ -53,7 +53,7 @@ namespace ObjectSql.Tests.CommandTextGenerationTests
 				.Verify(@"SELECT @p0 AS [fld1],  @p1 AS [fld2]",
 				c.DbType(SqlDbType.NVarChar), i.DbType(SqlDbType.Int));
 		}
-		[TestMethod]
+		[Test]
 		public void Select_Constants_In_DtoType_InitByParams()
 		{
 			var c = "cost";
@@ -62,7 +62,7 @@ namespace ObjectSql.Tests.CommandTextGenerationTests
 				.Verify(@"SELECT @p0 AS [Field1],  @p1 AS [Field2]",
 				c.DbType(SqlDbType.NVarChar), i.DbType(SqlDbType.Int));
 		}
-		[TestMethod]
+		[Test]
 		public void Select_AllDbFields()
 		{
 			EfQuery.From<Product>().Select((p) => p)
@@ -73,13 +73,13 @@ namespace ObjectSql.Tests.CommandTextGenerationTests
 			FROM [dbo].[Products] AS [p]");
 
 		}
-		[TestMethod]
+		[Test]
 		public void Select_OneField()
 		{
 			EfQuery.From<Product>().Select((p) => p.ProductName)
 							.Verify("SELECT [p].[ProductName] FROM [dbo].[Products] AS [p]");
 		}
-		[TestMethod]
+		[Test]
 		public void Select_FromTable_ButConstant()
 		{
 			var c = "constant";
@@ -88,7 +88,7 @@ namespace ObjectSql.Tests.CommandTextGenerationTests
 				.Verify("SELECT @p0 FROM [dbo].[Products] AS [p]"
 				, c.DbType(SqlDbType.NVarChar));
 		}
-		[TestMethod]
+		[Test]
 		public void Select_Anonimus_ConcreteFields()
 		{
 			var res = EfQuery.From<Product>()
@@ -96,7 +96,7 @@ namespace ObjectSql.Tests.CommandTextGenerationTests
 			.Verify("SELECT[p].[CategoryID]AS[Fld1],[p].[Discontinued]AS[Fld2]" +
 						"FROM[dbo].[Products]AS[p]");
 		}
-		[TestMethod]
+		[Test]
 		public void Select_TSqlComplexFunctionCall()
 		{
 			EfQuery
@@ -105,7 +105,7 @@ namespace ObjectSql.Tests.CommandTextGenerationTests
 				.Verify("SELECTSUBSTRING([p].[ProductName],@p0,@p1)FROM[dbo].[Products]AS[p]",
 						1.DbType(SqlDbType.Int), 5.DbType(SqlDbType.Int));
 		}
-		[TestMethod]
+		[Test]
 		public void Select_CountFunctionCall()
 		{
 			EfQuery
@@ -113,7 +113,7 @@ namespace ObjectSql.Tests.CommandTextGenerationTests
 				.Select((p) => Sql.Count(p.ProductID))
 				.Verify("SELECTCOUNT([p].[ProductID])FROM[dbo].[Products]AS[p]");
 		}
-		[TestMethod]
+		[Test]
 		public void Select_WithoutSource_TSqlFunctionResult()
 		{
 			var c = "cost";
@@ -121,7 +121,7 @@ namespace ObjectSql.Tests.CommandTextGenerationTests
 				.Verify(@"SELECTSUBSTRING(@p0,@p1,@p2)",
 				c.DbType(SqlDbType.NVarChar), 1.DbType(SqlDbType.Int), 3.DbType(SqlDbType.Int));
 		}
-		[TestMethod]
+		[Test]
 		public void Select_WithoutSource_TSqlFunctionResult_AndConstant()
 		{
 			var c = "cost";
@@ -130,7 +130,7 @@ namespace ObjectSql.Tests.CommandTextGenerationTests
 				c.DbType(SqlDbType.NVarChar), 1.DbType(SqlDbType.Int), 3.DbType(SqlDbType.Int));
 
 		}
-		[TestMethod]
+		[Test]
 		public void Select_PassEntity_ButSelectConstant()
 		{
 			var c = "constant";
@@ -140,7 +140,7 @@ namespace ObjectSql.Tests.CommandTextGenerationTests
 				, c.DbType(SqlDbType.NVarChar), 1.DbType(SqlDbType.Int),
 				4.DbType(SqlDbType.Int));
 		}
-		[TestMethod]
+		[Test]
 		public void Select_GroupBy()
 		{
 			EfQuery.From<Product>()
@@ -150,7 +150,7 @@ namespace ObjectSql.Tests.CommandTextGenerationTests
 							"FROM[dbo].[Products]AS[p]" +
 							"GROUPBY[p].[CategoryID]");
 		}
-		[TestMethod]
+		[Test]
 		public void Select_GroupBy_Having()
 		{
 			EfQuery.From<Product>()
@@ -163,7 +163,7 @@ namespace ObjectSql.Tests.CommandTextGenerationTests
 							"HAVING([p].[CategoryID]>@p0)",
 						5.DbType(SqlDbType.Int));
 		}
-		[TestMethod]
+		[Test]
 		public void Select_GroupBy_Having_AggregateFunction()
 		{
 			EfQuery.From<Product>()

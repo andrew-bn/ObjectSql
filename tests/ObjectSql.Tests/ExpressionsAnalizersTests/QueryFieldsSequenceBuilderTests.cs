@@ -1,4 +1,4 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using NUnit.Framework;
 using Moq;
 using ObjectSql.Core;
 using ObjectSql.Core.Bo.CommandPreparatorDescriptor;
@@ -20,7 +20,7 @@ using System.Threading.Tasks;
 
 namespace ObjectSql.Tests.ExpressionsAnalizersTests
 {
-	[TestClass]
+	[TestFixture]
 	public class QueryFieldsSequenceBuilderTests
 	{
 		private Mock<IEntitySchemaManager> _schemaManager;
@@ -32,7 +32,7 @@ namespace ObjectSql.Tests.ExpressionsAnalizersTests
 		private EntitySchema _categorySchema;
 		private string _categoryNameField;
 		private int _parametersEncountered;
-		[TestInitialize]
+		[SetUp]
 		public void Setup()
 		{
 			_categoryNameField = "Category Name Fld";
@@ -68,7 +68,7 @@ namespace ObjectSql.Tests.ExpressionsAnalizersTests
 			public int Id { get; set; }
 			public string Name { get; set; }
 		}
-		[TestMethod]
+		[Test]
 		[ExpectedException(typeof(ObjectSqlException))]
 		public void BuildSql_SelectNewDto_MemberInit_ErrorExpected()
 		{
@@ -76,7 +76,7 @@ namespace ObjectSql.Tests.ExpressionsAnalizersTests
 			var builder = CreateBuilder();
 			builder.BuildSql(_parametersHolder.Object, exp.Body, true);
 		}
-		[TestMethod]
+		[Test]
 		[ExpectedException(typeof(ObjectSqlException))]
 		public void BuildSql_SelectNewDto_ConstructorInitializer_ErrorExpected()
 		{
@@ -84,7 +84,7 @@ namespace ObjectSql.Tests.ExpressionsAnalizersTests
 			var builder = CreateBuilder();
 			var result = builder.BuildSql(_parametersHolder.Object, exp.Body, true);
 		}
-		[TestMethod]
+		[Test]
 		public void BuildSql_SelectNewAnonimus_ValidResult()
 		{
 			Expression<Func<Category, object>> exp = (d) => new { d.Description, d.Picture };
@@ -93,7 +93,7 @@ namespace ObjectSql.Tests.ExpressionsAnalizersTests
 
 			Assert.AreEqual("[Description],[Picture]", result);
 		}
-		[TestMethod]
+		[Test]
 		[ExpectedException(typeof(ObjectSqlException))]
 		public void BuildSql_SelectNewAnonimus_ConstantFieldAsSelectedField_ErrorExpected()
 		{
@@ -102,7 +102,7 @@ namespace ObjectSql.Tests.ExpressionsAnalizersTests
 			var builder = CreateBuilder();
 			var result = builder.BuildSql(_parametersHolder.Object, exp.Body, false);
 		}
-		[TestMethod]
+		[Test]
 		[ExpectedException(typeof(ObjectSqlException))]
 		public void BuildSql_SelectNewAnonimus_ConstantAsSelectedField_ErrorExpected()
 		{
@@ -110,7 +110,7 @@ namespace ObjectSql.Tests.ExpressionsAnalizersTests
 			var builder = CreateBuilder();
 			var result = builder.BuildSql(_parametersHolder.Object, exp.Body, false);
 		}
-		[TestMethod]
+		[Test]
 		[ExpectedException(typeof(ObjectSqlException))]
 		public void BuildSql_SelectNewComplexAnonimus_ErrorExpected()
 		{

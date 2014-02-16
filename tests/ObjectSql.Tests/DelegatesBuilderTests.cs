@@ -1,4 +1,4 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using NUnit.Framework;
 using Moq;
 using ObjectSql.Core;
 using ObjectSql.Core.Bo.EntitySchema;
@@ -17,7 +17,7 @@ using System.Threading.Tasks;
 
 namespace ObjectSql.Tests
 {
-	[TestClass]
+	[TestFixture]
 	public class DelegatesBuilderTests
 	{
 		public class Root
@@ -68,7 +68,7 @@ namespace ObjectSql.Tests
 			return LambdaExpression.New(Reflect.FindCtor(() => new FakeParameter("", null, null)), name,
 							 LambdaExpression.Constant(type,typeof(IStorageFieldType)), Expression.Convert(value,typeof(object)));
 		}
-		[TestInitialize]
+		[SetUp]
 		public void Setup()
 		{
 			_fieldType = new Mock<IStorageFieldType>();
@@ -94,7 +94,7 @@ namespace ObjectSql.Tests
 			_dataReader = new Mock<IDataReader>();
 		}
 		#region CreateDatabaseParameterFactoryAction
-		[TestMethod]
+		[Test]
 		public void CreateParameterToCommandAppender_CreatesParameterFactory_ValidCall()
 		{
 			var builder = CreateBuilder();
@@ -118,7 +118,7 @@ namespace ObjectSql.Tests
 
 			Assert.IsTrue(validCall);
 		}
-		[TestMethod]
+		[Test]
 		public void CreateParameterToCommandAppender_ValidDelegateCreated()
 		{
 			var builder = CreateBuilder();
@@ -134,7 +134,7 @@ namespace ObjectSql.Tests
 		{
 			return 234;
 		}
-		[TestMethod]
+		[Test]
 		[ExpectedException(typeof(ObjectSqlException))]
 		public void CreateParameterToCommandAppender_MethodCallConstant_ErrorExpected()
 		{
@@ -147,7 +147,7 @@ namespace ObjectSql.Tests
 			var result = builder.CreateDatabaseParameterFactoryAction(_paramName, _valueAccessor, _fieldType.Object);
 
 		}
-		[TestMethod]
+		[Test]
 		[ExpectedException(typeof(ObjectSqlException))]
 		public void CreateParameterToCommandAppender_ValueAccessorRootIsParameter_ErrorExpected()
 		{
@@ -163,7 +163,7 @@ namespace ObjectSql.Tests
 		{
 			public static string Value { get; set; }
 		}
-		[TestMethod]
+		[Test]
 		[ExpectedException(typeof(ObjectSqlException))]
 		public void CreateParameterToCommandAppender_ValueAccessorRootIsStatic_ErrorExpected()
 		{
@@ -177,7 +177,7 @@ namespace ObjectSql.Tests
 		}
 		#endregion
 		#region GenerateMaterializationDelegate
-		[TestMethod]
+		[Test]
 		public void GenerateMaterializationDelegate_CtorBasedMaterialization_ValidDelegateGenerated()
 		{
 			
@@ -189,7 +189,7 @@ namespace ObjectSql.Tests
 			_dataReader.Verify(r => r.GetInt32(0));
 			_dataReader.Verify(r => r.GetString(1));
 		}
-		[TestMethod]
+		[Test]
 		public void GenerateMaterializationDelegate_CtorBasedMaterialization_ValidEntityCreated()
 		{
 			var expectedId = 23412;
@@ -209,7 +209,7 @@ namespace ObjectSql.Tests
 			Assert.AreEqual(false,entity.Ignore);
 		}
 
-		[TestMethod]
+		[Test]
 		public void GenerateMaterializationDelegate_ParamsBasedMaterialization_ValidDelegateGenerated()
 		{
 
@@ -222,7 +222,7 @@ namespace ObjectSql.Tests
 			_dataReader.Verify(r => r.GetString(1));
 			_dataReader.Verify(r => r.GetBoolean(2));
 		}
-		[TestMethod]
+		[Test]
 		public void GenerateMaterializationDelegate_ParamsBasedMaterialization_ValidEntityCreated()
 		{
 			var expectedId = 23412;
@@ -243,7 +243,7 @@ namespace ObjectSql.Tests
 			Assert.AreEqual(expectedIgnore, entity.Ignore);
 		}
 
-		[TestMethod]
+		[Test]
 		public void GenerateMaterializationDelegate_ScalarMaterialization_ValidEntityCreated()
 		{
 			var val = "val";
@@ -258,7 +258,7 @@ namespace ObjectSql.Tests
 
 			Assert.AreEqual(val, entity);
 		}
-		[TestMethod]
+		[Test]
 		public void GenerateMaterializationDelegate_ScalarMaterialization_ValidDelegateGenerated()
 		{
 			var info = new EntityMaterializationInformation(typeof(string));
@@ -271,7 +271,7 @@ namespace ObjectSql.Tests
 		}
 		#endregion
 		#region CreateInsertionParametersInitializerAction
-		[TestMethod]
+		[Test]
 		public void CreateInsertionParametersInitializer_ValidDelegateGenerated()
 		{
 			_command.Setup(c => c.CommandText).Returns("");

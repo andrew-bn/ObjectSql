@@ -1,4 +1,4 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using NUnit.Framework;
 using ObjectSql.Core.Bo.EntitySchema;
 using ObjectSql.Core.SchemaManager;
 using ObjectSql.Core.Bo;
@@ -12,7 +12,7 @@ using System.Threading.Tasks;
 
 namespace ObjectSql.Tests
 {
-	[TestClass]
+	[TestFixture]
 	public class EntitySchemaManagerTests
 	{
 		public class Entity
@@ -20,7 +20,7 @@ namespace ObjectSql.Tests
 			public Guid Id { get; set; }
 			public string Name { get; set; }
 		}
-		[TestMethod]
+		[Test]
 		public void GetSchema_NoAnnotations_ReturnsValidSchema()
 		{
 			var mng = CreateManager();
@@ -55,7 +55,7 @@ namespace ObjectSql.Tests
 			[NotMapped]
 			public bool Ignored{get;set;}
 		}
-		[TestMethod]
+		[Test]
 		public void GetSchema_WithAnnotations_ReturnsValidSchema()
 		{
 			var mng = CreateManager();

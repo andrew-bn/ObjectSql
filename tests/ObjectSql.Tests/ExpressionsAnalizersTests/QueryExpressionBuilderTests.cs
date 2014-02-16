@@ -1,4 +1,4 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using NUnit.Framework;
 using Moq;
 using ObjectSql.Core;
 using ObjectSql.Core.Bo.CommandPreparatorDescriptor;
@@ -23,7 +23,7 @@ using System.Threading.Tasks;
 
 namespace ObjectSql.Tests.ExpressionsAnalizersTests
 {
-	[TestClass]
+	[TestFixture]
 	public class QueryExpressionBuilderTests: TestBase
 	{
 		private Mock<IEntitySchemaManager> _schemaManager;
@@ -35,7 +35,7 @@ namespace ObjectSql.Tests.ExpressionsAnalizersTests
 		private EntitySchema _categorySchema;
 		private string _categoryNameField;
 		private int _parametersEncountered;
-		[TestInitialize]
+		[SetUp]
 		public void Setup()
 		{
 			_categoryNameField = "Category Name Fld";
@@ -64,7 +64,7 @@ namespace ObjectSql.Tests.ExpressionsAnalizersTests
 			_parametersHolder.Setup(h => h.ParametersEncountered).Returns(() => _parametersEncountered);
 
 		}
-		[TestMethod]
+		[Test]
 		public void BuildSql_RenderConstant()
 		{
 			Expression<Func<object>> exp = () => 5;
@@ -76,7 +76,7 @@ namespace ObjectSql.Tests.ExpressionsAnalizersTests
 			_parametersHolder.Verify(h => h.AddPreparator(It.IsAny<CommandPreparator>()), Times.Once());
 			_parametersHolder.Verify(h => h.AddPreparator(It.Is<CommandPreparator>(d => ((SingleParameterPreparator)d).Name == "p0")));
 		}
-		[TestMethod]
+		[Test]
 		public void BuildSql_RenderClassProperty()
 		{
 			var value = 5;
@@ -89,7 +89,7 @@ namespace ObjectSql.Tests.ExpressionsAnalizersTests
 			_parametersHolder.Verify(h => h.AddPreparator(It.IsAny<CommandPreparator>()), Times.Once());
 			_parametersHolder.Verify(h => h.AddPreparator(It.Is<CommandPreparator>(d => ((SingleParameterPreparator)d).Name == "p0")));
 		}
-		[TestMethod]
+		[Test]
 		public void BuildSql_RenderNestedClassProperty()
 		{
 			var value = new { Val = false };
@@ -103,7 +103,7 @@ namespace ObjectSql.Tests.ExpressionsAnalizersTests
 			_parametersHolder.Verify(h => h.AddPreparator(It.Is<CommandPreparator>(d => ((SingleParameterPreparator)d).Name == "p0")));
 		}
 
-		[TestMethod]
+		[Test]
 		public void BuildSql_RenderEntityField()
 		{
 			var value = new { Val = false };
@@ -115,7 +115,7 @@ namespace ObjectSql.Tests.ExpressionsAnalizersTests
 			_parametersHolder.Verify(h => h.AddPreparator(It.IsAny<CommandPreparator>()), Times.Never());
 		}
 
-		[TestMethod]
+		[Test]
 		public void BuildSql_RenderTwoParameters()
 		{
 			Expression<Func<Category,object>> exp = (c) => "val"+2;
@@ -129,7 +129,7 @@ namespace ObjectSql.Tests.ExpressionsAnalizersTests
 			_parametersHolder.Verify(h => h.AddPreparator(It.Is<CommandPreparator>(d => ((SingleParameterPreparator)d).Name == "p0")));
 			_parametersHolder.Verify(h => h.AddPreparator(It.Is<CommandPreparator>(d => ((SingleParameterPreparator)d).Name == "p1")));
 		}
-		[TestMethod]
+		[Test]
 		public void BuildSql_RenderSameParameters()
 		{
 			Expression<Func<Category, object>> exp = (c) => "val" + 2 + "val";
@@ -143,7 +143,7 @@ namespace ObjectSql.Tests.ExpressionsAnalizersTests
 			_parametersHolder.Verify(h => h.AddPreparator(It.Is<CommandPreparator>(d => ((SingleParameterPreparator)d).Name == "p0")));
 			_parametersHolder.Verify(h => h.AddPreparator(It.Is<CommandPreparator>(d => ((SingleParameterPreparator)d).Name == "p1")));
 		}
-		[TestMethod]
+		[Test]
 		public void BuildSql_RenderSameParameterTypes()
 		{
 			Expression<Func<Category, object>> exp = (c) => "val" + 2 + "val2";
@@ -159,7 +159,7 @@ namespace ObjectSql.Tests.ExpressionsAnalizersTests
 			_parametersHolder.Verify(h => h.AddPreparator(It.Is<CommandPreparator>(d => ((SingleParameterPreparator)d).Name == "p1")));
 			_parametersHolder.Verify(h => h.AddPreparator(It.Is<CommandPreparator>(d => ((SingleParameterPreparator)d).Name == "p2")));
 		}
-		[TestMethod]
+		[Test]
 		public void BuildSql_RenderSameParameters_SameRoot_DifferentProperties()
 		{
 			var val1 = "val";
@@ -181,7 +181,7 @@ namespace ObjectSql.Tests.ExpressionsAnalizersTests
 		{
 			public string Val { get; set; }
 		}
-		[TestMethod]
+		[Test]
 		public void BuildSql_RenderSameRootTypes_SameParameterValues_DifferentRootInstances()
 		{
 			var v1 = new Root() { Val = "val" };
@@ -199,7 +199,7 @@ namespace ObjectSql.Tests.ExpressionsAnalizersTests
 			_parametersHolder.Verify(h => h.AddPreparator(It.Is<CommandPreparator>(d => ((SingleParameterPreparator)d).Name == "p1")));
 			_parametersHolder.Verify(h => h.AddPreparator(It.Is<CommandPreparator>(d => ((SingleParameterPreparator)d).Name == "p2")));
 		}
-		[TestMethod]
+		[Test]
 		public void BuildSql_RenderSameRootParameters()
 		{
 			var v1 = new Root() { Val = "val" };
@@ -214,7 +214,7 @@ namespace ObjectSql.Tests.ExpressionsAnalizersTests
 			_parametersHolder.Verify(h => h.AddPreparator(It.Is<CommandPreparator>(d => ((SingleParameterPreparator)d).Name == "p0")));
 			_parametersHolder.Verify(h => h.AddPreparator(It.Is<CommandPreparator>(d => ((SingleParameterPreparator)d).Name == "p1")));
 		}
-		[TestMethod]
+		[Test]
 		public void BuildSql_RenderBinarySub()
 		{
 			Expression<Func<Category, object>> exp = (c) => c.CategoryID-1;
@@ -226,7 +226,7 @@ namespace ObjectSql.Tests.ExpressionsAnalizersTests
 			_parametersHolder.Verify(h => h.AddPreparator(It.IsAny<CommandPreparator>()), Times.Exactly(1));
 			_parametersHolder.Verify(h => h.AddPreparator(It.Is<CommandPreparator>(d => ((SingleParameterPreparator)d).Name == "p0")));
 		}
-		[TestMethod]
+		[Test]
 		public void BuildSql_RenderDivide()
 		{
 			Expression<Func<Category, object>> exp = (c) => c.CategoryID / 1;
@@ -238,7 +238,7 @@ namespace ObjectSql.Tests.ExpressionsAnalizersTests
 			_parametersHolder.Verify(h => h.AddPreparator(It.IsAny<CommandPreparator>()), Times.Exactly(1));
 			_parametersHolder.Verify(h => h.AddPreparator(It.Is<CommandPreparator>(d => ((SingleParameterPreparator)d).Name == "p0")));
 		}
-		[TestMethod]
+		[Test]
 		public void BuildSql_RenderMult()
 		{
 			Expression<Func<Category, object>> exp = (c) => c.CategoryID * 1;
@@ -250,7 +250,7 @@ namespace ObjectSql.Tests.ExpressionsAnalizersTests
 			_parametersHolder.Verify(h => h.AddPreparator(It.IsAny<CommandPreparator>()), Times.Exactly(1));
 			_parametersHolder.Verify(h => h.AddPreparator(It.Is<CommandPreparator>(d => ((SingleParameterPreparator)d).Name == "p0")));
 		}
-		[TestMethod]
+		[Test]
 		public void BuildSql_RenderGreater()
 		{
 			Expression<Func<Category, object>> exp = (c) => c.CategoryID > 1;
@@ -262,7 +262,7 @@ namespace ObjectSql.Tests.ExpressionsAnalizersTests
 			_parametersHolder.Verify(h => h.AddPreparator(It.IsAny<CommandPreparator>()), Times.Exactly(1));
 			_parametersHolder.Verify(h => h.AddPreparator(It.Is<CommandPreparator>(d => ((SingleParameterPreparator)d).Name == "p0")));
 		}
-		[TestMethod]
+		[Test]
 		public void BuildSql_RenderGreaterOrEqual()
 		{
 			Expression<Func<Category, object>> exp = (c) => c.CategoryID >= 1;
@@ -274,7 +274,7 @@ namespace ObjectSql.Tests.ExpressionsAnalizersTests
 			_parametersHolder.Verify(h => h.AddPreparator(It.IsAny<CommandPreparator>()), Times.Exactly(1));
 			_parametersHolder.Verify(h => h.AddPreparator(It.Is<CommandPreparator>(d => ((SingleParameterPreparator)d).Name == "p0")));
 		}
-		[TestMethod]
+		[Test]
 		public void BuildSql_RenderLess()
 		{
 			Expression<Func<Category, object>> exp = (c) => c.CategoryID < 1;
@@ -286,7 +286,7 @@ namespace ObjectSql.Tests.ExpressionsAnalizersTests
 			_parametersHolder.Verify(h => h.AddPreparator(It.IsAny<CommandPreparator>()), Times.Exactly(1));
 			_parametersHolder.Verify(h => h.AddPreparator(It.Is<CommandPreparator>(d => ((SingleParameterPreparator)d).Name == "p0")));
 		}
-		[TestMethod]
+		[Test]
 		public void BuildSql_RenderLessOrEqual()
 		{
 			Expression<Func<Category, object>> exp = (c) => c.CategoryID <= 1;
@@ -298,7 +298,7 @@ namespace ObjectSql.Tests.ExpressionsAnalizersTests
 			_parametersHolder.Verify(h => h.AddPreparator(It.IsAny<CommandPreparator>()), Times.Exactly(1));
 			_parametersHolder.Verify(h => h.AddPreparator(It.Is<CommandPreparator>(d => ((SingleParameterPreparator)d).Name == "p0")));
 		}
-		[TestMethod]
+		[Test]
 		public void BuildSql_RenderNotEqual()
 		{
 			Expression<Func<Category, object>> exp = (c) => c.CategoryID != 1;
@@ -310,7 +310,7 @@ namespace ObjectSql.Tests.ExpressionsAnalizersTests
 			_parametersHolder.Verify(h => h.AddPreparator(It.IsAny<CommandPreparator>()), Times.Exactly(1));
 			_parametersHolder.Verify(h => h.AddPreparator(It.Is<CommandPreparator>(d => ((SingleParameterPreparator)d).Name == "p0")));
 		}
-		[TestMethod]
+		[Test]
 		public void BuildSql_RenderNull()
 		{
 			Expression<Func<object>> exp = () => null;
@@ -320,7 +320,7 @@ namespace ObjectSql.Tests.ExpressionsAnalizersTests
 			Assert.AreEqual("NULL", result);
 			_parametersHolder.Verify(h => h.AddPreparator(It.IsAny<CommandPreparator>()), Times.Never());
 		}
-		[TestMethod]
+		[Test]
 		public void BuildSql_RenderIsNull()
 		{
 			Expression<Func<Category, object>> exp = (c) => c.Picture == null;
@@ -330,7 +330,7 @@ namespace ObjectSql.Tests.ExpressionsAnalizersTests
 			Assert.AreEqual("([c].[Picture]ISNULL)", result);
 			_parametersHolder.Verify(h => h.AddPreparator(It.IsAny<CommandPreparator>()), Times.Never());
 		}
-		[TestMethod]
+		[Test]
 		public void BuildSql_RenderIsNotNull()
 		{
 			Expression<Func<Category, object>> exp = (c) => c.Picture != null;
@@ -340,7 +340,7 @@ namespace ObjectSql.Tests.ExpressionsAnalizersTests
 			Assert.AreEqual("([c].[Picture]ISNOTNULL)", result);
 			_parametersHolder.Verify(h => h.AddPreparator(It.IsAny<CommandPreparator>()), Times.Never());
 		}
-		[TestMethod]
+		[Test]
 		public void BuildSql_RenderAnd()
 		{
 			Expression<Func<Category, object>> exp = (c) => c.Description==null && c.CategoryID == 1;
@@ -352,7 +352,7 @@ namespace ObjectSql.Tests.ExpressionsAnalizersTests
 			_parametersHolder.Verify(h => h.AddPreparator(It.IsAny<CommandPreparator>()), Times.Exactly(1));
 			_parametersHolder.Verify(h => h.AddPreparator(It.Is<CommandPreparator>(d => ((SingleParameterPreparator)d).Name == "p0")));
 		}
-		[TestMethod]
+		[Test]
 		public void BuildSql_RenderOr()
 		{
 			Expression<Func<Category, object>> exp = (c) => c.Description == null || c.CategoryID == 1;
@@ -364,7 +364,7 @@ namespace ObjectSql.Tests.ExpressionsAnalizersTests
 			_parametersHolder.Verify(h => h.AddPreparator(It.IsAny<CommandPreparator>()), Times.Exactly(1));
 			_parametersHolder.Verify(h => h.AddPreparator(It.Is<CommandPreparator>(d => ((SingleParameterPreparator)d).Name == "p0")));
 		}
-		[TestMethod]
+		[Test]
 		public void BuildSql_RenderNot()
 		{
 			Expression<Func<Category, object>> exp = (c) => !(c.CategoryID == 1);
@@ -380,7 +380,7 @@ namespace ObjectSql.Tests.ExpressionsAnalizersTests
 		{
 			return 0;
 		}
-		[TestMethod]
+		[Test]
 		[ExpectedException(typeof(ObjectSqlException))]
 		public void BuildSql_MethodCall_ErrorExpected()
 		{
@@ -389,7 +389,7 @@ namespace ObjectSql.Tests.ExpressionsAnalizersTests
 			builder.BuildSql(_parametersHolder.Object, exp.Body, true).Prepare();
 		}
 		
-		[TestMethod]
+		[Test]
 		public void BuildSql_TargetDatabaseExtensionMethodCall_ValidResult()
 		{
 			TestExtension.RenderLikeWasCalled = false;

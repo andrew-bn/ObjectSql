@@ -1,6 +1,7 @@
 ﻿using System;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using NUnit.Framework;
 using System.Linq.Expressions;
+using NUnit.Framework;
 using ObjectSql.Core.Bo;
 using ObjectSql.Core.Misc;
 using ObjectSql.Core;
@@ -9,7 +10,7 @@ using System.Collections.Generic;
 
 namespace ObjectSql.Tests
 {
-	[TestClass]
+	[TestFixture]
 	public class HashCodeGeneratorTests
 	{
 		public class Foo
@@ -24,7 +25,7 @@ namespace ObjectSql.Tests
 			public bool Param3 { get; set; }
 			public Foo FooParam { get; set; }
 		}
-		[TestMethod]
+		[Test]
 		public void DifferentRoots()
 		{
 			const bool constantClosureSource = true;
@@ -47,7 +48,7 @@ namespace ObjectSql.Tests
 			Assert.AreEqual(1, pairs[0].Value);
 
 		}
-		[TestMethod]
+		[Test]
 		public void DifferentRoots_OneRootPropertyValueIsNull()
 		{
 			const bool constantClosureSource = true;
@@ -70,7 +71,7 @@ namespace ObjectSql.Tests
 			Assert.AreEqual(1, pairs[0].Value);
 
 		}
-		[TestMethod]
+		[Test]
 		public void NullRoots()
 		{
 			Expression<Func<Foo, object>> exp =
@@ -83,7 +84,7 @@ namespace ObjectSql.Tests
 
 			Assert.AreEqual(0, p.Roots.Count);
 		}
-		[TestMethod]
+		[Test]
 		public void DuplicatedRoot()
 		{
 			const bool constantClosureSource = true;
@@ -110,7 +111,7 @@ namespace ObjectSql.Tests
 		}
 
 		public int Value = 4;
-		[TestMethod]
+		[Test]
 		public void DifferentRoots3()
 		{
 			const bool constantClosureSource = true;
@@ -134,7 +135,7 @@ namespace ObjectSql.Tests
 			Assert.AreEqual(1, pairs[0].Value);
 			Assert.AreEqual(2, pairs[1].Value);
 		}
-		[TestMethod]
+		[Test]
 		public void DifferentHashCodes_ParameterReplacement()
 		{
 			const bool constantClosureSource = true;
@@ -158,7 +159,7 @@ namespace ObjectSql.Tests
 
 			Assert.IsFalse(p1.Hash == p2.Hash);
 		}
-		[TestMethod]
+		[Test]
 		public void DifferentRootParametersValues_SameHashCodes()
 		{
 			var closureSource2 = 4;
@@ -178,7 +179,7 @@ namespace ObjectSql.Tests
 
 			Assert.IsTrue(p1.Hash == p2.Hash);
 		}
-		[TestMethod]
+		[Test]
 		public void DifferentConstantValues_DifferentHashCodes()
 		{
 			Expression<Func<Foo, object>> exp1 =
@@ -196,7 +197,7 @@ namespace ObjectSql.Tests
 
 			Assert.IsFalse(p1.Hash == p2.Hash);
 		}
-		[TestMethod]
+		[Test]
 		public void SameConstantValues_SameHashCodes()
 		{
 			Expression<Func<Foo, object>> exp1 =
@@ -215,7 +216,7 @@ namespace ObjectSql.Tests
 			Assert.IsTrue(p1.Hash == p2.Hash);
 		}
 
-		[TestMethod]
+		[Test]
 		public void ComplexCase_ConstantsHasSameValues_RootsPropertiesHasDifferentValues()
 		{
 			const bool constantClosureSource = true;
@@ -265,7 +266,7 @@ namespace ObjectSql.Tests
 			Assert.IsTrue(p1.Hash == p2.Hash);
 		}
 
-		[TestMethod]
+		[Test]
 		public void ComplexCase_ConstantsHasDifferentValues_RootsPropertiesHasSameValues()
 		{
 			const bool constantClosureSource = true;

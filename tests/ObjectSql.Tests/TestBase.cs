@@ -1,4 +1,4 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using NUnit.Framework;
 using ObjectSql.Core.Misc;
 using ObjectSql.EF5;
 using ObjectSql.QueryInterfaces;
@@ -78,7 +78,7 @@ namespace ObjectSql.Tests
 			return value;
 		}
 	}
-	[TestClass]
+	[TestFixture]
 	public abstract class TestBase
 	{
 		static TestBase()

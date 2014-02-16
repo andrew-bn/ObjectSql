@@ -1,4 +1,4 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using NUnit.Framework;
 using Moq;
 using ObjectSql.Core;
 using ObjectSql.Core.Bo.CommandPreparatorDescriptor;
@@ -20,7 +20,7 @@ using System.Threading.Tasks;
 
 namespace ObjectSql.Tests.ExpressionsAnalizersTests
 {
-	[TestClass]
+	[TestFixture]
 	public class QueryUpdateBuilderTests:TestBase 
 	{
 		private Mock<IEntitySchemaManager> _schemaManager;
@@ -32,7 +32,7 @@ namespace ObjectSql.Tests.ExpressionsAnalizersTests
 		private EntitySchema _categorySchema;
 		private string _categoryNameField;
 		private int _parametersEncountered;
-		[TestInitialize]
+		[SetUp]
 		public void Setup()
 		{
 			_categoryNameField = "Category Name Fld";
@@ -61,7 +61,7 @@ namespace ObjectSql.Tests.ExpressionsAnalizersTests
 			_parametersHolder.Setup(h => h.ParametersEncountered).Returns(() => _parametersEncountered);
 
 		}
-		[TestMethod]
+		[Test]
 		[ExpectedException(typeof(ObjectSqlException))]
 		public void BuildSql_NoMemberInitNode_ErrorExpected()
 		{
@@ -70,7 +70,7 @@ namespace ObjectSql.Tests.ExpressionsAnalizersTests
 			var builder = CreateBuilder();
 			var result = builder.BuildSql(_parametersHolder.Object, exp.Body, true);
 		}
-		[TestMethod]
+		[Test]
 		public void BuildSql_ValidResultExpected()
 		{
 			var c = new Category();

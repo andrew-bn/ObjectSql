@@ -1,4 +1,4 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using NUnit.Framework;
 using Moq;
 using ObjectSql.Core;
 using ObjectSql.Core.Bo.CommandPreparatorDescriptor;
@@ -20,7 +20,7 @@ using System.Threading.Tasks;
 
 namespace ObjectSql.Tests.ExpressionsAnalizersTests
 {
-	[TestClass]
+	[TestFixture]
 	public class QuerySelectBuilderTests
 	{
 		private Mock<IEntitySchemaManager> _schemaManager;
@@ -32,7 +32,7 @@ namespace ObjectSql.Tests.ExpressionsAnalizersTests
 		private EntitySchema _categorySchema;
 		private string _categoryNameField;
 		private int _parametersEncountered;
-		[TestInitialize]
+		[SetUp]
 		public void Setup()
 		{
 			_categoryNameField = "Category Name Fld";
@@ -68,7 +68,7 @@ namespace ObjectSql.Tests.ExpressionsAnalizersTests
 			public int Id { get; set; }
 			public string Name { get; set; }
 		}
-		[TestMethod]
+		[Test]
 		public void BuildSql_SelectNew_ConstructorInitializer()
 		{
 			Expression<Func<Dto>> exp = () => new Dto(3,"name");
@@ -77,7 +77,7 @@ namespace ObjectSql.Tests.ExpressionsAnalizersTests
 
 			Assert.AreEqual("@p0AS[identity],@p1AS[dtoName]", result);
 		}
-		[TestMethod]
+		[Test]
 		public void BuildSql_SelectNew_ParametersInitializer()
 		{
 			Expression<Func<Dto>> exp = () => new Dto{ Id = 2, Name = "name" };
@@ -86,7 +86,7 @@ namespace ObjectSql.Tests.ExpressionsAnalizersTests
 
 			Assert.AreEqual("@p0AS[Id],@p1AS[Name]", result);
 		}
-		[TestMethod]
+		[Test]
 		[ExpectedException(typeof(ObjectSqlException))]
 		public void BuildSql_SelectNew_ParametersAndConstructorInitializer_ErrorExpected()
 		{
@@ -94,7 +94,7 @@ namespace ObjectSql.Tests.ExpressionsAnalizersTests
 			var builder = CreateBuilder();
 			var result = builder.BuildSql(_parametersHolder.Object, exp.Body, true).Prepare();
 		}
-		[TestMethod]
+		[Test]
 		public void BuildSql_SelectAnonimus_ParametersInitializer()
 		{
 			Expression<Func<object>> exp = () => new { Id = 2, Name = "name" };
@@ -103,7 +103,7 @@ namespace ObjectSql.Tests.ExpressionsAnalizersTests
 
 			Assert.AreEqual("@p0AS[Id],@p1AS[Name]", result);
 		}
-		[TestMethod]
+		[Test]
 		public void BuildSql_SelectParameter()
 		{
 			Expression<Func<Category,Category>> exp = (p) => p;
@@ -113,7 +113,7 @@ namespace ObjectSql.Tests.ExpressionsAnalizersTests
 			Assert.AreEqual("[p].[CategoryID],[p].[CategoryNameFld],[p].[Description],[p].[Picture]", result);
 		}
 
-		[TestMethod]
+		[Test]
 		[ExpectedException(typeof(ObjectSqlException))]
 		public void BuildSql_SelectNestedAnonimus_ErrorExpected()
 		{

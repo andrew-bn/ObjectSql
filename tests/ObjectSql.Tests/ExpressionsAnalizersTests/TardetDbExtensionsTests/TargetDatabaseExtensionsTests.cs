@@ -1,4 +1,4 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using NUnit.Framework;
 using Moq;
 using ObjectSql.Core;
 using ObjectSql.Core.Bo.CommandPreparatorDescriptor;
@@ -21,7 +21,7 @@ using System.Threading.Tasks;
 
 namespace ObjectSql.Tests.ExpressionsAnalizersTests.TardetDbExtensionsTests
 {
-	[TestClass]
+	[TestFixture]
 	public class TargetDatabaseExtensionsTests
 	{
 		private Mock<IEntitySchemaManager> _schemaManager;
@@ -32,7 +32,7 @@ namespace ObjectSql.Tests.ExpressionsAnalizersTests.TardetDbExtensionsTests
 		private Action<IDbCommand, object> _parameterFactory;
 		private EntitySchema _categorySchema;
 		private int _parametersEncountered;
-		[TestInitialize]
+		[SetUp]
 		public void Setup()
 		{
 			_categorySchema = new EntitySchema(typeof(Category), new StorageName(false,"Category", null),
@@ -60,7 +60,7 @@ namespace ObjectSql.Tests.ExpressionsAnalizersTests.TardetDbExtensionsTests
 			_parametersHolder.Setup(h => h.ParametersEncountered).Returns(() => _parametersEncountered);
 
 		}
-		[TestMethod]
+		[Test]
 		public void BuildSql_Avg()
 		{
 			Expression<Func<Category, object>> exp = (c) => Sql.Avg(c.CategoryID);
@@ -68,7 +68,7 @@ namespace ObjectSql.Tests.ExpressionsAnalizersTests.TardetDbExtensionsTests
 
 			Assert.AreEqual("AVG([c].[CategoryID])", result);
 		}
-		[TestMethod]
+		[Test]
 		public void BuildSql_Count()
 		{
 			Expression<Func<Category, object>> exp = c => Sql.Count(c.CategoryID);
@@ -76,7 +76,7 @@ namespace ObjectSql.Tests.ExpressionsAnalizersTests.TardetDbExtensionsTests
 
 			Assert.AreEqual("COUNT([c].[CategoryID])", result);
 		}
-		[TestMethod]
+		[Test]
 		public void BuildSql_Min()
 		{
 			Expression<Func<Category, object>> exp = ( c) => Sql.Min(c.CategoryID);
@@ -84,7 +84,7 @@ namespace ObjectSql.Tests.ExpressionsAnalizersTests.TardetDbExtensionsTests
 
 			Assert.AreEqual("MIN([c].[CategoryID])", result);
 		}
-		[TestMethod]
+		[Test]
 		public void BuildSql_Max()
 		{
 			Expression<Func<Category, object>> exp = (c) => Sql.Max(c.CategoryID);
@@ -92,7 +92,7 @@ namespace ObjectSql.Tests.ExpressionsAnalizersTests.TardetDbExtensionsTests
 
 			Assert.AreEqual("MAX([c].[CategoryID])", result);
 		}
-		[TestMethod]
+		[Test]
 		public void BuildSql_Like()
 		{
 			Expression<Func<Category, object>> exp = ( c) => Sql.Like(c.CategoryName,"adf");
@@ -100,7 +100,7 @@ namespace ObjectSql.Tests.ExpressionsAnalizersTests.TardetDbExtensionsTests
 
 			Assert.AreEqual("([c].[CategoryName]LIKE@p0)", result);
 		}
-		[TestMethod]
+		[Test]
 		public void BuildSql_NotLike()
 		{
 			Expression<Func<Category, object>> exp = ( c) => Sql.NotLike(c.CategoryName, "adf");

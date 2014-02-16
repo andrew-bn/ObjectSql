@@ -3,14 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using NUnit.Framework;
 
 namespace ObjectSql.Tests.SqlServerTests
 {
-	[TestClass]
+	[TestFixture]
 	public class SchemaGeneratorTest:TestBase
 	{
-		[TestMethod]
+		[Test]
 		public void Foo()
 		{
 			var result = SqlServer.Schema.SchemaGenerator.Generate("adf","CsName", ConnectionString);

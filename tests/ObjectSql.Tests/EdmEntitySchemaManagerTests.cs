@@ -1,4 +1,4 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using NUnit.Framework;
 using ObjectSql.Core.Bo.EntitySchema;
 using ObjectSql.Core.SchemaManager;
 using ObjectSql.EF5;
@@ -13,10 +13,10 @@ using System.Threading.Tasks;
 
 namespace ObjectSql.Tests
 {
-	[TestClass]
+	[TestFixture]
 	public class EdmEntitySchemaManagerTests
 	{
-		[TestMethod]
+		[Test]
 		public void GetSchema_ReturnsValidSchema()
 		{
 			var manager = CreateManager();
@@ -60,13 +60,13 @@ namespace ObjectSql.Tests
 			Assert.IsFalse(result.EntityProperties[4].Mapped);
 			#endregion
 		}
-		[TestMethod]
+		[Test]
 		[ExpectedException(typeof(ObjectSqlException))]
 		public void CreateManager_InvalidCsdlNameDescriptor_ExceptionExpected()
 		{
 			new EdmEntitySchemaManager<SqlDbType>("res://*/INVALIDNAME.csdl|res://*/Northwind.ssdl|res://*/Northwind.msl");
 		}
-		[TestMethod]
+		[Test]
 		[ExpectedException(typeof(ObjectSqlException))]
 		public void CreateManager_InvalidMetadataDescriptor_ExceptionExpected()
 		{

@@ -1,4 +1,4 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using NUnit.Framework;
 using ObjectSql.Core.Bo;
 using ObjectSql.Core.Misc;
 using ObjectSql.Core;
@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace ObjectSql.Tests
 {
-	[TestClass]
+	[TestFixture]
 	public class ExpressionComparerTests
 	{
 		public class Foo
@@ -26,7 +26,7 @@ namespace ObjectSql.Tests
 			public bool Param3 { get; set; }
 			public Foo FooParam { get; set; }
 		}
-		[TestMethod]
+		[Test]
 		public void ExpressionsAreEqual_ConstantsHasSameValues()
 		{
 			const bool constantClosureSource = true;
@@ -78,7 +78,7 @@ namespace ObjectSql.Tests
 
 			Assert.IsTrue(result);
 		}
-		[TestMethod]
+		[Test]
 		public void ExpressionsAreEqual_RootsHaveSameValues()
 		{
 			const bool constantClosureSource = true;

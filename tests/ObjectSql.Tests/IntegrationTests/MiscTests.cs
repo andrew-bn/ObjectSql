@@ -1,4 +1,4 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using NUnit.Framework;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace ObjectSql.Tests.IntegrationTests
 {
-	[TestClass]
+	[TestFixture]
 	public class MiscTests : TestBase
 	{
 		public class Dto1
@@ -27,7 +27,7 @@ namespace ObjectSql.Tests.IntegrationTests
 			public int Field2 { get; set; }
 			public string Field3 { get; set; }
 		}
-		[TestMethod]
+		[Test]
 		public void Select_WithoutSource_BinaryOperation_SelectResult()
 		{
 			var c = "const";
@@ -37,7 +37,7 @@ namespace ObjectSql.Tests.IntegrationTests
 
 			Assert.AreEqual("constant", res);
 		}
-		[TestMethod]
+		[Test]
 		public void Select_Anonimus_ConcatFieldWithConstant()
 		{
 			var c = "_const";
@@ -48,7 +48,7 @@ namespace ObjectSql.Tests.IntegrationTests
 			Assert.AreEqual("Alice Mutton_const", res[0].Fld1);
 
 		}
-		[TestMethod]
+		[Test]
 		public void Select_Anonimus_ConcatFieldWithField()
 		{
 			var c = "_const";

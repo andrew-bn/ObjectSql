@@ -1,4 +1,4 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using NUnit.Framework;
 using ObjectSql.Core.Misc;
 using ObjectSql.Core;
 using System;
@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace ObjectSql.Tests
 {
-	[TestClass]
+	[TestFixture]
 	public class ExpressionEnumeratorTests
 	{
 		public class Foo
@@ -25,7 +25,7 @@ namespace ObjectSql.Tests
 			public bool Param3 { get; set; }
 			public Foo FooParam { get; set; }
 		}
-		[TestMethod]
+		[Test]
 		public void BooleanExpressionEnumerationFlowIsValid()
 		{
 			int val = 1;
@@ -62,7 +62,7 @@ f
 ", result);
 		}
 
-		[TestMethod]
+		[Test]
 		public void NewExpressionEnumerationFlowIsValid()
 		{
 			int val = 1;

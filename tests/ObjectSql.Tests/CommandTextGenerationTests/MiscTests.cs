@@ -1,4 +1,4 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using NUnit.Framework;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace ObjectSql.Tests.CommandTextGenerationTests
 {
-	[TestClass]
+	[TestFixture]
 	public class MiscTests : TestBase
 	{
 		public class Dto1
@@ -27,7 +27,7 @@ namespace ObjectSql.Tests.CommandTextGenerationTests
 			public int Field2 { get; set; }
 			public string Field3 { get; set; }
 		}
-		[TestMethod]
+		[Test]
 		public void Select_WithoutSource_BinaryOperation_SelectResult()
 		{
 			var c = "const";
@@ -36,7 +36,7 @@ namespace ObjectSql.Tests.CommandTextGenerationTests
 				.Verify(@"SELECT (@p0 + @p1)",
 				c.DbType(SqlDbType.NVarChar), c2.DbType(SqlDbType.NVarChar));
 		}
-		[TestMethod]
+		[Test]
 		public void Select_Anonimus_ConcatFieldWithConstant()
 		{
 			var c = "_const";
@@ -47,7 +47,7 @@ namespace ObjectSql.Tests.CommandTextGenerationTests
 						c.DbType(SqlDbType.NVarChar));
 
 		}
-		[TestMethod]
+		[Test]
 		public void Select_Anonimus_ConcatFieldWithField()
 		{
 			var c = "_const";

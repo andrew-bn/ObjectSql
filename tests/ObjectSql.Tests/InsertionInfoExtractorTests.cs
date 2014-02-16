@@ -1,4 +1,4 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using NUnit.Framework;
 using Moq;
 using ObjectSql.Core.Bo.EntitySchema;
 using ObjectSql.Core.QueryBuilder.InfoExtractor;
@@ -13,14 +13,14 @@ using System.Threading.Tasks;
 
 namespace ObjectSql.Tests
 {
-	[TestClass]
+	[TestFixture]
 	public class InsertionInfoExtractorTests
 	{
 		private Mock<IEntitySchemaManager> _schemaManager;
 
 		private EntitySchema _categorySchema;
 		private string _categoryNameField;
-		[TestInitialize]
+		[SetUp]
 		public void Setup()
 		{
 			_categoryNameField = "Category Name Fld";
@@ -35,7 +35,7 @@ namespace ObjectSql.Tests
 			_schemaManager = new Mock<IEntitySchemaManager>();
 			_schemaManager.Setup(m => m.GetSchema(It.IsAny<Type>())).Returns(_categorySchema);
 		}
-		[TestMethod]
+		[Test]
 		public void ExtractFrom_ParameterInsertionSchema()
 		{
 			Expression<Func<Category, object>> exp = c => c;
@@ -45,7 +45,7 @@ namespace ObjectSql.Tests
 			Assert.AreEqual(4, result.PropertiesIndexesToInsert.Length);
 			Assert.IsTrue(result.PropertiesIndexesToInsert.SequenceEqual(new[]{0,1,2,3}));
 		}
-		[TestMethod]
+		[Test]
 		public void ExtractFrom_FieldSequenseInsertionSchema()
 		{
 			Expression<Func<Category, object>> exp = c => new { c.Picture,c.CategoryName };

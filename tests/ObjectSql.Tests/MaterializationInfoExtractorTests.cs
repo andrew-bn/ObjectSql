@@ -1,4 +1,4 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using NUnit.Framework;
 using Moq;
 using ObjectSql.Core.Bo.EntitySchema;
 using ObjectSql.Core.Misc;
@@ -15,7 +15,7 @@ using System.Threading.Tasks;
 using ObjectSql;
 namespace ObjectSql.Tests
 {
-	[TestClass]
+	[TestFixture]
 	public class MaterializationInfoExtractorTests
 	{
 		private Mock<IEntitySchemaManager> _schemaManager;
@@ -29,7 +29,7 @@ namespace ObjectSql.Tests
 			public int Id { get; set; }
 			public string Name { get; set; }
 		}
-		[TestInitialize]
+		[SetUp]
 		public void Setup()
 		{
 			_categoryNameField = "Category Name Fld";
@@ -44,7 +44,7 @@ namespace ObjectSql.Tests
 			_schemaManager = new Mock<IEntitySchemaManager>();
 			_schemaManager.Setup(m => m.GetSchema(It.IsAny<Type>())).Returns(_categorySchema);
 		}
-		[TestMethod]
+		[Test]
 		public void ExtractFrom_ParameterMaterialization()
 		{
 			Expression<Func<Category, object>> exp = c => c;
@@ -55,7 +55,7 @@ namespace ObjectSql.Tests
 			Assert.IsFalse(result.IsSingleValue);
 			Assert.IsTrue(result.FieldsIndexes.SequenceEqual(new[] { 0, 1, 2, 3 }));
 		}
-		[TestMethod]
+		[Test]
 		public void ExtractFrom_SingleValueMaterialization()
 		{
 			Expression<Func<Category,object>> exp = (c) => c.Picture;
@@ -66,7 +66,7 @@ namespace ObjectSql.Tests
 			Assert.IsTrue(result.IsSingleValue);
 			Assert.AreEqual(typeof(byte[]),result.SingleValueType);
 		}
-		[TestMethod]
+		[Test]
 		public void ExtractFrom_MethodCallResultMaterialization()
 		{
 			Expression<Func<Category, object>> exp = (c) => Sql.Count(c.CategoryID);
@@ -77,7 +77,7 @@ namespace ObjectSql.Tests
 			Assert.IsTrue(result.IsSingleValue);
 			Assert.AreEqual(typeof(int), result.SingleValueType);
 		}
-		[TestMethod]
+		[Test]
 		public void ExtractFrom_ConstructorMaterialization()
 		{
 			Expression<Func<Category, object>> exp = (c) => new Dto(c.CategoryID, c.CategoryName);
@@ -88,7 +88,7 @@ namespace ObjectSql.Tests
 			Assert.IsFalse(result.IsSingleValue);
 			Assert.AreEqual(Reflect.FindCtor(()=>new Dto(1,"")), result.ConstructorInfo);
 		}
-		[TestMethod]
+		[Test]
 		public void ExtractFrom_MemberInitMaterialization()
 		{
 			_categorySchema = new EntitySchema(typeof(Dto), new StorageName(false,"Dto", null),

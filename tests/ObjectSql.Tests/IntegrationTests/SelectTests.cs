@@ -1,5 +1,5 @@
 ﻿using System.Data.SqlClient;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using NUnit.Framework;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -12,7 +12,7 @@ using ObjectSql.QueryInterfaces;
 
 namespace ObjectSql.Tests.IntegrationTests
 {
-	[TestClass]
+	[TestFixture]
 	public class SelectTests : TestBase
 	{
 		public class Dto1
@@ -31,14 +31,14 @@ namespace ObjectSql.Tests.IntegrationTests
 			public int Field2 { get; set; }
 			public string Field3 { get; set; }
 		}
-		[TestMethod]
+		[Test]
 		public void Select_Constant_Integration()
 		{
 			var c = "cost";
 			var scalar = EfQuery.Select(() => c).ExecuteScalar();
 			Assert.AreEqual(c, scalar);
 		}
-		[TestMethod]
+		[Test]
 		public void Select_Constants_In_AnonimusType_Integration()
 		{
 			var c = "cost";
@@ -50,7 +50,7 @@ namespace ObjectSql.Tests.IntegrationTests
 			Assert.AreEqual(i, res[0].i);
 		}
 
-		[TestMethod]
+		[Test]
 		public void Select_Constants_In_DtoType_InitByConstructor_Integration()
 		{
 			var c = "cost";
@@ -60,7 +60,7 @@ namespace ObjectSql.Tests.IntegrationTests
 			Assert.AreEqual(c, res[0].Field1);
 			Assert.AreEqual(i, res[0].Field2);
 		}
-		[TestMethod]
+		[Test]
 		public void Select_Constants_In_DtoType_InitByParams_Integration()
 		{
 			var c = "cost";
@@ -71,13 +71,13 @@ namespace ObjectSql.Tests.IntegrationTests
 			Assert.AreEqual(c, res[0].Field1);
 			Assert.AreEqual(i, res[0].Field2);
 		}
-		[TestMethod]
+		[Test]
 		public void Select_AllDbFields_Integration()
 		{
 			var res = EfQuery.From<Product>().Select((p) => p).ExecuteQuery().ToArray();
 			Assert.AreEqual(77, res.Length);
 		}
-		[TestMethod]
+		[Test]
 		public void Select_OneField_Integration()
 		{
 			var res = EfQuery.From<Product>()
@@ -85,7 +85,7 @@ namespace ObjectSql.Tests.IntegrationTests
 			Assert.AreEqual(77, res.Length);
 			Assert.AreEqual("Alice Mutton", res[0]);
 		}
-		[TestMethod]
+		[Test]
 		public void Select_FromTable_ButConstant_Integration()
 		{
 			var c = "constant";
@@ -93,7 +93,7 @@ namespace ObjectSql.Tests.IntegrationTests
 			Assert.AreEqual(77, res.Length);
 			Assert.AreEqual(77, res.Count(r => r == c));
 		}
-		[TestMethod]
+		[Test]
 		public void Select_Anonimus_ConcreteFields_Integration()
 		{
 			var res = EfQuery.From<Product>()
@@ -103,20 +103,20 @@ namespace ObjectSql.Tests.IntegrationTests
 			Assert.AreEqual(1, res[0].Fld1);
 			Assert.AreEqual(false, res[0].Fld2);
 		}
-		[TestMethod]
+		[Test]
 		public void Select_TSqlComplexFunctionCall()
 		{
 			var res = EfQuery.From<Product>().Select((p) => MsSql.Substring(p.ProductName, 1, 5)).ExecuteQuery().ToArray();
 			Assert.AreEqual(77, res.Length);
 			Assert.IsFalse(res.Any(v=>v.Length>5));
 		}
-		[TestMethod]
+		[Test]
 		public void Select_CountFunctionCall()
 		{
 			var res = EfQuery.From<Product>().Select((p) => Sql.Count(p.ProductID)).ExecuteScalar();
 			Assert.AreEqual(77, res);
 		}
-		[TestMethod]
+		[Test]
 		public void Select_WithoutSource_TSqlFunctionResult()
 		{
 			var c = "cost";
@@ -124,7 +124,7 @@ namespace ObjectSql.Tests.IntegrationTests
 
 			Assert.AreEqual("cos", res);
 		}
-		[TestMethod]
+		[Test]
 		public void Select_WithoutSource_TSqlFunctionResult_AndConstant()
 		{
 			var c = "cost";
@@ -135,7 +135,7 @@ namespace ObjectSql.Tests.IntegrationTests
 			Assert.AreEqual(c, res[0].c);
 
 		}
-		[TestMethod]
+		[Test]
 		public void Select_PassEntity_ButSelectConstant()
 		{
 			var c = "constant";
@@ -144,7 +144,7 @@ namespace ObjectSql.Tests.IntegrationTests
 			Assert.AreEqual(77, res.Length);
 			Assert.AreEqual(77, res.Count(r => r == "cons"));
 		}
-		[TestMethod]
+		[Test]
 		public void Select_GroupBy()
 		{
 			var res = EfQuery.From<Product>()
@@ -155,7 +155,7 @@ namespace ObjectSql.Tests.IntegrationTests
 			Assert.AreEqual(5, arr.Fld1);
 			Assert.AreEqual(22, arr.Fld2);
 		}
-		[TestMethod]
+		[Test]
 		public void Select_GroupBy_AvgByDecimal()
 		{
 			var res = EfQuery
@@ -166,7 +166,7 @@ namespace ObjectSql.Tests.IntegrationTests
 			Assert.AreEqual(8, arr.Length);
 		}
 
-		[TestMethod]
+		[Test]
 		public void Select_CompiledQuery()
 		{
 			var mng = new ObjectSqlManager<SqlConnection>(EfConnectionString);
@@ -183,7 +183,7 @@ namespace ObjectSql.Tests.IntegrationTests
 			Assert.AreEqual(5, entity.Fld1);
 			Assert.AreEqual(22, entity.Fld2);
 		}
-		[TestMethod]
+		[Test]
 		public void StoredProcedure()
 		{
 			var result = EfQuery.StoredProcedure((TestDatabaseEntities e) => e.CustOrderHist("VINET"))
@@ -193,7 +193,7 @@ namespace ObjectSql.Tests.IntegrationTests
 
 		}
 #if NET45
-		[TestMethod]
+		[Test]
 		public void Select_GroupBy_Async()
 		{
 			var res = EfQuery.From<Product>()
