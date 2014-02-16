@@ -113,7 +113,7 @@ namespace ObjectSql.Tests
 		{
 			get
 			{
-				return new SqlConnection().CreateCommand().Query();
+				return new SqlConnection(ConnectionString).CreateCommand().Query();
 			}
 		}
 		public static string PrepareResult(string result)

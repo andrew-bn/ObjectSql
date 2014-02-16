@@ -826,27 +826,27 @@ namespace ObjectSql.Tests
 	{
 
 		[Procedure("CustOrderHist", "dbo")]
-		public abstract IEnumerable<T> CustOrderHist<T>([Parameter("CustomerID", "nchar")]string @CustomerID);
+		public abstract void CustOrderHist([Parameter("CustomerID", "nchar")]string @CustomerID);
 
 		[Procedure("CustOrdersDetail", "dbo")]
-		public abstract IEnumerable<T> CustOrdersDetail<T>([Parameter("OrderID", "int")]int? @OrderID);
+		public abstract void CustOrdersDetail([Parameter("OrderID", "int")]int? @OrderID);
 
 		[Procedure("CustOrdersOrders", "dbo")]
-		public abstract IEnumerable<T> CustOrdersOrders<T>([Parameter("CustomerID", "nchar")]string @CustomerID);
+		public abstract void CustOrdersOrders([Parameter("CustomerID", "nchar")]string @CustomerID);
 
 		[Procedure("Employee Sales by Country", "dbo")]
-		public abstract IEnumerable<T> Employee_Sales_by_Country<T>([Parameter("Beginning_Date", "datetime")]DateTime? @Beginning_Date, [Parameter("Ending_Date", "datetime")]DateTime? @Ending_Date);
+		public abstract void Employee_Sales_by_Country([Parameter("Beginning_Date", "datetime")]DateTime? @Beginning_Date, [Parameter("Ending_Date", "datetime")]DateTime? @Ending_Date);
 
 		[Procedure("MyProcedure", "dbo")]
-		public abstract IEnumerable<T> MyProcedure<T>([Parameter("param1", "int")]int? @param1);
+		public abstract void MyProcedure([Parameter("param1", "int")]int? @param1);
 
 		[Procedure("Sales by Year", "dbo")]
-		public abstract IEnumerable<T> Sales_by_Year<T>([Parameter("Beginning_Date", "datetime")]DateTime? @Beginning_Date, [Parameter("Ending_Date", "datetime")]DateTime? @Ending_Date);
+		public abstract void Sales_by_Year([Parameter("Beginning_Date", "datetime")]DateTime? @Beginning_Date, [Parameter("Ending_Date", "datetime")]DateTime? @Ending_Date);
 
 		[Procedure("SalesByCategory", "dbo")]
-		public abstract IEnumerable<T> SalesByCategory<T>([Parameter("CategoryName", "nvarchar")]string @CategoryName, [Parameter("OrdYear", "nvarchar")]string @OrdYear);
+		public abstract void SalesByCategory([Parameter("CategoryName", "nvarchar")]string @CategoryName, [Parameter("OrdYear", "nvarchar")]string @OrdYear);
 
 		[Procedure("Ten Most Expensive Products", "dbo")]
-		public abstract IEnumerable<T> Ten_Most_Expensive_Products<T>();
+		public abstract void Ten_Most_Expensive_Products();
 	}
 }
