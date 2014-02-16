@@ -94,6 +94,7 @@
     <Compile Include="Core\Bo\ExpressionAnalizerType.cs" />
     <Compile Include="Core\Bo\CommandPreparatorsHolder.cs" />
     <Compile Include="Core\Bo\QueryContext.cs" />
+    <Compile Include="Core\Bo\QueryEnvironment.cs" />
     <Compile Include="Core\Bo\QueryPreparationData.cs" />
     <Compile Include="Core\Bo\QueryRoots.cs" />
     <Compile Include="Core\Bo\ResourcesTreatmentType.cs" />

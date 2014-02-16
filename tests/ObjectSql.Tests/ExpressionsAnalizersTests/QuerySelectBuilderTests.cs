@@ -36,7 +36,7 @@ namespace ObjectSql.Tests.ExpressionsAnalizersTests
 		public void Setup()
 		{
 			_categoryNameField = "Category Name Fld";
-			_categorySchema = new EntitySchema(typeof(Category), new StorageName(false,"Category", null),
+			_categorySchema = new EntitySchema(typeof(Category), new StorageName(false, "Category", null),
 									new Dictionary<string, StorageField>()
 									{
 										{ "CategoryID", new StorageField("CategoryID", null) }, 
@@ -71,7 +71,7 @@ namespace ObjectSql.Tests.ExpressionsAnalizersTests
 		[Test]
 		public void BuildSql_SelectNew_ConstructorInitializer()
 		{
-			Expression<Func<Dto>> exp = () => new Dto(3,"name");
+			Expression<Func<Dto>> exp = () => new Dto(3, "name");
 			var builder = CreateBuilder();
 			var result = builder.BuildSql(_parametersHolder.Object, exp.Body, true).Prepare();
 
@@ -80,7 +80,7 @@ namespace ObjectSql.Tests.ExpressionsAnalizersTests
 		[Test]
 		public void BuildSql_SelectNew_ParametersInitializer()
 		{
-			Expression<Func<Dto>> exp = () => new Dto{ Id = 2, Name = "name" };
+			Expression<Func<Dto>> exp = () => new Dto { Id = 2, Name = "name" };
 			var builder = CreateBuilder();
 			var result = builder.BuildSql(_parametersHolder.Object, exp.Body, true).Prepare();
 
@@ -90,7 +90,7 @@ namespace ObjectSql.Tests.ExpressionsAnalizersTests
 		[ExpectedException(typeof(ObjectSqlException))]
 		public void BuildSql_SelectNew_ParametersAndConstructorInitializer_ErrorExpected()
 		{
-			Expression<Func<Dto>> exp = () => new Dto(4,"name") { Name = "name" };
+			Expression<Func<Dto>> exp = () => new Dto(4, "name") { Name = "name" };
 			var builder = CreateBuilder();
 			var result = builder.BuildSql(_parametersHolder.Object, exp.Body, true).Prepare();
 		}
@@ -106,7 +106,7 @@ namespace ObjectSql.Tests.ExpressionsAnalizersTests
 		[Test]
 		public void BuildSql_SelectParameter()
 		{
-			Expression<Func<Category,Category>> exp = (p) => p;
+			Expression<Func<Category, Category>> exp = (p) => p;
 			var builder = CreateBuilder();
 			var result = builder.BuildSql(_parametersHolder.Object, exp.Body, true).Prepare();
 
@@ -117,14 +117,14 @@ namespace ObjectSql.Tests.ExpressionsAnalizersTests
 		[ExpectedException(typeof(ObjectSqlException))]
 		public void BuildSql_SelectNestedAnonimus_ErrorExpected()
 		{
-			Expression<Func<object>> exp = () => new { Id = 2, Name = "name", D = new {Descr = "descr"} };
+			Expression<Func<object>> exp = () => new { Id = 2, Name = "name", D = new { Descr = "descr" } };
 			var builder = CreateBuilder();
 			var result = builder.BuildSql(_parametersHolder.Object, exp.Body, true).Prepare();
 		}
 
 		private QuerySelectBuilder CreateBuilder()
 		{
-			return new QuerySelectBuilder(_schemaManager.Object, _delegatesBuilder.Object, new SqlServerSqlWriter());
+			return new QuerySelectBuilder(_schemaManager.Object, _delegatesBuilder.Object, SqlServerSqlWriter.Instance);
 
 		}
 		protected Expression IsExp<T>(Expression<Func<T>> b)

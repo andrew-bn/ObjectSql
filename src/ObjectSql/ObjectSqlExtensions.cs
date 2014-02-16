@@ -28,12 +28,20 @@ namespace System
 			
 			var factory = ObjectSqlRegistry.FindSchemaManagerFactory(dbCommand.Connection, initialCs);
 			var providerName = factory.TryGetProviderName(dbCommand.Connection, initialCs);
-			var dbManager = ObjectSqlRegistry.FindDatabaseManager(dbCommand.Connection, providerName);
 			
+			var dbManager = ObjectSqlRegistry.FindDatabaseManager(dbCommand.Connection, providerName);
 			var sm = factory.CreateSchemaManager(dbManager.DbType, initialCs);
-			var queryBuilder = dbManager.CreateQueryBuilder(sm);
 
-			var context = QueryManager.CreateQueryContext(dbCommand, queryBuilder, sm, command.Connection.ConnectionString, treatType);
+			var env = new QueryEnvironment(
+						initialCs,
+						dbCommand,
+						treatType,
+						sm,
+						dbManager.CreateDelegatesBuilder(),
+						dbManager.CreateSqlWriter());
+
+			var context = QueryManager.CreateQueryContext(env);
+
 			return new QueryRoot(context);
 		}
 	}

@@ -115,7 +115,7 @@ namespace ObjectSql.Tests.ExpressionsAnalizersTests.TardetDbExtensionsTests
 
 		private QueryExpressionBuilder CreateBuilder()
 		{
-			return new QueryExpressionBuilder(_schemaManager.Object, _delegatesBuilder.Object, new SqlServerSqlWriter());
+			return new QueryExpressionBuilder(_schemaManager.Object, _delegatesBuilder.Object, SqlServerSqlWriter.Instance);
 		}
 	}
 }

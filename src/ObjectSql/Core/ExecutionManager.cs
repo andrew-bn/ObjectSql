@@ -29,7 +29,7 @@ namespace ObjectSql.Core
 		public static IEnumerable<T> ExecuteQuery<T>(QueryContext context)
 		{
 			PrepareQuery(context);
-			var cmd = context.DbCommand;
+			var cmd = context.QueryEnvironment.Command;
 
 			var connection = cmd.Connection;
 			var connectionOpened = connection.State == ConnectionState.Closed;
@@ -41,7 +41,7 @@ namespace ObjectSql.Core
 		public static IQueryDataReader ExecuteReader(QueryContext context)
 		{
 			PrepareQuery(context);
-			var cmd = context.DbCommand;
+			var cmd = context.QueryEnvironment.Command;
 
 			var connection = cmd.Connection;
 			var connectionOpened = connection.State == ConnectionState.Closed;
@@ -52,7 +52,7 @@ namespace ObjectSql.Core
 
 		private static T ExecuteCommand<T>(QueryContext context, Func<IDbCommand, T> executor)
 		{
-			var cmd = context.DbCommand;
+			var cmd = context.QueryEnvironment.Command;
 			var connectionOpened = OpenConnection(cmd.Connection);
 			try
 			{
@@ -68,10 +68,10 @@ namespace ObjectSql.Core
 		{
 			if (connectionOpened)
 				cmd.Connection.Close();
-			if (context.ResourcesTreatmentType == ResourcesTreatmentType.DisposeCommand ||
-				context.ResourcesTreatmentType == ResourcesTreatmentType.DisposeConnection)
+			if (context.QueryEnvironment.ResourcesTreatmentType == ResourcesTreatmentType.DisposeCommand ||
+				context.QueryEnvironment.ResourcesTreatmentType == ResourcesTreatmentType.DisposeConnection)
 				cmd.Dispose();
-			if (context.ResourcesTreatmentType == ResourcesTreatmentType.DisposeConnection)
+			if (context.QueryEnvironment.ResourcesTreatmentType == ResourcesTreatmentType.DisposeConnection)
 				cmd.Connection.Dispose();
 		}
 
@@ -86,12 +86,12 @@ namespace ObjectSql.Core
 		#region async
 		public static async Task<IAsyncEnumerable<T>> ExecuteQueryAsync<T>(QueryContext context)
 		{
-			if (!(context.DbCommand is DbCommand))
+			if (!(context.QueryEnvironment.Command is DbCommand))
 				throw new ObjectSqlException("Provider does not support async operations");
 
 			PrepareQuery(context);
 
-			var cmd = (DbCommand)context.DbCommand;
+			var cmd = (DbCommand)context.QueryEnvironment.Command;
 			var connection = cmd.Connection;
 			var connectionOpened = connection.State == ConnectionState.Closed;
 			if (connectionOpened) await connection.OpenAsync();
@@ -107,7 +107,7 @@ namespace ObjectSql.Core
 		private static void DisposeDataReader(QueryContext context, IDataReader dataReader, bool connectionOpened)
 		{
 			dataReader.Dispose();
-			FreeResources(context, context.DbCommand, connectionOpened);
+			FreeResources(context, context.QueryEnvironment.Command, connectionOpened);
 		}
 	}
 }

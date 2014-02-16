@@ -6,6 +6,11 @@ namespace ObjectSql.SqlServer
 {
 	public class SqlServerSqlWriter : ISqlWriter
 	{
+		public static SqlServerSqlWriter Instance = new SqlServerSqlWriter();
+		private SqlServerSqlWriter()
+		{
+		}
+
 		public CommandText WriteUpdate(CommandText commandText, EntitySchema entity, string updateSql)
 		{
 			return commandText.Append("UPDATE {0} SET {1}", PrepareStorageName(entity), updateSql);

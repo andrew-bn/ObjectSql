@@ -84,7 +84,7 @@ namespace ObjectSql.QueryImplementation
 			get
 			{
 				PrepareQuery();
-				return Context.DbCommand;
+				return Context.QueryEnvironment.Command;
 			}
 		}
 	}

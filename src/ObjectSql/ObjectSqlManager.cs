@@ -47,11 +47,19 @@ namespace ObjectSql
 					var factory = ObjectSqlRegistry.FindSchemaManagerFactory(conn, _connectionString);
 					var dbManager = ObjectSqlRegistry.FindDatabaseManager(conn, factory.TryGetProviderName(conn, _connectionString));
 					var sm = factory.CreateSchemaManager(dbManager.DbType, _connectionString);
-					var queryBuilder = dbManager.CreateQueryBuilder(sm);
+					var cmd = conn.CreateCommand();
+					var delBuilder = dbManager.CreateDelegatesBuilder();
+					var sqlWriter = dbManager.CreateSqlWriter();
 
-					var context = new CompiledQueryContext(
-						conn.CreateCommand(), queryBuilder, sm,
-						new StrongBox<TArgs>(arg1), result.Context);
+					var env = new QueryEnvironment(result.Context.QueryEnvironment.InitialConnectionString,
+					                               cmd,
+					                               result.Context.QueryEnvironment.ResourcesTreatmentType,
+					                               sm,
+					                               delBuilder,
+					                               sqlWriter);
+
+					var context = new CompiledQueryContext(env, new StrongBox<TArgs>(arg1), result.Context);
+
 					QueryManager.PrepareQuery(context, preparationData);
 					return new QueryEnd<TEntity>(context);
 				};

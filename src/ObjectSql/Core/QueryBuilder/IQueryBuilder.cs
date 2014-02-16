@@ -6,7 +6,6 @@ namespace ObjectSql.Core.QueryBuilder
 {
 	public interface IQueryBuilder
 	{
-		IDelegatesBuilder DelegatesBuilder { get; }
 		QueryPreparationData BuildQuery(IQueryPart[] parts);
 	}
 }

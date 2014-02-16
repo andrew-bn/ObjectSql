@@ -15,9 +15,8 @@ using System.Linq.Expressions;
 
 namespace ObjectSql.Core.QueryBuilder
 {
-	public abstract class QueryBuilder: IQueryBuilder
+	public class ObjectQueryBuilder: IQueryBuilder
 	{
-		public IDelegatesBuilder DelegatesBuilder { get { return _delegatesBuilder; } }
 		private readonly IEntitySchemaManager _schemaManager;
 		private readonly ISqlWriter _sqlWriter;
 		private readonly IDelegatesBuilder _delegatesBuilder;
@@ -25,7 +24,15 @@ namespace ObjectSql.Core.QueryBuilder
 		private readonly IMaterializationInfoExtractor _materializationInfoExtrator;
 		private readonly IInsertionInfoExtractor _insertionInfoExtractor;
 
-		protected QueryBuilder(IEntitySchemaManager schemaManager,
+		public ObjectQueryBuilder(QueryEnvironment env)
+			: this(env.SchemaManager,env.SqlWriter,env.DelegatesBuilder,
+					new ExpressionAnalizer(env.SchemaManager,env.DelegatesBuilder,env.SqlWriter),
+					new MaterializationInfoExtractor(env.SchemaManager),
+					new InsertionInfoExtractor(env.SchemaManager))
+		{
+		}
+
+		private ObjectQueryBuilder(IEntitySchemaManager schemaManager,
 							   ISqlWriter sqlWriter,
 							   IDelegatesBuilder expressionBuilder,
 							   IExpressionAnalizer expressionAnalizer,

@@ -12,31 +12,24 @@ namespace ObjectSql.Core.Bo
 	{
 		public const int PRIME = 397;
 
-		public IDbCommand DbCommand { get; private set; }
-		public IQueryBuilder QueryBuilder { get; set; }
-		public IEntitySchemaManager SchemaManager { get; set; }
-		public string ConnectionString { get; private set; }
+		public QueryEnvironment QueryEnvironment { get; set; }
+
 		public IList<IQueryPart> QueryParts { get { return _queryParts; } }
 		public QueryRoots QueryRoots { get { return QueryRootsStruct; } }
 		public Delegate MaterializationDelegate { get; set; }
-		public ResourcesTreatmentType ResourcesTreatmentType { get; private set; }
 		public bool Prepared { get; set; }
 
 		private List<IQueryPart> _queryParts;
 		protected QueryRoots QueryRootsStruct;
 
-		internal QueryContext(IDbCommand command, IQueryBuilder queryBuilder, IEntitySchemaManager schemaManager, string connectionString, ResourcesTreatmentType resTreatment)
+		internal QueryContext(QueryEnvironment queryEnvironment)
 		{
-			DbCommand = command;
-			QueryBuilder = queryBuilder;
-			SchemaManager = schemaManager;
-			ConnectionString = connectionString;
+			QueryEnvironment = queryEnvironment;
 			_queryParts = new List<IQueryPart>();
-			ResourcesTreatmentType = resTreatment;
 		}
 		internal QueryContext CopyWith(IDbCommand command)
 		{
-			var result = new QueryContext(command,QueryBuilder, SchemaManager, ConnectionString,ResourcesTreatmentType)
+			var result = new QueryContext(QueryEnvironment)
 				{
 					QueryRootsStruct = QueryRootsStruct,
 					_queryParts = _queryParts,
@@ -59,8 +52,9 @@ namespace ObjectSql.Core.Bo
 
 		private bool ExpressionCompareBasedEquals(QueryContext obj)
 		{
-			var cmd = DbCommand;
-			var objCmd = obj.DbCommand;
+			var cmd = QueryEnvironment.Command;
+			var objCmd = obj.QueryEnvironment.Command;
+
 			if (_queryParts.Count != obj._queryParts.Count ||
 				!ExpressionComparer.AreEqual(ref QueryRootsStruct, ref obj.QueryRootsStruct) ||
 				cmd.GetType() != objCmd.GetType() ||
@@ -102,9 +96,9 @@ namespace ObjectSql.Core.Bo
 		private void CalculateDbCommandHash(ref QueryRoots parameters)
 		{
 			parameters.Hash *= PRIME;
-			parameters.Hash ^= DbCommand.GetType().GetHashCode();
+			parameters.Hash ^= QueryEnvironment.Command.GetType().GetHashCode();
 			parameters.Hash *= PRIME;
-			parameters.Hash ^= DbCommand.Connection.ConnectionString.GetHashCode();
+			parameters.Hash ^= QueryEnvironment.Command.Connection.ConnectionString.GetHashCode();
 		}
 		#endregion
 	}

@@ -28,7 +28,7 @@ namespace ObjectSql.QueryImplementation
 
 		public System.Data.IDbCommand Command
 		{
-			get { return Context.DbCommand; }
+			get { return Context.QueryEnvironment.Command; }
 		}
 	}
 }

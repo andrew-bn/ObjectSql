@@ -31,7 +31,7 @@ namespace ObjectSql.Core
 		internal static void PrepareQuery(QueryContext context, QueryPreparationData preparationData)
 		{
 			context.MaterializationDelegate = preparationData.DataMaterializer;
-			var dbCommand = context.DbCommand;
+			var dbCommand = context.QueryEnvironment.Command;
 
 			if (string.IsNullOrEmpty(dbCommand.CommandText))
 				dbCommand.CommandText = preparationData.CommandText;
@@ -55,12 +55,12 @@ namespace ObjectSql.Core
 
 		private static QueryPreparationData GeneratePreparationData(QueryContext context)
 		{
-			return context.QueryBuilder.BuildQuery(context.QueryParts.ToArray());
+			return new ObjectQueryBuilder(context.QueryEnvironment).BuildQuery(context.QueryParts.ToArray());
 		}
 
-		internal static QueryContext CreateQueryContext(IDbCommand command, IQueryBuilder queryBuilder, IEntitySchemaManager schemaManager, string connectionString, ResourcesTreatmentType resTreatment)
+		internal static QueryContext CreateQueryContext(QueryEnvironment environment)
 		{
-			return new QueryContext(command, queryBuilder, schemaManager, connectionString, resTreatment);
+			return new QueryContext(environment);
 		}
 	}
 }

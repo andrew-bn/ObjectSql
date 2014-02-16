@@ -120,7 +120,7 @@ namespace ObjectSql.Tests.ExpressionsAnalizersTests
 		}
 		private QueryFieldsSequenceBuilder CreateBuilder()
 		{
-			return new QueryFieldsSequenceBuilder(_schemaManager.Object, _delegatesBuilder.Object, new SqlServerSqlWriter());
+			return new QueryFieldsSequenceBuilder(_schemaManager.Object, _delegatesBuilder.Object, SqlServerSqlWriter.Instance);
 
 		}
 		protected Expression IsExp<T>(Expression<Func<T>> b)

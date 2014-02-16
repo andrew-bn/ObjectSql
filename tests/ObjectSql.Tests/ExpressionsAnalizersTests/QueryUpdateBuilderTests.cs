@@ -82,7 +82,7 @@ namespace ObjectSql.Tests.ExpressionsAnalizersTests
 		}
 		private QueryUpdateBuilder CreateBuilder()
 		{
-			return new QueryUpdateBuilder(_schemaManager.Object, _delegatesBuilder.Object,new SqlServerSqlWriter());
+			return new QueryUpdateBuilder(_schemaManager.Object, _delegatesBuilder.Object, SqlServerSqlWriter.Instance);
 		}
 		protected Expression IsExp<T>(Expression<Func<T>> b)
 		{

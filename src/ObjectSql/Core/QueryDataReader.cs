@@ -33,8 +33,8 @@ namespace ObjectSql.Core
 		{
 			var materializer = _mapMaterializers.GetOrAdd(typeof (T), t =>
 				{
-					var builder = Context.QueryBuilder.DelegatesBuilder;
-					var entitySchema = Context.SchemaManager.GetSchema(t);
+					var builder = Context.QueryEnvironment.DelegatesBuilder;
+					var entitySchema = Context.QueryEnvironment.SchemaManager.GetSchema(t);
 					var info = new EntityMaterializationInformation(t, true);
 					return builder.CreateEntityMaterializationDelegate(entitySchema, info);
 				});

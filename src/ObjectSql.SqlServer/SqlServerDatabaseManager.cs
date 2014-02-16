@@ -2,6 +2,7 @@
 using System.Data;
 using System.Data.SqlClient;
 using ObjectSql.Core.QueryBuilder;
+using ObjectSql.Core.QueryBuilder.LambdaBuilder;
 using ObjectSql.Core.SchemaManager;
 
 namespace ObjectSql.SqlServer
@@ -17,10 +18,6 @@ namespace ObjectSql.SqlServer
 		{
 			return dataReader is SqlDataReader;
 		}
-		public IQueryBuilder CreateQueryBuilder(IEntitySchemaManager schemaManager)
-		{
-			return new SqlServerQueryBuilder(schemaManager);
-		}
 
 		public Type DbType
 		{
@@ -28,11 +25,14 @@ namespace ObjectSql.SqlServer
 		}
 
 
-		public Core.QueryBuilder.LambdaBuilder.DelegatesBuilder CreateDelegatesBuilder()
+		public IDelegatesBuilder CreateDelegatesBuilder()
 		{
 			return SqlServerDelegatesBuilder.Instance;
 		}
 
-
+		public ISqlWriter CreateSqlWriter()
+		{
+			return SqlServerSqlWriter.Instance;
+		}
 	}
 }

@@ -96,7 +96,6 @@
     <Compile Include="SqlServerDatabaseManager.cs" />
     <Compile Include="SqlServerDelegatesBuilder.cs" />
     <Compile Include="ObjectSqlSqlServerInitializer.cs" />
-    <Compile Include="SqlServerQueryBuilder.cs" />
     <Compile Include="SqlServerSqlWriter.cs" />
     <Compile Include="SqlServerTargetDatabaseExtensions.cs" />
   </ItemGroup>

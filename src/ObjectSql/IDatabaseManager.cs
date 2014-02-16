@@ -15,7 +15,8 @@ namespace ObjectSql
 		Type DbType { get; }
 		bool MatchManager(IDbConnection dbConnection, string providerName);
 		bool MatchManager(IDataReader dataReader);
-		IQueryBuilder CreateQueryBuilder(IEntitySchemaManager schemaManager);
-		DelegatesBuilder CreateDelegatesBuilder();
+		IDelegatesBuilder CreateDelegatesBuilder();
+
+		ISqlWriter CreateSqlWriter();
 	}
 }
