@@ -64,13 +64,15 @@ namespace SqlBoost.Tests
 		[ExpectedException(typeof(SqlBoostException))]
 		public void CreateManager_InvalidCsdlNameDescriptor_ExceptionExpected()
 		{
-			new EdmEntitySchemaManager<SqlDbType>("res://*/INVALIDNAME.csdl|res://*/Northwind.ssdl|res://*/Northwind.msl");
+			new EdmEntitySchemaManager<SqlDbType>(@"metadata=res:res://*/INVALIDNAME.csdl|res://*/Northwind.ssdl|res://*/Northwind.msl;provider=System.Data.SqlClient;provider connection string=""data source=(LocalDB)\v11.0;attachdbfilename=D:\Work\Git\ObjectSql\tests\SqlBoost.Tests\TestDatabase.mdf;integrated security=True;connect timeout=30;MultipleActiveResultSets=True;App=EntityFramework""");
+			
 		}
 		[TestMethod]
 		[ExpectedException(typeof(SqlBoostException))]
 		public void CreateManager_InvalidMetadataDescriptor_ExceptionExpected()
 		{
-			new EdmEntitySchemaManager<SqlDbType>("res://*/InvalidMetadataDescriptorFormat:/*/Northwind.msl");
+			new EdmEntitySchemaManager<SqlDbType>(@"metadata=res://*/InvalidMetadataDescriptorFormat:/*/Northwind.msl;provider=System.Data.SqlClient;provider connection string=""data source=(LocalDB)\v11.0;attachdbfilename=D:\Work\Git\ObjectSql\tests\SqlBoost.Tests\TestDatabase.mdf;integrated security=True;connect timeout=30;MultipleActiveResultSets=True;App=EntityFramework""");
+			
 		}
 		private IEntitySchemaManager CreateManager()
 		{

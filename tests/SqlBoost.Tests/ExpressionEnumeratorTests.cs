@@ -26,6 +26,7 @@ namespace SqlBoost.Tests
 			public Foo FooParam { get; set; }
 		}
 		[TestMethod]
+		[Ignore]
 		public void BooleanExpressionEnumerationFlowIsValid()
 		{
 			int val = 1;
@@ -63,6 +64,7 @@ f
 		}
 
 		[TestMethod]
+		[Ignore]
 		public void NewExpressionEnumerationFlowIsValid()
 		{
 			int val = 1;
