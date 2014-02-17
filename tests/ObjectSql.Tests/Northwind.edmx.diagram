@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="4c03717b1de146eaad1681fb621170fa" Name="Diagram1">
+        <EntityTypeShape EntityType="TestDatabaseModel.Category" Width="1.5" PointX="3" PointY="19.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="TestDatabaseModel.CustomerDemographic" Width="1.5" PointX="0.75" PointY="2.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="TestDatabaseModel.Customer" Width="1.5" PointX="3" PointY="1.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="TestDatabaseModel.Employee" Width="1.5" PointX="3" PointY="9.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="TestDatabaseModel.MultiTypeTable" Width="1.5" PointX="9.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="TestDatabaseModel.Order_Detail" Width="1.5" PointX="7.5" PointY="2.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="TestDatabaseModel.Order" Width="1.5" PointX="5.25" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="TestDatabaseModel.Product" Width="1.5" PointX="5.25" PointY="20.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="TestDatabaseModel.Region" Width="1.5" PointX="5.75" PointY="7.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="TestDatabaseModel.Shipper" Width="1.5" PointX="3" PointY="15.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="TestDatabaseModel.Supplier" Width="1.5" PointX="3" PointY="22.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="TestDatabaseModel.Territory" Width="1.5" PointX="8" PointY="9.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="TestDatabaseModel.Alphabetical_list_of_product" Width="1.5" PointX="10.75" PointY="8.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="TestDatabaseModel.Category_Sales_for_1997" Width="1.5" PointX="0.75" PointY="6.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="TestDatabaseModel.Current_Product_List" Width="1.5" PointX="2.75" PointY="6.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="TestDatabaseModel.Customer_and_Suppliers_by_City" Width="1.5" PointX="11.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="TestDatabaseModel.Invoice" Width="1.5" PointX="12.75" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="TestDatabaseModel.Order_Details_Extended" Width="1.5" PointX="5.75" PointY="12.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="TestDatabaseModel.Order_Subtotal" Width="1.5" PointX="7.75" PointY="12.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="TestDatabaseModel.Orders_Qry" Width="1.5" PointX="9.75" PointY="12.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="TestDatabaseModel.Product_Sales_for_1997" Width="1.5" PointX="12.75" PointY="10.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="TestDatabaseModel.Products_Above_Average_Price" Width="1.5" PointX="13.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="TestDatabaseModel.Products_by_Category" Width="1.5" PointX="11.75" PointY="13.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="TestDatabaseModel.Sales_by_Category" Width="1.5" PointX="13.75" PointY="13.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="TestDatabaseModel.Sales_Totals_by_Amount" Width="1.5" PointX="14.75" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="TestDatabaseModel.Summary_of_Sales_by_Quarter" Width="1.5" PointX="14.75" PointY="6.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="TestDatabaseModel.Summary_of_Sales_by_Year" Width="1.5" PointX="14.75" PointY="9.75" IsExpanded="true" />
+        <AssociationConnector Association="TestDatabaseModel.FK_Products_Categories" ManuallyRouted="false" />
+        <AssociationConnector Association="TestDatabaseModel.FK_Orders_Customers" ManuallyRouted="false" />
+        <AssociationConnector Association="TestDatabaseModel.FK_Employees_Employees" ManuallyRouted="false" />
+        <AssociationConnector Association="TestDatabaseModel.FK_Orders_Employees" ManuallyRouted="false" />
+        <AssociationConnector Association="TestDatabaseModel.FK_Order_Details_Orders" ManuallyRouted="false" />
+        <AssociationConnector Association="TestDatabaseModel.FK_Order_Details_Products" ManuallyRouted="false" />
+        <AssociationConnector Association="TestDatabaseModel.FK_Orders_Shippers" ManuallyRouted="false" />
+        <AssociationConnector Association="TestDatabaseModel.FK_Products_Suppliers" ManuallyRouted="false" />
+        <AssociationConnector Association="TestDatabaseModel.FK_Territories_Region" ManuallyRouted="false" />
+        <AssociationConnector Association="TestDatabaseModel.CustomerCustomerDemo" ManuallyRouted="false" />
+        <AssociationConnector Association="TestDatabaseModel.EmployeeTerritories" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
