@@ -89,4 +89,22 @@ namespace <#= Namespace#>
 		}
 #>
 	}
+
+	public static partial class <#=ConnStrName#>ProceduresHolder
+	{
+<# 
+		foreach(var proc in Schema.Procedures)
+		{
+#>
+
+		public static IQueryEnd <#=ToValidName(proc.Name)#>(this IStoredProcedureHolder<<#=ConnStrName#>Context> holder<#
+			foreach(var p in proc.Parameters){#>, <#=ToTypeName(p.NetType,true)#> <#=ToValidName(p.Name)#><#}#>)
+		{
+			return holder.Root.Exec<<#=ConnStrName#>Context>(h=>h.<#=ToValidName(proc.Name)#>(<#
+				foreach(var p in proc.Parameters){#><#=p.Position>1?", ":""#><#=ToValidName(p.Name)#><#}#>));
+		}
+<#
+		}
+#>
+	}
 }

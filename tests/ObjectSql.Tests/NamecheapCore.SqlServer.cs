@@ -27030,4 +27030,7903 @@ namespace ObjectSql.Tests
 			Query().Exec<NamecheapCoreContext>(h => h.USP_AUTOMATION_UPDATE_DOMAINS_LIST(@Domainname, @Nameservers));
 		}
 	}
+
+	public static partial class NamecheapCoreProceduresHolder
+	{
+
+		public static IQueryEnd _SAVEBIG_COUPON_STATS(this IStoredProcedureHolder<NamecheapCoreContext> holder)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h._SAVEBIG_COUPON_STATS());
+		}
+
+		public static IQueryEnd _SAVEBIG_COUPON_STATS_v2(this IStoredProcedureHolder<NamecheapCoreContext> holder)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h._SAVEBIG_COUPON_STATS_v2());
+		}
+
+		public static IQueryEnd AddOrEditIpConfig(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @operationType, int? @autoID, int? @applicationID, long? @startingIP, long? @endingIP, short? @minuteCounter, int? @hourCounter, int? @dayCounter, bool? @isActive)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.AddOrEditIpConfig(@operationType, @autoID, @applicationID, @startingIP, @endingIP, @minuteCounter, @hourCounter, @dayCounter, @isActive));
+		}
+
+		public static IQueryEnd AddOrEditKeyConfig(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @operationType, int? @autoID, int? @applicationID, string @keyword, short? @minuteCounter, int? @hourCounter, int? @dayCounter)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.AddOrEditKeyConfig(@operationType, @autoID, @applicationID, @keyword, @minuteCounter, @hourCounter, @dayCounter));
+		}
+
+		public static IQueryEnd adhoc_DisableAdminUser(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @AdminUserName, string @Secret)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.adhoc_DisableAdminUser(@AdminUserName, @Secret));
+		}
+
+		public static IQueryEnd Check_RenewMailNotice_IsDisabled_ForUser(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @username)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.Check_RenewMailNotice_IsDisabled_ForUser(@username));
+		}
+
+		public static IQueryEnd CheckIPsAlreadyConfigured(this IStoredProcedureHolder<NamecheapCoreContext> holder, long? @startIp, long? @endIp, int? @autoId)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.CheckIPsAlreadyConfigured(@startIp, @endIp, @autoId));
+		}
+
+		public static IQueryEnd CheckKeyAlreadyConfigured(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @keyword, int? @autoId)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.CheckKeyAlreadyConfigured(@keyword, @autoId));
+		}
+
+		public static IQueryEnd DeleteIpConfig(this IStoredProcedureHolder<NamecheapCoreContext> holder, int? @autoId)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.DeleteIpConfig(@autoId));
+		}
+
+		public static IQueryEnd DeleteKeyConfig(this IStoredProcedureHolder<NamecheapCoreContext> holder, int? @autoId)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.DeleteKeyConfig(@autoId));
+		}
+
+		public static IQueryEnd DeleteMarkedAsDeletedEntries(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @applicationName, string @configType, DateTime? @lastUpdatedDateTime)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.DeleteMarkedAsDeletedEntries(@applicationName, @configType, @lastUpdatedDateTime));
+		}
+
+		public static IQueryEnd GetAllIPConfigurations(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @applicationName, DateTime? @lastUpdatedDateTime)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.GetAllIPConfigurations(@applicationName, @lastUpdatedDateTime));
+		}
+
+		public static IQueryEnd GetAllKeyConfigurations(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @applicationName, DateTime? @lastUpdatedDateTime)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.GetAllKeyConfigurations(@applicationName, @lastUpdatedDateTime));
+		}
+
+		public static IQueryEnd GetApplicaionList(this IStoredProcedureHolder<NamecheapCoreContext> holder)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.GetApplicaionList());
+		}
+
+		public static IQueryEnd GetGlobalConfiguration(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @applicationName)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.GetGlobalConfiguration(@applicationName));
+		}
+
+		public static IQueryEnd GetIPConfigurationList(this IStoredProcedureHolder<NamecheapCoreContext> holder, long? @ipAddress, bool? @isActive, int? @applicationID, int? @Page, int? @PageSize)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.GetIPConfigurationList(@ipAddress, @isActive, @applicationID, @Page, @PageSize));
+		}
+
+		public static IQueryEnd GetIPConfigurationListex(this IStoredProcedureHolder<NamecheapCoreContext> holder, long? @ipAddress, bool? @isActive, int? @applicationID, int? @Page, int? @PageSize)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.GetIPConfigurationListex(@ipAddress, @isActive, @applicationID, @Page, @PageSize));
+		}
+
+		public static IQueryEnd GetKeyConfigurationList(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @keyword, int? @applicationID, int? @page, int? @PageSize)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.GetKeyConfigurationList(@keyword, @applicationID, @page, @PageSize));
+		}
+
+		public static IQueryEnd GetNamecheapDealsPartnerDetails(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @partnerName)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.GetNamecheapDealsPartnerDetails(@partnerName));
+		}
+
+		public static IQueryEnd PromotionDetailsTemplate(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @PromotionCode, DateTime? @startDate, DateTime? @enddate)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.PromotionDetailsTemplate(@PromotionCode, @startDate, @enddate));
+		}
+
+		public static IQueryEnd UDF_DOES_USER_HAVE_ANY_ORDER(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @UserName, bool? @userHasOrder)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.UDF_DOES_USER_HAVE_ANY_ORDER(@UserName, @userHasOrder));
+		}
+
+		public static IQueryEnd USP_ACT_OR_DEACT_SECURITY_SETTINGS(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @sUserName, string @sEnteredKey)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_ACT_OR_DEACT_SECURITY_SETTINGS(@sUserName, @sEnteredKey));
+		}
+
+		public static IQueryEnd usp_Activate_Change_Reseller_Level(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @UserName, decimal? @UserId, int? @LevelId, string @Comment, string @AdminComment, string @ActionFlag, string @ActionStatus)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.usp_Activate_Change_Reseller_Level(@UserName, @UserId, @LevelId, @Comment, @AdminComment, @ActionFlag, @ActionStatus));
+		}
+
+		public static IQueryEnd usp_Activate_DeActivate_Reseller_Status(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @UserName, decimal? @UserId, string @Comment, string @AdminComment, string @ActionFlag, string @ActionStatus)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.usp_Activate_DeActivate_Reseller_Status(@UserName, @UserId, @Comment, @AdminComment, @ActionFlag, @ActionStatus));
+		}
+
+		public static IQueryEnd USP_ACTIVATE_DELETE_CATEGORY(this IStoredProcedureHolder<NamecheapCoreContext> holder, int? @categoryid, string @operation)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_ACTIVATE_DELETE_CATEGORY(@categoryid, @operation));
+		}
+
+		public static IQueryEnd usp_Activate_Namecheap_Bonus(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @userName, string @partnerType, decimal? @amount, string @userIp, int? @overideCouponValue)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.usp_Activate_Namecheap_Bonus(@userName, @partnerType, @amount, @userIp, @overideCouponValue));
+		}
+
+		public static IQueryEnd usp_ActivateNamecheapsDealsCoupon(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @userName, string @partnerName, decimal? @amountSpentTillDate, string @userIp)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.usp_ActivateNamecheapsDealsCoupon(@userName, @partnerName, @amountSpentTillDate, @userIp));
+		}
+
+		public static IQueryEnd USP_ADD_DestinationToCategoryToUser(this IStoredProcedureHolder<NamecheapCoreContext> holder, Guid? @categoryId, Guid? @destinationId, string @userName)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_ADD_DestinationToCategoryToUser(@categoryId, @destinationId, @userName));
+		}
+
+		public static IQueryEnd Usp_Add_Dnssec(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @domainName, string @xmlData)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.Usp_Add_Dnssec(@domainName, @xmlData));
+		}
+
+		public static IQueryEnd USP_ADD_EDIT_PRICING(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @sItem, int? @iStartYear, int? @iEndYear, int? @iMinQty, int? @iMaxQty, string @sActionID, decimal? @iPricePerYear, int? @ID, string @sOperation)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_ADD_EDIT_PRICING(@sItem, @iStartYear, @iEndYear, @iMinQty, @iMaxQty, @sActionID, @iPricePerYear, @ID, @sOperation));
+		}
+
+		public static IQueryEnd USP_ADD_EDIT_USERPRICING(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @sUserName, int? @iTLDID, decimal? @UserPricePerYear, string @PricingHint, string @sOperation)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_ADD_EDIT_USERPRICING(@sUserName, @iTLDID, @UserPricePerYear, @PricingHint, @sOperation));
+		}
+
+		public static IQueryEnd USP_ADD_ENOMERROR_LOG(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @DomainName, string @CommandName, string @ResponseCode, string @ResponseString)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_ADD_ENOMERROR_LOG(@DomainName, @CommandName, @ResponseCode, @ResponseString));
+		}
+
+		public static IQueryEnd USP_ADD_NEW_SSLPARTNER_USER(this IStoredProcedureHolder<NamecheapCoreContext> holder, decimal? @userID, int? @Resellone_UserID, string @Resellone_UserName, string @Resellone_Password)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_ADD_NEW_SSLPARTNER_USER(@userID, @Resellone_UserID, @Resellone_UserName, @Resellone_Password));
+		}
+
+		public static IQueryEnd USP_ADD_TRANSACTION(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @UserName, string @Transaction_Type, string @PayerEmail, decimal? @GrossAmount, string @Comments, string @OrderRef_ID, string @CC_Trans_ID, string @CC_Status, string @PendingReason, string @PaypalPaymentType, string @ParentCC_Trans_ID)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_ADD_TRANSACTION(@UserName, @Transaction_Type, @PayerEmail, @GrossAmount, @Comments, @OrderRef_ID, @CC_Trans_ID, @CC_Status, @PendingReason, @PaypalPaymentType, @ParentCC_Trans_ID));
+		}
+
+		public static IQueryEnd USP_ADD_VOUCHER(this IStoredProcedureHolder<NamecheapCoreContext> holder, DateTime? @ExpirationDate, bool? @isactive, string @productName, int? @qty)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_ADD_VOUCHER(@ExpirationDate, @isactive, @productName, @qty));
+		}
+
+		public static IQueryEnd USP_ADD_WG_EMAIL_QUEUE(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @email, string @forward_To_Email, string @operation)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_ADD_WG_EMAIL_QUEUE(@email, @forward_To_Email, @operation));
+		}
+
+		public static IQueryEnd usp_AddCardToUserOptions(this IStoredProcedureHolder<NamecheapCoreContext> holder, Guid? @creditCardId, string @userName)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.usp_AddCardToUserOptions(@creditCardId, @userName));
+		}
+
+		public static IQueryEnd USP_ADDOREDIT_HOSTING_USER_DETAILS(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @operationType, string @userName, int? @autoId, int? @clientID, bool? @isActive, string @hostingProvider)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_ADDOREDIT_HOSTING_USER_DETAILS(@operationType, @userName, @autoId, @clientID, @isActive, @hostingProvider));
+		}
+
+		public static IQueryEnd usp_AddOXSubscriptionTrialInOrderTable(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @userName, string @domainName, string @trialPlanName, string @ip)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.usp_AddOXSubscriptionTrialInOrderTable(@userName, @domainName, @trialPlanName, @ip));
+		}
+
+		public static IQueryEnd usp_AddResellerInitialActivationDetails(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @userName, DateTime? @ActivationDate, string @ip, string @initialLevel, string @source)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.usp_AddResellerInitialActivationDetails(@userName, @ActivationDate, @ip, @initialLevel, @source));
+		}
+
+		public static IQueryEnd usp_AddTransaction(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @UserName, string @TransactionType, string @PaymentSource, decimal? @AssociatedOrderID, string @PayerEMail, decimal? @CCInitialAmount, decimal? @RefundAmount, bool? @RefundYN, bool? @CompletedYN, string @Comments, string @OrderRefID, DateTime? @EndDateTime, string @CCOrderID, string @CCTransID, string @CCStatus, string @PaypalPendingReason, string @PaypalPaymentType, string @CCLast4, string @CCNameOnCard, string @OrderIP, string @OrderZip, string @OrderError, int? @RelatedTransactionID, bool? @IsAddedByAdmin, bool? @DoNotRefund, string @PaymentProviderToken, string @PaymentProviderStatus, string @ErrInfo, string @RawData, bool? @CancelByRefundYN)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.usp_AddTransaction(@UserName, @TransactionType, @PaymentSource, @AssociatedOrderID, @PayerEMail, @CCInitialAmount, @RefundAmount, @RefundYN, @CompletedYN, @Comments, @OrderRefID, @EndDateTime, @CCOrderID, @CCTransID, @CCStatus, @PaypalPendingReason, @PaypalPaymentType, @CCLast4, @CCNameOnCard, @OrderIP, @OrderZip, @OrderError, @RelatedTransactionID, @IsAddedByAdmin, @DoNotRefund, @PaymentProviderToken, @PaymentProviderStatus, @ErrInfo, @RawData, @CancelByRefundYN));
+		}
+
+		public static IQueryEnd usp_Adhoc_AddNewGeoTrustContract(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @New_Contract_Id)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.usp_Adhoc_AddNewGeoTrustContract(@New_Contract_Id));
+		}
+
+		public static IQueryEnd USP_ADHOC_CAPTCHA_ON_OFF(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @Signup_Captcha_On_Or_Off, string @Signup_Captcha_Type, string @FirstOrder_Captcha_On_Or_Off, string @FirstOrder_Captcha_Type)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_ADHOC_CAPTCHA_ON_OFF(@Signup_Captcha_On_Or_Off, @Signup_Captcha_Type, @FirstOrder_Captcha_On_Or_Off, @FirstOrder_Captcha_Type));
+		}
+
+		public static IQueryEnd usp_Adhoc_CheckIfPromotionAlreadyUsedByAnyOtherUser(this IStoredProcedureHolder<NamecheapCoreContext> holder, long? @orderId)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.usp_Adhoc_CheckIfPromotionAlreadyUsedByAnyOtherUser(@orderId));
+		}
+
+		public static IQueryEnd usp_Adhoc_CheckIfPromotionAlreadyUsedByAnyOtherUser_Aug13LifeHackerPromo(this IStoredProcedureHolder<NamecheapCoreContext> holder, long? @orderId)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.usp_Adhoc_CheckIfPromotionAlreadyUsedByAnyOtherUser_Aug13LifeHackerPromo(@orderId));
+		}
+
+		public static IQueryEnd usp_Adhoc_CheckIfPromotionAlreadyUsedByAnyOtherUser_August2012Promo(this IStoredProcedureHolder<NamecheapCoreContext> holder, long? @orderId)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.usp_Adhoc_CheckIfPromotionAlreadyUsedByAnyOtherUser_August2012Promo(@orderId));
+		}
+
+		public static IQueryEnd usp_Adhoc_CheckIfPromotionAlreadyUsedByAnyOtherUser_Base(this IStoredProcedureHolder<NamecheapCoreContext> holder, long? @orderId, string @ParentPromotion)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.usp_Adhoc_CheckIfPromotionAlreadyUsedByAnyOtherUser_Base(@orderId, @ParentPromotion));
+		}
+
+		public static IQueryEnd usp_Adhoc_CheckIfPromotionAlreadyUsedByAnyOtherUser_BirthdayRenewalPromo(this IStoredProcedureHolder<NamecheapCoreContext> holder, long? @orderId)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.usp_Adhoc_CheckIfPromotionAlreadyUsedByAnyOtherUser_BirthdayRenewalPromo(@orderId));
+		}
+
+		public static IQueryEnd usp_Adhoc_CheckIfPromotionAlreadyUsedByAnyOtherUser_BlackFridayCyberMonday(this IStoredProcedureHolder<NamecheapCoreContext> holder, long? @orderId, string @ParentPromotion)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.usp_Adhoc_CheckIfPromotionAlreadyUsedByAnyOtherUser_BlackFridayCyberMonday(@orderId, @ParentPromotion));
+		}
+
+		public static IQueryEnd usp_Adhoc_CheckIfPromotionAlreadyUsedByAnyOtherUser_Feb2013DomainPPC(this IStoredProcedureHolder<NamecheapCoreContext> holder, long? @orderId)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.usp_Adhoc_CheckIfPromotionAlreadyUsedByAnyOtherUser_Feb2013DomainPPC(@orderId));
+		}
+
+		public static IQueryEnd usp_Adhoc_CheckIfPromotionAlreadyUsedByAnyOtherUser_InfoAutoPromo(this IStoredProcedureHolder<NamecheapCoreContext> holder, long? @orderId)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.usp_Adhoc_CheckIfPromotionAlreadyUsedByAnyOtherUser_InfoAutoPromo(@orderId));
+		}
+
+		public static IQueryEnd usp_Adhoc_CheckIfPromotionAlreadyUsedByAnyOtherUser_July12RetweetPromo(this IStoredProcedureHolder<NamecheapCoreContext> holder, long? @orderId)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.usp_Adhoc_CheckIfPromotionAlreadyUsedByAnyOtherUser_July12RetweetPromo(@orderId));
+		}
+
+		public static IQueryEnd usp_Adhoc_CheckIfPromotionAlreadyUsedByAnyOtherUser_Sep2012NCROCKS(this IStoredProcedureHolder<NamecheapCoreContext> holder, long? @orderId)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.usp_Adhoc_CheckIfPromotionAlreadyUsedByAnyOtherUser_Sep2012NCROCKS(@orderId));
+		}
+
+		public static IQueryEnd usp_Adhoc_CheckIfPromotionAlreadyUsedByAnyOtherUser_WeloveU2012Promo(this IStoredProcedureHolder<NamecheapCoreContext> holder, long? @orderId)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.usp_Adhoc_CheckIfPromotionAlreadyUsedByAnyOtherUser_WeloveU2012Promo(@orderId));
+		}
+
+		public static IQueryEnd usp_AdHoc_Find98CentPromotionDomainsPushHistory(this IStoredProcedureHolder<NamecheapCoreContext> holder, DateTime? @OrderFromDate, DateTime? @OrderToDate, string @SortBy_PUSHDATE_DOMAIN_FROMUSER_TOUSER_ORDERIP_PUSHIP)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.usp_AdHoc_Find98CentPromotionDomainsPushHistory(@OrderFromDate, @OrderToDate, @SortBy_PUSHDATE_DOMAIN_FROMUSER_TOUSER_ORDERIP_PUSHIP));
+		}
+
+		public static IQueryEnd USP_ADHOC_FINDOUT_USERS_USING_ORDERID(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @csvOrderIDs)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_ADHOC_FINDOUT_USERS_USING_ORDERID(@csvOrderIDs));
+		}
+
+		public static IQueryEnd USP_ADHOC_FREE_HOSTING_TRIAL_USER_TRACKING_REPORT(this IStoredProcedureHolder<NamecheapCoreContext> holder, DateTime? @StartDate, DateTime? @EndDate)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_ADHOC_FREE_HOSTING_TRIAL_USER_TRACKING_REPORT(@StartDate, @EndDate));
+		}
+
+		public static IQueryEnd USP_ADHOC_GET_ORG_REGISTRATIONS_WITH_OTHER_TLDS(this IStoredProcedureHolder<NamecheapCoreContext> holder, DateTime? @BeginDate_MMslashDDslashYYYY, DateTime? @EndDate_MMslashDDslashYYYY, bool? @ReturnOnlyOrgDomains_0_or_1)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_ADHOC_GET_ORG_REGISTRATIONS_WITH_OTHER_TLDS(@BeginDate_MMslashDDslashYYYY, @EndDate_MMslashDDslashYYYY, @ReturnOnlyOrgDomains_0_or_1));
+		}
+
+		public static IQueryEnd usp_Adhoc_GetTemplateMonsterReportTool(this IStoredProcedureHolder<NamecheapCoreContext> holder, DateTime? @startDateTime, DateTime? @endDateTime)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.usp_Adhoc_GetTemplateMonsterReportTool(@startDateTime, @endDateTime));
+		}
+
+		public static IQueryEnd usp_Adhoc_GetTopInfoRegistrationUsersByDate(this IStoredProcedureHolder<NamecheapCoreContext> holder, DateTime? @startdate, DateTime? @enddate, int? @NumberOfUsers)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.usp_Adhoc_GetTopInfoRegistrationUsersByDate(@startdate, @enddate, @NumberOfUsers));
+		}
+
+		public static IQueryEnd usp_Adhoc_GetUsDotOrgRegistrationsByDate(this IStoredProcedureHolder<NamecheapCoreContext> holder, DateTime? @Begin_Register_Date, DateTime? @End_Register_Date, string @Tld)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.usp_Adhoc_GetUsDotOrgRegistrationsByDate(@Begin_Register_Date, @End_Register_Date, @Tld));
+		}
+
+		public static IQueryEnd USP_ADHOC_SSL_CERTIFICATES_PURCHASED_BY_RESELLERS_REPORT(this IStoredProcedureHolder<NamecheapCoreContext> holder, DateTime? @StartDate, DateTime? @EndDate, string @Username)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_ADHOC_SSL_CERTIFICATES_PURCHASED_BY_RESELLERS_REPORT(@StartDate, @EndDate, @Username));
+		}
+
+		public static IQueryEnd USP_ADHOC_SSL_ORDER_REPORT(this IStoredProcedureHolder<NamecheapCoreContext> holder, DateTime? @StartDate, DateTime? @EndDate)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_ADHOC_SSL_ORDER_REPORT(@StartDate, @EndDate));
+		}
+
+		public static IQueryEnd USP_ADHOC_SSL_RESELLER_EVENTS_REPORT(this IStoredProcedureHolder<NamecheapCoreContext> holder, DateTime? @StartDate, DateTime? @EndDate)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_ADHOC_SSL_RESELLER_EVENTS_REPORT(@StartDate, @EndDate));
+		}
+
+		public static IQueryEnd USP_ADHOC_SSL_RESELLER_TOTAL_RECEIPTS_BY_RESELLER_REPORT(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @Username)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_ADHOC_SSL_RESELLER_TOTAL_RECEIPTS_BY_RESELLER_REPORT(@Username));
+		}
+
+		public static IQueryEnd usp_Adhoc_ViewOrEditGeoTrustContract(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @Add_Or_View_Or_Edit, string @Certificate_Type, string @New_Contract_Id)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.usp_Adhoc_ViewOrEditGeoTrustContract(@Add_Or_View_Or_Edit, @Certificate_Type, @New_Contract_Id));
+		}
+
+		public static IQueryEnd usp_adhocGet2011BlackFridayPromotionCodeUsageWithRelatedUsers(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @username)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.usp_adhocGet2011BlackFridayPromotionCodeUsageWithRelatedUsers(@username));
+		}
+
+		public static IQueryEnd usp_AdhocGetCouponsRemainingForNamecheapDeals(this IStoredProcedureHolder<NamecheapCoreContext> holder)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.usp_AdhocGetCouponsRemainingForNamecheapDeals());
+		}
+
+		public static IQueryEnd usp_AdhocGetOrgDomainsDuringDec2011FreeOrgPromo(this IStoredProcedureHolder<NamecheapCoreContext> holder)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.usp_AdhocGetOrgDomainsDuringDec2011FreeOrgPromo());
+		}
+
+		public static IQueryEnd usp_AdhocHostingRenewalOrderReport(this IStoredProcedureHolder<NamecheapCoreContext> holder, DateTime? @StartDate, DateTime? @EndDate)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.usp_AdhocHostingRenewalOrderReport(@StartDate, @EndDate));
+		}
+
+		public static IQueryEnd usp_AdhocReportDomainExpiration(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @UserName)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.usp_AdhocReportDomainExpiration(@UserName));
+		}
+
+		public static IQueryEnd usp_AdhocSetPromotionUsageForBlackFridayCyberMondayPromo(this IStoredProcedureHolder<NamecheapCoreContext> holder, long? @OrderId, string @promotionCode)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.usp_AdhocSetPromotionUsageForBlackFridayCyberMondayPromo(@OrderId, @promotionCode));
+		}
+
+		public static IQueryEnd usp_AdhocSetPromotionUsageForEarthDayPromo(this IStoredProcedureHolder<NamecheapCoreContext> holder, long? @OrderId, string @promotionCode)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.usp_AdhocSetPromotionUsageForEarthDayPromo(@OrderId, @promotionCode));
+		}
+
+		public static IQueryEnd usp_AdhocSetPromotionUsageForEasterPromo(this IStoredProcedureHolder<NamecheapCoreContext> holder, long? @OrderId, string @promotionCode)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.usp_AdhocSetPromotionUsageForEasterPromo(@OrderId, @promotionCode));
+		}
+
+		public static IQueryEnd usp_AdhocSetPromotionUsageForLifeHackerPromo2013(this IStoredProcedureHolder<NamecheapCoreContext> holder, long? @OrderId)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.usp_AdhocSetPromotionUsageForLifeHackerPromo2013(@OrderId));
+		}
+
+		public static IQueryEnd usp_AdhocSetPromotionUsageForMoveYourDomainPromo(this IStoredProcedureHolder<NamecheapCoreContext> holder, long? @OrderId, string @promotionCode)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.usp_AdhocSetPromotionUsageForMoveYourDomainPromo(@OrderId, @promotionCode));
+		}
+
+		public static IQueryEnd usp_AdhocSetPromotionUsageForRenewalPromo(this IStoredProcedureHolder<NamecheapCoreContext> holder, long? @OrderId)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.usp_AdhocSetPromotionUsageForRenewalPromo(@OrderId));
+		}
+
+		public static IQueryEnd usp_AdhocSetPromotionUsageForReTweetDeal_Jun2013(this IStoredProcedureHolder<NamecheapCoreContext> holder, long? @OrderId, string @promotionCode)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.usp_AdhocSetPromotionUsageForReTweetDeal_Jun2013(@OrderId, @promotionCode));
+		}
+
+		public static IQueryEnd usp_AdhocSetPromotionUsageForSep2012NCROCKS(this IStoredProcedureHolder<NamecheapCoreContext> holder, long? @OrderId)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.usp_AdhocSetPromotionUsageForSep2012NCROCKS(@OrderId));
+		}
+
+		public static IQueryEnd usp_AdhocSetPromotionUsageForUs98CentPromo(this IStoredProcedureHolder<NamecheapCoreContext> holder, long? @OrderId)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.usp_AdhocSetPromotionUsageForUs98CentPromo(@OrderId));
+		}
+
+		public static IQueryEnd usp_AdhocSetPromotionUsageForWallStreetPromo(this IStoredProcedureHolder<NamecheapCoreContext> holder, long? @OrderId)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.usp_AdhocSetPromotionUsageForWallStreetPromo(@OrderId));
+		}
+
+		public static IQueryEnd usp_AdhocSetPromotionUsageForWeLoveUPromo(this IStoredProcedureHolder<NamecheapCoreContext> holder, long? @OrderId)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.usp_AdhocSetPromotionUsageForWeLoveUPromo(@OrderId));
+		}
+
+		public static IQueryEnd usp_AdhocSSLActivationExpireDateRemovalReport(this IStoredProcedureHolder<NamecheapCoreContext> holder, DateTime? @StartDate, DateTime? @EndDate, string @UserName, long? @CertificateID, string @Note)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.usp_AdhocSSLActivationExpireDateRemovalReport(@StartDate, @EndDate, @UserName, @CertificateID, @Note));
+		}
+
+		public static IQueryEnd USP_ADMIN_ACTIVATE_DELETE_NAVIGATION(this IStoredProcedureHolder<NamecheapCoreContext> holder, int? @navid, string @operation)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_ADMIN_ACTIVATE_DELETE_NAVIGATION(@navid, @operation));
+		}
+
+		public static IQueryEnd USP_ADMIN_AD_LIST(this IStoredProcedureHolder<NamecheapCoreContext> holder)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_ADMIN_AD_LIST());
+		}
+
+		public static IQueryEnd USP_ADMIN_ADD_AFFILIATE_PROGRAM_USERS(this IStoredProcedureHolder<NamecheapCoreContext> holder, int? @programId, string @userName, bool? @affiliateSpecific)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_ADMIN_ADD_AFFILIATE_PROGRAM_USERS(@programId, @userName, @affiliateSpecific));
+		}
+
+		public static IQueryEnd USP_ADMIN_ADD_API_COMMANDS(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @apiFunctionsBySemicolon)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_ADMIN_ADD_API_COMMANDS(@apiFunctionsBySemicolon));
+		}
+
+		public static IQueryEnd USP_ADMIN_ADD_API_SCOPES(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @spiScopesBySemicolon)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_ADMIN_ADD_API_SCOPES(@spiScopesBySemicolon));
+		}
+
+		public static IQueryEnd USP_ADMIN_ADD_CREDITCARD_REFUND_TRANSACTION(this IStoredProcedureHolder<NamecheapCoreContext> holder, int? @transactionId, string @userName, string @transactionType, int? @associatedOrderId, string @paymentSource, string @payerEmail, decimal? @ccInitialAmount, decimal? @refundAmount, bool? @refundYN, bool? @completedYN, string @comments, string @orderRefId, DateTime? @startDateTime, DateTime? @endDateTime, string @ccOrderId, string @ccTransId, string @ccStatus, string @paypalPendingReason, string @paypalPaymentType, string @ccLast4, string @ccNameOnCard, string @orderIp, string @orderZip, string @orderError, string @errorInfo, string @rawData, DateTime? @recordCreatedDateTime, int? @relatedTransactionId, bool? @isAddedByAdmin)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_ADMIN_ADD_CREDITCARD_REFUND_TRANSACTION(@transactionId, @userName, @transactionType, @associatedOrderId, @paymentSource, @payerEmail, @ccInitialAmount, @refundAmount, @refundYN, @completedYN, @comments, @orderRefId, @startDateTime, @endDateTime, @ccOrderId, @ccTransId, @ccStatus, @paypalPendingReason, @paypalPaymentType, @ccLast4, @ccNameOnCard, @orderIp, @orderZip, @orderError, @errorInfo, @rawData, @recordCreatedDateTime, @relatedTransactionId, @isAddedByAdmin));
+		}
+
+		public static IQueryEnd USP_ADMIN_ADD_DOMAIN(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @domainName, string @userName, string @password, string @payStatus, string @transactionId, string @orderId, int? @years, string @provider, DateTime? @expiresOn)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_ADMIN_ADD_DOMAIN(@domainName, @userName, @password, @payStatus, @transactionId, @orderId, @years, @provider, @expiresOn));
+		}
+
+		public static IQueryEnd USP_ADMIN_ADD_DOMAINS_TO_BATCH(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @BulkDomains, string @adminUser, string @sessionId, string @objectType, string @addedFromPage)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_ADMIN_ADD_DOMAINS_TO_BATCH(@BulkDomains, @adminUser, @sessionId, @objectType, @addedFromPage));
+		}
+
+		public static IQueryEnd USP_ADMIN_ADD_LOGIN_TOKENS(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @ticketGuid, DateTime? @ticketDate, string @adminIp, string @adminUser, string @reason, int? @userToImpersonate)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_ADMIN_ADD_LOGIN_TOKENS(@ticketGuid, @ticketDate, @adminIp, @adminUser, @reason, @userToImpersonate));
+		}
+
+		public static IQueryEnd USP_ADMIN_ADD_NAVIGATION(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @operationtype, string @navName, int? @parNavID, int? @LinkTypeId, string @imgUrl, int? @imgHeight, int? @imgWidth, string @navTitle, string @site, bool? @isSectionYN, int? @navId, bool? @isEnabledYN)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_ADMIN_ADD_NAVIGATION(@operationtype, @navName, @parNavID, @LinkTypeId, @imgUrl, @imgHeight, @imgWidth, @navTitle, @site, @isSectionYN, @navId, @isEnabledYN));
+		}
+
+		public static IQueryEnd USP_ADMIN_ADD_POSITIVESSL_FREE(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @UserName, string @DomainName, string @Ip)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_ADMIN_ADD_POSITIVESSL_FREE(@UserName, @DomainName, @Ip));
+		}
+
+		public static IQueryEnd USP_ADMIN_ADD_POSITIVESSL_FREE_BYORDERID(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @Ip, int? @OrderId, int? @AutoId)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_ADMIN_ADD_POSITIVESSL_FREE_BYORDERID(@Ip, @OrderId, @AutoId));
+		}
+
+		public static IQueryEnd USP_ADMIN_ADD_PROMO_USERS(this IStoredProcedureHolder<NamecheapCoreContext> holder, int? @IPI_Promotion_Id, string @IPV_UserName, bool? @IPB_User_specific_Promotion_YN)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_ADMIN_ADD_PROMO_USERS(@IPI_Promotion_Id, @IPV_UserName, @IPB_User_specific_Promotion_YN));
+		}
+
+		public static IQueryEnd USP_ADMIN_ADD_ROLE_USERS(this IStoredProcedureHolder<NamecheapCoreContext> holder, int? @roleID, string @userName, string @AdminUerName, string @AdminIP)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_ADMIN_ADD_ROLE_USERS(@roleID, @userName, @AdminUerName, @AdminIP));
+		}
+
+		public static IQueryEnd USP_ADMIN_AFFILIATES_EARNED_COMMISSIONS_LOG_HISTORY_REPORT(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @username, string @statusname, DateTime? @FromDate, DateTime? @ToDate, string @ProductName, int? @OrderID, int? @OrderDetailID, long? @IP, string @HttpReferrer, string @SortBy, string @Order, int? @Page, int? @PageSize, bool? @ReturnAllRows)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_ADMIN_AFFILIATES_EARNED_COMMISSIONS_LOG_HISTORY_REPORT(@username, @statusname, @FromDate, @ToDate, @ProductName, @OrderID, @OrderDetailID, @IP, @HttpReferrer, @SortBy, @Order, @Page, @PageSize, @ReturnAllRows));
+		}
+
+		public static IQueryEnd USP_ADMIN_AFFILIATES_USERS_REPORT(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @username, int? @AutoID, DateTime? @FromDate, DateTime? @ToDate, string @SortBy, string @Order, int? @Page, int? @PageSize)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_ADMIN_AFFILIATES_USERS_REPORT(@username, @AutoID, @FromDate, @ToDate, @SortBy, @Order, @Page, @PageSize));
+		}
+
+		public static IQueryEnd USP_ADMIN_ASSIGN_API_COMMANDS_TO_SCOPE_ID(this IStoredProcedureHolder<NamecheapCoreContext> holder, int? @scopeId, string @apiIdsBySemicolon)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_ADMIN_ASSIGN_API_COMMANDS_TO_SCOPE_ID(@scopeId, @apiIdsBySemicolon));
+		}
+
+		public static IQueryEnd USP_ADMIN_ASSIGN_API_SCOPES_TO_APP_ROLE_ID(this IStoredProcedureHolder<NamecheapCoreContext> holder, int? @appRoleId, string @scopeIdsBySemicolon)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_ADMIN_ASSIGN_API_SCOPES_TO_APP_ROLE_ID(@appRoleId, @scopeIdsBySemicolon));
+		}
+
+		public static IQueryEnd USP_ADMIN_ASSIGN_API_SCOPES_TO_ROLE_ID(this IStoredProcedureHolder<NamecheapCoreContext> holder, int? @roleId, string @scopeIdsBySemicolon)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_ADMIN_ASSIGN_API_SCOPES_TO_ROLE_ID(@roleId, @scopeIdsBySemicolon));
+		}
+
+		public static IQueryEnd USP_ADMIN_BATCH_CLEAR_LIST(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @objectType, string @adminUserName)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_ADMIN_BATCH_CLEAR_LIST(@objectType, @adminUserName));
+		}
+
+		public static IQueryEnd USP_ADMIN_BATCH_DELETE_BATCH(this IStoredProcedureHolder<NamecheapCoreContext> holder, int? @autoId)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_ADMIN_BATCH_DELETE_BATCH(@autoId));
+		}
+
+		public static IQueryEnd USP_ADMIN_BATCH_GET_LIST(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @batchType, string @sessionId, string @username, string @addedfrompage)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_ADMIN_BATCH_GET_LIST(@batchType, @sessionId, @username, @addedfrompage));
+		}
+
+		public static IQueryEnd USP_ADMIN_BATCH_SET_ACTION(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @addedFromPage, string @actionType, string @userName, string @sessionId, string @reason, string @reasonForAdmin, bool? @namecheapLock, bool? @clientUpdateProhibited, bool? @registrarLock, bool? @clientDeleteProhibited, bool? @clientHold, bool? @disableAutoRenew)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_ADMIN_BATCH_SET_ACTION(@addedFromPage, @actionType, @userName, @sessionId, @reason, @reasonForAdmin, @namecheapLock, @clientUpdateProhibited, @registrarLock, @clientDeleteProhibited, @clientHold, @disableAutoRenew));
+		}
+
+		public static IQueryEnd usp_Admin_Bulk_Insert_CouponCodes(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @csvCouponCodes, string @GoogleAdWords_Or_Pixmac, decimal? @startRange, decimal? @endRange, decimal? @couponValue, DateTime? @expiryDateTime)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.usp_Admin_Bulk_Insert_CouponCodes(@csvCouponCodes, @GoogleAdWords_Or_Pixmac, @startRange, @endRange, @couponValue, @expiryDateTime));
+		}
+
+		public static IQueryEnd USP_ADMIN_CHANGE_IP_OF_URL_FORWARDING(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @fromIp, string @toIp)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_ADMIN_CHANGE_IP_OF_URL_FORWARDING(@fromIp, @toIp));
+		}
+
+		public static IQueryEnd USP_ADMIN_CHANGE_PASSWORD(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @Admin_UserName, string @Old_Password, string @New_Password)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_ADMIN_CHANGE_PASSWORD(@Admin_UserName, @Old_Password, @New_Password));
+		}
+
+		public static IQueryEnd USP_ADMIN_CHECK_DOMAIN_TO_UNLOCK(this IStoredProcedureHolder<NamecheapCoreContext> holder, int? @domainId)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_ADMIN_CHECK_DOMAIN_TO_UNLOCK(@domainId));
+		}
+
+		public static IQueryEnd USP_ADMIN_CHECK_LOGIN_TOKEN_LOG(this IStoredProcedureHolder<NamecheapCoreContext> holder, int? @tokenId, string @ticketGuid, DateTime? @ticketDate, string @currentIp)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_ADMIN_CHECK_LOGIN_TOKEN_LOG(@tokenId, @ticketGuid, @ticketDate, @currentIp));
+		}
+
+		public static IQueryEnd USP_ADMIN_CHECK_PASSWORD(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @Admin_UserName, string @Admin_Password)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_ADMIN_CHECK_PASSWORD(@Admin_UserName, @Admin_Password));
+		}
+
+		public static IQueryEnd USP_ADMIN_CHECK_WHOISGUARD_STATUS_FOR_DOMAIN(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @domainName)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_ADMIN_CHECK_WHOISGUARD_STATUS_FOR_DOMAIN(@domainName));
+		}
+
+		public static IQueryEnd USP_ADMIN_CREATE_FREE_ORDER(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @UserName, string @IPV_RequestIP, string @SLD, string @TLD, string @ActionId, int? @NumYears, int? @Qty, int? @TransID, string @PromoCode)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_ADMIN_CREATE_FREE_ORDER(@UserName, @IPV_RequestIP, @SLD, @TLD, @ActionId, @NumYears, @Qty, @TransID, @PromoCode));
+		}
+
+		public static IQueryEnd USP_ADMIN_DELETE_API_COMMAND(this IStoredProcedureHolder<NamecheapCoreContext> holder, int? @apiId)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_ADMIN_DELETE_API_COMMAND(@apiId));
+		}
+
+		public static IQueryEnd USP_ADMIN_DELETE_API_SCOPE(this IStoredProcedureHolder<NamecheapCoreContext> holder, int? @scopeId)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_ADMIN_DELETE_API_SCOPE(@scopeId));
+		}
+
+		public static IQueryEnd USP_ADMIN_DELETE_BANNED_PASSWORD(this IStoredProcedureHolder<NamecheapCoreContext> holder, int? @banID)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_ADMIN_DELETE_BANNED_PASSWORD(@banID));
+		}
+
+		public static IQueryEnd USP_ADMIN_DELETE_PAGE_NAVIGATION(this IStoredProcedureHolder<NamecheapCoreContext> holder, int? @autoId)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_ADMIN_DELETE_PAGE_NAVIGATION(@autoId));
+		}
+
+		public static IQueryEnd USP_ADMIN_DELETE_PROMOTION_TLD(this IStoredProcedureHolder<NamecheapCoreContext> holder, int? @Promotion_ID, string @sActionID, string @TLDName)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_ADMIN_DELETE_PROMOTION_TLD(@Promotion_ID, @sActionID, @TLDName));
+		}
+
+		public static IQueryEnd USP_ADMIN_DELETE_ROLE_USERS(this IStoredProcedureHolder<NamecheapCoreContext> holder, int? @roleID, string @userName, string @AdminUerName, string @AdminIP)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_ADMIN_DELETE_ROLE_USERS(@roleID, @userName, @AdminUerName, @AdminIP));
+		}
+
+		public static IQueryEnd USP_ADMIN_DELETE_USER_TLD(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @User_Name, string @sActionID, string @TLDName)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_ADMIN_DELETE_USER_TLD(@User_Name, @sActionID, @TLDName));
+		}
+
+		public static IQueryEnd USP_ADMIN_DISABLE_WHOISGUARD_AUTORENEW(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @domainList_CSV, string @comment, string @ipaddress, string @adminUser)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_ADMIN_DISABLE_WHOISGUARD_AUTORENEW(@domainList_CSV, @comment, @ipaddress, @adminUser));
+		}
+
+		public static IQueryEnd USP_ADMIN_DISCARD_WHOISGUARD(this IStoredProcedureHolder<NamecheapCoreContext> holder, int? @slotid)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_ADMIN_DISCARD_WHOISGUARD(@slotid));
+		}
+
+		public static IQueryEnd USP_ADMIN_DNS_ALLOW_DISALLOW_FREEDNS(this IStoredProcedureHolder<NamecheapCoreContext> holder, bool? @IsDisallow, string @DomainName, string @Reason, string @AdminReason)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_ADMIN_DNS_ALLOW_DISALLOW_FREEDNS(@IsDisallow, @DomainName, @Reason, @AdminReason));
+		}
+
+		public static IQueryEnd USP_ADMIN_EDIT_DEFAULT_URL_IN_NAVIGATION(this IStoredProcedureHolder<NamecheapCoreContext> holder, int? @pageId, int? @navId)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_ADMIN_EDIT_DEFAULT_URL_IN_NAVIGATION(@pageId, @navId));
+		}
+
+		public static IQueryEnd USP_ADMIN_EDIT_DOMAIN(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @domainName, DateTime? @registeredOn, int? @numberOfYears, DateTime? @expiresOn, string @payStatus, string @transId, string @orderId)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_ADMIN_EDIT_DOMAIN(@domainName, @registeredOn, @numberOfYears, @expiresOn, @payStatus, @transId, @orderId));
+		}
+
+		public static IQueryEnd USP_ADMIN_EXPIRED_DELETE_DOMAINS(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @IPV_PeriodType, string @IPV_Period, DateTime? @IPDT_StartDate, DateTime? @IPDT_EndDate, string @IPV_Show, string @IPNV_UserName, string @IPNV_Domainname)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_ADMIN_EXPIRED_DELETE_DOMAINS(@IPV_PeriodType, @IPV_Period, @IPDT_StartDate, @IPDT_EndDate, @IPV_Show, @IPNV_UserName, @IPNV_Domainname));
+		}
+
+		public static IQueryEnd USP_ADMIN_GET_ACTION_PRODUCT_LIST(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @sType, string @sActionID)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_ADMIN_GET_ACTION_PRODUCT_LIST(@sType, @sActionID));
+		}
+
+		public static IQueryEnd USP_ADMIN_GET_AD_INFO(this IStoredProcedureHolder<NamecheapCoreContext> holder, int? @IPI_Ad_Id)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_ADMIN_GET_AD_INFO(@IPI_Ad_Id));
+		}
+
+		public static IQueryEnd USP_ADMIN_GET_ADGROUP_INFO(this IStoredProcedureHolder<NamecheapCoreContext> holder, int? @IPI_Ad_Group_Id)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_ADMIN_GET_ADGROUP_INFO(@IPI_Ad_Group_Id));
+		}
+
+		public static IQueryEnd USP_ADMIN_GET_ADMIN_NOTIFICATION_LIST(this IStoredProcedureHolder<NamecheapCoreContext> holder, int? @Page, int? @PageSize, string @username)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_ADMIN_GET_ADMIN_NOTIFICATION_LIST(@Page, @PageSize, @username));
+		}
+
+		public static IQueryEnd USP_ADMIN_GET_AFFILIATE_PROGRAM_BY_ID(this IStoredProcedureHolder<NamecheapCoreContext> holder, int? @affiliateProgramId)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_ADMIN_GET_AFFILIATE_PROGRAM_BY_ID(@affiliateProgramId));
+		}
+
+		public static IQueryEnd USP_ADMIN_GET_AFFILIATE_PROGRAM_COMMISSION_LIST(this IStoredProcedureHolder<NamecheapCoreContext> holder, int? @programId, string @actionId, string @tldName, bool? @includeHosting)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_ADMIN_GET_AFFILIATE_PROGRAM_COMMISSION_LIST(@programId, @actionId, @tldName, @includeHosting));
+		}
+
+		public static IQueryEnd USP_ADMIN_GET_AFFILIATE_PROGRAM_USERS(this IStoredProcedureHolder<NamecheapCoreContext> holder, int? @programId, string @userName)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_ADMIN_GET_AFFILIATE_PROGRAM_USERS(@programId, @userName));
+		}
+
+		public static IQueryEnd USP_ADMIN_GET_ALL_BANNED_PASSWORDS(this IStoredProcedureHolder<NamecheapCoreContext> holder)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_ADMIN_GET_ALL_BANNED_PASSWORDS());
+		}
+
+		public static IQueryEnd USP_ADMIN_GET_ALLOWED_DOMAIN_LIST(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @userName)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_ADMIN_GET_ALLOWED_DOMAIN_LIST(@userName));
+		}
+
+		public static IQueryEnd USP_ADMIN_GET_API_COMMANDS(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @commandFilter)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_ADMIN_GET_API_COMMANDS(@commandFilter));
+		}
+
+		public static IQueryEnd USP_ADMIN_GET_API_COMMANDS_BY_SCOPE_ID(this IStoredProcedureHolder<NamecheapCoreContext> holder, int? @scopeId)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_ADMIN_GET_API_COMMANDS_BY_SCOPE_ID(@scopeId));
+		}
+
+		public static IQueryEnd USP_ADMIN_GET_API_SCOPE_BY_ID(this IStoredProcedureHolder<NamecheapCoreContext> holder, int? @scopeId)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_ADMIN_GET_API_SCOPE_BY_ID(@scopeId));
+		}
+
+		public static IQueryEnd USP_ADMIN_GET_API_SCOPES(this IStoredProcedureHolder<NamecheapCoreContext> holder)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_ADMIN_GET_API_SCOPES());
+		}
+
+		public static IQueryEnd USP_ADMIN_GET_API_SCOPES_BY_APP_ROLE_ID(this IStoredProcedureHolder<NamecheapCoreContext> holder, int? @appRoleId)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_ADMIN_GET_API_SCOPES_BY_APP_ROLE_ID(@appRoleId));
+		}
+
+		public static IQueryEnd USP_ADMIN_GET_API_SCOPES_BY_ROLE_ID(this IStoredProcedureHolder<NamecheapCoreContext> holder, int? @roleId)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_ADMIN_GET_API_SCOPES_BY_ROLE_ID(@roleId));
+		}
+
+		public static IQueryEnd USP_ADMIN_GET_APP_ROLE_BY_ID(this IStoredProcedureHolder<NamecheapCoreContext> holder, int? @appRoleId)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_ADMIN_GET_APP_ROLE_BY_ID(@appRoleId));
+		}
+
+		public static IQueryEnd USP_ADMIN_GET_APP_ROLE_LIST(this IStoredProcedureHolder<NamecheapCoreContext> holder, int? @roleid, string @roleName, string @filterType)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_ADMIN_GET_APP_ROLE_LIST(@roleid, @roleName, @filterType));
+		}
+
+		public static IQueryEnd USP_ADMIN_GET_AUTORENEW_LOG(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @FilterByDomain, string @FilterByUsername)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_ADMIN_GET_AUTORENEW_LOG(@FilterByDomain, @FilterByUsername));
+		}
+
+		public static IQueryEnd USP_ADMIN_GET_BANNED_PASSWORD_DETAILS(this IStoredProcedureHolder<NamecheapCoreContext> holder, int? @banID)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_ADMIN_GET_BANNED_PASSWORD_DETAILS(@banID));
+		}
+
+		public static IQueryEnd USP_ADMIN_GET_COMPLETE_PAGE_NAV_ATTRIBUTES(this IStoredProcedureHolder<NamecheapCoreContext> holder)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_ADMIN_GET_COMPLETE_PAGE_NAV_ATTRIBUTES());
+		}
+
+		public static IQueryEnd USP_ADMIN_GET_COMPLETED_SALE_LIST(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @Domainname, string @Buyer, string @Seller, string @BuyerOrSeller, DateTime? @Fromdate, DateTime? @Todate, string @SortBy, string @Order, int? @Page, int? @PageSize, bool? @IsSaleVerified)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_ADMIN_GET_COMPLETED_SALE_LIST(@Domainname, @Buyer, @Seller, @BuyerOrSeller, @Fromdate, @Todate, @SortBy, @Order, @Page, @PageSize, @IsSaleVerified));
+		}
+
+		public static IQueryEnd USP_ADMIN_GET_CONTACTDETAILS_FOR_SLOTID(this IStoredProcedureHolder<NamecheapCoreContext> holder, int? @slotid)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_ADMIN_GET_CONTACTDETAILS_FOR_SLOTID(@slotid));
+		}
+
+		public static IQueryEnd USP_ADMIN_GET_DOMAIN_ABUSED_DETAILS(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @domainName)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_ADMIN_GET_DOMAIN_ABUSED_DETAILS(@domainName));
+		}
+
+		public static IQueryEnd USP_ADMIN_GET_DOMAIN_GRANT_RIGHTS(this IStoredProcedureHolder<NamecheapCoreContext> holder, decimal? @IPN_Domain_ID)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_ADMIN_GET_DOMAIN_GRANT_RIGHTS(@IPN_Domain_ID));
+		}
+
+		public static IQueryEnd USP_ADMIN_GET_DOMAIN_GRANTED_RIGHT_LIST(this IStoredProcedureHolder<NamecheapCoreContext> holder, decimal? @IPN_Domain_ID, decimal? @IPN_User_ID)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_ADMIN_GET_DOMAIN_GRANTED_RIGHT_LIST(@IPN_Domain_ID, @IPN_User_ID));
+		}
+
+		public static IQueryEnd USP_ADMIN_GET_DOMAIN_INFO_FOR_DELETE(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @DomainList_CSV)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_ADMIN_GET_DOMAIN_INFO_FOR_DELETE(@DomainList_CSV));
+		}
+
+		public static IQueryEnd USP_ADMIN_GET_DOMAIN_LOCK_STATUS(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @domainName)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_ADMIN_GET_DOMAIN_LOCK_STATUS(@domainName));
+		}
+
+		public static IQueryEnd USP_ADMIN_GET_DOMAINNAME_AND_SLOTID(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @domainIds)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_ADMIN_GET_DOMAINNAME_AND_SLOTID(@domainIds));
+		}
+
+		public static IQueryEnd USP_ADMIN_GET_DOMAINNAME_BY_DOMAIN_ID(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @domainIds)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_ADMIN_GET_DOMAINNAME_BY_DOMAIN_ID(@domainIds));
+		}
+
+		public static IQueryEnd USP_ADMIN_GET_DOMAINNAME_FOR_SLOTID(this IStoredProcedureHolder<NamecheapCoreContext> holder, int? @slotid)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_ADMIN_GET_DOMAINNAME_FOR_SLOTID(@slotid));
+		}
+
+		public static IQueryEnd USP_ADMIN_GET_FAVOURITE_LIST(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @adminUserName)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_ADMIN_GET_FAVOURITE_LIST(@adminUserName));
+		}
+
+		public static IQueryEnd USP_ADMIN_GET_INFO(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @AdminUserName)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_ADMIN_GET_INFO(@AdminUserName));
+		}
+
+		public static IQueryEnd USP_ADMIN_GET_LINKTYPE(this IStoredProcedureHolder<NamecheapCoreContext> holder)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_ADMIN_GET_LINKTYPE());
+		}
+
+		public static IQueryEnd USP_ADMIN_GET_MESSAGE_LIST(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @SearchTerm, string @UserName, string @Associateddomain, string @MsgType)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_ADMIN_GET_MESSAGE_LIST(@SearchTerm, @UserName, @Associateddomain, @MsgType));
+		}
+
+		public static IQueryEnd USP_ADMIN_GET_MP_OFFERACCEPTED_FOR_DOMAIN(this IStoredProcedureHolder<NamecheapCoreContext> holder, int? @MPListID)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_ADMIN_GET_MP_OFFERACCEPTED_FOR_DOMAIN(@MPListID));
+		}
+
+		public static IQueryEnd USP_ADMIN_GET_NAV_SEQUENCE(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @CharUsed, bool? @ForPage, int? @NavPageId, string @SiteName)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_ADMIN_GET_NAV_SEQUENCE(@CharUsed, @ForPage, @NavPageId, @SiteName));
+		}
+
+		public static IQueryEnd USP_ADMIN_GET_NAVIGATION_ENABLED(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @CharUsed, bool? @ActiveOnly, string @Type, string @site)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_ADMIN_GET_NAVIGATION_ENABLED(@CharUsed, @ActiveOnly, @Type, @site));
+		}
+
+		public static IQueryEnd USP_ADMIN_GET_NAVIGATION_INFO(this IStoredProcedureHolder<NamecheapCoreContext> holder, int? @NavId)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_ADMIN_GET_NAVIGATION_INFO(@NavId));
+		}
+
+		public static IQueryEnd USP_ADMIN_GET_NAVIGATION_LIST(this IStoredProcedureHolder<NamecheapCoreContext> holder, int? @navId)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_ADMIN_GET_NAVIGATION_LIST(@navId));
+		}
+
+		public static IQueryEnd USP_ADMIN_GET_NAVIGATION_SEQUENCE(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @CharUsed, bool? @ActiveOnly, string @site)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_ADMIN_GET_NAVIGATION_SEQUENCE(@CharUsed, @ActiveOnly, @site));
+		}
+
+		public static IQueryEnd USP_ADMIN_GET_ORDER_ITEMS_DETAILS(this IStoredProcedureHolder<NamecheapCoreContext> holder, int? @OrderID)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_ADMIN_GET_ORDER_ITEMS_DETAILS(@OrderID));
+		}
+
+		public static IQueryEnd USP_ADMIN_GET_PARTNERS(this IStoredProcedureHolder<NamecheapCoreContext> holder)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_ADMIN_GET_PARTNERS());
+		}
+
+		public static IQueryEnd USP_ADMIN_GET_PRODUCT_INFO(this IStoredProcedureHolder<NamecheapCoreContext> holder, int? @IPI_Group_Type_ID)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_ADMIN_GET_PRODUCT_INFO(@IPI_Group_Type_ID));
+		}
+
+		public static IQueryEnd USP_ADMIN_GET_PROMOTION_LIST(this IStoredProcedureHolder<NamecheapCoreContext> holder, int? @PromotionID)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_ADMIN_GET_PROMOTION_LIST(@PromotionID));
+		}
+
+		public static IQueryEnd USP_ADMIN_GET_PROMOTION_LIST_BY_CODE(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @promotionCode)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_ADMIN_GET_PROMOTION_LIST_BY_CODE(@promotionCode));
+		}
+
+		public static IQueryEnd USP_ADMIN_GET_PROMOTION_LIST_BY_PAGE(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @promotionCode, string @filterType, int? @pageNumber, int? @pageSize, string @sortBy, bool? @sortDesc)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_ADMIN_GET_PROMOTION_LIST_BY_PAGE(@promotionCode, @filterType, @pageNumber, @pageSize, @sortBy, @sortDesc));
+		}
+
+		public static IQueryEnd USP_ADMIN_GET_PROMOTION_PRICING_DETAILS(this IStoredProcedureHolder<NamecheapCoreContext> holder, int? @sPromotionID, string @sActionID, string @TLDName)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_ADMIN_GET_PROMOTION_PRICING_DETAILS(@sPromotionID, @sActionID, @TLDName));
+		}
+
+		public static IQueryEnd USP_ADMIN_GET_PROMOTION_PRICING_LIST(this IStoredProcedureHolder<NamecheapCoreContext> holder, int? @sPromotionID, string @sActionID, string @TLDName)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_ADMIN_GET_PROMOTION_PRICING_LIST(@sPromotionID, @sActionID, @TLDName));
+		}
+
+		public static IQueryEnd USP_ADMIN_GET_PROMOTION_PRICING_LIST_FOR_HOSTING(this IStoredProcedureHolder<NamecheapCoreContext> holder, int? @sPromotionID, string @sActionID, string @TLDName)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_ADMIN_GET_PROMOTION_PRICING_LIST_FOR_HOSTING(@sPromotionID, @sActionID, @TLDName));
+		}
+
+		public static IQueryEnd USP_ADMIN_GET_PROMOTION_USERS(this IStoredProcedureHolder<NamecheapCoreContext> holder, int? @Promotion_Id, string @UserName)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_ADMIN_GET_PROMOTION_USERS(@Promotion_Id, @UserName));
+		}
+
+		public static IQueryEnd USP_ADMIN_GET_ROLE_BY_ID(this IStoredProcedureHolder<NamecheapCoreContext> holder, int? @roleId)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_ADMIN_GET_ROLE_BY_ID(@roleId));
+		}
+
+		public static IQueryEnd USP_ADMIN_GET_ROLE_LIST(this IStoredProcedureHolder<NamecheapCoreContext> holder, int? @roleid, string @roleName, string @filterType)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_ADMIN_GET_ROLE_LIST(@roleid, @roleName, @filterType));
+		}
+
+		public static IQueryEnd USP_ADMIN_GET_ROLE_USERS(this IStoredProcedureHolder<NamecheapCoreContext> holder, int? @roleId, string @UserName)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_ADMIN_GET_ROLE_USERS(@roleId, @UserName));
+		}
+
+		public static IQueryEnd USP_ADMIN_GET_ROLES_AND_USER_ROLES(this IStoredProcedureHolder<NamecheapCoreContext> holder, int? @UserId)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_ADMIN_GET_ROLES_AND_USER_ROLES(@UserId));
+		}
+
+		public static IQueryEnd USP_ADMIN_GET_SSL_CERTIFICATE_DETAILS(this IStoredProcedureHolder<NamecheapCoreContext> holder, int? @certificateId)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_ADMIN_GET_SSL_CERTIFICATE_DETAILS(@certificateId));
+		}
+
+		public static IQueryEnd USP_ADMIN_GET_SSL_STATUS(this IStoredProcedureHolder<NamecheapCoreContext> holder)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_ADMIN_GET_SSL_STATUS());
+		}
+
+		public static IQueryEnd USP_ADMIN_GET_SSL_TYPE(this IStoredProcedureHolder<NamecheapCoreContext> holder)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_ADMIN_GET_SSL_TYPE());
+		}
+
+		public static IQueryEnd USP_ADMIN_GET_STATUS_OF_WHOISGUARD(this IStoredProcedureHolder<NamecheapCoreContext> holder, int? @slotid)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_ADMIN_GET_STATUS_OF_WHOISGUARD(@slotid));
+		}
+
+		public static IQueryEnd USP_ADMIN_GET_TLD_USERS(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @userName)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_ADMIN_GET_TLD_USERS(@userName));
+		}
+
+		public static IQueryEnd USP_ADMIN_GET_USER_LOG_LIST(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @Username, string @Domainname, string @Logtype, DateTime? @Fromdate, DateTime? @Todate, int? @Page, int? @PageSize)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_ADMIN_GET_USER_LOG_LIST(@Username, @Domainname, @Logtype, @Fromdate, @Todate, @Page, @PageSize));
+		}
+
+		public static IQueryEnd USP_ADMIN_GET_USER_PRICING_DETAILS(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @Username, string @sActionID, string @TLDName)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_ADMIN_GET_USER_PRICING_DETAILS(@Username, @sActionID, @TLDName));
+		}
+
+		public static IQueryEnd USP_ADMIN_GET_USER_PRICING_LIST(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @Username, string @sActionID, string @TLDName)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_ADMIN_GET_USER_PRICING_LIST(@Username, @sActionID, @TLDName));
+		}
+
+		public static IQueryEnd USP_ADMIN_GET_USER_PRICING_LIST_FOR_HOSTING(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @Username, string @sActionID, string @TLDName)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_ADMIN_GET_USER_PRICING_LIST_FOR_HOSTING(@Username, @sActionID, @TLDName));
+		}
+
+		public static IQueryEnd USP_ADMIN_GET_WHOISGUARD_AUTORENEW_BY_DOMAIN_ID(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @domainIds)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_ADMIN_GET_WHOISGUARD_AUTORENEW_BY_DOMAIN_ID(@domainIds));
+		}
+
+		public static IQueryEnd USP_ADMIN_GET_WHOISGUARD_BY_DOMAIN_ID(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @domainIds)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_ADMIN_GET_WHOISGUARD_BY_DOMAIN_ID(@domainIds));
+		}
+
+		public static IQueryEnd usp_Admin_GetFraudScoreDetails(this IStoredProcedureHolder<NamecheapCoreContext> holder, decimal? @transactionId)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.usp_Admin_GetFraudScoreDetails(@transactionId));
+		}
+
+		public static IQueryEnd USP_ADMIN_INSERT_OR_UPDATE_BANNED_PASSWORD(this IStoredProcedureHolder<NamecheapCoreContext> holder, int? @banID, string @bannedPassword, string @bannedAdminComments, string @adminUser)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_ADMIN_INSERT_OR_UPDATE_BANNED_PASSWORD(@banID, @bannedPassword, @bannedAdminComments, @adminUser));
+		}
+
+		public static IQueryEnd USP_ADMIN_IS_USER_LOCKED(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @userName)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_ADMIN_IS_USER_LOCKED(@userName));
+		}
+
+		public static IQueryEnd USP_ADMIN_ITEMS_ADDED_TO_BATCH(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @adminUser, string @sessionId, string @objectType, string @addedFromPage, string @batchObjectItemsXml)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_ADMIN_ITEMS_ADDED_TO_BATCH(@adminUser, @sessionId, @objectType, @addedFromPage, @batchObjectItemsXml));
+		}
+
+		public static IQueryEnd USP_ADMIN_IUD_AD(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @IPV_Operation_Type, int? @IPI_Ad_Id, string @IPV_Title, string @IPV_Image_URL, short? @IPI_Image_Width, short? @IPI_Image_Height, string @IPV_Target_Link, string @IPT_Description, bool? @IPB_TextType_YN)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_ADMIN_IUD_AD(@IPV_Operation_Type, @IPI_Ad_Id, @IPV_Title, @IPV_Image_URL, @IPI_Image_Width, @IPI_Image_Height, @IPV_Target_Link, @IPT_Description, @IPB_TextType_YN));
+		}
+
+		public static IQueryEnd USP_ADMIN_IUD_ADGROUP(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @IPV_Operation_Type, int? @IPI_Ad_Group_Id, string @IPI_Ad_Group_Name, string @IPT_Description, int? @IPI_Group_Type_Id, string @IPT_Ad_List)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_ADMIN_IUD_ADGROUP(@IPV_Operation_Type, @IPI_Ad_Group_Id, @IPI_Ad_Group_Name, @IPT_Description, @IPI_Group_Type_Id, @IPT_Ad_List));
+		}
+
+		public static IQueryEnd USP_ADMIN_IUD_AFFILIATE_PROGRAM(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @sActionType, string @affiliateProgramName, string @affiliateProgramDescription, DateTime? @createdDateTime, DateTime? @expiryDateTime, int? @numberOfOrdersCommissionAppliedFor, bool? @canUseAfflCodeForOwnAccount, string @programLandingPage, bool? @grantCommissionForSpecifiedProductsOnly, bool? @affilitateSpecificYN, string @promotionCode, int? @affiliateProgramID)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_ADMIN_IUD_AFFILIATE_PROGRAM(@sActionType, @affiliateProgramName, @affiliateProgramDescription, @createdDateTime, @expiryDateTime, @numberOfOrdersCommissionAppliedFor, @canUseAfflCodeForOwnAccount, @programLandingPage, @grantCommissionForSpecifiedProductsOnly, @affilitateSpecificYN, @promotionCode, @affiliateProgramID));
+		}
+
+		public static IQueryEnd USP_ADMIN_IUD_PRODUCT(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @IPV_Operation_Type, int? @IPI_Group_Type_ID, string @IPV_Product_Name)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_ADMIN_IUD_PRODUCT(@IPV_Operation_Type, @IPI_Group_Type_ID, @IPV_Product_Name));
+		}
+
+		public static IQueryEnd USP_ADMIN_IUD_PROMOTION_PRICING(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @sActionType, int? @Promotion_ID, string @nPromotioncode, string @PromotionName, string @Description, DateTime? @Start_Date, DateTime? @End_Date, int? @MaxCount, decimal? @MaxAmount, bool? @bUserSpecificPromotion_YN)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_ADMIN_IUD_PROMOTION_PRICING(@sActionType, @Promotion_ID, @nPromotioncode, @PromotionName, @Description, @Start_Date, @End_Date, @MaxCount, @MaxAmount, @bUserSpecificPromotion_YN));
+		}
+
+		public static IQueryEnd USP_ADMIN_IUD_ROLE_MANAGEMENT(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @sActionType, int? @roleID, string @roleName, string @description, bool? @disabled)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_ADMIN_IUD_ROLE_MANAGEMENT(@sActionType, @roleID, @roleName, @description, @disabled));
+		}
+
+		public static IQueryEnd USP_ADMIN_LIST_NAVIGATION(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @operationtype, string @pageURL, string @pagename, int? @Id, string @siteName)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_ADMIN_LIST_NAVIGATION(@operationtype, @pageURL, @pagename, @Id, @siteName));
+		}
+
+		public static IQueryEnd USP_ADMIN_LOCK_UNLOCK_ADD_LOG(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @domainName, string @lockType, string @reason, string @reasonForAdmin, bool? @lock, string @adminUser)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_ADMIN_LOCK_UNLOCK_ADD_LOG(@domainName, @lockType, @reason, @reasonForAdmin, @lock, @adminUser));
+		}
+
+		public static IQueryEnd USP_ADMIN_LOCK_UNLOCK_DOMAIN_BY_ID(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @domainIds, string @reason, string @reasonForAdmin, bool? @lock, bool? @alreadyLockedDomain, string @adminUser, bool? @namecheapLock, bool? @disableAutoRenew)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_ADMIN_LOCK_UNLOCK_DOMAIN_BY_ID(@domainIds, @reason, @reasonForAdmin, @lock, @alreadyLockedDomain, @adminUser, @namecheapLock, @disableAutoRenew));
+		}
+
+		public static IQueryEnd USP_ADMIN_LOG_CREDITCARD_REFUNDS(this IStoredProcedureHolder<NamecheapCoreContext> holder, int? @logId, string @adminUserName, int? @transactionId, string @status, string @description, string @comments)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_ADMIN_LOG_CREDITCARD_REFUNDS(@logId, @adminUserName, @transactionId, @status, @description, @comments));
+		}
+
+		public static IQueryEnd USP_ADMIN_LOG_LOCKORUNLOCK_REASONS(this IStoredProcedureHolder<NamecheapCoreContext> holder, short? @lockUnlockUserId, string @lockUnlockBy, string @lockOrUnlock, string @reason)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_ADMIN_LOG_LOCKORUNLOCK_REASONS(@lockUnlockUserId, @lockUnlockBy, @lockOrUnlock, @reason));
+		}
+
+		public static IQueryEnd USP_ADMIN_LOG_LOGOFF(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @adminUserName, byte? @IPClassA, byte? @IPClassB, byte? @IPClassC, byte? @IPClassD)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_ADMIN_LOG_LOGOFF(@adminUserName, @IPClassA, @IPClassB, @IPClassC, @IPClassD));
+		}
+
+		public static IQueryEnd USP_ADMIN_MP_CHANGE_NAVIGATION_SEQUENCE(this IStoredProcedureHolder<NamecheapCoreContext> holder, int? @NavID, bool? @MoveType)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_ADMIN_MP_CHANGE_NAVIGATION_SEQUENCE(@NavID, @MoveType));
+		}
+
+		public static IQueryEnd USP_ADMIN_MP_UPDATE_DLIST(this IStoredProcedureHolder<NamecheapCoreContext> holder, int? @MPListID, string @AdminDescription)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_ADMIN_MP_UPDATE_DLIST(@MPListID, @AdminDescription));
+		}
+
+		public static IQueryEnd usp_Admin_Namecheap_Bonus_List(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @userName, string @couponCode, DateTime? @startDate, DateTime? @endDate, int? @pageNumber, int? @pageSize)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.usp_Admin_Namecheap_Bonus_List(@userName, @couponCode, @startDate, @endDate, @pageNumber, @pageSize));
+		}
+
+		public static IQueryEnd usp_Admin_Namecheap_Bonus_Statistics(this IStoredProcedureHolder<NamecheapCoreContext> holder)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.usp_Admin_Namecheap_Bonus_Statistics());
+		}
+
+		public static IQueryEnd usp_Admin_Namecheap_Bonus_Unlink(this IStoredProcedureHolder<NamecheapCoreContext> holder, int? @autoId, string @adminUser, string @adminDesc)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.usp_Admin_Namecheap_Bonus_Unlink(@autoId, @adminUser, @adminDesc));
+		}
+
+		public static IQueryEnd usp_Admin_Namecheap_Deals_GetDetails(this IStoredProcedureHolder<NamecheapCoreContext> holder, int? @autoId)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.usp_Admin_Namecheap_Deals_GetDetails(@autoId));
+		}
+
+		public static IQueryEnd usp_Admin_Namecheap_Deals_List(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @userName, string @couponCode, DateTime? @startDate, DateTime? @endDate, int? @pageNumber, int? @pageSize)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.usp_Admin_Namecheap_Deals_List(@userName, @couponCode, @startDate, @endDate, @pageNumber, @pageSize));
+		}
+
+		public static IQueryEnd usp_Admin_Namecheap_Deals_Statistics(this IStoredProcedureHolder<NamecheapCoreContext> holder)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.usp_Admin_Namecheap_Deals_Statistics());
+		}
+
+		public static IQueryEnd usp_Admin_Namecheap_Deals_Unlink(this IStoredProcedureHolder<NamecheapCoreContext> holder, int? @autoId, string @adminUser, string @adminDesc)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.usp_Admin_Namecheap_Deals_Unlink(@autoId, @adminUser, @adminDesc));
+		}
+
+		public static IQueryEnd USP_ADMIN_PLACE_BULK_TRANSFER(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @IPV_Bulk_Domains, string @IPV_User_Name, string @IPV_Admin_User, string @IPV_Admin_User_password, bool? @IPB_Remove_FundsYN, string @IPV_RequestIP, string @IPV_PromoCode, decimal? @IPN_TransactionID, string @IPN_WGOption)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_ADMIN_PLACE_BULK_TRANSFER(@IPV_Bulk_Domains, @IPV_User_Name, @IPV_Admin_User, @IPV_Admin_User_password, @IPB_Remove_FundsYN, @IPV_RequestIP, @IPV_PromoCode, @IPN_TransactionID, @IPN_WGOption));
+		}
+
+		public static IQueryEnd USP_ADMIN_POSITIVESSL_CHECKBYORDERID(this IStoredProcedureHolder<NamecheapCoreContext> holder, int? @OrderId)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_ADMIN_POSITIVESSL_CHECKBYORDERID(@OrderId));
+		}
+
+		public static IQueryEnd USP_ADMIN_PURCHASE_TRANSACTION(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @IPNV_UserName, decimal? @IPM_Transaction_Amt, string @IPV_Transaction_Operator, string @IPV_Exceeded, DateTime? @IPV_Start_Date, DateTime? @IPV_End_Date, string @IPV_Timeperiod, string @IPV_Period_Type)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_ADMIN_PURCHASE_TRANSACTION(@IPNV_UserName, @IPM_Transaction_Amt, @IPV_Transaction_Operator, @IPV_Exceeded, @IPV_Start_Date, @IPV_End_Date, @IPV_Timeperiod, @IPV_Period_Type));
+		}
+
+		public static IQueryEnd USP_ADMIN_REMOVE_FUND_FOR_RESUBMIT(this IStoredProcedureHolder<NamecheapCoreContext> holder, decimal? @IPN_TransferID, string @IPV_RequestIP)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_ADMIN_REMOVE_FUND_FOR_RESUBMIT(@IPN_TransferID, @IPV_RequestIP));
+		}
+
+		public static IQueryEnd USP_ADMIN_REMOVE_WHOISGUARD(this IStoredProcedureHolder<NamecheapCoreContext> holder, int? @slotid)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_ADMIN_REMOVE_WHOISGUARD(@slotid));
+		}
+
+		public static IQueryEnd USP_ADMIN_REVEAL_USER_PWD(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @adminUserName)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_ADMIN_REVEAL_USER_PWD(@adminUserName));
+		}
+
+		public static IQueryEnd USP_ADMIN_REVERT_FUND_FOR_CANCELED_TRANSFER(this IStoredProcedureHolder<NamecheapCoreContext> holder, decimal? @IPN_TransferID)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_ADMIN_REVERT_FUND_FOR_CANCELED_TRANSFER(@IPN_TransferID));
+		}
+
+		public static IQueryEnd USP_ADMIN_REVIEW_MAXMIND(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @maxmindAutoIds, string @adminName, bool? @reviewFlag)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_ADMIN_REVIEW_MAXMIND(@maxmindAutoIds, @adminName, @reviewFlag));
+		}
+
+		public static IQueryEnd USP_ADMIN_SaveMessage(this IStoredProcedureHolder<NamecheapCoreContext> holder, int? @MessageTypeId, string @UserNameTo, string @Title, string @Message)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_ADMIN_SaveMessage(@MessageTypeId, @UserNameTo, @Title, @Message));
+		}
+
+		public static IQueryEnd USP_ADMIN_SET_AFFILIATE_PROGRAM_COMMISSION_DETAIL(this IStoredProcedureHolder<NamecheapCoreContext> holder, int? @programId, string @programCommissionXml)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_ADMIN_SET_AFFILIATE_PROGRAM_COMMISSION_DETAIL(@programId, @programCommissionXml));
+		}
+
+		public static IQueryEnd USP_ADMIN_SET_AUTORENEW_BY_DOMAIN_ID(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @DomainIds, bool? @EnableAutoRenew, string @AdminLogin, string @ReasonForAdmin)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_ADMIN_SET_AUTORENEW_BY_DOMAIN_ID(@DomainIds, @EnableAutoRenew, @AdminLogin, @ReasonForAdmin));
+		}
+
+		public static IQueryEnd USP_ADMIN_SET_AUTORENEW_WG_BY_DOMAIN_ID(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @DomainIds, bool? @EnableAutoRenewWG, string @AdminLogin, string @ReasonForAdmin)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_ADMIN_SET_AUTORENEW_WG_BY_DOMAIN_ID(@DomainIds, @EnableAutoRenewWG, @AdminLogin, @ReasonForAdmin));
+		}
+
+		public static IQueryEnd USP_ADMIN_SET_BATCH_ENABLE_DISABLE_WHOISGUARD(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @IPV_AutoId, string @IPV_ObjectName, string @IPV_Status, string @IPV_Action, string @IPV_admin_UserName, string @IPV_Reason, string @IPV_ReasonForAdmin, bool? @Is_Enabled, string @IPV_Status_Description)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_ADMIN_SET_BATCH_ENABLE_DISABLE_WHOISGUARD(@IPV_AutoId, @IPV_ObjectName, @IPV_Status, @IPV_Action, @IPV_admin_UserName, @IPV_Reason, @IPV_ReasonForAdmin, @Is_Enabled, @IPV_Status_Description));
+		}
+
+		public static IQueryEnd USP_ADMIN_SET_BATCH_LOCK_UNLOCK_DOMAIN(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @IPV_AutoId, string @IPV_ObjectName, string @IPV_Status, string @IPV_Action, string @IPV_admin_UserName, string @IPV_Reason, string @IPV_ReasonForAdmin, bool? @IPB_isLocked, string @IPV_Status_Description, bool? @namecheapLock, bool? @disableAutoRenew)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_ADMIN_SET_BATCH_LOCK_UNLOCK_DOMAIN(@IPV_AutoId, @IPV_ObjectName, @IPV_Status, @IPV_Action, @IPV_admin_UserName, @IPV_Reason, @IPV_ReasonForAdmin, @IPB_isLocked, @IPV_Status_Description, @namecheapLock, @disableAutoRenew));
+		}
+
+		public static IQueryEnd USP_ADMIN_SET_BATCH_STATUS(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @IPV_AutoId, string @IPV_ObjectName, string @IPV_Status, string @IPV_Action, string @IPV_Status_Description)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_ADMIN_SET_BATCH_STATUS(@IPV_AutoId, @IPV_ObjectName, @IPV_Status, @IPV_Action, @IPV_Status_Description));
+		}
+
+		public static IQueryEnd USP_ADMIN_SET_COPY_USER_PRICING(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @IPV_CopyUserName, string @IPV_Username)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_ADMIN_SET_COPY_USER_PRICING(@IPV_CopyUserName, @IPV_Username));
+		}
+
+		public static IQueryEnd USP_ADMIN_SET_DO_NOT_REFUND_FOR_TRANSACTION(this IStoredProcedureHolder<NamecheapCoreContext> holder, int? @currentOrderId, bool? @doNotRefundFlag, int? @currentTransactionId)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_ADMIN_SET_DO_NOT_REFUND_FOR_TRANSACTION(@currentOrderId, @doNotRefundFlag, @currentTransactionId));
+		}
+
+		public static IQueryEnd USP_ADMIN_SET_DOMAIN_ABUSED_DETAILS(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @abuseType, string @complainant, string @ticketID, int? @domainID, string @domainName, string @status, string @description, string @adminUserName)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_ADMIN_SET_DOMAIN_ABUSED_DETAILS(@abuseType, @complainant, @ticketID, @domainID, @domainName, @status, @description, @adminUserName));
+		}
+
+		public static IQueryEnd USP_ADMIN_SET_MESSAGES(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @IPV_Message_Title, string @IPV_Message_Body, DateTime? @IPV_Deliver_After_Date, string @IPV_UserName, string @IPV_Associated_Domains, string @IPV_Associated_OrderID, string @IPV_Additional_Info, string @IPV_ReplyTo_Mail, string @IPV_Modified_By, decimal? @IPN_Reference_ID)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_ADMIN_SET_MESSAGES(@IPV_Message_Title, @IPV_Message_Body, @IPV_Deliver_After_Date, @IPV_UserName, @IPV_Associated_Domains, @IPV_Associated_OrderID, @IPV_Additional_Info, @IPV_ReplyTo_Mail, @IPV_Modified_By, @IPN_Reference_ID));
+		}
+
+		public static IQueryEnd USP_ADMIN_SET_NAV_ATTRIBUTES(this IStoredProcedureHolder<NamecheapCoreContext> holder, int? @navId, string @attributeChildNavIdsValues, bool? @applyToChild)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_ADMIN_SET_NAV_ATTRIBUTES(@navId, @attributeChildNavIdsValues, @applyToChild));
+		}
+
+		public static IQueryEnd USP_ADMIN_SET_NAV_PAGE_ATTRIBUTES(this IStoredProcedureHolder<NamecheapCoreContext> holder, int? @pageId, string @attributeNavIdsValues)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_ADMIN_SET_NAV_PAGE_ATTRIBUTES(@pageId, @attributeNavIdsValues));
+		}
+
+		public static IQueryEnd USP_ADMIN_SET_PROMOTION_PRICING(this IStoredProcedureHolder<NamecheapCoreContext> holder, int? @PromotionID, short? @_1_yr_id, decimal? @_1_yr_price, short? @_2_yr_id, decimal? @_2_yr_price, short? @_3_yr_id, decimal? @_3_yr_price, short? @_4_yr_id, decimal? @_4_yr_price, short? @_5_yr_id, decimal? @_5_yr_price, short? @_6_yr_id, decimal? @_6_yr_price, short? @_7_yr_id, decimal? @_7_yr_price, short? @_8_yr_id, decimal? @_8_yr_price, short? @_9_yr_id, decimal? @_9_yr_price, short? @_10_yr_id, decimal? @_10_yr_price)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_ADMIN_SET_PROMOTION_PRICING(@PromotionID, @_1_yr_id, @_1_yr_price, @_2_yr_id, @_2_yr_price, @_3_yr_id, @_3_yr_price, @_4_yr_id, @_4_yr_price, @_5_yr_id, @_5_yr_price, @_6_yr_id, @_6_yr_price, @_7_yr_id, @_7_yr_price, @_8_yr_id, @_8_yr_price, @_9_yr_id, @_9_yr_price, @_10_yr_id, @_10_yr_price));
+		}
+
+		public static IQueryEnd USP_ADMIN_SET_PROMOTION_TLD_PRICING_DETAIL(this IStoredProcedureHolder<NamecheapCoreContext> holder, int? @iPromotionID, string @Pricing_Hint, string @Addtional_Cost_Hint, string @promotionTldPricingXml)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_ADMIN_SET_PROMOTION_TLD_PRICING_DETAIL(@iPromotionID, @Pricing_Hint, @Addtional_Cost_Hint, @promotionTldPricingXml));
+		}
+
+		public static IQueryEnd USP_ADMIN_SET_USER_PRICING(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @Username, string @Pricing_Hint, short? @_1_yr_id, decimal? @_1_yr_price, short? @_2_yr_id, decimal? @_2_yr_price, short? @_3_yr_id, decimal? @_3_yr_price, short? @_4_yr_id, decimal? @_4_yr_price, short? @_5_yr_id, decimal? @_5_yr_price, short? @_6_yr_id, decimal? @_6_yr_price, short? @_7_yr_id, decimal? @_7_yr_price, short? @_8_yr_id, decimal? @_8_yr_price, short? @_9_yr_id, decimal? @_9_yr_price, short? @_10_yr_id, decimal? @_10_yr_price)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_ADMIN_SET_USER_PRICING(@Username, @Pricing_Hint, @_1_yr_id, @_1_yr_price, @_2_yr_id, @_2_yr_price, @_3_yr_id, @_3_yr_price, @_4_yr_id, @_4_yr_price, @_5_yr_id, @_5_yr_price, @_6_yr_id, @_6_yr_price, @_7_yr_id, @_7_yr_price, @_8_yr_id, @_8_yr_price, @_9_yr_id, @_9_yr_price, @_10_yr_id, @_10_yr_price));
+		}
+
+		public static IQueryEnd USP_ADMIN_SET_USER_TLD_PRICING_DETAIL(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @User_Name, string @Pricing_Hint, string @Addtional_Cost_Hint, DateTime? @Pricing_Start_Date, DateTime? @Pricing_End_Date, string @userTldPricingXml)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_ADMIN_SET_USER_TLD_PRICING_DETAIL(@User_Name, @Pricing_Hint, @Addtional_Cost_Hint, @Pricing_Start_Date, @Pricing_End_Date, @userTldPricingXml));
+		}
+
+		public static IQueryEnd USP_ADMIN_SSL_ADD_REFUND_EMAIL_QUEUE(this IStoredProcedureHolder<NamecheapCoreContext> holder, int? @certificateId, string @adminUserName, string @adminIp, DateTime? @cancelledDateTime, string @cancelledReason, bool? @IsParent)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_ADMIN_SSL_ADD_REFUND_EMAIL_QUEUE(@certificateId, @adminUserName, @adminIp, @cancelledDateTime, @cancelledReason, @IsParent));
+		}
+
+		public static IQueryEnd USP_ADMIN_SSL_CANCEL_NEWREPLACE(this IStoredProcedureHolder<NamecheapCoreContext> holder, int? @certificateId)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_ADMIN_SSL_CANCEL_NEWREPLACE(@certificateId));
+		}
+
+		public static IQueryEnd USP_ADMIN_SSL_DETAIL(this IStoredProcedureHolder<NamecheapCoreContext> holder, decimal? @PartnerOrderID)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_ADMIN_SSL_DETAIL(@PartnerOrderID));
+		}
+
+		public static IQueryEnd USP_ADMIN_SSL_ERROR_INFO(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @CertificateID)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_ADMIN_SSL_ERROR_INFO(@CertificateID));
+		}
+
+		public static IQueryEnd USP_ADMIN_SSL_ERROR_LIST(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @IPV_UserName, string @IPV_CertificateID)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_ADMIN_SSL_ERROR_LIST(@IPV_UserName, @IPV_CertificateID));
+		}
+
+		public static IQueryEnd USP_ADMIN_SSL_GET_CURRENT_RESELLER_LEVEL(this IStoredProcedureHolder<NamecheapCoreContext> holder, decimal? @UserId)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_ADMIN_SSL_GET_CURRENT_RESELLER_LEVEL(@UserId));
+		}
+
+		public static IQueryEnd USP_ADMIN_SSL_GET_DETAILS_IN_HIERARCHY(this IStoredProcedureHolder<NamecheapCoreContext> holder, int? @certificateId, string @flag)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_ADMIN_SSL_GET_DETAILS_IN_HIERARCHY(@certificateId, @flag));
+		}
+
+		public static IQueryEnd USP_ADMIN_SSL_GET_PARENT_INFO(this IStoredProcedureHolder<NamecheapCoreContext> holder, int? @certificateID)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_ADMIN_SSL_GET_PARENT_INFO(@certificateID));
+		}
+
+		public static IQueryEnd USP_ADMIN_SSL_GET_REFID(this IStoredProcedureHolder<NamecheapCoreContext> holder, decimal? @PartnerOrderID)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_ADMIN_SSL_GET_REFID(@PartnerOrderID));
+		}
+
+		public static IQueryEnd USP_ADMIN_SSL_GET_STATUS(this IStoredProcedureHolder<NamecheapCoreContext> holder, int? @certificateId)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_ADMIN_SSL_GET_STATUS(@certificateId));
+		}
+
+		public static IQueryEnd USP_ADMIN_SSL_LIST(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @UserName, string @HostName, DateTime? @StartDate, DateTime? @EndDate, string @PartnerName, string @SSLType, string @PartnerOrderId, string @OurOrderId, string @EmailId, string @Status)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_ADMIN_SSL_LIST(@UserName, @HostName, @StartDate, @EndDate, @PartnerName, @SSLType, @PartnerOrderId, @OurOrderId, @EmailId, @Status));
+		}
+
+		public static IQueryEnd USP_ADMIN_SSL_RESELLER_EMAIL_DETAIL(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @AutoId)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_ADMIN_SSL_RESELLER_EMAIL_DETAIL(@AutoId));
+		}
+
+		public static IQueryEnd USP_ADMIN_SSL_RESELLER_LEVEL_DETAIL(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @UserName)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_ADMIN_SSL_RESELLER_LEVEL_DETAIL(@UserName));
+		}
+
+		public static IQueryEnd USP_ADMIN_SSL_RESELLER_LEVEL_LOG_DETAIL(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @UserName)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_ADMIN_SSL_RESELLER_LEVEL_LOG_DETAIL(@UserName));
+		}
+
+		public static IQueryEnd USP_ADMIN_SSL_STATUS_UPDATE(this IStoredProcedureHolder<NamecheapCoreContext> holder, int? @CertificateID, string @NewStatus, string @NewStatusDesc, string @PartnerID)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_ADMIN_SSL_STATUS_UPDATE(@CertificateID, @NewStatus, @NewStatusDesc, @PartnerID));
+		}
+
+		public static IQueryEnd USP_ADMIN_SSL_UPDATE_STATUS_TO_CANCEL(this IStoredProcedureHolder<NamecheapCoreContext> holder, int? @CertificateID, string @NewStatus, string @NewStatusDesc, string @PartnerID, bool? @IsParent)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_ADMIN_SSL_UPDATE_STATUS_TO_CANCEL(@CertificateID, @NewStatus, @NewStatusDesc, @PartnerID, @IsParent));
+		}
+
+		public static IQueryEnd USP_ADMIN_SYNCHRONIZE_EXPIRYDATE(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @slotid)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_ADMIN_SYNCHRONIZE_EXPIRYDATE(@slotid));
+		}
+
+		public static IQueryEnd USP_ADMIN_TOGGLE_FAVOURITE_LIST(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @adminUserName, string @linkId)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_ADMIN_TOGGLE_FAVOURITE_LIST(@adminUserName, @linkId));
+		}
+
+		public static IQueryEnd USP_ADMIN_UNASSIGN_API_COMMANDS_FROM_SCOPE_ID(this IStoredProcedureHolder<NamecheapCoreContext> holder, int? @scopeId, string @apiIdsBySemicolon)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_ADMIN_UNASSIGN_API_COMMANDS_FROM_SCOPE_ID(@scopeId, @apiIdsBySemicolon));
+		}
+
+		public static IQueryEnd USP_ADMIN_UNASSIGN_API_SCOPES_FROM_APP_ROLE_ID(this IStoredProcedureHolder<NamecheapCoreContext> holder, int? @appRoleId, string @scopeIdsBySemicolon)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_ADMIN_UNASSIGN_API_SCOPES_FROM_APP_ROLE_ID(@appRoleId, @scopeIdsBySemicolon));
+		}
+
+		public static IQueryEnd USP_ADMIN_UNASSIGN_API_SCOPES_FROM_ROLE_ID(this IStoredProcedureHolder<NamecheapCoreContext> holder, int? @roleId, string @scopeIdsBySemicolon)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_ADMIN_UNASSIGN_API_SCOPES_FROM_ROLE_ID(@roleId, @scopeIdsBySemicolon));
+		}
+
+		public static IQueryEnd USP_ADMIN_UNLOCK_EXTERNAL_LOGIN_USER(this IStoredProcedureHolder<NamecheapCoreContext> holder, decimal? @userID, string @adminComments, string @adminUser)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_ADMIN_UNLOCK_EXTERNAL_LOGIN_USER(@userID, @adminComments, @adminUser));
+		}
+
+		public static IQueryEnd USP_ADMIN_UPDATE_CHANGE_IN_PRICING(this IStoredProcedureHolder<NamecheapCoreContext> holder, int? @sPromotionID, string @sUserName, string @sActionID, string @TLDName, string @ForAmountOrCost, string @ToAmountOrCost, string @CompareType, string @IncreaseOrDecrease, string @PercentOrDollar, double? @CompareAmount, double? @UpdateAmount)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_ADMIN_UPDATE_CHANGE_IN_PRICING(@sPromotionID, @sUserName, @sActionID, @TLDName, @ForAmountOrCost, @ToAmountOrCost, @CompareType, @IncreaseOrDecrease, @PercentOrDollar, @CompareAmount, @UpdateAmount));
+		}
+
+		public static IQueryEnd USP_ADMIN_UPDATE_DETAILS_FOR_TRANSFER_DOMAINS(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @updateString, string @type)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_ADMIN_UPDATE_DETAILS_FOR_TRANSFER_DOMAINS(@updateString, @type));
+		}
+
+		public static IQueryEnd USP_ADMIN_UPDATE_DOMAIN_ORDER_ITEM(this IStoredProcedureHolder<NamecheapCoreContext> holder, int? @orderItemId, bool? @isSuccess, string @orderMessage)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_ADMIN_UPDATE_DOMAIN_ORDER_ITEM(@orderItemId, @isSuccess, @orderMessage));
+		}
+
+		public static IQueryEnd USP_ADMIN_UPDATE_FAVOURITES_SEQ_NO(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @adminUserName, string @data)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_ADMIN_UPDATE_FAVOURITES_SEQ_NO(@adminUserName, @data));
+		}
+
+		public static IQueryEnd USP_ADMIN_UPDATE_ONEPAGER_SUBSCRIPTION_STATUS(this IStoredProcedureHolder<NamecheapCoreContext> holder, decimal? @subscriptionId, bool? @status, string @statusChangeDateTime, string @adminUserName, string @comments, string @adminComments)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_ADMIN_UPDATE_ONEPAGER_SUBSCRIPTION_STATUS(@subscriptionId, @status, @statusChangeDateTime, @adminUserName, @comments, @adminComments));
+		}
+
+		public static IQueryEnd USP_ADMIN_UPDATE_TLD_ORDER(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @PrimaryTlds_OrderedCSV, string @SecondaryTlds_OrderedCSV)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_ADMIN_UPDATE_TLD_ORDER(@PrimaryTlds_OrderedCSV, @SecondaryTlds_OrderedCSV));
+		}
+
+		public static IQueryEnd USP_ADMIN_UPDATE_USER_ROLES(this IStoredProcedureHolder<NamecheapCoreContext> holder, int? @UserID, string @AssociatedRoles, string @AdminUerName, string @AdminIP)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_ADMIN_UPDATE_USER_ROLES(@UserID, @AssociatedRoles, @AdminUerName, @AdminIP));
+		}
+
+		public static IQueryEnd USP_ADMIN_WHOISGUARD_HISTORY_DETAILS(this IStoredProcedureHolder<NamecheapCoreContext> holder, int? @SlotId, string @AdminUser, DateTime? @LogDateTime, string @Action, string @Reason)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_ADMIN_WHOISGUARD_HISTORY_DETAILS(@SlotId, @AdminUser, @LogDateTime, @Action, @Reason));
+		}
+
+		public static IQueryEnd usp_AdminAddOXSubscriptiontoOrderTable(this IStoredProcedureHolder<NamecheapCoreContext> holder, int? @SubscriptionID, string @userName, string @domainName, string @PlanName, decimal? @OrderPrice, string @ip, int? @outOrderId, int? @outOrderDetailId)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.usp_AdminAddOXSubscriptiontoOrderTable(@SubscriptionID, @userName, @domainName, @PlanName, @OrderPrice, @ip, @outOrderId, @outOrderDetailId));
+		}
+
+		public static IQueryEnd usp_AdminAddSupportVerification(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @userName, string @pin, string @profileEmail, string @adminUser, string @adminIp, string @comments)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.usp_AdminAddSupportVerification(@userName, @pin, @profileEmail, @adminUser, @adminIp, @comments));
+		}
+
+		public static IQueryEnd usp_AdminCheckSufficientRefundAmountForUser(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @transactionIds)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.usp_AdminCheckSufficientRefundAmountForUser(@transactionIds));
+		}
+
+		public static IQueryEnd usp_AdminEnableDisableTransferMate(this IStoredProcedureHolder<NamecheapCoreContext> holder, decimal? @transferId, bool? @transferMateEnabled, string @adminComments)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.usp_AdminEnableDisableTransferMate(@transferId, @transferMateEnabled, @adminComments));
+		}
+
+		public static IQueryEnd usp_AdminGetDomainDetails(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @DomainName)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.usp_AdminGetDomainDetails(@DomainName));
+		}
+
+		public static IQueryEnd usp_AdminGetInitialAmountForTransaction(this IStoredProcedureHolder<NamecheapCoreContext> holder, decimal? @transactionId)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.usp_AdminGetInitialAmountForTransaction(@transactionId));
+		}
+
+		public static IQueryEnd usp_AdminGetInitiatedTransactionByTransactionId(this IStoredProcedureHolder<NamecheapCoreContext> holder, decimal? @transactionId)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.usp_AdminGetInitiatedTransactionByTransactionId(@transactionId));
+		}
+
+		public static IQueryEnd USP_AdminGetLinkpointOrderIdByTransactionId(this IStoredProcedureHolder<NamecheapCoreContext> holder, int? @transactionId)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_AdminGetLinkpointOrderIdByTransactionId(@transactionId));
+		}
+
+		public static IQueryEnd usp_AdminGetLogMessageDepartments(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @adminUserName)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.usp_AdminGetLogMessageDepartments(@adminUserName));
+		}
+
+		public static IQueryEnd usp_AdminGetParticularDomainDetails(this IStoredProcedureHolder<NamecheapCoreContext> holder, long? @DomainStatusAutoId)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.usp_AdminGetParticularDomainDetails(@DomainStatusAutoId));
+		}
+
+		public static IQueryEnd usp_AdminGetPreviousRefundToFundsTransactions(this IStoredProcedureHolder<NamecheapCoreContext> holder, decimal? @orderId, decimal? @transactionId)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.usp_AdminGetPreviousRefundToFundsTransactions(@orderId, @transactionId));
+		}
+
+		public static IQueryEnd usp_AdminGetTransferDetails(this IStoredProcedureHolder<NamecheapCoreContext> holder, decimal? @transferId)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.usp_AdminGetTransferDetails(@transferId));
+		}
+
+		public static IQueryEnd usp_AdminGetUserEmailAddress(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @userName)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.usp_AdminGetUserEmailAddress(@userName));
+		}
+
+		public static IQueryEnd usp_AdminGetUserSupportPinDetails(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @UserName)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.usp_AdminGetUserSupportPinDetails(@UserName));
+		}
+
+		public static IQueryEnd usp_AdminGetUserVerifiedStatus(this IStoredProcedureHolder<NamecheapCoreContext> holder, int? @autoID)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.usp_AdminGetUserVerifiedStatus(@autoID));
+		}
+
+		public static IQueryEnd USP_AFFILIATE_ACTIVATE_PROGRAM(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @userName, string @password, string @passwordNoCase, string @ip, bool? @skipPasswordCheck)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_AFFILIATE_ACTIVATE_PROGRAM(@userName, @password, @passwordNoCase, @ip, @skipPasswordCheck));
+		}
+
+		public static IQueryEnd USP_AFFILIATE_ADD_CANCELLED_ORDER(this IStoredProcedureHolder<NamecheapCoreContext> holder, int? @orderID, int? @orderDetailID, bool? @IsCancelledByAdmin, bool? @ProcessedYN, string @Details)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_AFFILIATE_ADD_CANCELLED_ORDER(@orderID, @orderDetailID, @IsCancelledByAdmin, @ProcessedYN, @Details));
+		}
+
+		public static IQueryEnd USP_AFFILIATE_ENABLE(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @UserName, string @Password, string @PasswordNoCase)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_AFFILIATE_ENABLE(@UserName, @Password, @PasswordNoCase));
+		}
+
+		public static IQueryEnd USP_AFFILIATE_GET_ALL_INFO(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @UserName)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_AFFILIATE_GET_ALL_INFO(@UserName));
+		}
+
+		public static IQueryEnd USP_AFFILIATE_GET_COMMISSION_STATUS_FOR_ORDERITEM(this IStoredProcedureHolder<NamecheapCoreContext> holder, int? @orderID, int? @orderDetailID)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_AFFILIATE_GET_COMMISSION_STATUS_FOR_ORDERITEM(@orderID, @orderDetailID));
+		}
+
+		public static IQueryEnd USP_AFFILIATE_GET_DETAILS_FOR_AUTO_REFERENCE_ID(this IStoredProcedureHolder<NamecheapCoreContext> holder, int? @autoReferenceID)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_AFFILIATE_GET_DETAILS_FOR_AUTO_REFERENCE_ID(@autoReferenceID));
+		}
+
+		public static IQueryEnd USP_AFFILIATE_GET_ID(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @userName)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_AFFILIATE_GET_ID(@userName));
+		}
+
+		public static IQueryEnd USP_AFFILIATE_GET_ORDER_DETAILS(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @domainName)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_AFFILIATE_GET_ORDER_DETAILS(@domainName));
+		}
+
+		public static IQueryEnd USP_AFFILIATE_GET_ORDERITEMID_BY_TRANSFERID(this IStoredProcedureHolder<NamecheapCoreContext> holder, int? @transferID)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_AFFILIATE_GET_ORDERITEMID_BY_TRANSFERID(@transferID));
+		}
+
+		public static IQueryEnd USP_AFFILIATE_GET_PROMOTION_CODE_FOR_REFERENCE(this IStoredProcedureHolder<NamecheapCoreContext> holder, int? @autoReferenceID)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_AFFILIATE_GET_PROMOTION_CODE_FOR_REFERENCE(@autoReferenceID));
+		}
+
+		public static IQueryEnd USP_AFFILIATE_GET_USER_AFFILIATE_STATUS(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @userName)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_AFFILIATE_GET_USER_AFFILIATE_STATUS(@userName));
+		}
+
+		public static IQueryEnd USP_AFFILIATE_LOG_REFERRAL_TRAFFIC(this IStoredProcedureHolder<NamecheapCoreContext> holder, int? @affiliateID, string @ip, int? @affiliateProgramID, string @httpReferrer)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_AFFILIATE_LOG_REFERRAL_TRAFFIC(@affiliateID, @ip, @affiliateProgramID, @httpReferrer));
+		}
+
+		public static IQueryEnd USP_AFFILIATE_PROCESS_EARNED_COMMISSION_PERDAY(this IStoredProcedureHolder<NamecheapCoreContext> holder, int? @affiliateID, DateTime? @saleDate)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_AFFILIATE_PROCESS_EARNED_COMMISSION_PERDAY(@affiliateID, @saleDate));
+		}
+
+		public static IQueryEnd USP_AFFILIATE_PROCESS_ORDER_ITEMS(this IStoredProcedureHolder<NamecheapCoreContext> holder, int? @orderID, int? @orderDetailID, bool? @ignoreOldCreditYN, string @logDetails)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_AFFILIATE_PROCESS_ORDER_ITEMS(@orderID, @orderDetailID, @ignoreOldCreditYN, @logDetails));
+		}
+
+		public static IQueryEnd USP_AFFILIATE_PROCESS_ORDER_ITEMS_20100731(this IStoredProcedureHolder<NamecheapCoreContext> holder, int? @orderID, int? @orderDetailID, bool? @ignoreOldCreditYN, string @logDetails)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_AFFILIATE_PROCESS_ORDER_ITEMS_20100731(@orderID, @orderDetailID, @ignoreOldCreditYN, @logDetails));
+		}
+
+		public static IQueryEnd USP_AFFILIATE_PROCESS_ORDER_ITEMS_MANUAL(this IStoredProcedureHolder<NamecheapCoreContext> holder, int? @orderID, int? @orderDetailID, bool? @ignoreOldCreditYN, string @logDetails, bool? @IgnoreOrderCountCheck, bool? @IgnorePromotionCode)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_AFFILIATE_PROCESS_ORDER_ITEMS_MANUAL(@orderID, @orderDetailID, @ignoreOldCreditYN, @logDetails, @IgnoreOrderCountCheck, @IgnorePromotionCode));
+		}
+
+		public static IQueryEnd USP_AFFILIATE_PROCESS_ORDER_ITEMS_old(this IStoredProcedureHolder<NamecheapCoreContext> holder, int? @orderID, int? @orderDetailID, bool? @ignoreOldCreditYN, string @logDetails)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_AFFILIATE_PROCESS_ORDER_ITEMS_old(@orderID, @orderDetailID, @ignoreOldCreditYN, @logDetails));
+		}
+
+		public static IQueryEnd USP_AFFILIATE_REVERT_COMMISSION_FOR_ORDERITEM(this IStoredProcedureHolder<NamecheapCoreContext> holder, int? @orderID, int? @orderDetailID, string @level, string @reason, bool? @adminCancelledYN, int? @qtyToCancel)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_AFFILIATE_REVERT_COMMISSION_FOR_ORDERITEM(@orderID, @orderDetailID, @level, @reason, @adminCancelledYN, @qtyToCancel));
+		}
+
+		public static IQueryEnd USP_AFFILIATES_ADMIN_COPY_USER_COMMISSION_DETAILS(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @fromUserName, string @toUserName)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_AFFILIATES_ADMIN_COPY_USER_COMMISSION_DETAILS(@fromUserName, @toUserName));
+		}
+
+		public static IQueryEnd USP_AFFILIATES_ADMIN_GET_ACTION_PRODUCT_LIST_FOR_USER(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @sType, string @sActionID)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_AFFILIATES_ADMIN_GET_ACTION_PRODUCT_LIST_FOR_USER(@sType, @sActionID));
+		}
+
+		public static IQueryEnd USP_AFFILIATES_ADMIN_GET_GLOBAL_COMMISSION_PRICING_DETAILS(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @actionID, string @tldName)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_AFFILIATES_ADMIN_GET_GLOBAL_COMMISSION_PRICING_DETAILS(@actionID, @tldName));
+		}
+
+		public static IQueryEnd USP_AFFILIATES_ADMIN_GET_GLOBAL_COMMISSIONS(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @actionID, string @tldName, int? @explicitMaximum, int? @recordsPerPage, int? @chosenPage, bool? @isHosting)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_AFFILIATES_ADMIN_GET_GLOBAL_COMMISSIONS(@actionID, @tldName, @explicitMaximum, @recordsPerPage, @chosenPage, @isHosting));
+		}
+
+		public static IQueryEnd USP_AFFILIATES_ADMIN_GET_USER_COMMISSION_PRICING_DETAILS(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @userName, string @actionID, string @tldName)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_AFFILIATES_ADMIN_GET_USER_COMMISSION_PRICING_DETAILS(@userName, @actionID, @tldName));
+		}
+
+		public static IQueryEnd USP_AFFILIATES_ADMIN_GET_USER_COMMISSIONS_DETAILS(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @userName, int? @explicitMaximum, int? @recordsPerPage, int? @chosenPage, bool? @isHosting)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_AFFILIATES_ADMIN_GET_USER_COMMISSIONS_DETAILS(@userName, @explicitMaximum, @recordsPerPage, @chosenPage, @isHosting));
+		}
+
+		public static IQueryEnd USP_AFFILIATES_ADMIN_GET_USER_STATUS(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @userName)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_AFFILIATES_ADMIN_GET_USER_STATUS(@userName));
+		}
+
+		public static IQueryEnd USP_AFFILIATES_ADMIN_GET_USERS_COMMISSION_LIST(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @userName)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_AFFILIATES_ADMIN_GET_USERS_COMMISSION_LIST(@userName));
+		}
+
+		public static IQueryEnd USP_AFFILIATES_ADMIN_SAVE_CONFIG_INFO_FOR_USER(this IStoredProcedureHolder<NamecheapCoreContext> holder, int? @affiliateID, int? @numberOfOrdersCommissionAppliedFor, bool? @canUseAfflCodeForOwnAccount)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_AFFILIATES_ADMIN_SAVE_CONFIG_INFO_FOR_USER(@affiliateID, @numberOfOrdersCommissionAppliedFor, @canUseAfflCodeForOwnAccount));
+		}
+
+		public static IQueryEnd USP_AFFILIATES_ADMIN_SET_GLOBAL_COMMISSION_PRICING_DETAIL(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @actionID, string @tldName, string @globalCommissionPricingXML)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_AFFILIATES_ADMIN_SET_GLOBAL_COMMISSION_PRICING_DETAIL(@actionID, @tldName, @globalCommissionPricingXML));
+		}
+
+		public static IQueryEnd USP_AFFILIATES_ADMIN_SET_USER_COMMISSION_PRICING_DETAIL(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @userName, string @actionID, string @tldName, string @userCommissionPricingXML)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_AFFILIATES_ADMIN_SET_USER_COMMISSION_PRICING_DETAIL(@userName, @actionID, @tldName, @userCommissionPricingXML));
+		}
+
+		public static IQueryEnd USP_AFFILIATES_CHECKTO_WITHDRAW_COMMISSION(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @userName, int? @affiliateId)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_AFFILIATES_CHECKTO_WITHDRAW_COMMISSION(@userName, @affiliateId));
+		}
+
+		public static IQueryEnd USP_AFFILIATES_COMPLETE_OR_CANCEL_WITHDRAW_COMMISSION(this IStoredProcedureHolder<NamecheapCoreContext> holder, int? @requestId, string @cancelOrComplete, string @description, decimal? @amount, string @paypalEmail)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_AFFILIATES_COMPLETE_OR_CANCEL_WITHDRAW_COMMISSION(@requestId, @cancelOrComplete, @description, @amount, @paypalEmail));
+		}
+
+		public static IQueryEnd USP_AFFILIATES_DELETE_GLOBAL_COMMISSION(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @actionID, string @tldName)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_AFFILIATES_DELETE_GLOBAL_COMMISSION(@actionID, @tldName));
+		}
+
+		public static IQueryEnd USP_AFFILIATES_DELETE_USER_COMMISSION(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @userName)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_AFFILIATES_DELETE_USER_COMMISSION(@userName));
+		}
+
+		public static IQueryEnd USP_AFFILIATES_DELETE_USER_COMMISSION_FOR_TLD_ACTION(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @userName, string @actionID, string @tldName)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_AFFILIATES_DELETE_USER_COMMISSION_FOR_TLD_ACTION(@userName, @actionID, @tldName));
+		}
+
+		public static IQueryEnd USP_AFFILIATES_EARNED_COMMISSIONS_HISTORY_REPORT(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @username, DateTime? @FromDate, DateTime? @ToDate, string @SortBy, string @Order, int? @Page, int? @PageSize, bool? @ReturnAllRows)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_AFFILIATES_EARNED_COMMISSIONS_HISTORY_REPORT(@username, @FromDate, @ToDate, @SortBy, @Order, @Page, @PageSize, @ReturnAllRows));
+		}
+
+		public static IQueryEnd USP_AFFILIATES_EARNED_COMMISSIONS_LOG_HISTORY_REPORT(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @username, string @statusname, DateTime? @FromDate, DateTime? @ToDate, string @SortBy, string @Order, int? @Page, int? @PageSize, bool? @ReturnAllRows)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_AFFILIATES_EARNED_COMMISSIONS_LOG_HISTORY_REPORT(@username, @statusname, @FromDate, @ToDate, @SortBy, @Order, @Page, @PageSize, @ReturnAllRows));
+		}
+
+		public static IQueryEnd USP_AFFILIATES_ENABLE_DISABLE_USER(this IStoredProcedureHolder<NamecheapCoreContext> holder, int? @affiliateID, bool? @isDeleted, string @adminIP, string @adminUser, string @deletedReason, string @deletedInternalReason)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_AFFILIATES_ENABLE_DISABLE_USER(@affiliateID, @isDeleted, @adminIP, @adminUser, @deletedReason, @deletedInternalReason));
+		}
+
+		public static IQueryEnd USP_AFFILIATES_GET_USER_DETAILS(this IStoredProcedureHolder<NamecheapCoreContext> holder, int? @affiliateID)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_AFFILIATES_GET_USER_DETAILS(@affiliateID));
+		}
+
+		public static IQueryEnd USP_AFFILIATES_LOCK_UNLOCK_USER(this IStoredProcedureHolder<NamecheapCoreContext> holder, int? @affiliateID, bool? @lockedByAdminYN, string @reason, string @internalReason, string @adminIP, string @adminUser)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_AFFILIATES_LOCK_UNLOCK_USER(@affiliateID, @lockedByAdminYN, @reason, @internalReason, @adminIP, @adminUser));
+		}
+
+		public static IQueryEnd USP_AFFILIATES_UPDATE_ORDER_PROCESS_PARMAS(this IStoredProcedureHolder<NamecheapCoreContext> holder, int? @lastUpdatedOrderID)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_AFFILIATES_UPDATE_ORDER_PROCESS_PARMAS(@lastUpdatedOrderID));
+		}
+
+		public static IQueryEnd USP_AFFILIATES_USERS_REPORT(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @username, DateTime? @FromDate, DateTime? @ToDate, string @SortBy, string @Order, int? @Page, int? @PageSize, bool? @ReturnAllRows)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_AFFILIATES_USERS_REPORT(@username, @FromDate, @ToDate, @SortBy, @Order, @Page, @PageSize, @ReturnAllRows));
+		}
+
+		public static IQueryEnd USP_AFFILIATES_WITHDRAW_COMMISSION(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @IPNV_UserName, string @IPV_PayMode, decimal? @IPM_Amount, string @IPNV_Paypal_ID, string @IPNV_Check_To, string @IPT_Check_Address, string @IPNV_Password, string @IPNV_PasswordNoCase, int? @Affiliate_ID)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_AFFILIATES_WITHDRAW_COMMISSION(@IPNV_UserName, @IPV_PayMode, @IPM_Amount, @IPNV_Paypal_ID, @IPNV_Check_To, @IPT_Check_Address, @IPNV_Password, @IPNV_PasswordNoCase, @Affiliate_ID));
+		}
+
+		public static IQueryEnd USP_API_ACCESS_DISABLE(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @UserName, string @Password, string @PasswordNoCase)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_API_ACCESS_DISABLE(@UserName, @Password, @PasswordNoCase));
+		}
+
+		public static IQueryEnd USP_API_ACCESS_ENABLE(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @UserName, string @Password, string @PasswordNoCase)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_API_ACCESS_ENABLE(@UserName, @Password, @PasswordNoCase));
+		}
+
+		public static IQueryEnd USP_API_ADD_DOMAIN_TO_USER(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @UserName, string @DomainName, short? @NumYears, string @PayStatus, string @NumericOrderID, string @OrderID, string @TransID, string @EnomTransId, bool? @IsAddToRegistrationQueue, string @ProviderName, decimal? @OrderDetailID, string @dnsProviderType, DateTime? @expiryDateTime)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_API_ADD_DOMAIN_TO_USER(@UserName, @DomainName, @NumYears, @PayStatus, @NumericOrderID, @OrderID, @TransID, @EnomTransId, @IsAddToRegistrationQueue, @ProviderName, @OrderDetailID, @dnsProviderType, @expiryDateTime));
+		}
+
+		public static IQueryEnd USP_API_ADD_FREE_PRODUCTS_IN_ORDER_DETAILS(this IStoredProcedureHolder<NamecheapCoreContext> holder, int? @orderId, string @sld, string @tld, short? @numYears, decimal? @pricePerYear, decimal? @regPricePerYear, decimal? @specialPrice, int? @qty, string @actionId, bool? @actionSuccess, string @errInfo, int? @orderDetailId, string @productType, string @title)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_API_ADD_FREE_PRODUCTS_IN_ORDER_DETAILS(@orderId, @sld, @tld, @numYears, @pricePerYear, @regPricePerYear, @specialPrice, @qty, @actionId, @actionSuccess, @errInfo, @orderDetailId, @productType, @title));
+		}
+
+		public static IQueryEnd USP_API_ADD_FREE_SSL(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @ActionID, string @sSLD, string @sTLD, short? @NumofYears, int? @Qty, string @userName, string @sTransactionID, string @sOrderID, decimal? @sNumericOrderID)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_API_ADD_FREE_SSL(@ActionID, @sSLD, @sTLD, @NumofYears, @Qty, @userName, @sTransactionID, @sOrderID, @sNumericOrderID));
+		}
+
+		public static IQueryEnd USP_API_ADD_FUNDS_REQUEST(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @tokenId, string @userName, string @requestorUserName, string @requestorUserType, string @createdByEndUserIP, DateTime? @createdDateTime, string @status, decimal? @requestedAmount, string @createdByRequestIp, string @returnUrl)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_API_ADD_FUNDS_REQUEST(@tokenId, @userName, @requestorUserName, @requestorUserType, @createdByEndUserIP, @createdDateTime, @status, @requestedAmount, @createdByRequestIp, @returnUrl));
+		}
+
+		public static IQueryEnd USP_API_ADD_REMOVE_ALLOWED_IPS(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @UserName, string @Password, string @PasswordNoCase, string @Action, string @IP)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_API_ADD_REMOVE_ALLOWED_IPS(@UserName, @Password, @PasswordNoCase, @Action, @IP));
+		}
+
+		public static IQueryEnd USP_API_ADD_TO_TRANSFER_QUEUE(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @UserName, string @DomainName, short? @NumOfYears, string @EppCode, string @TransID, decimal? @TransactionID, decimal? @AssociatedOrderID, string @ClientIP, string @option1, string @providerName)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_API_ADD_TO_TRANSFER_QUEUE(@UserName, @DomainName, @NumOfYears, @EppCode, @TransID, @TransactionID, @AssociatedOrderID, @ClientIP, @option1, @providerName));
+		}
+
+		public static IQueryEnd USP_API_ADMIN_GET_DOMAIN_INFO_BY_DOMAINNAME(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @domainname)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_API_ADMIN_GET_DOMAIN_INFO_BY_DOMAINNAME(@domainname));
+		}
+
+		public static IQueryEnd usp_Api_Admin_Onepager_ChangeHostName(this IStoredProcedureHolder<NamecheapCoreContext> holder, decimal? @SubscriptionId, string @AdminUserName, string @DomainName, string @NewHostName, string @OnepagerActionType, string @Comments)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.usp_Api_Admin_Onepager_ChangeHostName(@SubscriptionId, @AdminUserName, @DomainName, @NewHostName, @OnepagerActionType, @Comments));
+		}
+
+		public static IQueryEnd usp_Api_Admin_Onepager_Create(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @UserName, string @EmailAddress, string @HostName, string @DomainName, int? @DomainId, decimal? @PartnerSubscriptionId, DateTime? @ExpirationDateTime, bool? @IsEnabled, string @Comments, bool? @IsAutoRenew, decimal? @CreatedOrderId, string @ActionType, int? @Duration, string @Duration_Type)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.usp_Api_Admin_Onepager_Create(@UserName, @EmailAddress, @HostName, @DomainName, @DomainId, @PartnerSubscriptionId, @ExpirationDateTime, @IsEnabled, @Comments, @IsAutoRenew, @CreatedOrderId, @ActionType, @Duration, @Duration_Type));
+		}
+
+		public static IQueryEnd usp_Api_Admin_Onepager_Disable(this IStoredProcedureHolder<NamecheapCoreContext> holder, decimal? @SubscriptionId, string @AdminUserName, string @Comments, string @InternalComments, string @DisableStatusType, string @DisableStatus)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.usp_Api_Admin_Onepager_Disable(@SubscriptionId, @AdminUserName, @Comments, @InternalComments, @DisableStatusType, @DisableStatus));
+		}
+
+		public static IQueryEnd usp_Api_Admin_Onepager_Enable(this IStoredProcedureHolder<NamecheapCoreContext> holder, decimal? @SubscriptionId, string @AdminComments, string @Comments, string @StatusType, string @AdminUserName)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.usp_Api_Admin_Onepager_Enable(@SubscriptionId, @AdminComments, @Comments, @StatusType, @AdminUserName));
+		}
+
+		public static IQueryEnd usp_Api_Admin_Onepager_GetList(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @userName, int? @ListType, string @SearchTerm, string @SortExpression, int? @page, int? @pageSize)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.usp_Api_Admin_Onepager_GetList(@userName, @ListType, @SearchTerm, @SortExpression, @page, @pageSize));
+		}
+
+		public static IQueryEnd usp_Api_Admin_PrivacyPolicy_CancelRenewal(this IStoredProcedureHolder<NamecheapCoreContext> holder, int? @subscriptionId, int? @policyStatusId, string @logXml)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.usp_Api_Admin_PrivacyPolicy_CancelRenewal(@subscriptionId, @policyStatusId, @logXml));
+		}
+
+		public static IQueryEnd usp_Api_Admin_PrivacyPolicy_ChangeUser(this IStoredProcedureHolder<NamecheapCoreContext> holder, int? @subscriptionId, string @ownerUserName, string @targetUserName)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.usp_Api_Admin_PrivacyPolicy_ChangeUser(@subscriptionId, @ownerUserName, @targetUserName));
+		}
+
+		public static IQueryEnd usp_Api_Admin_PrivacyPolicy_Configure(this IStoredProcedureHolder<NamecheapCoreContext> holder, int? @PartnerSubscriptionId, DateTime? @ExpirationDatetime, string @PolicyStatus, int? @StatusId, string @MoreInfoLog)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.usp_Api_Admin_PrivacyPolicy_Configure(@PartnerSubscriptionId, @ExpirationDatetime, @PolicyStatus, @StatusId, @MoreInfoLog));
+		}
+
+		public static IQueryEnd usp_Api_Admin_PrivacyPolicy_Create(this IStoredProcedureHolder<NamecheapCoreContext> holder, decimal? @PartnerSubscriptionId, string @SubscriptionType, decimal? @CreatedOrderId, decimal? @PartnerOrderId, string @DomainName, string @EmailAddress, int? @NumOfYears, string @Password, string @PrivacypolicyLogOrderId, decimal? @CreatedOrderItemId, string @UserName, DateTime? @NextBillingDateTime, bool? @IsUpgradeConfirm, int? @StatusId, string @MoreInfoLog)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.usp_Api_Admin_PrivacyPolicy_Create(@PartnerSubscriptionId, @SubscriptionType, @CreatedOrderId, @PartnerOrderId, @DomainName, @EmailAddress, @NumOfYears, @Password, @PrivacypolicyLogOrderId, @CreatedOrderItemId, @UserName, @NextBillingDateTime, @IsUpgradeConfirm, @StatusId, @MoreInfoLog));
+		}
+
+		public static IQueryEnd usp_Api_Admin_PrivacyPolicy_GetInfo(this IStoredProcedureHolder<NamecheapCoreContext> holder, int? @SubscriptionId)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.usp_Api_Admin_PrivacyPolicy_GetInfo(@SubscriptionId));
+		}
+
+		public static IQueryEnd usp_Api_Admin_PrivacyPolicy_GetList(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @userName, string @domainName, string @EmailAddress, string @SortExpression, int? @page, int? @pageSize)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.usp_Api_Admin_PrivacyPolicy_GetList(@userName, @domainName, @EmailAddress, @SortExpression, @page, @pageSize));
+		}
+
+		public static IQueryEnd usp_Api_Admin_PrivacyPolicy_UpdateEmailAddress(this IStoredProcedureHolder<NamecheapCoreContext> holder, int? @subscriptionId, string @domainName, string @emailAddress, int? @policyStatusId, string @logXml)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.usp_Api_Admin_PrivacyPolicy_UpdateEmailAddress(@subscriptionId, @domainName, @emailAddress, @policyStatusId, @logXml));
+		}
+
+		public static IQueryEnd usp_Api_Admin_PrivacyPolicy_UpdateRenew(this IStoredProcedureHolder<NamecheapCoreContext> holder, decimal? @SubscriptionId, decimal? @OrderId, decimal? @OrderItemId, DateTime? @ExpiryDateTime, string @RenewalStatus)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.usp_Api_Admin_PrivacyPolicy_UpdateRenew(@SubscriptionId, @OrderId, @OrderItemId, @ExpiryDateTime, @RenewalStatus));
+		}
+
+		public static IQueryEnd usp_Api_Admin_PrivacyPolicyUpdate(this IStoredProcedureHolder<NamecheapCoreContext> holder, int? @SubscriptionId, decimal? @PartnerSubscriptionId, string @SubscriptionType, decimal? @CreatedOrderId, decimal? @PartnerOrderId, string @DomainName, string @EmailAddress, int? @NumOfYears, string @Password, decimal? @CreatedOrderItemId, string @UserName, DateTime? @NextBillingDateTime, bool? @IsUpgradeConfirm, int? @StatusId, string @MoreInfoLog)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.usp_Api_Admin_PrivacyPolicyUpdate(@SubscriptionId, @PartnerSubscriptionId, @SubscriptionType, @CreatedOrderId, @PartnerOrderId, @DomainName, @EmailAddress, @NumOfYears, @Password, @CreatedOrderItemId, @UserName, @NextBillingDateTime, @IsUpgradeConfirm, @StatusId, @MoreInfoLog));
+		}
+
+		public static IQueryEnd USP_API_APIUSER_GETROLE(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @ApiUser)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_API_APIUSER_GETROLE(@ApiUser));
+		}
+
+		public static IQueryEnd USP_API_AUTHENTICATE_AND_AUTHORIZE(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @ApiUser, string @ApiKey, string @ApiPassword, string @UserName, string @Command, string @RequestIp, string @ClientIp)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_API_AUTHENTICATE_AND_AUTHORIZE(@ApiUser, @ApiKey, @ApiPassword, @UserName, @Command, @RequestIp, @ClientIp));
+		}
+
+		public static IQueryEnd USP_API_AUTHENTICATE_APIUSER(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @ApiUser, string @ApiKey, string @RequestIp, string @ClientIp)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_API_AUTHENTICATE_APIUSER(@ApiUser, @ApiKey, @RequestIp, @ClientIp));
+		}
+
+		public static IQueryEnd USP_API_CHANGE_PASSWORD(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @userName, string @password, string @passwordNoCase, string @newPassword, string @newPasswordNoCase, string @newPasswordLog, string @Ip)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_API_CHANGE_PASSWORD(@userName, @password, @passwordNoCase, @newPassword, @newPasswordNoCase, @newPasswordLog, @Ip));
+		}
+
+		public static IQueryEnd USP_API_CHANGE_PASSWORD_USING_RESETCODE(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @UserName, string @RequestGuid, string @NewPassword, string @NewPasswordNoCase, string @NewPasswordLog, string @Ip)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_API_CHANGE_PASSWORD_USING_RESETCODE(@UserName, @RequestGuid, @NewPassword, @NewPasswordNoCase, @NewPasswordLog, @Ip));
+		}
+
+		public static IQueryEnd USP_API_CHECK_DOMAIN_AVAILABLITY(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @domainname, string @username)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_API_CHECK_DOMAIN_AVAILABLITY(@domainname, @username));
+		}
+
+		public static IQueryEnd USP_API_CHECK_DOMAIN_EXPIRE(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @domainname)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_API_CHECK_DOMAIN_EXPIRE(@domainname));
+		}
+
+		public static IQueryEnd USP_API_CHECK_EMAIL_FOR_WHOISGUARD(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @username, string @email)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_API_CHECK_EMAIL_FOR_WHOISGUARD(@username, @email));
+		}
+
+		public static IQueryEnd USP_API_CHECK_SSL_PURCHASEVALIDATIONID(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @purchaseValidationId, string @userName)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_API_CHECK_SSL_PURCHASEVALIDATIONID(@purchaseValidationId, @userName));
+		}
+
+		public static IQueryEnd USP_API_CHECK_TOKEN_ID_AND_GET_STATUS(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @tokenId, string @requestorUserName, string @requestorUserType)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_API_CHECK_TOKEN_ID_AND_GET_STATUS(@tokenId, @requestorUserName, @requestorUserType));
+		}
+
+		public static IQueryEnd USP_API_CHECK_USER_EDIT_CAPABILITIES_FOR_DOMAIN(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @domainName, string @userName, string @actionType)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_API_CHECK_USER_EDIT_CAPABILITIES_FOR_DOMAIN(@domainName, @userName, @actionType));
+		}
+
+		public static IQueryEnd USP_API_CHECK_USER_LIST(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @UserList_CSV)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_API_CHECK_USER_LIST(@UserList_CSV));
+		}
+
+		public static IQueryEnd USP_API_CHECK_VALID_SSL_FOR_RENEW(this IStoredProcedureHolder<NamecheapCoreContext> holder, decimal? @certificateID, string @username)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_API_CHECK_VALID_SSL_FOR_RENEW(@certificateID, @username));
+		}
+
+		public static IQueryEnd USP_API_CREATE_DOMAIN_PURCHASE_ORDER(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @UserName, string @ClientIP, string @PromotionCode, string @SLD, string @TLD, short? @NumYears, string @RegistrantOrganizationName, string @RegistrantJobTitle, string @RegistrantFirstName, string @RegistrantLastName, string @RegistrantAddress1, string @RegistrantAddress2, string @RegistrantCity, string @RegistrantStateProvince, string @RegistrantStateProvinceChoice, string @RegistrantPostalCode, string @RegistrantCountry, string @RegistrantPhone, string @RegistrantPhoneExt, string @RegistrantFax, string @RegistrantEmailAddress, string @TechOrganizationName, string @TechJobTitle, string @TechFirstName, string @TechLastName, string @TechAddress1, string @TechAddress2, string @TechCity, string @TechStateProvince, string @TechStateProvinceChoice, string @TechPostalCode, string @TechCountry, string @TechPhone, string @TechPhoneExt, string @TechFax, string @TechEmailAddress, string @AdminOrganizationName, string @AdminJobTitle, string @AdminFirstName, string @AdminLastName, string @AdminAddress1, string @AdminAddress2, string @AdminCity, string @AdminStateProvince, string @AdminStateProvinceChoice, string @AdminPostalCode, string @AdminCountry, string @AdminPhone, string @AdminPhoneExt, string @AdminFax, string @AdminEmailAddress, string @AuxBillingOrganizationName, string @AuxBillingJobTitle, string @AuxBillingFirstName, string @AuxBillingLastName, string @AuxBillingAddress1, string @AuxBillingAddress2, string @AuxBillingCity, string @AuxBillingStateProvince, string @AuxBillingStateProvinceChoice, string @AuxBillingPostalCode, string @AuxBillingCountry, string @AuxBillingPhone, string @AuxBillingPhoneext, string @AuxBillingFax, string @AuxBillingEmailAddress, string @UseNameServer, string @NS1, string @NS2, string @NS3, string @NS4, string @NS5, string @FwdEMailUser, string @FwdToEMail, string @Submit, string @ForwardingURL, string @ForwardingType, string @RegistrantNexus, string @RegistrantNexusCountry, string @RegistrantPurpose, string @CIRAType, string @COUKLegalType, string @COUKCompanyID, string @COUKRegisteredfor, string @COUKRegOptOut, string @ORGUKRegisteredfor, string @ORGUKRegOptOut, string @ORGUKLegalType, string @ORGUKCompanyID, bool? @DEconfirmAddress, string @Eu_adr_lang, bool? @Eu_agreedelete, string @MEUKLegalType, string @MEUKCompanyID, string @MEUKRegisteredfor, string @MEUKRegOptOut, string @Cira_Registrant, string @Cira_Registrant_desc, string @Cira_trademark_no, string @Cira_org_registered_in)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_API_CREATE_DOMAIN_PURCHASE_ORDER(@UserName, @ClientIP, @PromotionCode, @SLD, @TLD, @NumYears, @RegistrantOrganizationName, @RegistrantJobTitle, @RegistrantFirstName, @RegistrantLastName, @RegistrantAddress1, @RegistrantAddress2, @RegistrantCity, @RegistrantStateProvince, @RegistrantStateProvinceChoice, @RegistrantPostalCode, @RegistrantCountry, @RegistrantPhone, @RegistrantPhoneExt, @RegistrantFax, @RegistrantEmailAddress, @TechOrganizationName, @TechJobTitle, @TechFirstName, @TechLastName, @TechAddress1, @TechAddress2, @TechCity, @TechStateProvince, @TechStateProvinceChoice, @TechPostalCode, @TechCountry, @TechPhone, @TechPhoneExt, @TechFax, @TechEmailAddress, @AdminOrganizationName, @AdminJobTitle, @AdminFirstName, @AdminLastName, @AdminAddress1, @AdminAddress2, @AdminCity, @AdminStateProvince, @AdminStateProvinceChoice, @AdminPostalCode, @AdminCountry, @AdminPhone, @AdminPhoneExt, @AdminFax, @AdminEmailAddress, @AuxBillingOrganizationName, @AuxBillingJobTitle, @AuxBillingFirstName, @AuxBillingLastName, @AuxBillingAddress1, @AuxBillingAddress2, @AuxBillingCity, @AuxBillingStateProvince, @AuxBillingStateProvinceChoice, @AuxBillingPostalCode, @AuxBillingCountry, @AuxBillingPhone, @AuxBillingPhoneext, @AuxBillingFax, @AuxBillingEmailAddress, @UseNameServer, @NS1, @NS2, @NS3, @NS4, @NS5, @FwdEMailUser, @FwdToEMail, @Submit, @ForwardingURL, @ForwardingType, @RegistrantNexus, @RegistrantNexusCountry, @RegistrantPurpose, @CIRAType, @COUKLegalType, @COUKCompanyID, @COUKRegisteredfor, @COUKRegOptOut, @ORGUKRegisteredfor, @ORGUKRegOptOut, @ORGUKLegalType, @ORGUKCompanyID, @DEconfirmAddress, @Eu_adr_lang, @Eu_agreedelete, @MEUKLegalType, @MEUKCompanyID, @MEUKRegisteredfor, @MEUKRegOptOut, @Cira_Registrant, @Cira_Registrant_desc, @Cira_trademark_no, @Cira_org_registered_in));
+		}
+
+		public static IQueryEnd USP_API_CREATE_DOMAIN_RENEW_PURCHASE(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @UserName, short? @NumYears, string @SLD, string @TLD, string @PromotionCode, string @ClientIP)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_API_CREATE_DOMAIN_RENEW_PURCHASE(@UserName, @NumYears, @SLD, @TLD, @PromotionCode, @ClientIP));
+		}
+
+		public static IQueryEnd USP_API_CREATE_NEW_USER(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @ParentUserName, string @UserName, string @ClientIp, string @Email, string @FirstName, string @LastName, bool? @AcceptTerms, bool? @AcceptNews, string @JobTitle, string @Organization, string @StreetAddress, string @StreetAddress2, string @City, string @State, string @StateProvinceChoice, string @Zip, string @Country, string @Phone, string @PhoneExt, string @Fax, string @Password, bool? @isAppUser)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_API_CREATE_NEW_USER(@ParentUserName, @UserName, @ClientIp, @Email, @FirstName, @LastName, @AcceptTerms, @AcceptNews, @JobTitle, @Organization, @StreetAddress, @StreetAddress2, @City, @State, @StateProvinceChoice, @Zip, @Country, @Phone, @PhoneExt, @Fax, @Password, @isAppUser));
+		}
+
+		public static IQueryEnd USP_API_CREATE_ORDER(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @UserName, string @SLD, string @TLD, short? @NumYears, int? @Qty, string @ActionID, string @PromotionCode, string @ClientIP, string @OrderRefID, string @RegistrantOrganizationName, string @RegistrantJobTitle, string @RegistrantFirstName, string @RegistrantLastName, string @RegistrantAddress1, string @RegistrantAddress2, string @RegistrantCity, string @RegistrantStateProvince, string @RegistrantStateProvinceChoice, string @RegistrantPostalCode, string @RegistrantCountry, string @RegistrantPhone, string @RegistrantPhoneExt, string @RegistrantFax, string @RegistrantEmailAddress, string @TechOrganizationName, string @TechJobTitle, string @TechFirstName, string @TechLastName, string @TechAddress1, string @TechAddress2, string @TechCity, string @TechStateProvince, string @TechStateProvinceChoice, string @TechPostalCode, string @TechCountry, string @TechPhone, string @TechPhoneExt, string @TechFax, string @TechEmailAddress, string @AdminOrganizationName, string @AdminJobTitle, string @AdminFirstName, string @AdminLastName, string @AdminAddress1, string @AdminAddress2, string @AdminCity, string @AdminStateProvince, string @AdminStateProvinceChoice, string @AdminPostalCode, string @AdminCountry, string @AdminPhone, string @AdminPhoneExt, string @AdminFax, string @AdminEmailAddress, string @AuxBillingOrganizationName, string @AuxBillingJobTitle, string @AuxBillingFirstName, string @AuxBillingLastName, string @AuxBillingAddress1, string @AuxBillingAddress2, string @AuxBillingCity, string @AuxBillingStateProvince, string @AuxBillingStateProvinceChoice, string @AuxBillingPostalCode, string @AuxBillingCountry, string @AuxBillingPhone, string @AuxBillingPhoneext, string @AuxBillingFax, string @AuxBillingEmailAddress, string @UseNameServer, string @NS1, string @NS2, string @NS3, string @NS4, string @NS5, string @FwdEMailUser, string @FwdToEMail, string @Submit, string @ForwardingURL, string @ForwardingType, string @RegistrantNexus, string @RegistrantNexusCountry, string @RegistrantPurpose, string @CIRAType, string @COUKLegalType, string @COUKCompanyID, string @COUKRegisteredfor, string @COUKRegOptOut, string @ORGUKRegisteredfor, string @ORGUKRegOptOut, string @ORGUKLegalType, string @ORGUKCompanyID, bool? @DEconfirmAddress, string @Eu_adr_lang, bool? @Eu_agreedelete, string @MEUKLegalType, string @MEUKCompanyID, string @MEUKRegisteredfor, string @MEUKRegOptOut, string @Cira_Registrant, string @Cira_Registrant_desc, string @Cira_trademark_no, string @Cira_org_registered_in, string @Option1, string @Option2)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_API_CREATE_ORDER(@UserName, @SLD, @TLD, @NumYears, @Qty, @ActionID, @PromotionCode, @ClientIP, @OrderRefID, @RegistrantOrganizationName, @RegistrantJobTitle, @RegistrantFirstName, @RegistrantLastName, @RegistrantAddress1, @RegistrantAddress2, @RegistrantCity, @RegistrantStateProvince, @RegistrantStateProvinceChoice, @RegistrantPostalCode, @RegistrantCountry, @RegistrantPhone, @RegistrantPhoneExt, @RegistrantFax, @RegistrantEmailAddress, @TechOrganizationName, @TechJobTitle, @TechFirstName, @TechLastName, @TechAddress1, @TechAddress2, @TechCity, @TechStateProvince, @TechStateProvinceChoice, @TechPostalCode, @TechCountry, @TechPhone, @TechPhoneExt, @TechFax, @TechEmailAddress, @AdminOrganizationName, @AdminJobTitle, @AdminFirstName, @AdminLastName, @AdminAddress1, @AdminAddress2, @AdminCity, @AdminStateProvince, @AdminStateProvinceChoice, @AdminPostalCode, @AdminCountry, @AdminPhone, @AdminPhoneExt, @AdminFax, @AdminEmailAddress, @AuxBillingOrganizationName, @AuxBillingJobTitle, @AuxBillingFirstName, @AuxBillingLastName, @AuxBillingAddress1, @AuxBillingAddress2, @AuxBillingCity, @AuxBillingStateProvince, @AuxBillingStateProvinceChoice, @AuxBillingPostalCode, @AuxBillingCountry, @AuxBillingPhone, @AuxBillingPhoneext, @AuxBillingFax, @AuxBillingEmailAddress, @UseNameServer, @NS1, @NS2, @NS3, @NS4, @NS5, @FwdEMailUser, @FwdToEMail, @Submit, @ForwardingURL, @ForwardingType, @RegistrantNexus, @RegistrantNexusCountry, @RegistrantPurpose, @CIRAType, @COUKLegalType, @COUKCompanyID, @COUKRegisteredfor, @COUKRegOptOut, @ORGUKRegisteredfor, @ORGUKRegOptOut, @ORGUKLegalType, @ORGUKCompanyID, @DEconfirmAddress, @Eu_adr_lang, @Eu_agreedelete, @MEUKLegalType, @MEUKCompanyID, @MEUKRegisteredfor, @MEUKRegOptOut, @Cira_Registrant, @Cira_Registrant_desc, @Cira_trademark_no, @Cira_org_registered_in, @Option1, @Option2));
+		}
+
+		public static IQueryEnd USP_API_CREATE_ORDER_FOR_MARKETPLACE_WITH_CUSTOM_PRICE(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @Username, decimal? @MPListingId, string @PromotionCode, string @ClientIP, bool? @IsBilling, int? @AffliateId, int? @AffliateProgramId, string @OrderRefID, string @BillingOrganizationName, string @BillingJobTitle, string @BillingFirstName, string @BillingLastName, string @BillingAddress1, string @BillingAddress2, string @BillingCity, string @BillingStateProvince, string @BillingStateProvinceChoice, string @BillingPostalCode, string @BillingCountry, string @BillingPhone, string @BillingPhoneext, string @BillingFax, string @BillingEmailAddress, decimal? @Price, decimal? @RegularPrice, string @ProviderType)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_API_CREATE_ORDER_FOR_MARKETPLACE_WITH_CUSTOM_PRICE(@Username, @MPListingId, @PromotionCode, @ClientIP, @IsBilling, @AffliateId, @AffliateProgramId, @OrderRefID, @BillingOrganizationName, @BillingJobTitle, @BillingFirstName, @BillingLastName, @BillingAddress1, @BillingAddress2, @BillingCity, @BillingStateProvince, @BillingStateProvinceChoice, @BillingPostalCode, @BillingCountry, @BillingPhone, @BillingPhoneext, @BillingFax, @BillingEmailAddress, @Price, @RegularPrice, @ProviderType));
+		}
+
+		public static IQueryEnd USP_API_CREATE_ORDER_WITH_CUSTOM_INVOICE(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @UserName, string @SLD, string @TLD, short? @NumYears, int? @Qty, string @ActionID, string @PromotionCode, string @ClientIP, bool? @IsBilling, int? @AffliateId, int? @AffliateProgramId, string @OrderRefID, string @RegistrantOrganizationName, string @RegistrantJobTitle, string @RegistrantFirstName, string @RegistrantLastName, string @RegistrantAddress1, string @RegistrantAddress2, string @RegistrantCity, string @RegistrantStateProvince, string @RegistrantStateProvinceChoice, string @RegistrantPostalCode, string @RegistrantCountry, string @RegistrantPhone, string @RegistrantPhoneExt, string @RegistrantFax, string @RegistrantEmailAddress, string @TechOrganizationName, string @TechJobTitle, string @TechFirstName, string @TechLastName, string @TechAddress1, string @TechAddress2, string @TechCity, string @TechStateProvince, string @TechStateProvinceChoice, string @TechPostalCode, string @TechCountry, string @TechPhone, string @TechPhoneExt, string @TechFax, string @TechEmailAddress, string @AdminOrganizationName, string @AdminJobTitle, string @AdminFirstName, string @AdminLastName, string @AdminAddress1, string @AdminAddress2, string @AdminCity, string @AdminStateProvince, string @AdminStateProvinceChoice, string @AdminPostalCode, string @AdminCountry, string @AdminPhone, string @AdminPhoneExt, string @AdminFax, string @AdminEmailAddress, string @AuxBillingOrganizationName, string @AuxBillingJobTitle, string @AuxBillingFirstName, string @AuxBillingLastName, string @AuxBillingAddress1, string @AuxBillingAddress2, string @AuxBillingCity, string @AuxBillingStateProvince, string @AuxBillingStateProvinceChoice, string @AuxBillingPostalCode, string @AuxBillingCountry, string @AuxBillingPhone, string @AuxBillingPhoneext, string @AuxBillingFax, string @AuxBillingEmailAddress, string @BillingOrganizationName, string @BillingJobTitle, string @BillingFirstName, string @BillingLastName, string @BillingAddress1, string @BillingAddress2, string @BillingCity, string @BillingStateProvince, string @BillingStateProvinceChoice, string @BillingPostalCode, string @BillingCountry, string @BillingPhone, string @BillingPhoneext, string @BillingFax, string @BillingEmailAddress, string @UseNameServer, string @NS1, string @NS2, string @NS3, string @NS4, string @NS5, string @FwdEMailUser, string @FwdToEMail, string @Submit, string @ForwardingURL, string @ForwardingType, string @RegistrantNexus, string @RegistrantNexusCountry, string @RegistrantPurpose, string @COUKLegalType, string @COUKCompanyID, string @COUKRegisteredfor, string @COUKRegOptOut, string @ORGUKRegisteredfor, string @ORGUKRegOptOut, string @ORGUKLegalType, string @ORGUKCompanyID, bool? @DEconfirmAddress, string @Eu_adr_lang, bool? @Eu_agreedelete, string @MEUKLegalType, string @MEUKCompanyID, string @MEUKRegisteredfor, string @MEUKRegOptOut, string @CIRA_Legal_Type, string @CIRA_Whois_Display, string @CIRA_Agreement_Value, string @CIRA_Agreement_Version, string @CIRA_Language, string @Option1, string @Option2)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_API_CREATE_ORDER_WITH_CUSTOM_INVOICE(@UserName, @SLD, @TLD, @NumYears, @Qty, @ActionID, @PromotionCode, @ClientIP, @IsBilling, @AffliateId, @AffliateProgramId, @OrderRefID, @RegistrantOrganizationName, @RegistrantJobTitle, @RegistrantFirstName, @RegistrantLastName, @RegistrantAddress1, @RegistrantAddress2, @RegistrantCity, @RegistrantStateProvince, @RegistrantStateProvinceChoice, @RegistrantPostalCode, @RegistrantCountry, @RegistrantPhone, @RegistrantPhoneExt, @RegistrantFax, @RegistrantEmailAddress, @TechOrganizationName, @TechJobTitle, @TechFirstName, @TechLastName, @TechAddress1, @TechAddress2, @TechCity, @TechStateProvince, @TechStateProvinceChoice, @TechPostalCode, @TechCountry, @TechPhone, @TechPhoneExt, @TechFax, @TechEmailAddress, @AdminOrganizationName, @AdminJobTitle, @AdminFirstName, @AdminLastName, @AdminAddress1, @AdminAddress2, @AdminCity, @AdminStateProvince, @AdminStateProvinceChoice, @AdminPostalCode, @AdminCountry, @AdminPhone, @AdminPhoneExt, @AdminFax, @AdminEmailAddress, @AuxBillingOrganizationName, @AuxBillingJobTitle, @AuxBillingFirstName, @AuxBillingLastName, @AuxBillingAddress1, @AuxBillingAddress2, @AuxBillingCity, @AuxBillingStateProvince, @AuxBillingStateProvinceChoice, @AuxBillingPostalCode, @AuxBillingCountry, @AuxBillingPhone, @AuxBillingPhoneext, @AuxBillingFax, @AuxBillingEmailAddress, @BillingOrganizationName, @BillingJobTitle, @BillingFirstName, @BillingLastName, @BillingAddress1, @BillingAddress2, @BillingCity, @BillingStateProvince, @BillingStateProvinceChoice, @BillingPostalCode, @BillingCountry, @BillingPhone, @BillingPhoneext, @BillingFax, @BillingEmailAddress, @UseNameServer, @NS1, @NS2, @NS3, @NS4, @NS5, @FwdEMailUser, @FwdToEMail, @Submit, @ForwardingURL, @ForwardingType, @RegistrantNexus, @RegistrantNexusCountry, @RegistrantPurpose, @COUKLegalType, @COUKCompanyID, @COUKRegisteredfor, @COUKRegOptOut, @ORGUKRegisteredfor, @ORGUKRegOptOut, @ORGUKLegalType, @ORGUKCompanyID, @DEconfirmAddress, @Eu_adr_lang, @Eu_agreedelete, @MEUKLegalType, @MEUKCompanyID, @MEUKRegisteredfor, @MEUKRegOptOut, @CIRA_Legal_Type, @CIRA_Whois_Display, @CIRA_Agreement_Value, @CIRA_Agreement_Version, @CIRA_Language, @Option1, @Option2));
+		}
+
+		public static IQueryEnd USP_API_CREATE_ORDER_WITH_CUSTOM_INVOICE_AND_PRICE(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @UserName, string @SLD, string @TLD, short? @NumYears, short? @Duration, int? @Qty, string @ActionID, int? @userId, string @durationType, string @PromotionCode, string @ClientIP, bool? @IsBilling, int? @AffliateId, int? @AffliateProgramId, string @OrderRefID, string @RegistrantOrganizationName, string @RegistrantJobTitle, string @RegistrantFirstName, string @RegistrantLastName, string @RegistrantAddress1, string @RegistrantAddress2, string @RegistrantCity, string @RegistrantStateProvince, string @RegistrantStateProvinceChoice, string @RegistrantPostalCode, string @RegistrantCountry, string @RegistrantPhone, string @RegistrantPhoneExt, string @RegistrantFax, string @RegistrantEmailAddress, string @TechOrganizationName, string @TechJobTitle, string @TechFirstName, string @TechLastName, string @TechAddress1, string @TechAddress2, string @TechCity, string @TechStateProvince, string @TechStateProvinceChoice, string @TechPostalCode, string @TechCountry, string @TechPhone, string @TechPhoneExt, string @TechFax, string @TechEmailAddress, string @AdminOrganizationName, string @AdminJobTitle, string @AdminFirstName, string @AdminLastName, string @AdminAddress1, string @AdminAddress2, string @AdminCity, string @AdminStateProvince, string @AdminStateProvinceChoice, string @AdminPostalCode, string @AdminCountry, string @AdminPhone, string @AdminPhoneExt, string @AdminFax, string @AdminEmailAddress, string @AuxBillingOrganizationName, string @AuxBillingJobTitle, string @AuxBillingFirstName, string @AuxBillingLastName, string @AuxBillingAddress1, string @AuxBillingAddress2, string @AuxBillingCity, string @AuxBillingStateProvince, string @AuxBillingStateProvinceChoice, string @AuxBillingPostalCode, string @AuxBillingCountry, string @AuxBillingPhone, string @AuxBillingPhoneext, string @AuxBillingFax, string @AuxBillingEmailAddress, string @BillingOrganizationName, string @BillingJobTitle, string @BillingFirstName, string @BillingLastName, string @BillingAddress1, string @BillingAddress2, string @BillingCity, string @BillingStateProvince, string @BillingStateProvinceChoice, string @BillingPostalCode, string @BillingCountry, string @BillingPhone, string @BillingPhoneext, string @BillingFax, string @BillingEmailAddress, string @UseNameServer, string @NS1, string @NS2, string @NS3, string @NS4, string @NS5, string @FwdEMailUser, string @FwdToEMail, string @Submit, string @ForwardingURL, string @ForwardingType, string @RegistrantNexus, string @RegistrantNexusCountry, string @RegistrantPurpose, string @COUKLegalType, string @COUKCompanyID, string @COUKRegisteredfor, string @COUKRegOptOut, string @ORGUKRegisteredfor, string @ORGUKRegOptOut, string @ORGUKLegalType, string @ORGUKCompanyID, bool? @DEconfirmAddress, string @Eu_adr_lang, bool? @Eu_agreedelete, string @MEUKLegalType, string @MEUKCompanyID, string @MEUKRegisteredfor, string @MEUKRegOptOut, string @CIRA_Legal_Type, string @CIRA_Whois_Display, string @CIRA_Agreement_Value, string @CIRA_Agreement_Version, string @CIRA_Language, string @Option1, string @Option2, decimal? @PricePerYear, decimal? @RegPricePerYear, decimal? @SpecialPrice, decimal? @AdditionalCostPerYear, decimal? @RegAdditionalCostPerYear, decimal? @SpecialAdditionalCost, bool? @IsPricePerDuration, bool? @IsAdditionalCostOneTime, string @OrderRefIP, int? @tierpricingid)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_API_CREATE_ORDER_WITH_CUSTOM_INVOICE_AND_PRICE(@UserName, @SLD, @TLD, @NumYears, @Duration, @Qty, @ActionID, @userId, @durationType, @PromotionCode, @ClientIP, @IsBilling, @AffliateId, @AffliateProgramId, @OrderRefID, @RegistrantOrganizationName, @RegistrantJobTitle, @RegistrantFirstName, @RegistrantLastName, @RegistrantAddress1, @RegistrantAddress2, @RegistrantCity, @RegistrantStateProvince, @RegistrantStateProvinceChoice, @RegistrantPostalCode, @RegistrantCountry, @RegistrantPhone, @RegistrantPhoneExt, @RegistrantFax, @RegistrantEmailAddress, @TechOrganizationName, @TechJobTitle, @TechFirstName, @TechLastName, @TechAddress1, @TechAddress2, @TechCity, @TechStateProvince, @TechStateProvinceChoice, @TechPostalCode, @TechCountry, @TechPhone, @TechPhoneExt, @TechFax, @TechEmailAddress, @AdminOrganizationName, @AdminJobTitle, @AdminFirstName, @AdminLastName, @AdminAddress1, @AdminAddress2, @AdminCity, @AdminStateProvince, @AdminStateProvinceChoice, @AdminPostalCode, @AdminCountry, @AdminPhone, @AdminPhoneExt, @AdminFax, @AdminEmailAddress, @AuxBillingOrganizationName, @AuxBillingJobTitle, @AuxBillingFirstName, @AuxBillingLastName, @AuxBillingAddress1, @AuxBillingAddress2, @AuxBillingCity, @AuxBillingStateProvince, @AuxBillingStateProvinceChoice, @AuxBillingPostalCode, @AuxBillingCountry, @AuxBillingPhone, @AuxBillingPhoneext, @AuxBillingFax, @AuxBillingEmailAddress, @BillingOrganizationName, @BillingJobTitle, @BillingFirstName, @BillingLastName, @BillingAddress1, @BillingAddress2, @BillingCity, @BillingStateProvince, @BillingStateProvinceChoice, @BillingPostalCode, @BillingCountry, @BillingPhone, @BillingPhoneext, @BillingFax, @BillingEmailAddress, @UseNameServer, @NS1, @NS2, @NS3, @NS4, @NS5, @FwdEMailUser, @FwdToEMail, @Submit, @ForwardingURL, @ForwardingType, @RegistrantNexus, @RegistrantNexusCountry, @RegistrantPurpose, @COUKLegalType, @COUKCompanyID, @COUKRegisteredfor, @COUKRegOptOut, @ORGUKRegisteredfor, @ORGUKRegOptOut, @ORGUKLegalType, @ORGUKCompanyID, @DEconfirmAddress, @Eu_adr_lang, @Eu_agreedelete, @MEUKLegalType, @MEUKCompanyID, @MEUKRegisteredfor, @MEUKRegOptOut, @CIRA_Legal_Type, @CIRA_Whois_Display, @CIRA_Agreement_Value, @CIRA_Agreement_Version, @CIRA_Language, @Option1, @Option2, @PricePerYear, @RegPricePerYear, @SpecialPrice, @AdditionalCostPerYear, @RegAdditionalCostPerYear, @SpecialAdditionalCost, @IsPricePerDuration, @IsAdditionalCostOneTime, @OrderRefIP, @tierpricingid));
+		}
+
+		public static IQueryEnd USP_API_CREATE_ORDER_WITH_CUSTOM_INVOICE_AND_PRICE_new(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @UserName, string @SLD, string @TLD, short? @NumYears, short? @Duration, int? @Qty, string @ActionID, int? @userId, string @durationType, string @PromotionCode, string @ClientIP, bool? @IsBilling, int? @AffliateId, int? @AffliateProgramId, string @OrderRefID, string @RegistrantOrganizationName, string @RegistrantJobTitle, string @RegistrantFirstName, string @RegistrantLastName, string @RegistrantAddress1, string @RegistrantAddress2, string @RegistrantCity, string @RegistrantStateProvince, string @RegistrantStateProvinceChoice, string @RegistrantPostalCode, string @RegistrantCountry, string @RegistrantPhone, string @RegistrantPhoneExt, string @RegistrantFax, string @RegistrantEmailAddress, string @TechOrganizationName, string @TechJobTitle, string @TechFirstName, string @TechLastName, string @TechAddress1, string @TechAddress2, string @TechCity, string @TechStateProvince, string @TechStateProvinceChoice, string @TechPostalCode, string @TechCountry, string @TechPhone, string @TechPhoneExt, string @TechFax, string @TechEmailAddress, string @AdminOrganizationName, string @AdminJobTitle, string @AdminFirstName, string @AdminLastName, string @AdminAddress1, string @AdminAddress2, string @AdminCity, string @AdminStateProvince, string @AdminStateProvinceChoice, string @AdminPostalCode, string @AdminCountry, string @AdminPhone, string @AdminPhoneExt, string @AdminFax, string @AdminEmailAddress, string @AuxBillingOrganizationName, string @AuxBillingJobTitle, string @AuxBillingFirstName, string @AuxBillingLastName, string @AuxBillingAddress1, string @AuxBillingAddress2, string @AuxBillingCity, string @AuxBillingStateProvince, string @AuxBillingStateProvinceChoice, string @AuxBillingPostalCode, string @AuxBillingCountry, string @AuxBillingPhone, string @AuxBillingPhoneext, string @AuxBillingFax, string @AuxBillingEmailAddress, string @BillingOrganizationName, string @BillingJobTitle, string @BillingFirstName, string @BillingLastName, string @BillingAddress1, string @BillingAddress2, string @BillingCity, string @BillingStateProvince, string @BillingStateProvinceChoice, string @BillingPostalCode, string @BillingCountry, string @BillingPhone, string @BillingPhoneext, string @BillingFax, string @BillingEmailAddress, string @UseNameServer, string @NS1, string @NS2, string @NS3, string @NS4, string @NS5, string @FwdEMailUser, string @FwdToEMail, string @Submit, string @ForwardingURL, string @ForwardingType, string @RegistrantNexus, string @RegistrantNexusCountry, string @RegistrantPurpose, string @COUKLegalType, string @COUKCompanyID, string @COUKRegisteredfor, string @COUKRegOptOut, string @ORGUKRegisteredfor, string @ORGUKRegOptOut, string @ORGUKLegalType, string @ORGUKCompanyID, bool? @DEconfirmAddress, string @Eu_adr_lang, bool? @Eu_agreedelete, string @MEUKLegalType, string @MEUKCompanyID, string @MEUKRegisteredfor, string @MEUKRegOptOut, string @CIRA_Legal_Type, string @CIRA_Whois_Display, string @CIRA_Agreement_Value, string @CIRA_Agreement_Version, string @CIRA_Language, string @Option1, string @Option2, decimal? @PricePerYear, decimal? @RegPricePerYear, decimal? @SpecialPrice, decimal? @AdditionalCostPerYear, decimal? @RegAdditionalCostPerYear, decimal? @SpecialAdditionalCost, bool? @IsPricePerDuration, bool? @IsAdditionalCostOneTime, string @AddonName, string @AddonGroupName, decimal? @AddonPrice, decimal? @AddonRegularPrice, decimal? @AddonSpecialPrice, decimal? @AddonAdditionalCost, decimal? @AddonRegularAdditionalCost, decimal? @AddonSpecialAdditionalCost, bool? @IsAddonRegularPricingTypeMultiple, bool? @IsAddonSpecialPricingTypeMultiple, bool? @IsAddonPricingTypeMultiple, bool? @IsAddonRegularAdditionalCostTypeMultiple, bool? @IsAddonSpecialAdditionalCostTypeMultiple, bool? @IsAddonAdditionalCostTypeMultiple, int? @AddonQty, string @OrderRefIP, int? @tierpricingid)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_API_CREATE_ORDER_WITH_CUSTOM_INVOICE_AND_PRICE_new(@UserName, @SLD, @TLD, @NumYears, @Duration, @Qty, @ActionID, @userId, @durationType, @PromotionCode, @ClientIP, @IsBilling, @AffliateId, @AffliateProgramId, @OrderRefID, @RegistrantOrganizationName, @RegistrantJobTitle, @RegistrantFirstName, @RegistrantLastName, @RegistrantAddress1, @RegistrantAddress2, @RegistrantCity, @RegistrantStateProvince, @RegistrantStateProvinceChoice, @RegistrantPostalCode, @RegistrantCountry, @RegistrantPhone, @RegistrantPhoneExt, @RegistrantFax, @RegistrantEmailAddress, @TechOrganizationName, @TechJobTitle, @TechFirstName, @TechLastName, @TechAddress1, @TechAddress2, @TechCity, @TechStateProvince, @TechStateProvinceChoice, @TechPostalCode, @TechCountry, @TechPhone, @TechPhoneExt, @TechFax, @TechEmailAddress, @AdminOrganizationName, @AdminJobTitle, @AdminFirstName, @AdminLastName, @AdminAddress1, @AdminAddress2, @AdminCity, @AdminStateProvince, @AdminStateProvinceChoice, @AdminPostalCode, @AdminCountry, @AdminPhone, @AdminPhoneExt, @AdminFax, @AdminEmailAddress, @AuxBillingOrganizationName, @AuxBillingJobTitle, @AuxBillingFirstName, @AuxBillingLastName, @AuxBillingAddress1, @AuxBillingAddress2, @AuxBillingCity, @AuxBillingStateProvince, @AuxBillingStateProvinceChoice, @AuxBillingPostalCode, @AuxBillingCountry, @AuxBillingPhone, @AuxBillingPhoneext, @AuxBillingFax, @AuxBillingEmailAddress, @BillingOrganizationName, @BillingJobTitle, @BillingFirstName, @BillingLastName, @BillingAddress1, @BillingAddress2, @BillingCity, @BillingStateProvince, @BillingStateProvinceChoice, @BillingPostalCode, @BillingCountry, @BillingPhone, @BillingPhoneext, @BillingFax, @BillingEmailAddress, @UseNameServer, @NS1, @NS2, @NS3, @NS4, @NS5, @FwdEMailUser, @FwdToEMail, @Submit, @ForwardingURL, @ForwardingType, @RegistrantNexus, @RegistrantNexusCountry, @RegistrantPurpose, @COUKLegalType, @COUKCompanyID, @COUKRegisteredfor, @COUKRegOptOut, @ORGUKRegisteredfor, @ORGUKRegOptOut, @ORGUKLegalType, @ORGUKCompanyID, @DEconfirmAddress, @Eu_adr_lang, @Eu_agreedelete, @MEUKLegalType, @MEUKCompanyID, @MEUKRegisteredfor, @MEUKRegOptOut, @CIRA_Legal_Type, @CIRA_Whois_Display, @CIRA_Agreement_Value, @CIRA_Agreement_Version, @CIRA_Language, @Option1, @Option2, @PricePerYear, @RegPricePerYear, @SpecialPrice, @AdditionalCostPerYear, @RegAdditionalCostPerYear, @SpecialAdditionalCost, @IsPricePerDuration, @IsAdditionalCostOneTime, @AddonName, @AddonGroupName, @AddonPrice, @AddonRegularPrice, @AddonSpecialPrice, @AddonAdditionalCost, @AddonRegularAdditionalCost, @AddonSpecialAdditionalCost, @IsAddonRegularPricingTypeMultiple, @IsAddonSpecialPricingTypeMultiple, @IsAddonPricingTypeMultiple, @IsAddonRegularAdditionalCostTypeMultiple, @IsAddonSpecialAdditionalCostTypeMultiple, @IsAddonAdditionalCostTypeMultiple, @AddonQty, @OrderRefIP, @tierpricingid));
+		}
+
+		public static IQueryEnd USP_API_CREATE_USER(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @ParentUserName, string @UserName, string @Password, string @PasswordNoCase, string @PasswordLog, string @ClientIp, string @Email, string @FirstName, string @LastName, bool? @AcceptTerms, bool? @AcceptNews, string @JobTitle, string @Organization, string @StreetAddress, string @StreetAddress2, string @City, string @State, string @StateProvinceChoice, string @Zip, string @Country, string @Phone, string @PhoneExt, string @Fax, bool? @isAppUser)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_API_CREATE_USER(@ParentUserName, @UserName, @Password, @PasswordNoCase, @PasswordLog, @ClientIp, @Email, @FirstName, @LastName, @AcceptTerms, @AcceptNews, @JobTitle, @Organization, @StreetAddress, @StreetAddress2, @City, @State, @StateProvinceChoice, @Zip, @Country, @Phone, @PhoneExt, @Fax, @isAppUser));
+		}
+
+		public static IQueryEnd USP_API_CREATE_USER_ADDRESS(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @UserName, string @AddressName, bool? @DefaultYN, string @FirstName, string @LastName, string @JobTitle, string @Organization, string @StreetAddress, string @Address2, string @City, string @State, string @StateProvince, string @Zip, string @Country, string @Phone, string @Fax, string @PhoneExt, string @Email)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_API_CREATE_USER_ADDRESS(@UserName, @AddressName, @DefaultYN, @FirstName, @LastName, @JobTitle, @Organization, @StreetAddress, @Address2, @City, @State, @StateProvince, @Zip, @Country, @Phone, @Fax, @PhoneExt, @Email));
+		}
+
+		public static IQueryEnd USP_API_DELETE_USER_ADDRESS(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @UserName, decimal? @AddressId)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_API_DELETE_USER_ADDRESS(@UserName, @AddressId));
+		}
+
+		public static IQueryEnd USP_API_GET_ALL_AUTORENEW_STATUS(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @DomainName)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_API_GET_ALL_AUTORENEW_STATUS(@DomainName));
+		}
+
+		public static IQueryEnd USP_API_GET_ALL_EDIT_CAPABILITY(this IStoredProcedureHolder<NamecheapCoreContext> holder)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_API_GET_ALL_EDIT_CAPABILITY());
+		}
+
+		public static IQueryEnd USP_API_GET_ALL_INFO(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @UserName)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_API_GET_ALL_INFO(@UserName));
+		}
+
+		public static IQueryEnd USP_API_GET_ALL_TLD_INFO(this IStoredProcedureHolder<NamecheapCoreContext> holder)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_API_GET_ALL_TLD_INFO());
+		}
+
+		public static IQueryEnd USP_API_GET_APPUSER_KEY_DETAILS(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @AppUser, string @KeyVersion, string @RequestIP)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_API_GET_APPUSER_KEY_DETAILS(@AppUser, @KeyVersion, @RequestIP));
+		}
+
+		public static IQueryEnd USP_API_GET_COUPON_DETAILS(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @IPV_PromoCode, string @IPV_UserName, bool? @isUserLoggedIN)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_API_GET_COUPON_DETAILS(@IPV_PromoCode, @IPV_UserName, @isUserLoggedIN));
+		}
+
+		public static IQueryEnd USP_API_GET_DOMAIN_CONTACTS_BY_DOMAINNAME(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @domainname)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_API_GET_DOMAIN_CONTACTS_BY_DOMAINNAME(@domainname));
+		}
+
+		public static IQueryEnd USP_API_GET_DOMAIN_EDIT_CAPABILITIES(this IStoredProcedureHolder<NamecheapCoreContext> holder, decimal? @IPN_Reseller_ID, decimal? @IPN_User_ID, decimal? @IPN_Domain_ID)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_API_GET_DOMAIN_EDIT_CAPABILITIES(@IPN_Reseller_ID, @IPN_User_ID, @IPN_Domain_ID));
+		}
+
+		public static IQueryEnd USP_API_GET_DOMAIN_INFO(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @domainname)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_API_GET_DOMAIN_INFO(@domainname));
+		}
+
+		public static IQueryEnd USP_API_GET_DOMAIN_INFO_BY_DOMAINNAME(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @domainname, string @username)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_API_GET_DOMAIN_INFO_BY_DOMAINNAME(@domainname, @username));
+		}
+
+		public static IQueryEnd USP_API_GET_DOMAIN_LIST(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @UserName, string @ListType, string @SearchTerm, int? @Page, int? @PageSize, string @SortBy)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_API_GET_DOMAIN_LIST(@UserName, @ListType, @SearchTerm, @Page, @PageSize, @SortBy));
+		}
+
+		public static IQueryEnd USP_API_GET_DOMAIN_LOCK_REASON(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @domainName)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_API_GET_DOMAIN_LOCK_REASON(@domainName));
+		}
+
+		public static IQueryEnd USP_API_GET_MARKETPLACE_LISTING(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @Keyword, string @StartingLetter, int? @SubcategoryId, bool? @AdultListing, bool? @AcceptOfferOnly, bool? @FixedPriceOnly, string @Extensions, string @CategoryID, int? @MaximumLength, decimal? @MinPriceRange, decimal? @MaxPriceRange, int? @ClosingInterval, bool? @ExcludeHypen, bool? @ExcludeNumber, bool? @FeaturedYN, string @optsearch, string @SellerUserName, int? @page, int? @PageSize, string @SortExpression, string @PremiumDomains, string @Sld)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_API_GET_MARKETPLACE_LISTING(@Keyword, @StartingLetter, @SubcategoryId, @AdultListing, @AcceptOfferOnly, @FixedPriceOnly, @Extensions, @CategoryID, @MaximumLength, @MinPriceRange, @MaxPriceRange, @ClosingInterval, @ExcludeHypen, @ExcludeNumber, @FeaturedYN, @optsearch, @SellerUserName, @page, @PageSize, @SortExpression, @PremiumDomains, @Sld));
+		}
+
+		public static IQueryEnd USP_API_GET_MARKETPLACE_LISTING_MV(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @Keyword, string @StartingLetter, int? @SubcategoryId, bool? @AdultListing, bool? @AcceptOfferOnly, bool? @FixedPriceOnly, string @Extensions, string @CategoryID, int? @MaximumLength, decimal? @MinPriceRange, decimal? @MaxPriceRange, int? @ClosingInterval, bool? @ExcludeHypen, bool? @ExcludeNumber, bool? @FeaturedYN, string @optsearch, string @SellerUserName, int? @page, int? @PageSize, string @SortExpression, string @PremiumDomains)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_API_GET_MARKETPLACE_LISTING_MV(@Keyword, @StartingLetter, @SubcategoryId, @AdultListing, @AcceptOfferOnly, @FixedPriceOnly, @Extensions, @CategoryID, @MaximumLength, @MinPriceRange, @MaxPriceRange, @ClosingInterval, @ExcludeHypen, @ExcludeNumber, @FeaturedYN, @optsearch, @SellerUserName, @page, @PageSize, @SortExpression, @PremiumDomains));
+		}
+
+		public static IQueryEnd USP_API_GET_MARKETPLACE_LISTING_NEW(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @Keyword, string @StartingLetter, int? @SubcategoryId, bool? @AdultListing, bool? @AcceptOfferOnly, bool? @FixedPriceOnly, string @Extensions, string @CategoryID, int? @MaximumLength, decimal? @MinPriceRange, decimal? @MaxPriceRange, int? @ClosingInterval, bool? @ExcludeHypen, bool? @ExcludeNumber, bool? @FeaturedYN, string @optsearch, string @SellerUserName, int? @page, int? @PageSize, string @SortExpression, string @PremiumDomains)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_API_GET_MARKETPLACE_LISTING_NEW(@Keyword, @StartingLetter, @SubcategoryId, @AdultListing, @AcceptOfferOnly, @FixedPriceOnly, @Extensions, @CategoryID, @MaximumLength, @MinPriceRange, @MaxPriceRange, @ClosingInterval, @ExcludeHypen, @ExcludeNumber, @FeaturedYN, @optsearch, @SellerUserName, @page, @PageSize, @SortExpression, @PremiumDomains));
+		}
+
+		public static IQueryEnd USP_API_GET_MARKETPLACE_LISTING_OLD(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @Keyword, string @StartingLetter, int? @SubcategoryId, bool? @AdultListing, bool? @AcceptOfferOnly, bool? @FixedPriceOnly, string @Extensions, string @CategoryID, int? @MaximumLength, decimal? @MinPriceRange, decimal? @MaxPriceRange, int? @ClosingInterval, bool? @ExcludeHypen, bool? @ExcludeNumber, bool? @FeaturedYN, string @optsearch, string @SellerUserName, int? @page, int? @PageSize, string @SortExpression, string @PremiumDomains)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_API_GET_MARKETPLACE_LISTING_OLD(@Keyword, @StartingLetter, @SubcategoryId, @AdultListing, @AcceptOfferOnly, @FixedPriceOnly, @Extensions, @CategoryID, @MaximumLength, @MinPriceRange, @MaxPriceRange, @ClosingInterval, @ExcludeHypen, @ExcludeNumber, @FeaturedYN, @optsearch, @SellerUserName, @page, @PageSize, @SortExpression, @PremiumDomains));
+		}
+
+		public static IQueryEnd USP_API_GET_MARKETPLACE_LISTING1(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @Keyword, string @StartingLetter, int? @SubcategoryId, bool? @AdultListing, bool? @AcceptOfferOnly, bool? @FixedPriceOnly, string @Extensions, string @CategoryID, int? @MaximumLength, decimal? @MinPriceRange, decimal? @MaxPriceRange, int? @ClosingInterval, bool? @ExcludeHypen, bool? @ExcludeNumber, bool? @FeaturedYN, string @optsearch, string @SellerUserName, int? @page, int? @PageSize, string @SortExpression, string @PremiumDomains)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_API_GET_MARKETPLACE_LISTING1(@Keyword, @StartingLetter, @SubcategoryId, @AdultListing, @AcceptOfferOnly, @FixedPriceOnly, @Extensions, @CategoryID, @MaximumLength, @MinPriceRange, @MaxPriceRange, @ClosingInterval, @ExcludeHypen, @ExcludeNumber, @FeaturedYN, @optsearch, @SellerUserName, @page, @PageSize, @SortExpression, @PremiumDomains));
+		}
+
+		public static IQueryEnd USP_API_GET_NONREALTIME_DOMAIN_STATUS(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @DomainName, string @UserName, int? @OrderId)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_API_GET_NONREALTIME_DOMAIN_STATUS(@DomainName, @UserName, @OrderId));
+		}
+
+		public static IQueryEnd USP_API_GET_PRODUCT_DETAILS(this IStoredProcedureHolder<NamecheapCoreContext> holder)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_API_GET_PRODUCT_DETAILS());
+		}
+
+		public static IQueryEnd USP_API_GET_PRODUCT_PRICING_LIST(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @userName, string @productType, string @productCategory, string @promotionCode)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_API_GET_PRODUCT_PRICING_LIST(@userName, @productType, @productCategory, @promotionCode));
+		}
+
+		public static IQueryEnd USP_API_GET_SSL_INFO(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @sslIds)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_API_GET_SSL_INFO(@sslIds));
+		}
+
+		public static IQueryEnd USP_API_GET_SSL_LIST(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @List_Type, string @UserName, string @Search_Term, string @sortBy, int? @Page, int? @PageSize)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_API_GET_SSL_LIST(@List_Type, @UserName, @Search_Term, @sortBy, @Page, @PageSize));
+		}
+
+		public static IQueryEnd USP_API_GET_TLD_INFO(this IStoredProcedureHolder<NamecheapCoreContext> holder)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_API_GET_TLD_INFO());
+		}
+
+		public static IQueryEnd USP_API_GET_TLD_MODCONTACT_STATUS(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @tld)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_API_GET_TLD_MODCONTACT_STATUS(@tld));
+		}
+
+		public static IQueryEnd USP_API_GET_TOTAL_HOURS_TO_CHECK_TOKENID(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @tokenId)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_API_GET_TOTAL_HOURS_TO_CHECK_TOKENID(@tokenId));
+		}
+
+		public static IQueryEnd USP_API_GET_TRANSFER_LIST(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @UserName, string @ListType, string @SearchTerm, int? @Page, int? @PageSize, string @SortBy)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_API_GET_TRANSFER_LIST(@UserName, @ListType, @SearchTerm, @Page, @PageSize, @SortBy));
+		}
+
+		public static IQueryEnd USP_API_GET_TRNASFER_STATUS(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @UserName, decimal? @TransferID)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_API_GET_TRNASFER_STATUS(@UserName, @TransferID));
+		}
+
+		public static IQueryEnd USP_API_GET_USER_ADDRESS_INFO(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @UserName, decimal? @AddressId)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_API_GET_USER_ADDRESS_INFO(@UserName, @AddressId));
+		}
+
+		public static IQueryEnd USP_API_GET_USER_BALANCES(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @UserName)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_API_GET_USER_BALANCES(@UserName));
+		}
+
+		public static IQueryEnd USP_API_GET_USER_CHECKOUT_SETTINGS(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @UserName)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_API_GET_USER_CHECKOUT_SETTINGS(@UserName));
+		}
+
+		public static IQueryEnd USP_API_GET_USERNAME_FROM_TOKENID_IN_ADD_FUNDS(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @tokenId)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_API_GET_USERNAME_FROM_TOKENID_IN_ADD_FUNDS(@tokenId));
+		}
+
+		public static IQueryEnd USP_API_GET_USERS_WITH_ACCESS_TO_DOMAIN(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @RequestingUserName, string @DomainName)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_API_GET_USERS_WITH_ACCESS_TO_DOMAIN(@RequestingUserName, @DomainName));
+		}
+
+		public static IQueryEnd USP_API_GET_WHOIGUARD_STATUS_FOR_DOMAIN(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @domainname)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_API_GET_WHOIGUARD_STATUS_FOR_DOMAIN(@domainname));
+		}
+
+		public static IQueryEnd USP_API_GET_WHOISGUARD_INFO(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @domainname, int? @whoisguardId, string @tld, string @username)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_API_GET_WHOISGUARD_INFO(@domainname, @whoisguardId, @tld, @username));
+		}
+
+		public static IQueryEnd USP_API_GET_WHOISGUARD_STATUS(this IStoredProcedureHolder<NamecheapCoreContext> holder, int? @whoisguardId, string @username, string @type)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_API_GET_WHOISGUARD_STATUS(@whoisguardId, @username, @type));
+		}
+
+		public static IQueryEnd USP_API_LIST_USER_ADDRESS(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @UserName)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_API_LIST_USER_ADDRESS(@UserName));
+		}
+
+		public static IQueryEnd USP_API_LOG_AUTORENEW(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @domainName, string @userName)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_API_LOG_AUTORENEW(@domainName, @userName));
+		}
+
+		public static IQueryEnd USP_API_MP_VALIDATE_USERNAME_FOR_MAKEOFFER(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @username, decimal? @mp_listing_id)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_API_MP_VALIDATE_USERNAME_FOR_MAKEOFFER(@username, @mp_listing_id));
+		}
+
+		public static IQueryEnd usp_Api_Onepager_GetEmail(this IStoredProcedureHolder<NamecheapCoreContext> holder, decimal? @SubscriptionId)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.usp_Api_Onepager_GetEmail(@SubscriptionId));
+		}
+
+		public static IQueryEnd usp_Api_Onepager_Getinfo(this IStoredProcedureHolder<NamecheapCoreContext> holder, decimal? @SubscriptionId, string @UserName)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.usp_Api_Onepager_Getinfo(@SubscriptionId, @UserName));
+		}
+
+		public static IQueryEnd usp_Api_Onepager_GetList(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @userName, int? @ListType, string @SearchTerm, string @SortExpression, int? @page, int? @pageSize)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.usp_Api_Onepager_GetList(@userName, @ListType, @SearchTerm, @SortExpression, @page, @pageSize));
+		}
+
+		public static IQueryEnd usp_Api_Onepager_GetPartnerSubscriptionId(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @UserName, decimal? @SubscriptionId)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.usp_Api_Onepager_GetPartnerSubscriptionId(@UserName, @SubscriptionId));
+		}
+
+		public static IQueryEnd usp_Api_Onepager_Renew(this IStoredProcedureHolder<NamecheapCoreContext> holder, decimal? @SubscriptionId, DateTime? @ExpirationDateTime, decimal? @RenewedOrderId, string @ActionType, int? @Duration, string @Duration_Type)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.usp_Api_Onepager_Renew(@SubscriptionId, @ExpirationDateTime, @RenewedOrderId, @ActionType, @Duration, @Duration_Type));
+		}
+
+		public static IQueryEnd usp_Api_Onepager_SetAutoRenew(this IStoredProcedureHolder<NamecheapCoreContext> holder, decimal? @SubscriptionId, bool? @IsAutoRenew, string @Status, string @StatusType)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.usp_Api_Onepager_SetAutoRenew(@SubscriptionId, @IsAutoRenew, @Status, @StatusType));
+		}
+
+		public static IQueryEnd usp_Api_Onepager_ValidateHostName(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @UserName, string @HostName, decimal? @Subscriptionid)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.usp_Api_Onepager_ValidateHostName(@UserName, @HostName, @Subscriptionid));
+		}
+
+		public static IQueryEnd USP_API_ORDER_UPDATE_STATUS(this IStoredProcedureHolder<NamecheapCoreContext> holder, int? @OrderID, bool? @IsActionsuccess, string @ErrInfo, string @option2, string @promotionCode)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_API_ORDER_UPDATE_STATUS(@OrderID, @IsActionsuccess, @ErrInfo, @option2, @promotionCode));
+		}
+
+		public static IQueryEnd usp_Api_PrivacyPolicy_Cancel(this IStoredProcedureHolder<NamecheapCoreContext> holder, int? @SubscriptionId, int? @StatusId, string @MoreInfoLog)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.usp_Api_PrivacyPolicy_Cancel(@SubscriptionId, @StatusId, @MoreInfoLog));
+		}
+
+		public static IQueryEnd usp_Api_PrivacyPolicy_Configure(this IStoredProcedureHolder<NamecheapCoreContext> holder, int? @PartnerSubscriptionId, DateTime? @ExpirationDatetime, string @PolicyStatus, int? @StatusId, string @MoreInfoLog)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.usp_Api_PrivacyPolicy_Configure(@PartnerSubscriptionId, @ExpirationDatetime, @PolicyStatus, @StatusId, @MoreInfoLog));
+		}
+
+		public static IQueryEnd usp_Api_PrivacyPolicy_Create(this IStoredProcedureHolder<NamecheapCoreContext> holder, decimal? @PartnerSubscriptionId, string @SubscriptionType, decimal? @CreatedOrderId, decimal? @PartnerOrderId, string @DomainName, string @EmailAddress, int? @NumOfYears, string @Password, string @PrivacypolicyLogOrderId, decimal? @CreatedOrderItemId, string @UserName, DateTime? @NextBillingDateTime, bool? @IsUpgradeConfirm, int? @StatusId, string @MoreInfoLog)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.usp_Api_PrivacyPolicy_Create(@PartnerSubscriptionId, @SubscriptionType, @CreatedOrderId, @PartnerOrderId, @DomainName, @EmailAddress, @NumOfYears, @Password, @PrivacypolicyLogOrderId, @CreatedOrderItemId, @UserName, @NextBillingDateTime, @IsUpgradeConfirm, @StatusId, @MoreInfoLog));
+		}
+
+		public static IQueryEnd usp_Api_PrivacyPolicy_Getinfo(this IStoredProcedureHolder<NamecheapCoreContext> holder, decimal? @PartnerSubscriptionId, string @OwnerUserName)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.usp_Api_PrivacyPolicy_Getinfo(@PartnerSubscriptionId, @OwnerUserName));
+		}
+
+		public static IQueryEnd usp_Api_PrivacyPolicy_Getlist(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @OwnerUserName, string @SortBy, int? @Page, int? @PageSize, string @SearchTerm, string @ListType, int? @Category)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.usp_Api_PrivacyPolicy_Getlist(@OwnerUserName, @SortBy, @Page, @PageSize, @SearchTerm, @ListType, @Category));
+		}
+
+		public static IQueryEnd usp_Api_PrivacyPolicy_GetSubscriptionId(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @OwnerUserName, int? @SubscriptionId)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.usp_Api_PrivacyPolicy_GetSubscriptionId(@OwnerUserName, @SubscriptionId));
+		}
+
+		public static IQueryEnd usp_Api_PrivacyPolicy_Renew(this IStoredProcedureHolder<NamecheapCoreContext> holder, decimal? @SubscriptionId, int? @NumOfYears, DateTime? @ExpiryDateTime, string @RenewalStatus)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.usp_Api_PrivacyPolicy_Renew(@SubscriptionId, @NumOfYears, @ExpiryDateTime, @RenewalStatus));
+		}
+
+		public static IQueryEnd usp_Api_PrivacyPolicy_RenewalValid(this IStoredProcedureHolder<NamecheapCoreContext> holder, int? @SubscriptionId, string @RenewStatus)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.usp_Api_PrivacyPolicy_RenewalValid(@SubscriptionId, @RenewStatus));
+		}
+
+		public static IQueryEnd usp_Api_PrivacyPolicy_UpdateEmailAddress(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @OwnerUserName, string @EmailAddress, decimal? @PartnerSubscriptionId, int? @StatusId, string @MoreInfoLog)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.usp_Api_PrivacyPolicy_UpdateEmailAddress(@OwnerUserName, @EmailAddress, @PartnerSubscriptionId, @StatusId, @MoreInfoLog));
+		}
+
+		public static IQueryEnd usp_Api_PrivacyPolicy_UpdatePassword(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @OwnerUserName, string @OwnerPassword, string @DomainName)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.usp_Api_PrivacyPolicy_UpdatePassword(@OwnerUserName, @OwnerPassword, @DomainName));
+		}
+
+		public static IQueryEnd usp_Api_PrivacyPolicy_UpdateRenew(this IStoredProcedureHolder<NamecheapCoreContext> holder, decimal? @SubscriptionId, decimal? @OrderId, decimal? @OrderItemId, decimal? @TransactionId, DateTime? @ExpiryDateTime, string @RenewalStatus)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.usp_Api_PrivacyPolicy_UpdateRenew(@SubscriptionId, @OrderId, @OrderItemId, @TransactionId, @ExpiryDateTime, @RenewalStatus));
+		}
+
+		public static IQueryEnd usp_Api_PrivacyPolicy_ValidateDomainName(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @DomainName, string @OwnerUserName)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.usp_Api_PrivacyPolicy_ValidateDomainName(@DomainName, @OwnerUserName));
+		}
+
+		public static IQueryEnd usp_Api_PrivacyPolicyUpdate(this IStoredProcedureHolder<NamecheapCoreContext> holder, int? @SubscriptionId, decimal? @PartnerSubscriptionId, string @SubscriptionType, decimal? @CreatedOrderId, decimal? @PartnerOrderId, string @DomainName, string @EmailAddress, int? @NumOfYears, string @Password, string @PrivacypolicyLogOrderId, decimal? @CreatedOrderItemId, string @UserName, DateTime? @NextBillingDateTime, bool? @IsUpgradeConfirm, int? @StatusId, string @MoreInfoLog)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.usp_Api_PrivacyPolicyUpdate(@SubscriptionId, @PartnerSubscriptionId, @SubscriptionType, @CreatedOrderId, @PartnerOrderId, @DomainName, @EmailAddress, @NumOfYears, @Password, @PrivacypolicyLogOrderId, @CreatedOrderItemId, @UserName, @NextBillingDateTime, @IsUpgradeConfirm, @StatusId, @MoreInfoLog));
+		}
+
+		public static IQueryEnd USP_API_PROCESS_REFUND(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @UserName, decimal? @InitialAmount, decimal? @OrderID, string @ClientIP, decimal? @RelatedTransactionId, string @OrderRefId)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_API_PROCESS_REFUND(@UserName, @InitialAmount, @OrderID, @ClientIP, @RelatedTransactionId, @OrderRefId));
+		}
+
+		public static IQueryEnd USP_API_PURCHASE_RENEW_SSL(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @ActionID, string @RefID, string @sSLD, string @sTLD, short? @NumofYears, int? @Qty, string @userName, string @domainUsed, string @sTransactionID, string @sOrderID, string @sOrderDetailID, string @sPayStatus, decimal? @sNumericOrderID, string @sPurchaseValidationID)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_API_PURCHASE_RENEW_SSL(@ActionID, @RefID, @sSLD, @sTLD, @NumofYears, @Qty, @userName, @domainUsed, @sTransactionID, @sOrderID, @sOrderDetailID, @sPayStatus, @sNumericOrderID, @sPurchaseValidationID));
+		}
+
+		public static IQueryEnd USP_API_PURCHASE_RENEW_SSL_WITH_PRICE(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @ActionID, string @RefID, string @sSLD, string @sTLD, short? @NumofYears, int? @Qty, string @userName, string @domainUsed, string @sTransactionID, string @sOrderID, string @sOrderDetailID, string @sPayStatus, decimal? @sNumericOrderID, string @sPurchaseValidationID, decimal? @userId, string @durationType, string @promotionCode, decimal? @PurchasePrice, decimal? @RetailPrice)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_API_PURCHASE_RENEW_SSL_WITH_PRICE(@ActionID, @RefID, @sSLD, @sTLD, @NumofYears, @Qty, @userName, @domainUsed, @sTransactionID, @sOrderID, @sOrderDetailID, @sPayStatus, @sNumericOrderID, @sPurchaseValidationID, @userId, @durationType, @promotionCode, @PurchasePrice, @RetailPrice));
+		}
+
+		public static IQueryEnd USP_API_REACTIVATE_DOMAIN(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @domainname, string @username, short? @NumYears, string @OrderID, string @TransID, decimal? @OrderDetailID)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_API_REACTIVATE_DOMAIN(@domainname, @username, @NumYears, @OrderID, @TransID, @OrderDetailID));
+		}
+
+		public static IQueryEnd USP_API_RENEW_DOMAIN(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @UserName, string @DomainName, int? @NumYears, string @TransactionID, string @OrderID, decimal? @OrderDetailID, DateTime? @NewExpiryDateTime)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_API_RENEW_DOMAIN(@UserName, @DomainName, @NumYears, @TransactionID, @OrderID, @OrderDetailID, @NewExpiryDateTime));
+		}
+
+		public static IQueryEnd USP_API_RESET_KEY(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @UserName, string @Password, string @PasswordNoCase)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_API_RESET_KEY(@UserName, @Password, @PasswordNoCase));
+		}
+
+		public static IQueryEnd USP_API_SET_AUTO_RENEW_STATUS(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @DomainName, bool? @DomainRenew, bool? @WGRenew, bool? @POP3Renew)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_API_SET_AUTO_RENEW_STATUS(@DomainName, @DomainRenew, @WGRenew, @POP3Renew));
+		}
+
+		public static IQueryEnd USP_API_SET_DEFAULT_USER_ADDRESS(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @UserName, decimal? @AddressId)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_API_SET_DEFAULT_USER_ADDRESS(@UserName, @AddressId));
+		}
+
+		public static IQueryEnd USP_API_SET_DOMAIN_EDIT_CAPABILITIES(this IStoredProcedureHolder<NamecheapCoreContext> holder, decimal? @ResellerID, string @CurrentUserName, string @TargetUserName, string @DomainName, string @CapabilitiesCSV)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_API_SET_DOMAIN_EDIT_CAPABILITIES(@ResellerID, @CurrentUserName, @TargetUserName, @DomainName, @CapabilitiesCSV));
+		}
+
+		public static IQueryEnd USP_API_TRANSFERMATE_UPDATE_ORIGINALEMAIL(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @UserName, int? @TransferID, string @OriginalEmail)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_API_TRANSFERMATE_UPDATE_ORIGINALEMAIL(@UserName, @TransferID, @OriginalEmail));
+		}
+
+		public static IQueryEnd USP_API_TRANSFERMATE_UPDATE_STATUS(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @UserName, int? @TransferID, string @StatusDescription)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_API_TRANSFERMATE_UPDATE_STATUS(@UserName, @TransferID, @StatusDescription));
+		}
+
+		public static IQueryEnd USP_API_UPDATE_DOMAIN_CONTACTS(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @domainname, string @RegistrantFirstName, string @RegistrantLastName, string @RegistrantJobTitle, string @RegistrantOrganization, string @RegistrantStreetAddress, string @RegistrantAddress2, string @RegistrantCity, string @RegistrantState, string @RegistrantStateProvince, string @RegistrantZip, string @RegistrantCountry, string @RegistrantPhone, string @RegistrantFax, string @RegistrantEmail, string @RegistrantPhoneext, string @TechFirstName, string @TechLastName, string @TechJobTitle, string @TechOrganization, string @TechStreetAddress, string @TechAddress2, string @TechCity, string @TechState, string @TechStateProvince, string @TechZip, string @TechCountry, string @TechPhone, string @TechFax, string @TechEmail, string @TechPhoneext, string @AdminFirstName, string @AdminLastName, string @AdminJobTitle, string @AdminOrganization, string @AdminStreetAddress, string @AdminAddress2, string @AdminCity, string @AdminState, string @AdminStateProvince, string @AdminZip, string @AdminCountry, string @AdminPhone, string @AdminFax, string @AdminEmail, string @AdminPhoneext, string @BillingFirstName, string @BillingLastName, string @BillingJobTitle, string @BillingOrganization, string @BillingStreetAddress, string @BillingAddress2, string @BillingCity, string @BillingState, string @BillingStateProvince, string @BillingZip, string @BillingCountry, string @BillingPhone, string @BillingFax, string @BillingEmail, string @BillingPhoneext, string @RegistrantNexus, string @RegisrantNexusCountry, string @RegistrantPurpose, string @ciraLegalType, string @ciraWhoisDisplay, string @ciraAgreementVersion, string @ciraLanguage, string @COUKLegalType, string @COUKCompanyID, string @COUKRegisteredfor, string @COUKRegOptOut, string @ORGUKLegalType, string @ORGUKCompanyID, string @ORGUKRegisteredfor, string @ORGUKRegOptOut, string @MEUKLegalType, string @MEUKCompanyID, string @MEUKRegisteredfor, string @MEUKRegOptOut, string @FRLegalType, DateTime? @FRRegistrantBirthdate, string @FRRegistrantBirthPlace, string @FRRegistrantLegalId, string @FRRegistrantDunsNumber, string @FRRegistrantLocalId, DateTime? @FRRegistrantJoDateDec, DateTime? @FRRegistrantJoDatePub, string @FRRegistrantJoNumber, string @FRRegistrantJoPage, string @FRRegistrantTradeNumber)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_API_UPDATE_DOMAIN_CONTACTS(@domainname, @RegistrantFirstName, @RegistrantLastName, @RegistrantJobTitle, @RegistrantOrganization, @RegistrantStreetAddress, @RegistrantAddress2, @RegistrantCity, @RegistrantState, @RegistrantStateProvince, @RegistrantZip, @RegistrantCountry, @RegistrantPhone, @RegistrantFax, @RegistrantEmail, @RegistrantPhoneext, @TechFirstName, @TechLastName, @TechJobTitle, @TechOrganization, @TechStreetAddress, @TechAddress2, @TechCity, @TechState, @TechStateProvince, @TechZip, @TechCountry, @TechPhone, @TechFax, @TechEmail, @TechPhoneext, @AdminFirstName, @AdminLastName, @AdminJobTitle, @AdminOrganization, @AdminStreetAddress, @AdminAddress2, @AdminCity, @AdminState, @AdminStateProvince, @AdminZip, @AdminCountry, @AdminPhone, @AdminFax, @AdminEmail, @AdminPhoneext, @BillingFirstName, @BillingLastName, @BillingJobTitle, @BillingOrganization, @BillingStreetAddress, @BillingAddress2, @BillingCity, @BillingState, @BillingStateProvince, @BillingZip, @BillingCountry, @BillingPhone, @BillingFax, @BillingEmail, @BillingPhoneext, @RegistrantNexus, @RegisrantNexusCountry, @RegistrantPurpose, @ciraLegalType, @ciraWhoisDisplay, @ciraAgreementVersion, @ciraLanguage, @COUKLegalType, @COUKCompanyID, @COUKRegisteredfor, @COUKRegOptOut, @ORGUKLegalType, @ORGUKCompanyID, @ORGUKRegisteredfor, @ORGUKRegOptOut, @MEUKLegalType, @MEUKCompanyID, @MEUKRegisteredfor, @MEUKRegOptOut, @FRLegalType, @FRRegistrantBirthdate, @FRRegistrantBirthPlace, @FRRegistrantLegalId, @FRRegistrantDunsNumber, @FRRegistrantLocalId, @FRRegistrantJoDateDec, @FRRegistrantJoDatePub, @FRRegistrantJoNumber, @FRRegistrantJoPage, @FRRegistrantTradeNumber));
+		}
+
+		public static IQueryEnd USP_API_UPDATE_DOMAIN_PURCHASE_ORDER(this IStoredProcedureHolder<NamecheapCoreContext> holder, bool? @IsActionSuccess, string @ErrInfo, int? @OrderID, string @DomainName)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_API_UPDATE_DOMAIN_PURCHASE_ORDER(@IsActionSuccess, @ErrInfo, @OrderID, @DomainName));
+		}
+
+		public static IQueryEnd USP_API_UPDATE_DOMAIN_RENEW_ORDER(this IStoredProcedureHolder<NamecheapCoreContext> holder, bool? @IsActionSuccess, string @ErrInfo, int? @OrderID, string @DomainName)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_API_UPDATE_DOMAIN_RENEW_ORDER(@IsActionSuccess, @ErrInfo, @OrderID, @DomainName));
+		}
+
+		public static IQueryEnd USP_API_UPDATE_EMAIL(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @username, string @resetcode, string @Ip)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_API_UPDATE_EMAIL(@username, @resetcode, @Ip));
+		}
+
+		public static IQueryEnd USP_API_UPDATE_RESET_EMAIL(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @username, string @emailKey, string @email)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_API_UPDATE_RESET_EMAIL(@username, @emailKey, @email));
+		}
+
+		public static IQueryEnd USP_API_UPDATE_STATUS_FOR_REQUEST_FUNDS(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @tokenId)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_API_UPDATE_STATUS_FOR_REQUEST_FUNDS(@tokenId));
+		}
+
+		public static IQueryEnd USP_API_UPDATE_TRANSFER_STATUS(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @UserName, int? @TransferID, int? @StatusID, string @StatusDesc)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_API_UPDATE_TRANSFER_STATUS(@UserName, @TransferID, @StatusID, @StatusDesc));
+		}
+
+		public static IQueryEnd USP_API_UPDATE_USER(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @UserName, string @ClientIp, string @Email, string @FirstName, string @LastName, string @JobTitle, string @Organization, string @StreetAddress, string @StreetAddress2, string @City, string @State, string @Zip, string @Country, string @Phone, string @PhoneExt, string @Fax)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_API_UPDATE_USER(@UserName, @ClientIp, @Email, @FirstName, @LastName, @JobTitle, @Organization, @StreetAddress, @StreetAddress2, @City, @State, @Zip, @Country, @Phone, @PhoneExt, @Fax));
+		}
+
+		public static IQueryEnd USP_API_UPDATE_USER_ADDRESS(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @UserName, string @AddressName, bool? @DefaultYN, string @FirstName, string @LastName, string @JobTitle, string @Organization, string @StreetAddress, string @Address2, string @City, string @State, string @StateProvince, string @Zip, string @Country, string @Phone, string @Fax, string @PhoneExt, string @Email, decimal? @AddressId)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_API_UPDATE_USER_ADDRESS(@UserName, @AddressName, @DefaultYN, @FirstName, @LastName, @JobTitle, @Organization, @StreetAddress, @Address2, @City, @State, @StateProvince, @Zip, @Country, @Phone, @Fax, @PhoneExt, @Email, @AddressId));
+		}
+
+		public static IQueryEnd USP_API_USER_CREATE_CHECK_EMAIL_FOR_DUPLICATE(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @Email)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_API_USER_CREATE_CHECK_EMAIL_FOR_DUPLICATE(@Email));
+		}
+
+		public static IQueryEnd USP_API_USER_HAS_DOMAIN_ACCESS(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @DomainName, string @UserName)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_API_USER_HAS_DOMAIN_ACCESS(@DomainName, @UserName));
+		}
+
+		public static IQueryEnd USP_API_USER_HAS_DOMAINS_ACCESS(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @UserName, string @DomainList)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_API_USER_HAS_DOMAINS_ACCESS(@UserName, @DomainList));
+		}
+
+		public static IQueryEnd USP_API_VALIDATE_FOR_RESET_PASSWORD(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @FindBy, string @FindByValue)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_API_VALIDATE_FOR_RESET_PASSWORD(@FindBy, @FindByValue));
+		}
+
+		public static IQueryEnd USP_API_VALIDATE_USER_CREDENTIALS(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @userName, string @password, string @passwordNoCase, string @loginIp, string @loginFrom, bool? @isMasterPasswordMatch, bool? @kayakologin, bool? @isExternalLogin)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_API_VALIDATE_USER_CREDENTIALS(@userName, @password, @passwordNoCase, @loginIp, @loginFrom, @isMasterPasswordMatch, @kayakologin, @isExternalLogin));
+		}
+
+		public static IQueryEnd USP_API_VALIDATE_USERNAME_AND_AUTHORIZE_APIUSER(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @UserName, string @ApiUser)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_API_VALIDATE_USERNAME_AND_AUTHORIZE_APIUSER(@UserName, @ApiUser));
+		}
+
+		public static IQueryEnd USP_API_WHOIGUARD_GET_MAXYEARS_OF_QUANTITY(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @productName)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_API_WHOIGUARD_GET_MAXYEARS_OF_QUANTITY(@productName));
+		}
+
+		public static IQueryEnd USP_API_WHOISGUARD_ADD_WITH_ADDRESS_OPTIONAL(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @IPV_UserName, byte? @IPI_Num_Years, bool? @EnableWG, string @domainName, decimal? @AssociatedOrderId, decimal? @AssociatedOrderItemId, string @IPV_Action_ID, string @IPV_WGEmailId, string @RegistrantFirstName, string @RegistrantLastName, string @RegistrantJobTitle, string @RegistrantOrganizationName, string @RegistrantAddress1, string @RegistrantAddress2, string @RegistrantCity, string @RegistrantStateProvince, string @RegistrantStateProvinceChoice, string @RegistrantPostalCode, string @RegistrantCountry, string @RegistrantPhone, string @RegistrantFax, string @RegistrantEmailAddress, string @AdminFirstName, string @AdminLastName, string @AdminJobTitle, string @AdminOrganizationName, string @AdminAddress1, string @AdminAddress2, string @AdminCity, string @AdminStateProvince, string @AdminStateProvinceChoice, string @AdminPostalCode, string @AdminCountry, string @AdminPhone, string @AdminFax, string @AdminEmailAddress, string @TechFirstName, string @TechLastName, string @TechJobTitle, string @TechOrganizationName, string @TechAddress1, string @TechAddress2, string @TechCity, string @TechStateProvince, string @TechStateProvinceChoice, string @TechPostalCode, string @TechCountry, string @TechPhone, string @TechFax, string @TechEmailAddress, string @AuxBillingFirstName, string @AuxBillingLastName, string @AuxBillingJobTitle, string @AuxBillingOrganizationName, string @AuxBillingAddress1, string @AuxBillingAddress2, string @AuxBillingCity, string @AuxBillingStateProvince, string @AuxBillingStateProvinceChoice, string @AuxBillingPostalCode, string @AuxBillingCountry, string @AuxBillingPhone, string @AuxBillingFax, string @AuxBillingEmailAddress, string @RegistrantPhoneext, string @AdminPhoneext, string @TechPhoneext, string @AuxBillingPhoneext, string @RegistrantNexus, string @RegistrantNexusCountry, string @RegistrantPurpose, string @COUKLegalType, string @COUKCompanyID, string @COUKRegisteredFor, string @COUKRegOptOut, string @ORGUKLegalType, string @ORGUKCompanyID, string @ORGUKRegisteredFor, string @ORGUKRegOptOut, string @MEUKLegalType, string @MEUKCompanyID, string @MEUKRegisteredFor, string @MEUKRegOptOut, string @CACIRALegalType, string @CACIRAWhoisDisplay, string @CACIRAAgreementVersion, string @CACIRAAgreementValue, string @CACIRALanguage, string @ASIACCLocality, string @ASIALocalityCity, string @ASIALocalitySP, string @ASIALegalEntity, string @ASIAIdentForm, string @ASIAIdentNumber, string @ASIAOtherLeType, string @ASIAOtherIdentForm, string @EUAdrLang, string @XXXMemberID, bool? @XXXResolving, string @FRLegalType, DateTime? @FRRegistrantBirthdate, string @FRRegistrantBirthPlace, string @FRRegistrantLegalId, string @FRRegistrantDunsNumber, string @FRRegistrantLocalId, DateTime? @FRRegistrantJoDateDec, DateTime? @FRRegistrantJoDatePub, string @FRRegistrantJoNumber, string @FRRegistrantJoPage, string @FRRegistrantTradeNumber)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_API_WHOISGUARD_ADD_WITH_ADDRESS_OPTIONAL(@IPV_UserName, @IPI_Num_Years, @EnableWG, @domainName, @AssociatedOrderId, @AssociatedOrderItemId, @IPV_Action_ID, @IPV_WGEmailId, @RegistrantFirstName, @RegistrantLastName, @RegistrantJobTitle, @RegistrantOrganizationName, @RegistrantAddress1, @RegistrantAddress2, @RegistrantCity, @RegistrantStateProvince, @RegistrantStateProvinceChoice, @RegistrantPostalCode, @RegistrantCountry, @RegistrantPhone, @RegistrantFax, @RegistrantEmailAddress, @AdminFirstName, @AdminLastName, @AdminJobTitle, @AdminOrganizationName, @AdminAddress1, @AdminAddress2, @AdminCity, @AdminStateProvince, @AdminStateProvinceChoice, @AdminPostalCode, @AdminCountry, @AdminPhone, @AdminFax, @AdminEmailAddress, @TechFirstName, @TechLastName, @TechJobTitle, @TechOrganizationName, @TechAddress1, @TechAddress2, @TechCity, @TechStateProvince, @TechStateProvinceChoice, @TechPostalCode, @TechCountry, @TechPhone, @TechFax, @TechEmailAddress, @AuxBillingFirstName, @AuxBillingLastName, @AuxBillingJobTitle, @AuxBillingOrganizationName, @AuxBillingAddress1, @AuxBillingAddress2, @AuxBillingCity, @AuxBillingStateProvince, @AuxBillingStateProvinceChoice, @AuxBillingPostalCode, @AuxBillingCountry, @AuxBillingPhone, @AuxBillingFax, @AuxBillingEmailAddress, @RegistrantPhoneext, @AdminPhoneext, @TechPhoneext, @AuxBillingPhoneext, @RegistrantNexus, @RegistrantNexusCountry, @RegistrantPurpose, @COUKLegalType, @COUKCompanyID, @COUKRegisteredFor, @COUKRegOptOut, @ORGUKLegalType, @ORGUKCompanyID, @ORGUKRegisteredFor, @ORGUKRegOptOut, @MEUKLegalType, @MEUKCompanyID, @MEUKRegisteredFor, @MEUKRegOptOut, @CACIRALegalType, @CACIRAWhoisDisplay, @CACIRAAgreementVersion, @CACIRAAgreementValue, @CACIRALanguage, @ASIACCLocality, @ASIALocalityCity, @ASIALocalitySP, @ASIALegalEntity, @ASIAIdentForm, @ASIAIdentNumber, @ASIAOtherLeType, @ASIAOtherIdentForm, @EUAdrLang, @XXXMemberID, @XXXResolving, @FRLegalType, @FRRegistrantBirthdate, @FRRegistrantBirthPlace, @FRRegistrantLegalId, @FRRegistrantDunsNumber, @FRRegistrantLocalId, @FRRegistrantJoDateDec, @FRRegistrantJoDatePub, @FRRegistrantJoNumber, @FRRegistrantJoPage, @FRRegistrantTradeNumber));
+		}
+
+		public static IQueryEnd USP_API_WHOISGUARD_ALLOT(this IStoredProcedureHolder<NamecheapCoreContext> holder, decimal? @nWGID, string @sDomain, string @ForwardToEmail, string @RegistrantFirstName, string @RegistrantLastName, string @RegistrantJobTitle, string @RegistrantOrganizationName, string @RegistrantAddress1, string @RegistrantAddress2, string @RegistrantCity, string @RegistrantStateProvince, string @RegistrantStateProvinceChoice, string @RegistrantPostalCode, string @RegistrantCountry, string @RegistrantPhone, string @RegistrantFax, string @RegistrantEmailAddress, string @AdminFirstName, string @AdminLastName, string @AdminJobTitle, string @AdminOrganizationName, string @AdminAddress1, string @AdminAddress2, string @AdminCity, string @AdminStateProvince, string @AdminStateProvinceChoice, string @AdminPostalCode, string @AdminCountry, string @AdminPhone, string @AdminFax, string @AdminEmailAddress, string @TechFirstName, string @TechLastName, string @TechJobTitle, string @TechOrganizationName, string @TechAddress1, string @TechAddress2, string @TechCity, string @TechStateProvince, string @TechStateProvinceChoice, string @TechPostalCode, string @TechCountry, string @TechPhone, string @TechFax, string @TechEmailAddress, string @AuxBillingFirstName, string @AuxBillingLastName, string @AuxBillingJobTitle, string @AuxBillingOrganizationName, string @AuxBillingAddress1, string @AuxBillingAddress2, string @AuxBillingCity, string @AuxBillingStateProvince, string @AuxBillingStateProvinceChoice, string @AuxBillingPostalCode, string @AuxBillingCountry, string @AuxBillingPhone, string @AuxBillingFax, string @AuxBillingEmailAddress, string @RegistrantNexus, string @RegistrantNexusCountry, string @RegistrantPurpose, string @CIRALegalType, string @COUKLegalType, string @COUKCompanyID, string @ORGUKLegalType, string @ORGUKCompanyID, string @RegistrantPhoneext, string @AdminPhoneext, string @TechPhoneext, string @AuxBillingPhoneext, string @COUKRegisteredFor, string @COUKRegOptOut, string @ORGUKRegisteredFor, string @ORGUKRegOptOut, string @EUAdrLang, string @MEUKLegalType, string @MEUKCompanyID, string @MEUKRegisteredFor, string @MEUKRegOptOut, string @CIRARegistrant, string @CIRARegistrantDesc, string @CIRATrademarkNo, string @CIRAOrgRegisteredIn)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_API_WHOISGUARD_ALLOT(@nWGID, @sDomain, @ForwardToEmail, @RegistrantFirstName, @RegistrantLastName, @RegistrantJobTitle, @RegistrantOrganizationName, @RegistrantAddress1, @RegistrantAddress2, @RegistrantCity, @RegistrantStateProvince, @RegistrantStateProvinceChoice, @RegistrantPostalCode, @RegistrantCountry, @RegistrantPhone, @RegistrantFax, @RegistrantEmailAddress, @AdminFirstName, @AdminLastName, @AdminJobTitle, @AdminOrganizationName, @AdminAddress1, @AdminAddress2, @AdminCity, @AdminStateProvince, @AdminStateProvinceChoice, @AdminPostalCode, @AdminCountry, @AdminPhone, @AdminFax, @AdminEmailAddress, @TechFirstName, @TechLastName, @TechJobTitle, @TechOrganizationName, @TechAddress1, @TechAddress2, @TechCity, @TechStateProvince, @TechStateProvinceChoice, @TechPostalCode, @TechCountry, @TechPhone, @TechFax, @TechEmailAddress, @AuxBillingFirstName, @AuxBillingLastName, @AuxBillingJobTitle, @AuxBillingOrganizationName, @AuxBillingAddress1, @AuxBillingAddress2, @AuxBillingCity, @AuxBillingStateProvince, @AuxBillingStateProvinceChoice, @AuxBillingPostalCode, @AuxBillingCountry, @AuxBillingPhone, @AuxBillingFax, @AuxBillingEmailAddress, @RegistrantNexus, @RegistrantNexusCountry, @RegistrantPurpose, @CIRALegalType, @COUKLegalType, @COUKCompanyID, @ORGUKLegalType, @ORGUKCompanyID, @RegistrantPhoneext, @AdminPhoneext, @TechPhoneext, @AuxBillingPhoneext, @COUKRegisteredFor, @COUKRegOptOut, @ORGUKRegisteredFor, @ORGUKRegOptOut, @EUAdrLang, @MEUKLegalType, @MEUKCompanyID, @MEUKRegisteredFor, @MEUKRegOptOut, @CIRARegistrant, @CIRARegistrantDesc, @CIRATrademarkNo, @CIRAOrgRegisteredIn));
+		}
+
+		public static IQueryEnd USP_API_WHOISGUARD_CHECK_AVAILABLITY(this IStoredProcedureHolder<NamecheapCoreContext> holder, int? @whoisguardId, string @username)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_API_WHOISGUARD_CHECK_AVAILABLITY(@whoisguardId, @username));
+		}
+
+		public static IQueryEnd USP_API_WHOISGUARD_DISCARD(this IStoredProcedureHolder<NamecheapCoreContext> holder, int? @whoisguardId)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_API_WHOISGUARD_DISCARD(@whoisguardId));
+		}
+
+		public static IQueryEnd USP_API_WHOISGUARD_GET_ASSOCIATE_EMAIL(this IStoredProcedureHolder<NamecheapCoreContext> holder, decimal? @slotId)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_API_WHOISGUARD_GET_ASSOCIATE_EMAIL(@slotId));
+		}
+
+		public static IQueryEnd USP_API_WHOISGUARD_GET_INFO(this IStoredProcedureHolder<NamecheapCoreContext> holder, int? @whoisguardId)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_API_WHOISGUARD_GET_INFO(@whoisguardId));
+		}
+
+		public static IQueryEnd USP_API_WHOISGUARD_GET_ITEMS(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @productName)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_API_WHOISGUARD_GET_ITEMS(@productName));
+		}
+
+		public static IQueryEnd USP_API_WHOISGUARD_LOG_RENEW(this IStoredProcedureHolder<NamecheapCoreContext> holder, bool? @actionSuccess, string @errInfo, string @regId, string @sld, string @tld, string @actionId, string @registrarRawData, int? @orderId)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_API_WHOISGUARD_LOG_RENEW(@actionSuccess, @errInfo, @regId, @sld, @tld, @actionId, @registrarRawData, @orderId));
+		}
+
+		public static IQueryEnd USP_API_WHOISGUARD_PURCHASE_AND_AUTOMATIC_ENABLE(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @IPV_UserName, byte? @IPI_Num_Years, string @IPV_Option1, string @IPV_Option2, string @IPV_BatchId, string @IPV_ID, string @IPV_Action_ID, string @IPV_WGEmailId, string @RegistrantFirstName, string @RegistrantLastName, string @RegistrantJobTitle, string @RegistrantOrganizationName, string @RegistrantAddress1, string @RegistrantAddress2, string @RegistrantCity, string @RegistrantStateProvince, string @RegistrantStateProvinceChoice, string @RegistrantPostalCode, string @RegistrantCountry, string @RegistrantPhone, string @RegistrantFax, string @RegistrantEmailAddress, string @AdminFirstName, string @AdminLastName, string @AdminJobTitle, string @AdminOrganizationName, string @AdminAddress1, string @AdminAddress2, string @AdminCity, string @AdminStateProvince, string @AdminStateProvinceChoice, string @AdminPostalCode, string @AdminCountry, string @AdminPhone, string @AdminFax, string @AdminEmailAddress, string @TechFirstName, string @TechLastName, string @TechJobTitle, string @TechOrganizationName, string @TechAddress1, string @TechAddress2, string @TechCity, string @TechStateProvince, string @TechStateProvinceChoice, string @TechPostalCode, string @TechCountry, string @TechPhone, string @TechFax, string @TechEmailAddress, string @AuxBillingFirstName, string @AuxBillingLastName, string @AuxBillingJobTitle, string @AuxBillingOrganizationName, string @AuxBillingAddress1, string @AuxBillingAddress2, string @AuxBillingCity, string @AuxBillingStateProvince, string @AuxBillingStateProvinceChoice, string @AuxBillingPostalCode, string @AuxBillingCountry, string @AuxBillingPhone, string @AuxBillingFax, string @AuxBillingEmailAddress, string @RegistrantNexus, string @RegistrantNexusCountry, string @RegistrantPurpose, string @CIRALegalType, string @COUKLegalType, string @COUKCompanyID, string @ORGUKLegalType, string @ORGUKCompanyID, string @RegistrantPhoneext, string @AdminPhoneext, string @TechPhoneext, string @AuxBillingPhoneext, string @COUKRegisteredFor, string @COUKRegOptOut, string @ORGUKRegisteredFor, string @ORGUKRegOptOut, string @EUAdrLang, string @MEUKLegalType, string @MEUKCompanyID, string @MEUKRegisteredFor, string @MEUKRegOptOut, string @CIRARegistrant, string @CIRARegistrantDesc, string @CIRATrademarkNo, string @CIRAOrgRegisteredIn)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_API_WHOISGUARD_PURCHASE_AND_AUTOMATIC_ENABLE(@IPV_UserName, @IPI_Num_Years, @IPV_Option1, @IPV_Option2, @IPV_BatchId, @IPV_ID, @IPV_Action_ID, @IPV_WGEmailId, @RegistrantFirstName, @RegistrantLastName, @RegistrantJobTitle, @RegistrantOrganizationName, @RegistrantAddress1, @RegistrantAddress2, @RegistrantCity, @RegistrantStateProvince, @RegistrantStateProvinceChoice, @RegistrantPostalCode, @RegistrantCountry, @RegistrantPhone, @RegistrantFax, @RegistrantEmailAddress, @AdminFirstName, @AdminLastName, @AdminJobTitle, @AdminOrganizationName, @AdminAddress1, @AdminAddress2, @AdminCity, @AdminStateProvince, @AdminStateProvinceChoice, @AdminPostalCode, @AdminCountry, @AdminPhone, @AdminFax, @AdminEmailAddress, @TechFirstName, @TechLastName, @TechJobTitle, @TechOrganizationName, @TechAddress1, @TechAddress2, @TechCity, @TechStateProvince, @TechStateProvinceChoice, @TechPostalCode, @TechCountry, @TechPhone, @TechFax, @TechEmailAddress, @AuxBillingFirstName, @AuxBillingLastName, @AuxBillingJobTitle, @AuxBillingOrganizationName, @AuxBillingAddress1, @AuxBillingAddress2, @AuxBillingCity, @AuxBillingStateProvince, @AuxBillingStateProvinceChoice, @AuxBillingPostalCode, @AuxBillingCountry, @AuxBillingPhone, @AuxBillingFax, @AuxBillingEmailAddress, @RegistrantNexus, @RegistrantNexusCountry, @RegistrantPurpose, @CIRALegalType, @COUKLegalType, @COUKCompanyID, @ORGUKLegalType, @ORGUKCompanyID, @RegistrantPhoneext, @AdminPhoneext, @TechPhoneext, @AuxBillingPhoneext, @COUKRegisteredFor, @COUKRegOptOut, @ORGUKRegisteredFor, @ORGUKRegOptOut, @EUAdrLang, @MEUKLegalType, @MEUKCompanyID, @MEUKRegisteredFor, @MEUKRegOptOut, @CIRARegistrant, @CIRARegistrantDesc, @CIRATrademarkNo, @CIRAOrgRegisteredIn));
+		}
+
+		public static IQueryEnd USP_API_WHOISGUARD_RENEW(this IStoredProcedureHolder<NamecheapCoreContext> holder, int? @whoisguardId, byte? @numOfYears)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_API_WHOISGUARD_RENEW(@whoisguardId, @numOfYears));
+		}
+
+		public static IQueryEnd USP_API_WHOISGUARD_UPDATE_ASSOCIATED_EMAIL(this IStoredProcedureHolder<NamecheapCoreContext> holder, decimal? @whoisguardId, string @newEmailID, string @domainname)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_API_WHOISGUARD_UPDATE_ASSOCIATED_EMAIL(@whoisguardId, @newEmailID, @domainname));
+		}
+
+		public static IQueryEnd USP_API_WHOISGUARD_UPDATE_EMAIL_CHANGE_DUARATION(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @username, string @domainname, int? @emailChangeDuration)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_API_WHOISGUARD_UPDATE_EMAIL_CHANGE_DUARATION(@username, @domainname, @emailChangeDuration));
+		}
+
+		public static IQueryEnd USP_API_WHOISGUARD_UPDATE_FORWARDED_EMAIL(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @domainname, string @forwardedEmail)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_API_WHOISGUARD_UPDATE_FORWARDED_EMAIL(@domainname, @forwardedEmail));
+		}
+
+		public static IQueryEnd USP_API_WHOISGUARD_UPDATE_STATUS(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @username, int? @associate_domainId, string @associate_Email_Forwarded_To, bool? @isError)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_API_WHOISGUARD_UPDATE_STATUS(@username, @associate_domainId, @associate_Email_Forwarded_To, @isError));
+		}
+
+		public static IQueryEnd USP_API_WHOISGUARD_UPDATE_STATUS_BY_DOMAIN(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @domainname, string @forwardedTo, string @actionType)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_API_WHOISGUARD_UPDATE_STATUS_BY_DOMAIN(@domainname, @forwardedTo, @actionType));
+		}
+
+		public static IQueryEnd usp_APICheckMeTLDOrderToRegisterInREProvider(this IStoredProcedureHolder<NamecheapCoreContext> holder, int? @orderId, decimal? @orderItemId)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.usp_APICheckMeTLDOrderToRegisterInREProvider(@orderId, @orderItemId));
+		}
+
+		public static IQueryEnd usp_ApiDomainTransferUpdateErrInfo(this IStoredProcedureHolder<NamecheapCoreContext> holder, decimal? @transferID, string @errInfo)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.usp_ApiDomainTransferUpdateErrInfo(@transferID, @errInfo));
+		}
+
+		public static IQueryEnd usp_ApiDomainTransferUpdateProviderOrderId(this IStoredProcedureHolder<NamecheapCoreContext> holder, decimal? @transferID, string @providerTransferOrderID)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.usp_ApiDomainTransferUpdateProviderOrderId(@transferID, @providerTransferOrderID));
+		}
+
+		public static IQueryEnd Usp_ApiGetDomainRestrictedInfo(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @DomainName, string @RestrictionName)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.Usp_ApiGetDomainRestrictedInfo(@DomainName, @RestrictionName));
+		}
+
+		public static IQueryEnd Usp_ApiGetDomainRestrictedInfoList(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @DomainName)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.Usp_ApiGetDomainRestrictedInfoList(@DomainName));
+		}
+
+		public static IQueryEnd usp_ApiGetIsInternalRenewReactivate(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @domainname)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.usp_ApiGetIsInternalRenewReactivate(@domainname));
+		}
+
+		public static IQueryEnd usp_ApiGetUserInfo(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @userName)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.usp_ApiGetUserInfo(@userName));
+		}
+
+		public static IQueryEnd USP_APITRANSFER_CANCEL_BYADMIN(this IStoredProcedureHolder<NamecheapCoreContext> holder, int? @TransferID, string @AdminName, bool? @Refund, string @Comments)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_APITRANSFER_CANCEL_BYADMIN(@TransferID, @AdminName, @Refund, @Comments));
+		}
+
+		public static IQueryEnd USP_APITRANSFER_GET_DOMAIN_INFO(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @DomainName, string @UserName)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_APITRANSFER_GET_DOMAIN_INFO(@DomainName, @UserName));
+		}
+
+		public static IQueryEnd USP_APITRANSFER_GET_TRANSFER_INFO(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @UserName, decimal? @TransferId, string @DomainName)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_APITRANSFER_GET_TRANSFER_INFO(@UserName, @TransferId, @DomainName));
+		}
+
+		public static IQueryEnd USP_APITRANSFER_GET_TRANSFER_LIST(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @Filter, string @SortColumn, int? @SortDirection, int? @PageSize, int? @PageNumber, string @UserName, string @TransferCategory)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_APITRANSFER_GET_TRANSFER_LIST(@Filter, @SortColumn, @SortDirection, @PageSize, @PageNumber, @UserName, @TransferCategory));
+		}
+
+		public static IQueryEnd USP_APITRANSFER_UPDATE_EPPCODE(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @UserName, int? @TransferID, string @EppCode)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_APITRANSFER_UPDATE_EPPCODE(@UserName, @TransferID, @EppCode));
+		}
+
+		public static IQueryEnd USP_APITRANSFER_UPDATE_STATUS_BYADMIN(this IStoredProcedureHolder<NamecheapCoreContext> holder, int? @TransferID, int? @StatusID, string @StatusDesc)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_APITRANSFER_UPDATE_STATUS_BYADMIN(@TransferID, @StatusID, @StatusDesc));
+		}
+
+		public static IQueryEnd USP_APPLY_SPECIAL_PROMOTION_CODE_FOR_ONE_ITEM(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @refID, string @promotionCode, string @userName, int? @maxOrderCountAllowedPerUser, DateTime? @orderCountCheckStartDateTime)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_APPLY_SPECIAL_PROMOTION_CODE_FOR_ONE_ITEM(@refID, @promotionCode, @userName, @maxOrderCountAllowedPerUser, @orderCountCheckStartDateTime));
+		}
+
+		public static IQueryEnd USP_AUTOMATION_AFFILIATE_GET_AFFILIATEID_FOR_COMMISSION_PROCESS(this IStoredProcedureHolder<NamecheapCoreContext> holder, DateTime? @saleDate)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_AUTOMATION_AFFILIATE_GET_AFFILIATEID_FOR_COMMISSION_PROCESS(@saleDate));
+		}
+
+		public static IQueryEnd USP_AUTOMATION_AFFILIATE_GET_EARNED_COMMISSION_DATES_TO_PROCESS(this IStoredProcedureHolder<NamecheapCoreContext> holder, DateTime? @maxCommissionProcessDateTime)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_AUTOMATION_AFFILIATE_GET_EARNED_COMMISSION_DATES_TO_PROCESS(@maxCommissionProcessDateTime));
+		}
+
+		public static IQueryEnd USP_AUTOMATION_AFFILIATE_GET_ORDER_ITEMS_TO_PROCESS(this IStoredProcedureHolder<NamecheapCoreContext> holder, int? @lastProcessedOrderID, int? @maxOrdersToReturn, DateTime? @processUntilDateTime, int? @maxOrderId)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_AUTOMATION_AFFILIATE_GET_ORDER_ITEMS_TO_PROCESS(@lastProcessedOrderID, @maxOrdersToReturn, @processUntilDateTime, @maxOrderId));
+		}
+
+		public static IQueryEnd USP_AUTOMATION_AFFILIATE_GET_ORDER_PROCESS_PARAMETERS(this IStoredProcedureHolder<NamecheapCoreContext> holder)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_AUTOMATION_AFFILIATE_GET_ORDER_PROCESS_PARAMETERS());
+		}
+
+		public static IQueryEnd USP_AUTOMATION_CHECK_FREE_DNS_ALLOWED(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @domainname)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_AUTOMATION_CHECK_FREE_DNS_ALLOWED(@domainname));
+		}
+
+		public static IQueryEnd USP_AUTOMATION_CHECKIFDOMAINEXISTS(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @DomainName)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_AUTOMATION_CHECKIFDOMAINEXISTS(@DomainName));
+		}
+
+		public static IQueryEnd USP_AUTOMATION_DELETE_EXPIRED_DOMAIN(this IStoredProcedureHolder<NamecheapCoreContext> holder)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_AUTOMATION_DELETE_EXPIRED_DOMAIN());
+		}
+
+		public static IQueryEnd USP_AUTOMATION_DELETE_EXPIRED_UNUSED_DISCARDED_WHOISGUARDS(this IStoredProcedureHolder<NamecheapCoreContext> holder)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_AUTOMATION_DELETE_EXPIRED_UNUSED_DISCARDED_WHOISGUARDS());
+		}
+
+		public static IQueryEnd USP_AUTOMATION_DELETE_WG_EMAIL_QUEUE(this IStoredProcedureHolder<NamecheapCoreContext> holder)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_AUTOMATION_DELETE_WG_EMAIL_QUEUE());
+		}
+
+		public static IQueryEnd USP_AUTOMATION_DELETE_WG_FOR_EXPIRY(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @email)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_AUTOMATION_DELETE_WG_FOR_EXPIRY(@email));
+		}
+
+		public static IQueryEnd USP_AUTOMATION_DISABLE_WG(this IStoredProcedureHolder<NamecheapCoreContext> holder, decimal? @slotID)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_AUTOMATION_DISABLE_WG(@slotID));
+		}
+
+		public static IQueryEnd USP_AUTOMATION_EXPIRE_DOMAIN_GET_LAST_EXPIRY_DATETIME(this IStoredProcedureHolder<NamecheapCoreContext> holder)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_AUTOMATION_EXPIRE_DOMAIN_GET_LAST_EXPIRY_DATETIME());
+		}
+
+		public static IQueryEnd USP_AUTOMATION_EXPIRE_DOMAIN_GET_ORIGINAL_DNS(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @domainName, string @userName)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_AUTOMATION_EXPIRE_DOMAIN_GET_ORIGINAL_DNS(@domainName, @userName));
+		}
+
+		public static IQueryEnd USP_AUTOMATION_EXPIRE_DOMAIN_GET_RETRY_REVERT_NAME_SERVERS_LIST(this IStoredProcedureHolder<NamecheapCoreContext> holder)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_AUTOMATION_EXPIRE_DOMAIN_GET_RETRY_REVERT_NAME_SERVERS_LIST());
+		}
+
+		public static IQueryEnd USP_AUTOMATION_EXPIRE_DOMAIN_GET_TOP_ITEM(this IStoredProcedureHolder<NamecheapCoreContext> holder)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_AUTOMATION_EXPIRE_DOMAIN_GET_TOP_ITEM());
+		}
+
+		public static IQueryEnd USP_AUTOMATION_EXPIRE_DOMAIN_PROCESS_AN_ITEM(this IStoredProcedureHolder<NamecheapCoreContext> holder, long? @QueueId, int? @MinsToProcessExpiry)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_AUTOMATION_EXPIRE_DOMAIN_PROCESS_AN_ITEM(@QueueId, @MinsToProcessExpiry));
+		}
+
+		public static IQueryEnd USP_AUTOMATION_EXPIRE_DOMAIN_PROCESS_QUEUE(this IStoredProcedureHolder<NamecheapCoreContext> holder, DateTime? @StartDateTime, DateTime? @EndDatetime, bool? @IsFillQueueFirstTimeYN)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_AUTOMATION_EXPIRE_DOMAIN_PROCESS_QUEUE(@StartDateTime, @EndDatetime, @IsFillQueueFirstTimeYN));
+		}
+
+		public static IQueryEnd USP_AUTOMATION_EXPIRE_DOMAIN_SAVE_EXISTING_NAMESERVERS(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @DomainName, decimal? @DomainId, string @DNSXML)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_AUTOMATION_EXPIRE_DOMAIN_SAVE_EXISTING_NAMESERVERS(@DomainName, @DomainId, @DNSXML));
+		}
+
+		public static IQueryEnd USP_AUTOMATION_EXPIRE_DOMAIN_UPDATE_DNS_SWITCH_STATUS(this IStoredProcedureHolder<NamecheapCoreContext> holder, int? @StatusId, bool? @IsNameServerChanged, string @LogInfo)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_AUTOMATION_EXPIRE_DOMAIN_UPDATE_DNS_SWITCH_STATUS(@StatusId, @IsNameServerChanged, @LogInfo));
+		}
+
+		public static IQueryEnd USP_AUTOMATION_EXPIRE_DOMAIN_UPDATE_REVERTED_STATUS(this IStoredProcedureHolder<NamecheapCoreContext> holder, int? @expireDomainStatusID, string @domainName, bool? @isNameserverReverted, string @nameserverRevertMessage, bool? @isFromRetry)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_AUTOMATION_EXPIRE_DOMAIN_UPDATE_REVERTED_STATUS(@expireDomainStatusID, @domainName, @isNameserverReverted, @nameserverRevertMessage, @isFromRetry));
+		}
+
+		public static IQueryEnd USP_AUTOMATION_GET_BATCH_PROCESS(this IStoredProcedureHolder<NamecheapCoreContext> holder, int? @IPN_PageIndex, int? @IPN_PageSize)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_AUTOMATION_GET_BATCH_PROCESS(@IPN_PageIndex, @IPN_PageSize));
+		}
+
+		public static IQueryEnd USP_AUTOMATION_GET_DOMAIN_CONTACTS_FOR_WG_EXPIRE(this IStoredProcedureHolder<NamecheapCoreContext> holder, decimal? @assoID)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_AUTOMATION_GET_DOMAIN_CONTACTS_FOR_WG_EXPIRE(@assoID));
+		}
+
+		public static IQueryEnd USP_AUTOMATION_GET_DOMAINS_TOCHANGE_HOST(this IStoredProcedureHolder<NamecheapCoreContext> holder, int? @Start_Auto_Id, int? @End_Auto_Id)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_AUTOMATION_GET_DOMAINS_TOCHANGE_HOST(@Start_Auto_Id, @End_Auto_Id));
+		}
+
+		public static IQueryEnd USP_AUTOMATION_GET_EMAIL_DETAILS_FOR_WG_EMAIL_PAGE(this IStoredProcedureHolder<NamecheapCoreContext> holder, int? @pageno)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_AUTOMATION_GET_EMAIL_DETAILS_FOR_WG_EMAIL_PAGE(@pageno));
+		}
+
+		public static IQueryEnd USP_AUTOMATION_GET_EXPIRE_DOMAIN_PROCESS_STATUS(this IStoredProcedureHolder<NamecheapCoreContext> holder, long? @AutoId)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_AUTOMATION_GET_EXPIRE_DOMAIN_PROCESS_STATUS(@AutoId));
+		}
+
+		public static IQueryEnd USP_AUTOMATION_GET_EXPIRED_DOMAIN_LIST_FROM_TMP_TABLE(this IStoredProcedureHolder<NamecheapCoreContext> holder, int? @numberOfItems, int? @lastExpiredDomainID)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_AUTOMATION_GET_EXPIRED_DOMAIN_LIST_FROM_TMP_TABLE(@numberOfItems, @lastExpiredDomainID));
+		}
+
+		public static IQueryEnd USP_AUTOMATION_GET_EXPIRED_WHOISGUARD(this IStoredProcedureHolder<NamecheapCoreContext> holder)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_AUTOMATION_GET_EXPIRED_WHOISGUARD());
+		}
+
+		public static IQueryEnd USP_AUTOMATION_GET_LOG_DOMAINTRANSFERRED(this IStoredProcedureHolder<NamecheapCoreContext> holder)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_AUTOMATION_GET_LOG_DOMAINTRANSFERRED());
+		}
+
+		public static IQueryEnd USP_AUTOMATION_GET_NEWS_LETTER_SYNC_CONTACTS(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @userType)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_AUTOMATION_GET_NEWS_LETTER_SYNC_CONTACTS(@userType));
+		}
+
+		public static IQueryEnd USP_AUTOMATION_GET_SALE_TRANSACTION(this IStoredProcedureHolder<NamecheapCoreContext> holder)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_AUTOMATION_GET_SALE_TRANSACTION());
+		}
+
+		public static IQueryEnd USP_AUTOMATION_GET_WHOSIGUARD_PROTECTED_DOMAIN(this IStoredProcedureHolder<NamecheapCoreContext> holder, int? @Start_Auto_Id, int? @End_Auto_Id)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_AUTOMATION_GET_WHOSIGUARD_PROTECTED_DOMAIN(@Start_Auto_Id, @End_Auto_Id));
+		}
+
+		public static IQueryEnd USP_AUTOMATION_INSERT_EXPIRE_DOMAIN_IN_PROCESS_STATUS(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @UserName, string @DomainName, DateTime? @DomainExpireDateTime, bool? @IsNameServerChangedYN, long? @AutoId, string @DNSXML, string @LogInfo)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_AUTOMATION_INSERT_EXPIRE_DOMAIN_IN_PROCESS_STATUS(@UserName, @DomainName, @DomainExpireDateTime, @IsNameServerChangedYN, @AutoId, @DNSXML, @LogInfo));
+		}
+
+		public static IQueryEnd USP_AUTOMATION_INSERT_EXPIRED_DOMAIN_INTO_TMP_TABLE(this IStoredProcedureHolder<NamecheapCoreContext> holder)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_AUTOMATION_INSERT_EXPIRED_DOMAIN_INTO_TMP_TABLE());
+		}
+
+		public static IQueryEnd USP_AUTOMATION_INSERT_LOG_DOMAINTRANSFERRED(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @TransferredInOut, string @String)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_AUTOMATION_INSERT_LOG_DOMAINTRANSFERRED(@TransferredInOut, @String));
+		}
+
+		public static IQueryEnd USP_AUTOMATION_PAYPAL_GET_UNRESOLVED_DISPUTE_LIST(this IStoredProcedureHolder<NamecheapCoreContext> holder)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_AUTOMATION_PAYPAL_GET_UNRESOLVED_DISPUTE_LIST());
+		}
+
+		public static IQueryEnd USP_AUTOMATION_PAYPAL_RESOLVE_DISPUTE(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @TransID, string @ApiTransactionStatus)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_AUTOMATION_PAYPAL_RESOLVE_DISPUTE(@TransID, @ApiTransactionStatus));
+		}
+
+		public static IQueryEnd USP_AUTOMATION_PROCESS_ABUSE_DOMAIN(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @domainName)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_AUTOMATION_PROCESS_ABUSE_DOMAIN(@domainName));
+		}
+
+		public static IQueryEnd USP_AUTOMATION_REFUND_PARTIAL_RENEWED_TRANSFER(this IStoredProcedureHolder<NamecheapCoreContext> holder, decimal? @IPN_Transfer_ID, int? @IPN_NumYears, bool? @IPB_Test_Only_YN, decimal? @LD_Error)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_AUTOMATION_REFUND_PARTIAL_RENEWED_TRANSFER(@IPN_Transfer_ID, @IPN_NumYears, @IPB_Test_Only_YN, @LD_Error));
+		}
+
+		public static IQueryEnd USP_AUTOMATION_REFUND_TRANSFER(this IStoredProcedureHolder<NamecheapCoreContext> holder, decimal? @IPN_Transfer_ID, bool? @IPB_Test_Only_YN, decimal? @LD_Error)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_AUTOMATION_REFUND_TRANSFER(@IPN_Transfer_ID, @IPB_Test_Only_YN, @LD_Error));
+		}
+
+		public static IQueryEnd USP_AUTOMATION_SUBMITTRANSFER_ADD_DOMAIN(this IStoredProcedureHolder<NamecheapCoreContext> holder, decimal? @transferID, string @domainname, string @username, DateTime? @registeredDate, int? @NumYears)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_AUTOMATION_SUBMITTRANSFER_ADD_DOMAIN(@transferID, @domainname, @username, @registeredDate, @NumYears));
+		}
+
+		public static IQueryEnd USP_AUTOMATION_SUBMITTRANSFER_HANDLE_COMPLETED_LIST(this IStoredProcedureHolder<NamecheapCoreContext> holder, bool? @IsCompleteNamecheapTransfer, int? @StartId, int? @EndId, bool? @isProcessTransferMateEnabledOnly)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_AUTOMATION_SUBMITTRANSFER_HANDLE_COMPLETED_LIST(@IsCompleteNamecheapTransfer, @StartId, @EndId, @isProcessTransferMateEnabledOnly));
+		}
+
+		public static IQueryEnd USP_AUTOMATION_SUBMITTRANSFER_UPDATE_DOMAIN_DNS(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @domainName, string @dnsSubType, byte? @existingEmailProviderID)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_AUTOMATION_SUBMITTRANSFER_UPDATE_DOMAIN_DNS(@domainName, @dnsSubType, @existingEmailProviderID));
+		}
+
+		public static IQueryEnd USP_AUTOMATION_SUBMITTRANSFER_UPDATE_WHOISEXPIRATIONDATE_STATUS(this IStoredProcedureHolder<NamecheapCoreContext> holder, decimal? @transferID, string @StatusID, DateTime? @expirationDate)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_AUTOMATION_SUBMITTRANSFER_UPDATE_WHOISEXPIRATIONDATE_STATUS(@transferID, @StatusID, @expirationDate));
+		}
+
+		public static IQueryEnd USP_AUTOMATION_UPDATE_ABUSE_NOTIFICATION_SENT_DETAILS(this IStoredProcedureHolder<NamecheapCoreContext> holder, int? @domainId, string @userName, string @emailId, string @noticeType, int? @noticePeriod)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_AUTOMATION_UPDATE_ABUSE_NOTIFICATION_SENT_DETAILS(@domainId, @userName, @emailId, @noticeType, @noticePeriod));
+		}
+
+		public static IQueryEnd USP_AUTOMATION_UPDATE_DOMAIN_FOR_DELETE_EXPIRE(this IStoredProcedureHolder<NamecheapCoreContext> holder)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_AUTOMATION_UPDATE_DOMAIN_FOR_DELETE_EXPIRE());
+		}
+
+		public static IQueryEnd USP_AUTOMATION_UPDATE_EXPIRE_SSL_CERTFICATES(this IStoredProcedureHolder<NamecheapCoreContext> holder)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_AUTOMATION_UPDATE_EXPIRE_SSL_CERTFICATES());
+		}
+
+		public static IQueryEnd USP_AUTOMATION_UPDATE_FOR_RENEW_YEARS(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @domainname, short? @calculatedRenewYears)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_AUTOMATION_UPDATE_FOR_RENEW_YEARS(@domainname, @calculatedRenewYears));
+		}
+
+		public static IQueryEnd USP_AUTOMATION_UPDATE_LOG_DOMAINTRANSFERRED(this IStoredProcedureHolder<NamecheapCoreContext> holder, decimal? @Id, string @UserName, bool? @ExistInDomainTable, bool? @EnomVerified, bool? @DomainDeleted, bool? @MailSent, DateTime? @DomainDeletedDate)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_AUTOMATION_UPDATE_LOG_DOMAINTRANSFERRED(@Id, @UserName, @ExistInDomainTable, @EnomVerified, @DomainDeleted, @MailSent, @DomainDeletedDate));
+		}
+
+		public static IQueryEnd USP_AUTOMATION_UPDATE_WG_EMAIL(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @newEmail, string @oldEmail, decimal? @slotID, string @forwardEmail)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_AUTOMATION_UPDATE_WG_EMAIL(@newEmail, @oldEmail, @slotID, @forwardEmail));
+		}
+
+		public static IQueryEnd USP_AUTOMATION_USERDETAILS_FOR_LOGTRANSFEROUT(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @DomainName)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_AUTOMATION_USERDETAILS_FOR_LOGTRANSFEROUT(@DomainName));
+		}
+
+		public static IQueryEnd usp_AutomationAddAddonDetailForOX(this IStoredProcedureHolder<NamecheapCoreContext> holder, decimal? @Order_Id, string @Sld, string @ActionId, short? @Duration)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.usp_AutomationAddAddonDetailForOX(@Order_Id, @Sld, @ActionId, @Duration));
+		}
+
+		public static IQueryEnd usp_AutomationAutorenewWG(this IStoredProcedureHolder<NamecheapCoreContext> holder, decimal? @slotId, short? @numYears, string @userName, string @domainName)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.usp_AutomationAutorenewWG(@slotId, @numYears, @userName, @domainName));
+		}
+
+		public static IQueryEnd usp_AutomationGetAutorenewDomainsAndProductsListForUser(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @username)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.usp_AutomationGetAutorenewDomainsAndProductsListForUser(@username));
+		}
+
+		public static IQueryEnd usp_AutomationGetAutorenewDomainsAndProductsUsersOptions(this IStoredProcedureHolder<NamecheapCoreContext> holder)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.usp_AutomationGetAutorenewDomainsAndProductsUsersOptions());
+		}
+
+		public static IQueryEnd usp_AutomationGetAutorenewDomainsOPListForUser(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @username)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.usp_AutomationGetAutorenewDomainsOPListForUser(@username));
+		}
+
+		public static IQueryEnd usp_AutomationGetAutorenewDomainsOPUsersOptions(this IStoredProcedureHolder<NamecheapCoreContext> holder, int? @Grace_days)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.usp_AutomationGetAutorenewDomainsOPUsersOptions(@Grace_days));
+		}
+
+		public static IQueryEnd usp_AutomationGetAutorenewDomainsWGListForUser(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @username)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.usp_AutomationGetAutorenewDomainsWGListForUser(@username));
+		}
+
+		public static IQueryEnd usp_AutomationGetAutorenewDomainsWGUsersOptions(this IStoredProcedureHolder<NamecheapCoreContext> holder)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.usp_AutomationGetAutorenewDomainsWGUsersOptions());
+		}
+
+		public static IQueryEnd usp_AutomationGetAutorenewOXListForUser(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @UserName, int? @Renew_Days, int? @Renew_Days_Onemonthcycle)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.usp_AutomationGetAutorenewOXListForUser(@UserName, @Renew_Days, @Renew_Days_Onemonthcycle));
+		}
+
+		public static IQueryEnd usp_AutomationGetAutorenewOXUsersOptions(this IStoredProcedureHolder<NamecheapCoreContext> holder, int? @StartRenew_OneMonthCycle, int? @StartRenew_Cycle)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.usp_AutomationGetAutorenewOXUsersOptions(@StartRenew_OneMonthCycle, @StartRenew_Cycle));
+		}
+
+		public static IQueryEnd usp_AutomationGetExpiringOXSubscriptions(this IStoredProcedureHolder<NamecheapCoreContext> holder)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.usp_AutomationGetExpiringOXSubscriptions());
+		}
+
+		public static IQueryEnd usp_AutomationGetOnedayToExpireOXSubscriptions(this IStoredProcedureHolder<NamecheapCoreContext> holder)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.usp_AutomationGetOnedayToExpireOXSubscriptions());
+		}
+
+		public static IQueryEnd usp_AutomationGetOrderOneTimeEmailPendings(this IStoredProcedureHolder<NamecheapCoreContext> holder)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.usp_AutomationGetOrderOneTimeEmailPendings());
+		}
+
+		public static IQueryEnd usp_AutomationGetRenewReactivateToVerifyList(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @tldCsv)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.usp_AutomationGetRenewReactivateToVerifyList(@tldCsv));
+		}
+
+		public static IQueryEnd usp_AutomationRenewNotification(this IStoredProcedureHolder<NamecheapCoreContext> holder, short? @NoOfTopRecords, string @domainStartingAlphaNumericLeter, DateTime? @StartDate, DateTime? @Enddate, decimal? @DomainId)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.usp_AutomationRenewNotification(@NoOfTopRecords, @domainStartingAlphaNumericLeter, @StartDate, @Enddate, @DomainId));
+		}
+
+		public static IQueryEnd usp_AutomationSetCompleteToTrue(this IStoredProcedureHolder<NamecheapCoreContext> holder, bool? @isProcessTransferMateEnabledOnly)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.usp_AutomationSetCompleteToTrue(@isProcessTransferMateEnabledOnly));
+		}
+
+		public static IQueryEnd usp_AutomationUpdateDomainExpiryDateTime(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @domainName, DateTime? @expiryDateTime)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.usp_AutomationUpdateDomainExpiryDateTime(@domainName, @expiryDateTime));
+		}
+
+		public static IQueryEnd usp_AutomationUpdateDomainForAutoRenew(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @domainname, string @username, decimal? @orderId, decimal? @transactionId, string @clientIp, short? @numYears)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.usp_AutomationUpdateDomainForAutoRenew(@domainname, @username, @orderId, @transactionId, @clientIp, @numYears));
+		}
+
+		public static IQueryEnd usp_AutomationUpdateDomainsAutoRenewErrorStatus(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @domainData, string @username)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.usp_AutomationUpdateDomainsAutoRenewErrorStatus(@domainData, @username));
+		}
+
+		public static IQueryEnd usp_AutomationUpdateIsOneTimeEmailFlag(this IStoredProcedureHolder<NamecheapCoreContext> holder, decimal? @OrderId)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.usp_AutomationUpdateIsOneTimeEmailFlag(@OrderId));
+		}
+
+		public static IQueryEnd usp_AutomationWgEmailQueueOnetime(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @newEmail, string @oldEmail, decimal? @slotID, string @forwardEmail)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.usp_AutomationWgEmailQueueOnetime(@newEmail, @oldEmail, @slotID, @forwardEmail));
+		}
+
+		public static IQueryEnd usp_AutorenewCreateNewUpdateOrderTransaction(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @orderRefID, string @userName, decimal? @price, string @serverIP, decimal? @TransactionID)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.usp_AutorenewCreateNewUpdateOrderTransaction(@orderRefID, @userName, @price, @serverIP, @TransactionID));
+		}
+
+		public static IQueryEnd USP_BULK_ALLOT_WG(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @DomainName, string @BatchID, string @RegistrantFax, string @RegistrantPhone, string @RegistrantCountry, string @RegistrantPostalCode, string @RegistrantStateProvince, string @RegistrantStateProvinceChoice, string @RegistrantCity, string @RegistrantAddress1, string @RegistrantAddress2, string @RegistrantLastName, string @RegistrantFirstName, string @RegistrantJobTitle, string @RegistrantOrganizationName, string @RegistrantPhoneext, string @RegistrantEmailAddress, string @TechFax, string @TechPhone, string @TechCountry, string @TechPostalCode, string @TechStateProvince, string @TechStateProvinceChoice, string @TechCity, string @TechAddress1, string @TechAddress2, string @TechLastName, string @TechFirstName, string @TechJobTitle, string @TechOrganizationName, string @TechPhoneext, string @TechEmailAddress, string @AdminFax, string @AdminPhone, string @AdminCountry, string @AdminPostalCode, string @AdminStateProvince, string @AdminStateProvinceChoice, string @AdminCity, string @AdminAddress1, string @AdminAddress2, string @AdminLastName, string @AdminFirstName, string @AdminJobTitle, string @AdminOrganizationName, string @AdminPhoneext, string @AdminEmailAddress, string @AuxBillingFax, string @AuxBillingPhone, string @AuxBillingCountry, string @AuxBillingPostalCode, string @AuxBillingStateProvince, string @AuxBillingStateProvinceChoice, string @AuxBillingCity, string @AuxBillingAddress1, string @AuxBillingAddress2, string @AuxBillingLastName, string @AuxBillingFirstName, string @AuxBillingJobTitle, string @AuxBillingOrganizationName, string @AuxBillingPhoneext, string @AuxBillingEmailAddress, string @RegistrantNexus, string @RegistrantNexusCountry, string @RegistrantPurpose, string @COUKRegisteredFor, string @ORGUKRegisteredFor, string @COUKLegalType, string @ORGUKLegalType, string @COUKRegOptOut, string @ORGUKRegOptOut, string @COUKCompanyID, string @ORGUKCompanyID, string @EUAdrLang, string @MEUKLegalType, string @MEUKCompanyID, string @MEUKRegisteredfor, string @MEUKRegOptOut, string @CIRALegalType, string @CIRAWhoisDisplay, string @CIRAAgreementValue, string @CIRAAgreementVersion, string @CIRALanguage)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_BULK_ALLOT_WG(@DomainName, @BatchID, @RegistrantFax, @RegistrantPhone, @RegistrantCountry, @RegistrantPostalCode, @RegistrantStateProvince, @RegistrantStateProvinceChoice, @RegistrantCity, @RegistrantAddress1, @RegistrantAddress2, @RegistrantLastName, @RegistrantFirstName, @RegistrantJobTitle, @RegistrantOrganizationName, @RegistrantPhoneext, @RegistrantEmailAddress, @TechFax, @TechPhone, @TechCountry, @TechPostalCode, @TechStateProvince, @TechStateProvinceChoice, @TechCity, @TechAddress1, @TechAddress2, @TechLastName, @TechFirstName, @TechJobTitle, @TechOrganizationName, @TechPhoneext, @TechEmailAddress, @AdminFax, @AdminPhone, @AdminCountry, @AdminPostalCode, @AdminStateProvince, @AdminStateProvinceChoice, @AdminCity, @AdminAddress1, @AdminAddress2, @AdminLastName, @AdminFirstName, @AdminJobTitle, @AdminOrganizationName, @AdminPhoneext, @AdminEmailAddress, @AuxBillingFax, @AuxBillingPhone, @AuxBillingCountry, @AuxBillingPostalCode, @AuxBillingStateProvince, @AuxBillingStateProvinceChoice, @AuxBillingCity, @AuxBillingAddress1, @AuxBillingAddress2, @AuxBillingLastName, @AuxBillingFirstName, @AuxBillingJobTitle, @AuxBillingOrganizationName, @AuxBillingPhoneext, @AuxBillingEmailAddress, @RegistrantNexus, @RegistrantNexusCountry, @RegistrantPurpose, @COUKRegisteredFor, @ORGUKRegisteredFor, @COUKLegalType, @ORGUKLegalType, @COUKRegOptOut, @ORGUKRegOptOut, @COUKCompanyID, @ORGUKCompanyID, @EUAdrLang, @MEUKLegalType, @MEUKCompanyID, @MEUKRegisteredfor, @MEUKRegOptOut, @CIRALegalType, @CIRAWhoisDisplay, @CIRAAgreementValue, @CIRAAgreementVersion, @CIRALanguage));
+		}
+
+		public static IQueryEnd USP_CART_VALIDATE(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @REFID, string @Username, string @DomainName, string @ActionID, bool? @LoggedIn, string @PackID)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_CART_VALIDATE(@REFID, @Username, @DomainName, @ActionID, @LoggedIn, @PackID));
+		}
+
+		public static IQueryEnd USP_CHANGE_PASSWORD(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @userName, string @password, string @passwordNoCase, string @newPassword, string @newPasswordNoCase, string @newPasswordLog, string @sourceIp, string @calledFrom)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_CHANGE_PASSWORD(@userName, @password, @passwordNoCase, @newPassword, @newPasswordNoCase, @newPasswordLog, @sourceIp, @calledFrom));
+		}
+
+		public static IQueryEnd USP_CHANGE_PASSWORD_USING_RESETCODE(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @UserName, string @RequestGuid, string @NewPassword, string @NewPasswordNoCase, string @NewPasswordLog, string @Ip, string @calledFrom, string @AuthorizationReferenceId)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_CHANGE_PASSWORD_USING_RESETCODE(@UserName, @RequestGuid, @NewPassword, @NewPasswordNoCase, @NewPasswordLog, @Ip, @calledFrom, @AuthorizationReferenceId));
+		}
+
+		public static IQueryEnd usp_ChangeOwnership(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @sourceUserName, string @targetUserName, string @domainName, string @TransID, string @WGOption, decimal? @domainId, bool? @isChangeContact)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.usp_ChangeOwnership(@sourceUserName, @targetUserName, @domainName, @TransID, @WGOption, @domainId, @isChangeContact));
+		}
+
+		public static IQueryEnd USP_CHARGE_TRANSACTION_AND_ADD_FUNDS(this IStoredProcedureHolder<NamecheapCoreContext> holder, decimal? @TransactionId, decimal? @ChargeAmount, bool? @IsRefund_YN)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_CHARGE_TRANSACTION_AND_ADD_FUNDS(@TransactionId, @ChargeAmount, @IsRefund_YN));
+		}
+
+		public static IQueryEnd USP_CHECK_ADMIN_LOGIN(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @UserName, string @Password, byte? @IPClassA, byte? @IPClassB, byte? @IPClassC, byte? @IPClassD, string @AllowedIpsList)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_CHECK_ADMIN_LOGIN(@UserName, @Password, @IPClassA, @IPClassB, @IPClassC, @IPClassD, @AllowedIpsList));
+		}
+
+		public static IQueryEnd USP_CHECK_CAN_SKIP_ADDCARD_VERIFICATION(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @userName)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_CHECK_CAN_SKIP_ADDCARD_VERIFICATION(@userName));
+		}
+
+		public static IQueryEnd USP_CHECK_CAN_SKIP_ADDFUNDS_VERIFICATION(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @userName)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_CHECK_CAN_SKIP_ADDFUNDS_VERIFICATION(@userName));
+		}
+
+		public static IQueryEnd USP_CHECK_CAN_SKIP_CARD_PAYMENT_VERIFICATION(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @userName, bool? @isFirstOrder)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_CHECK_CAN_SKIP_CARD_PAYMENT_VERIFICATION(@userName, @isFirstOrder));
+		}
+
+		public static IQueryEnd USP_CHECK_DOMAIN_EXISTS_FOR_USER(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @UserName, string @DomainName)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_CHECK_DOMAIN_EXISTS_FOR_USER(@UserName, @DomainName));
+		}
+
+		public static IQueryEnd USP_CHECK_FR_POSTALCODE(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @postalCode, string @placeName)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_CHECK_FR_POSTALCODE(@postalCode, @placeName));
+		}
+
+		public static IQueryEnd USP_CHECK_GROUPNAME_EXISTS(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @groupName)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_CHECK_GROUPNAME_EXISTS(@groupName));
+		}
+
+		public static IQueryEnd USP_CHECK_HOSTED_DOMAIN_EXISTS_FOR_USER(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @hostname, string @username)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_CHECK_HOSTED_DOMAIN_EXISTS_FOR_USER(@hostname, @username));
+		}
+
+		public static IQueryEnd USP_CHECK_IF_DOMAIN_BANNED_FOR_SSL(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @domainname, string @username)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_CHECK_IF_DOMAIN_BANNED_FOR_SSL(@domainname, @username));
+		}
+
+		public static IQueryEnd USP_CHECK_IF_EXIST_MESSAGE_ID(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @MessageID)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_CHECK_IF_EXIST_MESSAGE_ID(@MessageID));
+		}
+
+		public static IQueryEnd USP_CHECK_IF_RESELLER(this IStoredProcedureHolder<NamecheapCoreContext> holder, decimal? @userId)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_CHECK_IF_RESELLER(@userId));
+		}
+
+		public static IQueryEnd USP_CHECK_IP_IN_BLOCKED_LIST(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @IPV_Remote_IP)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_CHECK_IP_IN_BLOCKED_LIST(@IPV_Remote_IP));
+		}
+
+		public static IQueryEnd usp_Check_Namecheap_Bonus_CouponCode_Available(this IStoredProcedureHolder<NamecheapCoreContext> holder, decimal? @amount, string @partnerType, int? @overideCouponValue)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.usp_Check_Namecheap_Bonus_CouponCode_Available(@amount, @partnerType, @overideCouponValue));
+		}
+
+		public static IQueryEnd USP_CHECK_SHOPPING_FOR_ACTIONID(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @ActionID, string @RefID)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_CHECK_SHOPPING_FOR_ACTIONID(@ActionID, @RefID));
+		}
+
+		public static IQueryEnd USP_CHECK_SSL_IN_CART(this IStoredProcedureHolder<NamecheapCoreContext> holder, bool? @IPB_IsUserLoggedIN, string @IPV_UserName, decimal? @IPN_Certificate_ID, string @IPV_Domainused)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_CHECK_SSL_IN_CART(@IPB_IsUserLoggedIN, @IPV_UserName, @IPN_Certificate_ID, @IPV_Domainused));
+		}
+
+		public static IQueryEnd USP_CHECK_TARGETUSER_EXISTS(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @UserName)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_CHECK_TARGETUSER_EXISTS(@UserName));
+		}
+
+		public static IQueryEnd USP_CHECK_USER_LOCK_STATUS(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @userName)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_CHECK_USER_LOCK_STATUS(@userName));
+		}
+
+		public static IQueryEnd USP_CHECK_USER_LOGIN(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @userName, string @password, string @passwordNoCase, string @loginIp, string @loginFrom, string @userSupportPin)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_CHECK_USER_LOGIN(@userName, @password, @passwordNoCase, @loginIp, @loginFrom, @userSupportPin));
+		}
+
+		public static IQueryEnd USP_CHECK_USER_PASSWORD(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @userName, string @password, string @passwordNoCase)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_CHECK_USER_PASSWORD(@userName, @password, @passwordNoCase));
+		}
+
+		public static IQueryEnd USP_CHECK_USER_REQUEST_TOKEN(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @RequestGuid)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_CHECK_USER_REQUEST_TOKEN(@RequestGuid));
+		}
+
+		public static IQueryEnd USP_CHECK_USERNAME_EMAIL_AVAILABILITY(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @userName, string @email)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_CHECK_USERNAME_EMAIL_AVAILABILITY(@userName, @email));
+		}
+
+		public static IQueryEnd USP_CHECK_USERNAME_EXISTS(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @userName, int? @clientID, int? @autoId, string @hostingProvider)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_CHECK_USERNAME_EXISTS(@userName, @clientID, @autoId, @hostingProvider));
+		}
+
+		public static IQueryEnd USP_CHECK_VALID_ACTIONID_TLD(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @ActionID, string @sTLD)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_CHECK_VALID_ACTIONID_TLD(@ActionID, @sTLD));
+		}
+
+		public static IQueryEnd USP_CHECK_VALID_AUTORENEW_DOMAIN_EXISTS_FOR_USER(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @UserName, string @DomainName)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_CHECK_VALID_AUTORENEW_DOMAIN_EXISTS_FOR_USER(@UserName, @DomainName));
+		}
+
+		public static IQueryEnd USP_CHECK_WG_IN_CART(this IStoredProcedureHolder<NamecheapCoreContext> holder, bool? @IsUserLoggedIN, string @sUserName, string @sSLD)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_CHECK_WG_IN_CART(@IsUserLoggedIN, @sUserName, @sSLD));
+		}
+
+		public static IQueryEnd usp_Check2FAEnabledForUser(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @userName)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.usp_Check2FAEnabledForUser(@userName));
+		}
+
+		public static IQueryEnd usp_CheckDomainHasRenewableWhoisGuard(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @domainName, string @username)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.usp_CheckDomainHasRenewableWhoisGuard(@domainName, @username));
+		}
+
+		public static IQueryEnd usp_CheckGlobal2FAEnabilityForUser(this IStoredProcedureHolder<NamecheapCoreContext> holder)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.usp_CheckGlobal2FAEnabilityForUser());
+		}
+
+		public static IQueryEnd usp_CheckIfRedeemCoupon(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @promotionCode)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.usp_CheckIfRedeemCoupon(@promotionCode));
+		}
+
+		public static IQueryEnd usp_CheckOrderStatusForFHT(this IStoredProcedureHolder<NamecheapCoreContext> holder, int? @OrderID)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.usp_CheckOrderStatusForFHT(@OrderID));
+		}
+
+		public static IQueryEnd USP_CHECKOUT(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @IPV_Ref_ID)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_CHECKOUT(@IPV_Ref_ID));
+		}
+
+		public static IQueryEnd USP_CHECKOUT_HOSTING_GET_DOMAINS_TO_CHANGE_HOSTING_DNS(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @IPV_RegID, string @IPV_User_Name)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_CHECKOUT_HOSTING_GET_DOMAINS_TO_CHANGE_HOSTING_DNS(@IPV_RegID, @IPV_User_Name));
+		}
+
+		public static IQueryEnd USP_CHECKOUT_SET_OPTION_FLAGS(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @refID, string @UserName)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_CHECKOUT_SET_OPTION_FLAGS(@refID, @UserName));
+		}
+
+		public static IQueryEnd usp_CheckoutProcessIdMarkForPaymentCompletion(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @checkoutProcessID, string @paymentMode, bool? @isCompletedYN, string @checkoutStatusDesc)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.usp_CheckoutProcessIdMarkForPaymentCompletion(@checkoutProcessID, @paymentMode, @isCompletedYN, @checkoutStatusDesc));
+		}
+
+		public static IQueryEnd usp_CheckoutProcessIdMarkForPaymentSubmission(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @checkoutProcessID, string @paymentMode)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.usp_CheckoutProcessIdMarkForPaymentSubmission(@checkoutProcessID, @paymentMode));
+		}
+
+		public static IQueryEnd usp_ClearLogAffiliateTrafic(this IStoredProcedureHolder<NamecheapCoreContext> holder)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.usp_ClearLogAffiliateTrafic());
+		}
+
+		public static IQueryEnd usp_CommaSeperatorString(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @csvINPUT)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.usp_CommaSeperatorString(@csvINPUT));
+		}
+
+		public static IQueryEnd USP_COMMON_GET_COUNTRY_CODES(this IStoredProcedureHolder<NamecheapCoreContext> holder)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_COMMON_GET_COUNTRY_CODES());
+		}
+
+		public static IQueryEnd USP_COMMON_WHOISGUARD_UPDATE_STATUS_BY_DOMAIN(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @domainname, string @forwardedTo, string @actionType)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_COMMON_WHOISGUARD_UPDATE_STATUS_BY_DOMAIN(@domainname, @forwardedTo, @actionType));
+		}
+
+		public static IQueryEnd USP_CREATE_TOKEN_FOR_ADD_FUNDS_REQUEST(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @tokenId, string @newTokenId)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_CREATE_TOKEN_FOR_ADD_FUNDS_REQUEST(@tokenId, @newTokenId));
+		}
+
+		public static IQueryEnd USP_CREATE_USER_ACCOUNT(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @userName, string @password, string @passwordNoCase, string @passwordLog, string @email, string @firstName, string @lastName, string @friendEmail1, string @friendEmail2, int? @newsLetter, int? @AcceptTerms, string @purpose, string @ip, string @referralId, string @adId)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_CREATE_USER_ACCOUNT(@userName, @password, @passwordNoCase, @passwordLog, @email, @firstName, @lastName, @friendEmail1, @friendEmail2, @newsLetter, @AcceptTerms, @purpose, @ip, @referralId, @adId));
+		}
+
+		public static IQueryEnd USP_CREATE_WHOISGUARD_SUBSCRIPTION(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @User_Name, int? @Num_Subscriptions, int? @Num_Years_Each_Subscription)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_CREATE_WHOISGUARD_SUBSCRIPTION(@User_Name, @Num_Subscriptions, @Num_Years_Each_Subscription));
+		}
+
+		public static IQueryEnd usp_CreateCreditCardInitiatedTransactions(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @username, string @transactionType, string @paymentSource, decimal? @ccInitalAmount, string @orderRefId, string @providerToken, string @intiatedTransactionStatus, string @orderIp)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.usp_CreateCreditCardInitiatedTransactions(@username, @transactionType, @paymentSource, @ccInitalAmount, @orderRefId, @providerToken, @intiatedTransactionStatus, @orderIp));
+		}
+
+		public static IQueryEnd usp_CreateOrderForBatchAutoRenew(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @OrderXml, string @ClientIP, string @OrderRefID, decimal? @TransactionId, string @applicationType)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.usp_CreateOrderForBatchAutoRenew(@OrderXml, @ClientIP, @OrderRefID, @TransactionId, @applicationType));
+		}
+
+		public static IQueryEnd usp_CreateOrderForBatchAutoRenew11(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @OrderXml, string @ClientIP, string @OrderRefID, decimal? @TransactionId, string @applicationType)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.usp_CreateOrderForBatchAutoRenew11(@OrderXml, @ClientIP, @OrderRefID, @TransactionId, @applicationType));
+		}
+
+		public static IQueryEnd usp_CreateOrgTldPromotionDetails(this IStoredProcedureHolder<NamecheapCoreContext> holder, decimal? @orderId, string @tld, int? @hourDifferenceOfOtherTld)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.usp_CreateOrgTldPromotionDetails(@orderId, @tld, @hourDifferenceOfOtherTld));
+		}
+
+		public static IQueryEnd usp_CreateTransaction(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @UserName, string @TransactionType, string @PaymentSource, decimal? @AssociatedOrderID, string @PayerEMail, decimal? @CCInitialAmount, decimal? @RefundAmount, bool? @RefundYN, bool? @CompletedYN, string @Comments, string @OrderRefID, DateTime? @EndDateTime, string @CCOrderID, string @CCTransID, string @CCStatus, string @PaypalPendingReason, string @PaypalPaymentType, string @CCLast4, string @CCNameOnCard, string @OrderIP, string @OrderZip, string @OrderError, int? @RelatedTransactionID, bool? @IsAddedByAdmin, bool? @DoNotRefund)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.usp_CreateTransaction(@UserName, @TransactionType, @PaymentSource, @AssociatedOrderID, @PayerEMail, @CCInitialAmount, @RefundAmount, @RefundYN, @CompletedYN, @Comments, @OrderRefID, @EndDateTime, @CCOrderID, @CCTransID, @CCStatus, @PaypalPendingReason, @PaypalPaymentType, @CCLast4, @CCNameOnCard, @OrderIP, @OrderZip, @OrderError, @RelatedTransactionID, @IsAddedByAdmin, @DoNotRefund));
+		}
+
+		public static IQueryEnd USP_CREDITCARD_ADD_FUNDS(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @userName, decimal? @amount, int? @transactionId)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_CREDITCARD_ADD_FUNDS(@userName, @amount, @transactionId));
+		}
+
+		public static IQueryEnd USP_DELETE_ATTRIBUTE_FROM_GROUP(this IStoredProcedureHolder<NamecheapCoreContext> holder, int? @attributeId)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_DELETE_ATTRIBUTE_FROM_GROUP(@attributeId));
+		}
+
+		public static IQueryEnd USP_DELETE_ATTRIBUTE_GROUP(this IStoredProcedureHolder<NamecheapCoreContext> holder, int? @groupId)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_DELETE_ATTRIBUTE_GROUP(@groupId));
+		}
+
+		public static IQueryEnd USP_DELETE_DOMAIN(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @UserName, string @DomainName, string @Reason, string @Comments, bool? @RegistrarDeleted)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_DELETE_DOMAIN(@UserName, @DomainName, @Reason, @Comments, @RegistrarDeleted));
+		}
+
+		public static IQueryEnd USP_DELETE_DOMAIN_EDIT_CAPABILITIES(this IStoredProcedureHolder<NamecheapCoreContext> holder, decimal? @IPN_Current_User_ID, decimal? @IPN_Domain_ID, decimal? @IPN_Target_User_ID)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_DELETE_DOMAIN_EDIT_CAPABILITIES(@IPN_Current_User_ID, @IPN_Domain_ID, @IPN_Target_User_ID));
+		}
+
+		public static IQueryEnd USP_DELETE_EXPIRED_WHOISGUARD(this IStoredProcedureHolder<NamecheapCoreContext> holder, decimal? @slotid)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_DELETE_EXPIRED_WHOISGUARD(@slotid));
+		}
+
+		public static IQueryEnd USP_DELETE_HOSTING_USER_DETAILS(this IStoredProcedureHolder<NamecheapCoreContext> holder, int? @autoId)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_DELETE_HOSTING_USER_DETAILS(@autoId));
+		}
+
+		public static IQueryEnd USP_DELETE_WHOISGUARD(this IStoredProcedureHolder<NamecheapCoreContext> holder, int? @id, decimal? @userID)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_DELETE_WHOISGUARD(@id, @userID));
+		}
+
+		public static IQueryEnd usp_DeleteCardFromUserOptions(this IStoredProcedureHolder<NamecheapCoreContext> holder, Guid? @creditCardId, string @userName)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.usp_DeleteCardFromUserOptions(@creditCardId, @userName));
+		}
+
+		public static IQueryEnd USP_DNS_ALL_DOMAINS_LIST(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @username, decimal? @IPN_User_ID, string @IPV_List_Type, string @IPV_Search_Term, decimal? @IPN_Category_ID, string @SortBy, string @Order, bool? @IPB_Expired_YN, int? @Page, int? @PageSize, bool? @ReturnAllRows)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_DNS_ALL_DOMAINS_LIST(@username, @IPN_User_ID, @IPV_List_Type, @IPV_Search_Term, @IPN_Category_ID, @SortBy, @Order, @IPB_Expired_YN, @Page, @PageSize, @ReturnAllRows));
+		}
+
+		public static IQueryEnd USP_DNS_ALLOW_DISALLOW_FREEDNS(this IStoredProcedureHolder<NamecheapCoreContext> holder, bool? @IsDisallow, string @DomainName, string @Reason, string @AdminReason)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_DNS_ALLOW_DISALLOW_FREEDNS(@IsDisallow, @DomainName, @Reason, @AdminReason));
+		}
+
+		public static IQueryEnd USP_DNS_DELETE_DOMAIN_SETTINGS(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @domainName, int? @domainId)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_DNS_DELETE_DOMAIN_SETTINGS(@domainName, @domainId));
+		}
+
+		public static IQueryEnd USP_DNS_ENABLE_DISABLE_DYNAMIC_DNS(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @domainName, string @userName, string @dynamicDnsStatusXml, bool? @hostedDomain)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_DNS_ENABLE_DISABLE_DYNAMIC_DNS(@domainName, @userName, @dynamicDnsStatusXml, @hostedDomain));
+		}
+
+		public static IQueryEnd USP_DNS_GET_DNS(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @domainName, string @userName)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_DNS_GET_DNS(@domainName, @userName));
+		}
+
+		public static IQueryEnd USP_DNS_GET_DNSPROVIDER_SERVERS_FOR_SUBTYPE(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @providerSubtype)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_DNS_GET_DNSPROVIDER_SERVERS_FOR_SUBTYPE(@providerSubtype));
+		}
+
+		public static IQueryEnd USP_DNS_GET_DYNAMIC_DNS_STATUS(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @domainName, string @userName, bool? @hostedDomain)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_DNS_GET_DYNAMIC_DNS_STATUS(@domainName, @userName, @hostedDomain));
+		}
+
+		public static IQueryEnd USP_DNS_GET_EMAIL_FORWARDING(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @domainName, string @userName, bool? @hostedDomain)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_DNS_GET_EMAIL_FORWARDING(@domainName, @userName, @hostedDomain));
+		}
+
+		public static IQueryEnd USP_DNS_GET_EMAILPROVIDER_SERVERS_FOR_SUBTYPE(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @providerSubtype)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_DNS_GET_EMAILPROVIDER_SERVERS_FOR_SUBTYPE(@providerSubtype));
+		}
+
+		public static IQueryEnd USP_DNS_GET_HOSTS(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @domainName, string @userName, bool? @hostedDomain)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_DNS_GET_HOSTS(@domainName, @userName, @hostedDomain));
+		}
+
+		public static IQueryEnd USP_DNS_GET_METATAGS(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @domainName, string @userName, int? @hostId, bool? @hostedDomain)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_DNS_GET_METATAGS(@domainName, @userName, @hostId, @hostedDomain));
+		}
+
+		public static IQueryEnd USP_DNS_GET_PROVIDER_TYPE_BY_RR(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @dnsXml, string @status, string @dnsSubType)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_DNS_GET_PROVIDER_TYPE_BY_RR(@dnsXml, @status, @dnsSubType));
+		}
+
+		public static IQueryEnd USP_DNS_GET_SOA(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @domainName)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_DNS_GET_SOA(@domainName));
+		}
+
+		public static IQueryEnd USP_DNS_GET_URL_FORWARDING(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @domainName, string @userName, bool? @hostedDomain)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_DNS_GET_URL_FORWARDING(@domainName, @userName, @hostedDomain));
+		}
+
+		public static IQueryEnd USP_DNS_GETROWCOUNT_FOR_ALLDOMAINS_LIST(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @UserName, bool? @IPB_Expired_YN, decimal? @IPN_User_ID, string @IPV_List_Type, string @IPV_Search_Term, decimal? @IPN_Category_ID)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_DNS_GETROWCOUNT_FOR_ALLDOMAINS_LIST(@UserName, @IPB_Expired_YN, @IPN_User_ID, @IPV_List_Type, @IPV_Search_Term, @IPN_Category_ID));
+		}
+
+		public static IQueryEnd USP_DNS_HOSTED_DOMAINS_HISTORY_REPORT(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @username, string @IPV_Search_Term, DateTime? @FromDate, DateTime? @ToDate, string @SortBy, string @Order, int? @Page, int? @PageSize, bool? @ReturnAllRows)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_DNS_HOSTED_DOMAINS_HISTORY_REPORT(@username, @IPV_Search_Term, @FromDate, @ToDate, @SortBy, @Order, @Page, @PageSize, @ReturnAllRows));
+		}
+
+		public static IQueryEnd USP_DNS_HOSTED_DOMAINS_LIST(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @username, string @IPV_Search_Term, decimal? @IPN_Category_ID, string @SortBy, string @Order, int? @Page, int? @PageSize, bool? @ReturnAllRows)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_DNS_HOSTED_DOMAINS_LIST(@username, @IPV_Search_Term, @IPN_Category_ID, @SortBy, @Order, @Page, @PageSize, @ReturnAllRows));
+		}
+
+		public static IQueryEnd USP_DNS_HOSTING_ADD_HOST(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @hostName, string @userName, bool? @addToHostedDomain, bool? @activateHostRecords, string @domainName, string @computedTLD, string @authorizationStatus, string @verificationStatus, string @registrarName, DateTime? @expiryDateTime, string @addedIP, string @providerSubType)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_DNS_HOSTING_ADD_HOST(@hostName, @userName, @addToHostedDomain, @activateHostRecords, @domainName, @computedTLD, @authorizationStatus, @verificationStatus, @registrarName, @expiryDateTime, @addedIP, @providerSubType));
+		}
+
+		public static IQueryEnd USP_DNS_HOSTING_ADD_TO_CART(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @refID, string @domainNameList, string @userName, string @prevRefID)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_DNS_HOSTING_ADD_TO_CART(@refID, @domainNameList, @userName, @prevRefID));
+		}
+
+		public static IQueryEnd USP_DNS_HOSTING_ADD_TO_CART_FOR_BULK_FREE_DNS(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @refID, string @domainNameList, bool? @IsBulkHost)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_DNS_HOSTING_ADD_TO_CART_FOR_BULK_FREE_DNS(@refID, @domainNameList, @IsBulkHost));
+		}
+
+		public static IQueryEnd USP_DNS_HOSTING_AUTHORIZATION_PROCESS(this IStoredProcedureHolder<NamecheapCoreContext> holder, bool? @isAuthorized, bool? @isHostedDomain, int? @hostDomainsID, string @authorizationKey, string @authorizationIP, string @authorizationStatus, string @adminComments)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_DNS_HOSTING_AUTHORIZATION_PROCESS(@isAuthorized, @isHostedDomain, @hostDomainsID, @authorizationKey, @authorizationIP, @authorizationStatus, @adminComments));
+		}
+
+		public static IQueryEnd USP_DNS_HOSTING_AUTOMATION_GET_TO_VERIFY_LIST(this IStoredProcedureHolder<NamecheapCoreContext> holder)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_DNS_HOSTING_AUTOMATION_GET_TO_VERIFY_LIST());
+		}
+
+		public static IQueryEnd USP_DNS_HOSTING_CHECK_HOST_EXISTED(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @hostName, string @userName)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_DNS_HOSTING_CHECK_HOST_EXISTED(@hostName, @userName));
+		}
+
+		public static IQueryEnd USP_DNS_HOSTING_CHECK_HOSTNAME_FOR_EMAIL_UPDATE(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @hostName, string @userName, bool? @isHostedDomain)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_DNS_HOSTING_CHECK_HOSTNAME_FOR_EMAIL_UPDATE(@hostName, @userName, @isHostedDomain));
+		}
+
+		public static IQueryEnd USP_DNS_HOSTING_DELETE_AUTHORIZATION_EXPIRED_DOMAINS(this IStoredProcedureHolder<NamecheapCoreContext> holder)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_DNS_HOSTING_DELETE_AUTHORIZATION_EXPIRED_DOMAINS());
+		}
+
+		public static IQueryEnd USP_DNS_HOSTING_DELETE_FROM_CART(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @refID)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_DNS_HOSTING_DELETE_FROM_CART(@refID));
+		}
+
+		public static IQueryEnd USP_DNS_HOSTING_DELETE_HOST(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @hostName, string @actionType, string @actionDescription)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_DNS_HOSTING_DELETE_HOST(@hostName, @actionType, @actionDescription));
+		}
+
+		public static IQueryEnd USP_DNS_HOSTING_EXTEND_VALIDITY_DATE(this IStoredProcedureHolder<NamecheapCoreContext> holder, int? @hostID, DateTime? @newVerificationExpiryDateTime, string @comments)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_DNS_HOSTING_EXTEND_VALIDITY_DATE(@hostID, @newVerificationExpiryDateTime, @comments));
+		}
+
+		public static IQueryEnd USP_DNS_HOSTING_GET_ACTION_LIST(this IStoredProcedureHolder<NamecheapCoreContext> holder)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_DNS_HOSTING_GET_ACTION_LIST());
+		}
+
+		public static IQueryEnd USP_DNS_HOSTING_GET_ALL_TLD_LIST(this IStoredProcedureHolder<NamecheapCoreContext> holder, bool? @IsOnly_AllowDNSHosting, string @tldType)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_DNS_HOSTING_GET_ALL_TLD_LIST(@IsOnly_AllowDNSHosting, @tldType));
+		}
+
+		public static IQueryEnd USP_DNS_HOSTING_GET_AUTHORIZATION_DETAILS(this IStoredProcedureHolder<NamecheapCoreContext> holder, bool? @isHostedDomains, string @authorizationKey)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_DNS_HOSTING_GET_AUTHORIZATION_DETAILS(@isHostedDomains, @authorizationKey));
+		}
+
+		public static IQueryEnd USP_DNS_HOSTING_GET_CATEGORIES(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @userName)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_DNS_HOSTING_GET_CATEGORIES(@userName));
+		}
+
+		public static IQueryEnd USP_DNS_HOSTING_GET_DOMAIN_LIST_BY_BULK_HOST_TAG_FREE_DNS(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @refID, bool? @bulkHost)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_DNS_HOSTING_GET_DOMAIN_LIST_BY_BULK_HOST_TAG_FREE_DNS(@refID, @bulkHost));
+		}
+
+		public static IQueryEnd USP_DNS_HOSTING_GET_DOMAIN_LIST_BY_REF_ID(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @refID, string @userName)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_DNS_HOSTING_GET_DOMAIN_LIST_BY_REF_ID(@refID, @userName));
+		}
+
+		public static IQueryEnd USP_DNS_HOSTING_GET_EXPIRED_HOST_LIST(this IStoredProcedureHolder<NamecheapCoreContext> holder)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_DNS_HOSTING_GET_EXPIRED_HOST_LIST());
+		}
+
+		public static IQueryEnd USP_DNS_HOSTING_GET_HOST_DETAILS_FOR_ADMIN(this IStoredProcedureHolder<NamecheapCoreContext> holder, bool? @isHostedDomain, int? @hostID)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_DNS_HOSTING_GET_HOST_DETAILS_FOR_ADMIN(@isHostedDomain, @hostID));
+		}
+
+		public static IQueryEnd USP_DNS_HOSTING_GET_HOSTED_DOMAIN_DETIALS(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @hostName)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_DNS_HOSTING_GET_HOSTED_DOMAIN_DETIALS(@hostName));
+		}
+
+		public static IQueryEnd USP_DNS_HOSTING_GET_INFO(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @hostName, string @userName)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_DNS_HOSTING_GET_INFO(@hostName, @userName));
+		}
+
+		public static IQueryEnd USP_DNS_HOSTING_GET_STATUS_LIST(this IStoredProcedureHolder<NamecheapCoreContext> holder)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_DNS_HOSTING_GET_STATUS_LIST());
+		}
+
+		public static IQueryEnd USP_DNS_HOSTING_GET_SUB_DOMAIN_INFO(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @domainName, int? @hostId)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_DNS_HOSTING_GET_SUB_DOMAIN_INFO(@domainName, @hostId));
+		}
+
+		public static IQueryEnd USP_DNS_HOSTING_GET_SUB_DOMAIN_LIST(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @domainName, string @IPV_Search_Term)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_DNS_HOSTING_GET_SUB_DOMAIN_LIST(@domainName, @IPV_Search_Term));
+		}
+
+		public static IQueryEnd USP_DNS_HOSTING_GET_TO_AUTHORIZE_LIST(this IStoredProcedureHolder<NamecheapCoreContext> holder)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_DNS_HOSTING_GET_TO_AUTHORIZE_LIST());
+		}
+
+		public static IQueryEnd USP_DNS_HOSTING_IS_ALLOW_FREE_DNS(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @userName)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_DNS_HOSTING_IS_ALLOW_FREE_DNS(@userName));
+		}
+
+		public static IQueryEnd USP_DNS_HOSTING_LOCK_UNLOCK_HOST(this IStoredProcedureHolder<NamecheapCoreContext> holder, int? @hostID, bool? @domainLockedYN, string @comments, string @lockUnlockReason, string @calledBy)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_DNS_HOSTING_LOCK_UNLOCK_HOST(@hostID, @domainLockedYN, @comments, @lockUnlockReason, @calledBy));
+		}
+
+		public static IQueryEnd USP_DNS_HOSTING_PAY_FOR_SUBSCRIPTION(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @ActionID, string @RefID, string @sSLD, string @sTLD, short? @NumofYears, int? @Qty, string @userName, string @sTransactionID, string @sOrderID, string @sPayStatus, decimal? @sNumericOrderID)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_DNS_HOSTING_PAY_FOR_SUBSCRIPTION(@ActionID, @RefID, @sSLD, @sTLD, @NumofYears, @Qty, @userName, @sTransactionID, @sOrderID, @sPayStatus, @sNumericOrderID));
+		}
+
+		public static IQueryEnd USP_DNS_HOSTING_RE_INITIATE_AUTHORIZATION(this IStoredProcedureHolder<NamecheapCoreContext> holder, bool? @isHostedDomains, int? @hostID, string @authorizationEmail, string @comments)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_DNS_HOSTING_RE_INITIATE_AUTHORIZATION(@isHostedDomains, @hostID, @authorizationEmail, @comments));
+		}
+
+		public static IQueryEnd USP_DNS_HOSTING_RE_INITIATE_VERIFICATION(this IStoredProcedureHolder<NamecheapCoreContext> holder, int? @hostID, string @comments)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_DNS_HOSTING_RE_INITIATE_VERIFICATION(@hostID, @comments));
+		}
+
+		public static IQueryEnd USP_DNS_HOSTING_REMOVE_FROM_DNS_SYSTEM(this IStoredProcedureHolder<NamecheapCoreContext> holder, bool? @isHostedDomain, int? @hostID, string @actionType, string @actionDescription)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_DNS_HOSTING_REMOVE_FROM_DNS_SYSTEM(@isHostedDomain, @hostID, @actionType, @actionDescription));
+		}
+
+		public static IQueryEnd USP_DNS_HOSTING_RESET_AUTHORIZATION(this IStoredProcedureHolder<NamecheapCoreContext> holder, bool? @isHostedDomains, int? @hostID, string @comments)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_DNS_HOSTING_RESET_AUTHORIZATION(@isHostedDomains, @hostID, @comments));
+		}
+
+		public static IQueryEnd USP_DNS_HOSTING_SET_AUTHORIZATION_EMAIL(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @hostName, string @userName, string @authorizationEmail, bool? @isHostedDomains)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_DNS_HOSTING_SET_AUTHORIZATION_EMAIL(@hostName, @userName, @authorizationEmail, @isHostedDomains));
+		}
+
+		public static IQueryEnd USP_DNS_HOSTING_UPDATE_AUTHORIZATION_DETAILS(this IStoredProcedureHolder<NamecheapCoreContext> holder, bool? @isHostedDomains, int? @hostId, string @authorizationStatus, string @authorizationEmail, string @authorizationKey)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_DNS_HOSTING_UPDATE_AUTHORIZATION_DETAILS(@isHostedDomains, @hostId, @authorizationStatus, @authorizationEmail, @authorizationKey));
+		}
+
+		public static IQueryEnd USP_DNS_HOSTING_UPDATE_AUTHORIZATION_STATUS(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @hostName, string @userName, bool? @isHostedDomains, string @action)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_DNS_HOSTING_UPDATE_AUTHORIZATION_STATUS(@hostName, @userName, @isHostedDomains, @action));
+		}
+
+		public static IQueryEnd USP_DNS_HOSTING_UPDATE_HOST(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @hostName, string @userName, string @providerSubType)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_DNS_HOSTING_UPDATE_HOST(@hostName, @userName, @providerSubType));
+		}
+
+		public static IQueryEnd USP_DNS_HOSTING_VALIDATE_DOMAIN(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @domainName, string @userName)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_DNS_HOSTING_VALIDATE_DOMAIN(@domainName, @userName));
+		}
+
+		public static IQueryEnd USP_DNS_HOSTING_VALIDATE_FOR_PARENT_OWNER(this IStoredProcedureHolder<NamecheapCoreContext> holder, int? @hostID, bool? @isHostedDomain, string @domainName, string @userName, string @actionType)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_DNS_HOSTING_VALIDATE_FOR_PARENT_OWNER(@hostID, @isHostedDomain, @domainName, @userName, @actionType));
+		}
+
+		public static IQueryEnd USP_DNS_HOSTING_VALIDATE_HOST(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @hostName, string @userName, string @domainName, bool? @isSubDomain, bool? @checkUserIfDNSHostingdisabled, bool? @checkIfDomainBanned)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_DNS_HOSTING_VALIDATE_HOST(@hostName, @userName, @domainName, @isSubDomain, @checkUserIfDNSHostingdisabled, @checkIfDomainBanned));
+		}
+
+		public static IQueryEnd USP_DNS_HOSTING_VERIFICATION_PROCESS(this IStoredProcedureHolder<NamecheapCoreContext> holder, int? @hostID, string @verificationStatusName, int? @verificationExtendValidityPeriod, string @comments)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_DNS_HOSTING_VERIFICATION_PROCESS(@hostID, @verificationStatusName, @verificationExtendValidityPeriod, @comments));
+		}
+
+		public static IQueryEnd USP_DNS_HOSTING_VERIFICATION_PROCESS_FOR_AMDIN(this IStoredProcedureHolder<NamecheapCoreContext> holder, int? @hostID, string @verificationStatusName, int? @verificationExtendValidityPeriod, string @comments)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_DNS_HOSTING_VERIFICATION_PROCESS_FOR_AMDIN(@hostID, @verificationStatusName, @verificationExtendValidityPeriod, @comments));
+		}
+
+		public static IQueryEnd USP_DNS_PENDING_HOSTED_DOMAINS_LIST(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @username, string @IPV_Search_Term, string @SortBy, string @Order, int? @Page, int? @PageSize, bool? @ReturnAllRows)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_DNS_PENDING_HOSTED_DOMAINS_LIST(@username, @IPV_Search_Term, @SortBy, @Order, @Page, @PageSize, @ReturnAllRows));
+		}
+
+		public static IQueryEnd USP_DNS_PROVIDER_REPLICATION(this IStoredProcedureHolder<NamecheapCoreContext> holder, int? @domainId, byte? @oldProviderId, byte? @newProviderId, string @providerType, Guid? @uniqueId, string @domainnameToCleanUp, bool? @hostedDomain)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_DNS_PROVIDER_REPLICATION(@domainId, @oldProviderId, @newProviderId, @providerType, @uniqueId, @domainnameToCleanUp, @hostedDomain));
+		}
+
+		public static IQueryEnd USP_DNS_PROVIDER_REPLICATION_DDNS(this IStoredProcedureHolder<NamecheapCoreContext> holder, int? @domainId, byte? @oldProviderId, byte? @newProviderId, string @providerType, Guid? @uniqueId, string @domainnameToCleanUp, bool? @hostedDomain)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_DNS_PROVIDER_REPLICATION_DDNS(@domainId, @oldProviderId, @newProviderId, @providerType, @uniqueId, @domainnameToCleanUp, @hostedDomain));
+		}
+
+		public static IQueryEnd USP_DNS_PROVIDER_REPLICATION_NEWT0(this IStoredProcedureHolder<NamecheapCoreContext> holder, int? @domainId, byte? @oldProviderId, byte? @newProviderId, string @providerType, Guid? @uniqueId, string @domainnameToCleanUp, bool? @hostedDomain)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_DNS_PROVIDER_REPLICATION_NEWT0(@domainId, @oldProviderId, @newProviderId, @providerType, @uniqueId, @domainnameToCleanUp, @hostedDomain));
+		}
+
+		public static IQueryEnd USP_DNS_PROVIDER_REPLICATION_NEWT1(this IStoredProcedureHolder<NamecheapCoreContext> holder, int? @domainId, byte? @oldProviderId, byte? @newProviderId, string @providerType, Guid? @uniqueId, string @domainnameToCleanUp, bool? @hostedDomain)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_DNS_PROVIDER_REPLICATION_NEWT1(@domainId, @oldProviderId, @newProviderId, @providerType, @uniqueId, @domainnameToCleanUp, @hostedDomain));
+		}
+
+		public static IQueryEnd USP_DNS_PROVIDER_REPLICATION_NEWT2(this IStoredProcedureHolder<NamecheapCoreContext> holder, int? @domainId, byte? @oldProviderId, byte? @newProviderId, string @providerType, Guid? @uniqueId, string @domainnameToCleanUp, bool? @hostedDomain)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_DNS_PROVIDER_REPLICATION_NEWT2(@domainId, @oldProviderId, @newProviderId, @providerType, @uniqueId, @domainnameToCleanUp, @hostedDomain));
+		}
+
+		public static IQueryEnd USP_DNS_PROVIDER_REPLICATION_NEWT3(this IStoredProcedureHolder<NamecheapCoreContext> holder, int? @domainId, byte? @oldProviderId, byte? @newProviderId, string @providerType, Guid? @uniqueId, string @domainnameToCleanUp, bool? @hostedDomain)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_DNS_PROVIDER_REPLICATION_NEWT3(@domainId, @oldProviderId, @newProviderId, @providerType, @uniqueId, @domainnameToCleanUp, @hostedDomain));
+		}
+
+		public static IQueryEnd USP_DNS_PROVIDER_REPLICATION_NEWT4(this IStoredProcedureHolder<NamecheapCoreContext> holder, int? @domainId, byte? @oldProviderId, byte? @newProviderId, string @providerType, Guid? @uniqueId, string @domainnameToCleanUp, bool? @hostedDomain)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_DNS_PROVIDER_REPLICATION_NEWT4(@domainId, @oldProviderId, @newProviderId, @providerType, @uniqueId, @domainnameToCleanUp, @hostedDomain));
+		}
+
+		public static IQueryEnd USP_DNS_PROVIDER_REPLICATION_T0(this IStoredProcedureHolder<NamecheapCoreContext> holder, int? @domainId, byte? @oldProviderId, byte? @newProviderId, string @providerType, Guid? @uniqueId, string @domainnameToCleanUp, bool? @hostedDomain)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_DNS_PROVIDER_REPLICATION_T0(@domainId, @oldProviderId, @newProviderId, @providerType, @uniqueId, @domainnameToCleanUp, @hostedDomain));
+		}
+
+		public static IQueryEnd USP_DNS_PROVIDER_REPLICATION_T1(this IStoredProcedureHolder<NamecheapCoreContext> holder, int? @domainId, byte? @oldProviderId, byte? @newProviderId, string @providerType, Guid? @uniqueId, string @domainnameToCleanUp, bool? @hostedDomain)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_DNS_PROVIDER_REPLICATION_T1(@domainId, @oldProviderId, @newProviderId, @providerType, @uniqueId, @domainnameToCleanUp, @hostedDomain));
+		}
+
+		public static IQueryEnd USP_DNS_PROVIDER_REPLICATION_T2(this IStoredProcedureHolder<NamecheapCoreContext> holder, int? @domainId, byte? @oldProviderId, byte? @newProviderId, string @providerType, Guid? @uniqueId, string @domainnameToCleanUp, bool? @hostedDomain)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_DNS_PROVIDER_REPLICATION_T2(@domainId, @oldProviderId, @newProviderId, @providerType, @uniqueId, @domainnameToCleanUp, @hostedDomain));
+		}
+
+		public static IQueryEnd USP_DNS_PROVIDER_REPLICATION_T3(this IStoredProcedureHolder<NamecheapCoreContext> holder, int? @domainId, byte? @oldProviderId, byte? @newProviderId, string @providerType, Guid? @uniqueId, string @domainnameToCleanUp, bool? @hostedDomain)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_DNS_PROVIDER_REPLICATION_T3(@domainId, @oldProviderId, @newProviderId, @providerType, @uniqueId, @domainnameToCleanUp, @hostedDomain));
+		}
+
+		public static IQueryEnd USP_DNS_PROVIDER_REPLICATION_T4(this IStoredProcedureHolder<NamecheapCoreContext> holder, int? @domainId, byte? @oldProviderId, byte? @newProviderId, string @providerType, Guid? @uniqueId, string @domainnameToCleanUp, bool? @hostedDomain)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_DNS_PROVIDER_REPLICATION_T4(@domainId, @oldProviderId, @newProviderId, @providerType, @uniqueId, @domainnameToCleanUp, @hostedDomain));
+		}
+
+		public static IQueryEnd USP_DNS_PROVIDER_REPLICATION_T5(this IStoredProcedureHolder<NamecheapCoreContext> holder, int? @domainId, byte? @oldProviderId, byte? @newProviderId, string @providerType, Guid? @uniqueId, string @domainnameToCleanUp, bool? @hostedDomain)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_DNS_PROVIDER_REPLICATION_T5(@domainId, @oldProviderId, @newProviderId, @providerType, @uniqueId, @domainnameToCleanUp, @hostedDomain));
+		}
+
+		public static IQueryEnd USP_DNS_PROVIDER_REPLICATION_T6(this IStoredProcedureHolder<NamecheapCoreContext> holder, int? @domainId, byte? @oldProviderId, byte? @newProviderId, string @providerType, Guid? @uniqueId, string @domainnameToCleanUp, bool? @hostedDomain)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_DNS_PROVIDER_REPLICATION_T6(@domainId, @oldProviderId, @newProviderId, @providerType, @uniqueId, @domainnameToCleanUp, @hostedDomain));
+		}
+
+		public static IQueryEnd USP_DNS_PROVIDER_REPLICATION_T7(this IStoredProcedureHolder<NamecheapCoreContext> holder, int? @domainId, byte? @oldProviderId, byte? @newProviderId, string @providerType, Guid? @uniqueId, string @domainnameToCleanUp, bool? @hostedDomain)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_DNS_PROVIDER_REPLICATION_T7(@domainId, @oldProviderId, @newProviderId, @providerType, @uniqueId, @domainnameToCleanUp, @hostedDomain));
+		}
+
+		public static IQueryEnd USP_DNS_PROVIDER_REPLICATION_T8(this IStoredProcedureHolder<NamecheapCoreContext> holder, int? @domainId, byte? @oldProviderId, byte? @newProviderId, string @providerType, Guid? @uniqueId, string @domainnameToCleanUp, bool? @hostedDomain)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_DNS_PROVIDER_REPLICATION_T8(@domainId, @oldProviderId, @newProviderId, @providerType, @uniqueId, @domainnameToCleanUp, @hostedDomain));
+		}
+
+		public static IQueryEnd USP_DNS_PROVIDER_REPLICATION_T9(this IStoredProcedureHolder<NamecheapCoreContext> holder, int? @domainId, byte? @oldProviderId, byte? @newProviderId, string @providerType, Guid? @uniqueId, string @domainnameToCleanUp, bool? @hostedDomain)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_DNS_PROVIDER_REPLICATION_T9(@domainId, @oldProviderId, @newProviderId, @providerType, @uniqueId, @domainnameToCleanUp, @hostedDomain));
+		}
+
+		public static IQueryEnd USP_DNS_SET_DNS(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @domainName, string @userName, string @dnsXml)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_DNS_SET_DNS(@domainName, @userName, @dnsXml));
+		}
+
+		public static IQueryEnd USP_DNS_SET_DNS_SYNC(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @domainName, string @userName, string @dnsXml, DateTime? @expDateTime, bool? @isExpDateUpdateRequired, bool? @isDnsUpdateRequired, string @oldDnsServers, string @oldDnsServerType, string @newDnsServerType)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_DNS_SET_DNS_SYNC(@domainName, @userName, @dnsXml, @expDateTime, @isExpDateUpdateRequired, @isDnsUpdateRequired, @oldDnsServers, @oldDnsServerType, @newDnsServerType));
+		}
+
+		public static IQueryEnd USP_DNS_SET_DYNAMIC_DNS(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @domainName, string @dynamicDnsStatusXml)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_DNS_SET_DYNAMIC_DNS(@domainName, @dynamicDnsStatusXml));
+		}
+
+		public static IQueryEnd USP_DNS_SET_EMAIL_FORWARDING(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @domainName, string @userName, string @emailforwardsXml, bool? @hostedDomain)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_DNS_SET_EMAIL_FORWARDING(@domainName, @userName, @emailforwardsXml, @hostedDomain));
+		}
+
+		public static IQueryEnd USP_DNS_SET_HOSTS(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @domainName, string @userName, string @hostXml, bool? @hostedDomain)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_DNS_SET_HOSTS(@domainName, @userName, @hostXml, @hostedDomain));
+		}
+
+		public static IQueryEnd USP_DNS_SET_METATAGS(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @domainName, string @userName, string @hostXml, bool? @hostedDomain)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_DNS_SET_METATAGS(@domainName, @userName, @hostXml, @hostedDomain));
+		}
+
+		public static IQueryEnd USP_DNS_SET_URL_FORWARDING(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @domainName, string @userName, string @urlFwdXML, bool? @hostedDomain)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_DNS_SET_URL_FORWARDING(@domainName, @userName, @urlFwdXML, @hostedDomain));
+		}
+
+		public static IQueryEnd USP_DNS_SETHOSTS_FOR_A_DOMAIN(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @hostXML, string @domainName, string @userName)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_DNS_SETHOSTS_FOR_A_DOMAIN(@hostXML, @domainName, @userName));
+		}
+
+		public static IQueryEnd usp_DnsRestrictionGetRestrictionDetails(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @Type, string @Name)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.usp_DnsRestrictionGetRestrictionDetails(@Type, @Name));
+		}
+
+		public static IQueryEnd usp_DnsRestrictionGetRestrictions(this IStoredProcedureHolder<NamecheapCoreContext> holder)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.usp_DnsRestrictionGetRestrictions());
+		}
+
+		public static IQueryEnd usp_DnsRestrictionGetRestrictionsHistory(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @Type, string @Name)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.usp_DnsRestrictionGetRestrictionsHistory(@Type, @Name));
+		}
+
+		public static IQueryEnd usp_DnsRestrictionSaveRestrictionDetails(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @Type, string @Name, string @RestrictionNamesCSV, string @StartDate, string @EndDate, string @Reason, string @Comment, string @AdminUserName, string @AdminIp)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.usp_DnsRestrictionSaveRestrictionDetails(@Type, @Name, @RestrictionNamesCSV, @StartDate, @EndDate, @Reason, @Comment, @AdminUserName, @AdminIp));
+		}
+
+		public static IQueryEnd usp_DnsRestrictionValidateDomainName(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @DomainName)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.usp_DnsRestrictionValidateDomainName(@DomainName));
+		}
+
+		public static IQueryEnd usp_DnsRestrictionValidateUserName(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @UserName)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.usp_DnsRestrictionValidateUserName(@UserName));
+		}
+
+		public static IQueryEnd USP_DO_FINAL_VALIDATION_FOR_SPECIALPROMOTION(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @refId, string @promotionCode, string @userName, string @clientIp, int? @maxOrderCountAllowedPerUser, DateTime? @orderCountCheckStartDateTime)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_DO_FINAL_VALIDATION_FOR_SPECIALPROMOTION(@refId, @promotionCode, @userName, @clientIp, @maxOrderCountAllowedPerUser, @orderCountCheckStartDateTime));
+		}
+
+		public static IQueryEnd usp_DoesUserHaveAlreadyFailedOrdersDueToCrossCheck(this IStoredProcedureHolder<NamecheapCoreContext> holder, int? @UserId, string @PromotionCode, int? @PromotionBeginDate)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.usp_DoesUserHaveAlreadyFailedOrdersDueToCrossCheck(@UserId, @PromotionCode, @PromotionBeginDate));
+		}
+
+		public static IQueryEnd USP_DOMAIN_EXTRA_STATUS(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @IPV_DomainName)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_DOMAIN_EXTRA_STATUS(@IPV_DomainName));
+		}
+
+		public static IQueryEnd USP_DOMAIN_LIST_EXPORT(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @sUserName)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_DOMAIN_LIST_EXPORT(@sUserName));
+		}
+
+		public static IQueryEnd USP_DOMAIN_PARKING_GET(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @DomainName)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_DOMAIN_PARKING_GET(@DomainName));
+		}
+
+		public static IQueryEnd USP_DOMAIN_PARKING_SET(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @DomainName, string @ParkingText, string @TrackingCode)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_DOMAIN_PARKING_SET(@DomainName, @ParkingText, @TrackingCode));
+		}
+
+		public static IQueryEnd usp_Domains_GetProvidersResourceRecords(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @DomainName, string @OwnerUserName)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.usp_Domains_GetProvidersResourceRecords(@DomainName, @OwnerUserName));
+		}
+
+		public static IQueryEnd USP_EDIT_MP_DOMAIN(this IStoredProcedureHolder<NamecheapCoreContext> holder, decimal? @LisitngID, decimal? @ListingPrice, DateTime? @ListingDate, DateTime? @ListExpiryDate, bool? @AcceptOffer, bool? @AdultListing, bool? @Hypens, bool? @Numbers, int? @category1, int? @category2, string @OperationType, string @ClosedReason, int? @DomainCommission)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_EDIT_MP_DOMAIN(@LisitngID, @ListingPrice, @ListingDate, @ListExpiryDate, @AcceptOffer, @AdultListing, @Hypens, @Numbers, @category1, @category2, @OperationType, @ClosedReason, @DomainCommission));
+		}
+
+		public static IQueryEnd usp_EnableApiForResellerActivation(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @userName)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.usp_EnableApiForResellerActivation(@userName));
+		}
+
+		public static IQueryEnd usp_EnableDisable2FAForUser(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @userName, string @Mode, string @AdminUser, string @AdminUsername, string @Comments, string @Ip)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.usp_EnableDisable2FAForUser(@userName, @Mode, @AdminUser, @AdminUsername, @Comments, @Ip));
+		}
+
+		public static IQueryEnd USP_EventQ_Add_DomainLockUnlock_Event(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @userName, string @ip, string @domainName, bool? @Locked)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_EventQ_Add_DomainLockUnlock_Event(@userName, @ip, @domainName, @Locked));
+		}
+
+		public static IQueryEnd USP_EventQ_Add_Notification(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @eventTypeName, string @customerName, string @xmlData, int? @priority)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_EventQ_Add_Notification(@eventTypeName, @customerName, @xmlData, @priority));
+		}
+
+		public static IQueryEnd USP_EventQ_Add_Notification_Domain_AutoRenew_Updates(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @userName, string @domainName, string @ip, string @dataSubType, string @oldData, string @newData)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_EventQ_Add_Notification_Domain_AutoRenew_Updates(@userName, @domainName, @ip, @dataSubType, @oldData, @newData));
+		}
+
+		public static IQueryEnd USP_EventQ_Add_Notification_Domain_Contacts_Updates(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @userName, string @domainName, string @ip, string @dataSubType, string @oldData, string @newData)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_EventQ_Add_Notification_Domain_Contacts_Updates(@userName, @domainName, @ip, @dataSubType, @oldData, @newData));
+		}
+
+		public static IQueryEnd USP_EventQ_Add_Notification_Domain_Dns_Updates(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @userName, string @domainName, string @ip, string @dataSubType, string @oldData, string @newData)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_EventQ_Add_Notification_Domain_Dns_Updates(@userName, @domainName, @ip, @dataSubType, @oldData, @newData));
+		}
+
+		public static IQueryEnd USP_EventQ_Add_Notification_Domain_DynDns_Updates(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @userName, string @domainName, string @ip, string @dataSubType, string @oldData, string @newData)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_EventQ_Add_Notification_Domain_DynDns_Updates(@userName, @domainName, @ip, @dataSubType, @oldData, @newData));
+		}
+
+		public static IQueryEnd USP_EventQ_Add_Notification_Domain_Hosts_Updates(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @userName, string @domainName, string @ip, string @dataSubType, string @oldData, string @newData)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_EventQ_Add_Notification_Domain_Hosts_Updates(@userName, @domainName, @ip, @dataSubType, @oldData, @newData));
+		}
+
+		public static IQueryEnd USP_EventQ_Add_Notification_Domain_MailForward_Updates(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @userName, string @domainName, string @ip, string @dataSubType, string @oldData, string @newData)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_EventQ_Add_Notification_Domain_MailForward_Updates(@userName, @domainName, @ip, @dataSubType, @oldData, @newData));
+		}
+
+		public static IQueryEnd USP_EventQ_Add_User_Logged_Event(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @userName, string @ip)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_EventQ_Add_User_Logged_Event(@userName, @ip));
+		}
+
+		public static IQueryEnd USP_EXPIRINGDOMAINS(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @Alphanumeric)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_EXPIRINGDOMAINS(@Alphanumeric));
+		}
+
+		public static IQueryEnd usp_ExportMarketplaceListingDataToDomainsBot(this IStoredProcedureHolder<NamecheapCoreContext> holder)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.usp_ExportMarketplaceListingDataToDomainsBot());
+		}
+
+		public static IQueryEnd USP_FETCH_PROFILE_PASSWORD_REMINDER_SETTINGS(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @userName)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_FETCH_PROFILE_PASSWORD_REMINDER_SETTINGS(@userName));
+		}
+
+		public static IQueryEnd USP_FETCH_PROFILE_RENEWAL_MAIL_SETTINGS(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @sUserName)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_FETCH_PROFILE_RENEWAL_MAIL_SETTINGS(@sUserName));
+		}
+
+		public static IQueryEnd USP_FIND_AND_FILL_FIRST_SUCCESSFUL_ORDER(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @Username)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_FIND_AND_FILL_FIRST_SUCCESSFUL_ORDER(@Username));
+		}
+
+		public static IQueryEnd USP_FINISH_MONEY_TRANSFER_REQUESTS(this IStoredProcedureHolder<NamecheapCoreContext> holder, decimal? @RequestID, bool? @Option, string @Reason, string @AdminUsername, string @AdminIP)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_FINISH_MONEY_TRANSFER_REQUESTS(@RequestID, @Option, @Reason, @AdminUsername, @AdminIP));
+		}
+
+		public static IQueryEnd USP_FLAG_TO_EXPRESS_PAGE(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @refID, string @UserName)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_FLAG_TO_EXPRESS_PAGE(@refID, @UserName));
+		}
+
+		public static IQueryEnd usp_GenericCreateOrder(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @orderRefId, string @userName, decimal? @totalPrice, string @requestIp, string @promotionCode, long? @newOrderId)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.usp_GenericCreateOrder(@orderRefId, @userName, @totalPrice, @requestIp, @promotionCode, @newOrderId));
+		}
+
+		public static IQueryEnd usp_GenericCreateOrderDetailDomain(this IStoredProcedureHolder<NamecheapCoreContext> holder, int? @orderId, string @sld, string @tld, short? @duration, decimal? @price, decimal? @regularPrice, decimal? @specialPrice, int? @qty, string @actionName, decimal? @additionalCost, string @durationType, bool? @isPricingMultiple, decimal? @specialAdditionalCost, decimal? @regularadditionalCost, decimal? @parentOrderItemId, long? @newOrderDetailId)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.usp_GenericCreateOrderDetailDomain(@orderId, @sld, @tld, @duration, @price, @regularPrice, @specialPrice, @qty, @actionName, @additionalCost, @durationType, @isPricingMultiple, @specialAdditionalCost, @regularadditionalCost, @parentOrderItemId, @newOrderDetailId));
+		}
+
+		public static IQueryEnd USP_GET_ADMIN_CONTEXT_ROLE(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @userName)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_GET_ADMIN_CONTEXT_ROLE(@userName));
+		}
+
+		public static IQueryEnd USP_GET_ADMIN_MP_DOMAIN_LIST(this IStoredProcedureHolder<NamecheapCoreContext> holder)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_GET_ADMIN_MP_DOMAIN_LIST());
+		}
+
+		public static IQueryEnd USP_GET_ADMIN_ROLE_COMMAND(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @roleName)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_GET_ADMIN_ROLE_COMMAND(@roleName));
+		}
+
+		public static IQueryEnd USP_GET_ADMIN_ROLES(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @roleName)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_GET_ADMIN_ROLES(@roleName));
+		}
+
+		public static IQueryEnd USP_GET_ADMIN_USER_CONTEXT_ROLE(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @userName, string @domainName)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_GET_ADMIN_USER_CONTEXT_ROLE(@userName, @domainName));
+		}
+
+		public static IQueryEnd USP_GET_ADMIN_USER_ROLES(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @adminUserName)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_GET_ADMIN_USER_ROLES(@adminUserName));
+		}
+
+		public static IQueryEnd USP_GET_ADMIN_USER_SECUIRTY_SETTINGS(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @sUserName)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_GET_ADMIN_USER_SECUIRTY_SETTINGS(@sUserName));
+		}
+
+		public static IQueryEnd USP_GET_ADMIN_USERS_IN_ROLE(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @roleName)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_GET_ADMIN_USERS_IN_ROLE(@roleName));
+		}
+
+		public static IQueryEnd USP_GET_ALL_AUTORENEW_STATUS(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @IPV_DomainName)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_GET_ALL_AUTORENEW_STATUS(@IPV_DomainName));
+		}
+
+		public static IQueryEnd USP_GET_ALL_EDIT_CAPABILITIES(this IStoredProcedureHolder<NamecheapCoreContext> holder)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_GET_ALL_EDIT_CAPABILITIES());
+		}
+
+		public static IQueryEnd USP_GET_APP_ROLE_BY_APP_USER(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @appUser)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_GET_APP_ROLE_BY_APP_USER(@appUser));
+		}
+
+		public static IQueryEnd USP_GET_ATTRIBUTE_GROUPS(this IStoredProcedureHolder<NamecheapCoreContext> holder, int? @groupId)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_GET_ATTRIBUTE_GROUPS(@groupId));
+		}
+
+		public static IQueryEnd USP_GET_ATTRIBUTES_FOR_GROUP(this IStoredProcedureHolder<NamecheapCoreContext> holder, int? @groupId, int? @attributeId)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_GET_ATTRIBUTES_FOR_GROUP(@groupId, @attributeId));
+		}
+
+		public static IQueryEnd USP_GET_AUTORENEW_DETAILS(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @sDomainName, string @sType)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_GET_AUTORENEW_DETAILS(@sDomainName, @sType));
+		}
+
+		public static IQueryEnd USP_GET_BANNED_DOMAINS_BY_BANNEDTYPE(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @domainname)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_GET_BANNED_DOMAINS_BY_BANNEDTYPE(@domainname));
+		}
+
+		public static IQueryEnd USP_GET_BANNED_PASSWORDS(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @Password)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_GET_BANNED_PASSWORDS(@Password));
+		}
+
+		public static IQueryEnd USP_GET_BUYER_INFO(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @UserName)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_GET_BUYER_INFO(@UserName));
+		}
+
+		public static IQueryEnd USP_GET_CATEGORY_SEQUENCE(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @CharUsed, bool? @ActiveOnly)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_GET_CATEGORY_SEQUENCE(@CharUsed, @ActiveOnly));
+		}
+
+		public static IQueryEnd USP_GET_CC_ABUSE_COUNT(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @IPV_User_Name, string @IPV_CC_ACTION_TYPE)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_GET_CC_ABUSE_COUNT(@IPV_User_Name, @IPV_CC_ACTION_TYPE));
+		}
+
+		public static IQueryEnd USP_GET_CHECKOUT_SETTINGS(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @refID)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_GET_CHECKOUT_SETTINGS(@refID));
+		}
+
+		public static IQueryEnd USP_GET_COUPON_DETAILS(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @IPV_PromoCode, string @IPV_UserName, bool? @isUserLoggedIN, string @specialPromotionCode, bool? @specialPromotionRequiresLogin, int? @specialPromotionMaxUsagePerUser, DateTime? @specialPromotionOrderCountCheckStartDateTime)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_GET_COUPON_DETAILS(@IPV_PromoCode, @IPV_UserName, @isUserLoggedIN, @specialPromotionCode, @specialPromotionRequiresLogin, @specialPromotionMaxUsagePerUser, @specialPromotionOrderCountCheckStartDateTime));
+		}
+
+		public static IQueryEnd USP_GET_CREDIT_CARD_ABUSE_BY_USERNAME(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @userName)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_GET_CREDIT_CARD_ABUSE_BY_USERNAME(@userName));
+		}
+
+		public static IQueryEnd USP_GET_DNS_PROVIDER_SUBTYPE(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @domainName)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_GET_DNS_PROVIDER_SUBTYPE(@domainName));
+		}
+
+		public static IQueryEnd USP_GET_DOMAIN_EDIT_CAPABILITIES(this IStoredProcedureHolder<NamecheapCoreContext> holder, decimal? @IPN_Reseller_ID, decimal? @IPN_User_ID, decimal? @IPN_Domain_ID)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_GET_DOMAIN_EDIT_CAPABILITIES(@IPN_Reseller_ID, @IPN_User_ID, @IPN_Domain_ID));
+		}
+
+		public static IQueryEnd USP_GET_DOMAIN_EDIT_CAPABILITIES_FOR_CART(this IStoredProcedureHolder<NamecheapCoreContext> holder, decimal? @IPN_Reseller_ID, string @IPN_User_Name, string @IPN_Domain_Name)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_GET_DOMAIN_EDIT_CAPABILITIES_FOR_CART(@IPN_Reseller_ID, @IPN_User_Name, @IPN_Domain_Name));
+		}
+
+		public static IQueryEnd USP_GET_DOMAIN_INFO(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @IPV_Domain_Name, decimal? @IPN_User_ID)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_GET_DOMAIN_INFO(@IPV_Domain_Name, @IPN_User_ID));
+		}
+
+		public static IQueryEnd USP_GET_DOMAIN_LIST(this IStoredProcedureHolder<NamecheapCoreContext> holder, decimal? @IPN_User_ID, string @IPV_List_Type, bool? @IPB_Expired_YN, string @IPV_Search_Term)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_GET_DOMAIN_LIST(@IPN_User_ID, @IPV_List_Type, @IPB_Expired_YN, @IPV_Search_Term));
+		}
+
+		public static IQueryEnd USP_GET_DOMAIN_LIST_CATEGORIZED(this IStoredProcedureHolder<NamecheapCoreContext> holder, decimal? @IPN_User_ID, string @IPV_List_Type, bool? @IPB_Expired_YN, string @IPV_Search_Term, decimal? @IPN_Category_ID)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_GET_DOMAIN_LIST_CATEGORIZED(@IPN_User_ID, @IPV_List_Type, @IPB_Expired_YN, @IPV_Search_Term, @IPN_Category_ID));
+		}
+
+		public static IQueryEnd USP_GET_DOMAIN_LIST_FOR_USER_BY_TLD(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @UserName)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_GET_DOMAIN_LIST_FOR_USER_BY_TLD(@UserName));
+		}
+
+		public static IQueryEnd USP_GET_DOMAIN_POPUP_INFO(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @DomainName)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_GET_DOMAIN_POPUP_INFO(@DomainName));
+		}
+
+		public static IQueryEnd USP_GET_DOMAIN_SEARCH_LIST(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @IPV_SLD, string @IPV_TLD, bool? @IPB_Extended_Search_YN)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_GET_DOMAIN_SEARCH_LIST(@IPV_SLD, @IPV_TLD, @IPB_Extended_Search_YN));
+		}
+
+		public static IQueryEnd USP_GET_DOMAIN_SOCIAL_NETWORKING_DETAILS(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @Domainname)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_GET_DOMAIN_SOCIAL_NETWORKING_DETAILS(@Domainname));
+		}
+
+		public static IQueryEnd USP_GET_EMAIL_CHANGE_DATA(this IStoredProcedureHolder<NamecheapCoreContext> holder, DateTime? @day, int? @explicitMaximum)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_GET_EMAIL_CHANGE_DATA(@day, @explicitMaximum));
+		}
+
+		public static IQueryEnd USP_GET_ENOM_AUTO_RENEW_COMPLETED(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @IPv_Operation_type)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_GET_ENOM_AUTO_RENEW_COMPLETED(@IPv_Operation_type));
+		}
+
+		public static IQueryEnd USP_GET_ENOM_AUTO_RENEW_DOMAINS(this IStoredProcedureHolder<NamecheapCoreContext> holder)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_GET_ENOM_AUTO_RENEW_DOMAINS());
+		}
+
+		public static IQueryEnd USP_GET_EXACT_TRANSFER_STATUS_FOR_RE(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @reTransferOrPostponedStatus, int? @reCode, string @domainname)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_GET_EXACT_TRANSFER_STATUS_FOR_RE(@reTransferOrPostponedStatus, @reCode, @domainname));
+		}
+
+		public static IQueryEnd USP_GET_EXPIRE_DOMAIN_LIST(this IStoredProcedureHolder<NamecheapCoreContext> holder, int? @IPN_ExpiringInDays, DateTime? @IPDT_ExpiringOn, DateTime? @IPDT_FromDate, DateTime? @IPDT_ToDate, string @IPV_UserName, string @IPNV_DomainName, string @IPV_OperationType, string @SortBy, string @Order, int? @Page, int? @PageSize)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_GET_EXPIRE_DOMAIN_LIST(@IPN_ExpiringInDays, @IPDT_ExpiringOn, @IPDT_FromDate, @IPDT_ToDate, @IPV_UserName, @IPNV_DomainName, @IPV_OperationType, @SortBy, @Order, @Page, @PageSize));
+		}
+
+		public static IQueryEnd USP_GET_EXPIRING_ONEPAGER_FOR_RENEW_NOTIFICATION(this IStoredProcedureHolder<NamecheapCoreContext> holder)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_GET_EXPIRING_ONEPAGER_FOR_RENEW_NOTIFICATION());
+		}
+
+		public static IQueryEnd USP_GET_EXPIRING_SSL(this IStoredProcedureHolder<NamecheapCoreContext> holder)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_GET_EXPIRING_SSL());
+		}
+
+		public static IQueryEnd USP_GET_EXPIRING_WHOISGUARD(this IStoredProcedureHolder<NamecheapCoreContext> holder, int? @page, int? @PageSize, int? @TotalNoOfPages)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_GET_EXPIRING_WHOISGUARD(@page, @PageSize, @TotalNoOfPages));
+		}
+
+		public static IQueryEnd USP_GET_EXPIRING_WHOISGUARD_SET_FOR_AUTORENEW(this IStoredProcedureHolder<NamecheapCoreContext> holder)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_GET_EXPIRING_WHOISGUARD_SET_FOR_AUTORENEW());
+		}
+
+		public static IQueryEnd USP_GET_EXPIRING_WHOISGUARDNEW(this IStoredProcedureHolder<NamecheapCoreContext> holder, int? @page, int? @PageSize, int? @TotalNoOfPages)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_GET_EXPIRING_WHOISGUARDNEW(@page, @PageSize, @TotalNoOfPages));
+		}
+
+		public static IQueryEnd USP_GET_GLOBAL_MODIFY_COMMANDS(this IStoredProcedureHolder<NamecheapCoreContext> holder)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_GET_GLOBAL_MODIFY_COMMANDS());
+		}
+
+		public static IQueryEnd USP_GET_GLOBAL_OPTIONS(this IStoredProcedureHolder<NamecheapCoreContext> holder)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_GET_GLOBAL_OPTIONS());
+		}
+
+		public static IQueryEnd USP_GET_HOSTING_CLIENTID(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @UserName)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_GET_HOSTING_CLIENTID(@UserName));
+		}
+
+		public static IQueryEnd USP_GET_HOSTING_DETAILS_FOR_USER(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @Username)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_GET_HOSTING_DETAILS_FOR_USER(@Username));
+		}
+
+		public static IQueryEnd USP_GET_INFO_FROM_TOKENID_IN_ADD_FUNDS(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @tokenId)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_GET_INFO_FROM_TOKENID_IN_ADD_FUNDS(@tokenId));
+		}
+
+		public static IQueryEnd USP_GET_IP_INFO(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @IPV_Remote_IP)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_GET_IP_INFO(@IPV_Remote_IP));
+		}
+
+		public static IQueryEnd USP_GET_ISVALID_ENOM_AUTO_RENEW(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @IPv_Domainname)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_GET_ISVALID_ENOM_AUTO_RENEW(@IPv_Domainname));
+		}
+
+		public static IQueryEnd USP_GET_KAYAKO_USER_ID(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @UserName)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_GET_KAYAKO_USER_ID(@UserName));
+		}
+
+		public static IQueryEnd USP_GET_META_INFO(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @Type, string @URL, string @user_agent)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_GET_META_INFO(@Type, @URL, @user_agent));
+		}
+
+		public static IQueryEnd USP_GET_META_INFO_FOR_PAGE(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @URL, string @user_agent, string @overwrite_title)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_GET_META_INFO_FOR_PAGE(@URL, @user_agent, @overwrite_title));
+		}
+
+		public static IQueryEnd USP_GET_META_INFO_LIST(this IStoredProcedureHolder<NamecheapCoreContext> holder)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_GET_META_INFO_LIST());
+		}
+
+		public static IQueryEnd USP_GET_MONEY_TRANSFER_REQUESTS(this IStoredProcedureHolder<NamecheapCoreContext> holder, bool? @RequestType, string @For, decimal? @RequestID)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_GET_MONEY_TRANSFER_REQUESTS(@RequestType, @For, @RequestID));
+		}
+
+		public static IQueryEnd USP_GET_MP_CATEGORY_BY_LEVEL(this IStoredProcedureHolder<NamecheapCoreContext> holder, int? @IPN_ParentCategoryIdLevel, bool? @ActiveOnly)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_GET_MP_CATEGORY_BY_LEVEL(@IPN_ParentCategoryIdLevel, @ActiveOnly));
+		}
+
+		public static IQueryEnd USP_GET_MP_CATEGORY_INFO(this IStoredProcedureHolder<NamecheapCoreContext> holder, decimal? @IPN_Category_ID)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_GET_MP_CATEGORY_INFO(@IPN_Category_ID));
+		}
+
+		public static IQueryEnd USP_GET_MP_CATEGORY_LIST(this IStoredProcedureHolder<NamecheapCoreContext> holder, int? @parentCategoryId)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_GET_MP_CATEGORY_LIST(@parentCategoryId));
+		}
+
+		public static IQueryEnd USP_GET_MP_DOMAIN_DETAILS(this IStoredProcedureHolder<NamecheapCoreContext> holder, decimal? @DomainListID)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_GET_MP_DOMAIN_DETAILS(@DomainListID));
+		}
+
+		public static IQueryEnd USP_GET_MP_DOMAIN_LIST(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @type, int? @noofrows)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_GET_MP_DOMAIN_LIST(@type, @noofrows));
+		}
+
+		public static IQueryEnd USP_GET_MP_DOMAIN_LISTING(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @Keyword, string @StartingLetter, int? @SubcategoryId, bool? @AdultListing, bool? @AcceptOfferOnly, bool? @FixedPriceOnly, string @Extensions, string @CategoryID, int? @MaximumLength, decimal? @MinPriceRange, decimal? @MaxPriceRange, int? @ClosingInterval, bool? @ExcludeHypen, bool? @ExcludeNumber, bool? @FeaturedYN, string @optsearch, string @SellerUserName)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_GET_MP_DOMAIN_LISTING(@Keyword, @StartingLetter, @SubcategoryId, @AdultListing, @AcceptOfferOnly, @FixedPriceOnly, @Extensions, @CategoryID, @MaximumLength, @MinPriceRange, @MaxPriceRange, @ClosingInterval, @ExcludeHypen, @ExcludeNumber, @FeaturedYN, @optsearch, @SellerUserName));
+		}
+
+		public static IQueryEnd USP_GET_MP_DOMAIN_LISTING_ByPage(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @Keyword, string @StartingLetter, int? @SubcategoryId, bool? @AdultListing, bool? @AcceptOfferOnly, bool? @FixedPriceOnly, string @Extensions, string @CategoryID, int? @MaximumLength, decimal? @MinPriceRange, decimal? @MaxPriceRange, int? @ClosingInterval, bool? @ExcludeHypen, bool? @ExcludeNumber, bool? @FeaturedYN, string @optsearch, string @SellerUserName, int? @page, int? @PageSize)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_GET_MP_DOMAIN_LISTING_ByPage(@Keyword, @StartingLetter, @SubcategoryId, @AdultListing, @AcceptOfferOnly, @FixedPriceOnly, @Extensions, @CategoryID, @MaximumLength, @MinPriceRange, @MaxPriceRange, @ClosingInterval, @ExcludeHypen, @ExcludeNumber, @FeaturedYN, @optsearch, @SellerUserName, @page, @PageSize));
+		}
+
+		public static IQueryEnd USP_GET_MP_LISTING_DOMAIN_INFO(this IStoredProcedureHolder<NamecheapCoreContext> holder, decimal? @DomainListID)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_GET_MP_LISTING_DOMAIN_INFO(@DomainListID));
+		}
+
+		public static IQueryEnd USP_GET_MP_PREVIOUS_OFFERS(this IStoredProcedureHolder<NamecheapCoreContext> holder, decimal? @MP_Listing_ID, string @MP_UserName)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_GET_MP_PREVIOUS_OFFERS(@MP_Listing_ID, @MP_UserName));
+		}
+
+		public static IQueryEnd USP_GET_MP_SUBCATEGORIES(this IStoredProcedureHolder<NamecheapCoreContext> holder, int? @CategoryID, string @CharUsed, bool? @ActiveOnly)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_GET_MP_SUBCATEGORIES(@CategoryID, @CharUsed, @ActiveOnly));
+		}
+
+		public static IQueryEnd USP_GET_MP_USER_LIST(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @IPV_Seller_User_Name)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_GET_MP_USER_LIST(@IPV_Seller_User_Name));
+		}
+
+		public static IQueryEnd USP_GET_MY_ACCOUNT_FOR_USER(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @UserName)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_GET_MY_ACCOUNT_FOR_USER(@UserName));
+		}
+
+		public static IQueryEnd USP_GET_ONEPAGER_EXPIRED_DOMAINS_TO_DISABLE(this IStoredProcedureHolder<NamecheapCoreContext> holder, int? @Grace_Days)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_GET_ONEPAGER_EXPIRED_DOMAINS_TO_DISABLE(@Grace_Days));
+		}
+
+		public static IQueryEnd USP_GET_OTHER_CATEGORY_SEQUENCE(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @CharUsed, int? @currentCategory)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_GET_OTHER_CATEGORY_SEQUENCE(@CharUsed, @currentCategory));
+		}
+
+		public static IQueryEnd USP_GET_PACKAGE_DETAILS(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @REFID)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_GET_PACKAGE_DETAILS(@REFID));
+		}
+
+		public static IQueryEnd USP_GET_PAGE_INFO(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @IPV_Script_Name)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_GET_PAGE_INFO(@IPV_Script_Name));
+		}
+
+		public static IQueryEnd USP_GET_PARENT_TRANS_DETAILS(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @CC_Trans_ID, decimal? @TransactionID)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_GET_PARENT_TRANS_DETAILS(@CC_Trans_ID, @TransactionID));
+		}
+
+		public static IQueryEnd USP_GET_PAYPAL_PENDING_LIST(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @UserName)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_GET_PAYPAL_PENDING_LIST(@UserName));
+		}
+
+		public static IQueryEnd USP_GET_PERIOD_MESSAGES(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @IPV_UserName, string @IPV_Message_Title, string @IPV_Associated_Domains, string @IPV_Message_Type, int? @IPI_Period)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_GET_PERIOD_MESSAGES(@IPV_UserName, @IPV_Message_Title, @IPV_Associated_Domains, @IPV_Message_Type, @IPI_Period));
+		}
+
+		public static IQueryEnd USP_GET_PHONE_FAX_IF_NEED_VALIDATION(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @IPV_Reg_ID)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_GET_PHONE_FAX_IF_NEED_VALIDATION(@IPV_Reg_ID));
+		}
+
+		public static IQueryEnd USP_GET_POP3_LIST(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @User_Name)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_GET_POP3_LIST(@User_Name));
+		}
+
+		public static IQueryEnd USP_GET_PREPARE_GLOBAL_WHOISGUARD_LIST(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @IPV_Domainnames, string @IPC_Delimiter, string @IPV_Username)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_GET_PREPARE_GLOBAL_WHOISGUARD_LIST(@IPV_Domainnames, @IPC_Delimiter, @IPV_Username));
+		}
+
+		public static IQueryEnd USP_GET_PREV_NEXT_MESSAGEID(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @CMsgID, string @UserName)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_GET_PREV_NEXT_MESSAGEID(@CMsgID, @UserName));
+		}
+
+		public static IQueryEnd USP_GET_PRICING_FOR_TLD(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @IPV_TLD_Name, string @IPV_Action_ID, string @IPV_User_Name, string @IPV_Promotion_Code)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_GET_PRICING_FOR_TLD(@IPV_TLD_Name, @IPV_Action_ID, @IPV_User_Name, @IPV_Promotion_Code));
+		}
+
+		public static IQueryEnd USP_GET_PRICING_LIST(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @IPV_User_Name, string @IPV_Promotion_Code)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_GET_PRICING_LIST(@IPV_User_Name, @IPV_Promotion_Code));
+		}
+
+		public static IQueryEnd USP_GET_PRODUCT_ATTRIBUTES(this IStoredProcedureHolder<NamecheapCoreContext> holder, int? @productId)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_GET_PRODUCT_ATTRIBUTES(@productId));
+		}
+
+		public static IQueryEnd USP_GET_PRODUCTS(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @productName)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_GET_PRODUCTS(@productName));
+		}
+
+		public static IQueryEnd USP_GET_PRODUCTS_COMPARISION(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @productIds)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_GET_PRODUCTS_COMPARISION(@productIds));
+		}
+
+		public static IQueryEnd USP_GET_PRODUCTS_FOR_HOSTING(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @productName)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_GET_PRODUCTS_FOR_HOSTING(@productName));
+		}
+
+		public static IQueryEnd USP_GET_PROMOTION_USAGE_SOPA_DEC29(this IStoredProcedureHolder<NamecheapCoreContext> holder)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_GET_PROMOTION_USAGE_SOPA_DEC29());
+		}
+
+		public static IQueryEnd usp_Get_Push_AuthorizationCode(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @username)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.usp_Get_Push_AuthorizationCode(@username));
+		}
+
+		public static IQueryEnd USP_GET_RANDOM_ADS(this IStoredProcedureHolder<NamecheapCoreContext> holder, int? @IPV_Ad_Id, int? @IPV_Ad_Group_Id, int? @IPV_Product_Id)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_GET_RANDOM_ADS(@IPV_Ad_Id, @IPV_Ad_Group_Id, @IPV_Product_Id));
+		}
+
+		public static IQueryEnd USP_GET_RANDOM_TESTIMONIAL(this IStoredProcedureHolder<NamecheapCoreContext> holder)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_GET_RANDOM_TESTIMONIAL());
+		}
+
+		public static IQueryEnd USP_GET_RESELLER_INFO_FROM_KEY(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @IPV_Reseller_Key)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_GET_RESELLER_INFO_FROM_KEY(@IPV_Reseller_Key));
+		}
+
+		public static IQueryEnd USP_GET_RESELLER_LEVEL_NAMES(this IStoredProcedureHolder<NamecheapCoreContext> holder)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_GET_RESELLER_LEVEL_NAMES());
+		}
+
+		public static IQueryEnd USP_GET_ROLE_NAMES(this IStoredProcedureHolder<NamecheapCoreContext> holder)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_GET_ROLE_NAMES());
+		}
+
+		public static IQueryEnd USP_GET_SET_ENOM_AUTO_RENEW_STATUS(this IStoredProcedureHolder<NamecheapCoreContext> holder, decimal? @Enom_Auto_Renew_Track_ID, bool? @Auto_Renew_Success_YN, DateTime? @New_Expiration_Date_Time, string @Operation_Type)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_GET_SET_ENOM_AUTO_RENEW_STATUS(@Enom_Auto_Renew_Track_ID, @Auto_Renew_Success_YN, @New_Expiration_Date_Time, @Operation_Type));
+		}
+
+		public static IQueryEnd USP_GET_SHOPPING_CART(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @Session_Ref_ID)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_GET_SHOPPING_CART(@Session_Ref_ID));
+		}
+
+		public static IQueryEnd USP_GET_SHOPPING_CART_TOTAL(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @Session_Ref_ID)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_GET_SHOPPING_CART_TOTAL(@Session_Ref_ID));
+		}
+
+		public static IQueryEnd USP_GET_SHOPPING_CART_VALUE(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @Session_Ref_ID)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_GET_SHOPPING_CART_VALUE(@Session_Ref_ID));
+		}
+
+		public static IQueryEnd USP_GET_SSL_INITIAL_DETAILS(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @UserName, string @SslType)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_GET_SSL_INITIAL_DETAILS(@UserName, @SslType));
+		}
+
+		public static IQueryEnd USP_GET_SSL_LIST(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @List_Type, string @UserName, string @Search_Term, string @sortBy)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_GET_SSL_LIST(@List_Type, @UserName, @Search_Term, @sortBy));
+		}
+
+		public static IQueryEnd USP_GET_SSLPARTNER_USER_INFO(this IStoredProcedureHolder<NamecheapCoreContext> holder, decimal? @userID)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_GET_SSLPARTNER_USER_INFO(@userID));
+		}
+
+		public static IQueryEnd USP_GET_STATUS_NAMES(this IStoredProcedureHolder<NamecheapCoreContext> holder)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_GET_STATUS_NAMES());
+		}
+
+		public static IQueryEnd USP_GET_SUBSCRIBTION_DETAILS(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @userName, int? @encodedUserId)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_GET_SUBSCRIBTION_DETAILS(@userName, @encodedUserId));
+		}
+
+		public static IQueryEnd USP_GET_SUCCESSFULLY_REGISTERED_DOMAINS(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @IPV_RegID, string @IPV_User_Name)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_GET_SUCCESSFULLY_REGISTERED_DOMAINS(@IPV_RegID, @IPV_User_Name));
+		}
+
+		public static IQueryEnd USP_GET_SYSTEM_MESSAGE(this IStoredProcedureHolder<NamecheapCoreContext> holder, bool? @ShowSiteDownAndWarningMessage)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_GET_SYSTEM_MESSAGE(@ShowSiteDownAndWarningMessage));
+		}
+
+		public static IQueryEnd USP_GET_TLD_DETAILS(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @tld, bool? @activeYN)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_GET_TLD_DETAILS(@tld, @activeYN));
+		}
+
+		public static IQueryEnd USP_GET_TLD_PRICING(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @ActionType, string @username)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_GET_TLD_PRICING(@ActionType, @username));
+		}
+
+		public static IQueryEnd USP_GET_TLD_REGULAR_USER_PRICING(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @TLD_NAME, string @Price_Type, string @Action_Id, string @User_Name)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_GET_TLD_REGULAR_USER_PRICING(@TLD_NAME, @Price_Type, @Action_Id, @User_Name));
+		}
+
+		public static IQueryEnd USP_GET_TRANSACTION_DETAILS(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @CC_Trans_ID)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_GET_TRANSACTION_DETAILS(@CC_Trans_ID));
+		}
+
+		public static IQueryEnd USP_GET_TRANSACTION_INFO(this IStoredProcedureHolder<NamecheapCoreContext> holder, decimal? @TransactionId)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_GET_TRANSACTION_INFO(@TransactionId));
+		}
+
+		public static IQueryEnd USP_GET_TRANSACTION_INFO_BY_DOMAIN_DELETE(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @SLD, string @TLD)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_GET_TRANSACTION_INFO_BY_DOMAIN_DELETE(@SLD, @TLD));
+		}
+
+		public static IQueryEnd USP_GET_USER_CONTACT_INFO(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @UserName)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_GET_USER_CONTACT_INFO(@UserName));
+		}
+
+		public static IQueryEnd USP_GET_USER_DATA(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @UserName, string @Email, int? @explicitMaximum)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_GET_USER_DATA(@UserName, @Email, @explicitMaximum));
+		}
+
+		public static IQueryEnd USP_GET_USER_DATA_FROM(this IStoredProcedureHolder<NamecheapCoreContext> holder, DateTime? @registeredFrom, decimal? @idFrom, int? @explicitMaximum)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_GET_USER_DATA_FROM(@registeredFrom, @idFrom, @explicitMaximum));
+		}
+
+		public static IQueryEnd USP_GET_USER_DATA_REGISTEREDFROM(this IStoredProcedureHolder<NamecheapCoreContext> holder, DateTime? @registeredFrom, int? @explicitMaximum)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_GET_USER_DATA_REGISTEREDFROM(@registeredFrom, @explicitMaximum));
+		}
+
+		public static IQueryEnd USP_GET_USER_HOSTING_DETAILS(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @UserName, int? @Page, int? @PageSize)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_GET_USER_HOSTING_DETAILS(@UserName, @Page, @PageSize));
+		}
+
+		public static IQueryEnd USP_GET_USER_INFO(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @sUserName)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_GET_USER_INFO(@sUserName));
+		}
+
+		public static IQueryEnd USP_GET_USER_NEWSLETER(this IStoredProcedureHolder<NamecheapCoreContext> holder, int? @IPN_Page_No, int? @IPN_Records_Per_Page)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_GET_USER_NEWSLETER(@IPN_Page_No, @IPN_Records_Per_Page));
+		}
+
+		public static IQueryEnd USP_GET_USER_NOTIFICATION_EMAIL(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @IPV_UserName)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_GET_USER_NOTIFICATION_EMAIL(@IPV_UserName));
+		}
+
+		public static IQueryEnd USP_GET_USER_SECUIRTY_SETTINGS(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @IPV_UserName, string @IPV_DomainName, bool? @hostedDomain)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_GET_USER_SECUIRTY_SETTINGS(@IPV_UserName, @IPV_DomainName, @hostedDomain));
+		}
+
+		public static IQueryEnd USP_GET_USERS_WITH_ACCESS_TO_DOMAIN(this IStoredProcedureHolder<NamecheapCoreContext> holder, decimal? @IPN_Domain_ID, decimal? @IPN_Requesting_User_ID)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_GET_USERS_WITH_ACCESS_TO_DOMAIN(@IPN_Domain_ID, @IPN_Requesting_User_ID));
+		}
+
+		public static IQueryEnd USP_GET_WG_ADDRESS(this IStoredProcedureHolder<NamecheapCoreContext> holder)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_GET_WG_ADDRESS());
+		}
+
+		public static IQueryEnd USP_GET_WG_EMAIL_DETAILS(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @domainname)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_GET_WG_EMAIL_DETAILS(@domainname));
+		}
+
+		public static IQueryEnd USP_GET_WG_EMAIL_QUEUE(this IStoredProcedureHolder<NamecheapCoreContext> holder)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_GET_WG_EMAIL_QUEUE());
+		}
+
+		public static IQueryEnd USP_GET_WG_STATUS_FOR_SPAM_PROTECTION(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @sDomainName)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_GET_WG_STATUS_FOR_SPAM_PROTECTION(@sDomainName));
+		}
+
+		public static IQueryEnd USP_GET_WHOISGUARD_LIST(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @IPV_User_Name, string @IPV_List_Type)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_GET_WHOISGUARD_LIST(@IPV_User_Name, @IPV_List_Type));
+		}
+
+		public static IQueryEnd usp_GetActionRequiredAndCancelledList(this IStoredProcedureHolder<NamecheapCoreContext> holder, byte? @startId, byte? @endId, bool? @isProcessTransferMateEnabledOnly)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.usp_GetActionRequiredAndCancelledList(@startId, @endId, @isProcessTransferMateEnabledOnly));
+		}
+
+		public static IQueryEnd usp_GetAffiliateWelcomeEmailDetails(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @userName)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.usp_GetAffiliateWelcomeEmailDetails(@userName));
+		}
+
+		public static IQueryEnd usp_GetAllotedWgListOnetime(this IStoredProcedureHolder<NamecheapCoreContext> holder, int? @SlotIDStartRange, int? @SlotIDEndRange, int? @ModuleDigitNumber)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.usp_GetAllotedWgListOnetime(@SlotIDStartRange, @SlotIDEndRange, @ModuleDigitNumber));
+		}
+
+		public static IQueryEnd usp_GetAutoRenewSetCreditCardList(this IStoredProcedureHolder<NamecheapCoreContext> holder)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.usp_GetAutoRenewSetCreditCardList());
+		}
+
+		public static IQueryEnd usp_GetBannedDomainList(this IStoredProcedureHolder<NamecheapCoreContext> holder)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.usp_GetBannedDomainList());
+		}
+
+		public static IQueryEnd USP_GetCaptchaShowStatus(this IStoredProcedureHolder<NamecheapCoreContext> holder)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_GetCaptchaShowStatus());
+		}
+
+		public static IQueryEnd usp_GetCardUserOptionsById(this IStoredProcedureHolder<NamecheapCoreContext> holder, Guid? @creditCardId, string @userName)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.usp_GetCardUserOptionsById(@creditCardId, @userName));
+		}
+
+		public static IQueryEnd Usp_GetCCAbuseCount(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @userName)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.Usp_GetCCAbuseCount(@userName));
+		}
+
+		public static IQueryEnd usp_GetCCSaveAbuseReport(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @userName)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.usp_GetCCSaveAbuseReport(@userName));
+		}
+
+		public static IQueryEnd usp_GetCheckoutProcessIdStatus(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @checkoutProcessID)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.usp_GetCheckoutProcessIdStatus(@checkoutProcessID));
+		}
+
+		public static IQueryEnd USP_GetContextInfo(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @MailboxName)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_GetContextInfo(@MailboxName));
+		}
+
+		public static IQueryEnd usp_GetCouponCodeForUser(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @userName, string @partnerType)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.usp_GetCouponCodeForUser(@userName, @partnerType));
+		}
+
+		public static IQueryEnd usp_GetCurrencyConversionData(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @source, int? @versionId)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.usp_GetCurrencyConversionData(@source, @versionId));
+		}
+
+		public static IQueryEnd usp_GetDefaultDNSForNewRegistration(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @username)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.usp_GetDefaultDNSForNewRegistration(@username));
+		}
+
+		public static IQueryEnd usp_GetDomainValidityStatusForList(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @domainNamesCSV, string @userName)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.usp_GetDomainValidityStatusForList(@domainNamesCSV, @userName));
+		}
+
+		public static IQueryEnd usp_GetEnomDomainListOnetime(this IStoredProcedureHolder<NamecheapCoreContext> holder, int? @AutoIDStartRange, int? @AutoIDEndRange, int? @ModulusNumber, int? @TopRecords)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.usp_GetEnomDomainListOnetime(@AutoIDStartRange, @AutoIDEndRange, @ModulusNumber, @TopRecords));
+		}
+
+		public static IQueryEnd usp_GetEnomDomainMaxAutotID(this IStoredProcedureHolder<NamecheapCoreContext> holder, int? @AutoIDStartRange, int? @AutoIDEndRange, int? @ModulusNumber)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.usp_GetEnomDomainMaxAutotID(@AutoIDStartRange, @AutoIDEndRange, @ModulusNumber));
+		}
+
+		public static IQueryEnd Usp_GetList_Dnssec(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @domainName)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.Usp_GetList_Dnssec(@domainName));
+		}
+
+		public static IQueryEnd usp_GetLogUserStatus(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @userName, string @getAs)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.usp_GetLogUserStatus(@userName, @getAs));
+		}
+
+		public static IQueryEnd usp_GetMarketPlaceSearchResult(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @searchDatabaseResultXml)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.usp_GetMarketPlaceSearchResult(@searchDatabaseResultXml));
+		}
+
+		public static IQueryEnd usp_GetNamecheapDealsCouponDetails(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @username, string @partnerName)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.usp_GetNamecheapDealsCouponDetails(@username, @partnerName));
+		}
+
+		public static IQueryEnd usp_GetNamecheapDealsValueForOverview(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @userName, string @partnerName, decimal? @amountSpentTillDate)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.usp_GetNamecheapDealsValueForOverview(@userName, @partnerName, @amountSpentTillDate));
+		}
+
+		public static IQueryEnd usp_GetOrderDetailIdForBatchItem(this IStoredProcedureHolder<NamecheapCoreContext> holder, decimal? @OrderId, string @ProductName, string @SLD, string @TLD, decimal? @WGSlotId)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.usp_GetOrderDetailIdForBatchItem(@OrderId, @ProductName, @SLD, @TLD, @WGSlotId));
+		}
+
+		public static IQueryEnd usp_GetOrderDetails(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @OrderID, string @RecordType)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.usp_GetOrderDetails(@OrderID, @RecordType));
+		}
+
+		public static IQueryEnd usp_GetOrderIdsForTldPromotionCheck(this IStoredProcedureHolder<NamecheapCoreContext> holder, int? @numberOfItemsToGet, int? @timeGapToFetch)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.usp_GetOrderIdsForTldPromotionCheck(@numberOfItemsToGet, @timeGapToFetch));
+		}
+
+		public static IQueryEnd usp_GetOrderStatusDetails(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @OrderID, string @userName, int? @MaxCompletdItemToReturn)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.usp_GetOrderStatusDetails(@OrderID, @userName, @MaxCompletdItemToReturn));
+		}
+
+		public static IQueryEnd usp_GetOrderSummary(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @OrderID, string @RecordType)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.usp_GetOrderSummary(@OrderID, @RecordType));
+		}
+
+		public static IQueryEnd usp_GetOrderSummaryDetails(this IStoredProcedureHolder<NamecheapCoreContext> holder, decimal? @orderId, string @userName, bool? @isCalledFromSummaryPage)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.usp_GetOrderSummaryDetails(@orderId, @userName, @isCalledFromSummaryPage));
+		}
+
+		public static IQueryEnd usp_GetOrgWithOtherDomainReport(this IStoredProcedureHolder<NamecheapCoreContext> holder, DateTime? @startDate, DateTime? @endDate)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.usp_GetOrgWithOtherDomainReport(@startDate, @endDate));
+		}
+
+		public static IQueryEnd usp_GetOXAddonInfoBySubscriptionId(this IStoredProcedureHolder<NamecheapCoreContext> holder, int? @SubscriptionId, string @ActionId, int? @Duration, string @DurationType)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.usp_GetOXAddonInfoBySubscriptionId(@SubscriptionId, @ActionId, @Duration, @DurationType));
+		}
+
+		public static IQueryEnd usp_GetParticularServiceProviderRRDetails(this IStoredProcedureHolder<NamecheapCoreContext> holder, int? @providerRRID)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.usp_GetParticularServiceProviderRRDetails(@providerRRID));
+		}
+
+		public static IQueryEnd usp_GetPaypalTransID(this IStoredProcedureHolder<NamecheapCoreContext> holder, decimal? @userID, decimal? @transactionId)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.usp_GetPaypalTransID(@userID, @transactionId));
+		}
+
+		public static IQueryEnd usp_GetPersonalDomainsAddToCartXml(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @guid)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.usp_GetPersonalDomainsAddToCartXml(@guid));
+		}
+
+		public static IQueryEnd usp_GetResellerLevels(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @type)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.usp_GetResellerLevels(@type));
+		}
+
+		public static IQueryEnd usp_GetResellerUsersForUpgradationEmail(this IStoredProcedureHolder<NamecheapCoreContext> holder)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.usp_GetResellerUsersForUpgradationEmail());
+		}
+
+		public static IQueryEnd Usp_GetRestrictedAndUnrestrictedDomains(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @DomainNameList, string @RestrictionName)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.Usp_GetRestrictedAndUnrestrictedDomains(@DomainNameList, @RestrictionName));
+		}
+
+		public static IQueryEnd usp_GetServiceProviderRRDetails(this IStoredProcedureHolder<NamecheapCoreContext> holder, int? @providerID)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.usp_GetServiceProviderRRDetails(@providerID));
+		}
+
+		public static IQueryEnd usp_GetTokenIdForFraudCheckByTransactionId(this IStoredProcedureHolder<NamecheapCoreContext> holder, decimal? @transactionId)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.usp_GetTokenIdForFraudCheckByTransactionId(@transactionId));
+		}
+
+		public static IQueryEnd usp_GetTokenIdsForFraudCheck(this IStoredProcedureHolder<NamecheapCoreContext> holder, int? @numberOfItemsToGet, int? @timeGapToFetch)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.usp_GetTokenIdsForFraudCheck(@numberOfItemsToGet, @timeGapToFetch));
+		}
+
+		public static IQueryEnd usp_GetTransactionDetails(this IStoredProcedureHolder<NamecheapCoreContext> holder, decimal? @UserID, decimal? @transactionId)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.usp_GetTransactionDetails(@UserID, @transactionId));
+		}
+
+		public static IQueryEnd USP_GetTransactionIdByCheckoutProcessId(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @CheckoutProcessId)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_GetTransactionIdByCheckoutProcessId(@CheckoutProcessId));
+		}
+
+		public static IQueryEnd usp_GetUserAccountAndAvailableBalances(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @userName)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.usp_GetUserAccountAndAvailableBalances(@userName));
+		}
+
+		public static IQueryEnd usp_GetUserAutorenewPaymentDetails(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @username)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.usp_GetUserAutorenewPaymentDetails(@username));
+		}
+
+		public static IQueryEnd usp_GetUserFundsDetails(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @username)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.usp_GetUserFundsDetails(@username));
+		}
+
+		public static IQueryEnd usp_GetUserInfo(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @username)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.usp_GetUserInfo(@username));
+		}
+
+		public static IQueryEnd usp_GetUsernameForOrderId(this IStoredProcedureHolder<NamecheapCoreContext> holder, decimal? @orderId)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.usp_GetUsernameForOrderId(@orderId));
+		}
+
+		public static IQueryEnd usp_GetUserStatusDetails(this IStoredProcedureHolder<NamecheapCoreContext> holder)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.usp_GetUserStatusDetails());
+		}
+
+		public static IQueryEnd usp_GetUserSupportPinDetails(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @UserName, string @UserIp)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.usp_GetUserSupportPinDetails(@UserName, @UserIp));
+		}
+
+		public static IQueryEnd usp_GetUserTotalPurchaseTillDate(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @userName)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.usp_GetUserTotalPurchaseTillDate(@userName));
+		}
+
+		public static IQueryEnd usp_GetWgMaxSlotID(this IStoredProcedureHolder<NamecheapCoreContext> holder, int? @SlotIDStartRange, int? @SlotIDEndRange, int? @ModuleDigitNumber)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.usp_GetWgMaxSlotID(@SlotIDStartRange, @SlotIDEndRange, @ModuleDigitNumber));
+		}
+
+		public static IQueryEnd USP_HOSTING_CHECK_DOMAIN_HAS_PACK(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @RefID, string @DomainName)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_HOSTING_CHECK_DOMAIN_HAS_PACK(@RefID, @DomainName));
+		}
+
+		public static IQueryEnd USP_HOSTING_GET_SHOPPING_CART_DOMAINS(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @RefID)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_HOSTING_GET_SHOPPING_CART_DOMAINS(@RefID));
+		}
+
+		public static IQueryEnd USP_INSERT_BULKWG_MODIFY_QUEUE(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @BatchID, string @sDomainName, string @sChoice)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_INSERT_BULKWG_MODIFY_QUEUE(@BatchID, @sDomainName, @sChoice));
+		}
+
+		public static IQueryEnd USP_INSERT_BULKWG_QUEUE(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @BatchID, string @sDomainName, string @nSlotID)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_INSERT_BULKWG_QUEUE(@BatchID, @sDomainName, @nSlotID));
+		}
+
+		public static IQueryEnd USP_INSERT_EXPORT_REQUEST(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @sUserName, string @sReportType)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_INSERT_EXPORT_REQUEST(@sUserName, @sReportType));
+		}
+
+		public static IQueryEnd USP_INSERT_HOSTING_PROVIDER_DETAILS(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @UserName, string @ModernBillClientID, string @setProvider)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_INSERT_HOSTING_PROVIDER_DETAILS(@UserName, @ModernBillClientID, @setProvider));
+		}
+
+		public static IQueryEnd USP_INSERT_MAXMIND_ALERT_IP(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @IP_Address, string @MaxMind_ID, string @IP_Domain, string @City, string @Region, string @Country, DateTime? @MaxMind_Date, string @Txn_ID, string @Reason)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_INSERT_MAXMIND_ALERT_IP(@IP_Address, @MaxMind_ID, @IP_Domain, @City, @Region, @Country, @MaxMind_Date, @Txn_ID, @Reason));
+		}
+
+		public static IQueryEnd USP_INSERT_MESSAGES(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @IPV_Message_Title, string @IPV_Message_Body, DateTime? @IPV_Created_Date, DateTime? @IPV_Deliver_After_Date, string @IPV_UserName, string @IPV_Associated_Domains, string @IPV_Associated_OrderID, string @IPV_Additional_Info, bool? @IPV_Deleted_YN, int? @IPV_Message_TypeID, string @IPV_ReplyTo_Mail, string @IPV_Created_By, string @IPV_Modified_By, bool? @IPV_Read_YN)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_INSERT_MESSAGES(@IPV_Message_Title, @IPV_Message_Body, @IPV_Created_Date, @IPV_Deliver_After_Date, @IPV_UserName, @IPV_Associated_Domains, @IPV_Associated_OrderID, @IPV_Additional_Info, @IPV_Deleted_YN, @IPV_Message_TypeID, @IPV_ReplyTo_Mail, @IPV_Created_By, @IPV_Modified_By, @IPV_Read_YN));
+		}
+
+		public static IQueryEnd USP_INSERT_RECENT_DOMAIN_SEARCH(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @User_Name, string @SLD, string @TLD, bool? @Is_Available_At_Last_Check)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_INSERT_RECENT_DOMAIN_SEARCH(@User_Name, @SLD, @TLD, @Is_Available_At_Last_Check));
+		}
+
+		public static IQueryEnd USP_INSERT_RESET_PASSWORD(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @UserName, string @RequestGuid, string @Ip, string @RequestByType, string @RequestValue, string @ToEmail)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_INSERT_RESET_PASSWORD(@UserName, @RequestGuid, @Ip, @RequestByType, @RequestValue, @ToEmail));
+		}
+
+		public static IQueryEnd USP_INSERT_TRANSACTION_FRAUD_SCORE_AND_ADDRESS(this IStoredProcedureHolder<NamecheapCoreContext> holder, decimal? @transactionId, bool? @isCountryMatch, string @countryCode, bool? @isHighRiskCountry, int? @distance, string @ipRegion, string @ipCity, decimal? @ipLatitude, decimal? @ipLongitude, string @ipISP, string @ipOrganization, bool? @isAnonymousProxy, short? @proxyScore, bool? @isTransparentProxy, bool? @isFreeEmail, bool? @isCarderEmail, bool? @isHighRiskUsername, bool? @isHighRiskPassword, bool? @isBankCountryMatch, string @bankCountryMatchInfo, bool? @isBankNameMatch, string @bankNameMatchInfo, bool? @isBankPhoneMatch, string @bankPhoneMatchInfo, string @bankCountryByMaxmind, string @bankNameByMaxmind, string @bankPhoneByMaxmind, string @bankNameByCustomer, string @bankPhoneByCustomer, bool? @isPhoneNumberInBillingLocation, string @phoneNumberInBillingLocationInfo, bool? @isBillingCityStateZipMatch, decimal? @scoreDeprecated, decimal? @riskScore, string @riskExplanation, int? @queriesRemaining, string @errorInfo, string @maxmindId, string @clientIp, string @forwardedIp, string @cardExpiration, string @cardCvvHash, string @firstName, string @lastName, string @jobTitle, string @organizationName, string @streetAddress1, string @streetAddress2, string @city, string @state, string @zipCode, string @country, string @phoneNumber, string @emailAddress)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_INSERT_TRANSACTION_FRAUD_SCORE_AND_ADDRESS(@transactionId, @isCountryMatch, @countryCode, @isHighRiskCountry, @distance, @ipRegion, @ipCity, @ipLatitude, @ipLongitude, @ipISP, @ipOrganization, @isAnonymousProxy, @proxyScore, @isTransparentProxy, @isFreeEmail, @isCarderEmail, @isHighRiskUsername, @isHighRiskPassword, @isBankCountryMatch, @bankCountryMatchInfo, @isBankNameMatch, @bankNameMatchInfo, @isBankPhoneMatch, @bankPhoneMatchInfo, @bankCountryByMaxmind, @bankNameByMaxmind, @bankPhoneByMaxmind, @bankNameByCustomer, @bankPhoneByCustomer, @isPhoneNumberInBillingLocation, @phoneNumberInBillingLocationInfo, @isBillingCityStateZipMatch, @scoreDeprecated, @riskScore, @riskExplanation, @queriesRemaining, @errorInfo, @maxmindId, @clientIp, @forwardedIp, @cardExpiration, @cardCvvHash, @firstName, @lastName, @jobTitle, @organizationName, @streetAddress1, @streetAddress2, @city, @state, @zipCode, @country, @phoneNumber, @emailAddress));
+		}
+
+		public static IQueryEnd USP_INSERT_UPDATE_DOMAIN_RECORDS(this IStoredProcedureHolder<NamecheapCoreContext> holder, decimal? @ref_ID, string @DomainName, string @XmlContent, string @HostId)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_INSERT_UPDATE_DOMAIN_RECORDS(@ref_ID, @DomainName, @XmlContent, @HostId));
+		}
+
+		public static IQueryEnd usp_InsertCurrencyConversionData(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @source, string @sourceUrl, string @dataUrl, string @data, string @dataFormat, DateTime? @dataDateTime, string @baseCurrencyCode, string @message)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.usp_InsertCurrencyConversionData(@source, @sourceUrl, @dataUrl, @data, @dataFormat, @dataDateTime, @baseCurrencyCode, @message));
+		}
+
+		public static IQueryEnd usp_InsertPersonalDomainsAddToCart(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @guid, string @domainsXml, DateTime? @createdDatetime)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.usp_InsertPersonalDomainsAddToCart(@guid, @domainsXml, @createdDatetime));
+		}
+
+		public static IQueryEnd USP_INSTANTSEARCH_GET_DOMAIN_ORDERS(this IStoredProcedureHolder<NamecheapCoreContext> holder, int? @from, int? @to)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_INSTANTSEARCH_GET_DOMAIN_ORDERS(@from, @to));
+		}
+
+		public static IQueryEnd USP_INSTANTSEARCH_GET_DOMAIN_ORDERS_COUNT(this IStoredProcedureHolder<NamecheapCoreContext> holder)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_INSTANTSEARCH_GET_DOMAIN_ORDERS_COUNT());
+		}
+
+		public static IQueryEnd USP_INSTANTSEARCH_GET_DOMAIN_ORDERS_MAX_ID(this IStoredProcedureHolder<NamecheapCoreContext> holder)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_INSTANTSEARCH_GET_DOMAIN_ORDERS_MAX_ID());
+		}
+
+		public static IQueryEnd USP_INSTANTSEARCH_GET_DOMAIN_SSL(this IStoredProcedureHolder<NamecheapCoreContext> holder, int? @from, int? @to)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_INSTANTSEARCH_GET_DOMAIN_SSL(@from, @to));
+		}
+
+		public static IQueryEnd USP_INSTANTSEARCH_GET_DOMAIN_SSL_COUNT(this IStoredProcedureHolder<NamecheapCoreContext> holder)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_INSTANTSEARCH_GET_DOMAIN_SSL_COUNT());
+		}
+
+		public static IQueryEnd USP_INSTANTSEARCH_GET_DOMAIN_SSL_MAX_ID(this IStoredProcedureHolder<NamecheapCoreContext> holder)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_INSTANTSEARCH_GET_DOMAIN_SSL_MAX_ID());
+		}
+
+		public static IQueryEnd USP_INSTANTSEARCH_GET_DOMAIN_TRANSFERS_COUNT(this IStoredProcedureHolder<NamecheapCoreContext> holder)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_INSTANTSEARCH_GET_DOMAIN_TRANSFERS_COUNT());
+		}
+
+		public static IQueryEnd USP_INSTANTSEARCH_GET_DOMAIN_TRANSFERS_MAX_ID(this IStoredProcedureHolder<NamecheapCoreContext> holder)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_INSTANTSEARCH_GET_DOMAIN_TRANSFERS_MAX_ID());
+		}
+
+		public static IQueryEnd USP_INSTANTSEARCH_GET_DOMAINS(this IStoredProcedureHolder<NamecheapCoreContext> holder, int? @from, int? @to)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_INSTANTSEARCH_GET_DOMAINS(@from, @to));
+		}
+
+		public static IQueryEnd USP_INSTANTSEARCH_GET_DOMAINS_COUNT(this IStoredProcedureHolder<NamecheapCoreContext> holder)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_INSTANTSEARCH_GET_DOMAINS_COUNT());
+		}
+
+		public static IQueryEnd USP_INSTANTSEARCH_GET_DOMAINS_MAX_ID(this IStoredProcedureHolder<NamecheapCoreContext> holder)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_INSTANTSEARCH_GET_DOMAINS_MAX_ID());
+		}
+
+		public static IQueryEnd USP_INSTANTSEARCH_GET_HOSTED_DOMAIN_TRANSFERS(this IStoredProcedureHolder<NamecheapCoreContext> holder, int? @from, int? @to)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_INSTANTSEARCH_GET_HOSTED_DOMAIN_TRANSFERS(@from, @to));
+		}
+
+		public static IQueryEnd USP_INSTANTSEARCH_GET_HOSTED_DOMAINS(this IStoredProcedureHolder<NamecheapCoreContext> holder, int? @from, int? @to)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_INSTANTSEARCH_GET_HOSTED_DOMAINS(@from, @to));
+		}
+
+		public static IQueryEnd USP_INSTANTSEARCH_GET_HOSTED_DOMAINS_COUNT(this IStoredProcedureHolder<NamecheapCoreContext> holder)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_INSTANTSEARCH_GET_HOSTED_DOMAINS_COUNT());
+		}
+
+		public static IQueryEnd USP_INSTANTSEARCH_GET_HOSTED_DOMAINS_MAX_ID(this IStoredProcedureHolder<NamecheapCoreContext> holder)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_INSTANTSEARCH_GET_HOSTED_DOMAINS_MAX_ID());
+		}
+
+		public static IQueryEnd USP_INSTANTSEARCH_GET_ONEPAGERS(this IStoredProcedureHolder<NamecheapCoreContext> holder, int? @from, int? @to)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_INSTANTSEARCH_GET_ONEPAGERS(@from, @to));
+		}
+
+		public static IQueryEnd USP_INSTANTSEARCH_GET_ONEPAGERS_COUNT(this IStoredProcedureHolder<NamecheapCoreContext> holder)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_INSTANTSEARCH_GET_ONEPAGERS_COUNT());
+		}
+
+		public static IQueryEnd USP_INSTANTSEARCH_GET_ONEPAGERS_MAX_ID(this IStoredProcedureHolder<NamecheapCoreContext> holder)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_INSTANTSEARCH_GET_ONEPAGERS_MAX_ID());
+		}
+
+		public static IQueryEnd USP_INVALIDATE_SECURITY_REQUEST(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @sUserName)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_INVALIDATE_SECURITY_REQUEST(@sUserName));
+		}
+
+		public static IQueryEnd USP_IS_API_USER_ALLOWED_TO_API(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @apiUser, string @apiCommand)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_IS_API_USER_ALLOWED_TO_API(@apiUser, @apiCommand));
+		}
+
+		public static IQueryEnd USP_IS_APP_USER_ALLOWED_TO_API(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @appUser, string @apiCommand)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_IS_APP_USER_ALLOWED_TO_API(@appUser, @apiCommand));
+		}
+
+		public static IQueryEnd USP_IS_DOMAIN_BANNED(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @DomainName)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_IS_DOMAIN_BANNED(@DomainName));
+		}
+
+		public static IQueryEnd USP_IS_DOMAIN_WHITELISTED(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @DomainName)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_IS_DOMAIN_WHITELISTED(@DomainName));
+		}
+
+		public static IQueryEnd USP_IS_FUNDS_AVAILABLE_F0R_RENEW(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @IPV_USERNAME, string @IPV_TLD, string @IPV_TYPE, int? @IPV_NUMYEARS)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_IS_FUNDS_AVAILABLE_F0R_RENEW(@IPV_USERNAME, @IPV_TLD, @IPV_TYPE, @IPV_NUMYEARS));
+		}
+
+		public static IQueryEnd USP_IS_PAGE_ALLOWED_FOR_ADMIN_ROLE(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @PageName, string @RoleName)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_IS_PAGE_ALLOWED_FOR_ADMIN_ROLE(@PageName, @RoleName));
+		}
+
+		public static IQueryEnd USP_IS_PAGE_ALLOWED_FOR_ADMIN_USER(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @PageName, string @AdminUserName)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_IS_PAGE_ALLOWED_FOR_ADMIN_USER(@PageName, @AdminUserName));
+		}
+
+		public static IQueryEnd usp_IsOrderAvailable(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @sUserName)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.usp_IsOrderAvailable(@sUserName));
+		}
+
+		public static IQueryEnd USP_ISSPECIALPROMOTION_ALREADY_USED(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @promotionCode, string @userName)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_ISSPECIALPROMOTION_ALREADY_USED(@promotionCode, @userName));
+		}
+
+		public static IQueryEnd USP_IUD_EPP_REQUEST(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @Operation, string @DomainName, string @UserName, bool? @EPP_Available_YN, DateTime? @Last_EPP_Check_DateTime, DateTime? @Next_EPP_Check_DateTime, bool? @Email_Sent_YN, string @Email_Sent_To, DateTime? @Email_Sent_DateTime, bool? @Sent_To_Enom_YN, DateTime? @Sent_To_Enom_DateTime, string @ClientIp, string @Comments)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_IUD_EPP_REQUEST(@Operation, @DomainName, @UserName, @EPP_Available_YN, @Last_EPP_Check_DateTime, @Next_EPP_Check_DateTime, @Email_Sent_YN, @Email_Sent_To, @Email_Sent_DateTime, @Sent_To_Enom_YN, @Sent_To_Enom_DateTime, @ClientIp, @Comments));
+		}
+
+		public static IQueryEnd USP_IUD_META_INFO(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @Action, string @Type, string @URL, string @user_agent, string @meta_title, string @meta_description, string @meta_keywords, string @meta_content, string @meta_classification, string @meta_generator, string @meta_author, string @meta_revisit_after, string @hidden_text, string @URL_old, string @user_agent_old)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_IUD_META_INFO(@Action, @Type, @URL, @user_agent, @meta_title, @meta_description, @meta_keywords, @meta_content, @meta_classification, @meta_generator, @meta_author, @meta_revisit_after, @hidden_text, @URL_old, @user_agent_old));
+		}
+
+		public static IQueryEnd USP_IUD_MP_CATEGORY(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @IPV_Operation_Type, decimal? @IPN_MP_Category_ID, string @IPV_Category_name, string @IPT_Description, decimal? @IPN_Parent_category_id, bool? @Active_YN, decimal? @PRIMARY_KEY)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_IUD_MP_CATEGORY(@IPV_Operation_Type, @IPN_MP_Category_ID, @IPV_Category_name, @IPT_Description, @IPN_Parent_category_id, @Active_YN, @PRIMARY_KEY));
+		}
+
+		public static IQueryEnd USP_IUD_PARKING_TEXT(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @IPV_Domainame, string @IPT_Parking_Text, string @IPT_Tracking_Code, string @IPV_Operation_Type)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_IUD_PARKING_TEXT(@IPV_Domainame, @IPT_Parking_Text, @IPT_Tracking_Code, @IPV_Operation_Type));
+		}
+
+		public static IQueryEnd USP_IUD_TRACK_SUBMIT(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @IPV_Operation_Type, string @IPV_Refid, string @IPV_MD5)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_IUD_TRACK_SUBMIT(@IPV_Operation_Type, @IPV_Refid, @IPV_MD5));
+		}
+
+		public static IQueryEnd USP_IUD_TRANSACTION(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @OPERATION_TYPE, decimal? @Transaction_ID, string @User_Name, string @Transaction_Type, decimal? @Associated_Order_ID, string @Payment_Source, string @Payer_Email, decimal? @CC_Initial_Amount, decimal? @Refund_Amount, bool? @Refund_YN, bool? @Completed_YN, string @Comments, string @Order_RefID, DateTime? @Start_Date_Time, DateTime? @End_Date_Time, string @CC_Order_ID, string @CC_Trans_ID, string @CC_Status, string @Pending_Reason, string @Payment_Type, string @CC_Last4, string @CC_Name_On_Card, string @Order_IP, string @Order_Zip, string @Order_Error, string @Err_Info, string @Raw_Data, decimal? @PRIMARY_KEY, int? @RelatedTransactionID)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_IUD_TRANSACTION(@OPERATION_TYPE, @Transaction_ID, @User_Name, @Transaction_Type, @Associated_Order_ID, @Payment_Source, @Payer_Email, @CC_Initial_Amount, @Refund_Amount, @Refund_YN, @Completed_YN, @Comments, @Order_RefID, @Start_Date_Time, @End_Date_Time, @CC_Order_ID, @CC_Trans_ID, @CC_Status, @Pending_Reason, @Payment_Type, @CC_Last4, @CC_Name_On_Card, @Order_IP, @Order_Zip, @Order_Error, @Err_Info, @Raw_Data, @PRIMARY_KEY, @RelatedTransactionID));
+		}
+
+		public static IQueryEnd usp_Linked_ShoppingCartCreateProcessCart(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @checkoutProcessID, string @refID, string @checkoutID, string @promotionCode, bool? @isGlobalPromotion, decimal? @globalPromotionDiscount, bool? @isGlobalPromotionPercentageType, decimal? @total, string @cmsCartServerName, string @paymentMode, string @invAddr, long? @shoppingCartProcessID, string @errMessage)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.usp_Linked_ShoppingCartCreateProcessCart(@checkoutProcessID, @refID, @checkoutID, @promotionCode, @isGlobalPromotion, @globalPromotionDiscount, @isGlobalPromotionPercentageType, @total, @cmsCartServerName, @paymentMode, @invAddr, @shoppingCartProcessID, @errMessage));
+		}
+
+		public static IQueryEnd USP_LIST_OF_ALL_LOCKED_DOMAINS(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @vFiltertype, string @vFiltervalue)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_LIST_OF_ALL_LOCKED_DOMAINS(@vFiltertype, @vFiltervalue));
+		}
+
+		public static IQueryEnd USP_LOCK_USER(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @userName)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_LOCK_USER(@userName));
+		}
+
+		public static IQueryEnd USP_LOG_BUYER_INFO(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @Username, decimal? @Purchase_Limit, decimal? @Purchase_Dynamic_Limit, decimal? @Purchase_Value, string @TodaysPrevTrans, string @Associated_OrderID, bool? @Perday_Limit_Limit, bool? @Global_limit, bool? @Current_limit, bool? @Tenday_Limit)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_LOG_BUYER_INFO(@Username, @Purchase_Limit, @Purchase_Dynamic_Limit, @Purchase_Value, @TodaysPrevTrans, @Associated_OrderID, @Perday_Limit_Limit, @Global_limit, @Current_limit, @Tenday_Limit));
+		}
+
+		public static IQueryEnd USP_LOG_DNS(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @DNS, string @DomainName, string @UserName, string @LogType)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_LOG_DNS(@DNS, @DomainName, @UserName, @LogType));
+		}
+
+		public static IQueryEnd USP_LOG_EPP_REQUEST(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @DomainName, string @UserName, string @ClientIp, string @ReasonType, string @ReasonDesc, bool? @ContactUserYN)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_LOG_EPP_REQUEST(@DomainName, @UserName, @ClientIp, @ReasonType, @ReasonDesc, @ContactUserYN));
+		}
+
+		public static IQueryEnd USP_LOG_MODIFICATION_PREVIOUS_RIGHTS(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @IPV_Domain_Name, string @IPV_By_User_Name, string @IPV_For_User_Name, string @IPV_Action)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_LOG_MODIFICATION_PREVIOUS_RIGHTS(@IPV_Domain_Name, @IPV_By_User_Name, @IPV_For_User_Name, @IPV_Action));
+		}
+
+		public static IQueryEnd USP_LOG_MONITOR_DNS(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @dns, string @domainName, string @userName, string @logType)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_LOG_MONITOR_DNS(@dns, @domainName, @userName, @logType));
+		}
+
+		public static IQueryEnd USP_LOG_MONITOR_DNS_NEW(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @dns, string @domainName, string @userName, string @logType)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_LOG_MONITOR_DNS_NEW(@dns, @domainName, @userName, @logType));
+		}
+
+		public static IQueryEnd USP_LOG_PAYPAL_TRANSACTION(this IStoredProcedureHolder<NamecheapCoreContext> holder, decimal? @TransactionID, string @PaymentStatus, string @PendingReason, string @ReasonCode, DateTime? @StatusDateTime)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_LOG_PAYPAL_TRANSACTION(@TransactionID, @PaymentStatus, @PendingReason, @ReasonCode, @StatusDateTime));
+		}
+
+		public static IQueryEnd USP_LOG_TRANSPORT_USER_PROFILE_CHANGE(this IStoredProcedureHolder<NamecheapCoreContext> holder, Guid? @UserReferenceId, string @Encrypted_Key, long? @SourceIp, long? @LogTime, string @Reason, long? @LogReferenceId)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_LOG_TRANSPORT_USER_PROFILE_CHANGE(@UserReferenceId, @Encrypted_Key, @SourceIp, @LogTime, @Reason, @LogReferenceId));
+		}
+
+		public static IQueryEnd USP_LOG_USER_LOCK_UNLOCK(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @IPV_User_Name, string @IPV_Action_Type, string @IPV_Reason_Code, string @IPV_Reason_Details)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_LOG_USER_LOCK_UNLOCK(@IPV_User_Name, @IPV_Action_Type, @IPV_Reason_Code, @IPV_Reason_Details));
+		}
+
+		public static IQueryEnd USP_LOG_USER_PROFILE_CHANGE(this IStoredProcedureHolder<NamecheapCoreContext> holder, decimal? @userId, string @profileType, string @oldValue, string @newValue, string @byApp, string @byUser, string @comment, string @ipAddress, string @profileSubtype)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_LOG_USER_PROFILE_CHANGE(@userId, @profileType, @oldValue, @newValue, @byApp, @byUser, @comment, @ipAddress, @profileSubtype));
+		}
+
+		public static IQueryEnd usp_LogCreditCardSave(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @userName, string @providerStatus, string @errorDesc, string @ClientIp, string @actionType)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.usp_LogCreditCardSave(@userName, @providerStatus, @errorDesc, @ClientIp, @actionType));
+		}
+
+		public static IQueryEnd USP_LOGON_USER_LOGINSHARE(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @UserName, string @Password, string @PasswordNoCase, string @ClientIp, string @RequestIp)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_LOGON_USER_LOGINSHARE(@UserName, @Password, @PasswordNoCase, @ClientIp, @RequestIp));
+		}
+
+		public static IQueryEnd usp_LogResellerMailDetails(this IStoredProcedureHolder<NamecheapCoreContext> holder, long? @autoId, string @subject, string @htmlMailContent, string @txtMailContent)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.usp_LogResellerMailDetails(@autoId, @subject, @htmlMailContent, @txtMailContent));
+		}
+
+		public static IQueryEnd USP_LogUserLoginStatusFor2FA(this IStoredProcedureHolder<NamecheapCoreContext> holder, decimal? @userId, string @loginIp, string @loginFrom)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_LogUserLoginStatusFor2FA(@userId, @loginIp, @loginFrom));
+		}
+
+		public static IQueryEnd usp_MarketPlaceBuyDomainsFillQueueFromListing(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @partnerName)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.usp_MarketPlaceBuyDomainsFillQueueFromListing(@partnerName));
+		}
+
+		public static IQueryEnd usp_MarketPlaceBuyDomainsFillQueueToListing(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @Sellerusername, string @PartnerName)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.usp_MarketPlaceBuyDomainsFillQueueToListing(@Sellerusername, @PartnerName));
+		}
+
+		public static IQueryEnd usp_MarketplaceBuyDomainsGetDetails(this IStoredProcedureHolder<NamecheapCoreContext> holder, decimal? @mpListingId, string @userName)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.usp_MarketplaceBuyDomainsGetDetails(@mpListingId, @userName));
+		}
+
+		public static IQueryEnd usp_MarketPlaceBuyDomainsGetPurchasedDetails(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @domainName)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.usp_MarketPlaceBuyDomainsGetPurchasedDetails(@domainName));
+		}
+
+		public static IQueryEnd usp_MarketplaceBuyDomainsGetSaleHistory(this IStoredProcedureHolder<NamecheapCoreContext> holder, decimal? @mpListingId)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.usp_MarketplaceBuyDomainsGetSaleHistory(@mpListingId));
+		}
+
+		public static IQueryEnd usp_MarketPlaceBuyDomainsGetToVerifyDeletedDomains(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @PartnerName)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.usp_MarketPlaceBuyDomainsGetToVerifyDeletedDomains(@PartnerName));
+		}
+
+		public static IQueryEnd usp_MarketPlaceBuyDomainsMarkDeleteProcessed(this IStoredProcedureHolder<NamecheapCoreContext> holder, int? @autoID, bool? @isDeletedYN)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.usp_MarketPlaceBuyDomainsMarkDeleteProcessed(@autoID, @isDeletedYN));
+		}
+
+		public static IQueryEnd usp_MarketplaceBuyDomainsReport(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @userName, string @domainName, DateTime? @startDate, DateTime? @endDate, string @SortBy, string @Order, int? @pageNumber, int? @pageSize, bool? @isReturnAllRows)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.usp_MarketplaceBuyDomainsReport(@userName, @domainName, @startDate, @endDate, @SortBy, @Order, @pageNumber, @pageSize, @isReturnAllRows));
+		}
+
+		public static IQueryEnd usp_MarketPlaceBuyDomainsUpdateQueue(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @premiumDomainsXml, byte? @listingdaysToExpire, byte? @expiryCheckDaysRange, string @partnerName)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.usp_MarketPlaceBuyDomainsUpdateQueue(@premiumDomainsXml, @listingdaysToExpire, @expiryCheckDaysRange, @partnerName));
+		}
+
+		public static IQueryEnd usp_MarketPlaceCheckTransferRequestAlreadyExists(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @domainName)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.usp_MarketPlaceCheckTransferRequestAlreadyExists(@domainName));
+		}
+
+		public static IQueryEnd usp_MarketPlaceEnomPremiumGetApprovedCheckList(this IStoredProcedureHolder<NamecheapCoreContext> holder)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.usp_MarketPlaceEnomPremiumGetApprovedCheckList());
+		}
+
+		public static IQueryEnd usp_MarketPlaceEnomPremiumUpdateCheckStatus(this IStoredProcedureHolder<NamecheapCoreContext> holder, int? @autoId, int? @checkCount, string @status, string @statusDescription)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.usp_MarketPlaceEnomPremiumUpdateCheckStatus(@autoId, @checkCount, @status, @statusDescription));
+		}
+
+		public static IQueryEnd usp_MarketPlaceGetAllPartnerCategories(this IStoredProcedureHolder<NamecheapCoreContext> holder)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.usp_MarketPlaceGetAllPartnerCategories());
+		}
+
+		public static IQueryEnd usp_MarketPlaceGetAllPartners(this IStoredProcedureHolder<NamecheapCoreContext> holder)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.usp_MarketPlaceGetAllPartners());
+		}
+
+		public static IQueryEnd usp_MarketPlaceGetDomainName(this IStoredProcedureHolder<NamecheapCoreContext> holder, int? @MpId)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.usp_MarketPlaceGetDomainName(@MpId));
+		}
+
+		public static IQueryEnd usp_MarketPlaceGetLogPremiumDomainSaleStatus(this IStoredProcedureHolder<NamecheapCoreContext> holder, decimal? @MpListingId, string @getAs)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.usp_MarketPlaceGetLogPremiumDomainSaleStatus(@MpListingId, @getAs));
+		}
+
+		public static IQueryEnd usp_MarketPlaceGetOrderId(this IStoredProcedureHolder<NamecheapCoreContext> holder, int? @MpId)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.usp_MarketPlaceGetOrderId(@MpId));
+		}
+
+		public static IQueryEnd usp_MarketPlaceGetPartnerId(this IStoredProcedureHolder<NamecheapCoreContext> holder, int? @mpId)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.usp_MarketPlaceGetPartnerId(@mpId));
+		}
+
+		public static IQueryEnd usp_MarketPlaceGetPartnerOrderId(this IStoredProcedureHolder<NamecheapCoreContext> holder, int? @mpId)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.usp_MarketPlaceGetPartnerOrderId(@mpId));
+		}
+
+		public static IQueryEnd usp_MarketPlaceGetPremiumDomainSaleDetails(this IStoredProcedureHolder<NamecheapCoreContext> holder, int? @mpId)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.usp_MarketPlaceGetPremiumDomainSaleDetails(@mpId));
+		}
+
+		public static IQueryEnd usp_MarketPlaceGetPremiumDomainSaleStatus(this IStoredProcedureHolder<NamecheapCoreContext> holder)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.usp_MarketPlaceGetPremiumDomainSaleStatus());
+		}
+
+		public static IQueryEnd usp_MarketPlaceGetStatusName(this IStoredProcedureHolder<NamecheapCoreContext> holder, int? @Id)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.usp_MarketPlaceGetStatusName(@Id));
+		}
+
+		public static IQueryEnd usp_MarketPlaceIdIsValidToOrderIdWithPrice(this IStoredProcedureHolder<NamecheapCoreContext> holder, decimal? @mpId, int? @orderId, bool? @returnFlag, decimal? @itemPrice)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.usp_MarketPlaceIdIsValidToOrderIdWithPrice(@mpId, @orderId, @returnFlag, @itemPrice));
+		}
+
+		public static IQueryEnd usp_MarketPlaceIsValidStatus(this IStoredProcedureHolder<NamecheapCoreContext> holder, int? @MpId)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.usp_MarketPlaceIsValidStatus(@MpId));
+		}
+
+		public static IQueryEnd usp_MarketPlaceUpdateSaleTransaction(this IStoredProcedureHolder<NamecheapCoreContext> holder, decimal? @mpId, string @TransactionType, bool? @IsReturn, string @Description, string @DenyDescription, string @ResponseXml)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.usp_MarketPlaceUpdateSaleTransaction(@mpId, @TransactionType, @IsReturn, @Description, @DenyDescription, @ResponseXml));
+		}
+
+		public static IQueryEnd usp_MarketPlaceUpdateSaleTransactionForDeny(this IStoredProcedureHolder<NamecheapCoreContext> holder, decimal? @mpId, string @TransactionType, bool? @IsReturn, string @Description, string @DenyDescription, string @Status)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.usp_MarketPlaceUpdateSaleTransactionForDeny(@mpId, @TransactionType, @IsReturn, @Description, @DenyDescription, @Status));
+		}
+
+		public static IQueryEnd USP_MAXMIND_IP_RELATED_DETAILS(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @filterType, string @filterByIp, string @maxmindIds)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_MAXMIND_IP_RELATED_DETAILS(@filterType, @filterByIp, @maxmindIds));
+		}
+
+		public static IQueryEnd USP_MIGRATE_RECENT_DOMAIN_SEARCH(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @Old_User_Name, string @New_User_Name)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_MIGRATE_RECENT_DOMAIN_SEARCH(@Old_User_Name, @New_User_Name));
+		}
+
+		public static IQueryEnd USP_MOVE_MESSAGES_TO_NAMECHEAP_LOGS(this IStoredProcedureHolder<NamecheapCoreContext> holder)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_MOVE_MESSAGES_TO_NAMECHEAP_LOGS());
+		}
+
+		public static IQueryEnd USP_MOVE_MONEY2WITHDRAW(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @sUserName)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_MOVE_MONEY2WITHDRAW(@sUserName));
+		}
+
+		public static IQueryEnd USP_MoveMessageNamecheapcoreToNamecheapLogs(this IStoredProcedureHolder<NamecheapCoreContext> holder)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_MoveMessageNamecheapcoreToNamecheapLogs());
+		}
+
+		public static IQueryEnd USP_MP_ADD_DOMAIN_LOG(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @domainName, string @sellerName, short? @numberOfYears, string @ccTransactionId, string @ccOrderId, string @buyerName)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_MP_ADD_DOMAIN_LOG(@domainName, @sellerName, @numberOfYears, @ccTransactionId, @ccOrderId, @buyerName));
+		}
+
+		public static IQueryEnd USP_MP_ADDTO_CART(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @sRefID, decimal? @MPID, bool? @IsLoggedIN, string @sActionID, string @sUserName)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_MP_ADDTO_CART(@sRefID, @MPID, @IsLoggedIN, @sActionID, @sUserName));
+		}
+
+		public static IQueryEnd USP_MP_ADMIN_FAST_MONEY_TRANSFER(this IStoredProcedureHolder<NamecheapCoreContext> holder, decimal? @nTransactionID)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_MP_ADMIN_FAST_MONEY_TRANSFER(@nTransactionID));
+		}
+
+		public static IQueryEnd USP_MP_ADMIN_GET_ALL_DOMAINS_LIST(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @DomainName, string @UserName)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_MP_ADMIN_GET_ALL_DOMAINS_LIST(@DomainName, @UserName));
+		}
+
+		public static IQueryEnd USP_MP_ADMIN_GET_DOMAIN_DETAILS(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @DomainName)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_MP_ADMIN_GET_DOMAIN_DETAILS(@DomainName));
+		}
+
+		public static IQueryEnd USP_MP_ADMIN_GET_SALE_TRANSACTION(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @sDomainName, string @sUserName)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_MP_ADMIN_GET_SALE_TRANSACTION(@sDomainName, @sUserName));
+		}
+
+		public static IQueryEnd USP_MP_ADMIN_SALE_TRANSCTION_HISTORY(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @IPNV_UserName)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_MP_ADMIN_SALE_TRANSCTION_HISTORY(@IPNV_UserName));
+		}
+
+		public static IQueryEnd USP_MP_ADMIN_SAVE_NOTIFICATION_EMAIL(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @UserName, string @AdminUsername, string @IPAddress, string @OldNotification, string @NewNotification)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_MP_ADMIN_SAVE_NOTIFICATION_EMAIL(@UserName, @AdminUsername, @IPAddress, @OldNotification, @NewNotification));
+		}
+
+		public static IQueryEnd USP_MP_ADMIN_SAVE_PURCHASE_LIMIT(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @sUserName, decimal? @RequestLimit, decimal? @Addfunds)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_MP_ADMIN_SAVE_PURCHASE_LIMIT(@sUserName, @RequestLimit, @Addfunds));
+		}
+
+		public static IQueryEnd USP_MP_ADMIN_SAVE_USER_MANAGE_INFO(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @sUserName, decimal? @MinCCAddFunds, decimal? @PaypalAddFunds, decimal? @MaxAddFunds, decimal? @MaxAddFundsperday, bool? @AcceptCC, bool? @AcceptFunds, decimal? @nMaxSaleDomPrice, decimal? @nMinSaleDomPrice, int? @nCommissionPercent, decimal? @PayPalMinBal, decimal? @CheckMinBal, bool? @Block, string @BlockedReason, bool? @AutoApproveMarketplacePurchases, string @DefaultDNSProviderSubTypeName, string @DefaultDNSProviderInternalReason)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_MP_ADMIN_SAVE_USER_MANAGE_INFO(@sUserName, @MinCCAddFunds, @PaypalAddFunds, @MaxAddFunds, @MaxAddFundsperday, @AcceptCC, @AcceptFunds, @nMaxSaleDomPrice, @nMinSaleDomPrice, @nCommissionPercent, @PayPalMinBal, @CheckMinBal, @Block, @BlockedReason, @AutoApproveMarketplacePurchases, @DefaultDNSProviderSubTypeName, @DefaultDNSProviderInternalReason));
+		}
+
+		public static IQueryEnd USP_MP_ADMIN_SELLING_COMPLETED_LISTING(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @UserName, string @ListType, string @KeywordSearch, DateTime? @List_Start_Date, DateTime? @List_End_Date, DateTime? @Sale_Start_Date, DateTime? @Sale_End_Date, string @Sold_To)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_MP_ADMIN_SELLING_COMPLETED_LISTING(@UserName, @ListType, @KeywordSearch, @List_Start_Date, @List_End_Date, @Sale_Start_Date, @Sale_End_Date, @Sold_To));
+		}
+
+		public static IQueryEnd USP_MP_ADMIN_SELLING_CURRENT_LISTING(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @UserName, string @KeywordSearch, DateTime? @List_Start_Date, DateTime? @List_End_Date)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_MP_ADMIN_SELLING_CURRENT_LISTING(@UserName, @KeywordSearch, @List_Start_Date, @List_End_Date));
+		}
+
+		public static IQueryEnd USP_MP_ADMIN_SET_DOMAIN_DETAILS(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @DomainName, string @UserName, bool? @DenyListing, string @sReason, int? @commission)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_MP_ADMIN_SET_DOMAIN_DETAILS(@DomainName, @UserName, @DenyListing, @sReason, @commission));
+		}
+
+		public static IQueryEnd USP_MP_ADMIN_SET_DOMAIN_FEATURED_YN(this IStoredProcedureHolder<NamecheapCoreContext> holder, decimal? @Mp_Listing_ID, bool? @Featured_YN)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_MP_ADMIN_SET_DOMAIN_FEATURED_YN(@Mp_Listing_ID, @Featured_YN));
+		}
+
+		public static IQueryEnd USP_MP_ADMIN_USER_MANAGE_LIST(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @IPV_UserName)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_MP_ADMIN_USER_MANAGE_LIST(@IPV_UserName));
+		}
+
+		public static IQueryEnd USP_MP_APPROVAL_LOCAL_UPDATES(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @sDomain, decimal? @nListingID, string @ApprovedBy, string @ApproveDescription, DateTime? @ApprovedOn)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_MP_APPROVAL_LOCAL_UPDATES(@sDomain, @nListingID, @ApprovedBy, @ApproveDescription, @ApprovedOn));
+		}
+
+		public static IQueryEnd USP_MP_AVAILABLE_FEATURES(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @sDomainname)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_MP_AVAILABLE_FEATURES(@sDomainname));
+		}
+
+		public static IQueryEnd USP_MP_BUYING_ACTIVITY(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @Buyer_User_Name, string @Domainname)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_MP_BUYING_ACTIVITY(@Buyer_User_Name, @Domainname));
+		}
+
+		public static IQueryEnd USP_MP_BUYING_LOCAL_UPDATES(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @sREFID, string @sDomain, decimal? @nListingID, string @sBuyerUserName, string @OrderRefID, string @OrderID)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_MP_BUYING_LOCAL_UPDATES(@sREFID, @sDomain, @nListingID, @sBuyerUserName, @OrderRefID, @OrderID));
+		}
+
+		public static IQueryEnd USP_MP_BUYING_UPDATES(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @sDomain, decimal? @nListingID, string @sBuyerUserName, string @OrderRefID, string @OrderID, decimal? @salePrice)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_MP_BUYING_UPDATES(@sDomain, @nListingID, @sBuyerUserName, @OrderRefID, @OrderID, @salePrice));
+		}
+
+		public static IQueryEnd USP_MP_CHANGE_CATEGORY_SEQUENCE(this IStoredProcedureHolder<NamecheapCoreContext> holder, int? @CategoryID, bool? @MoveType)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_MP_CHANGE_CATEGORY_SEQUENCE(@CategoryID, @MoveType));
+		}
+
+		public static IQueryEnd USP_MP_EDIT_OFFER_A_PRICE(this IStoredProcedureHolder<NamecheapCoreContext> holder, decimal? @MP_Listing_ID, string @Buyer_User_Name, decimal? @Offer_Price)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_MP_EDIT_OFFER_A_PRICE(@MP_Listing_ID, @Buyer_User_Name, @Offer_Price));
+		}
+
+		public static IQueryEnd USP_MP_FILTER_USER_LISTING(this IStoredProcedureHolder<NamecheapCoreContext> holder, DateTime? @Created_Start_Date, DateTime? @Created_End_Date, DateTime? @LastTrans_Start_Date, DateTime? @LastTrans_End_Date, string @User_Name, string @Email, string @Signup_IP, string @SearchByField1, string @SearchByField2, string @SearchByValue1, string @SearchByValue2, int? @Page, int? @PageSize)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_MP_FILTER_USER_LISTING(@Created_Start_Date, @Created_End_Date, @LastTrans_Start_Date, @LastTrans_End_Date, @User_Name, @Email, @Signup_IP, @SearchByField1, @SearchByField2, @SearchByValue1, @SearchByValue2, @Page, @PageSize));
+		}
+
+		public static IQueryEnd USP_MP_FINAL_VALIDATION(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @sRefID, string @sBuyerUserName)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_MP_FINAL_VALIDATION(@sRefID, @sBuyerUserName));
+		}
+
+		public static IQueryEnd USP_MP_GET_BUYER_COMPLETED_DOMAIN_DETAILS(this IStoredProcedureHolder<NamecheapCoreContext> holder, decimal? @Mp_Listing_Id, string @BuyerUserName)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_MP_GET_BUYER_COMPLETED_DOMAIN_DETAILS(@Mp_Listing_Id, @BuyerUserName));
+		}
+
+		public static IQueryEnd USP_MP_GET_BUYER_OFFER(this IStoredProcedureHolder<NamecheapCoreContext> holder, decimal? @nListingID, string @sUserName)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_MP_GET_BUYER_OFFER(@nListingID, @sUserName));
+		}
+
+		public static IQueryEnd USP_MP_GET_COMPLETED_DOMAIN_DETAILS(this IStoredProcedureHolder<NamecheapCoreContext> holder, decimal? @Mp_Listing_Id, string @UserName)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_MP_GET_COMPLETED_DOMAIN_DETAILS(@Mp_Listing_Id, @UserName));
+		}
+
+		public static IQueryEnd USP_MP_GET_DETAILS_FOR_EMAIL(this IStoredProcedureHolder<NamecheapCoreContext> holder, decimal? @MP_listingId)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_MP_GET_DETAILS_FOR_EMAIL(@MP_listingId));
+		}
+
+		public static IQueryEnd USP_MP_GET_DOMAIN_PRICE_FOR_BUYER(this IStoredProcedureHolder<NamecheapCoreContext> holder, decimal? @nListingID, string @sUserName)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_MP_GET_DOMAIN_PRICE_FOR_BUYER(@nListingID, @sUserName));
+		}
+
+		public static IQueryEnd USP_MP_GET_MONEY_REQUEST(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @UserName, DateTime? @StartDate, DateTime? @EndDate, decimal? @RequestId, string @PayMode)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_MP_GET_MONEY_REQUEST(@UserName, @StartDate, @EndDate, @RequestId, @PayMode));
+		}
+
+		public static IQueryEnd USP_MP_GET_MP_DOMAIN_OFFERS_DETAILS(this IStoredProcedureHolder<NamecheapCoreContext> holder, decimal? @Mp_Listing_ID, string @Username, bool? @AllUser)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_MP_GET_MP_DOMAIN_OFFERS_DETAILS(@Mp_Listing_ID, @Username, @AllUser));
+		}
+
+		public static IQueryEnd USP_MP_GET_OFFER_ACTION_FOR_DOMAIN(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @UserName, decimal? @ListingID, string @ActionType, decimal? @OfferPrice)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_MP_GET_OFFER_ACTION_FOR_DOMAIN(@UserName, @ListingID, @ActionType, @OfferPrice));
+		}
+
+		public static IQueryEnd USP_MP_GET_PURCHASED_DOMAIN_LIST(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @UserName, string @Domainname)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_MP_GET_PURCHASED_DOMAIN_LIST(@UserName, @Domainname));
+		}
+
+		public static IQueryEnd USP_MP_GET_RETURN_CONFIRMATION(this IStoredProcedureHolder<NamecheapCoreContext> holder, decimal? @IPN_ListingID, bool? @IPB_Validate_Only_YN, string @IPV_Return_Description)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_MP_GET_RETURN_CONFIRMATION(@IPN_ListingID, @IPB_Validate_Only_YN, @IPV_Return_Description));
+		}
+
+		public static IQueryEnd USP_MP_GET_SELLER_CURRENT_OFFERS_RECEIVED(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @UserName, string @BuyerName, string @DomainName, DateTime? @List_Start_Date, DateTime? @List_End_Date)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_MP_GET_SELLER_CURRENT_OFFERS_RECEIVED(@UserName, @BuyerName, @DomainName, @List_Start_Date, @List_End_Date));
+		}
+
+		public static IQueryEnd USP_MP_GET_SELLER_DETAILS(this IStoredProcedureHolder<NamecheapCoreContext> holder, decimal? @nListingID)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_MP_GET_SELLER_DETAILS(@nListingID));
+		}
+
+		public static IQueryEnd USP_MP_GET_TRANSACTION_HISTORY(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @UserName, DateTime? @StartDate, DateTime? @EndDate, decimal? @TransID, string @TransType)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_MP_GET_TRANSACTION_HISTORY(@UserName, @StartDate, @EndDate, @TransID, @TransType));
+		}
+
+		public static IQueryEnd USP_MP_INSERT_LISTING(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @DomainName, string @Description, string @Seller_User_Name, decimal? @Listing_Price, int? @Listing_For, bool? @Accept_Offers_YN, bool? @Adult_Listing_YN, bool? @POP3_YN, bool? @WhoisGuard_YN, int? @Category1, int? @Category2, decimal? @tmpIdentity)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_MP_INSERT_LISTING(@DomainName, @Description, @Seller_User_Name, @Listing_Price, @Listing_For, @Accept_Offers_YN, @Adult_Listing_YN, @POP3_YN, @WhoisGuard_YN, @Category1, @Category2, @tmpIdentity));
+		}
+
+		public static IQueryEnd USP_MP_INSERT_OFFER_A_PRICE(this IStoredProcedureHolder<NamecheapCoreContext> holder, decimal? @MP_Listing_ID, string @Buyer_User_Name, decimal? @Offer_Price)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_MP_INSERT_OFFER_A_PRICE(@MP_Listing_ID, @Buyer_User_Name, @Offer_Price));
+		}
+
+		public static IQueryEnd USP_MP_INSERT_USER_MONEY_REQUEST(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @IPNV_UserName, string @IPV_PayMode, decimal? @IPM_Amount, string @IPNV_Paypal_ID, string @IPNV_Check_To, string @IPT_Check_Address, string @IPNV_Password, string @IPNV_PasswordNoCase)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_MP_INSERT_USER_MONEY_REQUEST(@IPNV_UserName, @IPV_PayMode, @IPM_Amount, @IPNV_Paypal_ID, @IPNV_Check_To, @IPT_Check_Address, @IPNV_Password, @IPNV_PasswordNoCase));
+		}
+
+		public static IQueryEnd USP_MP_LISTING_DOMAIN_VALIDATE(this IStoredProcedureHolder<NamecheapCoreContext> holder, decimal? @MP_Listing_ID)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_MP_LISTING_DOMAIN_VALIDATE(@MP_Listing_ID));
+		}
+
+		public static IQueryEnd USP_MP_RETURN_LOCAL_UPDATES(this IStoredProcedureHolder<NamecheapCoreContext> holder, decimal? @nListingID, bool? @IPB_Isdomainavailable, string @Admin_Return_Description, string @Content)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_MP_RETURN_LOCAL_UPDATES(@nListingID, @IPB_Isdomainavailable, @Admin_Return_Description, @Content));
+		}
+
+		public static IQueryEnd USP_MP_REVERSAL_LOCAL_UPDATES(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @sDomain, decimal? @nListingID, string @ReturnedBy, string @ReturnDescription, string @AdminComments, bool? @RefundBuyer, DateTime? @ReturnedOn)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_MP_REVERSAL_LOCAL_UPDATES(@sDomain, @nListingID, @ReturnedBy, @ReturnDescription, @AdminComments, @RefundBuyer, @ReturnedOn));
+		}
+
+		public static IQueryEnd USP_MP_SALE_AVAILABLE(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @Domainname)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_MP_SALE_AVAILABLE(@Domainname));
+		}
+
+		public static IQueryEnd USP_MP_SELL_GETOFFERS(this IStoredProcedureHolder<NamecheapCoreContext> holder, decimal? @ListingID, string @sUserFilter)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_MP_SELL_GETOFFERS(@ListingID, @sUserFilter));
+		}
+
+		public static IQueryEnd USP_MP_SELL_SAVEOFFER_OPTIONS(this IStoredProcedureHolder<NamecheapCoreContext> holder, decimal? @nID, decimal? @nOfferID, string @sBuyer, string @Option, decimal? @Price)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_MP_SELL_SAVEOFFER_OPTIONS(@nID, @nOfferID, @sBuyer, @Option, @Price));
+		}
+
+		public static IQueryEnd USP_MP_SELLING_COMPLETED_LISTING(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @UserName, string @ListType, string @KeywordSearch, DateTime? @List_Start_Date, DateTime? @List_End_Date, string @Sold_To)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_MP_SELLING_COMPLETED_LISTING(@UserName, @ListType, @KeywordSearch, @List_Start_Date, @List_End_Date, @Sold_To));
+		}
+
+		public static IQueryEnd USP_MP_SELLING_CURRENT_LISTING(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @UserName, string @KeywordSearch, DateTime? @List_Start_Date, DateTime? @List_End_Date)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_MP_SELLING_CURRENT_LISTING(@UserName, @KeywordSearch, @List_Start_Date, @List_End_Date));
+		}
+
+		public static IQueryEnd USP_MP_SELLING_DOMAIN_EDIT_LISTING(this IStoredProcedureHolder<NamecheapCoreContext> holder, decimal? @MP_Listing_ID, string @UserName)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_MP_SELLING_DOMAIN_EDIT_LISTING(@MP_Listing_ID, @UserName));
+		}
+
+		public static IQueryEnd USP_MP_SELLING_GLOBAL_ISLISTABLE(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @DomainName, string @UserName)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_MP_SELLING_GLOBAL_ISLISTABLE(@DomainName, @UserName));
+		}
+
+		public static IQueryEnd USP_MP_SELLING_ISLISTABLE(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @DomainName, string @UserName)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_MP_SELLING_ISLISTABLE(@DomainName, @UserName));
+		}
+
+		public static IQueryEnd USP_MP_SELLING_UPDATE_LISTING(this IStoredProcedureHolder<NamecheapCoreContext> holder, decimal? @MP_Listing_ID, string @Description, string @Seller_User_Name, bool? @Adult_Listing_YN, bool? @POP3_YN, bool? @WhoisGuard_YN, bool? @Accept_Offers_YN, bool? @CloseListing, int? @category1, int? @category2, bool? @IsUpdateWG, bool? @Offer_EmailAlert_YN)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_MP_SELLING_UPDATE_LISTING(@MP_Listing_ID, @Description, @Seller_User_Name, @Adult_Listing_YN, @POP3_YN, @WhoisGuard_YN, @Accept_Offers_YN, @CloseListing, @category1, @category2, @IsUpdateWG, @Offer_EmailAlert_YN));
+		}
+
+		public static IQueryEnd USP_MP_SET_GLOBAL_OPTIONS(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @IPV_Maximum_Price, string @IPV_Minimum_Price, string @IPV_Commision_Percentage, string @IPV_PaypalMin_Price, string @IPV_CheckMin_Price, string @IPV_CreditDay, string @IPV_Minimum_Balance, string @IPV_Minimum_Transaction, string @IPV_Minimum_Domains, string @IPV_Disable_ApiSignup)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_MP_SET_GLOBAL_OPTIONS(@IPV_Maximum_Price, @IPV_Minimum_Price, @IPV_Commision_Percentage, @IPV_PaypalMin_Price, @IPV_CheckMin_Price, @IPV_CreditDay, @IPV_Minimum_Balance, @IPV_Minimum_Transaction, @IPV_Minimum_Domains, @IPV_Disable_ApiSignup));
+		}
+
+		public static IQueryEnd USP_MP_UPDATE_POP3_FEATURE(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @DomainName, bool? @AddPop3Feature)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_MP_UPDATE_POP3_FEATURE(@DomainName, @AddPop3Feature));
+		}
+
+		public static IQueryEnd USP_MP_VALIDATE_OFFER_PRICE_FOR_DOMAIN(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @UserName, decimal? @ListingId, decimal? @OfferPrice)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_MP_VALIDATE_OFFER_PRICE_FOR_DOMAIN(@UserName, @ListingId, @OfferPrice));
+		}
+
+		public static IQueryEnd usp_Namecheap_Bonus_GetDetails(this IStoredProcedureHolder<NamecheapCoreContext> holder, int? @autoId)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.usp_Namecheap_Bonus_GetDetails(@autoId));
+		}
+
+		public static IQueryEnd usp_NamecheapCorePriceUpdate(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @TLDCSV, decimal? @ExactPriceTOUpdate, decimal? @AddIncreasePriceWithexistone, bool? @Isexactprice, string @PricingType)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.usp_NamecheapCorePriceUpdate(@TLDCSV, @ExactPriceTOUpdate, @AddIncreasePriceWithexistone, @Isexactprice, @PricingType));
+		}
+
+		public static IQueryEnd usp_NewsLetterAddSubcriptionAction(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @email, string @verificationCode, string @initiationIp, bool? @isInitiatedFromProfile, string @action)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.usp_NewsLetterAddSubcriptionAction(@email, @verificationCode, @initiationIp, @isInitiatedFromProfile, @action));
+		}
+
+		public static IQueryEnd usp_NewsLetterGetAssociatedUserId(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @email, string @verificationCode)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.usp_NewsLetterGetAssociatedUserId(@email, @verificationCode));
+		}
+
+		public static IQueryEnd usp_NewsLetterGetSubcriptionAction(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @verificationCode, string @email, string @action)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.usp_NewsLetterGetSubcriptionAction(@verificationCode, @email, @action));
+		}
+
+		public static IQueryEnd usp_NewsLetterGetUserSubscriptionStatus(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @userName)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.usp_NewsLetterGetUserSubscriptionStatus(@userName));
+		}
+
+		public static IQueryEnd usp_NewsLetterSubscribe(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @fromType, string @verificationCode, string @verificationIp, string @userName)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.usp_NewsLetterSubscribe(@fromType, @verificationCode, @verificationIp, @userName));
+		}
+
+		public static IQueryEnd usp_NewsLetterUnSubscribe(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @fromType, string @email, bool? @unSubscribeAll, string @verificationCode, string @verificationIp, string @userName, int? @encodedUserId)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.usp_NewsLetterUnSubscribe(@fromType, @email, @unSubscribeAll, @verificationCode, @verificationIp, @userName, @encodedUserId));
+		}
+
+		public static IQueryEnd usp_NewsLetterUpdateSubscriptionEmail(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @userName, string @oldEmail)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.usp_NewsLetterUpdateSubscriptionEmail(@userName, @oldEmail));
+		}
+
+		public static IQueryEnd USP_NEWSSTAND_GET_EMAIL_BY_LOGIN(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @Login)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_NEWSSTAND_GET_EMAIL_BY_LOGIN(@Login));
+		}
+
+		public static IQueryEnd USP_NEWSSTAND_IS_EMAIL_EXIST(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @Email)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_NEWSSTAND_IS_EMAIL_EXIST(@Email));
+		}
+
+		public static IQueryEnd USP_OAuth_Admin_GetApplicationAccess(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @userFilter, bool? @ascendingUserOrder, int? @usersOnPage, int? @pageNumber, string @appFilter)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_OAuth_Admin_GetApplicationAccess(@userFilter, @ascendingUserOrder, @usersOnPage, @pageNumber, @appFilter));
+		}
+
+		public static IQueryEnd USP_OAuth_Admin_GetApplications(this IStoredProcedureHolder<NamecheapCoreContext> holder)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_OAuth_Admin_GetApplications());
+		}
+
+		public static IQueryEnd USP_OAuth_DeleteAccessTokens(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @userName, int? @userId, int? @appId)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_OAuth_DeleteAccessTokens(@userName, @userId, @appId));
+		}
+
+		public static IQueryEnd USP_OAuth_GetEnabledApplications(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @userName)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_OAuth_GetEnabledApplications(@userName));
+		}
+
+		public static IQueryEnd usp_OnePagerSubscriptionHostname(this IStoredProcedureHolder<NamecheapCoreContext> holder, decimal? @OnePagerSubscriptionId, string @getAs)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.usp_OnePagerSubscriptionHostname(@OnePagerSubscriptionId, @getAs));
+		}
+
+		public static IQueryEnd usp_OnePagerSubscriptionStatus(this IStoredProcedureHolder<NamecheapCoreContext> holder, decimal? @OnePagerSubscriptionId, string @getAs)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.usp_OnePagerSubscriptionStatus(@OnePagerSubscriptionId, @getAs));
+		}
+
+		public static IQueryEnd usp_OrderProcessorAddDomainToRegistrationQueue(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @domainName, string @userName, int? @numOfYears, string @providerOrderId, decimal? @associatedOrderId, string @transactionId, string @providerName, bool? @enableDomainAutoRenew, bool? @enableWGAutoRenew)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.usp_OrderProcessorAddDomainToRegistrationQueue(@domainName, @userName, @numOfYears, @providerOrderId, @associatedOrderId, @transactionId, @providerName, @enableDomainAutoRenew, @enableWGAutoRenew));
+		}
+
+		public static IQueryEnd usp_OrderProcessorAddDomainToUser(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @domainName, string @userName, int? @numOfYears, DateTime? @expDateTime, string @providerOrderId, string @transId, string @payStatus, string @orderIdLong, string @providerName, bool? @enableDomainAutoRenew, bool? @enableWGAutoRenew, string @dnsProviderSubType)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.usp_OrderProcessorAddDomainToUser(@domainName, @userName, @numOfYears, @expDateTime, @providerOrderId, @transId, @payStatus, @orderIdLong, @providerName, @enableDomainAutoRenew, @enableWGAutoRenew, @dnsProviderSubType));
+		}
+
+		public static IQueryEnd usp_OrderProcessorGetCartPromotionCodeForAnOrder(this IStoredProcedureHolder<NamecheapCoreContext> holder, long? @shoppingCartProcessId, string @username, long? @shoppingCartItemId)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.usp_OrderProcessorGetCartPromotionCodeForAnOrder(@shoppingCartProcessId, @username, @shoppingCartItemId));
+		}
+
+		public static IQueryEnd usp_OrderProcessorGetSuccessOrderdForSettings(this IStoredProcedureHolder<NamecheapCoreContext> holder, decimal? @orderId, decimal? @transactionId, string @checkoutProcessId)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.usp_OrderProcessorGetSuccessOrderdForSettings(@orderId, @transactionId, @checkoutProcessId));
+		}
+
+		public static IQueryEnd usp_OrderProcessorMarkCartItemProcessAsCompleted(this IStoredProcedureHolder<NamecheapCoreContext> holder, long? @shoppingCartProcessId, long? @shoppingCartItemId, bool? @isSettingsSuccess, string @settingsStatus)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.usp_OrderProcessorMarkCartItemProcessAsCompleted(@shoppingCartProcessId, @shoppingCartItemId, @isSettingsSuccess, @settingsStatus));
+		}
+
+		public static IQueryEnd usp_OrderProcessorMarkCartProcessAsCompleted(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @checkoutProcessId)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.usp_OrderProcessorMarkCartProcessAsCompleted(@checkoutProcessId));
+		}
+
+		public static IQueryEnd usp_OrderProcessorProcessOrderCompletionAndRefund(this IStoredProcedureHolder<NamecheapCoreContext> holder, long? @orderId)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.usp_OrderProcessorProcessOrderCompletionAndRefund(@orderId));
+		}
+
+		public static IQueryEnd usp_OrderProcessorProcessOrderCompletionAndRefund2(this IStoredProcedureHolder<NamecheapCoreContext> holder, long? @orderId)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.usp_OrderProcessorProcessOrderCompletionAndRefund2(@orderId));
+		}
+
+		public static IQueryEnd usp_OrderProcessorSetOrderOneTimeEmail(this IStoredProcedureHolder<NamecheapCoreContext> holder, decimal? @OrderID)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.usp_OrderProcessorSetOrderOneTimeEmail(@OrderID));
+		}
+
+		public static IQueryEnd USP_OX_REFUND_CANCELLED_SUBSCRIPTIONS(this IStoredProcedureHolder<NamecheapCoreContext> holder, decimal? @IPN_Context_ID, int? @IPN_Return_Value, bool? @IPB_Test_Only_YN)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_OX_REFUND_CANCELLED_SUBSCRIPTIONS(@IPN_Context_ID, @IPN_Return_Value, @IPB_Test_Only_YN));
+		}
+
+		public static IQueryEnd usp_OXSubscriptionPurchaseStatistics(this IStoredProcedureHolder<NamecheapCoreContext> holder, DateTime? @startDate, DateTime? @endDate)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.usp_OXSubscriptionPurchaseStatistics(@startDate, @endDate));
+		}
+
+		public static IQueryEnd USP_PAYPAL_ADD_TRANSACTION(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @UserName, string @Transaction_Type, string @CC_Trans_ID, string @CC_Status, string @PayerEmail, decimal? @GrossAmount, string @Comments, string @OrderRef_ID, string @PendingReason, string @PaypalPaymentType, string @ParentCC_Trans_ID, string @PaymentProviderStatus)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_PAYPAL_ADD_TRANSACTION(@UserName, @Transaction_Type, @CC_Trans_ID, @CC_Status, @PayerEmail, @GrossAmount, @Comments, @OrderRef_ID, @PendingReason, @PaypalPaymentType, @ParentCC_Trans_ID, @PaymentProviderStatus));
+		}
+
+		public static IQueryEnd USP_PAYPAL_GET_TRANSACTION_DETAILS(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @CC_Trans_ID)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_PAYPAL_GET_TRANSACTION_DETAILS(@CC_Trans_ID));
+		}
+
+		public static IQueryEnd USP_PAYPAL_HANDLE_DISPUTE(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @TransID, string @UserName, string @ParentTransID, string @PaymentStatus, string @Txn_Type, string @PayerEmail, string @Comments, string @OrderRef_ID, string @PayerStatus, string @ResidenceCountry)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_PAYPAL_HANDLE_DISPUTE(@TransID, @UserName, @ParentTransID, @PaymentStatus, @Txn_Type, @PayerEmail, @Comments, @OrderRef_ID, @PayerStatus, @ResidenceCountry));
+		}
+
+		public static IQueryEnd USP_PAYPAL_LOG_IPN(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @TransID, string @UserName, string @Txn_Type, string @PaymentStatus, string @ParentTransID, decimal? @PaymentGross, decimal? @PaymentFee, string @ReasonCode, string @PendingReason, DateTime? @StatusDateTime, string @CaseType, string @ReceiverEmail, string @NotifyVersion, string @PayerEmail, string @OrderRef_ID, string @PayerStatus, string @ResidenceCountry)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_PAYPAL_LOG_IPN(@TransID, @UserName, @Txn_Type, @PaymentStatus, @ParentTransID, @PaymentGross, @PaymentFee, @ReasonCode, @PendingReason, @StatusDateTime, @CaseType, @ReceiverEmail, @NotifyVersion, @PayerEmail, @OrderRef_ID, @PayerStatus, @ResidenceCountry));
+		}
+
+		public static IQueryEnd USP_PAYPAL_REFUND_TRANSACTION(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @TransID, string @UserName, string @ParentTransID, decimal? @PaymentGross, string @Txn_Type, string @PayerEmail, string @Comments, string @OrderRef_ID, string @PayerStatus, string @ResidenceCountry)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_PAYPAL_REFUND_TRANSACTION(@TransID, @UserName, @ParentTransID, @PaymentGross, @Txn_Type, @PayerEmail, @Comments, @OrderRef_ID, @PayerStatus, @ResidenceCountry));
+		}
+
+		public static IQueryEnd USP_PAYPAL_UPDATE_STATUS_AND_PROCESS_FUNDS(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @UserName, decimal? @Transaction_ID, string @TransID, string @CC_Status, decimal? @ProcessAmount, string @Txn_Type, string @PayerEmail, string @OrderRef_ID, string @PayerStatus, string @ResidenceCountry)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_PAYPAL_UPDATE_STATUS_AND_PROCESS_FUNDS(@UserName, @Transaction_ID, @TransID, @CC_Status, @ProcessAmount, @Txn_Type, @PayerEmail, @OrderRef_ID, @PayerStatus, @ResidenceCountry));
+		}
+
+		public static IQueryEnd usp_PaypalGetParentTransactionDetails(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @parentTransID)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.usp_PaypalGetParentTransactionDetails(@parentTransID));
+		}
+
+		public static IQueryEnd usp_PaypalGetTokenDetails(this IStoredProcedureHolder<NamecheapCoreContext> holder, decimal? @UserID, string @Token)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.usp_PaypalGetTokenDetails(@UserID, @Token));
+		}
+
+		public static IQueryEnd usp_PaypalGetUserFundsDetailsByToken(this IStoredProcedureHolder<NamecheapCoreContext> holder, decimal? @UserID, string @Token)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.usp_PaypalGetUserFundsDetailsByToken(@UserID, @Token));
+		}
+
+		public static IQueryEnd usp_PaypalSaveTokenDetails(this IStoredProcedureHolder<NamecheapCoreContext> holder, decimal? @UserID, string @InvoiceNumber, string @Token, string @ClientIP, decimal? @Amount, string @CurrencyCode, DateTime? @PaypalTokenCreatedDateTime, string @TokenStatus, string @OrderRefID)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.usp_PaypalSaveTokenDetails(@UserID, @InvoiceNumber, @Token, @ClientIP, @Amount, @CurrencyCode, @PaypalTokenCreatedDateTime, @TokenStatus, @OrderRefID));
+		}
+
+		public static IQueryEnd usp_PaypalUpdateStatusAndProcessFundsIfNeeded(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @UserName, decimal? @Transaction_ID, string @TransID, string @PaymentProviderStatus, decimal? @ProcessAmount, string @Txn_Type, string @CC_Status, string @PayerEmail, string @OrderRef_ID, string @PayerStatus, string @ResidenceCountry)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.usp_PaypalUpdateStatusAndProcessFundsIfNeeded(@UserName, @Transaction_ID, @TransID, @PaymentProviderStatus, @ProcessAmount, @Txn_Type, @CC_Status, @PayerEmail, @OrderRef_ID, @PayerStatus, @ResidenceCountry));
+		}
+
+		public static IQueryEnd usp_PaypalUpdateTokenDetails(this IStoredProcedureHolder<NamecheapCoreContext> holder, decimal? @userID, string @token, string @PaypalTransID, string @tokenStatus, string @previousTokenStatus, string @StatusDecription)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.usp_PaypalUpdateTokenDetails(@userID, @token, @PaypalTransID, @tokenStatus, @previousTokenStatus, @StatusDecription));
+		}
+
+		public static IQueryEnd usp_PrivacyPolicyUpdate_Manual(this IStoredProcedureHolder<NamecheapCoreContext> holder, int? @SubscriptionId, string @DomainName, DateTime? @NextBillingDateTime)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.usp_PrivacyPolicyUpdate_Manual(@SubscriptionId, @DomainName, @NextBillingDateTime));
+		}
+
+		public static IQueryEnd usp_ProcessCartCreateOrder(this IStoredProcedureHolder<NamecheapCoreContext> holder, decimal? @transactionId, string @checkoutProcessId, string @userName, string @referralId, string @adId, int? @autoRefTrafficLogID, int? @affiliateId, int? @affiliateProgramId, string @applicationType)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.usp_ProcessCartCreateOrder(@transactionId, @checkoutProcessId, @userName, @referralId, @adId, @autoRefTrafficLogID, @affiliateId, @affiliateProgramId, @applicationType));
+		}
+
+		public static IQueryEnd usp_ProcessCartGetProcessCartForOrderProcessor(this IStoredProcedureHolder<NamecheapCoreContext> holder, decimal? @orderId, decimal? @transactionId, string @checkoutProcessId)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.usp_ProcessCartGetProcessCartForOrderProcessor(@orderId, @transactionId, @checkoutProcessId));
+		}
+
+		public static IQueryEnd usp_ProcessOrderCompletionAndRefund(this IStoredProcedureHolder<NamecheapCoreContext> holder, long? @orderId)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.usp_ProcessOrderCompletionAndRefund(@orderId));
+		}
+
+		public static IQueryEnd USP_PROFILE_INSERT_HISTORY(this IStoredProcedureHolder<NamecheapCoreContext> holder, decimal? @IPV_User_Id, string @IPV_Data, string @IPV_Profile_Type)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_PROFILE_INSERT_HISTORY(@IPV_User_Id, @IPV_Data, @IPV_Profile_Type));
+		}
+
+		public static IQueryEnd USP_PROVIDER_MEMBERSHIP_GET_CMS_USER(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @userNameToMatch, long? @userIdToMatch)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_PROVIDER_MEMBERSHIP_GET_CMS_USER(@userNameToMatch, @userIdToMatch));
+		}
+
+		public static IQueryEnd USP_PROVIDER_MEMBERSHIP_GET_CMS_USERS(this IStoredProcedureHolder<NamecheapCoreContext> holder, int? @pageSize, int? @pageIndex, string @userNameToMatch, long? @userIdToMatch, string @emailToMatch)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_PROVIDER_MEMBERSHIP_GET_CMS_USERS(@pageSize, @pageIndex, @userNameToMatch, @userIdToMatch, @emailToMatch));
+		}
+
+		public static IQueryEnd USP_PROVIDER_ROLES_CHECK_ROLE_EXISTS(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @RoleName)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_PROVIDER_ROLES_CHECK_ROLE_EXISTS(@RoleName));
+		}
+
+		public static IQueryEnd USP_PROVIDER_ROLES_GET_ALL_ROLES(this IStoredProcedureHolder<NamecheapCoreContext> holder, bool? @ReturnDisabledRolesAlso)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_PROVIDER_ROLES_GET_ALL_ROLES(@ReturnDisabledRolesAlso));
+		}
+
+		public static IQueryEnd USP_PROVIDER_ROLES_GET_ALL_ROLES_FOR_AN_USER(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @UserName)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_PROVIDER_ROLES_GET_ALL_ROLES_FOR_AN_USER(@UserName));
+		}
+
+		public static IQueryEnd USP_PROVIDER_ROLES_GET_USERS_IN_ROLES(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @RoleName, string @UserNameToMatch, int? @MaxNumberOfRowsToReturn)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_PROVIDER_ROLES_GET_USERS_IN_ROLES(@RoleName, @UserNameToMatch, @MaxNumberOfRowsToReturn));
+		}
+
+		public static IQueryEnd USP_PURCHASE_RENEW_SSL(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @ActionID, string @RefID, string @sSLD, string @sTLD, short? @NumofYears, int? @Qty, string @userName, string @sTransactionID, string @sOrderID, string @sPayStatus, decimal? @sNumericOrderID, bool? @replaceInsteadOfRefundYN, DateTime? @activation_Expire_DateTime)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_PURCHASE_RENEW_SSL(@ActionID, @RefID, @sSLD, @sTLD, @NumofYears, @Qty, @userName, @sTransactionID, @sOrderID, @sPayStatus, @sNumericOrderID, @replaceInsteadOfRefundYN, @activation_Expire_DateTime));
+		}
+
+		public static IQueryEnd USP_PURCHASE_RENEW_WBL(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @ActionID, string @RefID, string @domainName, string @userName, string @sTransactionID, string @sOrderID, decimal? @sNumericOrderID, long? @enomOrderID)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_PURCHASE_RENEW_WBL(@ActionID, @RefID, @domainName, @userName, @sTransactionID, @sOrderID, @sNumericOrderID, @enomOrderID));
+		}
+
+		public static IQueryEnd usp_PushDomainToUser(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @sourceUserName, string @targetUserName, string @ownerUserName, decimal? @domainId, string @domainName, string @ipAddress, string @setOneTimePushKeyToTargetuser, bool? @isOneTimeCode, string @WGOption, bool? @isChangeContact)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.usp_PushDomainToUser(@sourceUserName, @targetUserName, @ownerUserName, @domainId, @domainName, @ipAddress, @setOneTimePushKeyToTargetuser, @isOneTimeCode, @WGOption, @isChangeContact));
+		}
+
+		public static IQueryEnd USP_REDEEM_VOUCHER(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @code, string @userName, string @ip)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_REDEEM_VOUCHER(@code, @userName, @ip));
+		}
+
+		public static IQueryEnd usp_RedeemCouponCode(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @userName, string @couponCode, string @clientIp)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.usp_RedeemCouponCode(@userName, @couponCode, @clientIp));
+		}
+
+		public static IQueryEnd USP_REFUND_PARTIAL_RENEWED_TRANSFER(this IStoredProcedureHolder<NamecheapCoreContext> holder, decimal? @IPN_Transfer_ID, int? @IPN_NumYears, bool? @IPB_Test_Only_YN, decimal? @LD_Error)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_REFUND_PARTIAL_RENEWED_TRANSFER(@IPN_Transfer_ID, @IPN_NumYears, @IPB_Test_Only_YN, @LD_Error));
+		}
+
+		public static IQueryEnd USP_REFUND_TRANSFER(this IStoredProcedureHolder<NamecheapCoreContext> holder, decimal? @IPN_Transfer_ID, bool? @IPB_Test_Only_YN)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_REFUND_TRANSFER(@IPN_Transfer_ID, @IPB_Test_Only_YN));
+		}
+
+		public static IQueryEnd USP_REGISTRATION_QUEUE_REFUND(this IStoredProcedureHolder<NamecheapCoreContext> holder, decimal? @IPN_Register_ID, bool? @IPB_Test_Only_YN)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_REGISTRATION_QUEUE_REFUND(@IPN_Register_ID, @IPB_Test_Only_YN));
+		}
+
+		public static IQueryEnd USP_RELEASE_WHOISGUARD(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @IPV_Domainname, string @IPV_UserName)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_RELEASE_WHOISGUARD(@IPV_Domainname, @IPV_UserName));
+		}
+
+		public static IQueryEnd USP_REMOVE_BANNED_DOMAINS(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @RefID, int? @Removed_Domain_Count, string @Removed_Domains)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_REMOVE_BANNED_DOMAINS(@RefID, @Removed_Domain_Count, @Removed_Domains));
+		}
+
+		public static IQueryEnd USP_REMOVE_DestinationToCategoryToUser(this IStoredProcedureHolder<NamecheapCoreContext> holder, Guid? @categoryId, Guid? @destinationId, string @userName)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_REMOVE_DestinationToCategoryToUser(@categoryId, @destinationId, @userName));
+		}
+
+		public static IQueryEnd Usp_Remove_Dnssec(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @domainName, string @xmlData)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.Usp_Remove_Dnssec(@domainName, @xmlData));
+		}
+
+		public static IQueryEnd USP_REMOVE_DOMAIN_NOT_IN_ACCOUNT(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @IPNV_DomainName, string @actionType, bool? @forceDelete)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_REMOVE_DOMAIN_NOT_IN_ACCOUNT(@IPNV_DomainName, @actionType, @forceDelete));
+		}
+
+		public static IQueryEnd USP_REMOVE_MULTIPLE_STATUS_QUEUE(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @IPV_Username, string @IPNV_BatchId, string @IPNV_Domainname, string @IPNV_Docommand)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_REMOVE_MULTIPLE_STATUS_QUEUE(@IPV_Username, @IPNV_BatchId, @IPNV_Domainname, @IPNV_Docommand));
+		}
+
+		public static IQueryEnd Usp_RemoveAll_Dnssec(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @domainName)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.Usp_RemoveAll_Dnssec(@domainName));
+		}
+
+		public static IQueryEnd USP_REPORT_GET_FUNDS(this IStoredProcedureHolder<NamecheapCoreContext> holder, DateTime? @From_date, DateTime? @To_Date, decimal? @Transaction_ID, string @User_name)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_REPORT_GET_FUNDS(@From_date, @To_Date, @Transaction_ID, @User_name));
+		}
+
+		public static IQueryEnd USP_REPORT_GET_ORDERS(this IStoredProcedureHolder<NamecheapCoreContext> holder, DateTime? @Order_Date_From, DateTime? @Order_Date_To, string @ActionID, string @Order_Product_Name_Like, decimal? @Order_ID, string @User_name)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_REPORT_GET_ORDERS(@Order_Date_From, @Order_Date_To, @ActionID, @Order_Product_Name_Like, @Order_ID, @User_name));
+		}
+
+		public static IQueryEnd USP_REPORT_GET_TRANSACTION(this IStoredProcedureHolder<NamecheapCoreContext> holder, DateTime? @Transaction_Date_From, DateTime? @Transaction_Date_To, decimal? @Transaction_id, string @User_name)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_REPORT_GET_TRANSACTION(@Transaction_Date_From, @Transaction_Date_To, @Transaction_id, @User_name));
+		}
+
+		public static IQueryEnd USP_REPORTS_GET_ORDER_DETAILS(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @Username, string @OrderID, string @RecordType)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_REPORTS_GET_ORDER_DETAILS(@Username, @OrderID, @RecordType));
+		}
+
+		public static IQueryEnd USP_REPORTS_GET_TRANS_DETAILS(this IStoredProcedureHolder<NamecheapCoreContext> holder, decimal? @TransID, string @Username)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_REPORTS_GET_TRANS_DETAILS(@TransID, @Username));
+		}
+
+		public static IQueryEnd USP_RICHCONTENT_ADD_PURCHASED_DETAILS(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @userName, string @ip, long? @partnerSubscriptionID, long? @partnerOrderId, long? @partnerPublisherID, bool? @isInTrialPeriod, string @emailAddress, int? @ourOrderID)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_RICHCONTENT_ADD_PURCHASED_DETAILS(@userName, @ip, @partnerSubscriptionID, @partnerOrderId, @partnerPublisherID, @isInTrialPeriod, @emailAddress, @ourOrderID));
+		}
+
+		public static IQueryEnd USP_RICHCONTENT_CHECK_EMAIL_OR_USER_HAS_SUBSCRIPTIONS(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @userName, string @email)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_RICHCONTENT_CHECK_EMAIL_OR_USER_HAS_SUBSCRIPTIONS(@userName, @email));
+		}
+
+		public static IQueryEnd USP_RICHCONTENT_CHECK_EMAIL_VALIDATION(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @userName, string @email)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_RICHCONTENT_CHECK_EMAIL_VALIDATION(@userName, @email));
+		}
+
+		public static IQueryEnd USP_RICHCONTENT_CHECK_ISUSER_BLOCKED_FOR_FREE_TRIALS(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @userName)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_RICHCONTENT_CHECK_ISUSER_BLOCKED_FOR_FREE_TRIALS(@userName));
+		}
+
+		public static IQueryEnd USP_RICHCONTENT_EXPIRING_SUBSCRIPTIONS_LIST(this IStoredProcedureHolder<NamecheapCoreContext> holder)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_RICHCONTENT_EXPIRING_SUBSCRIPTIONS_LIST());
+		}
+
+		public static IQueryEnd USP_RICHCONTENT_GET_PARTNER_SUBSCRIPTION_ID(this IStoredProcedureHolder<NamecheapCoreContext> holder, int? @subscriptionAutoID)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_RICHCONTENT_GET_PARTNER_SUBSCRIPTION_ID(@subscriptionAutoID));
+		}
+
+		public static IQueryEnd USP_RICHCONTENT_GET_USER_EMAILS(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @userName, bool? @getSubscriptionEmailsYN)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_RICHCONTENT_GET_USER_EMAILS(@userName, @getSubscriptionEmailsYN));
+		}
+
+		public static IQueryEnd USP_RICHCONTENT_SET_EXPIRED(this IStoredProcedureHolder<NamecheapCoreContext> holder, int? @subcriptionAutoId)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_RICHCONTENT_SET_EXPIRED(@subcriptionAutoId));
+		}
+
+		public static IQueryEnd USP_RICHCONTENT_SUBSCRIPTIONS_LIST(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @UserName, string @IPV_Search_Term, decimal? @IPN_Filter_ID, string @SortBy, string @Order, int? @Page, int? @PageSize, bool? @ReturnAllRows)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_RICHCONTENT_SUBSCRIPTIONS_LIST(@UserName, @IPV_Search_Term, @IPN_Filter_ID, @SortBy, @Order, @Page, @PageSize, @ReturnAllRows));
+		}
+
+		public static IQueryEnd USP_RICHCONTENT_UPDATE_PURCHASED_DETAILS(this IStoredProcedureHolder<NamecheapCoreContext> holder, int? @subscriptionAutoID, long? @partnerSubscriptionID, int? @partnerPublisherID, string @domainUsed, string @subscriptionName, string @email, DateTime? @nextBillingDate, string @status, DateTime? @partnerCreatedDateTime, bool? @isInTrialPeriod, string @ourStatus)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_RICHCONTENT_UPDATE_PURCHASED_DETAILS(@subscriptionAutoID, @partnerSubscriptionID, @partnerPublisherID, @domainUsed, @subscriptionName, @email, @nextBillingDate, @status, @partnerCreatedDateTime, @isInTrialPeriod, @ourStatus));
+		}
+
+		public static IQueryEnd USP_RICHCONTENT_UPDATE_RENEW(this IStoredProcedureHolder<NamecheapCoreContext> holder, int? @subscriptionAutoID, int? @numYears, string @clientIP, int? @orderId)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_RICHCONTENT_UPDATE_RENEW(@subscriptionAutoID, @numYears, @clientIP, @orderId));
+		}
+
+		public static IQueryEnd USP_RICHCONTENT_VALIDATE_AND_GET_SUBSCRIPTION_DETAILS(this IStoredProcedureHolder<NamecheapCoreContext> holder, int? @subscriptionAutoId, string @userName)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_RICHCONTENT_VALIDATE_AND_GET_SUBSCRIPTION_DETAILS(@subscriptionAutoId, @userName));
+		}
+
+		public static IQueryEnd USP_SAVE_SECURITY_LOG(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @sUserName, string @sDomainName, string @IP, string @sDataType, string @sDataSubType, string @sOLDData, string @sNewData, int? @ID, bool? @NotifyUser, bool? @NotifyAdmin, string @ActionSource, bool? @DisableSecurityNotificationYN, string @AdminUserName)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_SAVE_SECURITY_LOG(@sUserName, @sDomainName, @IP, @sDataType, @sDataSubType, @sOLDData, @sNewData, @ID, @NotifyUser, @NotifyAdmin, @ActionSource, @DisableSecurityNotificationYN, @AdminUserName));
+		}
+
+		public static IQueryEnd usp_SaveLogPremiumDomainSaleStatus(this IStoredProcedureHolder<NamecheapCoreContext> holder, decimal? @MP_Listing_ID, byte? @StatusId, string @StatusDateTime, string @UserName, string @Ip, string @UserType, string @Description)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.usp_SaveLogPremiumDomainSaleStatus(@MP_Listing_ID, @StatusId, @StatusDateTime, @UserName, @Ip, @UserType, @Description));
+		}
+
+		public static IQueryEnd usp_SaveLogUserStatus(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @UserName, string @UserStatusId, string @Comments, string @AdminUser, string @AdminIP, string @CreatedDateTime)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.usp_SaveLogUserStatus(@UserName, @UserStatusId, @Comments, @AdminUser, @AdminIP, @CreatedDateTime));
+		}
+
+		public static IQueryEnd usp_SaveServiceProviderRRDetails(this IStoredProcedureHolder<NamecheapCoreContext> holder, int? @providerId, string @host, string @recordType, string @data, int? @priority, string @serverDescription, bool? @isActive)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.usp_SaveServiceProviderRRDetails(@providerId, @host, @recordType, @data, @priority, @serverDescription, @isActive));
+		}
+
+		public static IQueryEnd USP_SCHEDULE_SSL_UPDATE_STATUS(this IStoredProcedureHolder<NamecheapCoreContext> holder, decimal? @poid, string @Status, string @Status_Desc, string @Log_Details, string @sgeotrustOrderID, DateTime? @OrderDateTime, DateTime? @CompletedDateTime, DateTime? @ExpireDatetime, DateTime? @CancelledDateTime, string @DomainnameUsed, int? @ValidityPeriod, bool? @Is_Renewal_Order_YN)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_SCHEDULE_SSL_UPDATE_STATUS(@poid, @Status, @Status_Desc, @Log_Details, @sgeotrustOrderID, @OrderDateTime, @CompletedDateTime, @ExpireDatetime, @CancelledDateTime, @DomainnameUsed, @ValidityPeriod, @Is_Renewal_Order_YN));
+		}
+
+		public static IQueryEnd USP_SCHEDULE_UPDATE_WG_EMAIL_QUEUE(this IStoredProcedureHolder<NamecheapCoreContext> holder)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_SCHEDULE_UPDATE_WG_EMAIL_QUEUE());
+		}
+
+		public static IQueryEnd USP_SCHEDULE_UPDATE_WG_EMAIL_QUEUE_June08_2013(this IStoredProcedureHolder<NamecheapCoreContext> holder)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_SCHEDULE_UPDATE_WG_EMAIL_QUEUE_June08_2013());
+		}
+
+		public static IQueryEnd USP_SCHEDULE_UPDATE_WG_EMAIL_QUEUE_OCT04(this IStoredProcedureHolder<NamecheapCoreContext> holder)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_SCHEDULE_UPDATE_WG_EMAIL_QUEUE_OCT04());
+		}
+
+		public static IQueryEnd usp_SendAbuseReportToSupport(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @userName)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.usp_SendAbuseReportToSupport(@userName));
+		}
+
+		public static IQueryEnd usp_SerivcePurchaseMarketplaceDomain(this IStoredProcedureHolder<NamecheapCoreContext> holder, decimal? @listingId, string @sBuyerUserName, string @orderRefId, decimal? @orderId, decimal? @orderDetaildId, decimal? @salePrice)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.usp_SerivcePurchaseMarketplaceDomain(@listingId, @sBuyerUserName, @orderRefId, @orderId, @orderDetaildId, @salePrice));
+		}
+
+		public static IQueryEnd usp_ServiceAddDomainToTransferQueue(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @domainName, string @eppCode, string @userName, short? @numberOfYears, string @ccTransId, string @ccOrderId, string @statusId, string @statusDesc, decimal? @associatedOrderId, decimal? @associatedOrderDetailId, string @option1, string @requestIp, bool? @enableDomainAutoRenew, bool? @enableWGAutoRenew, string @losingRegistrar, bool? @transferMateEnabled)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.usp_ServiceAddDomainToTransferQueue(@domainName, @eppCode, @userName, @numberOfYears, @ccTransId, @ccOrderId, @statusId, @statusDesc, @associatedOrderId, @associatedOrderDetailId, @option1, @requestIp, @enableDomainAutoRenew, @enableWGAutoRenew, @losingRegistrar, @transferMateEnabled));
+		}
+
+		public static IQueryEnd usp_ServiceAddWhoisGuardToUser(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @userName, short? @numOfYears, decimal? @orderId, decimal? @orderDetailId, int? @numOfPacks, string @wgEmailId)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.usp_ServiceAddWhoisGuardToUser(@userName, @numOfYears, @orderId, @orderDetailId, @numOfPacks, @wgEmailId));
+		}
+
+		public static IQueryEnd usp_ServiceAssociateWhoisGuardForADomain(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @domainName, long? @whoisGuardId, string @associatedEmail, string @RegistrantOrganizationName, string @RegistrantJobTitle, string @RegistrantFirstName, string @RegistrantLastName, string @RegistrantAddress1, string @RegistrantAddress2, string @RegistrantCity, string @RegistrantStateProvince, string @RegistrantStateProvinceChoice, string @RegistrantPostalCode, string @RegistrantCountry, string @RegistrantPhone, string @RegistrantPhoneExt, string @RegistrantFax, string @RegistrantEmailAddress, string @TechOrganizationName, string @TechJobTitle, string @TechFirstName, string @TechLastName, string @TechAddress1, string @TechAddress2, string @TechCity, string @TechStateProvince, string @TechStateProvinceChoice, string @TechPostalCode, string @TechCountry, string @TechPhone, string @TechPhoneExt, string @TechFax, string @TechEmailAddress, string @AdminOrganizationName, string @AdminJobTitle, string @AdminFirstName, string @AdminLastName, string @AdminAddress1, string @AdminAddress2, string @AdminCity, string @AdminStateProvince, string @AdminStateProvinceChoice, string @AdminPostalCode, string @AdminCountry, string @AdminPhone, string @AdminPhoneExt, string @AdminFax, string @AdminEmailAddress, string @AuxBillingOrganizationName, string @AuxBillingJobTitle, string @AuxBillingFirstName, string @AuxBillingLastName, string @AuxBillingAddress1, string @AuxBillingAddress2, string @AuxBillingCity, string @AuxBillingStateProvince, string @AuxBillingStateProvinceChoice, string @AuxBillingPostalCode, string @AuxBillingCountry, string @AuxBillingPhone, string @AuxBillingPhoneExt, string @AuxBillingFax, string @AuxBillingEmailAddress, string @RegistrantNexus, string @RegistrantNexusCountry, string @RegistrantPurpose, string @CIRAType, string @COUKLegalType, string @COUKCompanyID, string @COUKRegisteredfor, string @COUKRegOptOut, string @ORGUKRegisteredfor, string @ORGUKRegOptOut, string @ORGUKLegalType, string @ORGUKCompanyID, string @MEUKLegalType, string @MEUKCompanyID, string @MEUKRegisteredfor, string @MEUKRegOptOut, string @EuAdrLang, string @Cira_Registrant, string @Cira_Registrant_desc, string @Cira_trademark_no, string @Cira_org_registered_in)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.usp_ServiceAssociateWhoisGuardForADomain(@domainName, @whoisGuardId, @associatedEmail, @RegistrantOrganizationName, @RegistrantJobTitle, @RegistrantFirstName, @RegistrantLastName, @RegistrantAddress1, @RegistrantAddress2, @RegistrantCity, @RegistrantStateProvince, @RegistrantStateProvinceChoice, @RegistrantPostalCode, @RegistrantCountry, @RegistrantPhone, @RegistrantPhoneExt, @RegistrantFax, @RegistrantEmailAddress, @TechOrganizationName, @TechJobTitle, @TechFirstName, @TechLastName, @TechAddress1, @TechAddress2, @TechCity, @TechStateProvince, @TechStateProvinceChoice, @TechPostalCode, @TechCountry, @TechPhone, @TechPhoneExt, @TechFax, @TechEmailAddress, @AdminOrganizationName, @AdminJobTitle, @AdminFirstName, @AdminLastName, @AdminAddress1, @AdminAddress2, @AdminCity, @AdminStateProvince, @AdminStateProvinceChoice, @AdminPostalCode, @AdminCountry, @AdminPhone, @AdminPhoneExt, @AdminFax, @AdminEmailAddress, @AuxBillingOrganizationName, @AuxBillingJobTitle, @AuxBillingFirstName, @AuxBillingLastName, @AuxBillingAddress1, @AuxBillingAddress2, @AuxBillingCity, @AuxBillingStateProvince, @AuxBillingStateProvinceChoice, @AuxBillingPostalCode, @AuxBillingCountry, @AuxBillingPhone, @AuxBillingPhoneExt, @AuxBillingFax, @AuxBillingEmailAddress, @RegistrantNexus, @RegistrantNexusCountry, @RegistrantPurpose, @CIRAType, @COUKLegalType, @COUKCompanyID, @COUKRegisteredfor, @COUKRegOptOut, @ORGUKRegisteredfor, @ORGUKRegOptOut, @ORGUKLegalType, @ORGUKCompanyID, @MEUKLegalType, @MEUKCompanyID, @MEUKRegisteredfor, @MEUKRegOptOut, @EuAdrLang, @Cira_Registrant, @Cira_Registrant_desc, @Cira_trademark_no, @Cira_org_registered_in));
+		}
+
+		public static IQueryEnd usp_ServiceFactoryGetUserRegistrationOptions(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @userName)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.usp_ServiceFactoryGetUserRegistrationOptions(@userName));
+		}
+
+		public static IQueryEnd usp_ServiceGetDomainInfo(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @domainName)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.usp_ServiceGetDomainInfo(@domainName));
+		}
+
+		public static IQueryEnd usp_ServiceGetWhoisGuardProtectedAddress(this IStoredProcedureHolder<NamecheapCoreContext> holder)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.usp_ServiceGetWhoisGuardProtectedAddress());
+		}
+
+		public static IQueryEnd usp_ServicePurchaseRenewSSL(this IStoredProcedureHolder<NamecheapCoreContext> holder, bool? @isRenewal, string @userName, string @sslType, short? @numofYears, int? @qty, decimal? @purchasePrice, decimal? @retailPrice, bool? @replaceInsteadOfRefundYN, string @domainUsed, decimal? @orderID, decimal? @orderDetailID, DateTime? @activationExpireDateTime, decimal? @relatedCertificateID, string @orderIp)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.usp_ServicePurchaseRenewSSL(@isRenewal, @userName, @sslType, @numofYears, @qty, @purchasePrice, @retailPrice, @replaceInsteadOfRefundYN, @domainUsed, @orderID, @orderDetailID, @activationExpireDateTime, @relatedCertificateID, @orderIp));
+		}
+
+		public static IQueryEnd usp_ServicePurchaseRenewWBL(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @actionType, string @domainName, string @userName, long? @orderID, long? @orderDetailID, long? @enomOrderID, int? @numYears)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.usp_ServicePurchaseRenewWBL(@actionType, @domainName, @userName, @orderID, @orderDetailID, @enomOrderID, @numYears));
+		}
+
+		public static IQueryEnd usp_ServiceRenewWhoisGuard(this IStoredProcedureHolder<NamecheapCoreContext> holder, decimal? @whoisGuardId, short? @numOfYears)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.usp_ServiceRenewWhoisGuard(@whoisGuardId, @numOfYears));
+		}
+
+		public static IQueryEnd usp_ServiceUpdateProcessedItem(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @checkoutProcessId, decimal? @orderId, long? @shoppingCartItemId, bool? @isSuccess, string @statusInfo, string @providerRawData, bool? @isSettingsRequired, string @option1, string @option2)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.usp_ServiceUpdateProcessedItem(@checkoutProcessId, @orderId, @shoppingCartItemId, @isSuccess, @statusInfo, @providerRawData, @isSettingsRequired, @option1, @option2));
+		}
+
+		public static IQueryEnd usp_ServiceUpdateRenewReactivateDomain(this IStoredProcedureHolder<NamecheapCoreContext> holder, bool? @isReactivate, int? @numYears, DateTime? @expiryDateTime, string @orderID, string @transID, string @domainName, string @userName)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.usp_ServiceUpdateRenewReactivateDomain(@isReactivate, @numYears, @expiryDateTime, @orderID, @transID, @domainName, @userName));
+		}
+
+		public static IQueryEnd usp_ServiceUpdateRenewRichContent(this IStoredProcedureHolder<NamecheapCoreContext> holder, int? @subscriptionAutoID, int? @numMonths, string @clientIP, int? @orderId)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.usp_ServiceUpdateRenewRichContent(@subscriptionAutoID, @numMonths, @clientIP, @orderId));
+		}
+
+		public static IQueryEnd USP_SET_ADMIN_USER_SECUIRTY_SETTINGS(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @sUserName, bool? @bLoginYN, bool? @bProfileYN, bool? @bDomainYN)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_SET_ADMIN_USER_SECUIRTY_SETTINGS(@sUserName, @bLoginYN, @bProfileYN, @bDomainYN));
+		}
+
+		public static IQueryEnd USP_SET_ATTRIBUTE_FOR_GROUP(this IStoredProcedureHolder<NamecheapCoreContext> holder, int? @groupId, int? @attributeId, string @attributeName, string @description)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_SET_ATTRIBUTE_FOR_GROUP(@groupId, @attributeId, @attributeName, @description));
+		}
+
+		public static IQueryEnd USP_SET_ATTRIBUTE_GROUP(this IStoredProcedureHolder<NamecheapCoreContext> holder, int? @groupId, string @groupName, string @description)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_SET_ATTRIBUTE_GROUP(@groupId, @groupName, @description));
+		}
+
+		public static IQueryEnd USP_SET_AUTO_ENABLE_WHOIGUARD(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @IPV_Domains, string @IPV_RefID)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_SET_AUTO_ENABLE_WHOIGUARD(@IPV_Domains, @IPV_RefID));
+		}
+
+		public static IQueryEnd USP_SET_COPY_AFFILIATE_PROGRAM(this IStoredProcedureHolder<NamecheapCoreContext> holder, int? @programId, string @programName)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_SET_COPY_AFFILIATE_PROGRAM(@programId, @programName));
+		}
+
+		public static IQueryEnd USP_SET_COPY_PROMOTION_PRICING(this IStoredProcedureHolder<NamecheapCoreContext> holder, decimal? @IPN_Promotionid, string @IPV_Procode)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_SET_COPY_PROMOTION_PRICING(@IPN_Promotionid, @IPV_Procode));
+		}
+
+		public static IQueryEnd USP_SET_DOMAIN_EDIT_CAPABILITIES(this IStoredProcedureHolder<NamecheapCoreContext> holder, decimal? @IPN_Reseller_ID, decimal? @IPN_Current_User_ID, string @IPV_Current_User_Password, string @IPV_Current_User_PasswordNoCase, string @IPV_Target_User_Name, decimal? @IPN_Domain_ID, string @IPV_Capabilities_CSV)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_SET_DOMAIN_EDIT_CAPABILITIES(@IPN_Reseller_ID, @IPN_Current_User_ID, @IPV_Current_User_Password, @IPV_Current_User_PasswordNoCase, @IPV_Target_User_Name, @IPN_Domain_ID, @IPV_Capabilities_CSV));
+		}
+
+		public static IQueryEnd USP_SET_DOMAIN_SOCIAL_NETWORKING_DETAILS(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @Domainname, string @ME_Username, string @ME_Password, string @ME_Email, DateTime? @ME_CreatedDate)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_SET_DOMAIN_SOCIAL_NETWORKING_DETAILS(@Domainname, @ME_Username, @ME_Password, @ME_Email, @ME_CreatedDate));
+		}
+
+		public static IQueryEnd USP_SET_DOMLIST_USER_PREFERENCE(this IStoredProcedureHolder<NamecheapCoreContext> holder, decimal? @IPN_User_ID, bool? @IPB_Save_Category, decimal? @IPN_Category_ID, bool? @IPB_Save_NumDomains, string @IPV_NumDomains)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_SET_DOMLIST_USER_PREFERENCE(@IPN_User_ID, @IPB_Save_Category, @IPN_Category_ID, @IPB_Save_NumDomains, @IPV_NumDomains));
+		}
+
+		public static IQueryEnd USP_SET_ENOM_AUTO_RENEW_FAILED(this IStoredProcedureHolder<NamecheapCoreContext> holder, decimal? @IPN_Enom_Auto_Renew_Track_ID, string @IPV_Domainname, decimal? @LD_Error)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_SET_ENOM_AUTO_RENEW_FAILED(@IPN_Enom_Auto_Renew_Track_ID, @IPV_Domainname, @LD_Error));
+		}
+
+		public static IQueryEnd USP_SET_ENOM_AUTO_RENEW_TRACK(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @IPV_Domainname, decimal? @IPN_RelatedOrderID)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_SET_ENOM_AUTO_RENEW_TRACK(@IPV_Domainname, @IPN_RelatedOrderID));
+		}
+
+		public static IQueryEnd USP_SET_ENOM_AUTO_RENEW_UPDATE_STATUS(this IStoredProcedureHolder<NamecheapCoreContext> holder, decimal? @IPN_Enom_Auto_Renew_Track_ID, string @IPV_Domainname, DateTime? @IPD_Newexpirationdate)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_SET_ENOM_AUTO_RENEW_UPDATE_STATUS(@IPN_Enom_Auto_Renew_Track_ID, @IPV_Domainname, @IPD_Newexpirationdate));
+		}
+
+		public static IQueryEnd USP_SET_GET_DOMLIST_USER_PREFERENCE(this IStoredProcedureHolder<NamecheapCoreContext> holder, decimal? @IPN_User_ID, decimal? @IPN_Category_ID, string @IPV_NumDomains)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_SET_GET_DOMLIST_USER_PREFERENCE(@IPN_User_ID, @IPN_Category_ID, @IPV_NumDomains));
+		}
+
+		public static IQueryEnd USP_SET_IP_INFO(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @IPV_Remote_IP, string @IPT_MaxMind_XML)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_SET_IP_INFO(@IPV_Remote_IP, @IPT_MaxMind_XML));
+		}
+
+		public static IQueryEnd USP_SET_KAYAKO_USER_ID(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @UserName, int? @KayakoUserId)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_SET_KAYAKO_USER_ID(@UserName, @KayakoUserId));
+		}
+
+		public static IQueryEnd USP_SET_MP_CATEGORY_FOR_DOMAIN(this IStoredProcedureHolder<NamecheapCoreContext> holder, decimal? @ListingID, int? @Category1, int? @Category2)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_SET_MP_CATEGORY_FOR_DOMAIN(@ListingID, @Category1, @Category2));
+		}
+
+		public static IQueryEnd USP_SET_NEW_PASSWORD(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @userName, string @oldPassword, string @newPassword, string @ip)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_SET_NEW_PASSWORD(@userName, @oldPassword, @newPassword, @ip));
+		}
+
+		public static IQueryEnd USP_SET_PHONE_FAX_FOR_VALIDATION(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @IPV_Reg_ID, string @IPV_Registrant_Phone, string @IPV_Registrant_Fax, string @IPV_Admin_Phone, string @IPV_Admin_Fax, string @IPV_Tech_Phone, string @IPV_Tech_Fax, string @IPV_AuxBilling_Phone, string @IPV_AuxBilling_Fax, string @IPV_User_Name, string @IPV_Update_Profile, string @IPV_Registrant_Phoneext, string @IPV_Admin_Phoneext, string @IPV_Tech_Phoneext, string @IPV_AuxBilling_Phoneext)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_SET_PHONE_FAX_FOR_VALIDATION(@IPV_Reg_ID, @IPV_Registrant_Phone, @IPV_Registrant_Fax, @IPV_Admin_Phone, @IPV_Admin_Fax, @IPV_Tech_Phone, @IPV_Tech_Fax, @IPV_AuxBilling_Phone, @IPV_AuxBilling_Fax, @IPV_User_Name, @IPV_Update_Profile, @IPV_Registrant_Phoneext, @IPV_Admin_Phoneext, @IPV_Tech_Phoneext, @IPV_AuxBilling_Phoneext));
+		}
+
+		public static IQueryEnd USP_SET_PRODUCT_ATTRIBUTES(this IStoredProcedureHolder<NamecheapCoreContext> holder, int? @productId, string @attributeIdsValues)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_SET_PRODUCT_ATTRIBUTES(@productId, @attributeIdsValues));
+		}
+
+		public static IQueryEnd USP_SET_REGISTRATION_OPTIONS(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @IPV_Reg_ID, string @IPV_Use_Name_Server, string @IPV_NS1, string @IPV_NS2, string @IPV_NS3, string @IPV_NS4, string @IPV_NS5, string @IPV_EForward_User, string @IPV_EForward_Email, string @IPV_UForward_URL, string @IPV_UForward_Type, string @IPV_Submit, string @RegistrantNexus, string @RegistrantNexusCountry, string @RegistrantPurpose, string @CIRAType, string @COUKLegalType, string @COUKCompanyID, string @COUKRegisteredfor, string @COUKRegOptOut, string @ORGUKLegalType, string @ORGUKCompanyID, string @ORGUKRegisteredfor, string @ORGUKRegOptOut, bool? @DEconfirmAddress, string @de_agreedelete, string @MEUKLegalType, string @MEUKCompanyID, string @MEUKRegisteredfor, string @MEUKRegOptOut, string @eu_adr_lang, bool? @eu_agreedelete, string @CIRA_Legal_Type, string @CIRA_Whois_Display, string @CIRA_Agreement_Value, string @CIRA_Agreement_Version, string @CIRA_Language, string @asia_cclocality, string @asia_localitycity, string @asia_localitysp, string @asia_legalentitytype, string @asia_identform, string @asia_ident_number, string @asia_otherletype, string @asia_otheridentform)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_SET_REGISTRATION_OPTIONS(@IPV_Reg_ID, @IPV_Use_Name_Server, @IPV_NS1, @IPV_NS2, @IPV_NS3, @IPV_NS4, @IPV_NS5, @IPV_EForward_User, @IPV_EForward_Email, @IPV_UForward_URL, @IPV_UForward_Type, @IPV_Submit, @RegistrantNexus, @RegistrantNexusCountry, @RegistrantPurpose, @CIRAType, @COUKLegalType, @COUKCompanyID, @COUKRegisteredfor, @COUKRegOptOut, @ORGUKLegalType, @ORGUKCompanyID, @ORGUKRegisteredfor, @ORGUKRegOptOut, @DEconfirmAddress, @de_agreedelete, @MEUKLegalType, @MEUKCompanyID, @MEUKRegisteredfor, @MEUKRegOptOut, @eu_adr_lang, @eu_agreedelete, @CIRA_Legal_Type, @CIRA_Whois_Display, @CIRA_Agreement_Value, @CIRA_Agreement_Version, @CIRA_Language, @asia_cclocality, @asia_localitycity, @asia_localitysp, @asia_legalentitytype, @asia_identform, @asia_ident_number, @asia_otherletype, @asia_otheridentform));
+		}
+
+		public static IQueryEnd USP_SET_STATUS_IN_ADD_FUNDS_REQUEST(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @tokenId, string @userName, string @status, string @subStatus)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_SET_STATUS_IN_ADD_FUNDS_REQUEST(@tokenId, @userName, @status, @subStatus));
+		}
+
+		public static IQueryEnd USP_SET_SUBSCRIBTION(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @userName, int? @encodedUserId, int? @subscribe, bool? @denyNotificationEmail)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_SET_SUBSCRIBTION(@userName, @encodedUserId, @subscribe, @denyNotificationEmail));
+		}
+
+		public static IQueryEnd USP_SET_USER_HOSTING_ACCOUNT_DETAILS(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @UserName, string @ClientID, string @ProviderName)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_SET_USER_HOSTING_ACCOUNT_DETAILS(@UserName, @ClientID, @ProviderName));
+		}
+
+		public static IQueryEnd USP_SET_USER_SECUIRTY_SETTINGS(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @sUserName, string @sUserEmail, bool? @bLoginYN, bool? @bProfileYN, bool? @bDomainYN, string @sType)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_SET_USER_SECUIRTY_SETTINGS(@sUserName, @sUserEmail, @bLoginYN, @bProfileYN, @bDomainYN, @sType));
+		}
+
+		public static IQueryEnd usp_SetCardAsDefaultForUser(this IStoredProcedureHolder<NamecheapCoreContext> holder, Guid? @creditCardId, string @userName)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.usp_SetCardAsDefaultForUser(@creditCardId, @userName));
+		}
+
+		public static IQueryEnd usp_SetOrgTldPromotionDetails(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @OrgTldDomain, string @OrgUserName, DateTime? @OrgCreatedDateTime, string @OtherTldDomain, string @OtherTldUserName, DateTime? @OtherTldCreatedDateTime, bool? @IsOtherDomainCreated, string @ApiReason)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.usp_SetOrgTldPromotionDetails(@OrgTldDomain, @OrgUserName, @OrgCreatedDateTime, @OtherTldDomain, @OtherTldUserName, @OtherTldCreatedDateTime, @IsOtherDomainCreated, @ApiReason));
+		}
+
+		public static IQueryEnd USP_SHOPPING_CART_SSL_PACKAGE_PURCHASE_PROCESS(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @refID, string @promotionCode, string @userName)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_SHOPPING_CART_SSL_PACKAGE_PURCHASE_PROCESS(@refID, @promotionCode, @userName));
+		}
+
+		public static IQueryEnd USP_SHOPPING_CART_VALIDATE_MANAGEDNS(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @hostName, bool? @IsUserLoggedIN, string @userName)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_SHOPPING_CART_VALIDATE_MANAGEDNS(@hostName, @IsUserLoggedIN, @userName));
+		}
+
+		public static IQueryEnd USP_SHOPPING_CART_VALIDATE_WBL(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @validationType, string @actionType, string @RefID, string @domainName, decimal? @itemNum, bool? @isUserLoggedIn, string @userName)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_SHOPPING_CART_VALIDATE_WBL(@validationType, @actionType, @RefID, @domainName, @itemNum, @isUserLoggedIn, @userName));
+		}
+
+		public static IQueryEnd USP_SHOPPING_PURCHASE_CHECK_REFERENCE_ITEM_ACTION_STATUS(this IStoredProcedureHolder<NamecheapCoreContext> holder, decimal? @refItem)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_SHOPPING_PURCHASE_CHECK_REFERENCE_ITEM_ACTION_STATUS(@refItem));
+		}
+
+		public static IQueryEnd USP_SHOPPINGCART_ADDUPDATE_FREE_SSL_TO_AN_ITEM(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @refId, decimal? @itemNum, string @sld, string @tld, short? @numYears, string @actionID, int? @minyears, int? @maxyears, int? @qty, string @actionType)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_SHOPPINGCART_ADDUPDATE_FREE_SSL_TO_AN_ITEM(@refId, @itemNum, @sld, @tld, @numYears, @actionID, @minyears, @maxyears, @qty, @actionType));
+		}
+
+		public static IQueryEnd USP_SHOPPINGCART_CHECK_ITEM_HAS_FREEPRODUCTS(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @refID, decimal? @itemNum, string @ActionID, string @Sld)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_SHOPPINGCART_CHECK_ITEM_HAS_FREEPRODUCTS(@refID, @itemNum, @ActionID, @Sld));
+		}
+
+		public static IQueryEnd USP_SHOPPINGCART_GET_ITEMNUM_DETAILS(this IStoredProcedureHolder<NamecheapCoreContext> holder, decimal? @itemNum, string @refId)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_SHOPPINGCART_GET_ITEMNUM_DETAILS(@itemNum, @refId));
+		}
+
+		public static IQueryEnd USP_SHOPPINGCART_REMOVE_FREE_PRODUCTS(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @refId, string @actionId, string @sld, string @tld, decimal? @refItemNum)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_SHOPPINGCART_REMOVE_FREE_PRODUCTS(@refId, @actionId, @sld, @tld, @refItemNum));
+		}
+
+		public static IQueryEnd USP_SHOPPINGCART_REMOVE_ITEM_AND_ITSFREE(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @RefID, decimal? @itemNum, bool? @leaveReferencedProduct)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_SHOPPINGCART_REMOVE_ITEM_AND_ITSFREE(@RefID, @itemNum, @leaveReferencedProduct));
+		}
+
+		public static IQueryEnd usp_ShoppingCartCreateProcessCart(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @checkoutProcessID, string @refID, string @checkoutID, string @promotionCode, bool? @isGlobalPromotion, decimal? @globalPromotionDiscount, bool? @isGlobalPromotionPercentageType, decimal? @total, string @cmsCartServerName, string @paymentMode, string @invAddr, long? @shoppingCartProcessID)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.usp_ShoppingCartCreateProcessCart(@checkoutProcessID, @refID, @checkoutID, @promotionCode, @isGlobalPromotion, @globalPromotionDiscount, @isGlobalPromotionPercentageType, @total, @cmsCartServerName, @paymentMode, @invAddr, @shoppingCartProcessID));
+		}
+
+		public static IQueryEnd usp_ShoppingCartGetProcessCartDetails(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @checkoutProcessId, long? @shoppingCartItemID, bool? @isGetAddonDetails)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.usp_ShoppingCartGetProcessCartDetails(@checkoutProcessId, @shoppingCartItemID, @isGetAddonDetails));
+		}
+
+		public static IQueryEnd usp_ShoppingCartProcessGetInvoiceAddress(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @checkoutProcessID)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.usp_ShoppingCartProcessGetInvoiceAddress(@checkoutProcessID));
+		}
+
+		public static IQueryEnd usp_ShoppingCartProcessMoveToArchive(this IStoredProcedureHolder<NamecheapCoreContext> holder)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.usp_ShoppingCartProcessMoveToArchive());
+		}
+
+		public static IQueryEnd usp_ShoppingCartProcessSaveInvoiceAddress(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @checkoutProcessID, string @invoiceAddr)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.usp_ShoppingCartProcessSaveInvoiceAddress(@checkoutProcessID, @invoiceAddr));
+		}
+
+		public static IQueryEnd usp_SortAutoRenewPriorityForUser(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @userName, string @data)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.usp_SortAutoRenewPriorityForUser(@userName, @data));
+		}
+
+		public static IQueryEnd USP_SSL_APPROVEORDENY_CERTIFICATE(this IStoredProcedureHolder<NamecheapCoreContext> holder, bool? @IsApprove, string @Pin, string @ApproverIp)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_SSL_APPROVEORDENY_CERTIFICATE(@IsApprove, @Pin, @ApproverIp));
+		}
+
+		public static IQueryEnd USP_SSL_CHECK_CERTIFICATE_BY_ID(this IStoredProcedureHolder<NamecheapCoreContext> holder, decimal? @certificateId, string @username)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_SSL_CHECK_CERTIFICATE_BY_ID(@certificateId, @username));
+		}
+
+		public static IQueryEnd USP_SSL_CHECK_CERTIFICATEID_IN_ENOM(this IStoredProcedureHolder<NamecheapCoreContext> holder, decimal? @certificateId)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_SSL_CHECK_CERTIFICATEID_IN_ENOM(@certificateId));
+		}
+
+		public static IQueryEnd USP_SSL_CHECK_COMMONNAME_EXISTS(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @commonName, string @userName)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_SSL_CHECK_COMMONNAME_EXISTS(@commonName, @userName));
+		}
+
+		public static IQueryEnd USP_SSL_CHECK_COMMONNAME_EXISTS_INFREE(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @commonName, int? @certificateID)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_SSL_CHECK_COMMONNAME_EXISTS_INFREE(@commonName, @certificateID));
+		}
+
+		public static IQueryEnd USP_SSL_CHECK_INSERT_FOR_REPLACE(this IStoredProcedureHolder<NamecheapCoreContext> holder, int? @certificateId)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_SSL_CHECK_INSERT_FOR_REPLACE(@certificateId));
+		}
+
+		public static IQueryEnd USP_SSL_CHECK_PROMOTION_FOR_CERTIFICATE(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @promotionCode, int? @certificateID)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_SSL_CHECK_PROMOTION_FOR_CERTIFICATE(@promotionCode, @certificateID));
+		}
+
+		public static IQueryEnd USP_SSL_DELETE(this IStoredProcedureHolder<NamecheapCoreContext> holder, decimal? @certificateId, string @userName, string @actionIp)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_SSL_DELETE(@certificateId, @userName, @actionIp));
+		}
+
+		public static IQueryEnd USP_SSL_DELETE_ALL_FREE_EXPIRED(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @username, string @actionIp)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_SSL_DELETE_ALL_FREE_EXPIRED(@username, @actionIp));
+		}
+
+		public static IQueryEnd USP_SSL_ENOM_GET_CERT_ID(this IStoredProcedureHolder<NamecheapCoreContext> holder, decimal? @certificateID)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_SSL_ENOM_GET_CERT_ID(@certificateID));
+		}
+
+		public static IQueryEnd USP_SSL_ENOM_GET_FREE_CERTIFICATES_FROM_POOL(this IStoredProcedureHolder<NamecheapCoreContext> holder, int? @associated_Certificate_Id, string @enom_certificate_type, byte? @enom_years_purchased)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_SSL_ENOM_GET_FREE_CERTIFICATES_FROM_POOL(@associated_Certificate_Id, @enom_certificate_type, @enom_years_purchased));
+		}
+
+		public static IQueryEnd USP_SSL_ENOM_IUD_CERTIFICATE_POOL(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @actionType, long? @enomOrderId, long? @enomCertId, string @enom_certificate_Type, byte? @enom_years_purchased, int? @associated_Certificate_ID, int? @poolId, DateTime? @associated_DateTime)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_SSL_ENOM_IUD_CERTIFICATE_POOL(@actionType, @enomOrderId, @enomCertId, @enom_certificate_Type, @enom_years_purchased, @associated_Certificate_ID, @poolId, @associated_DateTime));
+		}
+
+		public static IQueryEnd USP_SSL_GET_APPROVAL_DETAILS(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @Pin)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_SSL_GET_APPROVAL_DETAILS(@Pin));
+		}
+
+		public static IQueryEnd USP_SSL_GET_APPROVALPIN(this IStoredProcedureHolder<NamecheapCoreContext> holder, int? @certificateId, string @userName)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_SSL_GET_APPROVALPIN(@certificateId, @userName));
+		}
+
+		public static IQueryEnd USP_SSL_GET_CANCELLED_LIST(this IStoredProcedureHolder<NamecheapCoreContext> holder)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_SSL_GET_CANCELLED_LIST());
+		}
+
+		public static IQueryEnd USP_SSL_GET_CERTIFICATES_BY_STATUS_OF_A_PARTNER(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @status, string @partnerName)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_SSL_GET_CERTIFICATES_BY_STATUS_OF_A_PARTNER(@status, @partnerName));
+		}
+
+		public static IQueryEnd USP_SSL_GET_INFO(this IStoredProcedureHolder<NamecheapCoreContext> holder, decimal? @certificateId)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_SSL_GET_INFO(@certificateId));
+		}
+
+		public static IQueryEnd USP_SSL_GET_INITIALIZE_CERTIFICATE(this IStoredProcedureHolder<NamecheapCoreContext> holder, int? @certificateId)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_SSL_GET_INITIALIZE_CERTIFICATE(@certificateId));
+		}
+
+		public static IQueryEnd USP_SSL_GET_PARTNER(this IStoredProcedureHolder<NamecheapCoreContext> holder, decimal? @certificateID, string @username)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_SSL_GET_PARTNER(@certificateID, @username));
+		}
+
+		public static IQueryEnd USP_SSL_GET_PARTNER_BY_CERTIFICATE_TYPE(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @CertificateType)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_SSL_GET_PARTNER_BY_CERTIFICATE_TYPE(@CertificateType));
+		}
+
+		public static IQueryEnd USP_SSL_GET_PARTNER_BY_CERTIFICATEID(this IStoredProcedureHolder<NamecheapCoreContext> holder, decimal? @certificateId)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_SSL_GET_PARTNER_BY_CERTIFICATEID(@certificateId));
+		}
+
+		public static IQueryEnd USP_SSL_GET_REMAINING_DAYS_TO_EXPIRE(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @commonName, string @userName, string @sslType)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_SSL_GET_REMAINING_DAYS_TO_EXPIRE(@commonName, @userName, @sslType));
+		}
+
+		public static IQueryEnd USP_SSL_INSERT_FOR_REPLACE(this IStoredProcedureHolder<NamecheapCoreContext> holder, int? @certificateId)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_SSL_INSERT_FOR_REPLACE(@certificateId));
+		}
+
+		public static IQueryEnd USP_SSL_NEW_ORDER(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @sUsername, string @sDomain, string @sOrderID, string @Product, int? @nNumYears)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_SSL_NEW_ORDER(@sUsername, @sDomain, @sOrderID, @Product, @nNumYears));
+		}
+
+		public static IQueryEnd USP_SSL_PARTNER_ENOM_SCHEDULE_LIST(this IStoredProcedureHolder<NamecheapCoreContext> holder)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_SSL_PARTNER_ENOM_SCHEDULE_LIST());
+		}
+
+		public static IQueryEnd USP_SSL_PARTNER_ENOM_SCHEDULE_UPDATE_STATUS(this IStoredProcedureHolder<NamecheapCoreContext> holder, int? @CertificateID, int? @poolID, string @Status, string @StatusDesc, decimal? @enomOrderID, decimal? @enomOrderDetailID, string @geotrustOrderID, DateTime? @ExpiryDateTime)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_SSL_PARTNER_ENOM_SCHEDULE_UPDATE_STATUS(@CertificateID, @poolID, @Status, @StatusDesc, @enomOrderID, @enomOrderDetailID, @geotrustOrderID, @ExpiryDateTime));
+		}
+
+		public static IQueryEnd USP_SSL_PARTNER_GET_CANCELLED_LIST(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @Partner_Name)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_SSL_PARTNER_GET_CANCELLED_LIST(@Partner_Name));
+		}
+
+		public static IQueryEnd USP_SSL_PARTNER_GET_REPLACE_LIST(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @status, string @partnerName)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_SSL_PARTNER_GET_REPLACE_LIST(@status, @partnerName));
+		}
+
+		public static IQueryEnd USP_SSL_PARTNER_REFUND_CANCELLED_CERTIFICATES(this IStoredProcedureHolder<NamecheapCoreContext> holder, decimal? @IPN_Certificate_ID, int? @IPN_Return_Value, bool? @IPB_Test_Only_YN)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_SSL_PARTNER_REFUND_CANCELLED_CERTIFICATES(@IPN_Certificate_ID, @IPN_Return_Value, @IPB_Test_Only_YN));
+		}
+
+		public static IQueryEnd USP_SSL_PARTNER_SCHEDULE_LIST(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @Partner_Name)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_SSL_PARTNER_SCHEDULE_LIST(@Partner_Name));
+		}
+
+		public static IQueryEnd USP_SSL_PARTNER_SCHEDULE_UPDATE_STATUS(this IStoredProcedureHolder<NamecheapCoreContext> holder, decimal? @certificateID, string @status, string @statusDesc, string @expireDateTime)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_SSL_PARTNER_SCHEDULE_UPDATE_STATUS(@certificateID, @status, @statusDesc, @expireDateTime));
+		}
+
+		public static IQueryEnd USP_SSL_REFUND_CANCELLED_CERTIFICATES(this IStoredProcedureHolder<NamecheapCoreContext> holder, decimal? @IPN_Certificate_ID, int? @IPN_Return_Value, bool? @IPB_Test_Only_YN)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_SSL_REFUND_CANCELLED_CERTIFICATES(@IPN_Certificate_ID, @IPN_Return_Value, @IPB_Test_Only_YN));
+		}
+
+		public static IQueryEnd USP_SSL_REPLACE_CERTIFICATE_DETAILS(this IStoredProcedureHolder<NamecheapCoreContext> holder, int? @certificateId)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_SSL_REPLACE_CERTIFICATE_DETAILS(@certificateId));
+		}
+
+		public static IQueryEnd USP_SSL_REPLACE_CERTIFICATE_PURCHASED_WITH_OFFER(this IStoredProcedureHolder<NamecheapCoreContext> holder, int? @certificateId)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_SSL_REPLACE_CERTIFICATE_PURCHASED_WITH_OFFER(@certificateId));
+		}
+
+		public static IQueryEnd USP_SSL_SCHEDULE_UPDATE_PURCHASE(this IStoredProcedureHolder<NamecheapCoreContext> holder, decimal? @POrderID, string @sStatus, string @sStatusDesc, string @Log_Details, string @QuickInviteUrl)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_SSL_SCHEDULE_UPDATE_PURCHASE(@POrderID, @sStatus, @sStatusDesc, @Log_Details, @QuickInviteUrl));
+		}
+
+		public static IQueryEnd USP_SSL_SCHEDULED_LIST(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @sType)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_SSL_SCHEDULED_LIST(@sType));
+		}
+
+		public static IQueryEnd USP_SSL_SET_CERTIFICATE_ADMIN_DETAILS(this IStoredProcedureHolder<NamecheapCoreContext> holder, int? @certificateId, string @adminFirstName, string @adminLastName, string @adminEmail, string @jobTitle, string @organization, string @streetAddress, string @address2, string @city, string @state, string @stateProvince, string @zip, string @country, string @phone, string @fax, string @phoneExt, string @faxExt, string @joiLocality, string @joiStateOrProvince, string @joiCountry, DateTime? @dateOfIncorp, string @companyName, string @companyNumber, string @repFirstName, string @repLastName, string @repEmailAddress, string @repPhone, string @repFax, string @repTitle, string @repCallbackMethod, string @repOrganisationName, string @repOrganisationUnitName, string @repAddress1, string @repAddress2, string @repCity, string @repStateProvince, string @repPostalCode, string @repCountry, string @repPostOfficeBox, string @repCallbackDestinationSame)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_SSL_SET_CERTIFICATE_ADMIN_DETAILS(@certificateId, @adminFirstName, @adminLastName, @adminEmail, @jobTitle, @organization, @streetAddress, @address2, @city, @state, @stateProvince, @zip, @country, @phone, @fax, @phoneExt, @faxExt, @joiLocality, @joiStateOrProvince, @joiCountry, @dateOfIncorp, @companyName, @companyNumber, @repFirstName, @repLastName, @repEmailAddress, @repPhone, @repFax, @repTitle, @repCallbackMethod, @repOrganisationName, @repOrganisationUnitName, @repAddress1, @repAddress2, @repCity, @repStateProvince, @repPostalCode, @repCountry, @repPostOfficeBox, @repCallbackDestinationSame));
+		}
+
+		public static IQueryEnd USP_SSL_SET_CERTIFICATE_FOR_RESEND_APPROVEREMAIL(this IStoredProcedureHolder<NamecheapCoreContext> holder, int? @certificateId)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_SSL_SET_CERTIFICATE_FOR_RESEND_APPROVEREMAIL(@certificateId));
+		}
+
+		public static IQueryEnd USP_SSL_UPDATE_APPROVAL_EMAIL(this IStoredProcedureHolder<NamecheapCoreContext> holder, decimal? @CertificateID, string @Approver_Email)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_SSL_UPDATE_APPROVAL_EMAIL(@CertificateID, @Approver_Email));
+		}
+
+		public static IQueryEnd USP_SSL_UPDATE_APPROVER_EMAIL(this IStoredProcedureHolder<NamecheapCoreContext> holder, decimal? @certificate_ID, string @username, string @approverEmail, string @ip, bool? @ignoredWarning)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_SSL_UPDATE_APPROVER_EMAIL(@certificate_ID, @username, @approverEmail, @ip, @ignoredWarning));
+		}
+
+		public static IQueryEnd USP_SSL_UPDATE_CSR(this IStoredProcedureHolder<NamecheapCoreContext> holder, decimal? @certificate_ID, string @username, string @HostName, string @csr, string @certWebServerType)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_SSL_UPDATE_CSR(@certificate_ID, @username, @HostName, @csr, @certWebServerType));
+		}
+
+		public static IQueryEnd USP_SSL_UPDATE_CSR_AND_APPROVEREMAIL(this IStoredProcedureHolder<NamecheapCoreContext> holder, decimal? @certificate_ID, string @username, string @HostName, string @csr, string @certWebServerType, string @approverEmail)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_SSL_UPDATE_CSR_AND_APPROVEREMAIL(@certificate_ID, @username, @HostName, @csr, @certWebServerType, @approverEmail));
+		}
+
+		public static IQueryEnd USP_SSL_UPDATE_HTTP_FILE_STATUS(this IStoredProcedureHolder<NamecheapCoreContext> holder, decimal? @certificateID, string @username, bool? @HttpDCValidation, string @File_Name, string @File_Content)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_SSL_UPDATE_HTTP_FILE_STATUS(@certificateID, @username, @HttpDCValidation, @File_Name, @File_Content));
+		}
+
+		public static IQueryEnd USP_SSL_UPDATE_PARTNER_ID(this IStoredProcedureHolder<NamecheapCoreContext> holder, decimal? @certificateId, string @partnerName)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_SSL_UPDATE_PARTNER_ID(@certificateId, @partnerName));
+		}
+
+		public static IQueryEnd USP_SSL_UPDATE_PARTNER_ID_FOR_CERT(this IStoredProcedureHolder<NamecheapCoreContext> holder, decimal? @CertificateId)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_SSL_UPDATE_PARTNER_ID_FOR_CERT(@CertificateId));
+		}
+
+		public static IQueryEnd USP_SSL_UPDATE_PURCHASE_DETAILS(this IStoredProcedureHolder<NamecheapCoreContext> holder, decimal? @certificateID, string @username, decimal? @partnerItemOrderID, decimal? @partnerOrderID, string @geotrustOrderID)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_SSL_UPDATE_PURCHASE_DETAILS(@certificateID, @username, @partnerItemOrderID, @partnerOrderID, @geotrustOrderID));
+		}
+
+		public static IQueryEnd USP_SSL_UPDATE_PURCHASE_STATUS(this IStoredProcedureHolder<NamecheapCoreContext> holder, int? @certificateID, string @status, string @statusDesc, decimal? @partnerOrderID, decimal? @partnerCertificateID, decimal? @issuerOrderID, DateTime? @completedDatetime)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_SSL_UPDATE_PURCHASE_STATUS(@certificateID, @status, @statusDesc, @partnerOrderID, @partnerCertificateID, @issuerOrderID, @completedDatetime));
+		}
+
+		public static IQueryEnd USP_SSL_UPDATE_REPLACE_STATUS(this IStoredProcedureHolder<NamecheapCoreContext> holder, int? @certificateID, bool? @isReplaceSuccess, decimal? @partnerOrderID, string @status, string @statusDesc, decimal? @partnerCertificateID, decimal? @issuerOrderID, DateTime? @completedDatetime, DateTime? @expiredDatetime)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_SSL_UPDATE_REPLACE_STATUS(@certificateID, @isReplaceSuccess, @partnerOrderID, @status, @statusDesc, @partnerCertificateID, @issuerOrderID, @completedDatetime, @expiredDatetime));
+		}
+
+		public static IQueryEnd USP_SSL_UPDATE_STATUS(this IStoredProcedureHolder<NamecheapCoreContext> holder, decimal? @certificateID, string @username, string @status, string @statusDesc, DateTime? @expiryDate, DateTime? @issueDate, bool? @isUpdateExpiryDate, bool? @isUpdateIssueDate)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_SSL_UPDATE_STATUS(@certificateID, @username, @status, @statusDesc, @expiryDate, @issueDate, @isUpdateExpiryDate, @isUpdateIssueDate));
+		}
+
+		public static IQueryEnd USP_SSL_UPDATE_STATUS_WITH_LOCK(this IStoredProcedureHolder<NamecheapCoreContext> holder, decimal? @certificateID, string @username, string @status, string @statusDesc)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_SSL_UPDATE_STATUS_WITH_LOCK(@certificateID, @username, @status, @statusDesc));
+		}
+
+		public static IQueryEnd USP_SSL_UPGRADED_USING_FUNDS(this IStoredProcedureHolder<NamecheapCoreContext> holder, decimal? @certificateId, string @username, string @actionIp)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_SSL_UPGRADED_USING_FUNDS(@certificateId, @username, @actionIp));
+		}
+
+		public static IQueryEnd USP_SSL_VALIDATE_CERTIFICATE(this IStoredProcedureHolder<NamecheapCoreContext> holder, int? @certificateID, string @username)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_SSL_VALIDATE_CERTIFICATE(@certificateID, @username));
+		}
+
+		public static IQueryEnd USP_SSL_VALIDATE_INITIALIZE(this IStoredProcedureHolder<NamecheapCoreContext> holder, decimal? @certificateID, string @username)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_SSL_VALIDATE_INITIALIZE(@certificateID, @username));
+		}
+
+		public static IQueryEnd usp_SSLCertificateGetActivationDate(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @CertificateId)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.usp_SSLCertificateGetActivationDate(@CertificateId));
+		}
+
+		public static IQueryEnd usp_SslCertificateGetNotes(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @CertificateId)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.usp_SslCertificateGetNotes(@CertificateId));
+		}
+
+		public static IQueryEnd usp_SSLCertificateSaveActivationDate(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @CertificateId, DateTime? @ActivationDate)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.usp_SSLCertificateSaveActivationDate(@CertificateId, @ActivationDate));
+		}
+
+		public static IQueryEnd usp_SslCertificateSaveNotes(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @CertificateId, string @Notes)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.usp_SslCertificateSaveNotes(@CertificateId, @Notes));
+		}
+
+		public static IQueryEnd USP_STORE_WG_FROM_MULTIPLE(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @sDomainName, string @sBatchID, string @sWGStatus)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_STORE_WG_FROM_MULTIPLE(@sDomainName, @sBatchID, @sWGStatus));
+		}
+
+		public static IQueryEnd USP_TRANSACTION_FOR_ADDFUNDS(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @userName, string @transactionType, decimal? @associatedOrderId, string @paymentSource, decimal? @ccInitialAmount, string @orderRefId, string @ccLast4, string @ccNameOnCard, string @orderZip, string @orderIp, string @requestForm, int? @errNumber, string @errDesc)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_TRANSACTION_FOR_ADDFUNDS(@userName, @transactionType, @associatedOrderId, @paymentSource, @ccInitialAmount, @orderRefId, @ccLast4, @ccNameOnCard, @orderZip, @orderIp, @requestForm, @errNumber, @errDesc));
+		}
+
+		public static IQueryEnd USP_TRANSFER_LOG_RESUBMIT_LOCKED_STATUS(this IStoredProcedureHolder<NamecheapCoreContext> holder, int? @transferID, string @status)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_TRANSFER_LOG_RESUBMIT_LOCKED_STATUS(@transferID, @status));
+		}
+
+		public static IQueryEnd USP_TRANSFER_REFRESH_STATUS(this IStoredProcedureHolder<NamecheapCoreContext> holder, long? @transferId, string @enomStatusId, string @enomStatusDesc, string @trasnferOrderDetailId, bool? @isAutoRefresh)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_TRANSFER_REFRESH_STATUS(@transferId, @enomStatusId, @enomStatusDesc, @trasnferOrderDetailId, @isAutoRefresh));
+		}
+
+		public static IQueryEnd USP_TRANSFER_RESUBMIT(this IStoredProcedureHolder<NamecheapCoreContext> holder, int? @transferId, DateTime? @orderDate, string @transferOrderId, string @transferOrderDetailId, string @statusId, string @statusDesc, string @requestIp)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_TRANSFER_RESUBMIT(@transferId, @orderDate, @transferOrderId, @transferOrderDetailId, @statusId, @statusDesc, @requestIp));
+		}
+
+		public static IQueryEnd usp_TransferUserFunds(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @UserName, decimal? @Amount, string @DestUserName, string @Comments)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.usp_TransferUserFunds(@UserName, @Amount, @DestUserName, @Comments));
+		}
+
+		public static IQueryEnd usp_TryResellerUpgrade(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @userName, string @type, bool? @doSignUp)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.usp_TryResellerUpgrade(@userName, @type, @doSignUp));
+		}
+
+		public static IQueryEnd USP_TWITTER_ADD_EDIT_QUESTION(this IStoredProcedureHolder<NamecheapCoreContext> holder, int? @AutoId, long? @QuestionStatusId, string @Question, string @Answer, string @Keyword1, string @Keyword2, string @Keyword3, string @Keyword4, string @Keyword5, DateTime? @Date, int? @Time, string @Mode, bool? @DoNotUpdateAnswer, DateTime? @ActualLiveDate)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_TWITTER_ADD_EDIT_QUESTION(@AutoId, @QuestionStatusId, @Question, @Answer, @Keyword1, @Keyword2, @Keyword3, @Keyword4, @Keyword5, @Date, @Time, @Mode, @DoNotUpdateAnswer, @ActualLiveDate));
+		}
+
+		public static IQueryEnd USP_TWITTER_ADD_REPLIES_AND_USERS(this IStoredProcedureHolder<NamecheapCoreContext> holder, long? @replyStatusId, long? @inReplyStatusId, int? @twitterUserId, string @text, string @name, string @screenName, string @profileImageUrl, DateTime? @replyTime, int? @contestID, string @source)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_TWITTER_ADD_REPLIES_AND_USERS(@replyStatusId, @inReplyStatusId, @twitterUserId, @text, @name, @screenName, @profileImageUrl, @replyTime, @contestID, @source));
+		}
+
+		public static IQueryEnd USP_TWITTER_CHECK_PREVIOUS_QUESTION_WINNERS(this IStoredProcedureHolder<NamecheapCoreContext> holder, long? @questionId)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_TWITTER_CHECK_PREVIOUS_QUESTION_WINNERS(@questionId));
+		}
+
+		public static IQueryEnd USP_TWITTER_CREDIT_WINNER(this IStoredProcedureHolder<NamecheapCoreContext> holder, int? @winnerAutoId)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_TWITTER_CREDIT_WINNER(@winnerAutoId));
+		}
+
+		public static IQueryEnd USP_TWITTER_FIX_GET_REPLIES_CONFIG(this IStoredProcedureHolder<NamecheapCoreContext> holder, int? @questionAutoID)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_TWITTER_FIX_GET_REPLIES_CONFIG(@questionAutoID));
+		}
+
+		public static IQueryEnd USP_TWITTER_GET_QA_FOR_WINNERS_PAGE(this IStoredProcedureHolder<NamecheapCoreContext> holder, DateTime? @QuestionDate, string @TwitterLinkTemplate, string @TwitterLinkTemplateUser, int? @ContestID)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_TWITTER_GET_QA_FOR_WINNERS_PAGE(@QuestionDate, @TwitterLinkTemplate, @TwitterLinkTemplateUser, @ContestID));
+		}
+
+		public static IQueryEnd USP_TWITTER_GET_QA_FOR_WINNERS_PAGE_JUN2009(this IStoredProcedureHolder<NamecheapCoreContext> holder, DateTime? @QuestionDate, string @TwitterLinkTemplate, string @TwitterLinkTemplateUser)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_TWITTER_GET_QA_FOR_WINNERS_PAGE_JUN2009(@QuestionDate, @TwitterLinkTemplate, @TwitterLinkTemplateUser));
+		}
+
+		public static IQueryEnd USP_TWITTER_GET_QUESTION_DETAILS(this IStoredProcedureHolder<NamecheapCoreContext> holder, int? @questionAutoId)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_TWITTER_GET_QUESTION_DETAILS(@questionAutoId));
+		}
+
+		public static IQueryEnd USP_TWITTER_GET_REPLY_CONFIG(this IStoredProcedureHolder<NamecheapCoreContext> holder)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_TWITTER_GET_REPLY_CONFIG());
+		}
+
+		public static IQueryEnd USP_TWITTER_GET_UNPROCESSED_LIST(this IStoredProcedureHolder<NamecheapCoreContext> holder)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_TWITTER_GET_UNPROCESSED_LIST());
+		}
+
+		public static IQueryEnd USP_TWITTER_MARK_CORRECT_OR_INCORRECT(this IStoredProcedureHolder<NamecheapCoreContext> holder, bool? @setChoice, long? @questionId, string @replyStatusIds)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_TWITTER_MARK_CORRECT_OR_INCORRECT(@setChoice, @questionId, @replyStatusIds));
+		}
+
+		public static IQueryEnd USP_TWITTER_PICK_WINNERS(this IStoredProcedureHolder<NamecheapCoreContext> holder, long? @questionId, bool? @pickPendingWinners, bool? @repickAllWinners)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_TWITTER_PICK_WINNERS(@questionId, @pickPendingWinners, @repickAllWinners));
+		}
+
+		public static IQueryEnd USP_TWITTER_PICK_WINNERS_TO_CONFIRM(this IStoredProcedureHolder<NamecheapCoreContext> holder, long? @questionId)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_TWITTER_PICK_WINNERS_TO_CONFIRM(@questionId));
+		}
+
+		public static IQueryEnd USP_TWITTER_PROCESS_REPLY(this IStoredProcedureHolder<NamecheapCoreContext> holder, long? @replyStatusID)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_TWITTER_PROCESS_REPLY(@replyStatusID));
+		}
+
+		public static IQueryEnd USP_TWITTER_QUESTION_LIST(this IStoredProcedureHolder<NamecheapCoreContext> holder, bool? @CurrentOrAll, string @SearchTerm, string @SortBy, string @Order, int? @Page, int? @PageSize, bool? @filterByQuestionId)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_TWITTER_QUESTION_LIST(@CurrentOrAll, @SearchTerm, @SortBy, @Order, @Page, @PageSize, @filterByQuestionId));
+		}
+
+		public static IQueryEnd USP_TWITTER_REPICK_WINNERS_BY_IGNORING_OLD_WINNERS(this IStoredProcedureHolder<NamecheapCoreContext> holder, long? @questionId)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_TWITTER_REPICK_WINNERS_BY_IGNORING_OLD_WINNERS(@questionId));
+		}
+
+		public static IQueryEnd USP_TWITTER_TOP_SCORERS(this IStoredProcedureHolder<NamecheapCoreContext> holder, int? @contestID)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_TWITTER_TOP_SCORERS(@contestID));
+		}
+
+		public static IQueryEnd USP_TWITTER_TOP_SCORERS_JUN2009(this IStoredProcedureHolder<NamecheapCoreContext> holder)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_TWITTER_TOP_SCORERS_JUN2009());
+		}
+
+		public static IQueryEnd USP_TWITTER_UPDATE_QUESTION_ID(this IStoredProcedureHolder<NamecheapCoreContext> holder, long? @inReplyStatusId, long? @replyStatusId)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_TWITTER_UPDATE_QUESTION_ID(@inReplyStatusId, @replyStatusId));
+		}
+
+		public static IQueryEnd USP_TWITTER_USER_BAN_OR_UNBANNED(this IStoredProcedureHolder<NamecheapCoreContext> holder, int? @twitterUserId, bool? @logType, string @description, string @logBy, string @loggedByIp)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_TWITTER_USER_BAN_OR_UNBANNED(@twitterUserId, @logType, @description, @logBy, @loggedByIp));
+		}
+
+		public static IQueryEnd USP_TWITTER_USER_UNLINK(this IStoredProcedureHolder<NamecheapCoreContext> holder, int? @twitterUserId, string @description, string @logBy, string @namecheapUserName)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_TWITTER_USER_UNLINK(@twitterUserId, @description, @logBy, @namecheapUserName));
+		}
+
+		public static IQueryEnd USP_UNALLOT_WHOISGUARD(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @DomainName)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_UNALLOT_WHOISGUARD(@DomainName));
+		}
+
+		public static IQueryEnd USP_UPDATE_ATTRIBUTE_GROUP_SEQ_NO(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @attributeOrGroup, string @data)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_UPDATE_ATTRIBUTE_GROUP_SEQ_NO(@attributeOrGroup, @data));
+		}
+
+		public static IQueryEnd USP_UPDATE_AUTO_RENEW_STATUS(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @IPV_DomainName, int? @IPV_DomainRenew, int? @IPV_WGRenew, int? @IPV_POP3Renew)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_UPDATE_AUTO_RENEW_STATUS(@IPV_DomainName, @IPV_DomainRenew, @IPV_WGRenew, @IPV_POP3Renew));
+		}
+
+		public static IQueryEnd USP_UPDATE_CART_PRICING_ON_LOGIN(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @IPV_Reg_ID, string @IPV_User_Name, string @IPV_Promotion_Code)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_UPDATE_CART_PRICING_ON_LOGIN(@IPV_Reg_ID, @IPV_User_Name, @IPV_Promotion_Code));
+		}
+
+		public static IQueryEnd USP_UPDATE_FUNDS_REQUEST_STATUS_AND_TRANSACTION_ENTRY(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @tokenId, string @userName, string @status, decimal? @actualAmount, DateTime? @lastUpdatedDateTime, string @submittedIp, string @TransactionType, int? @associateOrderId, string @paymentsource, decimal? @cc_intial_amount, string @order_ref_Id, DateTime? @start_date_time, string @cc_last4, string @cc_name_on_card, string @order_zip, string @order_Ip)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_UPDATE_FUNDS_REQUEST_STATUS_AND_TRANSACTION_ENTRY(@tokenId, @userName, @status, @actualAmount, @lastUpdatedDateTime, @submittedIp, @TransactionType, @associateOrderId, @paymentsource, @cc_intial_amount, @order_ref_Id, @start_date_time, @cc_last4, @cc_name_on_card, @order_zip, @order_Ip));
+		}
+
+		public static IQueryEnd USP_UPDATE_HOSTING_PROVIDER_DETAILS(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @ModernbillId, string @UbersmithId, string @newProvider)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_UPDATE_HOSTING_PROVIDER_DETAILS(@ModernbillId, @UbersmithId, @newProvider));
+		}
+
+		public static IQueryEnd USP_UPDATE_LOG_ACTIONSTATUS(this IStoredProcedureHolder<NamecheapCoreContext> holder, int? @orderId, string @refId, string @sld, string @tld, string @actionId, bool? @actionSuccess, string @errNumber, string @errDesc, string @enomRawData, string @logErrorNumber, string @logErrDesc)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_UPDATE_LOG_ACTIONSTATUS(@orderId, @refId, @sld, @tld, @actionId, @actionSuccess, @errNumber, @errDesc, @enomRawData, @logErrorNumber, @logErrDesc));
+		}
+
+		public static IQueryEnd USP_UPDATE_LOG_SECURITY(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @auto_ids, string @delemiter)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_UPDATE_LOG_SECURITY(@auto_ids, @delemiter));
+		}
+
+		public static IQueryEnd USP_UPDATE_SSL_RENEWALMAIL_UNSUBSCRIBE_FLAG(this IStoredProcedureHolder<NamecheapCoreContext> holder, int? @certificateId)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_UPDATE_SSL_RENEWALMAIL_UNSUBSCRIBE_FLAG(@certificateId));
+		}
+
+		public static IQueryEnd USP_UPDATE_TRANSACTION_STATUS_AND_ADD_FUNDS(this IStoredProcedureHolder<NamecheapCoreContext> holder, decimal? @transactionId, string @ccOrderId, string @ccTransId, string @ccStatus, string @orderError, string @rawData, string @UserName, decimal? @ProcessAmount, string @Transaction_Type)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_UPDATE_TRANSACTION_STATUS_AND_ADD_FUNDS(@transactionId, @ccOrderId, @ccTransId, @ccStatus, @orderError, @rawData, @UserName, @ProcessAmount, @Transaction_Type));
+		}
+
+		public static IQueryEnd USP_UPDATE_TRANSACTION_STATUS_AND_PROCESS_FUNDS(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @UserName, decimal? @Transaction_ID, string @CC_Status, bool? @Completed_YN, DateTime? @EndDate, string @FundTransactionType, decimal? @ProcessAmount)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_UPDATE_TRANSACTION_STATUS_AND_PROCESS_FUNDS(@UserName, @Transaction_ID, @CC_Status, @Completed_YN, @EndDate, @FundTransactionType, @ProcessAmount));
+		}
+
+		public static IQueryEnd USP_UPDATE_TRANSFER_QUEUE_WITH_PROMOTION_DETAILS(this IStoredProcedureHolder<NamecheapCoreContext> holder, decimal? @TransferID, decimal? @parentOrderItemId, decimal? @orderItemId)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_UPDATE_TRANSFER_QUEUE_WITH_PROMOTION_DETAILS(@TransferID, @parentOrderItemId, @orderItemId));
+		}
+
+		public static IQueryEnd USP_UPDATE_USER_LOGIN(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @userName, string @newSessionId, string @oldSessionId)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_UPDATE_USER_LOGIN(@userName, @newSessionId, @oldSessionId));
+		}
+
+		public static IQueryEnd USP_UPDATE_UserSettings(this IStoredProcedureHolder<NamecheapCoreContext> holder, Guid? @timeZoneId, string @email, string @phone, string @userName)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_UPDATE_UserSettings(@timeZoneId, @email, @phone, @userName));
+		}
+
+		public static IQueryEnd USP_UPDATE_WG_EMAIL_QUEUE(this IStoredProcedureHolder<NamecheapCoreContext> holder, decimal? @EmailQueueID)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_UPDATE_WG_EMAIL_QUEUE(@EmailQueueID));
+		}
+
+		public static IQueryEnd usp_UpdateAndAddToCanceledPaymentQueue(this IStoredProcedureHolder<NamecheapCoreContext> holder, decimal? @transactionId, string @currentStatus, string @newStatus)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.usp_UpdateAndAddToCanceledPaymentQueue(@transactionId, @currentStatus, @newStatus));
+		}
+
+		public static IQueryEnd usp_UpdateCancelRefundFlag(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @userName, decimal? @transactionId, bool? @cancelByRefundYN, string @ccStatus)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.usp_UpdateCancelRefundFlag(@userName, @transactionId, @cancelByRefundYN, @ccStatus));
+		}
+
+		public static IQueryEnd usp_UpdateCardAutoRenewForUser(this IStoredProcedureHolder<NamecheapCoreContext> holder, Guid? @creditCardId, string @userName, bool? @isAutoRenew)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.usp_UpdateCardAutoRenewForUser(@creditCardId, @userName, @isAutoRenew));
+		}
+
+		public static IQueryEnd usp_UpdateCCTransactionDetails(this IStoredProcedureHolder<NamecheapCoreContext> holder, decimal? @transactionId, bool? @completedYN, string @ccStatus, string @ccLast4, string @ccNameOnCard, string @ccOrderId, string @ccTransId, string @errInfo, string @orderError, string @paymentProviderStatus, string @rawData, string @ccFirst4)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.usp_UpdateCCTransactionDetails(@transactionId, @completedYN, @ccStatus, @ccLast4, @ccNameOnCard, @ccOrderId, @ccTransId, @errInfo, @orderError, @paymentProviderStatus, @rawData, @ccFirst4));
+		}
+
+		public static IQueryEnd usp_UpdateConfigUserCountForFreeHosting(this IStoredProcedureHolder<NamecheapCoreContext> holder, long? @UserCount)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.usp_UpdateConfigUserCountForFreeHosting(@UserCount));
+		}
+
+		public static IQueryEnd usp_UpdateOrderDetailsWithParentOrderItemId(this IStoredProcedureHolder<NamecheapCoreContext> holder, long? @shoppingCartProcessId, decimal? @orderId)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.usp_UpdateOrderDetailsWithParentOrderItemId(@shoppingCartProcessId, @orderId));
+		}
+
+		public static IQueryEnd usp_UpdateOrderEmailOneTimeSentFlag(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @userName)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.usp_UpdateOrderEmailOneTimeSentFlag(@userName));
+		}
+
+		public static IQueryEnd usp_UpdateOrderIdsForTldPromotionCheck(this IStoredProcedureHolder<NamecheapCoreContext> holder, decimal? @orderId)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.usp_UpdateOrderIdsForTldPromotionCheck(@orderId));
+		}
+
+		public static IQueryEnd usp_UpdateOrderItemsActionStatus(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @OrderXml, string @OrderRefID)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.usp_UpdateOrderItemsActionStatus(@OrderXml, @OrderRefID));
+		}
+
+		public static IQueryEnd usp_UpdatePaypalPendingTrack(this IStoredProcedureHolder<NamecheapCoreContext> holder, decimal? @transactionId, string @paymentStatus, bool? @refundedYN, string @refundedTransID)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.usp_UpdatePaypalPendingTrack(@transactionId, @paymentStatus, @refundedYN, @refundedTransID));
+		}
+
+		public static IQueryEnd usp_UpdatePaypalTransactionDetails(this IStoredProcedureHolder<NamecheapCoreContext> holder, decimal? @transactionId, bool? @completedYN, string @ccStatus, string @ccTransId, string @payerEmail, decimal? @ccInitialAmount, string @errInfo, string @orderError, string @paymentProviderStatus, string @paypalPendingReason)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.usp_UpdatePaypalTransactionDetails(@transactionId, @completedYN, @ccStatus, @ccTransId, @payerEmail, @ccInitialAmount, @errInfo, @orderError, @paymentProviderStatus, @paypalPendingReason));
+		}
+
+		public static IQueryEnd usp_UpdateRawDataOnFraudCheck(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @rawData, string @providerToken, bool? @fromAdminFlag)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.usp_UpdateRawDataOnFraudCheck(@rawData, @providerToken, @fromAdminFlag));
+		}
+
+		public static IQueryEnd usp_UpdateResellerUpgradationSentMailFlag(this IStoredProcedureHolder<NamecheapCoreContext> holder, long? @autoId)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.usp_UpdateResellerUpgradationSentMailFlag(@autoId));
+		}
+
+		public static IQueryEnd usp_UpdateServiceProviderRRDetails(this IStoredProcedureHolder<NamecheapCoreContext> holder, int? @providerId, int? @providerrrId, string @host, string @recordType, string @data, int? @priority, string @serverDescription, bool? @isActive)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.usp_UpdateServiceProviderRRDetails(@providerId, @providerrrId, @host, @recordType, @data, @priority, @serverDescription, @isActive));
+		}
+
+		public static IQueryEnd usp_UpdateTransactionStatus(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @userName, decimal? @transactionId, string @ccstatus, string @paymentProviderStatus)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.usp_UpdateTransactionStatus(@userName, @transactionId, @ccstatus, @paymentProviderStatus));
+		}
+
+		public static IQueryEnd usp_UpdateUserExpireDomainDetails(this IStoredProcedureHolder<NamecheapCoreContext> holder, int? @DomainStatusAutoId, string @DomainName, DateTime? @RegistryOldExpireDateTime, DateTime? @RegistryNewExpireDateTime, string @AdminUserName, string @AdminIp, string @InternalComments, bool? @UserRenewalFlag, bool? @InternalRenewalFlag, string @InternalActionType, long? @EnomOrderId, string @LogInfo)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.usp_UpdateUserExpireDomainDetails(@DomainStatusAutoId, @DomainName, @RegistryOldExpireDateTime, @RegistryNewExpireDateTime, @AdminUserName, @AdminIp, @InternalComments, @UserRenewalFlag, @InternalRenewalFlag, @InternalActionType, @EnomOrderId, @LogInfo));
+		}
+
+		public static IQueryEnd usp_UpdateUserExpireDomainLog(this IStoredProcedureHolder<NamecheapCoreContext> holder, int? @DomainStatusAutoId, string @LogInfo)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.usp_UpdateUserExpireDomainLog(@DomainStatusAutoId, @LogInfo));
+		}
+
+		public static IQueryEnd usp_UpdateUserLogin(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @userName, string @oldSessionId, string @newSessionId)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.usp_UpdateUserLogin(@userName, @oldSessionId, @newSessionId));
+		}
+
+		public static IQueryEnd usp_UpdateUserSupportPinDetails(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @UserName, string @supportPin, string @adminUserName, string @type, string @Ip, string @comment)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.usp_UpdateUserSupportPinDetails(@UserName, @supportPin, @adminUserName, @type, @Ip, @comment));
+		}
+
+		public static IQueryEnd USP_UpdateUserSupportVerificationStatus(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @username, string @supportPin, string @clientIp)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_UpdateUserSupportVerificationStatus(@username, @supportPin, @clientIp));
+		}
+
+		public static IQueryEnd USP_USER_ADD_REMOVE_FUNDS(this IStoredProcedureHolder<NamecheapCoreContext> holder, bool? @IPB_Validate_Only_YN, string @IPV_User_Name, decimal? @IPD_Amount, string @IPV_Transaction_Type, string @IPV_Payment_Source, decimal? @IPN_Associated_Order_ID, string @IPV_Payer_EMail, string @IPV_Order_RefID, string @IPV_CC_Order_ID, string @IPV_Comments, string @IPV_CC_Trans_ID)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_USER_ADD_REMOVE_FUNDS(@IPB_Validate_Only_YN, @IPV_User_Name, @IPD_Amount, @IPV_Transaction_Type, @IPV_Payment_Source, @IPN_Associated_Order_ID, @IPV_Payer_EMail, @IPV_Order_RefID, @IPV_CC_Order_ID, @IPV_Comments, @IPV_CC_Trans_ID));
+		}
+
+		public static IQueryEnd USP_USER_ADD_REMOVE_FUNDS2(this IStoredProcedureHolder<NamecheapCoreContext> holder, bool? @IPB_Validate_Only_YN, string @IPV_User_Name, decimal? @IPD_Amount, string @IPV_Transaction_Type, string @IPV_Payment_Source, decimal? @IPN_Associated_Order_ID, string @IPV_Payer_EMail, string @IPV_Order_RefID, string @IPV_CC_Order_ID, string @IPV_Comments, string @IPV_CC_Trans_ID, int? @IPN_TransactionID, int? @IPN_RelatedTransaction_ID, bool? @IPB_ReturnRecordSet, decimal? @LD_Error, string @ReturnStatus, string @ReturnDescription, int? @transactionIdOutput, string @userIpForCreatingTransaction, string @IPV_CC_Last4, string @IPV_CC_Name_On_Card, bool? @BlockNegativeBalanceAfterPayment)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_USER_ADD_REMOVE_FUNDS2(@IPB_Validate_Only_YN, @IPV_User_Name, @IPD_Amount, @IPV_Transaction_Type, @IPV_Payment_Source, @IPN_Associated_Order_ID, @IPV_Payer_EMail, @IPV_Order_RefID, @IPV_CC_Order_ID, @IPV_Comments, @IPV_CC_Trans_ID, @IPN_TransactionID, @IPN_RelatedTransaction_ID, @IPB_ReturnRecordSet, @LD_Error, @ReturnStatus, @ReturnDescription, @transactionIdOutput, @userIpForCreatingTransaction, @IPV_CC_Last4, @IPV_CC_Name_On_Card, @BlockNegativeBalanceAfterPayment));
+		}
+
+		public static IQueryEnd USP_USER_CHECK_TWITTER_ID_EXIST(this IStoredProcedureHolder<NamecheapCoreContext> holder, int? @twitterUserID)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_USER_CHECK_TWITTER_ID_EXIST(@twitterUserID));
+		}
+
+		public static IQueryEnd USP_USER_CLEAR_SESSION(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @refId)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_USER_CLEAR_SESSION(@refId));
+		}
+
+		public static IQueryEnd USP_USER_DEVICE_CREATE(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @userName, string @deviceId, string @deviceType)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_USER_DEVICE_CREATE(@userName, @deviceId, @deviceType));
+		}
+
+		public static IQueryEnd USP_USER_DEVICE_DELETE(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @deviceId)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_USER_DEVICE_DELETE(@deviceId));
+		}
+
+		public static IQueryEnd USP_USER_DEVICE_REGISTER(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @deviceId)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_USER_DEVICE_REGISTER(@deviceId));
+		}
+
+		public static IQueryEnd USP_USER_GET_ID(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @userName)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_USER_GET_ID(@userName));
+		}
+
+		public static IQueryEnd USP_USER_GET_TWITTER_ACCOUNT_STATUS(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @userName)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_USER_GET_TWITTER_ACCOUNT_STATUS(@userName));
+		}
+
+		public static IQueryEnd USP_USER_SET_LOGIN_SECURITY_SETTINGS(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @IPV_UserName, string @IP)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_USER_SET_LOGIN_SECURITY_SETTINGS(@IPV_UserName, @IP));
+		}
+
+		public static IQueryEnd USP_USER_SET_TWITTER_VALIDATION(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @userName, string @twitterScreenName, int? @twitterUserID, string @validationCode, string @alternateValidationCode)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_USER_SET_TWITTER_VALIDATION(@userName, @twitterScreenName, @twitterUserID, @validationCode, @alternateValidationCode));
+		}
+
+		public static IQueryEnd USP_USER_TWITTER_VALIDATE_CODE(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @userName, string @validationCode)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_USER_TWITTER_VALIDATE_CODE(@userName, @validationCode));
+		}
+
+		public static IQueryEnd USP_USER_UPDATE_TWITTER_INFO(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @userName, string @twitterScreenName, string @twitterName, string @profileImageUrl)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_USER_UPDATE_TWITTER_INFO(@userName, @twitterScreenName, @twitterName, @profileImageUrl));
+		}
+
+		public static IQueryEnd USP_USER_VALIDATE_PASSWORD(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @userName, string @password, string @passwordNoCase)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_USER_VALIDATE_PASSWORD(@userName, @password, @passwordNoCase));
+		}
+
+		public static IQueryEnd USP_VALIDATE_ADMIN_USER(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @AdminUsername)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_VALIDATE_ADMIN_USER(@AdminUsername));
+		}
+
+		public static IQueryEnd USP_VALIDATE_TLD(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @TLD_Name)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_VALIDATE_TLD(@TLD_Name));
+		}
+
+		public static IQueryEnd USP_VALIDATE_USER(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @username)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_VALIDATE_USER(@username));
+		}
+
+		public static IQueryEnd USP_VALIDATE_VOUCHER_CODE(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @code, string @voucherType)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_VALIDATE_VOUCHER_CODE(@code, @voucherType));
+		}
+
+		public static IQueryEnd usp_ValidateRichContentRenew(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @userName, int? @packId)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.usp_ValidateRichContentRenew(@userName, @packId));
+		}
+
+		public static IQueryEnd USP_WBL_GET_DETAILS_BY_DOMAINNAME(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @domainName)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_WBL_GET_DETAILS_BY_DOMAINNAME(@domainName));
+		}
+
+		public static IQueryEnd USP_WBL_GET_LIST(this IStoredProcedureHolder<NamecheapCoreContext> holder, int? @userId, string @IPV_Search_Term, decimal? @IPN_Category_ID, string @SortBy, string @Order, int? @Page, int? @PageSize, bool? @ReturnAllRows)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_WBL_GET_LIST(@userId, @IPV_Search_Term, @IPN_Category_ID, @SortBy, @Order, @Page, @PageSize, @ReturnAllRows));
+		}
+
+		public static IQueryEnd USP_WBL_PUSH(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @domainName, string @userName, string @pushType, string @targetUserName)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_WBL_PUSH(@domainName, @userName, @pushType, @targetUserName));
+		}
+
+		public static IQueryEnd USP_WBL_UPDATE_EXPDATE_AND_ID(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @domainName, DateTime? @expDate, long? @enomWBLId)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_WBL_UPDATE_EXPDATE_AND_ID(@domainName, @expDate, @enomWBLId));
+		}
+
+		public static IQueryEnd USP_WG_DISCARD_FOR_DELETED_DOMAIN(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @IPV_DomainName)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_WG_DISCARD_FOR_DELETED_DOMAIN(@IPV_DomainName));
+		}
+
+		public static IQueryEnd USP_WG_PURCHASE_AND_AUTOMATIC_ENABLE(this IStoredProcedureHolder<NamecheapCoreContext> holder, decimal? @Transfer_id, string @IPV_UserName, string @IPV_Option1, string @IPV_Option2, string @IPV_BatchId)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_WG_PURCHASE_AND_AUTOMATIC_ENABLE(@Transfer_id, @IPV_UserName, @IPV_Option1, @IPV_Option2, @IPV_BatchId));
+		}
+
+		public static IQueryEnd USP_WHOISGUARD_ALLOT(this IStoredProcedureHolder<NamecheapCoreContext> holder, decimal? @nWGID, string @sDomain, string @ForwardToEmail, string @RegistrantFirstName, string @RegistrantLastName, string @RegistrantJobTitle, string @RegistrantOrganizationName, string @RegistrantAddress1, string @RegistrantAddress2, string @RegistrantCity, string @RegistrantStateProvince, string @RegistrantStateProvinceChoice, string @RegistrantPostalCode, string @RegistrantCountry, string @RegistrantPhone, string @RegistrantFax, string @RegistrantEmailAddress, string @AdminFirstName, string @AdminLastName, string @AdminJobTitle, string @AdminOrganizationName, string @AdminAddress1, string @AdminAddress2, string @AdminCity, string @AdminStateProvince, string @AdminStateProvinceChoice, string @AdminPostalCode, string @AdminCountry, string @AdminPhone, string @AdminFax, string @AdminEmailAddress, string @TechFirstName, string @TechLastName, string @TechJobTitle, string @TechOrganizationName, string @TechAddress1, string @TechAddress2, string @TechCity, string @TechStateProvince, string @TechStateProvinceChoice, string @TechPostalCode, string @TechCountry, string @TechPhone, string @TechFax, string @TechEmailAddress, string @AuxBillingFirstName, string @AuxBillingLastName, string @AuxBillingJobTitle, string @AuxBillingOrganizationName, string @AuxBillingAddress1, string @AuxBillingAddress2, string @AuxBillingCity, string @AuxBillingStateProvince, string @AuxBillingStateProvinceChoice, string @AuxBillingPostalCode, string @AuxBillingCountry, string @AuxBillingPhone, string @AuxBillingFax, string @AuxBillingEmailAddress, string @RegistrantNexus, string @RegistrantNexusCountry, string @RegistrantPurpose, string @COUKLegalType, string @COUKCompanyID, string @ORGUKLegalType, string @ORGUKCompanyID, string @RegistrantPhoneext, string @AdminPhoneext, string @TechPhoneext, string @AuxBillingPhoneext, string @COUKRegisteredFor, string @COUKRegOptOut, string @ORGUKRegisteredFor, string @ORGUKRegOptOut, string @EUAdrLang, string @MEUKLegalType, string @MEUKCompanyID, string @MEUKRegisteredFor, string @MEUKRegOptOut, string @CIRA_Legal_Type, string @CIRA_Whois_Display, string @CIRA_Agreement_Value, string @CIRA_Agreement_Version, string @CIRA_Language, string @ASIACCLocality, string @ASIALocalityCity, string @ASIALocalitySP, string @ASIALegalEntityType, string @ASIAIdentform, string @ASIAIdentNumber, string @ASIAOtherleType, string @ASIAOtherIdentForm, string @XXXMemberID, bool? @XXXResolving)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_WHOISGUARD_ALLOT(@nWGID, @sDomain, @ForwardToEmail, @RegistrantFirstName, @RegistrantLastName, @RegistrantJobTitle, @RegistrantOrganizationName, @RegistrantAddress1, @RegistrantAddress2, @RegistrantCity, @RegistrantStateProvince, @RegistrantStateProvinceChoice, @RegistrantPostalCode, @RegistrantCountry, @RegistrantPhone, @RegistrantFax, @RegistrantEmailAddress, @AdminFirstName, @AdminLastName, @AdminJobTitle, @AdminOrganizationName, @AdminAddress1, @AdminAddress2, @AdminCity, @AdminStateProvince, @AdminStateProvinceChoice, @AdminPostalCode, @AdminCountry, @AdminPhone, @AdminFax, @AdminEmailAddress, @TechFirstName, @TechLastName, @TechJobTitle, @TechOrganizationName, @TechAddress1, @TechAddress2, @TechCity, @TechStateProvince, @TechStateProvinceChoice, @TechPostalCode, @TechCountry, @TechPhone, @TechFax, @TechEmailAddress, @AuxBillingFirstName, @AuxBillingLastName, @AuxBillingJobTitle, @AuxBillingOrganizationName, @AuxBillingAddress1, @AuxBillingAddress2, @AuxBillingCity, @AuxBillingStateProvince, @AuxBillingStateProvinceChoice, @AuxBillingPostalCode, @AuxBillingCountry, @AuxBillingPhone, @AuxBillingFax, @AuxBillingEmailAddress, @RegistrantNexus, @RegistrantNexusCountry, @RegistrantPurpose, @COUKLegalType, @COUKCompanyID, @ORGUKLegalType, @ORGUKCompanyID, @RegistrantPhoneext, @AdminPhoneext, @TechPhoneext, @AuxBillingPhoneext, @COUKRegisteredFor, @COUKRegOptOut, @ORGUKRegisteredFor, @ORGUKRegOptOut, @EUAdrLang, @MEUKLegalType, @MEUKCompanyID, @MEUKRegisteredFor, @MEUKRegOptOut, @CIRA_Legal_Type, @CIRA_Whois_Display, @CIRA_Agreement_Value, @CIRA_Agreement_Version, @CIRA_Language, @ASIACCLocality, @ASIALocalityCity, @ASIALocalitySP, @ASIALegalEntityType, @ASIAIdentform, @ASIAIdentNumber, @ASIAOtherleType, @ASIAOtherIdentForm, @XXXMemberID, @XXXResolving));
+		}
+
+		public static IQueryEnd USP_WHOISGUARD_INITIALIZE(this IStoredProcedureHolder<NamecheapCoreContext> holder, int? @id, decimal? @userID)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_WHOISGUARD_INITIALIZE(@id, @userID));
+		}
+
+		public static IQueryEnd uspAdhocDomainAdminDeleteReport(this IStoredProcedureHolder<NamecheapCoreContext> holder, DateTime? @StartDate, DateTime? @EndDate, string @UserName)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.uspAdhocDomainAdminDeleteReport(@StartDate, @EndDate, @UserName));
+		}
+
+		public static IQueryEnd uspAdminAddVoucherForTemplateMonster(this IStoredProcedureHolder<NamecheapCoreContext> holder, int? @Number_Of_Vouchers, DateTime? @ExpirationDate, string @AddedBy, string @ProductName)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.uspAdminAddVoucherForTemplateMonster(@Number_Of_Vouchers, @ExpirationDate, @AddedBy, @ProductName));
+		}
+
+		public static IQueryEnd uspApiGetDomainInfoForSync(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @domainname)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.uspApiGetDomainInfoForSync(@domainname));
+		}
+
+		public static IQueryEnd uspGetDomainProvider(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @tld, string @action, decimal? @userID)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.uspGetDomainProvider(@tld, @action, @userID));
+		}
+
+		public static IQueryEnd uspGetDomainProviderForDomainList(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @domainList, string @providerType)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.uspGetDomainProviderForDomainList(@domainList, @providerType));
+		}
+
+		public static IQueryEnd uspGetOxAddonDetails(this IStoredProcedureHolder<NamecheapCoreContext> holder, int? @SubscriptionId, string @ActionId, int? @Duration, string @DurationType)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.uspGetOxAddonDetails(@SubscriptionId, @ActionId, @Duration, @DurationType));
+		}
+
+		public static IQueryEnd uspIsMarketPlaceIdValidToOrderId(this IStoredProcedureHolder<NamecheapCoreContext> holder, decimal? @mpId, int? @orderId, bool? @returnFlag)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.uspIsMarketPlaceIdValidToOrderId(@mpId, @orderId, @returnFlag));
+		}
+
+		public static IQueryEnd uspLogRenewalEmails(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @DomainName, string @UserName, string @EMail, string @DaysToExpire, DateTime? @CurrentDate, string @MailStatus, string @Type)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.uspLogRenewalEmails(@DomainName, @UserName, @EMail, @DaysToExpire, @CurrentDate, @MailStatus, @Type));
+		}
+
+		public static IQueryEnd uspSerivcePurchaseBuyDomainMarketplaceDomain(this IStoredProcedureHolder<NamecheapCoreContext> holder, decimal? @listingId, string @sBuyerUserName, string @orderRefId, decimal? @orderId, decimal? @salePrice, long? @partnerOrderId)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.uspSerivcePurchaseBuyDomainMarketplaceDomain(@listingId, @sBuyerUserName, @orderRefId, @orderId, @salePrice, @partnerOrderId));
+		}
+
+		public static IQueryEnd uspSetOXAutoRenew(this IStoredProcedureHolder<NamecheapCoreContext> holder, int? @SubscriptionId, bool? @IsAutoRenew)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.uspSetOXAutoRenew(@SubscriptionId, @IsAutoRenew));
+		}
+
+		public static IQueryEnd uspTemp_GetRERegisterOrdersToSetRegistrarLock(this IStoredProcedureHolder<NamecheapCoreContext> holder, int? @minsToIgnoreResentOrders)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.uspTemp_GetRERegisterOrdersToSetRegistrarLock(@minsToIgnoreResentOrders));
+		}
+
+		public static IQueryEnd uspTemp_UpdateSetRegistrarLockTrack(this IStoredProcedureHolder<NamecheapCoreContext> holder, decimal? @LastProcessedOrderId)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.uspTemp_UpdateSetRegistrarLockTrack(@LastProcessedOrderId));
+		}
+
+		public static IQueryEnd uspUpdateMarketPlaceStatusAndLogForBuyDomain(this IStoredProcedureHolder<NamecheapCoreContext> holder, decimal? @mpId, string @status, string @userName, string @ip, string @userType, string @description, bool? @isTransferCompletedCallBackReceived)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.uspUpdateMarketPlaceStatusAndLogForBuyDomain(@mpId, @status, @userName, @ip, @userType, @description, @isTransferCompletedCallBackReceived));
+		}
+
+		public static IQueryEnd uspUpdateMpIdToTransferRequestForBuyDomain(this IStoredProcedureHolder<NamecheapCoreContext> holder, decimal? @transferId, decimal? @mpId)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.uspUpdateMpIdToTransferRequestForBuyDomain(@transferId, @mpId));
+		}
+
+		public static IQueryEnd uspUpdateOnePagerSubscriptionStatus(this IStoredProcedureHolder<NamecheapCoreContext> holder, decimal? @OnePagerSubscriptionId, string @adminUserName, string @comments, string @adminComments)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.uspUpdateOnePagerSubscriptionStatus(@OnePagerSubscriptionId, @adminUserName, @comments, @adminComments));
+		}
+
+		public static IQueryEnd usp_AdminGetDepartmentDetails(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @departmentName)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.usp_AdminGetDepartmentDetails(@departmentName));
+		}
+
+		public static IQueryEnd usp_AdminGetMessagePriorities(this IStoredProcedureHolder<NamecheapCoreContext> holder)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.usp_AdminGetMessagePriorities());
+		}
+
+		public static IQueryEnd usp_AdminGetMessageStatuses(this IStoredProcedureHolder<NamecheapCoreContext> holder)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.usp_AdminGetMessageStatuses());
+		}
+
+		public static IQueryEnd usp_AdminGetMessageTypes(this IStoredProcedureHolder<NamecheapCoreContext> holder)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.usp_AdminGetMessageTypes());
+		}
+
+		public static IQueryEnd USP_GetLogMessageComments(this IStoredProcedureHolder<NamecheapCoreContext> holder, int? @messageId)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_GetLogMessageComments(@messageId));
+		}
+
+		public static IQueryEnd USP_GetLogMessages(this IStoredProcedureHolder<NamecheapCoreContext> holder, DateTime? @startDate, DateTime? @endDate, string @departments, int? @messageType, int? @messageStatus, int? @isRead, int? @pageNumber, int? @pageSize)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_GetLogMessages(@startDate, @endDate, @departments, @messageType, @messageStatus, @isRead, @pageNumber, @pageSize));
+		}
+
+		public static IQueryEnd USP_InsertLogMessageComments(this IStoredProcedureHolder<NamecheapCoreContext> holder, int? @messageId, string @commentsBy, DateTime? @commentedDate, string @comments)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_InsertLogMessageComments(@messageId, @commentsBy, @commentedDate, @comments));
+		}
+
+		public static IQueryEnd USP_InsertLogMessages(this IStoredProcedureHolder<NamecheapCoreContext> holder, int? @isRead, string @department, string @message, string @messageDescription, string @messageFrom, string @messageFrom2, string @messageShort, string @messageStatus, string @messageType, string @priority, DateTime? @startDateTime)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_InsertLogMessages(@isRead, @department, @message, @messageDescription, @messageFrom, @messageFrom2, @messageShort, @messageStatus, @messageType, @priority, @startDateTime));
+		}
+
+		public static IQueryEnd USP_NoOfReadUnreadMessages(this IStoredProcedureHolder<NamecheapCoreContext> holder, int? @isRead, string @departments)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_NoOfReadUnreadMessages(@isRead, @departments));
+		}
+
+		public static IQueryEnd USP_SelectLogMessage(this IStoredProcedureHolder<NamecheapCoreContext> holder, int? @messageId)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_SelectLogMessage(@messageId));
+		}
+
+		public static IQueryEnd USP_UpdateLogMessageActionStatus(this IStoredProcedureHolder<NamecheapCoreContext> holder, int? @messageId, int? @isRead, string @actionBy)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_UpdateLogMessageActionStatus(@messageId, @isRead, @actionBy));
+		}
+
+		public static IQueryEnd USP_UpdateLogMessageDepartment(this IStoredProcedureHolder<NamecheapCoreContext> holder, int? @messageId, string @department, string @actionBy)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_UpdateLogMessageDepartment(@messageId, @department, @actionBy));
+		}
+
+		public static IQueryEnd USP_UpdateLogMessageMessageStatus(this IStoredProcedureHolder<NamecheapCoreContext> holder, int? @messageId, string @messageStatus, string @actionBy)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_UpdateLogMessageMessageStatus(@messageId, @messageStatus, @actionBy));
+		}
+
+		public static IQueryEnd USP_UpdateLogMessagePriority(this IStoredProcedureHolder<NamecheapCoreContext> holder, int? @messageId, string @priority, string @actionBy)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_UpdateLogMessagePriority(@messageId, @priority, @actionBy));
+		}
+
+		public static IQueryEnd usp_Admin_ActionLog_CreateRecord(this IStoredProcedureHolder<NamecheapCoreContext> holder, DateTime? @Date, byte? @ActionId, short? @EntityId, string @Actor, string @MailBox, string @Plan, string @Domain, string @User, string @OldValue, string @NewValue, string @Comment, short? @ActionResultSatus)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.usp_Admin_ActionLog_CreateRecord(@Date, @ActionId, @EntityId, @Actor, @MailBox, @Plan, @Domain, @User, @OldValue, @NewValue, @Comment, @ActionResultSatus));
+		}
+
+		public static IQueryEnd usp_Admin_ActionLog_Request(this IStoredProcedureHolder<NamecheapCoreContext> holder, DateTime? @DateFrom, DateTime? @DateTo, byte? @ActionId, short? @EntityId, string @Actor, bool? @ActorWholeString, string @MailBox, bool? @MailBoxWholeString, string @Plan, bool? @PlanWholeString, string @Domain, bool? @DomainWholeString, string @User, bool? @UserWholeString, string @OldValue, bool? @OldValueWholeString, string @NewValue, bool? @NewValueWholeString, string @Comment, bool? @CommentWholeString, short? @ActionResultSatus, int? @Page, int? @PageSize, bool? @SortDirection, string @SortColumn)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.usp_Admin_ActionLog_Request(@DateFrom, @DateTo, @ActionId, @EntityId, @Actor, @ActorWholeString, @MailBox, @MailBoxWholeString, @Plan, @PlanWholeString, @Domain, @DomainWholeString, @User, @UserWholeString, @OldValue, @OldValueWholeString, @NewValue, @NewValueWholeString, @Comment, @CommentWholeString, @ActionResultSatus, @Page, @PageSize, @SortDirection, @SortColumn));
+		}
+
+		public static IQueryEnd usp_Admin_ActionsToEntities_GetList(this IStoredProcedureHolder<NamecheapCoreContext> holder)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.usp_Admin_ActionsToEntities_GetList());
+		}
+
+		public static IQueryEnd usp_ApiCommand_AddEvent(this IStoredProcedureHolder<NamecheapCoreContext> holder, Guid? @EventId, DateTime? @Date, string @CommandName, string @EventResult, string @UserName, string @CommandParameters, string @CommandResults, string @CommandErrors, string @Object, string @Action)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.usp_ApiCommand_AddEvent(@EventId, @Date, @CommandName, @EventResult, @UserName, @CommandParameters, @CommandResults, @CommandErrors, @Object, @Action));
+		}
+
+		public static IQueryEnd usp_ApiCommand_UpdateEvent(this IStoredProcedureHolder<NamecheapCoreContext> holder, Guid? @EventId, string @EventResult, string @CommandResults, string @CommandErrors)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.usp_ApiCommand_UpdateEvent(@EventId, @EventResult, @CommandResults, @CommandErrors));
+		}
+
+		public static IQueryEnd USP_Billing_GetCustomPriceLog(this IStoredProcedureHolder<NamecheapCoreContext> holder, int? @Page, int? @RecordsOnPage, string @DomainFilter, string @UserFilter, string @AdminFilter, int? @OrderFilter, string @ActionFilter, string @ItemFilter, bool? @CalculateRowsMode)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_Billing_GetCustomPriceLog(@Page, @RecordsOnPage, @DomainFilter, @UserFilter, @AdminFilter, @OrderFilter, @ActionFilter, @ItemFilter, @CalculateRowsMode));
+		}
+
+		public static IQueryEnd USP_Billing_SaveCustomPriceLog(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @AdminUserName, string @DomainName, string @Item, string @ActionType, decimal? @SupposedPrice, decimal? @CustomPrice, string @Comments, string @UserName, DateTime? @LogDate, long? @OrderId)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_Billing_SaveCustomPriceLog(@AdminUserName, @DomainName, @Item, @ActionType, @SupposedPrice, @CustomPrice, @Comments, @UserName, @LogDate, @OrderId));
+		}
+
+		public static IQueryEnd usp_RepositoryMethod_AddEvent(this IStoredProcedureHolder<NamecheapCoreContext> holder, DateTime? @Date, string @EventResult, string @EventInitiator, Guid? @ApiCommandEventId, string @RepositoryMethodName, string @RepositoryName, string @CallParameters, string @CallResults, string @CallErrors, string @PreviousData, bool? @ContainsPreviousData, string @Domain)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.usp_RepositoryMethod_AddEvent(@Date, @EventResult, @EventInitiator, @ApiCommandEventId, @RepositoryMethodName, @RepositoryName, @CallParameters, @CallResults, @CallErrors, @PreviousData, @ContainsPreviousData, @Domain));
+		}
+
+		public static IQueryEnd ManageUpdateMailboxFeatureSetLog(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @userName, string @domain, int? @planId, int? @contextId, string @contextAdminUserName, string @contextAdminPassword, string @ownerUserName, string @errorMessage, int? @action, int? @isSuccess, int? @Page, int? @pageSize)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.ManageUpdateMailboxFeatureSetLog(@userName, @domain, @planId, @contextId, @contextAdminUserName, @contextAdminPassword, @ownerUserName, @errorMessage, @action, @isSuccess, @Page, @pageSize));
+		}
+
+		public static IQueryEnd OXReportGeneral(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @status, int? @TrialSubscriptionCount, int? @PaidSubscriptionCount, int? @TrialMailboxCount, int? @PaidMailboxCount, int? @TotalSubscriptionCount, int? @TotalMailboxCount)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.OXReportGeneral(@status, @TrialSubscriptionCount, @PaidSubscriptionCount, @TrialMailboxCount, @PaidMailboxCount, @TotalSubscriptionCount, @TotalMailboxCount));
+		}
+
+		public static IQueryEnd OXReportKPISubscription(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @status, int? @TrialGraceSubscriptions, int? @PaidGraceSubscriptions, int? @TrialRedemptionSubscriptions, int? @PaidRedemptionSubscriptions, int? @TrialSubscriptionNotActivated, int? @PaidSubscriptionNotActivated, int? @TrialSubscriptionActive, int? @PaidSubscriptionActive, int? @TrialSubscriptionDisable, int? @PaidSubscriptionDisable, int? @TotalSubscriptions, int? @TotalTrialSubscriptions, int? @TotalPaidSubscriptions, int? @TotalGraceSubscriptions, int? @TotalRedemptionSubscriptions, int? @TotalSubscriptionNotActivated, int? @TotalSubscriptionActive, int? @TotalSubscriptionDisable)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.OXReportKPISubscription(@status, @TrialGraceSubscriptions, @PaidGraceSubscriptions, @TrialRedemptionSubscriptions, @PaidRedemptionSubscriptions, @TrialSubscriptionNotActivated, @PaidSubscriptionNotActivated, @TrialSubscriptionActive, @PaidSubscriptionActive, @TrialSubscriptionDisable, @PaidSubscriptionDisable, @TotalSubscriptions, @TotalTrialSubscriptions, @TotalPaidSubscriptions, @TotalGraceSubscriptions, @TotalRedemptionSubscriptions, @TotalSubscriptionNotActivated, @TotalSubscriptionActive, @TotalSubscriptionDisable));
+		}
+
+		public static IQueryEnd OXReportProductStatistic(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @status, int? @Month, int? @Year)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.OXReportProductStatistic(@status, @Month, @Year));
+		}
+
+		public static IQueryEnd OXReportProductStatisticToPlans(this IStoredProcedureHolder<NamecheapCoreContext> holder)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.OXReportProductStatisticToPlans());
+		}
+
+		public static IQueryEnd OXReportPurchaseSubscription(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @status, int? @Month, int? @Year, int? @AddTrialSubscription1Month, int? @AddTrialSubscription1Year, int? @AddPaidSubscription1Month, int? @AddPaidSubscription1Year, int? @AddTrialMailbox1Month, int? @AddTrialMailbox1Year, int? @AddPaidMailbox1Month, int? @AddPaidMailbox1Year, int? @TotalSubscription1Month, int? @TotalSubscription1Year, int? @TotalMailbox1Month, int? @TotalMailbox1Year)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.OXReportPurchaseSubscription(@status, @Month, @Year, @AddTrialSubscription1Month, @AddTrialSubscription1Year, @AddPaidSubscription1Month, @AddPaidSubscription1Year, @AddTrialMailbox1Month, @AddTrialMailbox1Year, @AddPaidMailbox1Month, @AddPaidMailbox1Year, @TotalSubscription1Month, @TotalSubscription1Year, @TotalMailbox1Month, @TotalMailbox1Year));
+		}
+
+		public static IQueryEnd OXReportPurchaseSubscriptionPeriod(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @status, DateTime? @FirstDate, DateTime? @LastDate, int? @AddTrialSubscription, int? @AddPaidSubscription, int? @AddTrialMailbox, int? @AddPaidMailbox, int? @TotalSubscription, int? @TotalMailbox)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.OXReportPurchaseSubscriptionPeriod(@status, @FirstDate, @LastDate, @AddTrialSubscription, @AddPaidSubscription, @AddTrialMailbox, @AddPaidMailbox, @TotalSubscription, @TotalMailbox));
+		}
+
+		public static IQueryEnd OXReportSubscriptionMailboxes(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @status, string @domain, int? @page, int? @pageSize)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.OXReportSubscriptionMailboxes(@status, @domain, @page, @pageSize));
+		}
+
+		public static IQueryEnd rep_Domain_Delete(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @domainName)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.rep_Domain_Delete(@domainName));
+		}
+
+		public static IQueryEnd rep_Domain_Delete_Redemption(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @domainName)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.rep_Domain_Delete_Redemption(@domainName));
+		}
+
+		public static IQueryEnd rep_Mailbox_ChangeDomainBulk(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @mailboxesXml, string @newDomain, string @oldDomain)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.rep_Mailbox_ChangeDomainBulk(@mailboxesXml, @newDomain, @oldDomain));
+		}
+
+		public static IQueryEnd rep_Mailbox_ChangePwd(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @mailboxName, string @newPass)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.rep_Mailbox_ChangePwd(@mailboxName, @newPass));
+		}
+
+		public static IQueryEnd rep_Mailbox_DeleteAlias(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @alias)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.rep_Mailbox_DeleteAlias(@alias));
+		}
+
+		public static IQueryEnd rep_Mailbox_DeleteBulk(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @mailboxesXml, string @domain)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.rep_Mailbox_DeleteBulk(@mailboxesXml, @domain));
+		}
+
+		public static IQueryEnd rep_Mailbox_Insert(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @mail, string @domain, string @password)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.rep_Mailbox_Insert(@mail, @domain, @password));
+		}
+
+		public static IQueryEnd rep_Mailbox_InsertAlias(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @mailbox, string @alias, string @domain)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.rep_Mailbox_InsertAlias(@mailbox, @alias, @domain));
+		}
+
+		public static IQueryEnd rep_Mailbox_InsertBulk(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @mailboxesXml, string @domain)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.rep_Mailbox_InsertBulk(@mailboxesXml, @domain));
+		}
+
+		public static IQueryEnd rep_Mailbox_MailChangeStateBulk(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @mailboxesXml, string @domain, bool? @active)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.rep_Mailbox_MailChangeStateBulk(@mailboxesXml, @domain, @active));
+		}
+
+		public static IQueryEnd rep_Mailbox_MailChangeStateBulkCommon(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @MailStateXml)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.rep_Mailbox_MailChangeStateBulkCommon(@MailStateXml));
+		}
+
+		public static IQueryEnd rep_Mailbox_Recovery(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @mail, string @domain, string @password, int? @quota, byte? @isActive)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.rep_Mailbox_Recovery(@mail, @domain, @password, @quota, @isActive));
+		}
+
+		public static IQueryEnd rep_Mailbox_SetActivity(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @UserName, bool? @UserDisabled, int? @SubscriptionStatus)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.rep_Mailbox_SetActivity(@UserName, @UserDisabled, @SubscriptionStatus));
+		}
+
+		public static IQueryEnd rep_Mailbox_SetCatchAll(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @mailbox, bool? @isEnabled)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.rep_Mailbox_SetCatchAll(@mailbox, @isEnabled));
+		}
+
+		public static IQueryEnd rep_Mailbox_SetQuota(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @mailbox, int? @quota)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.rep_Mailbox_SetQuota(@mailbox, @quota));
+		}
+
+		public static IQueryEnd rep_Mailbox_UpdateAlias(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @mailbox, string @domain, string @oldAlias, string @newAlias)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.rep_Mailbox_UpdateAlias(@mailbox, @domain, @oldAlias, @newAlias));
+		}
+
+		public static IQueryEnd Scheduler_Control(this IStoredProcedureHolder<NamecheapCoreContext> holder, bool? @isStop)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.Scheduler_Control(@isStop));
+		}
+
+		public static IQueryEnd Scheduler_GetMonitor(this IStoredProcedureHolder<NamecheapCoreContext> holder)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.Scheduler_GetMonitor());
+		}
+
+		public static IQueryEnd Scheduler_GetParameter(this IStoredProcedureHolder<NamecheapCoreContext> holder)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.Scheduler_GetParameter());
+		}
+
+		public static IQueryEnd Scheduler_GetStatus(this IStoredProcedureHolder<NamecheapCoreContext> holder, bool? @isRunning, DateTime? @lastTimeRunning, string @appVersion)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.Scheduler_GetStatus(@isRunning, @lastTimeRunning, @appVersion));
+		}
+
+		public static IQueryEnd Scheduler_SetMonitor(this IStoredProcedureHolder<NamecheapCoreContext> holder, bool? @isRunning, DateTime? @lastTimeRunning, string @appVersion)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.Scheduler_SetMonitor(@isRunning, @lastTimeRunning, @appVersion));
+		}
+
+		public static IQueryEnd Scheduler_UpdateParameter(this IStoredProcedureHolder<NamecheapCoreContext> holder, bool? @isUseTimeWorkParameter, string @metaTimeZone, string @startTime, string @endTime, bool? @isUseOperationParameter, int? @timeOutOperation, int? @countStepOperation)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.Scheduler_UpdateParameter(@isUseTimeWorkParameter, @metaTimeZone, @startTime, @endTime, @isUseOperationParameter, @timeOutOperation, @countStepOperation));
+		}
+
+		public static IQueryEnd usp_Admin_AdminSubscriptions_Create(this IStoredProcedureHolder<NamecheapCoreContext> holder, int? @PlanId, int? @ContextId, int? @DaysToExpire, decimal? @OrderId, decimal? @OrderItemId, int? @BillingCycle, string @OwnerUserName, bool? @IsTrialPlan)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.usp_Admin_AdminSubscriptions_Create(@PlanId, @ContextId, @DaysToExpire, @OrderId, @OrderItemId, @BillingCycle, @OwnerUserName, @IsTrialPlan));
+		}
+
+		public static IQueryEnd usp_Admin_Contexts_GetMailboxes(this IStoredProcedureHolder<NamecheapCoreContext> holder, int? @ContextId, string @OwnerUserName)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.usp_Admin_Contexts_GetMailboxes(@ContextId, @OwnerUserName));
+		}
+
+		public static IQueryEnd usp_Admin_FeatureSets_CompareTo(this IStoredProcedureHolder<NamecheapCoreContext> holder, int? @PlanSourceId, int? @PlanDestinationId)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.usp_Admin_FeatureSets_CompareTo(@PlanSourceId, @PlanDestinationId));
+		}
+
+		public static IQueryEnd usp_Admin_GetAuthorizationEmail(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @Domain, string @OwnerUserName, string @AuthorizationEmail)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.usp_Admin_GetAuthorizationEmail(@Domain, @OwnerUserName, @AuthorizationEmail));
+		}
+
+		public static IQueryEnd usp_Admin_GetAuthorizationKey(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @Domain, string @OwnerUserName, string @AuthorizationKey)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.usp_Admin_GetAuthorizationKey(@Domain, @OwnerUserName, @AuthorizationKey));
+		}
+
+		public static IQueryEnd usp_Admin_GetContext(this IStoredProcedureHolder<NamecheapCoreContext> holder, int? @ContextId)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.usp_Admin_GetContext(@ContextId));
+		}
+
+		public static IQueryEnd usp_Admin_GetDomainIMAPFolderSetting(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @domainName)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.usp_Admin_GetDomainIMAPFolderSetting(@domainName));
+		}
+
+		public static IQueryEnd usp_Admin_GetIMAPSetting(this IStoredProcedureHolder<NamecheapCoreContext> holder, bool? @IsCurrent)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.usp_Admin_GetIMAPSetting(@IsCurrent));
+		}
+
+		public static IQueryEnd usp_Admin_GetMailboxesOfPlan(this IStoredProcedureHolder<NamecheapCoreContext> holder, int? @PlanId)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.usp_Admin_GetMailboxesOfPlan(@PlanId));
+		}
+
+		public static IQueryEnd usp_Admin_GetMailboxesOfPlanWithPages(this IStoredProcedureHolder<NamecheapCoreContext> holder, int? @PlanId, int? @pageIndex, int? @pageSize)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.usp_Admin_GetMailboxesOfPlanWithPages(@PlanId, @pageIndex, @pageSize));
+		}
+
+		public static IQueryEnd usp_Admin_GetMailboxIMAPFolderSetting(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @userName)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.usp_Admin_GetMailboxIMAPFolderSetting(@userName));
+		}
+
+		public static IQueryEnd usp_Admin_IMAPSetting_Update(this IStoredProcedureHolder<NamecheapCoreContext> holder, int? @Id, string @HomeDir, string @Host, int? @Port, string @RootUser, bool? @IsCurrent, byte? @Action)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.usp_Admin_IMAPSetting_Update(@Id, @HomeDir, @Host, @Port, @RootUser, @IsCurrent, @Action));
+		}
+
+		public static IQueryEnd usp_Admin_Mails_LockBulk(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @mailBoxesXml, int? @subscriptionId, string @OwnerUserName)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.usp_Admin_Mails_LockBulk(@mailBoxesXml, @subscriptionId, @OwnerUserName));
+		}
+
+		public static IQueryEnd usp_Admin_Mails_TransferBulk(this IStoredProcedureHolder<NamecheapCoreContext> holder, int? @TargetSubscriptionId, string @MailboxesList, string @OwnerUserName)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.usp_Admin_Mails_TransferBulk(@TargetSubscriptionId, @MailboxesList, @OwnerUserName));
+		}
+
+		public static IQueryEnd usp_Admin_Plans_GetListWithInfo(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @keyword, bool? @activeOnly)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.usp_Admin_Plans_GetListWithInfo(@keyword, @activeOnly));
+		}
+
+		public static IQueryEnd usp_Admin_SetAuthorizationEmail(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @Domain, string @OwnerUserName, string @AuthorizationEmail)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.usp_Admin_SetAuthorizationEmail(@Domain, @OwnerUserName, @AuthorizationEmail));
+		}
+
+		public static IQueryEnd usp_Admin_SetAuthorizationEmailFailed(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @Domain, string @OwnerUserName)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.usp_Admin_SetAuthorizationEmailFailed(@Domain, @OwnerUserName));
+		}
+
+		public static IQueryEnd usp_Admin_Subscription_Downgrade(this IStoredProcedureHolder<NamecheapCoreContext> holder, int? @SubscriptionId, int? @newPlanId, string @OwnerUserName)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.usp_Admin_Subscription_Downgrade(@SubscriptionId, @newPlanId, @OwnerUserName));
+		}
+
+		public static IQueryEnd usp_Admin_Subscription_GetMailboxes(this IStoredProcedureHolder<NamecheapCoreContext> holder, int? @SubscriptionId, string @keyword, int? @Page, int? @pageSize, string @SortColumn, bool? @SortDirection, string @OwnerUserName)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.usp_Admin_Subscription_GetMailboxes(@SubscriptionId, @keyword, @Page, @pageSize, @SortColumn, @SortDirection, @OwnerUserName));
+		}
+
+		public static IQueryEnd usp_Admin_Subscription_Reactivate(this IStoredProcedureHolder<NamecheapCoreContext> holder, int? @SubscriptionId, string @OwnerUserName)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.usp_Admin_Subscription_Reactivate(@SubscriptionId, @OwnerUserName));
+		}
+
+		public static IQueryEnd usp_Admin_Subscription_Restore(this IStoredProcedureHolder<NamecheapCoreContext> holder, int? @SubscriptionId, int? @RenewYears, int? @RenewMonths, int? @RenewDays, string @OwnerUserName)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.usp_Admin_Subscription_Restore(@SubscriptionId, @RenewYears, @RenewMonths, @RenewDays, @OwnerUserName));
+		}
+
+		public static IQueryEnd usp_Admin_Subscription_SetExpDate(this IStoredProcedureHolder<NamecheapCoreContext> holder, int? @SubscriptionId, DateTime? @ExpirationDate, string @OwnerUserName, decimal? @OrderId, decimal? @OrderItemId, int? @BillingCycle)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.usp_Admin_Subscription_SetExpDate(@SubscriptionId, @ExpirationDate, @OwnerUserName, @OrderId, @OrderItemId, @BillingCycle));
+		}
+
+		public static IQueryEnd usp_Admin_Subscriptions_Activation(this IStoredProcedureHolder<NamecheapCoreContext> holder, int? @SubscriptionId, string @Domain, string @OwnerUserName)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.usp_Admin_Subscriptions_Activation(@SubscriptionId, @Domain, @OwnerUserName));
+		}
+
+		public static IQueryEnd usp_Admin_Subscriptions_ChangePlan(this IStoredProcedureHolder<NamecheapCoreContext> holder, int? @subscriptionId, int? @newPlanId, string @ownerUserName, int? @orderID, int? @typePaySource, string @ipAddress, decimal? @TotalToCharge)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.usp_Admin_Subscriptions_ChangePlan(@subscriptionId, @newPlanId, @ownerUserName, @orderID, @typePaySource, @ipAddress, @TotalToCharge));
+		}
+
+		public static IQueryEnd usp_Admin_Subscriptions_ContextChange(this IStoredProcedureHolder<NamecheapCoreContext> holder, int? @SubscriptionId, string @NewDomain, string @OwnerUserName)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.usp_Admin_Subscriptions_ContextChange(@SubscriptionId, @NewDomain, @OwnerUserName));
+		}
+
+		public static IQueryEnd usp_Admin_Subscriptions_Create(this IStoredProcedureHolder<NamecheapCoreContext> holder, int? @PlanId, int? @ContextId, int? @DaysToExpire, decimal? @OrderId, decimal? @OrderItemId, int? @BillingCycle, string @OwnerUserName, bool? @IsThirdPartyDomain, bool? @IsTrialPlan, bool? @IsAutoRenew, bool? @IsIntentionally)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.usp_Admin_Subscriptions_Create(@PlanId, @ContextId, @DaysToExpire, @OrderId, @OrderItemId, @BillingCycle, @OwnerUserName, @IsThirdPartyDomain, @IsTrialPlan, @IsAutoRenew, @IsIntentionally));
+		}
+
+		public static IQueryEnd USP_Admin_Subscriptions_DeleteExpired(this IStoredProcedureHolder<NamecheapCoreContext> holder, int? @DeleteExpiredDays, int? @countOperation)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_Admin_Subscriptions_DeleteExpired(@DeleteExpiredDays, @countOperation));
+		}
+
+		public static IQueryEnd USP_Admin_Subscriptions_DeleteRedemptions(this IStoredProcedureHolder<NamecheapCoreContext> holder, int? @DeleteRedemptionDays)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_Admin_Subscriptions_DeleteRedemptions(@DeleteRedemptionDays));
+		}
+
+		public static IQueryEnd usp_Admin_Subscriptions_DomainChange(this IStoredProcedureHolder<NamecheapCoreContext> holder, int? @SubscriptionId, string @NewDomain, string @OwnerUserName, bool? @IsNewContext, int? @ContextId)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.usp_Admin_Subscriptions_DomainChange(@SubscriptionId, @NewDomain, @OwnerUserName, @IsNewContext, @ContextId));
+		}
+
+		public static IQueryEnd usp_Admin_Subscriptions_GetContext(this IStoredProcedureHolder<NamecheapCoreContext> holder, int? @SubscriptionId)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.usp_Admin_Subscriptions_GetContext(@SubscriptionId));
+		}
+
+		public static IQueryEnd USP_Admin_Subscriptions_MoveToExpired(this IStoredProcedureHolder<NamecheapCoreContext> holder, int? @ExpiredStartDays, int? @countOperation)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_Admin_Subscriptions_MoveToExpired(@ExpiredStartDays, @countOperation));
+		}
+
+		public static IQueryEnd USP_Admin_Subscriptions_MoveToGrace(this IStoredProcedureHolder<NamecheapCoreContext> holder, int? @countOperation)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_Admin_Subscriptions_MoveToGrace(@countOperation));
+		}
+
+		public static IQueryEnd USP_Admin_Subscriptions_MoveToRedemption(this IStoredProcedureHolder<NamecheapCoreContext> holder, int? @RedemptionStartDays, int? @countOperation)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_Admin_Subscriptions_MoveToRedemption(@RedemptionStartDays, @countOperation));
+		}
+
+		public static IQueryEnd usp_Admin_Subscriptions_Transfer(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @Domain, string @OldOwnerUserName, string @NewOwnerUserName)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.usp_Admin_Subscriptions_Transfer(@Domain, @OldOwnerUserName, @NewOwnerUserName));
+		}
+
+		public static IQueryEnd usp_Admin_Subscriptions_Upgrade(this IStoredProcedureHolder<NamecheapCoreContext> holder, int? @SubscriptionId, int? @NewPlanId, string @OwnerUserName)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.usp_Admin_Subscriptions_Upgrade(@SubscriptionId, @NewPlanId, @OwnerUserName));
+		}
+
+		public static IQueryEnd usp_Admin_UserDomain_GetList(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @userName, bool? @isExclude)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.usp_Admin_UserDomain_GetList(@userName, @isExclude));
+		}
+
+		public static IQueryEnd usp_AdminBulkMailboxCreateThirdPartyDomain(this IStoredProcedureHolder<NamecheapCoreContext> holder, int? @SubscriptionId, string @mailBoxesXml, string @OwnerUserName, string @Domain)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.usp_AdminBulkMailboxCreateThirdPartyDomain(@SubscriptionId, @mailBoxesXml, @OwnerUserName, @Domain));
+		}
+
+		public static IQueryEnd usp_AdminChangeAdminContactTryCount(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @Domain, string @OwnerUserName)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.usp_AdminChangeAdminContactTryCount(@Domain, @OwnerUserName));
+		}
+
+		public static IQueryEnd usp_AdminContexts_FullGetInfo(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @Domain, string @OwnerUserName)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.usp_AdminContexts_FullGetInfo(@Domain, @OwnerUserName));
+		}
+
+		public static IQueryEnd usp_AdminContexts_FullGetInfoByNewThirdPartyDomain(this IStoredProcedureHolder<NamecheapCoreContext> holder, int? @countOperation)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.usp_AdminContexts_FullGetInfoByNewThirdPartyDomain(@countOperation));
+		}
+
+		public static IQueryEnd usp_AdminContexts_FullGetInfoByRecoveryContext(this IStoredProcedureHolder<NamecheapCoreContext> holder)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.usp_AdminContexts_FullGetInfoByRecoveryContext());
+		}
+
+		public static IQueryEnd usp_AdminContexts_GetPreRequisites(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @Domain, string @OwnerUserName, bool? @IsContextRequired, bool? @IsThirdPartyDomain)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.usp_AdminContexts_GetPreRequisites(@Domain, @OwnerUserName, @IsContextRequired, @IsThirdPartyDomain));
+		}
+
+		public static IQueryEnd USP_AdminContextsAdminCreate(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @OwnerUserName, string @Domain, bool? @Active, int? @OXquota, string @OXContextAdminUser, string @OXContextAdminPassword, bool? @IsThirdPartyDomain)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_AdminContextsAdminCreate(@OwnerUserName, @Domain, @Active, @OXquota, @OXContextAdminUser, @OXContextAdminPassword, @IsThirdPartyDomain));
+		}
+
+		public static IQueryEnd USP_AdminContextsCreate(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @OwnerUserName, string @Domain, bool? @Active, int? @OXquota, string @OXContextAdminUser, string @OXContextAdminPassword, bool? @IsThirdPartyDomain)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_AdminContextsCreate(@OwnerUserName, @Domain, @Active, @OXquota, @OXContextAdminUser, @OXContextAdminPassword, @IsThirdPartyDomain));
+		}
+
+		public static IQueryEnd usp_AdminContextsDelete(this IStoredProcedureHolder<NamecheapCoreContext> holder, int? @ContextId, string @domainName)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.usp_AdminContextsDelete(@ContextId, @domainName));
+		}
+
+		public static IQueryEnd usp_AdminContextsGetList(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @OwnerUserName, string @keyword, int? @page, int? @pageSize, string @SortColumn, bool? @SortDirection)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.usp_AdminContextsGetList(@OwnerUserName, @keyword, @page, @pageSize, @SortColumn, @SortDirection));
+		}
+
+		public static IQueryEnd usp_AdminDomainSetOXHost(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @host, string @recordType, string @recordSubType, string @data, byte? @priority, string @serverDescription, int? @action)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.usp_AdminDomainSetOXHost(@host, @recordType, @recordSubType, @data, @priority, @serverDescription, @action));
+		}
+
+		public static IQueryEnd USP_AdminDomainsGetList(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @OwnerUserName, string @keyword, int? @page, int? @pageSize, string @SortColumn, bool? @SortDirection)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_AdminDomainsGetList(@OwnerUserName, @keyword, @page, @pageSize, @SortColumn, @SortDirection));
+		}
+
+		public static IQueryEnd usp_AdminDomainSubscriptionGetList(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @userNameFilter, string @domainNameFilter, string @planNameFilter, string @status, int? @dateRange, DateTime? @startDate, DateTime? @endDate, int? @page, int? @pageSize, string @ownerUserName)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.usp_AdminDomainSubscriptionGetList(@userNameFilter, @domainNameFilter, @planNameFilter, @status, @dateRange, @startDate, @endDate, @page, @pageSize, @ownerUserName));
+		}
+
+		public static IQueryEnd usp_AdminMails_BulkCheck(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @mailboxesListXml, int? @subscriptionId, string @OwnerUserName, int? @mailboxesExcessSubscription)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.usp_AdminMails_BulkCheck(@mailboxesListXml, @subscriptionId, @OwnerUserName, @mailboxesExcessSubscription));
+		}
+
+		public static IQueryEnd usp_AdminMails_ChangePassword(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @OwnerUserName, string @mail, string @domain, string @newPassword)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.usp_AdminMails_ChangePassword(@OwnerUserName, @mail, @domain, @newPassword));
+		}
+
+		public static IQueryEnd usp_AdminMails_CheckMailboxActive(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @mailBoxesXml, int? @subscriptionId, string @OwnerUserName)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.usp_AdminMails_CheckMailboxActive(@mailBoxesXml, @subscriptionId, @OwnerUserName));
+		}
+
+		public static IQueryEnd usp_AdminMails_CreateBulk(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @mailBoxesXml, int? @subscriptionId, string @OwnerUserName)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.usp_AdminMails_CreateBulk(@mailBoxesXml, @subscriptionId, @OwnerUserName));
+		}
+
+		public static IQueryEnd usp_AdminMails_CreateBulk_OnlyAtCoredb(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @mailBoxesXml, int? @subscriptionId, string @OwnerUserName)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.usp_AdminMails_CreateBulk_OnlyAtCoredb(@mailBoxesXml, @subscriptionId, @OwnerUserName));
+		}
+
+		public static IQueryEnd usp_AdminMails_DeleteAlias(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @alias)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.usp_AdminMails_DeleteAlias(@alias));
+		}
+
+		public static IQueryEnd usp_AdminMails_DeleteBulk(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @mailBoxesXml, int? @subscriptionId, string @OwnerUserName)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.usp_AdminMails_DeleteBulk(@mailBoxesXml, @subscriptionId, @OwnerUserName));
+		}
+
+		public static IQueryEnd usp_AdminMails_GetAlias(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @mailbox)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.usp_AdminMails_GetAlias(@mailbox));
+		}
+
+		public static IQueryEnd usp_AdminMails_InsertAlias(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @mailbox, string @domain, string @alias)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.usp_AdminMails_InsertAlias(@mailbox, @domain, @alias));
+		}
+
+		public static IQueryEnd usp_AdminMails_SetQuota(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @mailBox, int? @subscriptionId, int? @quota, string @OwnerUserName)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.usp_AdminMails_SetQuota(@mailBox, @subscriptionId, @quota, @OwnerUserName));
+		}
+
+		public static IQueryEnd usp_AdminMails_UnlockBulk(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @mailBoxesXml, int? @subscriptionId, string @OwnerUserName)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.usp_AdminMails_UnlockBulk(@mailBoxesXml, @subscriptionId, @OwnerUserName));
+		}
+
+		public static IQueryEnd usp_AdminMails_UpdateAlias(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @mailbox, string @domain, string @oldAlias, string @newAlias)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.usp_AdminMails_UpdateAlias(@mailbox, @domain, @oldAlias, @newAlias));
+		}
+
+		public static IQueryEnd usp_AdminMailsGetContextInfo(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @OwnerUserName, string @MailboxName)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.usp_AdminMailsGetContextInfo(@OwnerUserName, @MailboxName));
+		}
+
+		public static IQueryEnd usp_AdminMailsGetList(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @AdminUser, int? @Page, int? @PageSize, string @UserName, string @Domain, string @OwnerUserName, string @PlanName, bool? @SearchByCreatedDate, DateTime? @CreateFilterStartDate, DateTime? @CreateFilterEndDate, bool? @isActive, bool? @isGrace, bool? @isRedemption, bool? @isDisabled)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.usp_AdminMailsGetList(@AdminUser, @Page, @PageSize, @UserName, @Domain, @OwnerUserName, @PlanName, @SearchByCreatedDate, @CreateFilterStartDate, @CreateFilterEndDate, @isActive, @isGrace, @isRedemption, @isDisabled));
+		}
+
+		public static IQueryEnd usp_AdminPlans_GetInfoBySubscriptionId(this IStoredProcedureHolder<NamecheapCoreContext> holder, int? @SubscriptionId, string @OwnerUserName)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.usp_AdminPlans_GetInfoBySubscriptionId(@SubscriptionId, @OwnerUserName));
+		}
+
+		public static IQueryEnd usp_AdminPlansCreate(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @name, string @description, int? @filestoreQuota, int? @mailboxDefaultQuota, int? @initialMailboxCount, string @featureSetsString)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.usp_AdminPlansCreate(@name, @description, @filestoreQuota, @mailboxDefaultQuota, @initialMailboxCount, @featureSetsString));
+		}
+
+		public static IQueryEnd usp_AdminPlansDelete(this IStoredProcedureHolder<NamecheapCoreContext> holder, int? @PlanId)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.usp_AdminPlansDelete(@PlanId));
+		}
+
+		public static IQueryEnd usp_AdminPlansGetInfo(this IStoredProcedureHolder<NamecheapCoreContext> holder, int? @PlanId)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.usp_AdminPlansGetInfo(@PlanId));
+		}
+
+		public static IQueryEnd USP_AdminPlansGetList(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @keyword, bool? @activeOnly)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_AdminPlansGetList(@keyword, @activeOnly));
+		}
+
+		public static IQueryEnd usp_AdminPlansModify(this IStoredProcedureHolder<NamecheapCoreContext> holder, int? @planId, string @description, int? @filestoreQuota, int? @mailboxDefaultQuota, int? @initialMailboxCount, string @featureSetsString)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.usp_AdminPlansModify(@planId, @description, @filestoreQuota, @mailboxDefaultQuota, @initialMailboxCount, @featureSetsString));
+		}
+
+		public static IQueryEnd usp_AdminPlansSetFeatureState(this IStoredProcedureHolder<NamecheapCoreContext> holder, int? @planId, string @featureName, bool? @state)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.usp_AdminPlansSetFeatureState(@planId, @featureName, @state));
+		}
+
+		public static IQueryEnd usp_AdminSubscriptionRenew(this IStoredProcedureHolder<NamecheapCoreContext> holder, int? @SubscriptionId, int? @RenewYears, int? @RenewMonths, int? @RenewDays, string @OwnerUserName, decimal? @OrderId, decimal? @OrderItemId, int? @BillingCycle)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.usp_AdminSubscriptionRenew(@SubscriptionId, @RenewYears, @RenewMonths, @RenewDays, @OwnerUserName, @OrderId, @OrderItemId, @BillingCycle));
+		}
+
+		public static IQueryEnd usp_AdminSubscriptionsChangeMailboxesCount(this IStoredProcedureHolder<NamecheapCoreContext> holder, int? @SubscriptionId, int? @MailboxesCount, string @CommandType, string @OwnerUserName, int? @ResultMailboxesCount, bool? @IgnoreQty)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.usp_AdminSubscriptionsChangeMailboxesCount(@SubscriptionId, @MailboxesCount, @CommandType, @OwnerUserName, @ResultMailboxesCount, @IgnoreQty));
+		}
+
+		public static IQueryEnd usp_AdminSubscriptionsGetContext(this IStoredProcedureHolder<NamecheapCoreContext> holder, int? @SubscriptionId, string @OwnerUserName)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.usp_AdminSubscriptionsGetContext(@SubscriptionId, @OwnerUserName));
+		}
+
+		public static IQueryEnd usp_AdminSubscriptionsGetInfo(this IStoredProcedureHolder<NamecheapCoreContext> holder, int? @SubscriptionId, string @OwnerUserName)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.usp_AdminSubscriptionsGetInfo(@SubscriptionId, @OwnerUserName));
+		}
+
+		public static IQueryEnd USP_AdminSubscriptionsGetList(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @domainNameFilter, string @ownerUserName)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_AdminSubscriptionsGetList(@domainNameFilter, @ownerUserName));
+		}
+
+		public static IQueryEnd usp_CheckLockForAbusePeriodSubscription(this IStoredProcedureHolder<NamecheapCoreContext> holder, int? @LockForAbuseDays, int? @countOperation)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.usp_CheckLockForAbusePeriodSubscription(@LockForAbuseDays, @countOperation));
+		}
+
+		public static IQueryEnd usp_CheckNotActivateSubscription(this IStoredProcedureHolder<NamecheapCoreContext> holder, int? @countOperation, int? @dateToCanceled)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.usp_CheckNotActivateSubscription(@countOperation, @dateToCanceled));
+		}
+
+		public static IQueryEnd usp_CheckRenewalPeriodSubscription(this IStoredProcedureHolder<NamecheapCoreContext> holder, int? @countOperation)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.usp_CheckRenewalPeriodSubscription(@countOperation));
+		}
+
+		public static IQueryEnd usp_CheckUserHasOXSubscriptions(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @username)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.usp_CheckUserHasOXSubscriptions(@username));
+		}
+
+		public static IQueryEnd usp_Contexts_Create(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @OwnerUserName, string @Domain, int? @OXquota, string @OXContextAdminUser, string @OXContextAdminPassword, bool? @IsThirdPartyDomain)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.usp_Contexts_Create(@OwnerUserName, @Domain, @OXquota, @OXContextAdminUser, @OXContextAdminPassword, @IsThirdPartyDomain));
+		}
+
+		public static IQueryEnd usp_Contexts_FullGetInfo(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @Domain, string @OwnerUserName)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.usp_Contexts_FullGetInfo(@Domain, @OwnerUserName));
+		}
+
+		public static IQueryEnd usp_Contexts_GetDomain(this IStoredProcedureHolder<NamecheapCoreContext> holder, int? @ContextId, string @OwnerUserName, string @domainName)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.usp_Contexts_GetDomain(@ContextId, @OwnerUserName, @domainName));
+		}
+
+		public static IQueryEnd usp_Contexts_GetInfo(this IStoredProcedureHolder<NamecheapCoreContext> holder, int? @ContextId)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.usp_Contexts_GetInfo(@ContextId));
+		}
+
+		public static IQueryEnd usp_Contexts_GetList(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @OwnerUserName, string @keyword, int? @page, int? @pageSize, string @SortColumn, bool? @SortDirection)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.usp_Contexts_GetList(@OwnerUserName, @keyword, @page, @pageSize, @SortColumn, @SortDirection));
+		}
+
+		public static IQueryEnd usp_Contexts_GetMailboxes(this IStoredProcedureHolder<NamecheapCoreContext> holder, int? @ContextId, string @OwnerUserName)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.usp_Contexts_GetMailboxes(@ContextId, @OwnerUserName));
+		}
+
+		public static IQueryEnd usp_Contexts_GetOXAdmin(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @OwnerUserName, int? @ContextId)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.usp_Contexts_GetOXAdmin(@OwnerUserName, @ContextId));
+		}
+
+		public static IQueryEnd usp_Contexts_GetPreRequisites(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @Domain, string @OwnerUserName, bool? @IsContextRequired, bool? @IsThirdPartyDomain)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.usp_Contexts_GetPreRequisites(@Domain, @OwnerUserName, @IsContextRequired, @IsThirdPartyDomain));
+		}
+
+		public static IQueryEnd usp_DeleteContextThirdPartyDomain(this IStoredProcedureHolder<NamecheapCoreContext> holder)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.usp_DeleteContextThirdPartyDomain());
+		}
+
+		public static IQueryEnd usp_DeleteHandledRecordFromUpdateMailboxFeatureSetTmp(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @mailbox)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.usp_DeleteHandledRecordFromUpdateMailboxFeatureSetTmp(@mailbox));
+		}
+
+		public static IQueryEnd usp_DomainHasSubscriptions(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @domainName, string @userName)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.usp_DomainHasSubscriptions(@domainName, @userName));
+		}
+
+		public static IQueryEnd usp_Domains_GetList(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @OwnerUserName, string @keyword, int? @page, int? @pageSize, string @SortColumn, bool? @SortDirection, bool? @isExpiredList)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.usp_Domains_GetList(@OwnerUserName, @keyword, @page, @pageSize, @SortColumn, @SortDirection, @isExpiredList));
+		}
+
+		public static IQueryEnd usp_EntityInfoCollect(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @EntityId, int? @EntityType)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.usp_EntityInfoCollect(@EntityId, @EntityType));
+		}
+
+		public static IQueryEnd usp_GetAuthorizationEmail(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @AuthorizationKey, string @OwnerUserName, string @AuthorizationEmail)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.usp_GetAuthorizationEmail(@AuthorizationKey, @OwnerUserName, @AuthorizationEmail));
+		}
+
+		public static IQueryEnd usp_GetHighPlanListToUserWithPricesCompare(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @currentPlanName)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.usp_GetHighPlanListToUserWithPricesCompare(@currentPlanName));
+		}
+
+		public static IQueryEnd USP_GetMailHostAliases(this IStoredProcedureHolder<NamecheapCoreContext> holder)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_GetMailHostAliases());
+		}
+
+		public static IQueryEnd usp_GetMaxFileStoreOfDomain(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @domain)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.usp_GetMaxFileStoreOfDomain(@domain));
+		}
+
+		public static IQueryEnd USP_GetSubscriptionPlanDetails(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @planName)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_GetSubscriptionPlanDetails(@planName));
+		}
+
+		public static IQueryEnd usp_GetUserData(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @userName)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.usp_GetUserData(@userName));
+		}
+
+		public static IQueryEnd usp_GetUserDataList(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @UserName, bool? @Except)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.usp_GetUserDataList(@UserName, @Except));
+		}
+
+		public static IQueryEnd usp_IncSendEmailTryCountSubscription(this IStoredProcedureHolder<NamecheapCoreContext> holder, int? @SubscriptionId)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.usp_IncSendEmailTryCountSubscription(@SubscriptionId));
+		}
+
+		public static IQueryEnd usp_Mailboxes_Delete_Pending(this IStoredProcedureHolder<NamecheapCoreContext> holder, int? @subscriptionId)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.usp_Mailboxes_Delete_Pending(@subscriptionId));
+		}
+
+		public static IQueryEnd usp_Mails_BulkCheck(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @mailboxesListXml, int? @subscriptionId, string @OwnerUserName, int? @mailboxesExcessSubscription)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.usp_Mails_BulkCheck(@mailboxesListXml, @subscriptionId, @OwnerUserName, @mailboxesExcessSubscription));
+		}
+
+		public static IQueryEnd usp_Mails_ChangePassword(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @OwnerUserName, string @mail, string @domain, string @newPassword)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.usp_Mails_ChangePassword(@OwnerUserName, @mail, @domain, @newPassword));
+		}
+
+		public static IQueryEnd usp_Mails_ChangeStateBulk(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @mailBoxesXml, int? @subscriptionId, bool? @UserDisable, string @OwnerUserName)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.usp_Mails_ChangeStateBulk(@mailBoxesXml, @subscriptionId, @UserDisable, @OwnerUserName));
+		}
+
+		public static IQueryEnd usp_Mails_Create(this IStoredProcedureHolder<NamecheapCoreContext> holder, int? @subscriptionId, string @OwnerUserName, string @mail, string @alias, string @catchalladdress, string @password, int? @createdId)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.usp_Mails_Create(@subscriptionId, @OwnerUserName, @mail, @alias, @catchalladdress, @password, @createdId));
+		}
+
+		public static IQueryEnd usp_Mails_Create_Pending(this IStoredProcedureHolder<NamecheapCoreContext> holder, int? @subscriptionId, string @OwnerUserName, string @mail, string @alias, string @catchalladdress, string @password, int? @createdId, int? @quota)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.usp_Mails_Create_Pending(@subscriptionId, @OwnerUserName, @mail, @alias, @catchalladdress, @password, @createdId, @quota));
+		}
+
+		public static IQueryEnd usp_Mails_CreateBulk(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @mailBoxesXml, int? @subscriptionId, string @OwnerUserName)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.usp_Mails_CreateBulk(@mailBoxesXml, @subscriptionId, @OwnerUserName));
+		}
+
+		public static IQueryEnd usp_Mails_DeleteAlias(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @alias)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.usp_Mails_DeleteAlias(@alias));
+		}
+
+		public static IQueryEnd usp_Mails_DeleteBulk(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @mailBoxesXml, int? @subscriptionId, string @OwnerUserName)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.usp_Mails_DeleteBulk(@mailBoxesXml, @subscriptionId, @OwnerUserName));
+		}
+
+		public static IQueryEnd usp_Mails_GetAlias(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @mailbox)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.usp_Mails_GetAlias(@mailbox));
+		}
+
+		public static IQueryEnd usp_Mails_GetContextInfo(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @OwnerUserName, string @MailboxName)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.usp_Mails_GetContextInfo(@OwnerUserName, @MailboxName));
+		}
+
+		public static IQueryEnd usp_Mails_GetInfo(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @MailboxName, string @OwnerUserName)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.usp_Mails_GetInfo(@MailboxName, @OwnerUserName));
+		}
+
+		public static IQueryEnd usp_Mails_GetLocalParts(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @MailboxesList, string @OwnerUserName)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.usp_Mails_GetLocalParts(@MailboxesList, @OwnerUserName));
+		}
+
+		public static IQueryEnd usp_Mails_GetMailboxStatus(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @mailbox)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.usp_Mails_GetMailboxStatus(@mailbox));
+		}
+
+		public static IQueryEnd usp_Mails_InsertAlias(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @mailbox, string @domain, string @alias)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.usp_Mails_InsertAlias(@mailbox, @domain, @alias));
+		}
+
+		public static IQueryEnd usp_Mails_Replication(this IStoredProcedureHolder<NamecheapCoreContext> holder)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.usp_Mails_Replication());
+		}
+
+		public static IQueryEnd usp_Mails_SetQuota(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @mailBox, int? @subscriptionId, int? @quota, string @OwnerUserName)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.usp_Mails_SetQuota(@mailBox, @subscriptionId, @quota, @OwnerUserName));
+		}
+
+		public static IQueryEnd usp_Mails_TransferBulk(this IStoredProcedureHolder<NamecheapCoreContext> holder, int? @TargetSubscriptionId, string @MailboxesList, string @OwnerUserName)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.usp_Mails_TransferBulk(@TargetSubscriptionId, @MailboxesList, @OwnerUserName));
+		}
+
+		public static IQueryEnd usp_Mails_UpdateAlias(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @mailbox, string @domain, string @oldAlias, string @newAlias)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.usp_Mails_UpdateAlias(@mailbox, @domain, @oldAlias, @newAlias));
+		}
+
+		public static IQueryEnd usp_Plans_GetInfo(this IStoredProcedureHolder<NamecheapCoreContext> holder, int? @PlanId)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.usp_Plans_GetInfo(@PlanId));
+		}
+
+		public static IQueryEnd usp_Plans_GetInfoBySubscriptionId(this IStoredProcedureHolder<NamecheapCoreContext> holder, int? @SubscriptionId, string @OwnerUserName)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.usp_Plans_GetInfoBySubscriptionId(@SubscriptionId, @OwnerUserName));
+		}
+
+		public static IQueryEnd usp_Plans_GetList(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @keyword, bool? @activeOnly)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.usp_Plans_GetList(@keyword, @activeOnly));
+		}
+
+		public static IQueryEnd usp_Plans_GetListForLog(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @keyword)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.usp_Plans_GetListForLog(@keyword));
+		}
+
+		public static IQueryEnd usp_Plans_GetListWithInfo(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @keyword, bool? @activeOnly)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.usp_Plans_GetListWithInfo(@keyword, @activeOnly));
+		}
+
+		public static IQueryEnd usp_Plans_SetFeaturesStateBulk(this IStoredProcedureHolder<NamecheapCoreContext> holder, int? @planId, string @featureSetsString, bool? @updateModifiedDate)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.usp_Plans_SetFeaturesStateBulk(@planId, @featureSetsString, @updateModifiedDate));
+		}
+
+		public static IQueryEnd Usp_Sch_ExpirationCheck(this IStoredProcedureHolder<NamecheapCoreContext> holder, int? @GracePeriod)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.Usp_Sch_ExpirationCheck(@GracePeriod));
+		}
+
+		public static IQueryEnd Usp_Sch_RedemptionCheck(this IStoredProcedureHolder<NamecheapCoreContext> holder, int? @GracePeriod, int? @RedemptionPeriod)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.Usp_Sch_RedemptionCheck(@GracePeriod, @RedemptionPeriod));
+		}
+
+		public static IQueryEnd usp_Subscription_GetInfo_ByContextId(this IStoredProcedureHolder<NamecheapCoreContext> holder, int? @contextId)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.usp_Subscription_GetInfo_ByContextId(@contextId));
+		}
+
+		public static IQueryEnd usp_Subscription_GetMailboxes(this IStoredProcedureHolder<NamecheapCoreContext> holder, int? @SubscriptionId, string @keyword, int? @Page, int? @pageSize, string @SortColumn, bool? @SortDirection, string @OwnerUserName)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.usp_Subscription_GetMailboxes(@SubscriptionId, @keyword, @Page, @pageSize, @SortColumn, @SortDirection, @OwnerUserName));
+		}
+
+		public static IQueryEnd usp_SubscriptionHistory_Insert(this IStoredProcedureHolder<NamecheapCoreContext> holder, int? @subscriptionId, byte? @oldStatus, byte? @newStatus, decimal? @oldOrderId, decimal? @newOrderId, DateTime? @changeDate)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.usp_SubscriptionHistory_Insert(@subscriptionId, @oldStatus, @newStatus, @oldOrderId, @newOrderId, @changeDate));
+		}
+
+		public static IQueryEnd usp_Subscriptions_Activation(this IStoredProcedureHolder<NamecheapCoreContext> holder, int? @ContextId, string @AuthorizationKey, string @OwnerUserName, string @Domain)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.usp_Subscriptions_Activation(@ContextId, @AuthorizationKey, @OwnerUserName, @Domain));
+		}
+
+		public static IQueryEnd usp_Subscriptions_Cancel(this IStoredProcedureHolder<NamecheapCoreContext> holder, int? @SubscriptionId)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.usp_Subscriptions_Cancel(@SubscriptionId));
+		}
+
+		public static IQueryEnd usp_Subscriptions_ChangeMailboxesCount(this IStoredProcedureHolder<NamecheapCoreContext> holder, int? @SubscriptionId, int? @MailboxesCount, string @CommandType, string @OwnerUserName, int? @ResultMailboxesCount)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.usp_Subscriptions_ChangeMailboxesCount(@SubscriptionId, @MailboxesCount, @CommandType, @OwnerUserName, @ResultMailboxesCount));
+		}
+
+		public static IQueryEnd usp_Subscriptions_ChangePlan(this IStoredProcedureHolder<NamecheapCoreContext> holder, int? @subscriptionId, int? @newPlanId, string @ownerUserName)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.usp_Subscriptions_ChangePlan(@subscriptionId, @newPlanId, @ownerUserName));
+		}
+
+		public static IQueryEnd usp_Subscriptions_ChangeStatus(this IStoredProcedureHolder<NamecheapCoreContext> holder, int? @subscriptionId, int? @Status, string @OwnerUserName)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.usp_Subscriptions_ChangeStatus(@subscriptionId, @Status, @OwnerUserName));
+		}
+
+		public static IQueryEnd usp_Subscriptions_CheckIntegrityDelete(this IStoredProcedureHolder<NamecheapCoreContext> holder, int? @SubscriptionId)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.usp_Subscriptions_CheckIntegrityDelete(@SubscriptionId));
+		}
+
+		public static IQueryEnd usp_Subscriptions_Create(this IStoredProcedureHolder<NamecheapCoreContext> holder, int? @PlanId, int? @ContextId, int? @DaysToExpire, decimal? @OrderId, decimal? @OrderItemId, int? @BillingCycle, string @OwnerUserName, bool? @IsThirdPartyDomain, bool? @IsIntentionally)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.usp_Subscriptions_Create(@PlanId, @ContextId, @DaysToExpire, @OrderId, @OrderItemId, @BillingCycle, @OwnerUserName, @IsThirdPartyDomain, @IsIntentionally));
+		}
+
+		public static IQueryEnd usp_Subscriptions_Delete(this IStoredProcedureHolder<NamecheapCoreContext> holder, int? @SubscriptionId, string @OwnerUserName)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.usp_Subscriptions_Delete(@SubscriptionId, @OwnerUserName));
+		}
+
+		public static IQueryEnd usp_Subscriptions_GetContext(this IStoredProcedureHolder<NamecheapCoreContext> holder, int? @SubscriptionId)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.usp_Subscriptions_GetContext(@SubscriptionId));
+		}
+
+		public static IQueryEnd usp_Subscriptions_GetCount(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @OwnerUserName)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.usp_Subscriptions_GetCount(@OwnerUserName));
+		}
+
+		public static IQueryEnd usp_Subscriptions_GetInfo(this IStoredProcedureHolder<NamecheapCoreContext> holder, int? @SubscriptionId, string @OwnerUserName)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.usp_Subscriptions_GetInfo(@SubscriptionId, @OwnerUserName));
+		}
+
+		public static IQueryEnd usp_Subscriptions_GetList(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @domainNameFilter, string @ownerUserName)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.usp_Subscriptions_GetList(@domainNameFilter, @ownerUserName));
+		}
+
+		public static IQueryEnd usp_Subscriptions_GetMailboxes_Pending(this IStoredProcedureHolder<NamecheapCoreContext> holder, int? @subscriptionId, string @ownerUserName)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.usp_Subscriptions_GetMailboxes_Pending(@subscriptionId, @ownerUserName));
+		}
+
+		public static IQueryEnd usp_Subscriptions_Lock(this IStoredProcedureHolder<NamecheapCoreContext> holder, int? @SubscriptionId, bool? @LockForAbuse, string @OwnerUserName)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.usp_Subscriptions_Lock(@SubscriptionId, @LockForAbuse, @OwnerUserName));
+		}
+
+		public static IQueryEnd usp_Subscriptions_Renew(this IStoredProcedureHolder<NamecheapCoreContext> holder, int? @SubscriptionId, int? @RenewDays, string @OwnerUserName)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.usp_Subscriptions_Renew(@SubscriptionId, @RenewDays, @OwnerUserName));
+		}
+
+		public static IQueryEnd usp_Subscriptions_Unlock(this IStoredProcedureHolder<NamecheapCoreContext> holder, int? @SubscriptionId, string @OwnerUserName, int? @RedemptionStartDays)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.usp_Subscriptions_Unlock(@SubscriptionId, @OwnerUserName, @RedemptionStartDays));
+		}
+
+		public static IQueryEnd usp_Subscriptions_Upgrade(this IStoredProcedureHolder<NamecheapCoreContext> holder, int? @SubscriptionId, int? @NewPlanId, string @OwnerUserName)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.usp_Subscriptions_Upgrade(@SubscriptionId, @NewPlanId, @OwnerUserName));
+		}
+
+		public static IQueryEnd usp_UpdateMailboxFeatureSetTmp_GetList(this IStoredProcedureHolder<NamecheapCoreContext> holder, int? @pageIndex, int? @pageSize)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.usp_UpdateMailboxFeatureSetTmp_GetList(@pageIndex, @pageSize));
+		}
+
+		public static IQueryEnd usp_UpdateMailboxFeatureSetTmp_Prepare(this IStoredProcedureHolder<NamecheapCoreContext> holder, int? @planId)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.usp_UpdateMailboxFeatureSetTmp_Prepare(@planId));
+		}
+
+		public static IQueryEnd USP_ValidateSubscription(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @domain, string @ownerUserName, bool? @isTrial)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_ValidateSubscription(@domain, @ownerUserName, @isTrial));
+		}
+
+		public static IQueryEnd SP_GET_USER_PROFILE(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @Name, string @EventTypeName)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.SP_GET_USER_PROFILE(@Name, @EventTypeName));
+		}
+
+		public static IQueryEnd USP_AUTOMATION_GET_DOMAINS_LIST(this IStoredProcedureHolder<NamecheapCoreContext> holder)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_AUTOMATION_GET_DOMAINS_LIST());
+		}
+
+		public static IQueryEnd USP_AUTOMATION_UPDATE_DOMAINS_LIST(this IStoredProcedureHolder<NamecheapCoreContext> holder, string @Domainname, string @Nameservers)
+		{
+			return holder.Root.Exec<NamecheapCoreContext>(h=>h.USP_AUTOMATION_UPDATE_DOMAINS_LIST(@Domainname, @Nameservers));
+		}
+	}
 }

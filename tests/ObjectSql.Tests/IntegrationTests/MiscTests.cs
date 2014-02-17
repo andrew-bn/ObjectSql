@@ -66,8 +66,8 @@ namespace ObjectSql.Tests.IntegrationTests
 			var sp = Query.Exec<TestDatabaseContext>().Ten_Most_Expensive_Products();
 			var reader = sp.ExecuteReader();
 			var res = reader.MapResult<Ten_Most_Expensive_Products_Result>().ToArray();
-			
-			Assert.AreEqual(10,res.Length);
+
+			Assert.AreEqual(10, res.Length);
 		}
 	}
 }

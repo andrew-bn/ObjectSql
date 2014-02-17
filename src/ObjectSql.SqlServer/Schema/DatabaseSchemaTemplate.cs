@@ -317,6 +317,114 @@ namespace ObjectSql.SqlServer.Schema
             
             #line default
             #line hidden
+            this.Write("\t}\r\n\r\n\tpublic static partial class ");
+            
+            #line 93 "M:\ObjectSql\src\ObjectSql.SqlServer\Schema\DatabaseSchemaTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(ConnStrName));
+            
+            #line default
+            #line hidden
+            this.Write("ProceduresHolder\r\n\t{\r\n");
+            
+            #line 95 "M:\ObjectSql\src\ObjectSql.SqlServer\Schema\DatabaseSchemaTemplate.tt"
+ 
+		foreach(var proc in Schema.Procedures)
+		{
+
+            
+            #line default
+            #line hidden
+            this.Write("\r\n\t\tpublic static IQueryEnd ");
+            
+            #line 100 "M:\ObjectSql\src\ObjectSql.SqlServer\Schema\DatabaseSchemaTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(ToValidName(proc.Name)));
+            
+            #line default
+            #line hidden
+            this.Write("(this IStoredProcedureHolder<");
+            
+            #line 100 "M:\ObjectSql\src\ObjectSql.SqlServer\Schema\DatabaseSchemaTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(ConnStrName));
+            
+            #line default
+            #line hidden
+            this.Write("Context> holder");
+            
+            #line 100 "M:\ObjectSql\src\ObjectSql.SqlServer\Schema\DatabaseSchemaTemplate.tt"
+
+			foreach(var p in proc.Parameters){
+            
+            #line default
+            #line hidden
+            this.Write(", ");
+            
+            #line 101 "M:\ObjectSql\src\ObjectSql.SqlServer\Schema\DatabaseSchemaTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(ToTypeName(p.NetType,true)));
+            
+            #line default
+            #line hidden
+            this.Write(" ");
+            
+            #line 101 "M:\ObjectSql\src\ObjectSql.SqlServer\Schema\DatabaseSchemaTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(ToValidName(p.Name)));
+            
+            #line default
+            #line hidden
+            
+            #line 101 "M:\ObjectSql\src\ObjectSql.SqlServer\Schema\DatabaseSchemaTemplate.tt"
+}
+            
+            #line default
+            #line hidden
+            this.Write(")\r\n\t\t{\r\n\t\t\treturn holder.Root.Exec<");
+            
+            #line 103 "M:\ObjectSql\src\ObjectSql.SqlServer\Schema\DatabaseSchemaTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(ConnStrName));
+            
+            #line default
+            #line hidden
+            this.Write("Context>(h=>h.");
+            
+            #line 103 "M:\ObjectSql\src\ObjectSql.SqlServer\Schema\DatabaseSchemaTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(ToValidName(proc.Name)));
+            
+            #line default
+            #line hidden
+            this.Write("(");
+            
+            #line 103 "M:\ObjectSql\src\ObjectSql.SqlServer\Schema\DatabaseSchemaTemplate.tt"
+
+				foreach(var p in proc.Parameters){
+            
+            #line default
+            #line hidden
+            
+            #line 104 "M:\ObjectSql\src\ObjectSql.SqlServer\Schema\DatabaseSchemaTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(p.Position>1?", ":""));
+            
+            #line default
+            #line hidden
+            
+            #line 104 "M:\ObjectSql\src\ObjectSql.SqlServer\Schema\DatabaseSchemaTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(ToValidName(p.Name)));
+            
+            #line default
+            #line hidden
+            
+            #line 104 "M:\ObjectSql\src\ObjectSql.SqlServer\Schema\DatabaseSchemaTemplate.tt"
+}
+            
+            #line default
+            #line hidden
+            this.Write("));\r\n\t\t}\r\n");
+            
+            #line 106 "M:\ObjectSql\src\ObjectSql.SqlServer\Schema\DatabaseSchemaTemplate.tt"
+
+		}
+
+            
+            #line default
+            #line hidden
             this.Write("\t}\r\n}");
             return this.GenerationEnvironment.ToString();
         }

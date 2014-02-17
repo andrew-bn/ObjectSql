@@ -888,4 +888,48 @@ namespace ObjectSql.Tests
 			Query().Exec<TestDatabaseContext>(h => h.Ten_Most_Expensive_Products());
 		}
 	}
+
+	public static partial class TestDatabaseProceduresHolder
+	{
+
+		public static IQueryEnd CustOrderHist(this IStoredProcedureHolder<TestDatabaseContext> holder, string @CustomerID)
+		{
+			return holder.Root.Exec<TestDatabaseContext>(h=>h.CustOrderHist(@CustomerID));
+		}
+
+		public static IQueryEnd CustOrdersDetail(this IStoredProcedureHolder<TestDatabaseContext> holder, int? @OrderID)
+		{
+			return holder.Root.Exec<TestDatabaseContext>(h=>h.CustOrdersDetail(@OrderID));
+		}
+
+		public static IQueryEnd CustOrdersOrders(this IStoredProcedureHolder<TestDatabaseContext> holder, string @CustomerID)
+		{
+			return holder.Root.Exec<TestDatabaseContext>(h=>h.CustOrdersOrders(@CustomerID));
+		}
+
+		public static IQueryEnd Employee_Sales_by_Country(this IStoredProcedureHolder<TestDatabaseContext> holder, DateTime? @Beginning_Date, DateTime? @Ending_Date)
+		{
+			return holder.Root.Exec<TestDatabaseContext>(h=>h.Employee_Sales_by_Country(@Beginning_Date, @Ending_Date));
+		}
+
+		public static IQueryEnd MyProcedure(this IStoredProcedureHolder<TestDatabaseContext> holder, int? @param1)
+		{
+			return holder.Root.Exec<TestDatabaseContext>(h=>h.MyProcedure(@param1));
+		}
+
+		public static IQueryEnd Sales_by_Year(this IStoredProcedureHolder<TestDatabaseContext> holder, DateTime? @Beginning_Date, DateTime? @Ending_Date)
+		{
+			return holder.Root.Exec<TestDatabaseContext>(h=>h.Sales_by_Year(@Beginning_Date, @Ending_Date));
+		}
+
+		public static IQueryEnd SalesByCategory(this IStoredProcedureHolder<TestDatabaseContext> holder, string @CategoryName, string @OrdYear)
+		{
+			return holder.Root.Exec<TestDatabaseContext>(h=>h.SalesByCategory(@CategoryName, @OrdYear));
+		}
+
+		public static IQueryEnd Ten_Most_Expensive_Products(this IStoredProcedureHolder<TestDatabaseContext> holder)
+		{
+			return holder.Root.Exec<TestDatabaseContext>(h=>h.Ten_Most_Expensive_Products());
+		}
+	}
 }
