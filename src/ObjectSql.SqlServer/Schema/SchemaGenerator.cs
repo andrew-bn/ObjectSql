@@ -22,13 +22,13 @@ namespace ObjectSql.SqlServer.Schema
 			{
 				connection.Open();
 				var t = Tables(connection).ToArray();
-				var p = Procedures(connection).ToList();
+				var p = ProceduresAndFunctions(connection).ToArray();
 
 				FillTableParameters(t, connection);
 				FillProcedureParameters(p, connection);
 
-				t.OrderBy(tbl => tbl.Schema + "." + tbl.Name);
-				p.OrderBy(proc => proc.Schema + "." + proc.Name);
+				t = t.OrderBy(tbl => tbl.Schema + "." + tbl.Name).ToArray();
+				p = p.OrderBy(proc => proc.Schema + "." + proc.Name).ToArray();
 
 				foreach (var tbl in t)
 					tbl.Columns = tbl.Columns.OrderBy(c => c.Position).ToList();
@@ -36,7 +36,12 @@ namespace ObjectSql.SqlServer.Schema
 				foreach (var proc in p)
 					proc.Parameters = proc.Parameters.OrderBy(par => par.Position).ToList();
 
-				var schema = new DatabaseSchema() { Tables = t.ToArray(), Procedures = p.ToArray() };
+				var schema = new DatabaseSchema()
+					{
+						Tables = t.ToArray(),
+						Procedures = p.Where(prc => prc.RoutineType == RoutineType.Procedure).ToArray(),
+						Functions = p.Where(f => f.RoutineType == RoutineType.Function).ToArray()
+					};
 				var template = new DatabaseSchemaTemplate(connStrName, schema, ns);
 				return template.TransformText();
 			}
@@ -118,7 +123,7 @@ namespace ObjectSql.SqlServer.Schema
 				yield return p;
 			}
 		}
-		private static IEnumerable<Procedure> Procedures(SqlConnection connection)
+		private static IEnumerable<Procedure> ProceduresAndFunctions(SqlConnection connection)
 		{
 			var table = connection.GetSchema("Procedures");
 			foreach (DataRow row in table.Rows)
@@ -130,6 +135,10 @@ namespace ObjectSql.SqlServer.Schema
 						p.Schema = row[col].ToString();
 					if (col.ColumnName.ToLower() == "routine_name")
 						p.Name = row[col].ToString();
+					if (Column(col, "routine_type"))
+						p.RoutineType = (row[col].ToString().ToLower() == "procedure")
+							                ? RoutineType.Procedure
+							                : RoutineType.Function;
 				}
 				yield return p;
 			}

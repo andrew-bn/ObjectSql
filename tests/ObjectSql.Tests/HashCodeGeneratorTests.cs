@@ -1,12 +1,9 @@
 ﻿using System;
 using NUnit.Framework;
 using System.Linq.Expressions;
-using NUnit.Framework;
 using ObjectSql.Core.Bo;
 using ObjectSql.Core.Misc;
-using ObjectSql.Core;
 using System.Linq;
-using System.Collections.Generic;
 
 namespace ObjectSql.Tests
 {

@@ -15,10 +15,22 @@ namespace ObjectSql.SqlServer.Schema
 			Schema = schema;
 			Namespace = @namespace;
 		}
+
 		public string ToValidName(string value)
 		{
-			return value.Replace(" ", "_");
+			if (value.Length > 0 && char.IsDigit(value[0]))
+				value = "_" + value;
+
+			if (value.Length > 1 && value[0] == '@' && char.IsDigit(value[1]))
+				value = "@_" + value.TrimStart('@');
+
+			return value.Replace(" ", "_")
+						.Replace("-", "_")
+						.Replace("'", "")
+						.Replace(".", "_")
+						.Replace("$", "");
 		}
+
 		public string ToTypeName(Type netType, bool nullable)
 		{
 			var result = "object";

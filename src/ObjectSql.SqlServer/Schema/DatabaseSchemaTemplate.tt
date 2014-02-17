@@ -13,20 +13,25 @@
 <#@ import namespace="System.Text" #>
 <#@ import namespace="System.Collections.Generic" #>
 using System;
-using System.ComponentModel.DataAnnotations.Schema;
-using ObjectSql;
+using System.Configuration;
+using System.Data.SqlClient;
 using System.Collections.Generic;
+using ObjectSql;
 using ObjectSql.QueryInterfaces;
 
 namespace <#= Namespace#>
 {
 <# 
-	var currentSchema = "";
+	string currentSchema = null;
 	foreach(var tbl in Schema.Tables) 
 	{
 		if (currentSchema != tbl.Schema) 
 		{
-#>	namespace <#= Namespace #>.<#=tbl.Schema#>
+			if (currentSchema != null)
+			{
+#>	}
+<#			}
+#>	namespace <#=tbl.Schema#>
 	{
 <#
 			currentSchema = tbl.Schema;
@@ -53,33 +58,32 @@ namespace <#= Namespace#>
 #>
 	}
 
-	public abstract partial class <#=ConnStrName#>
+	public partial class <#=ConnStrName#>Context
 	{
-<# 
+		private string _connectionString;
+		private ObjectSqlManager<SqlConnection> _sqlServerManager;
+
+		public <#=ConnStrName#>Context()
+		{
+			_connectionString = ConfigurationManager.ConnectionStrings["<#=ConnStrName#>"].ConnectionString;
+			_sqlServerManager = new ObjectSqlManager<SqlConnection>(_connectionString);
+		}
+
+		public ISql Query()
+		{
+			return _sqlServerManager.Query();
+		}
+<#
 		foreach(var proc in Schema.Procedures)
 		{
 #>
 
 		[Procedure("<#=proc.Name#>", "<#=proc.Schema#>")]
-		public abstract void <#=ToValidName(proc.Name)#>(<#
-			foreach(var p in proc.Parameters){#><#=p.Position>1?", ":""#>[Parameter("<#=p.Name.Replace("@","")#>", "<#=p.DataType#>")]<#=ToTypeName(p.NetType,true)#> <#=ToValidName(p.Name)#><#}#>);
-<#
-		}
-#>
-	}
-
-	public static partial class <#=ConnStrName#>ProceduresHolder
-	{
-<# 
-		foreach(var proc in Schema.Procedures)
+		public void <#=ToValidName(proc.Name)#>(<#
+			foreach(var p in proc.Parameters){#><#=p.Position>1?", ":""#>[Parameter("<#=p.Name.Replace("@","")#>", "<#=p.DataType#>")]<#=ToTypeName(p.NetType,true)#> <#=ToValidName(p.Name)#><#}#>)
 		{
-#>
-
-		public static IQueryEnd <#=ToValidName(proc.Name)#>(this IStoredProcedureHolder<<#=ConnStrName#>> holder<#
-			foreach(var p in proc.Parameters){#>, <#=ToTypeName(p.NetType,true)#> <#=ToValidName(p.Name)#><#}#>)
-		{
-			return holder.Root.StoredProcedure<<#=ConnStrName#>>(h=>h.<#=ToValidName(proc.Name)#>(<#
-				foreach(var p in proc.Parameters){#><#=p.Position>1?", ":""#><#=ToValidName(p.Name)#><#}#>));
+			Query().Exec<<#=ConnStrName#>Context>(h => h.<#=ToValidName(proc.Name)#>(<#
+				foreach(var p in proc.Parameters){ #><#=p.Position>1?", ":""#><#=ToValidName(p.Name)#><#}#>));
 		}
 <#
 		}

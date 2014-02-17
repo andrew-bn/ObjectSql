@@ -25,7 +25,7 @@ namespace ObjectSql.Tests
 			public bool Param3 { get; set; }
 			public Foo FooParam { get; set; }
 		}
-		[TestMethod]
+		[Test]
 		[Ignore]
 		public void BooleanExpressionEnumerationFlowIsValid()
 		{
@@ -63,7 +63,7 @@ f
 ", result);
 		}
 
-		[TestMethod]
+		[Test]
 		[Ignore]
 		public void NewExpressionEnumerationFlowIsValid()
 		{

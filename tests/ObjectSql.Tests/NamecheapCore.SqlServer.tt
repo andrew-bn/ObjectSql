@@ -1,0 +1,121 @@
+﻿<#@ template debug="false" hostspecific="true" language="C#" #>
+<#@ assembly name="System.Core" #>
+<#@ assembly name="System.Configuration" #>
+<#@ assembly name="EnvDTE" #>
+<#@ assembly name="$(ProjectDir)bin\$(ConfigurationName)\ObjectSql.Dll" #>
+<#@ assembly name="$(ProjectDir)bin\$(ConfigurationName)\ObjectSql.SqlServer.Dll" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Text" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ import namespace="ObjectSql.SqlServer.Schema" #>
+<#@ import namespace="System.IO" #>
+<#@ import namespace="System.Configuration" #>
+<#@ import namespace="System.Text.RegularExpressions" #>
+<#@ output extension=".cs" #>
+<#
+
+var config = new ConfigurationAccessor((IServiceProvider)this.Host);
+var t4FileName = this.Host.TemplateFile; 
+var connStrName = Path.GetFileName(t4FileName.Replace(".SqlServer.tt",""));
+string connStr = "";
+try
+{
+	connStr = ((ConnectionStringSettings)config.ConnectionStrings[connStrName]).ConnectionString;
+	var ns =  config.FindNs(this.Host.TemplateFile, (IServiceProvider)this.Host);
+	this.Write(SchemaGenerator.Generate(ns, connStrName,connStr));
+}
+catch
+{
+	this.Write("//Config not found");
+}
+#><#+
+public class ConfigurationAccessor
+{
+	public ConfigurationAccessor(IServiceProvider host)
+	{
+		EnvDTE.DTE env = (EnvDTE.DTE)host.GetService(typeof(EnvDTE.DTE));
+		_project = (EnvDTE.Project)((Array)env.ActiveSolutionProjects).GetValue(0);
+		string configurationFilename=null;	
+		
+		// examine each project item's filename looking for app.config or web.config
+		foreach (EnvDTE.ProjectItem item in _project.ProjectItems)
+		{
+			if (Regex.IsMatch(item.Name,"(app|web).config",RegexOptions.IgnoreCase))
+			{
+				// TODO: try this with linked files. is the filename pointing to the source?
+				configurationFilename=item.get_FileNames(0);
+				break;
+			}
+		}
+
+		if(!string.IsNullOrEmpty(configurationFilename))
+		{
+			ExeConfigurationFileMap configFile = null;
+			configFile = new ExeConfigurationFileMap();
+			configFile.ExeConfigFilename=configurationFilename;
+			_configuration = System.Configuration.ConfigurationManager.OpenMappedExeConfiguration(configFile, ConfigurationUserLevel.None);
+ 		}
+	}
+	
+	private EnvDTE.Project _project;
+	private Configuration _configuration;
+
+	public EnvDTE.Project Project
+	{
+		get { return _project; }
+	}
+	public EnvDTE.Properties Properties 
+	{
+		get { return _project.Properties;}
+	}
+	public Configuration Configuration
+	{
+		get { return _configuration; }
+	}	
+	public KeyValueConfigurationCollection AppSettings
+	{
+		get { return _configuration.AppSettings.Settings;}
+	}
+	public ConnectionStringSettingsCollection ConnectionStrings
+	{
+		get { return _configuration.ConnectionStrings.ConnectionStrings;}
+	}
+	
+	public string FindNs(string fileName, IServiceProvider host)
+	{
+		EnvDTE.DTE env = (EnvDTE.DTE)host.GetService(typeof(EnvDTE.DTE));
+		var proj = env.Solution.Projects.GetEnumerator();
+
+		while(proj.MoveNext())
+		{
+			var p = (EnvDTE.Project)proj.Current; 
+			
+			var res = FindNs(fileName,p.Name, "    ",p.ProjectItems);
+			if (res != null)
+				return res;
+		}
+		return null;
+	}
+
+	public string FindNs(string fileName, string ns, string tab,EnvDTE.ProjectItems items)
+	{
+		var itemsEn = items.GetEnumerator();
+
+		while(itemsEn.MoveNext())
+		{
+		    var i = (EnvDTE.ProjectItem)itemsEn.Current;
+
+			for(short j = 0;j<i.FileCount;j++)
+			{
+				if (fileName.ToLower() == i.FileNames[j].ToLower())
+					return ns;
+			}
+
+			var res = FindNs(fileName, ns+"."+i.Name, tab+"    ",i.ProjectItems);
+			if (res != null)
+				return res;
+		}
+		return null;
+	}
+}
+#>

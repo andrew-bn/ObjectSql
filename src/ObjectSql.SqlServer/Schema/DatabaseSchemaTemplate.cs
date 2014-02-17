@@ -18,11 +18,10 @@ namespace ObjectSql.SqlServer.Schema
     /// Class to produce the template output
     /// </summary>
     
-    #line 1 "D:\Work\Git\ObjectSql\src\ObjectSql.SqlServer\Schema\DatabaseSchemaTemplate.tt"
+    #line 1 "M:\ObjectSql\src\ObjectSql.SqlServer\Schema\DatabaseSchemaTemplate.tt"
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.TextTemplating", "11.0.0.0")]
     public partial class DatabaseSchemaTemplate : DatabaseSchemaTemplateBase
     {
-#line hidden
         /// <summary>
         /// Create the template output
         /// </summary>
@@ -38,45 +37,48 @@ namespace ObjectSql.SqlServer.Schema
 //------------------------------------------------------------------------------
 
 ");
-            this.Write("using System;\r\nusing System.ComponentModel.DataAnnotations.Schema;\r\nusing ObjectS" +
-                    "ql;\r\nusing System.Collections.Generic;\r\nusing ObjectSql.QueryInterfaces;\r\n\r\nname" +
-                    "space ");
+            this.Write("using System;\r\nusing System.Configuration;\r\nusing System.Data.SqlClient;\r\nusing S" +
+                    "ystem.Collections.Generic;\r\nusing ObjectSql;\r\nusing ObjectSql.QueryInterfaces;\r\n" +
+                    "\r\nnamespace ");
             
-            #line 21 "D:\Work\Git\ObjectSql\src\ObjectSql.SqlServer\Schema\DatabaseSchemaTemplate.tt"
+            #line 22 "M:\ObjectSql\src\ObjectSql.SqlServer\Schema\DatabaseSchemaTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Namespace));
             
             #line default
             #line hidden
             this.Write("\r\n{\r\n");
             
-            #line 23 "D:\Work\Git\ObjectSql\src\ObjectSql.SqlServer\Schema\DatabaseSchemaTemplate.tt"
+            #line 24 "M:\ObjectSql\src\ObjectSql.SqlServer\Schema\DatabaseSchemaTemplate.tt"
  
-	var currentSchema = "";
+	string currentSchema = null;
 	foreach(var tbl in Schema.Tables) 
 	{
 		if (currentSchema != tbl.Schema) 
 		{
+			if (currentSchema != null)
+			{
+
+            
+            #line default
+            #line hidden
+            this.Write("\t}\r\n");
+            
+            #line 33 "M:\ObjectSql\src\ObjectSql.SqlServer\Schema\DatabaseSchemaTemplate.tt"
+			}
 
             
             #line default
             #line hidden
             this.Write("\tnamespace ");
             
-            #line 29 "D:\Work\Git\ObjectSql\src\ObjectSql.SqlServer\Schema\DatabaseSchemaTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(Namespace));
-            
-            #line default
-            #line hidden
-            this.Write(".");
-            
-            #line 29 "D:\Work\Git\ObjectSql\src\ObjectSql.SqlServer\Schema\DatabaseSchemaTemplate.tt"
+            #line 34 "M:\ObjectSql\src\ObjectSql.SqlServer\Schema\DatabaseSchemaTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(tbl.Schema));
             
             #line default
             #line hidden
             this.Write("\r\n\t{\r\n");
             
-            #line 31 "D:\Work\Git\ObjectSql\src\ObjectSql.SqlServer\Schema\DatabaseSchemaTemplate.tt"
+            #line 36 "M:\ObjectSql\src\ObjectSql.SqlServer\Schema\DatabaseSchemaTemplate.tt"
 
 			currentSchema = tbl.Schema;
 		}
@@ -87,28 +89,28 @@ namespace ObjectSql.SqlServer.Schema
             #line hidden
             this.Write("\t\t[Table(\"");
             
-            #line 35 "D:\Work\Git\ObjectSql\src\ObjectSql.SqlServer\Schema\DatabaseSchemaTemplate.tt"
+            #line 40 "M:\ObjectSql\src\ObjectSql.SqlServer\Schema\DatabaseSchemaTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(tbl.Name));
             
             #line default
             #line hidden
             this.Write("\",Schema=\"");
             
-            #line 35 "D:\Work\Git\ObjectSql\src\ObjectSql.SqlServer\Schema\DatabaseSchemaTemplate.tt"
+            #line 40 "M:\ObjectSql\src\ObjectSql.SqlServer\Schema\DatabaseSchemaTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(tbl.Schema));
             
             #line default
             #line hidden
             this.Write("\")]\r\n\t\tpublic partial class ");
             
-            #line 36 "D:\Work\Git\ObjectSql\src\ObjectSql.SqlServer\Schema\DatabaseSchemaTemplate.tt"
+            #line 41 "M:\ObjectSql\src\ObjectSql.SqlServer\Schema\DatabaseSchemaTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(ToValidName(tbl.Name)));
             
             #line default
             #line hidden
             this.Write("\r\n\t\t{\r\n");
             
-            #line 38 "D:\Work\Git\ObjectSql\src\ObjectSql.SqlServer\Schema\DatabaseSchemaTemplate.tt"
+            #line 43 "M:\ObjectSql\src\ObjectSql.SqlServer\Schema\DatabaseSchemaTemplate.tt"
 
 			foreach(var col in tbl.Columns)
 			{
@@ -118,35 +120,35 @@ namespace ObjectSql.SqlServer.Schema
             #line hidden
             this.Write("\t\t\t[Column(\"");
             
-            #line 42 "D:\Work\Git\ObjectSql\src\ObjectSql.SqlServer\Schema\DatabaseSchemaTemplate.tt"
+            #line 47 "M:\ObjectSql\src\ObjectSql.SqlServer\Schema\DatabaseSchemaTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(col.Name));
             
             #line default
             #line hidden
             this.Write("\",TypeName=\"");
             
-            #line 42 "D:\Work\Git\ObjectSql\src\ObjectSql.SqlServer\Schema\DatabaseSchemaTemplate.tt"
+            #line 47 "M:\ObjectSql\src\ObjectSql.SqlServer\Schema\DatabaseSchemaTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(col.DataType));
             
             #line default
             #line hidden
             this.Write("\")]\r\n\t\t\tpublic ");
             
-            #line 43 "D:\Work\Git\ObjectSql\src\ObjectSql.SqlServer\Schema\DatabaseSchemaTemplate.tt"
+            #line 48 "M:\ObjectSql\src\ObjectSql.SqlServer\Schema\DatabaseSchemaTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(ToTypeName(col.NetType,col.IsNullable)));
             
             #line default
             #line hidden
             this.Write(" ");
             
-            #line 43 "D:\Work\Git\ObjectSql\src\ObjectSql.SqlServer\Schema\DatabaseSchemaTemplate.tt"
+            #line 48 "M:\ObjectSql\src\ObjectSql.SqlServer\Schema\DatabaseSchemaTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(ToValidName(col.Name)));
             
             #line default
             #line hidden
             this.Write(" {get; set;}\r\n\r\n");
             
-            #line 45 "D:\Work\Git\ObjectSql\src\ObjectSql.SqlServer\Schema\DatabaseSchemaTemplate.tt"
+            #line 50 "M:\ObjectSql\src\ObjectSql.SqlServer\Schema\DatabaseSchemaTemplate.tt"
 
 			}
 
@@ -155,7 +157,7 @@ namespace ObjectSql.SqlServer.Schema
             #line hidden
             this.Write("\t\t}\r\n\r\n");
             
-            #line 50 "D:\Work\Git\ObjectSql\src\ObjectSql.SqlServer\Schema\DatabaseSchemaTemplate.tt"
+            #line 55 "M:\ObjectSql\src\ObjectSql.SqlServer\Schema\DatabaseSchemaTemplate.tt"
 
 
 	}
@@ -163,17 +165,34 @@ namespace ObjectSql.SqlServer.Schema
             
             #line default
             #line hidden
-            this.Write("\t}\r\n\r\n\tpublic abstract partial class ");
+            this.Write("\t}\r\n\r\n\tpublic partial class ");
             
-            #line 56 "D:\Work\Git\ObjectSql\src\ObjectSql.SqlServer\Schema\DatabaseSchemaTemplate.tt"
+            #line 61 "M:\ObjectSql\src\ObjectSql.SqlServer\Schema\DatabaseSchemaTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(ConnStrName));
             
             #line default
             #line hidden
-            this.Write("\r\n\t{\r\n");
+            this.Write("Context\r\n\t{\r\n\t\tprivate string _connectionString;\r\n\t\tprivate ObjectSqlManager<SqlC" +
+                    "onnection> _sqlServerManager;\r\n\r\n\t\tpublic ");
             
-            #line 58 "D:\Work\Git\ObjectSql\src\ObjectSql.SqlServer\Schema\DatabaseSchemaTemplate.tt"
- 
+            #line 66 "M:\ObjectSql\src\ObjectSql.SqlServer\Schema\DatabaseSchemaTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(ConnStrName));
+            
+            #line default
+            #line hidden
+            this.Write("Context()\r\n\t\t{\r\n\t\t\t_connectionString = ConfigurationManager.ConnectionStrings[\"");
+            
+            #line 68 "M:\ObjectSql\src\ObjectSql.SqlServer\Schema\DatabaseSchemaTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(ConnStrName));
+            
+            #line default
+            #line hidden
+            this.Write("\"].ConnectionString;\r\n\t\t\t_sqlServerManager = new ObjectSqlManager<SqlConnection>(" +
+                    "_connectionString);\r\n\t\t}\r\n\r\n\t\tpublic ISql Query()\r\n\t\t{\r\n\t\t\treturn _sqlServerMana" +
+                    "ger.Query();\r\n\t\t}\r\n");
+            
+            #line 76 "M:\ObjectSql\src\ObjectSql.SqlServer\Schema\DatabaseSchemaTemplate.tt"
+
 		foreach(var proc in Schema.Procedures)
 		{
 
@@ -182,184 +201,116 @@ namespace ObjectSql.SqlServer.Schema
             #line hidden
             this.Write("\r\n\t\t[Procedure(\"");
             
-            #line 63 "D:\Work\Git\ObjectSql\src\ObjectSql.SqlServer\Schema\DatabaseSchemaTemplate.tt"
+            #line 81 "M:\ObjectSql\src\ObjectSql.SqlServer\Schema\DatabaseSchemaTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(proc.Name));
             
             #line default
             #line hidden
             this.Write("\", \"");
             
-            #line 63 "D:\Work\Git\ObjectSql\src\ObjectSql.SqlServer\Schema\DatabaseSchemaTemplate.tt"
+            #line 81 "M:\ObjectSql\src\ObjectSql.SqlServer\Schema\DatabaseSchemaTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(proc.Schema));
             
             #line default
             #line hidden
-            this.Write("\")]\r\n\t\tpublic abstract void ");
+            this.Write("\")]\r\n\t\tpublic void ");
             
-            #line 64 "D:\Work\Git\ObjectSql\src\ObjectSql.SqlServer\Schema\DatabaseSchemaTemplate.tt"
+            #line 82 "M:\ObjectSql\src\ObjectSql.SqlServer\Schema\DatabaseSchemaTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(ToValidName(proc.Name)));
             
             #line default
             #line hidden
             this.Write("(");
             
-            #line 64 "D:\Work\Git\ObjectSql\src\ObjectSql.SqlServer\Schema\DatabaseSchemaTemplate.tt"
+            #line 82 "M:\ObjectSql\src\ObjectSql.SqlServer\Schema\DatabaseSchemaTemplate.tt"
 
 			foreach(var p in proc.Parameters){
             
             #line default
             #line hidden
             
-            #line 65 "D:\Work\Git\ObjectSql\src\ObjectSql.SqlServer\Schema\DatabaseSchemaTemplate.tt"
+            #line 83 "M:\ObjectSql\src\ObjectSql.SqlServer\Schema\DatabaseSchemaTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(p.Position>1?", ":""));
             
             #line default
             #line hidden
             this.Write("[Parameter(\"");
             
-            #line 65 "D:\Work\Git\ObjectSql\src\ObjectSql.SqlServer\Schema\DatabaseSchemaTemplate.tt"
+            #line 83 "M:\ObjectSql\src\ObjectSql.SqlServer\Schema\DatabaseSchemaTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(p.Name.Replace("@","")));
             
             #line default
             #line hidden
             this.Write("\", \"");
             
-            #line 65 "D:\Work\Git\ObjectSql\src\ObjectSql.SqlServer\Schema\DatabaseSchemaTemplate.tt"
+            #line 83 "M:\ObjectSql\src\ObjectSql.SqlServer\Schema\DatabaseSchemaTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(p.DataType));
             
             #line default
             #line hidden
             this.Write("\")]");
             
-            #line 65 "D:\Work\Git\ObjectSql\src\ObjectSql.SqlServer\Schema\DatabaseSchemaTemplate.tt"
+            #line 83 "M:\ObjectSql\src\ObjectSql.SqlServer\Schema\DatabaseSchemaTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(ToTypeName(p.NetType,true)));
             
             #line default
             #line hidden
             this.Write(" ");
             
-            #line 65 "D:\Work\Git\ObjectSql\src\ObjectSql.SqlServer\Schema\DatabaseSchemaTemplate.tt"
+            #line 83 "M:\ObjectSql\src\ObjectSql.SqlServer\Schema\DatabaseSchemaTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(ToValidName(p.Name)));
             
             #line default
             #line hidden
             
-            #line 65 "D:\Work\Git\ObjectSql\src\ObjectSql.SqlServer\Schema\DatabaseSchemaTemplate.tt"
+            #line 83 "M:\ObjectSql\src\ObjectSql.SqlServer\Schema\DatabaseSchemaTemplate.tt"
 }
             
             #line default
             #line hidden
-            this.Write(");\r\n");
+            this.Write(")\r\n\t\t{\r\n\t\t\tQuery().Exec<");
             
-            #line 66 "D:\Work\Git\ObjectSql\src\ObjectSql.SqlServer\Schema\DatabaseSchemaTemplate.tt"
-
-		}
-
-            
-            #line default
-            #line hidden
-            this.Write("\t}\r\n\r\n\tpublic static partial class ");
-            
-            #line 71 "D:\Work\Git\ObjectSql\src\ObjectSql.SqlServer\Schema\DatabaseSchemaTemplate.tt"
+            #line 85 "M:\ObjectSql\src\ObjectSql.SqlServer\Schema\DatabaseSchemaTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(ConnStrName));
             
             #line default
             #line hidden
-            this.Write("ProceduresHolder\r\n\t{\r\n");
+            this.Write("Context>(h => h.");
             
-            #line 73 "D:\Work\Git\ObjectSql\src\ObjectSql.SqlServer\Schema\DatabaseSchemaTemplate.tt"
- 
-		foreach(var proc in Schema.Procedures)
-		{
-
-            
-            #line default
-            #line hidden
-            this.Write("\r\n\t\tpublic static IQueryEnd ");
-            
-            #line 78 "D:\Work\Git\ObjectSql\src\ObjectSql.SqlServer\Schema\DatabaseSchemaTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(ToValidName(proc.Name)));
-            
-            #line default
-            #line hidden
-            this.Write("(this IStoredProcedureHolder<");
-            
-            #line 78 "D:\Work\Git\ObjectSql\src\ObjectSql.SqlServer\Schema\DatabaseSchemaTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(ConnStrName));
-            
-            #line default
-            #line hidden
-            this.Write("> holder");
-            
-            #line 78 "D:\Work\Git\ObjectSql\src\ObjectSql.SqlServer\Schema\DatabaseSchemaTemplate.tt"
-
-			foreach(var p in proc.Parameters){
-            
-            #line default
-            #line hidden
-            this.Write(", ");
-            
-            #line 79 "D:\Work\Git\ObjectSql\src\ObjectSql.SqlServer\Schema\DatabaseSchemaTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(ToTypeName(p.NetType,true)));
-            
-            #line default
-            #line hidden
-            this.Write(" ");
-            
-            #line 79 "D:\Work\Git\ObjectSql\src\ObjectSql.SqlServer\Schema\DatabaseSchemaTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(ToValidName(p.Name)));
-            
-            #line default
-            #line hidden
-            
-            #line 79 "D:\Work\Git\ObjectSql\src\ObjectSql.SqlServer\Schema\DatabaseSchemaTemplate.tt"
-}
-            
-            #line default
-            #line hidden
-            this.Write(")\r\n\t\t{\r\n\t\t\treturn holder.Root.StoredProcedure<");
-            
-            #line 81 "D:\Work\Git\ObjectSql\src\ObjectSql.SqlServer\Schema\DatabaseSchemaTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(ConnStrName));
-            
-            #line default
-            #line hidden
-            this.Write(">(h=>h.");
-            
-            #line 81 "D:\Work\Git\ObjectSql\src\ObjectSql.SqlServer\Schema\DatabaseSchemaTemplate.tt"
+            #line 85 "M:\ObjectSql\src\ObjectSql.SqlServer\Schema\DatabaseSchemaTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(ToValidName(proc.Name)));
             
             #line default
             #line hidden
             this.Write("(");
             
-            #line 81 "D:\Work\Git\ObjectSql\src\ObjectSql.SqlServer\Schema\DatabaseSchemaTemplate.tt"
+            #line 85 "M:\ObjectSql\src\ObjectSql.SqlServer\Schema\DatabaseSchemaTemplate.tt"
 
-				foreach(var p in proc.Parameters){
+				foreach(var p in proc.Parameters){ 
             
             #line default
             #line hidden
             
-            #line 82 "D:\Work\Git\ObjectSql\src\ObjectSql.SqlServer\Schema\DatabaseSchemaTemplate.tt"
+            #line 86 "M:\ObjectSql\src\ObjectSql.SqlServer\Schema\DatabaseSchemaTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(p.Position>1?", ":""));
             
             #line default
             #line hidden
             
-            #line 82 "D:\Work\Git\ObjectSql\src\ObjectSql.SqlServer\Schema\DatabaseSchemaTemplate.tt"
+            #line 86 "M:\ObjectSql\src\ObjectSql.SqlServer\Schema\DatabaseSchemaTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(ToValidName(p.Name)));
             
             #line default
             #line hidden
             
-            #line 82 "D:\Work\Git\ObjectSql\src\ObjectSql.SqlServer\Schema\DatabaseSchemaTemplate.tt"
+            #line 86 "M:\ObjectSql\src\ObjectSql.SqlServer\Schema\DatabaseSchemaTemplate.tt"
 }
             
             #line default
             #line hidden
             this.Write("));\r\n\t\t}\r\n");
             
-            #line 84 "D:\Work\Git\ObjectSql\src\ObjectSql.SqlServer\Schema\DatabaseSchemaTemplate.tt"
+            #line 88 "M:\ObjectSql\src\ObjectSql.SqlServer\Schema\DatabaseSchemaTemplate.tt"
 
 		}
 

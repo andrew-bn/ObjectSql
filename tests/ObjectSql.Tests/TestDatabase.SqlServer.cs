@@ -8,15 +8,121 @@
 //------------------------------------------------------------------------------
 
 using System;
-using System.ComponentModel.DataAnnotations.Schema;
-using ObjectSql;
+using System.Configuration;
+using System.Data.SqlClient;
 using System.Collections.Generic;
+using ObjectSql;
 using ObjectSql.QueryInterfaces;
 
 namespace ObjectSql.Tests
 {
-	namespace ObjectSql.Tests.dbo
+	namespace dbo
 	{
+		[Table("Alphabetical list of products",Schema="dbo")]
+		public partial class Alphabetical_list_of_products
+		{
+			[Column("ProductID",TypeName="int")]
+			public int ProductID {get; set;}
+
+			[Column("ProductName",TypeName="nvarchar")]
+			public string ProductName {get; set;}
+
+			[Column("SupplierID",TypeName="int")]
+			public int? SupplierID {get; set;}
+
+			[Column("CategoryID",TypeName="int")]
+			public int? CategoryID {get; set;}
+
+			[Column("QuantityPerUnit",TypeName="nvarchar")]
+			public string QuantityPerUnit {get; set;}
+
+			[Column("UnitPrice",TypeName="money")]
+			public decimal? UnitPrice {get; set;}
+
+			[Column("UnitsInStock",TypeName="smallint")]
+			public short? UnitsInStock {get; set;}
+
+			[Column("UnitsOnOrder",TypeName="smallint")]
+			public short? UnitsOnOrder {get; set;}
+
+			[Column("ReorderLevel",TypeName="smallint")]
+			public short? ReorderLevel {get; set;}
+
+			[Column("Discontinued",TypeName="bit")]
+			public bool Discontinued {get; set;}
+
+			[Column("CategoryName",TypeName="nvarchar")]
+			public string CategoryName {get; set;}
+
+		}
+
+		[Table("Categories",Schema="dbo")]
+		public partial class Categories
+		{
+			[Column("CategoryID",TypeName="int")]
+			public int CategoryID {get; set;}
+
+			[Column("CategoryName",TypeName="nvarchar")]
+			public string CategoryName {get; set;}
+
+			[Column("Description",TypeName="ntext")]
+			public string Description {get; set;}
+
+			[Column("Picture",TypeName="image")]
+			public byte[] Picture {get; set;}
+
+		}
+
+		[Table("Category Sales for 1997",Schema="dbo")]
+		public partial class Category_Sales_for_1997
+		{
+			[Column("CategoryName",TypeName="nvarchar")]
+			public string CategoryName {get; set;}
+
+			[Column("CategorySales",TypeName="money")]
+			public decimal? CategorySales {get; set;}
+
+		}
+
+		[Table("Current Product List",Schema="dbo")]
+		public partial class Current_Product_List
+		{
+			[Column("ProductID",TypeName="int")]
+			public int ProductID {get; set;}
+
+			[Column("ProductName",TypeName="nvarchar")]
+			public string ProductName {get; set;}
+
+		}
+
+		[Table("Customer and Suppliers by City",Schema="dbo")]
+		public partial class Customer_and_Suppliers_by_City
+		{
+			[Column("City",TypeName="nvarchar")]
+			public string City {get; set;}
+
+			[Column("CompanyName",TypeName="nvarchar")]
+			public string CompanyName {get; set;}
+
+			[Column("ContactName",TypeName="nvarchar")]
+			public string ContactName {get; set;}
+
+			[Column("Relationship",TypeName="varchar")]
+			public string Relationship {get; set;}
+
+		}
+
+		[Table("CustomerCustomerDemo",Schema="dbo")]
+		public partial class CustomerCustomerDemo
+		{
+			[Column("CustomerID",TypeName="nchar")]
+			public string CustomerID {get; set;}
+
+			[Column("CustomerTypeID",TypeName="nchar")]
+			public string CustomerTypeID {get; set;}
+
+		}
+
 		[Table("CustomerDemographics",Schema="dbo")]
 		public partial class CustomerDemographics
 		{
@@ -28,14 +134,41 @@ namespace ObjectSql.Tests
 
 		}
 
-		[Table("Region",Schema="dbo")]
-		public partial class Region
+		[Table("Customers",Schema="dbo")]
+		public partial class Customers
 		{
-			[Column("RegionID",TypeName="int")]
-			public int RegionID {get; set;}
+			[Column("CustomerID",TypeName="nchar")]
+			public string CustomerID {get; set;}
 
-			[Column("RegionDescription",TypeName="nchar")]
-			public string RegionDescription {get; set;}
+			[Column("CompanyName",TypeName="nvarchar")]
+			public string CompanyName {get; set;}
+
+			[Column("ContactName",TypeName="nvarchar")]
+			public string ContactName {get; set;}
+
+			[Column("ContactTitle",TypeName="nvarchar")]
+			public string ContactTitle {get; set;}
+
+			[Column("Address",TypeName="nvarchar")]
+			public string Address {get; set;}
+
+			[Column("City",TypeName="nvarchar")]
+			public string City {get; set;}
+
+			[Column("Region",TypeName="nvarchar")]
+			public string Region {get; set;}
+
+			[Column("PostalCode",TypeName="nvarchar")]
+			public string PostalCode {get; set;}
+
+			[Column("Country",TypeName="nvarchar")]
+			public string Country {get; set;}
+
+			[Column("Phone",TypeName="nvarchar")]
+			public string Phone {get; set;}
+
+			[Column("Fax",TypeName="nvarchar")]
+			public string Fax {get; set;}
 
 		}
 
@@ -98,243 +231,6 @@ namespace ObjectSql.Tests
 
 		}
 
-		[Table("Categories",Schema="dbo")]
-		public partial class Categories
-		{
-			[Column("CategoryID",TypeName="int")]
-			public int CategoryID {get; set;}
-
-			[Column("CategoryName",TypeName="nvarchar")]
-			public string CategoryName {get; set;}
-
-			[Column("Description",TypeName="ntext")]
-			public string Description {get; set;}
-
-			[Column("Picture",TypeName="image")]
-			public byte[] Picture {get; set;}
-
-		}
-
-		[Table("Customers",Schema="dbo")]
-		public partial class Customers
-		{
-			[Column("CustomerID",TypeName="nchar")]
-			public string CustomerID {get; set;}
-
-			[Column("CompanyName",TypeName="nvarchar")]
-			public string CompanyName {get; set;}
-
-			[Column("ContactName",TypeName="nvarchar")]
-			public string ContactName {get; set;}
-
-			[Column("ContactTitle",TypeName="nvarchar")]
-			public string ContactTitle {get; set;}
-
-			[Column("Address",TypeName="nvarchar")]
-			public string Address {get; set;}
-
-			[Column("City",TypeName="nvarchar")]
-			public string City {get; set;}
-
-			[Column("Region",TypeName="nvarchar")]
-			public string Region {get; set;}
-
-			[Column("PostalCode",TypeName="nvarchar")]
-			public string PostalCode {get; set;}
-
-			[Column("Country",TypeName="nvarchar")]
-			public string Country {get; set;}
-
-			[Column("Phone",TypeName="nvarchar")]
-			public string Phone {get; set;}
-
-			[Column("Fax",TypeName="nvarchar")]
-			public string Fax {get; set;}
-
-		}
-
-		[Table("Shippers",Schema="dbo")]
-		public partial class Shippers
-		{
-			[Column("ShipperID",TypeName="int")]
-			public int ShipperID {get; set;}
-
-			[Column("CompanyName",TypeName="nvarchar")]
-			public string CompanyName {get; set;}
-
-			[Column("Phone",TypeName="nvarchar")]
-			public string Phone {get; set;}
-
-		}
-
-		[Table("Suppliers",Schema="dbo")]
-		public partial class Suppliers
-		{
-			[Column("SupplierID",TypeName="int")]
-			public int SupplierID {get; set;}
-
-			[Column("CompanyName",TypeName="nvarchar")]
-			public string CompanyName {get; set;}
-
-			[Column("ContactName",TypeName="nvarchar")]
-			public string ContactName {get; set;}
-
-			[Column("ContactTitle",TypeName="nvarchar")]
-			public string ContactTitle {get; set;}
-
-			[Column("Address",TypeName="nvarchar")]
-			public string Address {get; set;}
-
-			[Column("City",TypeName="nvarchar")]
-			public string City {get; set;}
-
-			[Column("Region",TypeName="nvarchar")]
-			public string Region {get; set;}
-
-			[Column("PostalCode",TypeName="nvarchar")]
-			public string PostalCode {get; set;}
-
-			[Column("Country",TypeName="nvarchar")]
-			public string Country {get; set;}
-
-			[Column("Phone",TypeName="nvarchar")]
-			public string Phone {get; set;}
-
-			[Column("Fax",TypeName="nvarchar")]
-			public string Fax {get; set;}
-
-			[Column("HomePage",TypeName="ntext")]
-			public string HomePage {get; set;}
-
-		}
-
-		[Table("Orders",Schema="dbo")]
-		public partial class Orders
-		{
-			[Column("OrderID",TypeName="int")]
-			public int OrderID {get; set;}
-
-			[Column("CustomerID",TypeName="nchar")]
-			public string CustomerID {get; set;}
-
-			[Column("EmployeeID",TypeName="int")]
-			public int? EmployeeID {get; set;}
-
-			[Column("OrderDate",TypeName="datetime")]
-			public DateTime? OrderDate {get; set;}
-
-			[Column("RequiredDate",TypeName="datetime")]
-			public DateTime? RequiredDate {get; set;}
-
-			[Column("ShippedDate",TypeName="datetime")]
-			public DateTime? ShippedDate {get; set;}
-
-			[Column("ShipVia",TypeName="int")]
-			public int? ShipVia {get; set;}
-
-			[Column("Freight",TypeName="money")]
-			public decimal? Freight {get; set;}
-
-			[Column("ShipName",TypeName="nvarchar")]
-			public string ShipName {get; set;}
-
-			[Column("ShipAddress",TypeName="nvarchar")]
-			public string ShipAddress {get; set;}
-
-			[Column("ShipCity",TypeName="nvarchar")]
-			public string ShipCity {get; set;}
-
-			[Column("ShipRegion",TypeName="nvarchar")]
-			public string ShipRegion {get; set;}
-
-			[Column("ShipPostalCode",TypeName="nvarchar")]
-			public string ShipPostalCode {get; set;}
-
-			[Column("ShipCountry",TypeName="nvarchar")]
-			public string ShipCountry {get; set;}
-
-		}
-
-		[Table("Products",Schema="dbo")]
-		public partial class Products
-		{
-			[Column("ProductID",TypeName="int")]
-			public int ProductID {get; set;}
-
-			[Column("ProductName",TypeName="nvarchar")]
-			public string ProductName {get; set;}
-
-			[Column("SupplierID",TypeName="int")]
-			public int? SupplierID {get; set;}
-
-			[Column("CategoryID",TypeName="int")]
-			public int? CategoryID {get; set;}
-
-			[Column("QuantityPerUnit",TypeName="nvarchar")]
-			public string QuantityPerUnit {get; set;}
-
-			[Column("UnitPrice",TypeName="money")]
-			public decimal? UnitPrice {get; set;}
-
-			[Column("UnitsInStock",TypeName="smallint")]
-			public short? UnitsInStock {get; set;}
-
-			[Column("UnitsOnOrder",TypeName="smallint")]
-			public short? UnitsOnOrder {get; set;}
-
-			[Column("ReorderLevel",TypeName="smallint")]
-			public short? ReorderLevel {get; set;}
-
-			[Column("Discontinued",TypeName="bit")]
-			public bool Discontinued {get; set;}
-
-		}
-
-		[Table("Order Details",Schema="dbo")]
-		public partial class Order_Details
-		{
-			[Column("OrderID",TypeName="int")]
-			public int OrderID {get; set;}
-
-			[Column("ProductID",TypeName="int")]
-			public int ProductID {get; set;}
-
-			[Column("UnitPrice",TypeName="money")]
-			public decimal UnitPrice {get; set;}
-
-			[Column("Quantity",TypeName="smallint")]
-			public short Quantity {get; set;}
-
-			[Column("Discount",TypeName="real")]
-			public float Discount {get; set;}
-
-		}
-
-		[Table("CustomerCustomerDemo",Schema="dbo")]
-		public partial class CustomerCustomerDemo
-		{
-			[Column("CustomerID",TypeName="nchar")]
-			public string CustomerID {get; set;}
-
-			[Column("CustomerTypeID",TypeName="nchar")]
-			public string CustomerTypeID {get; set;}
-
-		}
-
-		[Table("Territories",Schema="dbo")]
-		public partial class Territories
-		{
-			[Column("TerritoryID",TypeName="nvarchar")]
-			public string TerritoryID {get; set;}
-
-			[Column("TerritoryDescription",TypeName="nchar")]
-			public string TerritoryDescription {get; set;}
-
-			[Column("RegionID",TypeName="int")]
-			public int RegionID {get; set;}
-
-		}
-
 		[Table("EmployeeTerritories",Schema="dbo")]
 		public partial class EmployeeTerritories
 		{
@@ -343,88 +239,6 @@ namespace ObjectSql.Tests
 
 			[Column("TerritoryID",TypeName="nvarchar")]
 			public string TerritoryID {get; set;}
-
-		}
-
-		[Table("Orders Qry",Schema="dbo")]
-		public partial class Orders_Qry
-		{
-			[Column("OrderID",TypeName="int")]
-			public int OrderID {get; set;}
-
-			[Column("CustomerID",TypeName="nchar")]
-			public string CustomerID {get; set;}
-
-			[Column("EmployeeID",TypeName="int")]
-			public int? EmployeeID {get; set;}
-
-			[Column("OrderDate",TypeName="datetime")]
-			public DateTime? OrderDate {get; set;}
-
-			[Column("RequiredDate",TypeName="datetime")]
-			public DateTime? RequiredDate {get; set;}
-
-			[Column("ShippedDate",TypeName="datetime")]
-			public DateTime? ShippedDate {get; set;}
-
-			[Column("ShipVia",TypeName="int")]
-			public int? ShipVia {get; set;}
-
-			[Column("Freight",TypeName="money")]
-			public decimal? Freight {get; set;}
-
-			[Column("ShipName",TypeName="nvarchar")]
-			public string ShipName {get; set;}
-
-			[Column("ShipAddress",TypeName="nvarchar")]
-			public string ShipAddress {get; set;}
-
-			[Column("ShipCity",TypeName="nvarchar")]
-			public string ShipCity {get; set;}
-
-			[Column("ShipRegion",TypeName="nvarchar")]
-			public string ShipRegion {get; set;}
-
-			[Column("ShipPostalCode",TypeName="nvarchar")]
-			public string ShipPostalCode {get; set;}
-
-			[Column("ShipCountry",TypeName="nvarchar")]
-			public string ShipCountry {get; set;}
-
-			[Column("CompanyName",TypeName="nvarchar")]
-			public string CompanyName {get; set;}
-
-			[Column("Address",TypeName="nvarchar")]
-			public string Address {get; set;}
-
-			[Column("City",TypeName="nvarchar")]
-			public string City {get; set;}
-
-			[Column("Region",TypeName="nvarchar")]
-			public string Region {get; set;}
-
-			[Column("PostalCode",TypeName="nvarchar")]
-			public string PostalCode {get; set;}
-
-			[Column("Country",TypeName="nvarchar")]
-			public string Country {get; set;}
-
-		}
-
-		[Table("Quarterly Orders",Schema="dbo")]
-		public partial class Quarterly_Orders
-		{
-			[Column("CustomerID",TypeName="nchar")]
-			public string CustomerID {get; set;}
-
-			[Column("CompanyName",TypeName="nvarchar")]
-			public string CompanyName {get; set;}
-
-			[Column("City",TypeName="nvarchar")]
-			public string City {get; set;}
-
-			[Column("Country",TypeName="nvarchar")]
-			public string Country {get; set;}
 
 		}
 
@@ -508,188 +322,6 @@ namespace ObjectSql.Tests
 
 			[Column("Freight",TypeName="money")]
 			public decimal? Freight {get; set;}
-
-		}
-
-		[Table("Product Sales for 1997",Schema="dbo")]
-		public partial class Product_Sales_for_1997
-		{
-			[Column("CategoryName",TypeName="nvarchar")]
-			public string CategoryName {get; set;}
-
-			[Column("ProductName",TypeName="nvarchar")]
-			public string ProductName {get; set;}
-
-			[Column("ProductSales",TypeName="money")]
-			public decimal? ProductSales {get; set;}
-
-		}
-
-		[Table("Current Product List",Schema="dbo")]
-		public partial class Current_Product_List
-		{
-			[Column("ProductID",TypeName="int")]
-			public int ProductID {get; set;}
-
-			[Column("ProductName",TypeName="nvarchar")]
-			public string ProductName {get; set;}
-
-		}
-
-		[Table("Order Details Extended",Schema="dbo")]
-		public partial class Order_Details_Extended
-		{
-			[Column("OrderID",TypeName="int")]
-			public int OrderID {get; set;}
-
-			[Column("ProductID",TypeName="int")]
-			public int ProductID {get; set;}
-
-			[Column("ProductName",TypeName="nvarchar")]
-			public string ProductName {get; set;}
-
-			[Column("UnitPrice",TypeName="money")]
-			public decimal UnitPrice {get; set;}
-
-			[Column("Quantity",TypeName="smallint")]
-			public short Quantity {get; set;}
-
-			[Column("Discount",TypeName="real")]
-			public float Discount {get; set;}
-
-			[Column("ExtendedPrice",TypeName="money")]
-			public decimal? ExtendedPrice {get; set;}
-
-		}
-
-		[Table("Products Above Average Price",Schema="dbo")]
-		public partial class Products_Above_Average_Price
-		{
-			[Column("ProductName",TypeName="nvarchar")]
-			public string ProductName {get; set;}
-
-			[Column("UnitPrice",TypeName="money")]
-			public decimal? UnitPrice {get; set;}
-
-		}
-
-		[Table("Products by Category",Schema="dbo")]
-		public partial class Products_by_Category
-		{
-			[Column("CategoryName",TypeName="nvarchar")]
-			public string CategoryName {get; set;}
-
-			[Column("ProductName",TypeName="nvarchar")]
-			public string ProductName {get; set;}
-
-			[Column("QuantityPerUnit",TypeName="nvarchar")]
-			public string QuantityPerUnit {get; set;}
-
-			[Column("UnitsInStock",TypeName="smallint")]
-			public short? UnitsInStock {get; set;}
-
-			[Column("Discontinued",TypeName="bit")]
-			public bool Discontinued {get; set;}
-
-		}
-
-		[Table("Alphabetical list of products",Schema="dbo")]
-		public partial class Alphabetical_list_of_products
-		{
-			[Column("ProductID",TypeName="int")]
-			public int ProductID {get; set;}
-
-			[Column("ProductName",TypeName="nvarchar")]
-			public string ProductName {get; set;}
-
-			[Column("SupplierID",TypeName="int")]
-			public int? SupplierID {get; set;}
-
-			[Column("CategoryID",TypeName="int")]
-			public int? CategoryID {get; set;}
-
-			[Column("QuantityPerUnit",TypeName="nvarchar")]
-			public string QuantityPerUnit {get; set;}
-
-			[Column("UnitPrice",TypeName="money")]
-			public decimal? UnitPrice {get; set;}
-
-			[Column("UnitsInStock",TypeName="smallint")]
-			public short? UnitsInStock {get; set;}
-
-			[Column("UnitsOnOrder",TypeName="smallint")]
-			public short? UnitsOnOrder {get; set;}
-
-			[Column("ReorderLevel",TypeName="smallint")]
-			public short? ReorderLevel {get; set;}
-
-			[Column("Discontinued",TypeName="bit")]
-			public bool Discontinued {get; set;}
-
-			[Column("CategoryName",TypeName="nvarchar")]
-			public string CategoryName {get; set;}
-
-		}
-
-		[Table("Order Subtotals",Schema="dbo")]
-		public partial class Order_Subtotals
-		{
-			[Column("OrderID",TypeName="int")]
-			public int OrderID {get; set;}
-
-			[Column("Subtotal",TypeName="money")]
-			public decimal? Subtotal {get; set;}
-
-		}
-
-		[Table("Customer and Suppliers by City",Schema="dbo")]
-		public partial class Customer_and_Suppliers_by_City
-		{
-			[Column("City",TypeName="nvarchar")]
-			public string City {get; set;}
-
-			[Column("CompanyName",TypeName="nvarchar")]
-			public string CompanyName {get; set;}
-
-			[Column("ContactName",TypeName="nvarchar")]
-			public string ContactName {get; set;}
-
-			[Column("Relationship",TypeName="varchar")]
-			public string Relationship {get; set;}
-
-		}
-
-		[Table("Sales Totals by Amount",Schema="dbo")]
-		public partial class Sales_Totals_by_Amount
-		{
-			[Column("SaleAmount",TypeName="money")]
-			public decimal? SaleAmount {get; set;}
-
-			[Column("OrderID",TypeName="int")]
-			public int OrderID {get; set;}
-
-			[Column("CompanyName",TypeName="nvarchar")]
-			public string CompanyName {get; set;}
-
-			[Column("ShippedDate",TypeName="datetime")]
-			public DateTime? ShippedDate {get; set;}
-
-		}
-
-		[Table("Sales by Category",Schema="dbo")]
-		public partial class Sales_by_Category
-		{
-			[Column("CategoryID",TypeName="int")]
-			public int CategoryID {get; set;}
-
-			[Column("CategoryName",TypeName="nvarchar")]
-			public string CategoryName {get; set;}
-
-			[Column("ProductName",TypeName="nvarchar")]
-			public string ProductName {get; set;}
-
-			[Column("ProductSales",TypeName="money")]
-			public decimal? ProductSales {get; set;}
 
 		}
 
@@ -782,6 +414,331 @@ namespace ObjectSql.Tests
 
 		}
 
+		[Table("Order Details",Schema="dbo")]
+		public partial class Order_Details
+		{
+			[Column("OrderID",TypeName="int")]
+			public int OrderID {get; set;}
+
+			[Column("ProductID",TypeName="int")]
+			public int ProductID {get; set;}
+
+			[Column("UnitPrice",TypeName="money")]
+			public decimal UnitPrice {get; set;}
+
+			[Column("Quantity",TypeName="smallint")]
+			public short Quantity {get; set;}
+
+			[Column("Discount",TypeName="real")]
+			public float Discount {get; set;}
+
+		}
+
+		[Table("Order Details Extended",Schema="dbo")]
+		public partial class Order_Details_Extended
+		{
+			[Column("OrderID",TypeName="int")]
+			public int OrderID {get; set;}
+
+			[Column("ProductID",TypeName="int")]
+			public int ProductID {get; set;}
+
+			[Column("ProductName",TypeName="nvarchar")]
+			public string ProductName {get; set;}
+
+			[Column("UnitPrice",TypeName="money")]
+			public decimal UnitPrice {get; set;}
+
+			[Column("Quantity",TypeName="smallint")]
+			public short Quantity {get; set;}
+
+			[Column("Discount",TypeName="real")]
+			public float Discount {get; set;}
+
+			[Column("ExtendedPrice",TypeName="money")]
+			public decimal? ExtendedPrice {get; set;}
+
+		}
+
+		[Table("Order Subtotals",Schema="dbo")]
+		public partial class Order_Subtotals
+		{
+			[Column("OrderID",TypeName="int")]
+			public int OrderID {get; set;}
+
+			[Column("Subtotal",TypeName="money")]
+			public decimal? Subtotal {get; set;}
+
+		}
+
+		[Table("Orders",Schema="dbo")]
+		public partial class Orders
+		{
+			[Column("OrderID",TypeName="int")]
+			public int OrderID {get; set;}
+
+			[Column("CustomerID",TypeName="nchar")]
+			public string CustomerID {get; set;}
+
+			[Column("EmployeeID",TypeName="int")]
+			public int? EmployeeID {get; set;}
+
+			[Column("OrderDate",TypeName="datetime")]
+			public DateTime? OrderDate {get; set;}
+
+			[Column("RequiredDate",TypeName="datetime")]
+			public DateTime? RequiredDate {get; set;}
+
+			[Column("ShippedDate",TypeName="datetime")]
+			public DateTime? ShippedDate {get; set;}
+
+			[Column("ShipVia",TypeName="int")]
+			public int? ShipVia {get; set;}
+
+			[Column("Freight",TypeName="money")]
+			public decimal? Freight {get; set;}
+
+			[Column("ShipName",TypeName="nvarchar")]
+			public string ShipName {get; set;}
+
+			[Column("ShipAddress",TypeName="nvarchar")]
+			public string ShipAddress {get; set;}
+
+			[Column("ShipCity",TypeName="nvarchar")]
+			public string ShipCity {get; set;}
+
+			[Column("ShipRegion",TypeName="nvarchar")]
+			public string ShipRegion {get; set;}
+
+			[Column("ShipPostalCode",TypeName="nvarchar")]
+			public string ShipPostalCode {get; set;}
+
+			[Column("ShipCountry",TypeName="nvarchar")]
+			public string ShipCountry {get; set;}
+
+		}
+
+		[Table("Orders Qry",Schema="dbo")]
+		public partial class Orders_Qry
+		{
+			[Column("OrderID",TypeName="int")]
+			public int OrderID {get; set;}
+
+			[Column("CustomerID",TypeName="nchar")]
+			public string CustomerID {get; set;}
+
+			[Column("EmployeeID",TypeName="int")]
+			public int? EmployeeID {get; set;}
+
+			[Column("OrderDate",TypeName="datetime")]
+			public DateTime? OrderDate {get; set;}
+
+			[Column("RequiredDate",TypeName="datetime")]
+			public DateTime? RequiredDate {get; set;}
+
+			[Column("ShippedDate",TypeName="datetime")]
+			public DateTime? ShippedDate {get; set;}
+
+			[Column("ShipVia",TypeName="int")]
+			public int? ShipVia {get; set;}
+
+			[Column("Freight",TypeName="money")]
+			public decimal? Freight {get; set;}
+
+			[Column("ShipName",TypeName="nvarchar")]
+			public string ShipName {get; set;}
+
+			[Column("ShipAddress",TypeName="nvarchar")]
+			public string ShipAddress {get; set;}
+
+			[Column("ShipCity",TypeName="nvarchar")]
+			public string ShipCity {get; set;}
+
+			[Column("ShipRegion",TypeName="nvarchar")]
+			public string ShipRegion {get; set;}
+
+			[Column("ShipPostalCode",TypeName="nvarchar")]
+			public string ShipPostalCode {get; set;}
+
+			[Column("ShipCountry",TypeName="nvarchar")]
+			public string ShipCountry {get; set;}
+
+			[Column("CompanyName",TypeName="nvarchar")]
+			public string CompanyName {get; set;}
+
+			[Column("Address",TypeName="nvarchar")]
+			public string Address {get; set;}
+
+			[Column("City",TypeName="nvarchar")]
+			public string City {get; set;}
+
+			[Column("Region",TypeName="nvarchar")]
+			public string Region {get; set;}
+
+			[Column("PostalCode",TypeName="nvarchar")]
+			public string PostalCode {get; set;}
+
+			[Column("Country",TypeName="nvarchar")]
+			public string Country {get; set;}
+
+		}
+
+		[Table("Product Sales for 1997",Schema="dbo")]
+		public partial class Product_Sales_for_1997
+		{
+			[Column("CategoryName",TypeName="nvarchar")]
+			public string CategoryName {get; set;}
+
+			[Column("ProductName",TypeName="nvarchar")]
+			public string ProductName {get; set;}
+
+			[Column("ProductSales",TypeName="money")]
+			public decimal? ProductSales {get; set;}
+
+		}
+
+		[Table("Products",Schema="dbo")]
+		public partial class Products
+		{
+			[Column("ProductID",TypeName="int")]
+			public int ProductID {get; set;}
+
+			[Column("ProductName",TypeName="nvarchar")]
+			public string ProductName {get; set;}
+
+			[Column("SupplierID",TypeName="int")]
+			public int? SupplierID {get; set;}
+
+			[Column("CategoryID",TypeName="int")]
+			public int? CategoryID {get; set;}
+
+			[Column("QuantityPerUnit",TypeName="nvarchar")]
+			public string QuantityPerUnit {get; set;}
+
+			[Column("UnitPrice",TypeName="money")]
+			public decimal? UnitPrice {get; set;}
+
+			[Column("UnitsInStock",TypeName="smallint")]
+			public short? UnitsInStock {get; set;}
+
+			[Column("UnitsOnOrder",TypeName="smallint")]
+			public short? UnitsOnOrder {get; set;}
+
+			[Column("ReorderLevel",TypeName="smallint")]
+			public short? ReorderLevel {get; set;}
+
+			[Column("Discontinued",TypeName="bit")]
+			public bool Discontinued {get; set;}
+
+		}
+
+		[Table("Products Above Average Price",Schema="dbo")]
+		public partial class Products_Above_Average_Price
+		{
+			[Column("ProductName",TypeName="nvarchar")]
+			public string ProductName {get; set;}
+
+			[Column("UnitPrice",TypeName="money")]
+			public decimal? UnitPrice {get; set;}
+
+		}
+
+		[Table("Products by Category",Schema="dbo")]
+		public partial class Products_by_Category
+		{
+			[Column("CategoryName",TypeName="nvarchar")]
+			public string CategoryName {get; set;}
+
+			[Column("ProductName",TypeName="nvarchar")]
+			public string ProductName {get; set;}
+
+			[Column("QuantityPerUnit",TypeName="nvarchar")]
+			public string QuantityPerUnit {get; set;}
+
+			[Column("UnitsInStock",TypeName="smallint")]
+			public short? UnitsInStock {get; set;}
+
+			[Column("Discontinued",TypeName="bit")]
+			public bool Discontinued {get; set;}
+
+		}
+
+		[Table("Quarterly Orders",Schema="dbo")]
+		public partial class Quarterly_Orders
+		{
+			[Column("CustomerID",TypeName="nchar")]
+			public string CustomerID {get; set;}
+
+			[Column("CompanyName",TypeName="nvarchar")]
+			public string CompanyName {get; set;}
+
+			[Column("City",TypeName="nvarchar")]
+			public string City {get; set;}
+
+			[Column("Country",TypeName="nvarchar")]
+			public string Country {get; set;}
+
+		}
+
+		[Table("Region",Schema="dbo")]
+		public partial class Region
+		{
+			[Column("RegionID",TypeName="int")]
+			public int RegionID {get; set;}
+
+			[Column("RegionDescription",TypeName="nchar")]
+			public string RegionDescription {get; set;}
+
+		}
+
+		[Table("Sales by Category",Schema="dbo")]
+		public partial class Sales_by_Category
+		{
+			[Column("CategoryID",TypeName="int")]
+			public int CategoryID {get; set;}
+
+			[Column("CategoryName",TypeName="nvarchar")]
+			public string CategoryName {get; set;}
+
+			[Column("ProductName",TypeName="nvarchar")]
+			public string ProductName {get; set;}
+
+			[Column("ProductSales",TypeName="money")]
+			public decimal? ProductSales {get; set;}
+
+		}
+
+		[Table("Sales Totals by Amount",Schema="dbo")]
+		public partial class Sales_Totals_by_Amount
+		{
+			[Column("SaleAmount",TypeName="money")]
+			public decimal? SaleAmount {get; set;}
+
+			[Column("OrderID",TypeName="int")]
+			public int OrderID {get; set;}
+
+			[Column("CompanyName",TypeName="nvarchar")]
+			public string CompanyName {get; set;}
+
+			[Column("ShippedDate",TypeName="datetime")]
+			public DateTime? ShippedDate {get; set;}
+
+		}
+
+		[Table("Shippers",Schema="dbo")]
+		public partial class Shippers
+		{
+			[Column("ShipperID",TypeName="int")]
+			public int ShipperID {get; set;}
+
+			[Column("CompanyName",TypeName="nvarchar")]
+			public string CompanyName {get; set;}
+
+			[Column("Phone",TypeName="nvarchar")]
+			public string Phone {get; set;}
+
+		}
+
 		[Table("Summary of Sales by Quarter",Schema="dbo")]
 		public partial class Summary_of_Sales_by_Quarter
 		{
@@ -810,88 +767,125 @@ namespace ObjectSql.Tests
 
 		}
 
-		[Table("Category Sales for 1997",Schema="dbo")]
-		public partial class Category_Sales_for_1997
+		[Table("Suppliers",Schema="dbo")]
+		public partial class Suppliers
 		{
-			[Column("CategoryName",TypeName="nvarchar")]
-			public string CategoryName {get; set;}
+			[Column("SupplierID",TypeName="int")]
+			public int SupplierID {get; set;}
 
-			[Column("CategorySales",TypeName="money")]
-			public decimal? CategorySales {get; set;}
+			[Column("CompanyName",TypeName="nvarchar")]
+			public string CompanyName {get; set;}
+
+			[Column("ContactName",TypeName="nvarchar")]
+			public string ContactName {get; set;}
+
+			[Column("ContactTitle",TypeName="nvarchar")]
+			public string ContactTitle {get; set;}
+
+			[Column("Address",TypeName="nvarchar")]
+			public string Address {get; set;}
+
+			[Column("City",TypeName="nvarchar")]
+			public string City {get; set;}
+
+			[Column("Region",TypeName="nvarchar")]
+			public string Region {get; set;}
+
+			[Column("PostalCode",TypeName="nvarchar")]
+			public string PostalCode {get; set;}
+
+			[Column("Country",TypeName="nvarchar")]
+			public string Country {get; set;}
+
+			[Column("Phone",TypeName="nvarchar")]
+			public string Phone {get; set;}
+
+			[Column("Fax",TypeName="nvarchar")]
+			public string Fax {get; set;}
+
+			[Column("HomePage",TypeName="ntext")]
+			public string HomePage {get; set;}
+
+		}
+
+		[Table("Territories",Schema="dbo")]
+		public partial class Territories
+		{
+			[Column("TerritoryID",TypeName="nvarchar")]
+			public string TerritoryID {get; set;}
+
+			[Column("TerritoryDescription",TypeName="nchar")]
+			public string TerritoryDescription {get; set;}
+
+			[Column("RegionID",TypeName="int")]
+			public int RegionID {get; set;}
 
 		}
 
 	}
 
-	public abstract partial class TestDatabase
+	public partial class TestDatabaseContext
 	{
+		private string _connectionString;
+		private ObjectSqlManager<SqlConnection> _sqlServerManager;
+
+		public TestDatabaseContext()
+		{
+			_connectionString = ConfigurationManager.ConnectionStrings["TestDatabase"].ConnectionString;
+			_sqlServerManager = new ObjectSqlManager<SqlConnection>(_connectionString);
+		}
+
+		public ISql Query()
+		{
+			return _sqlServerManager.Query();
+		}
 
 		[Procedure("CustOrderHist", "dbo")]
-		public abstract void CustOrderHist([Parameter("CustomerID", "nchar")]string @CustomerID);
+		public void CustOrderHist([Parameter("CustomerID", "nchar")]string @CustomerID)
+		{
+			Query().Exec<TestDatabaseContext>(h => h.CustOrderHist(@CustomerID));
+		}
 
 		[Procedure("CustOrdersDetail", "dbo")]
-		public abstract void CustOrdersDetail([Parameter("OrderID", "int")]int? @OrderID);
+		public void CustOrdersDetail([Parameter("OrderID", "int")]int? @OrderID)
+		{
+			Query().Exec<TestDatabaseContext>(h => h.CustOrdersDetail(@OrderID));
+		}
 
 		[Procedure("CustOrdersOrders", "dbo")]
-		public abstract void CustOrdersOrders([Parameter("CustomerID", "nchar")]string @CustomerID);
+		public void CustOrdersOrders([Parameter("CustomerID", "nchar")]string @CustomerID)
+		{
+			Query().Exec<TestDatabaseContext>(h => h.CustOrdersOrders(@CustomerID));
+		}
 
 		[Procedure("Employee Sales by Country", "dbo")]
-		public abstract void Employee_Sales_by_Country([Parameter("Beginning_Date", "datetime")]DateTime? @Beginning_Date, [Parameter("Ending_Date", "datetime")]DateTime? @Ending_Date);
+		public void Employee_Sales_by_Country([Parameter("Beginning_Date", "datetime")]DateTime? @Beginning_Date, [Parameter("Ending_Date", "datetime")]DateTime? @Ending_Date)
+		{
+			Query().Exec<TestDatabaseContext>(h => h.Employee_Sales_by_Country(@Beginning_Date, @Ending_Date));
+		}
 
 		[Procedure("MyProcedure", "dbo")]
-		public abstract void MyProcedure([Parameter("param1", "int")]int? @param1);
+		public void MyProcedure([Parameter("param1", "int")]int? @param1)
+		{
+			Query().Exec<TestDatabaseContext>(h => h.MyProcedure(@param1));
+		}
 
 		[Procedure("Sales by Year", "dbo")]
-		public abstract void Sales_by_Year([Parameter("Beginning_Date", "datetime")]DateTime? @Beginning_Date, [Parameter("Ending_Date", "datetime")]DateTime? @Ending_Date);
+		public void Sales_by_Year([Parameter("Beginning_Date", "datetime")]DateTime? @Beginning_Date, [Parameter("Ending_Date", "datetime")]DateTime? @Ending_Date)
+		{
+			Query().Exec<TestDatabaseContext>(h => h.Sales_by_Year(@Beginning_Date, @Ending_Date));
+		}
 
 		[Procedure("SalesByCategory", "dbo")]
-		public abstract void SalesByCategory([Parameter("CategoryName", "nvarchar")]string @CategoryName, [Parameter("OrdYear", "nvarchar")]string @OrdYear);
+		public void SalesByCategory([Parameter("CategoryName", "nvarchar")]string @CategoryName, [Parameter("OrdYear", "nvarchar")]string @OrdYear)
+		{
+			Query().Exec<TestDatabaseContext>(h => h.SalesByCategory(@CategoryName, @OrdYear));
+		}
 
 		[Procedure("Ten Most Expensive Products", "dbo")]
-		public abstract void Ten_Most_Expensive_Products();
-	}
-
-	public static partial class TestDatabaseProceduresHolder
-	{
-
-		public static IQueryEnd CustOrderHist(this IStoredProcedureHolder<TestDatabase> holder, string @CustomerID)
+		public void Ten_Most_Expensive_Products()
 		{
-			return holder.Root.Exec<TestDatabase>(h=>h.CustOrderHist(@CustomerID));
-		}
-
-		public static IQueryEnd CustOrdersDetail(this IStoredProcedureHolder<TestDatabase> holder, int? @OrderID)
-		{
-			return holder.Root.Exec<TestDatabase>(h=>h.CustOrdersDetail(@OrderID));
-		}
-
-		public static IQueryEnd CustOrdersOrders(this IStoredProcedureHolder<TestDatabase> holder, string @CustomerID)
-		{
-			return holder.Root.Exec<TestDatabase>(h=>h.CustOrdersOrders(@CustomerID));
-		}
-
-		public static IQueryEnd Employee_Sales_by_Country(this IStoredProcedureHolder<TestDatabase> holder, DateTime? @Beginning_Date, DateTime? @Ending_Date)
-		{
-			return holder.Root.Exec<TestDatabase>(h=>h.Employee_Sales_by_Country(@Beginning_Date, @Ending_Date));
-		}
-
-		public static IQueryEnd MyProcedure(this IStoredProcedureHolder<TestDatabase> holder, int? @param1)
-		{
-			return holder.Root.Exec<TestDatabase>(h=>h.MyProcedure(@param1));
-		}
-
-		public static IQueryEnd Sales_by_Year(this IStoredProcedureHolder<TestDatabase> holder, DateTime? @Beginning_Date, DateTime? @Ending_Date)
-		{
-			return holder.Root.Exec<TestDatabase>(h=>h.Sales_by_Year(@Beginning_Date, @Ending_Date));
-		}
-
-		public static IQueryEnd SalesByCategory(this IStoredProcedureHolder<TestDatabase> holder, string @CategoryName, string @OrdYear)
-		{
-			return holder.Root.Exec<TestDatabase>(h=>h.SalesByCategory(@CategoryName, @OrdYear));
-		}
-
-		public static IQueryEnd Ten_Most_Expensive_Products(this IStoredProcedureHolder<TestDatabase> holder)
-		{
-			return holder.Root.Exec<TestDatabase>(h=>h.Ten_Most_Expensive_Products());
+			Query().Exec<TestDatabaseContext>(h => h.Ten_Most_Expensive_Products());
 		}
 	}
 }
