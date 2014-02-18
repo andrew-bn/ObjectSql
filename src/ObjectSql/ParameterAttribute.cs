@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -10,11 +11,13 @@ namespace ObjectSql
 	{
 		public string Name { get; private set; }
 		public string TypeName { get; private set; }
+		public ParameterDirection Direction { get; private set; }
 
-		public ParameterAttribute(string name, string type)
+		public ParameterAttribute(string name, string type/*, ParameterDirection direction*/)
 		{
 			Name = name;
 			TypeName = type;
+			//Direction = direction;
 		}
 	}
 }

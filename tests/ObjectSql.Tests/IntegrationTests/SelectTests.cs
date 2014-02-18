@@ -186,7 +186,8 @@ namespace ObjectSql.Tests.IntegrationTests
 		[Test]
 		public void StoredProcedure()
 		{
-			var result = EfQuery.Exec((TestDatabaseEntities e) => e.CustOrderHist("VINET"))
+			var vinet = "VINET1";
+			var result = EfQuery.Exec((TestDatabaseEntities e) => e.CustOrderHist(vinet))
 			                    .ExecuteQuery().ToArray();
 
 			Assert.AreEqual(9,result.Length);
