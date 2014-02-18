@@ -7,5 +7,6 @@ namespace ObjectSql.Core.QueryParts
 		QueryPartType PartType { get; }
 		void CalculateQueryExpressionParameters(ref QueryRoots parameters);
 		bool IsEqualTo(IQueryPart part, ref QueryRoots rootsA, ref QueryRoots rootsB);
+		void BuildPart(BuilderContext context);
 	}
 }

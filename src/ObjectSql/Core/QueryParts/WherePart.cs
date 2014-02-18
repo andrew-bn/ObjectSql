@@ -15,6 +15,16 @@ namespace ObjectSql.Core.QueryParts
 		{
 			get { return QueryPartType.Where; }
 		}
+		public override void BuildPart(BuilderContext context)
+		{
+			if (UseAliases)
+				AppendAlias(Expression, context);
+			var sql = context.ExpressionAnalizer.AnalizeExpression(context.Preparators, Expression.Body, ExpressionAnalizerType.Expression, UseAliases);
+			if (context.State == BuilderState.GroupByGenerated)
+				context.SqlWriter.WriteHaving(context.Text, sql);
+			else
+				context.SqlWriter.WriteWhere(context.Text, sql);
+		}
 		public override void CalculateQueryExpressionParameters(ref QueryRoots parameters)
 		{
 			base.CalculateQueryExpressionParameters(ref parameters);

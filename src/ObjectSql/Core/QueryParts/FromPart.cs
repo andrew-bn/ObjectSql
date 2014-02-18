@@ -3,7 +3,7 @@ using ObjectSql.Core.Bo;
 
 namespace ObjectSql.Core.QueryParts
 {
-	public class FromPart: QueryPartBase
+	public class FromPart : QueryPartBase
 	{
 		public Type[] Entities { get; private set; }
 		public FromPart(params Type[] entities)
@@ -15,6 +15,13 @@ namespace ObjectSql.Core.QueryParts
 		{
 			get { return QueryPartType.From; }
 		}
+
+		public override void BuildPart(BuilderContext context)
+		{
+			context.State = BuilderState.FromAliasNeeded;
+			context.SqlWriter.WriteFrom(context.Text, GetSchema(Entities[0], context));
+		}
+
 		public override void CalculateQueryExpressionParameters(ref QueryRoots parameters)
 		{
 			base.CalculateQueryExpressionParameters(ref parameters);
