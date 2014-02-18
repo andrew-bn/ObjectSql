@@ -1,11 +1,12 @@
 using System;
+using System.Data;
 
 namespace ObjectSql.SqlServer.Schema
 {
 	public class Parameter
 	{
 		public string Schema { get; set; }
-		public ParameterType ParameterType { get; set; }
+		public ParameterDirection ParameterType { get; set; }
 		public string ProcedureName { get; set; }
 		public int Position { get; set; }
 		public bool IsResult { get; set; }
