@@ -49,15 +49,16 @@ namespace ObjectSql.Core.QueryBuilder
 
 		public QueryPreparationData BuildQuery(IQueryPart[] parts)
 		{
-			var context = new BuilderContext();
+			var context = new BuilderContext(_schemaManager, _sqlWriter,_expressionAnalizer);
+
 			foreach (var part in parts)
 			{
 				switch (part.PartType)
 				{
 						//select
-					case QueryPartType.From: BuildFromPart((FromPart)part, context); break;
-					case QueryPartType.Join: BuildJoinPart((JoinPart)part, context); break;
-					case QueryPartType.Where: BuildWherePart((WherePart)part, context); break;
+					case QueryPartType.From: part.BuildPart(context); break;
+					case QueryPartType.Join: part.BuildPart(context); break;
+					case QueryPartType.Where: part.BuildPart(context); break;
 					case QueryPartType.GroupBy: BuildGoupByPart((GroupByPart)part, context); break;
 					case QueryPartType.Select: BuildSelectPart((SelectPart)part, context); break;
 
@@ -142,11 +143,7 @@ namespace ObjectSql.Core.QueryBuilder
 		}
 			#endregion
 		#region select
-		private void BuildFromPart(FromPart fromPart, BuilderContext context)
-		{
-			context.State = BuilderState.FromAliasNeeded;
-			_sqlWriter.WriteFrom(context.Text, GetSchema(fromPart.Entities[0]));
-		}
+
 		private void BuildJoinPart(JoinPart joinPart, BuilderContext context)
 		{
 			AppendAlias(joinPart.Expression, context);
