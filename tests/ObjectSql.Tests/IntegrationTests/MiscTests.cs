@@ -69,5 +69,18 @@ namespace ObjectSql.Tests.IntegrationTests
 
 			Assert.AreEqual(10, res.Length);
 		}
+		public void WithRef(ref int param1, out int param2)
+		{
+			param2 = default(int);
+			var p1 = param1;
+			var p2 = param2;
+			Action a = () =>
+				{
+					p1= 23;
+					p2 = 44;
+				};
+			param1 = p1;
+			param2 = p2;
+		}
 	}
 }
