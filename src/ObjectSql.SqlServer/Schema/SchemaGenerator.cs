@@ -86,9 +86,10 @@ namespace ObjectSql.SqlServer.Schema
 					if (Column(col, "specific_name"))
 						param.ProcedureName = row[col].ToString();
 					if (Column(col, "parameter_mode"))
-						param.ParameterType = (ParameterType)Enum.Parse(typeof(ParameterType), row[col].ToString(), true);
+						param.ParameterType = ParseParameterMode(row[col].ToString());
 					if (Column(col, "ordinal_position"))
 						param.Position = int.Parse(row[col].ToString());
+					
 					if (Column(col, "is_result"))
 						param.IsResult = row[col].ToString().ToLower() == "yes";
 					if (Column(col, "parameter_name"))
@@ -99,8 +100,24 @@ namespace ObjectSql.SqlServer.Schema
 						param.NetType = MapToNetType(param.DataType, true);
 					}
 				}
+
+				if (param.Position == 0)
+					param.ParameterType = ParameterDirection.ReturnValue;
+
 				procedures.First(p => p.Name == param.ProcedureName && p.Schema == param.Schema).Parameters.Add(param);
 			}
+		}
+
+		private static ParameterDirection ParseParameterMode(string value)
+		{
+			value = value.ToLower();
+			if (value == "in")
+				return ParameterDirection.Input;
+			if (value == "out")
+				return ParameterDirection.Output;
+			if (value == "inout")
+				return ParameterDirection.InputOutput;
+			return ParameterDirection.ReturnValue;
 		}
 
 		private static bool Column(DataColumn col, string name)

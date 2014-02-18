@@ -1,4 +1,6 @@
 ﻿using System.Data.Common;
+using System.Linq;
+using System.Reflection;
 using ObjectSql.Core.Bo;
 using ObjectSql.Exceptions;
 using System;
@@ -30,6 +32,10 @@ namespace ObjectSql.Core
 		{
 			PrepareQuery(context);
 			var cmd = context.QueryEnvironment.Command;
+			var val = context.QueryRoots.Roots.First().Key;
+			var type = val.GetType();
+			var prop = type.GetField("vinet");
+			prop.SetValue(val, "vinet");
 
 			var connection = cmd.Connection;
 			var connectionOpened = connection.State == ConnectionState.Closed;
