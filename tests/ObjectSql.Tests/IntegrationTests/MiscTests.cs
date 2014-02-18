@@ -65,7 +65,7 @@ namespace ObjectSql.Tests.IntegrationTests
 			//NamecheapCoreContext ctx = new NamecheapCoreContext();
 			//var em = "";
 			//ctx.usp_Admin_GetAuthorizationEmail("","", out em);
-			var sp = Query.Exec<TestDatabaseContext>().Ten_Most_Expensive_Products();
+			var sp = Query.WithContext<TestDatabaseContext>().Ten_Most_Expensive_Products();
 			var reader = sp.ExecuteReader();
 			var res = reader.MapResult<Ten_Most_Expensive_Products_Result>().ToArray();
 

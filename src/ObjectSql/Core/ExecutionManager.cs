@@ -32,10 +32,6 @@ namespace ObjectSql.Core
 		{
 			PrepareQuery(context);
 			var cmd = context.QueryEnvironment.Command;
-			var val = context.QueryRoots.Roots.First().Key;
-			var type = val.GetType();
-			var prop = type.GetField("vinet");
-			prop.SetValue(val, "vinet");
 
 			var connection = cmd.Connection;
 			var connectionOpened = connection.State == ConnectionState.Closed;

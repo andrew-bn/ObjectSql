@@ -70,9 +70,9 @@ namespace ObjectSql.QueryImplementation
 			Context.AddQueryPart(new StoredProcedurePart(spExecutor, null, true));
 			return new QueryEnd(Context);
 		}
-		public IStoredProcedureHolder<THolder> Exec<THolder>()
+		public IDatabaseContextHolder<THolder> WithContext<THolder>()
 		{
-			return new StoredProcedureHolder<THolder>(this);
+			return new DatabaseContextHolder<THolder>(Context);
 		}
 		public int ExecuteNonQuery()
 		{

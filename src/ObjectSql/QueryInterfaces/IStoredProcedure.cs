@@ -8,6 +8,6 @@ namespace ObjectSql.QueryInterfaces
 	{
 		IQueryEnd<TEntity> Exec<THolder,TEntity>(Expression<Func<THolder,IEnumerable<TEntity>>> spExecutor);
 		IQueryEnd Exec<THolder>(Expression<Action<THolder>> spExecutor);
-		IStoredProcedureHolder<THolder> Exec<THolder>();
+		IDatabaseContextHolder<THolder> WithContext<THolder>();
 	}
 }

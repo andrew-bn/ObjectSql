@@ -42,6 +42,21 @@ namespace ObjectSql.Core.QueryBuilder.LambdaBuilder
 			else
 				parameterAccessor = Expression.Constant(DBNull.Value);
 
+			var paramType = parameterAccessor.Type;
+
+			if (!paramType.IsValueType)
+				parameterAccessor = Expression.Condition(
+					Expression.Equal(parameterAccessor, Expression.Constant(null)),
+					Expression.Convert(Expression.Constant(DBNull.Value), typeof(object)),
+					Expression.Convert(parameterAccessor, typeof(object)));
+			else if (paramType.IsGenericType && paramType.GetGenericTypeDefinition() == typeof (Nullable<>))
+				parameterAccessor = Expression.Condition(
+					Expression.MakeMemberAccess(parameterAccessor, paramType.GetProperty("HasValue")),
+					Expression.Convert(Expression.MakeMemberAccess(parameterAccessor, paramType.GetProperty("Value")), typeof(object)),
+					Expression.Convert(Expression.Constant(DBNull.Value), typeof(object)));
+			else
+				parameterAccessor = Expression.Convert(parameterAccessor, typeof(object));
+			
 			Expression parameterCreate = CreateParameterFactory(parameterName, parameterAccessor, parameterType);
 
 			Expression parameterAdd = Expression.MakeMemberAccess(cmdParam, Reflect.FindProperty<IDbCommand>(c => c.Parameters));
@@ -109,7 +124,8 @@ namespace ObjectSql.Core.QueryBuilder.LambdaBuilder
 				setupParam.Add(Expression.Call(sb, sbAppend, dbParamName));
 				setupParam.Add(Expression.Assign(dbParamIndex, Expression.Increment(dbParamIndex)));
 				// add parameter
-				var parameterCreate = CreateParameterFactory(dbParamName, propAccess, prop.StorageField.DbType);
+				var parameterAccessor = Expression.Convert(propAccess, typeof(object));
+				var parameterCreate = CreateParameterFactory(dbParamName, parameterAccessor, prop.StorageField.DbType);
 				Expression parameterAdd = Expression.MakeMemberAccess(dbCmdParam, Reflect.FindProperty<IDbCommand>(c => c.Parameters));
 				parameterAdd = Expression.Call(parameterAdd, Reflect.FindMethod<IDbCommand>(c => c.Parameters.Add(default(object))), parameterCreate);
 				setupParam.Add(parameterAdd);
