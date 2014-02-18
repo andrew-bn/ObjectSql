@@ -22,13 +22,13 @@ namespace ObjectSql.SqlServer
 												Expression.Constant(fieldType.Value));
 				parameterCreate = Expression.MemberInit((NewExpression)parameterCreate,
 									Expression.Bind(Reflect.FindProperty<SqlParameter>(p => p.Value),
-												Expression.Convert(parameterAccessor, typeof(object))));
+												parameterAccessor));
 			}
 			else
 			{
 				parameterCreate = Expression.New(Reflect.FindCtor(() => new SqlParameter("", default(object))),
 												parameterName,
-												Expression.Convert(parameterAccessor, typeof(object)));
+												parameterAccessor);
 			}
 			return parameterCreate;
 		}
