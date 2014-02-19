@@ -11,7 +11,7 @@ namespace ObjectSql.SqlServer
 	{
 		public static SqlServerDelegatesBuilder Instance = new SqlServerDelegatesBuilder();
 		private SqlServerDelegatesBuilder(){}
-		protected override Expression CreateParameterFactory(Expression parameterName, Expression parameterAccessor, IStorageFieldType storageParameterType)
+		protected override Expression CreateParameterFactory(Expression parameterName, Expression parameterAccessor, IStorageFieldType storageParameterType, ParameterDirection direction)
 		{
 			var fieldType = storageParameterType as StorageFieldType<SqlDbType>;
 			Expression parameterCreate;
@@ -21,8 +21,8 @@ namespace ObjectSql.SqlServer
 												parameterName,
 												Expression.Constant(fieldType.Value));
 				parameterCreate = Expression.MemberInit((NewExpression)parameterCreate,
-									Expression.Bind(Reflect.FindProperty<SqlParameter>(p => p.Value),
-												parameterAccessor));
+									Expression.Bind(Reflect.FindProperty<SqlParameter>(p => p.Value),parameterAccessor),
+									Expression.Bind(Reflect.FindProperty<SqlParameter>(p=>p.Direction), Expression.Constant(direction)));
 			}
 			else
 			{
@@ -30,6 +30,7 @@ namespace ObjectSql.SqlServer
 												parameterName,
 												parameterAccessor);
 			}
+
 			return parameterCreate;
 		}
 	}

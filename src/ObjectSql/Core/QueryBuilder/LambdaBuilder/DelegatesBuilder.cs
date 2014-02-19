@@ -1,4 +1,5 @@
-﻿using ObjectSql.Core.Bo.EntitySchema;
+﻿using System.Data.Common;
+using ObjectSql.Core.Bo.EntitySchema;
 using ObjectSql.Core.Misc;
 using ObjectSql.Exceptions;
 using System;
@@ -31,27 +32,25 @@ namespace ObjectSql.Core.QueryBuilder.LambdaBuilder
 					parameterAccessor = Expression.Convert(rootParam, exp.Type);
 				else if (exp.NodeType == ExpressionType.MemberAccess)
 					parameterAccessor = Expression.MakeMemberAccess(parameterAccessor, ((MemberExpression)exp).Member);
-				else throw new ObjectSqlException("Invalid constant accessor detected");
+				else if (exp.NodeType != ExpressionType.Convert)
+					throw new ObjectSqlException("Invalid constant accessor detected");
 			}
 			Expression commandAccessor = Expression.MakeMemberAccess(cmdParam, Reflect.FindProperty<IDbCommand>(c => c.Parameters));
 			commandAccessor = Expression.MakeIndex(commandAccessor, typeof(IDataParameterCollection).GetProperty("Item"), new[] { parameterName });
-			
-			var paramType = parameterAccessor.Type;
-#error
-			if (paramType.IsGenericType && paramType.GetGenericTypeDefinition() == typeof (Nullable<>))
-				paramType = paramType.GetGenericArguments()[0];
+			commandAccessor = Expression.Convert(commandAccessor, typeof (IDataParameter));
+			commandAccessor = Expression.MakeMemberAccess(commandAccessor, Reflect.FindProperty<IDataParameter>(p => p.Value));
 
 			commandAccessor = Expression.Condition(Expression.TypeIs(commandAccessor,typeof(DBNull)),
 												   Expression.Convert(Expression.Constant(null), parameterAccessor.Type),
-												   Expression.Convert(Expression.Convert(commandAccessor, paramType),parameterAccessor.Type));
+												   Expression.Convert(commandAccessor, parameterAccessor.Type));
 	
 			return Expression.Lambda<Action<IDbCommand, object>>(
-						Expression.Assign(parameterAccessor, Expression.Constant(232,typeof(int?))),
+						Expression.Assign(parameterAccessor, commandAccessor),
 						cmdParam,
 						rootParam).Compile();
 		}
 
-		public Action<IDbCommand, object> CreateDatabaseParameterFactoryAction(Expression parameterName, Expression valueAccessor, IStorageFieldType parameterType)
+		public Action<IDbCommand, object> CreateDatabaseParameterFactoryAction(Expression parameterName, Expression valueAccessor, IStorageFieldType parameterType,ParameterDirection direction)
 		{
 			var expQueue = new Stack<Expression>(ExpressionEnumerator.Enumerate(valueAccessor).Cast<Expression>().ToArray());
 			var rootParam = Expression.Parameter(typeof(object));
@@ -66,11 +65,14 @@ namespace ObjectSql.Core.QueryBuilder.LambdaBuilder
 					var exp = expQueue.Pop();
 					if (exp == null) // static type
 						throw new ObjectSqlException("Invalid constant accessor detected. You can not use static fields as constants holders. Consider passing this value as variable");
-					if (exp.NodeType == ExpressionType.Constant)
+					
+				
+					else if (exp.NodeType == ExpressionType.Constant)
 						parameterAccessor = Expression.Convert(rootParam, exp.Type);
 					else if (exp.NodeType == ExpressionType.MemberAccess)
-						parameterAccessor = Expression.MakeMemberAccess(parameterAccessor, ((MemberExpression)exp).Member);
-					else throw new ObjectSqlException("Invalid constant accessor detected");
+						parameterAccessor = Expression.MakeMemberAccess(parameterAccessor, ((MemberExpression) exp).Member);
+					else if (exp.NodeType != ExpressionType.Convert)  
+						throw new ObjectSqlException("Invalid constant accessor detected");
 				}
 			}
 			else if (expQueue.Peek().NodeType != ExpressionType.Constant)
@@ -91,11 +93,11 @@ namespace ObjectSql.Core.QueryBuilder.LambdaBuilder
 				parameterAccessor = Expression.Condition(
 					Expression.MakeMemberAccess(parameterAccessor, paramType.GetProperty("HasValue")),
 					Expression.Convert(Expression.MakeMemberAccess(parameterAccessor, paramType.GetProperty("Value")), typeof(object)),
-					Expression.Convert(Expression.Constant(DBNull.Value), typeof(object)));
+					Expression.Convert(Expression.MakeMemberAccess(null, typeof(DBNull).GetField("Value")), typeof(object)));
 			else
 				parameterAccessor = Expression.Convert(parameterAccessor, typeof(object));
 
-			Expression parameterCreate = CreateParameterFactory(parameterName, parameterAccessor, parameterType);
+			Expression parameterCreate = CreateParameterFactory(parameterName, parameterAccessor, parameterType,direction);
 
 			Expression parameterAdd = Expression.MakeMemberAccess(cmdParam, Reflect.FindProperty<IDbCommand>(c => c.Parameters));
 			parameterAdd = Expression.Call(parameterAdd, Reflect.FindMethod<IDbCommand>(c => c.Parameters.Add(default(object))), parameterCreate);
@@ -163,7 +165,7 @@ namespace ObjectSql.Core.QueryBuilder.LambdaBuilder
 				setupParam.Add(Expression.Assign(dbParamIndex, Expression.Increment(dbParamIndex)));
 				// add parameter
 				var parameterAccessor = Expression.Convert(propAccess, typeof(object));
-				var parameterCreate = CreateParameterFactory(dbParamName, parameterAccessor, prop.StorageField.DbType);
+				var parameterCreate = CreateParameterFactory(dbParamName, parameterAccessor, prop.StorageField.DbType, ParameterDirection.Input);
 				Expression parameterAdd = Expression.MakeMemberAccess(dbCmdParam, Reflect.FindProperty<IDbCommand>(c => c.Parameters));
 				parameterAdd = Expression.Call(parameterAdd, Reflect.FindMethod<IDbCommand>(c => c.Parameters.Add(default(object))), parameterCreate);
 				setupParam.Add(parameterAdd);
@@ -384,7 +386,7 @@ namespace ObjectSql.Core.QueryBuilder.LambdaBuilder
 		}
 		#endregion
 
-		protected abstract Expression CreateParameterFactory(Expression parameterName, Expression parameterAccessor, IStorageFieldType storageParameterType);
+		protected abstract Expression CreateParameterFactory(Expression parameterName, Expression parameterAccessor, IStorageFieldType storageParameterType,ParameterDirection direction);
 
 
 		public Action<IDbCommand, object> CreateChangeDatabaseCommandTypeAction(CommandType commandType)

@@ -39,7 +39,7 @@ namespace ObjectSql
 		{
 			var func = query.Compile();
 			var result = (QueryEnd<TEntity>)func(default(TArgs));
-			var preparationData = QueryManager.GetQueryPreparationData(result.Context);
+			result.Context.PreparationData = QueryManager.GetQueryPreparationData(result.Context);
 
 			return (arg1) =>
 				{
@@ -60,7 +60,7 @@ namespace ObjectSql
 
 					var context = new CompiledQueryContext(env, new StrongBox<TArgs>(arg1), result.Context);
 
-					QueryManager.PrepareQuery(context, preparationData);
+					QueryManager.PreProcessQuery(context);
 					return new QueryEnd<TEntity>(context);
 				};
 		}

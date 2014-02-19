@@ -17,6 +17,7 @@ namespace ObjectSql.Core.Bo
 		public IList<IQueryPart> QueryParts { get { return _queryParts; } }
 		public QueryRoots QueryRoots { get { return QueryRootsStruct; } }
 		public Delegate MaterializationDelegate { get; set; }
+		public QueryPreparationData PreparationData { get; set; }
 		public bool Prepared { get; set; }
 
 		private List<IQueryPart> _queryParts;

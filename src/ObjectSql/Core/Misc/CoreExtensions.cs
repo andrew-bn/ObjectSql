@@ -1,4 +1,5 @@
-﻿using ObjectSql.Core.Bo.CommandPreparatorDescriptor;
+﻿using System.Linq.Expressions;
+using ObjectSql.Core.Bo.CommandPreparatorDescriptor;
 
 namespace ObjectSql.Core.Misc
 {
@@ -16,10 +17,16 @@ namespace ObjectSql.Core.Misc
 		{
 			return (StoredProcedureOutParameterProcessor)descriptor;
 		}
+
 		public static SingleParameterPrePostProcessor AsSingleParameter(this CommandPrePostProcessor descriptor)
 		{
-			return (SingleParameterPrePostProcessor)descriptor;
+			return (SingleParameterPrePostProcessor) descriptor;
 		}
-
+		public static Expression StripConvert(this Expression exp)
+		{
+			if (exp.NodeType == ExpressionType.Convert)
+				return ((UnaryExpression) exp).Operand;
+			return exp;
+		}
 	}
 }

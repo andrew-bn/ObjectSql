@@ -216,7 +216,7 @@ namespace ObjectSql.Core.QueryBuilder.ExpressionsAnalizers
 
 		protected Action<IDbCommand, object> CreateParameterInitializer(string name, Expression accessor, IStorageFieldType dbTypeInContext)
 		{
-			return DelegatesBuilder.CreateDatabaseParameterFactoryAction(Expression.Constant(name, typeof(string)), accessor, dbTypeInContext);
+			return DelegatesBuilder.CreateDatabaseParameterFactoryAction(Expression.Constant(name, typeof(string)), accessor, dbTypeInContext, ParameterDirection.Input);
 		}
 
 		private static bool IsConstant(Expression accessor)

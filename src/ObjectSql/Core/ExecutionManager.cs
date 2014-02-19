@@ -21,23 +21,22 @@ namespace ObjectSql.Core
 		public static object ExecuteScalar(QueryContext context)
 		{
 			PrepareQuery(context);
-			return ExecuteCommand(context, cmd => cmd.ExecuteScalar());
+			return ExecuteCommand(context, cmd => cmd.ExecuteScalar(), true);
 		}
 		public static int ExecuteNonQuery(QueryContext context)
 		{
 			PrepareQuery(context);
-			return ExecuteCommand(context, cmd => cmd.ExecuteNonQuery());
+			return ExecuteCommand(context, cmd => cmd.ExecuteNonQuery(), true);
 		}
 		public static IEnumerable<T> ExecuteQuery<T>(QueryContext context)
 		{
 			PrepareQuery(context);
 			var cmd = context.QueryEnvironment.Command;
 
-			var connection = cmd.Connection;
-			var connectionOpened = connection.State == ConnectionState.Closed;
-			if (connectionOpened) connection.Open();
+			var connectionOpened = OpenConnection(cmd.Connection);
 
-			var dataReader = cmd.ExecuteReader();
+			var dataReader = ExecuteCommand(context, c => c.ExecuteReader(), false);
+
 			return new EntityEnumerable<T>(context.MaterializationDelegate, dataReader, () => DisposeDataReader(context, dataReader, connectionOpened));
 		}
 		public static IQueryDataReader ExecuteReader(QueryContext context)
@@ -45,29 +44,51 @@ namespace ObjectSql.Core
 			PrepareQuery(context);
 			var cmd = context.QueryEnvironment.Command;
 
-			var connection = cmd.Connection;
-			var connectionOpened = connection.State == ConnectionState.Closed;
-			if (connectionOpened) connection.Open();
+			var connectionOpened = OpenConnection(cmd.Connection);
 
-			return new QueryDataReader(context, cmd.ExecuteReader(), () => FreeResources(context, cmd, connectionOpened));
+			var dataReader = ExecuteCommand(context, c => c.ExecuteReader(), false);
+
+			return new QueryDataReader(context, dataReader, () => DisposeDataReader(context, dataReader, connectionOpened));
 		}
 
-		private static T ExecuteCommand<T>(QueryContext context, Func<IDbCommand, T> executor)
+		private static T ExecuteCommand<T>(QueryContext context, Func<IDbCommand, T> executor, bool freeResources)
 		{
 			var cmd = context.QueryEnvironment.Command;
 			var connectionOpened = OpenConnection(cmd.Connection);
 			try
 			{
-				return executor(cmd);
+				var result = executor(cmd);
+				return result;
 			}
 			finally
 			{
-				FreeResources(context, cmd, connectionOpened);
+				if (freeResources)
+					FreeResources(context, cmd, connectionOpened);
+			}
+		}
+
+		private static void RunPostProcessors(QueryContext context)
+		{
+			var postProcessors = context.PreparationData.PostProcessors;
+			for (int i = 0; i < postProcessors.Length; i++)
+			{
+				if (!postProcessors[i].RootDemanding)
+					postProcessors[i].CommandPreparationAction(context.QueryEnvironment.Command, null);
+				else
+				{
+					foreach (var root in context.QueryRoots.Roots)
+					{
+						if ((root.Value & postProcessors[i].RootMap) != 0)
+							postProcessors[i].CommandPreparationAction(context.QueryEnvironment.Command, root.Key);
+					}
+				}
 			}
 		}
 
 		private static void FreeResources(QueryContext context, IDbCommand cmd, bool connectionOpened)
 		{
+			RunPostProcessors(context);
+
 			if (connectionOpened)
 				cmd.Connection.Close();
 			if (context.QueryEnvironment.ResourcesTreatmentType == ResourcesTreatmentType.DisposeCommand ||

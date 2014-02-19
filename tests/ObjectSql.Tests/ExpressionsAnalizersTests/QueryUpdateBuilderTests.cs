@@ -49,7 +49,7 @@ namespace ObjectSql.Tests.ExpressionsAnalizersTests
 
 			_parameterFactory = (c, o) => { };
 			_delegatesBuilder = new Mock<IDelegatesBuilder>();
-			_delegatesBuilder.Setup(b => b.CreateDatabaseParameterFactoryAction(It.IsAny<Expression>(), It.IsAny<Expression>(), It.IsAny<IStorageFieldType>()))
+			_delegatesBuilder.Setup(b => b.CreateDatabaseParameterFactoryAction(It.IsAny<Expression>(), It.IsAny<Expression>(), It.IsAny<IStorageFieldType>(), ParameterDirection.Input))
 				.Returns(_parameterFactory);
 
 			_parameters = new List<CommandPrePostProcessor>();

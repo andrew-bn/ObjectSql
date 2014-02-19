@@ -114,7 +114,7 @@ namespace ObjectSql.Tests
 					return ParameterFactory(pName,pAccessor,dbType);
 				};
 
-			builder.CreateDatabaseParameterFactoryAction(_paramName, _valueAccessor, _fieldType.Object);
+			builder.CreateDatabaseParameterFactoryAction(_paramName, _valueAccessor, _fieldType.Object, ParameterDirection.Input);
 
 			Assert.IsTrue(validCall);
 		}
@@ -124,7 +124,7 @@ namespace ObjectSql.Tests
 			var builder = CreateBuilder();
 			builder.CreateParameterFactoryFunc = (pName, pAccessor, dbType) => ParameterFactory(pName, pAccessor, dbType);
 
-			var result = builder.CreateDatabaseParameterFactoryAction(_paramName, _valueAccessor, _fieldType.Object);
+			var result = builder.CreateDatabaseParameterFactoryAction(_paramName, _valueAccessor, _fieldType.Object, ParameterDirection.Input);
 			
 			result(_command.Object, _root);
 
@@ -144,7 +144,7 @@ namespace ObjectSql.Tests
 			var builder = CreateBuilder();
 			builder.CreateParameterFactoryFunc = (pName, pAccessor, dbType) => ParameterFactory(pName, pAccessor, dbType);
 
-			var result = builder.CreateDatabaseParameterFactoryAction(_paramName, _valueAccessor, _fieldType.Object);
+			var result = builder.CreateDatabaseParameterFactoryAction(_paramName, _valueAccessor, _fieldType.Object, ParameterDirection.Input);
 
 		}
 		[Test]
@@ -157,7 +157,7 @@ namespace ObjectSql.Tests
 			var builder = CreateBuilder();
 			builder.CreateParameterFactoryFunc = (pName, pAccessor, dbType) => ParameterFactory(pName, pAccessor, dbType);
 
-			var result = builder.CreateDatabaseParameterFactoryAction(_paramName, _valueAccessor, _fieldType.Object);
+			var result = builder.CreateDatabaseParameterFactoryAction(_paramName, _valueAccessor, _fieldType.Object, ParameterDirection.Input);
 		}
 		public class ValueHolder
 		{
@@ -173,7 +173,7 @@ namespace ObjectSql.Tests
 			var builder = CreateBuilder();
 			builder.CreateParameterFactoryFunc = (pName, pAccessor, dbType) => ParameterFactory(pName, pAccessor, dbType);
 
-			var result = builder.CreateDatabaseParameterFactoryAction(_paramName, _valueAccessor, _fieldType.Object);
+			var result = builder.CreateDatabaseParameterFactoryAction(_paramName, _valueAccessor, _fieldType.Object, ParameterDirection.Input);
 		}
 		#endregion
 		#region GenerateMaterializationDelegate
@@ -300,13 +300,23 @@ namespace ObjectSql.Tests
 		{
 			return new FakeBuilder();
 		}
+
 		internal class FakeBuilder : DelegatesBuilder
 		{
 			public Func<Expression, Expression, IStorageFieldType, Expression> CreateParameterFactoryFunc { get; set; }
-			protected override Expression CreateParameterFactory(Expression parameterName, Expression parameterAccessor, IStorageFieldType storageParameterType)
+
+			protected override Expression CreateParameterFactory(Expression parameterName, Expression parameterAccessor,
+			                                                     IStorageFieldType storageParameterType,
+			                                                     ParameterDirection direction)
 			{
 				return CreateParameterFactoryFunc(parameterName, parameterAccessor, storageParameterType);
 			}
-		}
+
+			protected Expression CreateParameterFactory(Expression parameterName, Expression parameterAccessor,
+			                                                     IStorageFieldType storageParameterType)
+			{
+				return CreateParameterFactory(parameterName, parameterAccessor, storageParameterType, ParameterDirection.Input);
+			}
+	}
 	}
 }

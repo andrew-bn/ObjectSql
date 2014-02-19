@@ -22,17 +22,17 @@ namespace ObjectSql.Core
 		{
 			if (!context.Prepared)
 			{
-				var preparationData = _queryCache.GetOrAdd(context, GeneratePreparationData);
-				PrepareQuery(context, preparationData);
-#error
-				preparationData.PostProcessors[0].CommandPreparationAction(context.QueryEnvironment.Command,
-				                                                           context.QueryRoots.Roots.First().Key);
+				context.PreparationData = _queryCache.GetOrAdd(context, GeneratePreparationData);
+				
+				PreProcessQuery(context);
+
 				context.Prepared = true;
 			}
 		}
 
-		internal static void PrepareQuery(QueryContext context, QueryPreparationData preparationData)
+		internal static void PreProcessQuery(QueryContext context)
 		{
+			var preparationData = context.PreparationData;
 			context.MaterializationDelegate = preparationData.DataMaterializer;
 			var dbCommand = context.QueryEnvironment.Command;
 
