@@ -1,4 +1,5 @@
 using System;
+using System.Data;
 using System.Xml;
 
 namespace ObjectSql.SqlServer.Schema
@@ -15,7 +16,14 @@ namespace ObjectSql.SqlServer.Schema
 			Schema = schema;
 			Namespace = @namespace;
 		}
-
+		public bool IsOut(Parameter param)
+		{
+			return param.ParameterType == ParameterDirection.Output;
+		}
+		public bool IsInOut(Parameter param)
+		{
+			return param.ParameterType == ParameterDirection.InputOutput;
+		}
 		public string ToValidName(string value)
 		{
 			if (value.Length > 0 && char.IsDigit(value[0]))

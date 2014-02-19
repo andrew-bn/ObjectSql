@@ -10,6 +10,7 @@
 <#@ template language="C#" #>
 <#@ assembly name="System.Core" #>
 <#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Data" #>
 <#@ import namespace="System.Text" #>
 <#@ import namespace="System.Collections.Generic" #>
 using System;
@@ -73,23 +74,6 @@ namespace <#= Namespace#>
 		}
 	}
 
-	public static partial class <#=ConnStrName#>ProceduresExtension
-	{
-<# 
-		foreach(var proc in Schema.Procedures)
-		{
-#>
-		public static IQueryEnd <#=ToValidName(proc.Name)#>(this IDatabaseContextHolder<<#=ConnStrName#>Context> holder<#
-			foreach(var p in proc.Parameters){#>, <#=ToTypeName(p.NetType,true)#> <#=ToValidName(p.Name)#><#}#>)
-		{
-			return holder.Exec<<#=ConnStrName#>ProceduresHolder>(h=>h.<#=ToValidName(proc.Name)#>(<#
-				foreach(var p in proc.Parameters){#><#=p.Position>1?", ":""#><#=ToValidName(p.Name)#><#}#>));
-		}
-<#
-		}
-#>
-	}
-
 	public abstract class <#=ConnStrName#>ProceduresHolder
 	{
 <# 
@@ -97,7 +81,55 @@ namespace <#= Namespace#>
 		{
 #>
 		[Procedure("<#=proc.Name#>", "<#=proc.Schema#>")] public abstract void <#=ToValidName(proc.Name)#>(<#
-			foreach(var p in proc.Parameters){#><#=p.Position>1?", ":""#>[Parameter("<#=p.Name.Replace("@","")#>", "<#=p.DataType#>")]<#=ToTypeName(p.NetType,true)#> <#=ToValidName(p.Name)#><#}#>);
+			foreach(var p in proc.Parameters){#><#=p.Position>1?", ":""#>[Parameter("<#=p.Name.Replace("@","")#>", "<#=p.DataType#>")] <#=ToTypeName(p.NetType,true)#> <#=ToValidName(p.Name)#><#}#>);
+<#
+		}
+#>
+	}
+
+	public static partial class <#=ConnStrName#>ProceduresExtension
+	{
+<# 
+		foreach(var proc in Schema.Procedures)
+		{
+#>
+		public static IQueryEnd <#=ToValidName(proc.Name)#>(this IDatabaseContextHolder<<#=ConnStrName#>Context> holder<#
+			foreach(var p in proc.Parameters){#>,<#	if(IsOut(p)){#>out <#}if(IsInOut(p)){#>ref <#}#><#=ToTypeName(p.NetType,true)#> <#=ToValidName(p.Name)#><#}#>)
+		{
+<#
+			foreach(var p in proc.Parameters.Where(IsOut))
+			{
+#>
+			var <#=ToValidName(p.Name)#>_out = default(<#=ToTypeName(p.NetType,true)#>);
+<#
+			}
+#>
+<#
+			foreach(var p in proc.Parameters.Where(IsInOut))
+			{
+#>
+			var <#=ToValidName(p.Name)#>_ref = <#=ToValidName(p.Name)#>;
+<#
+			}
+#>
+			var ___lresl___ = holder.Exec<<#=ConnStrName#>ProceduresHolder>(h=>h.<#=ToValidName(proc.Name)#>(<#
+				foreach(var p in proc.Parameters){#><#=p.Position>1?", ":""#><#=ToValidName(p.Name)#><#if(IsOut(p)){#>_out<#} if(IsInOut(p)){#>_ref<#}#><#}#>));
+<#
+			foreach(var p in proc.Parameters.Where(IsInOut))
+			{
+#>
+			<#=ToValidName(p.Name)#> = <#=ToValidName(p.Name)#>_ref;
+<#
+			}
+			foreach(var p in proc.Parameters.Where(IsOut))
+			{
+#>
+			<#=ToValidName(p.Name)#> = <#=ToValidName(p.Name)#>_out;
+<#
+			}
+#>
+			return ___lresl___;
+		}
 <#
 		}
 #>

@@ -405,51 +405,61 @@ namespace ObjectSql.Tests
 		}
 	}
 
+	public abstract class TestDatabaseProceduresHolder
+	{
+		[Procedure("CustOrderHist", "dbo")] public abstract void CustOrderHist([Parameter("CustomerID", "nchar")] string @CustomerID);
+		[Procedure("CustOrdersDetail", "dbo")] public abstract void CustOrdersDetail([Parameter("OrderID", "int")] int? @OrderID);
+		[Procedure("CustOrdersOrders", "dbo")] public abstract void CustOrdersOrders([Parameter("CustomerID", "nchar")] string @CustomerID);
+		[Procedure("Employee Sales by Country", "dbo")] public abstract void Employee_Sales_by_Country([Parameter("Beginning_Date", "datetime")] DateTime? @Beginning_Date, [Parameter("Ending_Date", "datetime")] DateTime? @Ending_Date);
+		[Procedure("MyProcedure", "dbo")] public abstract void MyProcedure([Parameter("param1", "int")] int? @param1, [Parameter("outParam", "int")] int? @outParam);
+		[Procedure("Sales by Year", "dbo")] public abstract void Sales_by_Year([Parameter("Beginning_Date", "datetime")] DateTime? @Beginning_Date, [Parameter("Ending_Date", "datetime")] DateTime? @Ending_Date);
+		[Procedure("SalesByCategory", "dbo")] public abstract void SalesByCategory([Parameter("CategoryName", "nvarchar")] string @CategoryName, [Parameter("OrdYear", "nvarchar")] string @OrdYear);
+		[Procedure("Ten Most Expensive Products", "dbo")] public abstract void Ten_Most_Expensive_Products();
+	}
+
 	public static partial class TestDatabaseProceduresExtension
 	{
-		public static IQueryEnd CustOrderHist(this IDatabaseContextHolder<TestDatabaseContext> holder, string @CustomerID)
+		public static IQueryEnd CustOrderHist(this IDatabaseContextHolder<TestDatabaseContext> holder,string @CustomerID)
 		{
-			return holder.Exec<TestDatabaseProceduresHolder>(h=>h.CustOrderHist(@CustomerID));
+			var ___lresl___ = holder.Exec<TestDatabaseProceduresHolder>(h=>h.CustOrderHist(@CustomerID));
+			return ___lresl___;
 		}
-		public static IQueryEnd CustOrdersDetail(this IDatabaseContextHolder<TestDatabaseContext> holder, int? @OrderID)
+		public static IQueryEnd CustOrdersDetail(this IDatabaseContextHolder<TestDatabaseContext> holder,int? @OrderID)
 		{
-			return holder.Exec<TestDatabaseProceduresHolder>(h=>h.CustOrdersDetail(@OrderID));
+			var ___lresl___ = holder.Exec<TestDatabaseProceduresHolder>(h=>h.CustOrdersDetail(@OrderID));
+			return ___lresl___;
 		}
-		public static IQueryEnd CustOrdersOrders(this IDatabaseContextHolder<TestDatabaseContext> holder, string @CustomerID)
+		public static IQueryEnd CustOrdersOrders(this IDatabaseContextHolder<TestDatabaseContext> holder,string @CustomerID)
 		{
-			return holder.Exec<TestDatabaseProceduresHolder>(h=>h.CustOrdersOrders(@CustomerID));
+			var ___lresl___ = holder.Exec<TestDatabaseProceduresHolder>(h=>h.CustOrdersOrders(@CustomerID));
+			return ___lresl___;
 		}
-		public static IQueryEnd Employee_Sales_by_Country(this IDatabaseContextHolder<TestDatabaseContext> holder, DateTime? @Beginning_Date, DateTime? @Ending_Date)
+		public static IQueryEnd Employee_Sales_by_Country(this IDatabaseContextHolder<TestDatabaseContext> holder,DateTime? @Beginning_Date,DateTime? @Ending_Date)
 		{
-			return holder.Exec<TestDatabaseProceduresHolder>(h=>h.Employee_Sales_by_Country(@Beginning_Date, @Ending_Date));
+			var ___lresl___ = holder.Exec<TestDatabaseProceduresHolder>(h=>h.Employee_Sales_by_Country(@Beginning_Date, @Ending_Date));
+			return ___lresl___;
 		}
-		public static IQueryEnd MyProcedure(this IDatabaseContextHolder<TestDatabaseContext> holder, int? @param1, int? @outParam)
+		public static IQueryEnd MyProcedure(this IDatabaseContextHolder<TestDatabaseContext> holder,int? @param1,ref int? @outParam)
 		{
-			return holder.Exec<TestDatabaseProceduresHolder>(h=>h.MyProcedure(@param1, @outParam));
+			var @outParam_ref = @outParam;
+			var ___lresl___ = holder.Exec<TestDatabaseProceduresHolder>(h=>h.MyProcedure(@param1, @outParam_ref));
+			@outParam = @outParam_ref;
+			return ___lresl___;
 		}
-		public static IQueryEnd Sales_by_Year(this IDatabaseContextHolder<TestDatabaseContext> holder, DateTime? @Beginning_Date, DateTime? @Ending_Date)
+		public static IQueryEnd Sales_by_Year(this IDatabaseContextHolder<TestDatabaseContext> holder,DateTime? @Beginning_Date,DateTime? @Ending_Date)
 		{
-			return holder.Exec<TestDatabaseProceduresHolder>(h=>h.Sales_by_Year(@Beginning_Date, @Ending_Date));
+			var ___lresl___ = holder.Exec<TestDatabaseProceduresHolder>(h=>h.Sales_by_Year(@Beginning_Date, @Ending_Date));
+			return ___lresl___;
 		}
-		public static IQueryEnd SalesByCategory(this IDatabaseContextHolder<TestDatabaseContext> holder, string @CategoryName, string @OrdYear)
+		public static IQueryEnd SalesByCategory(this IDatabaseContextHolder<TestDatabaseContext> holder,string @CategoryName,string @OrdYear)
 		{
-			return holder.Exec<TestDatabaseProceduresHolder>(h=>h.SalesByCategory(@CategoryName, @OrdYear));
+			var ___lresl___ = holder.Exec<TestDatabaseProceduresHolder>(h=>h.SalesByCategory(@CategoryName, @OrdYear));
+			return ___lresl___;
 		}
 		public static IQueryEnd Ten_Most_Expensive_Products(this IDatabaseContextHolder<TestDatabaseContext> holder)
 		{
-			return holder.Exec<TestDatabaseProceduresHolder>(h=>h.Ten_Most_Expensive_Products());
+			var ___lresl___ = holder.Exec<TestDatabaseProceduresHolder>(h=>h.Ten_Most_Expensive_Products());
+			return ___lresl___;
 		}
-	}
-
-	public abstract class TestDatabaseProceduresHolder
-	{
-		[Procedure("CustOrderHist", "dbo")] public abstract void CustOrderHist([Parameter("CustomerID", "nchar")]string @CustomerID);
-		[Procedure("CustOrdersDetail", "dbo")] public abstract void CustOrdersDetail([Parameter("OrderID", "int")]int? @OrderID);
-		[Procedure("CustOrdersOrders", "dbo")] public abstract void CustOrdersOrders([Parameter("CustomerID", "nchar")]string @CustomerID);
-		[Procedure("Employee Sales by Country", "dbo")] public abstract void Employee_Sales_by_Country([Parameter("Beginning_Date", "datetime")]DateTime? @Beginning_Date, [Parameter("Ending_Date", "datetime")]DateTime? @Ending_Date);
-		[Procedure("MyProcedure", "dbo")] public abstract void MyProcedure([Parameter("param1", "int")]int? @param1, [Parameter("outParam", "int")]int? @outParam);
-		[Procedure("Sales by Year", "dbo")] public abstract void Sales_by_Year([Parameter("Beginning_Date", "datetime")]DateTime? @Beginning_Date, [Parameter("Ending_Date", "datetime")]DateTime? @Ending_Date);
-		[Procedure("SalesByCategory", "dbo")] public abstract void SalesByCategory([Parameter("CategoryName", "nvarchar")]string @CategoryName, [Parameter("OrdYear", "nvarchar")]string @OrdYear);
-		[Procedure("Ten Most Expensive Products", "dbo")] public abstract void Ten_Most_Expensive_Products();
 	}
 }
