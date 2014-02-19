@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Concurrent;
+using System.Data;
 using System.Linq;
 using System.Reflection;
 using ObjectSql.Core.Bo.EntitySchema;
@@ -150,12 +151,12 @@ namespace ObjectSql.Core.SchemaManager
 					: new StorageName(false, attr.Name, attr.Schema);
 
 		}
-		private StorageField ObtainStorageParameter(ParameterInfo prop)
+		private StorageParameter ObtainStorageParameter(ParameterInfo prop)
 		{
-			var annotationAttribute = prop.GetCustomAttribute(typeof(ParameterAttribute)) as ParameterAttribute;
-			return annotationAttribute == null
-					? new StorageField(prop.Name)
-					: new StorageField(annotationAttribute.Name, ParseDbType(annotationAttribute.TypeName));
+			var attr = prop.GetCustomAttribute(typeof(ParameterAttribute)) as ParameterAttribute;
+			return attr == null
+					? new StorageParameter(prop.Name, ParameterDirection.Input)
+					: new StorageParameter(attr.Name, ParseDbType(attr.TypeName), attr.Direction);
 		}
 		#endregion
 		protected IStorageFieldType ParseDbType(string value)

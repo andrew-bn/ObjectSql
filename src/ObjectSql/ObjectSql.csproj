@@ -82,6 +82,7 @@
     <Compile Include="Core\Bo\CommandPreparatorDescriptor\SimpleCommandPreparator.cs" />
     <Compile Include="Core\Bo\CommandPreparatorDescriptor\SingleParameterPreparator.cs" />
     <Compile Include="Core\Bo\CompiledQueryContext.cs" />
+    <Compile Include="Core\Bo\EntitySchema\StorageParameter.cs" />
     <Compile Include="Core\Bo\EntitySchema\EntityMember.cs" />
     <Compile Include="Core\Bo\EntitySchema\EntityProperty.cs" />
     <Compile Include="Core\Bo\EntitySchema\EntitySchema.cs" />

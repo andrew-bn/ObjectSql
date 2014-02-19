@@ -1,4 +1,5 @@
-﻿using System.Data.EntityClient;
+﻿using System.Data;
+using System.Data.EntityClient;
 using ObjectSql.Core.Bo.EntitySchema;
 using ObjectSql.Core.SchemaManager;
 using ObjectSql.Exceptions;
@@ -213,7 +214,7 @@ namespace ObjectSql.EF5
 			foreach (var p in parameters)
 			{
 				var paramIndex = Array.IndexOf(methodParams, p.Name.ToUpper());
-				var funcStorageName = new StorageField(p.Name, ParseDbType(p.Type));
+				var funcStorageName = new StorageParameter(p.Name, ParseDbType(p.Type), ParameterDirection.Input);
 				funcParams.Add(new FuncParameter(p.Name, paramIndex, funcStorageName));
 			}
 
