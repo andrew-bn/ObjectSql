@@ -32,23 +32,37 @@ namespace ObjectSql.Core.QueryBuilder.ExpressionsAnalizers
 
 			for (int i = 0; i < node.Arguments.Count; i++)
 			{
-				var funcParam = funcSchema.FuncParameters.First(p => p.Index == i).StorageField;
+				var funcParam = funcSchema.FuncParameters.First(p => p.Index == i).StorageParameter;
 				var initializer = CreateParameterInitializer(funcParam.Name, node.Arguments[i], funcParam.DbType);
-				
-				var descriptor = IsConstant(node.Arguments[i])
-									? new DatabaseCommandConstantPreparator(funcParam.Name, funcParam.DbType, node.Arguments[i], initializer)
-									: (SingleParameterPreparator) new DatabaseCommandParameterPreparator(funcParam.Name, funcParam.DbType, node.Arguments[i], initializer);
 
-				CommandPreparatorsHolder.AddPreparator(descriptor);
+				var descriptor = IsConstant(node.Arguments[i])
+									? new DatabaseCommandConstantPrePostProcessor(funcParam.Name, funcParam.DbType, node.Arguments[i], initializer)
+									: (SingleParameterPrePostProcessor)new DatabaseCommandParameterPrePostProcessor(funcParam.Name, funcParam.DbType, node.Arguments[i], initializer);
+
+				CommandPreparatorsHolder.AddPreProcessor(descriptor);
 
 				if (descriptor.RootDemanding)
 				{
 					descriptor.AsDatabaseParameter().ParameterWasEncountered(CommandPreparatorsHolder.ParametersEncountered);
+					
+					if (funcParam.IsOut && !IsConstant(node.Arguments[i]))
+					{
+						var parameterReader = CreateParameterReader(funcParam.Name, node.Arguments[i]);
+						var postProcessor = new StoredProcedureOutParameterProcessor(parameterReader);
+						CommandPreparatorsHolder.AddPostProcessor(postProcessor);
+						postProcessor.AsStoredProcedureOutParameterProcessor().ParameterWasEncountered(CommandPreparatorsHolder.ParametersEncountered);
+					}
+
 					CommandPreparatorsHolder.ParametersEncountered++;
 				}
 			}
 
 			return node;
+		}
+
+		private Action<IDbCommand, object> CreateParameterReader(string name, Expression accessor)
+		{
+			return ExpressionBuilder.CreateCommandParameterReader(Expression.Constant(name, typeof(string)), accessor);
 		}
 
 		protected Action<IDbCommand, object> CreateParameterInitializer(string name, Expression accessor, IStorageFieldType dbTypeInContext)

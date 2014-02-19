@@ -6,5 +6,6 @@ namespace ObjectSql.Core.Bo.CommandPreparatorDescriptor
 		InsertionParameter,
 		DatabaseCommandParameter,
 		DatabaseCommandConstant,
+		StoredProcedureOutParameterReader,
 	}
 }

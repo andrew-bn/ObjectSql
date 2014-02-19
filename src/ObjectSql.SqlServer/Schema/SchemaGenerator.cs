@@ -86,7 +86,7 @@ namespace ObjectSql.SqlServer.Schema
 					if (Column(col, "specific_name"))
 						param.ProcedureName = row[col].ToString();
 					if (Column(col, "parameter_mode"))
-						param.ParameterType = ParseParameterMode(row[col].ToString());
+						param.Direction = ParseParameterMode(row[col].ToString());
 					if (Column(col, "ordinal_position"))
 						param.Position = int.Parse(row[col].ToString());
 					
@@ -102,7 +102,7 @@ namespace ObjectSql.SqlServer.Schema
 				}
 
 				if (param.Position == 0)
-					param.ParameterType = ParameterDirection.ReturnValue;
+					param.Direction = ParameterDirection.ReturnValue;
 
 				procedures.First(p => p.Name == param.ProcedureName && p.Schema == param.Schema).Parameters.Add(param);
 			}

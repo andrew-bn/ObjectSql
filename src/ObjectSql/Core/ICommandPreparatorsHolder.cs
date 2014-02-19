@@ -5,8 +5,10 @@ namespace ObjectSql.Core
 {
 	public interface ICommandPreparatorsHolder
 	{
-		IList<CommandPreparator> Preparators { get; }
+		IList<CommandPrePostProcessor> PreProcessors { get; }
+		IList<CommandPrePostProcessor> PostProcessors { get; }
 		int ParametersEncountered { get; set; }
-		void AddPreparator(CommandPreparator preparator);
+		void AddPreProcessor(CommandPrePostProcessor prePostProcessor);
+		void AddPostProcessor(CommandPrePostProcessor prePostProcessor);
 	}
 }

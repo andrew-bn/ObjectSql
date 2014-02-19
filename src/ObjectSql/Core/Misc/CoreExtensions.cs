@@ -4,17 +4,21 @@ namespace ObjectSql.Core.Misc
 {
 	internal static class CoreExtensions
 	{
-		public static InsertionParameterPreparator AsInsertion(this CommandPreparator descriptor)
+		public static InsertionParameterPrePostProcessor AsInsertion(this CommandPrePostProcessor descriptor)
 		{
-			return (InsertionParameterPreparator)descriptor;
+			return (InsertionParameterPrePostProcessor)descriptor;
 		}
-		public static DatabaseCommandParameterPreparator AsDatabaseParameter(this CommandPreparator descriptor)
+		public static DatabaseCommandParameterPrePostProcessor AsDatabaseParameter(this CommandPrePostProcessor descriptor)
 		{
-			return (DatabaseCommandParameterPreparator)descriptor;
+			return (DatabaseCommandParameterPrePostProcessor)descriptor;
 		}
-		public static SingleParameterPreparator AsSingleParameter(this CommandPreparator descriptor)
+		public static StoredProcedureOutParameterProcessor AsStoredProcedureOutParameterProcessor(this CommandPrePostProcessor descriptor)
 		{
-			return (SingleParameterPreparator)descriptor;
+			return (StoredProcedureOutParameterProcessor)descriptor;
+		}
+		public static SingleParameterPrePostProcessor AsSingleParameter(this CommandPrePostProcessor descriptor)
+		{
+			return (SingleParameterPrePostProcessor)descriptor;
 		}
 
 	}

@@ -24,6 +24,9 @@ namespace ObjectSql.Core
 			{
 				var preparationData = _queryCache.GetOrAdd(context, GeneratePreparationData);
 				PrepareQuery(context, preparationData);
+#error
+				preparationData.PostProcessors[0].CommandPreparationAction(context.QueryEnvironment.Command,
+				                                                           context.QueryRoots.Roots.First().Key);
 				context.Prepared = true;
 			}
 		}
@@ -38,16 +41,16 @@ namespace ObjectSql.Core
 			else
 				dbCommand.CommandText += preparationData.CommandText;
 
-			for (int i = 0; i < preparationData.Parameters.Length; i++)
+			for (int i = 0; i < preparationData.PreProcessors.Length; i++)
 			{
-				if (!preparationData.Parameters[i].RootDemanding)
-					preparationData.Parameters[i].CommandPreparationAction(dbCommand, null);
+				if (!preparationData.PreProcessors[i].RootDemanding)
+					preparationData.PreProcessors[i].CommandPreparationAction(dbCommand, null);
 				else
 				{
 					foreach (var root in context.QueryRoots.Roots)
 					{
-						if ((root.Value & preparationData.Parameters[i].RootMap) != 0)
-							preparationData.Parameters[i].CommandPreparationAction(dbCommand, root.Key);
+						if ((root.Value & preparationData.PreProcessors[i].RootMap) != 0)
+							preparationData.PreProcessors[i].CommandPreparationAction(dbCommand, root.Key);
 					}
 				}
 			}

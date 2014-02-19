@@ -5,9 +5,9 @@ using ObjectSql.Core.Bo.EntitySchema;
 
 namespace ObjectSql.Core.Bo.CommandPreparatorDescriptor
 {
-	public abstract class SingleParameterPreparator : CommandPreparator
+	public abstract class SingleParameterPrePostProcessor : CommandPrePostProcessor
 	{
-		protected SingleParameterPreparator(string name, 
+		protected SingleParameterPrePostProcessor(string name, 
 			IStorageFieldType type, Expression accessor, Action<IDbCommand, object> preparationAction) 
 			: base(preparationAction)
 		{

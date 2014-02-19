@@ -5,16 +5,19 @@ namespace ObjectSql.Core.Bo
 {
 	public class QueryPreparationData
 	{
-		public CommandPreparator[] Parameters { get; private set; }
+		public CommandPrePostProcessor[] PreProcessors { get; private set; }
+		public CommandPrePostProcessor[] PostProcessors { get; private set; }
 		public string CommandText { get; private set; }
 		public Delegate DataMaterializer { get; private set; }
 
 		public QueryPreparationData(string commandText,
-									  CommandPreparator[] parameters,
-									  Delegate dataMaterializer)
+									CommandPrePostProcessor[] preProcessors,
+									CommandPrePostProcessor[] postProcessors,
+									Delegate dataMaterializer)
 		{
 			CommandText = commandText;
-			Parameters = parameters;
+			PreProcessors = preProcessors;
+			PostProcessors = postProcessors;
 			DataMaterializer = dataMaterializer;
 		}
 	}

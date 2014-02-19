@@ -22,7 +22,7 @@ namespace ObjectSql.Tests.SqlServerTests
 		private Mock<IDelegatesBuilder> _delegatesBuilder;
 		private Mock<ICommandPreparatorsHolder> _parametersHolder;
 
-		private List<CommandPreparator> _parameters;
+		private List<CommandPrePostProcessor> _parameters;
 		private Action<IDbCommand, object> _parameterFactory;
 		private EntitySchema _categorySchema;
 		private int _parametersEncountered;
@@ -45,11 +45,11 @@ namespace ObjectSql.Tests.SqlServerTests
 			_delegatesBuilder.Setup(b => b.CreateDatabaseParameterFactoryAction(It.IsAny<Expression>(), It.IsAny<Expression>(), It.IsAny<IStorageFieldType>()))
 				.Returns(_parameterFactory);
 
-			_parameters = new List<CommandPreparator>();
+			_parameters = new List<CommandPrePostProcessor>();
 			_parametersHolder = new Mock<ICommandPreparatorsHolder>();
-			_parametersHolder.Setup(h => h.Preparators).Returns(_parameters);
-			_parametersHolder.Setup(h => h.AddPreparator(It.IsAny<CommandPreparator>()))
-				.Callback((CommandPreparator d) => _parameters.Add(d));
+			_parametersHolder.Setup(h => h.PreProcessors).Returns(_parameters);
+			_parametersHolder.Setup(h => h.AddPreProcessor(It.IsAny<CommandPrePostProcessor>()))
+				.Callback((CommandPrePostProcessor d) => _parameters.Add(d));
 			_parametersHolder.SetupSet(h => h.ParametersEncountered).Callback(i => _parametersEncountered = i);
 			_parametersHolder.Setup(h => h.ParametersEncountered).Returns(() => _parametersEncountered);
 

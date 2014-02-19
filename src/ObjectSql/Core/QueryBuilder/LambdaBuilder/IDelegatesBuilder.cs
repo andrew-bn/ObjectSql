@@ -11,6 +11,6 @@ namespace ObjectSql.Core.QueryBuilder.LambdaBuilder
 		Action<IDbCommand, object> CreateInsertionParametersInitializerAction(EntitySchema entitySchema, EntityInsertionInformation insertionInfo);
 		Action<IDbCommand, object> CreateChangeDatabaseCommandTypeAction(CommandType commandType);
 		Delegate CreateEntityMaterializationDelegate(EntitySchema schema, EntityMaterializationInformation materializationInfo);
-		
+		Action<IDbCommand, object> CreateCommandParameterReader(ConstantExpression parameterName, Expression valueAccessor);
 	}
 }

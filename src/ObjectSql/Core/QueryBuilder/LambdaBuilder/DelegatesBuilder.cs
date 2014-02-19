@@ -13,6 +13,44 @@ namespace ObjectSql.Core.QueryBuilder.LambdaBuilder
 {
 	public abstract class DelegatesBuilder : IDelegatesBuilder
 	{
+		public Action<IDbCommand, object> CreateCommandParameterReader(ConstantExpression parameterName, Expression valueAccessor)
+		{
+			var expQueue = new Stack<Expression>(ExpressionEnumerator.Enumerate(valueAccessor).Cast<Expression>().ToArray());
+			var rootParam = Expression.Parameter(typeof(object));
+			var cmdParam = Expression.Parameter(typeof(IDbCommand));
+
+			Expression parameterAccessor = null;
+
+
+			while (expQueue.Count != 0)
+			{
+				var exp = expQueue.Pop();
+				if (exp == null) // static type
+					throw new ObjectSqlException("Invalid constant accessor detected. You can not use static fields as constants holders. Consider passing this value as variable");
+				if (exp.NodeType == ExpressionType.Constant)
+					parameterAccessor = Expression.Convert(rootParam, exp.Type);
+				else if (exp.NodeType == ExpressionType.MemberAccess)
+					parameterAccessor = Expression.MakeMemberAccess(parameterAccessor, ((MemberExpression)exp).Member);
+				else throw new ObjectSqlException("Invalid constant accessor detected");
+			}
+			Expression commandAccessor = Expression.MakeMemberAccess(cmdParam, Reflect.FindProperty<IDbCommand>(c => c.Parameters));
+			commandAccessor = Expression.MakeIndex(commandAccessor, typeof(IDataParameterCollection).GetProperty("Item"), new[] { parameterName });
+			
+			var paramType = parameterAccessor.Type;
+#error
+			if (paramType.IsGenericType && paramType.GetGenericTypeDefinition() == typeof (Nullable<>))
+				paramType = paramType.GetGenericArguments()[0];
+
+			commandAccessor = Expression.Condition(Expression.TypeIs(commandAccessor,typeof(DBNull)),
+												   Expression.Convert(Expression.Constant(null), parameterAccessor.Type),
+												   Expression.Convert(Expression.Convert(commandAccessor, paramType),parameterAccessor.Type));
+	
+			return Expression.Lambda<Action<IDbCommand, object>>(
+						Expression.Assign(parameterAccessor, Expression.Constant(232,typeof(int?))),
+						cmdParam,
+						rootParam).Compile();
+		}
+
 		public Action<IDbCommand, object> CreateDatabaseParameterFactoryAction(Expression parameterName, Expression valueAccessor, IStorageFieldType parameterType)
 		{
 			var expQueue = new Stack<Expression>(ExpressionEnumerator.Enumerate(valueAccessor).Cast<Expression>().ToArray());
@@ -49,14 +87,14 @@ namespace ObjectSql.Core.QueryBuilder.LambdaBuilder
 					Expression.Equal(parameterAccessor, Expression.Constant(null)),
 					Expression.Convert(Expression.Constant(DBNull.Value), typeof(object)),
 					Expression.Convert(parameterAccessor, typeof(object)));
-			else if (paramType.IsGenericType && paramType.GetGenericTypeDefinition() == typeof (Nullable<>))
+			else if (paramType.IsGenericType && paramType.GetGenericTypeDefinition() == typeof(Nullable<>))
 				parameterAccessor = Expression.Condition(
 					Expression.MakeMemberAccess(parameterAccessor, paramType.GetProperty("HasValue")),
 					Expression.Convert(Expression.MakeMemberAccess(parameterAccessor, paramType.GetProperty("Value")), typeof(object)),
 					Expression.Convert(Expression.Constant(DBNull.Value), typeof(object)));
 			else
 				parameterAccessor = Expression.Convert(parameterAccessor, typeof(object));
-			
+
 			Expression parameterCreate = CreateParameterFactory(parameterName, parameterAccessor, parameterType);
 
 			Expression parameterAdd = Expression.MakeMemberAccess(cmdParam, Reflect.FindProperty<IDbCommand>(c => c.Parameters));
@@ -168,7 +206,7 @@ namespace ObjectSql.Core.QueryBuilder.LambdaBuilder
 
 			if (materializationInfo.IsSingleValue && !materializationInfo.UseResultMapping)
 				return CreateSingleValueRowFactory(schema, delegateType);
-			
+
 			if (materializationInfo.IsConstructorBased)
 				return CreateConstructorBasedRowFactory(materializationInfo.ConstructorInfo, delegateType);
 
@@ -177,7 +215,7 @@ namespace ObjectSql.Core.QueryBuilder.LambdaBuilder
 
 			return CreatePropertyInitializationBasedRowFactory(schema, materializationInfo.FieldsIndexes, delegateType);
 		}
-		
+
 		private Delegate CreateSingleValueRowFactory(EntitySchema schema, Type delegateType)
 		{
 			var dataReaderParameter = Expression.Parameter(typeof(IDataReader));
@@ -249,8 +287,8 @@ namespace ObjectSql.Core.QueryBuilder.LambdaBuilder
 			var continueLabel = Expression.Label();
 
 			var dataReaderParameter = Expression.Parameter(typeof(IDataReader));
-			
-			var index = Expression.Variable(typeof (int), "index");
+
+			var index = Expression.Variable(typeof(int), "index");
 			var assignIndex = Expression.Assign(index, Expression.Constant(0));
 			parts.Add(assignIndex);
 
@@ -265,23 +303,23 @@ namespace ObjectSql.Core.QueryBuilder.LambdaBuilder
 							Expression.Goto(exitLabel));
 			parts.Add(loopExitCondition);
 
-			var fieldName = Expression.Variable(typeof (string), "fieldName");
+			var fieldName = Expression.Variable(typeof(string), "fieldName");
 			var fieldNameAssign = Expression.Assign(fieldName, Expression.Call(dataReaderParameter, getName, index));
 			parts.Add(fieldNameAssign);
 
-			var fieldType = Expression.Variable(typeof (Type), "fieldType");
+			var fieldType = Expression.Variable(typeof(Type), "fieldType");
 			var fieldTypeAssign = Expression.Assign(fieldType, Expression.Call(dataReaderParameter, getType, index));
 			parts.Add(fieldTypeAssign);
-				// ifs ---
+			// ifs ---
 			foreach (var p in schema.EntityFields)
 			{
 				var ifExp = Expression.IfThen(
-									Expression.Call(fieldName, stringEquals, Expression.Constant(p.StorageField.Name),Expression.Constant(StringComparison.CurrentCultureIgnoreCase)),
+									Expression.Call(fieldName, stringEquals, Expression.Constant(p.StorageField.Name), Expression.Constant(StringComparison.CurrentCultureIgnoreCase)),
 									Expression.Assign(Expression.Property(newRow, p.PropertyInfo),
-												Expression.Convert(Expression.Call(dataReaderParameter,getValue,index), p.PropertyInfo.PropertyType)));
+												Expression.Convert(Expression.Call(dataReaderParameter, getValue, index), p.PropertyInfo.PropertyType)));
 				parts.Add(ifExp);
 			}
-				// -------
+			// -------
 			parts.Add(Expression.Assign(index, Expression.Add(index, Expression.Constant(1))));
 			parts.Add(Expression.Goto(continueLabel));
 
@@ -290,7 +328,7 @@ namespace ObjectSql.Core.QueryBuilder.LambdaBuilder
 			parts.Add(newRow);
 
 			var body = Expression.Block(
-				new[]{index, newRow,fieldName,fieldType},
+				new[] { index, newRow, fieldName, fieldType },
 				parts);
 
 			return Expression.Lambda(delegateType, body, dataReaderParameter).Compile();
@@ -361,6 +399,6 @@ namespace ObjectSql.Core.QueryBuilder.LambdaBuilder
 						cmdParam,
 						rootParam).Compile();
 		}
-		
+
 	}
 }

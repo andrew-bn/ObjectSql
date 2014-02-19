@@ -78,7 +78,8 @@ namespace ObjectSql.Core.QueryBuilder
 			}
 
 			return new QueryPreparationData(context.Text.ToString(),
-											context.Preparators.Preparators.ToArray(),
+											context.Preparators.PreProcessors.ToArray(),
+											context.Preparators.PostProcessors.ToArray(),
 											context.MaterializationDelegate);
 		}
 
@@ -99,8 +100,8 @@ namespace ObjectSql.Core.QueryBuilder
 
 			var changeDbCommandType = _delegatesBuilder.CreateChangeDatabaseCommandTypeAction(CommandType.StoredProcedure);
 			
-			var param = new SimpleCommandPreparator(changeDbCommandType);
-			context.Preparators.AddPreparator(param);
+			var param = new SimpleCommandPrePostProcessor(changeDbCommandType);
+			context.Preparators.AddPreProcessor(param);
 
 			if (storedProcedurePart.HasResultEntityType)
 			{
@@ -138,8 +139,8 @@ namespace ObjectSql.Core.QueryBuilder
 			var entitySchema = GetSchema(valuesPart.Type);
 			var insertionAction = _delegatesBuilder.CreateInsertionParametersInitializerAction(entitySchema, context.InsertionInfo);
 
-			var param = new InsertionParameterPreparator(insertionAction);
-			context.Preparators.AddPreparator(param);
+			var param = new InsertionParameterPrePostProcessor(insertionAction);
+			context.Preparators.AddPreProcessor(param);
 		}
 			#endregion
 		#region select

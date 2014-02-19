@@ -30,7 +30,7 @@ namespace ObjectSql.Tests.ExpressionsAnalizersTests
 		private Mock<IDelegatesBuilder> _delegatesBuilder;
 		private Mock<ICommandPreparatorsHolder> _parametersHolder;
 
-		private List<CommandPreparator> _parameters;
+		private List<CommandPrePostProcessor> _parameters;
 		private Action<IDbCommand, object> _parameterFactory;
 		private EntitySchema _categorySchema;
 		private string _categoryNameField;
@@ -55,11 +55,11 @@ namespace ObjectSql.Tests.ExpressionsAnalizersTests
 			_delegatesBuilder.Setup(b => b.CreateDatabaseParameterFactoryAction(It.IsAny<Expression>(), It.IsAny<Expression>(), It.IsAny<IStorageFieldType>()))
 				.Returns(_parameterFactory);
 
-			_parameters = new List<CommandPreparator>();
+			_parameters = new List<CommandPrePostProcessor>();
 			_parametersHolder = new Mock<ICommandPreparatorsHolder>();
-			_parametersHolder.Setup(h => h.Preparators).Returns(_parameters);
-			_parametersHolder.Setup(h => h.AddPreparator(It.IsAny<CommandPreparator>()))
-				.Callback((CommandPreparator d) => _parameters.Add(d));
+			_parametersHolder.Setup(h => h.PreProcessors).Returns(_parameters);
+			_parametersHolder.Setup(h => h.AddPreProcessor(It.IsAny<CommandPrePostProcessor>()))
+				.Callback((CommandPrePostProcessor d) => _parameters.Add(d));
 			_parametersHolder.SetupSet(h => h.ParametersEncountered).Callback(i => _parametersEncountered = i);
 			_parametersHolder.Setup(h => h.ParametersEncountered).Returns(() => _parametersEncountered);
 
@@ -73,8 +73,8 @@ namespace ObjectSql.Tests.ExpressionsAnalizersTests
 
 			Assert.AreEqual("@p0", result);
 			_delegatesBuilder.Verify(b => b.CreateDatabaseParameterFactoryAction(IsExp(() => "p0"), IsExp(() => 5), null));
-			_parametersHolder.Verify(h => h.AddPreparator(It.IsAny<CommandPreparator>()), Times.Once());
-			_parametersHolder.Verify(h => h.AddPreparator(It.Is<CommandPreparator>(d => ((SingleParameterPreparator)d).Name == "p0")));
+			_parametersHolder.Verify(h => h.AddPreProcessor(It.IsAny<CommandPrePostProcessor>()), Times.Once());
+			_parametersHolder.Verify(h => h.AddPreProcessor(It.Is<CommandPrePostProcessor>(d => ((SingleParameterPrePostProcessor)d).Name == "p0")));
 		}
 		[Test]
 		public void BuildSql_RenderClassProperty()
@@ -86,8 +86,8 @@ namespace ObjectSql.Tests.ExpressionsAnalizersTests
 
 			Assert.AreEqual("@p0", result);
 			_delegatesBuilder.Verify(b=>b.CreateDatabaseParameterFactoryAction(IsExp(()=>"p0"),IsExp(()=>value),null));
-			_parametersHolder.Verify(h => h.AddPreparator(It.IsAny<CommandPreparator>()), Times.Once());
-			_parametersHolder.Verify(h => h.AddPreparator(It.Is<CommandPreparator>(d => ((SingleParameterPreparator)d).Name == "p0")));
+			_parametersHolder.Verify(h => h.AddPreProcessor(It.IsAny<CommandPrePostProcessor>()), Times.Once());
+			_parametersHolder.Verify(h => h.AddPreProcessor(It.Is<CommandPrePostProcessor>(d => ((SingleParameterPrePostProcessor)d).Name == "p0")));
 		}
 		[Test]
 		public void BuildSql_RenderNestedClassProperty()
@@ -99,8 +99,8 @@ namespace ObjectSql.Tests.ExpressionsAnalizersTests
 
 			Assert.AreEqual("@p0", result);
 			_delegatesBuilder.Verify(b => b.CreateDatabaseParameterFactoryAction(IsExp(() => "p0"), IsExp(() => value.Val), null));
-			_parametersHolder.Verify(h => h.AddPreparator(It.IsAny<CommandPreparator>()), Times.Once());
-			_parametersHolder.Verify(h => h.AddPreparator(It.Is<CommandPreparator>(d => ((SingleParameterPreparator)d).Name == "p0")));
+			_parametersHolder.Verify(h => h.AddPreProcessor(It.IsAny<CommandPrePostProcessor>()), Times.Once());
+			_parametersHolder.Verify(h => h.AddPreProcessor(It.Is<CommandPrePostProcessor>(d => ((SingleParameterPrePostProcessor)d).Name == "p0")));
 		}
 
 		[Test]
@@ -112,7 +112,7 @@ namespace ObjectSql.Tests.ExpressionsAnalizersTests
 			var result = builder.BuildSql(_parametersHolder.Object, exp.Body, true);
 
 			Assert.AreEqual("[catPar].["+_categoryNameField+"]", result);
-			_parametersHolder.Verify(h => h.AddPreparator(It.IsAny<CommandPreparator>()), Times.Never());
+			_parametersHolder.Verify(h => h.AddPreProcessor(It.IsAny<CommandPrePostProcessor>()), Times.Never());
 		}
 
 		[Test]
@@ -125,9 +125,9 @@ namespace ObjectSql.Tests.ExpressionsAnalizersTests
 			Assert.AreEqual("(@p0+@p1)", result);
 			_delegatesBuilder.Verify(b => b.CreateDatabaseParameterFactoryAction(IsExp(() => "p0"), IsExp(() => "val"), null));
 			_delegatesBuilder.Verify(b => b.CreateDatabaseParameterFactoryAction(IsExp(() => "p1"), IsExp(() => 2), null));
-			_parametersHolder.Verify(h => h.AddPreparator(It.IsAny<CommandPreparator>()), Times.Exactly(2));
-			_parametersHolder.Verify(h => h.AddPreparator(It.Is<CommandPreparator>(d => ((SingleParameterPreparator)d).Name == "p0")));
-			_parametersHolder.Verify(h => h.AddPreparator(It.Is<CommandPreparator>(d => ((SingleParameterPreparator)d).Name == "p1")));
+			_parametersHolder.Verify(h => h.AddPreProcessor(It.IsAny<CommandPrePostProcessor>()), Times.Exactly(2));
+			_parametersHolder.Verify(h => h.AddPreProcessor(It.Is<CommandPrePostProcessor>(d => ((SingleParameterPrePostProcessor)d).Name == "p0")));
+			_parametersHolder.Verify(h => h.AddPreProcessor(It.Is<CommandPrePostProcessor>(d => ((SingleParameterPrePostProcessor)d).Name == "p1")));
 		}
 		[Test]
 		public void BuildSql_RenderSameParameters()
@@ -139,9 +139,9 @@ namespace ObjectSql.Tests.ExpressionsAnalizersTests
 			Assert.AreEqual("((@p0+@p1)+@p0)", result);
 			_delegatesBuilder.Verify(b => b.CreateDatabaseParameterFactoryAction(IsExp(() => "p0"), IsExp(() => "val"), null));
 			_delegatesBuilder.Verify(b => b.CreateDatabaseParameterFactoryAction(IsExp(() => "p1"), IsExp(() => 2), null));
-			_parametersHolder.Verify(h => h.AddPreparator(It.IsAny<CommandPreparator>()), Times.Exactly(2));
-			_parametersHolder.Verify(h => h.AddPreparator(It.Is<CommandPreparator>(d => ((SingleParameterPreparator)d).Name == "p0")));
-			_parametersHolder.Verify(h => h.AddPreparator(It.Is<CommandPreparator>(d => ((SingleParameterPreparator)d).Name == "p1")));
+			_parametersHolder.Verify(h => h.AddPreProcessor(It.IsAny<CommandPrePostProcessor>()), Times.Exactly(2));
+			_parametersHolder.Verify(h => h.AddPreProcessor(It.Is<CommandPrePostProcessor>(d => ((SingleParameterPrePostProcessor)d).Name == "p0")));
+			_parametersHolder.Verify(h => h.AddPreProcessor(It.Is<CommandPrePostProcessor>(d => ((SingleParameterPrePostProcessor)d).Name == "p1")));
 		}
 		[Test]
 		public void BuildSql_RenderSameParameterTypes()
@@ -154,10 +154,10 @@ namespace ObjectSql.Tests.ExpressionsAnalizersTests
 			_delegatesBuilder.Verify(b => b.CreateDatabaseParameterFactoryAction(IsExp(() => "p0"), IsExp(() => "val"), null));
 			_delegatesBuilder.Verify(b => b.CreateDatabaseParameterFactoryAction(IsExp(() => "p1"), IsExp(() => 2), null));
 			_delegatesBuilder.Verify(b => b.CreateDatabaseParameterFactoryAction(IsExp(() => "p2"), IsExp(() => "val2"), null));
-			_parametersHolder.Verify(h => h.AddPreparator(It.IsAny<CommandPreparator>()), Times.Exactly(3));
-			_parametersHolder.Verify(h => h.AddPreparator(It.Is<CommandPreparator>(d => ((SingleParameterPreparator)d).Name == "p0")));
-			_parametersHolder.Verify(h => h.AddPreparator(It.Is<CommandPreparator>(d => ((SingleParameterPreparator)d).Name == "p1")));
-			_parametersHolder.Verify(h => h.AddPreparator(It.Is<CommandPreparator>(d => ((SingleParameterPreparator)d).Name == "p2")));
+			_parametersHolder.Verify(h => h.AddPreProcessor(It.IsAny<CommandPrePostProcessor>()), Times.Exactly(3));
+			_parametersHolder.Verify(h => h.AddPreProcessor(It.Is<CommandPrePostProcessor>(d => ((SingleParameterPrePostProcessor)d).Name == "p0")));
+			_parametersHolder.Verify(h => h.AddPreProcessor(It.Is<CommandPrePostProcessor>(d => ((SingleParameterPrePostProcessor)d).Name == "p1")));
+			_parametersHolder.Verify(h => h.AddPreProcessor(It.Is<CommandPrePostProcessor>(d => ((SingleParameterPrePostProcessor)d).Name == "p2")));
 		}
 		[Test]
 		public void BuildSql_RenderSameParameters_SameRoot_DifferentProperties()
@@ -172,10 +172,10 @@ namespace ObjectSql.Tests.ExpressionsAnalizersTests
 			_delegatesBuilder.Verify(b => b.CreateDatabaseParameterFactoryAction(IsExp(() => "p0"), IsExp(() => val1), null));
 			_delegatesBuilder.Verify(b => b.CreateDatabaseParameterFactoryAction(IsExp(() => "p1"), IsExp(() => 2), null));
 			_delegatesBuilder.Verify(b => b.CreateDatabaseParameterFactoryAction(IsExp(() => "p2"), IsExp(() => val2), null));
-			_parametersHolder.Verify(h => h.AddPreparator(It.IsAny<CommandPreparator>()), Times.Exactly(3));
-			_parametersHolder.Verify(h => h.AddPreparator(It.Is<CommandPreparator>(d => ((SingleParameterPreparator)d).Name == "p0")));
-			_parametersHolder.Verify(h => h.AddPreparator(It.Is<CommandPreparator>(d => ((SingleParameterPreparator)d).Name == "p1")));
-			_parametersHolder.Verify(h => h.AddPreparator(It.Is<CommandPreparator>(d => ((SingleParameterPreparator)d).Name == "p2")));
+			_parametersHolder.Verify(h => h.AddPreProcessor(It.IsAny<CommandPrePostProcessor>()), Times.Exactly(3));
+			_parametersHolder.Verify(h => h.AddPreProcessor(It.Is<CommandPrePostProcessor>(d => ((SingleParameterPrePostProcessor)d).Name == "p0")));
+			_parametersHolder.Verify(h => h.AddPreProcessor(It.Is<CommandPrePostProcessor>(d => ((SingleParameterPrePostProcessor)d).Name == "p1")));
+			_parametersHolder.Verify(h => h.AddPreProcessor(It.Is<CommandPrePostProcessor>(d => ((SingleParameterPrePostProcessor)d).Name == "p2")));
 		}
 		public class Root
 		{
@@ -194,10 +194,10 @@ namespace ObjectSql.Tests.ExpressionsAnalizersTests
 			_delegatesBuilder.Verify(b => b.CreateDatabaseParameterFactoryAction(IsExp(() => "p0"), IsExp(() => v1.Val), null));
 			_delegatesBuilder.Verify(b => b.CreateDatabaseParameterFactoryAction(IsExp(() => "p1"), IsExp(() => 2), null));
 			_delegatesBuilder.Verify(b => b.CreateDatabaseParameterFactoryAction(IsExp(() => "p2"), IsExp(() => v2.Val), null));
-			_parametersHolder.Verify(h => h.AddPreparator(It.IsAny<CommandPreparator>()), Times.Exactly(3));
-			_parametersHolder.Verify(h => h.AddPreparator(It.Is<CommandPreparator>(d => ((SingleParameterPreparator)d).Name == "p0")));
-			_parametersHolder.Verify(h => h.AddPreparator(It.Is<CommandPreparator>(d => ((SingleParameterPreparator)d).Name == "p1")));
-			_parametersHolder.Verify(h => h.AddPreparator(It.Is<CommandPreparator>(d => ((SingleParameterPreparator)d).Name == "p2")));
+			_parametersHolder.Verify(h => h.AddPreProcessor(It.IsAny<CommandPrePostProcessor>()), Times.Exactly(3));
+			_parametersHolder.Verify(h => h.AddPreProcessor(It.Is<CommandPrePostProcessor>(d => ((SingleParameterPrePostProcessor)d).Name == "p0")));
+			_parametersHolder.Verify(h => h.AddPreProcessor(It.Is<CommandPrePostProcessor>(d => ((SingleParameterPrePostProcessor)d).Name == "p1")));
+			_parametersHolder.Verify(h => h.AddPreProcessor(It.Is<CommandPrePostProcessor>(d => ((SingleParameterPrePostProcessor)d).Name == "p2")));
 		}
 		[Test]
 		public void BuildSql_RenderSameRootParameters()
@@ -210,9 +210,9 @@ namespace ObjectSql.Tests.ExpressionsAnalizersTests
 			Assert.AreEqual("((@p0+@p1)+@p0)", result);
 			_delegatesBuilder.Verify(b => b.CreateDatabaseParameterFactoryAction(IsExp(() => "p0"), IsExp(() => v1.Val), null));
 			_delegatesBuilder.Verify(b => b.CreateDatabaseParameterFactoryAction(IsExp(() => "p1"), IsExp(() => 2), null));
-			_parametersHolder.Verify(h => h.AddPreparator(It.IsAny<CommandPreparator>()), Times.Exactly(2));
-			_parametersHolder.Verify(h => h.AddPreparator(It.Is<CommandPreparator>(d => ((SingleParameterPreparator)d).Name == "p0")));
-			_parametersHolder.Verify(h => h.AddPreparator(It.Is<CommandPreparator>(d => ((SingleParameterPreparator)d).Name == "p1")));
+			_parametersHolder.Verify(h => h.AddPreProcessor(It.IsAny<CommandPrePostProcessor>()), Times.Exactly(2));
+			_parametersHolder.Verify(h => h.AddPreProcessor(It.Is<CommandPrePostProcessor>(d => ((SingleParameterPrePostProcessor)d).Name == "p0")));
+			_parametersHolder.Verify(h => h.AddPreProcessor(It.Is<CommandPrePostProcessor>(d => ((SingleParameterPrePostProcessor)d).Name == "p1")));
 		}
 		[Test]
 		public void BuildSql_RenderBinarySub()
@@ -223,8 +223,8 @@ namespace ObjectSql.Tests.ExpressionsAnalizersTests
 
 			Assert.AreEqual("([c].[CategoryID]-@p0)", result);
 			_delegatesBuilder.Verify(b => b.CreateDatabaseParameterFactoryAction(IsExp(() => "p0"), IsExp(() => 1), null));
-			_parametersHolder.Verify(h => h.AddPreparator(It.IsAny<CommandPreparator>()), Times.Exactly(1));
-			_parametersHolder.Verify(h => h.AddPreparator(It.Is<CommandPreparator>(d => ((SingleParameterPreparator)d).Name == "p0")));
+			_parametersHolder.Verify(h => h.AddPreProcessor(It.IsAny<CommandPrePostProcessor>()), Times.Exactly(1));
+			_parametersHolder.Verify(h => h.AddPreProcessor(It.Is<CommandPrePostProcessor>(d => ((SingleParameterPrePostProcessor)d).Name == "p0")));
 		}
 		[Test]
 		public void BuildSql_RenderDivide()
@@ -235,8 +235,8 @@ namespace ObjectSql.Tests.ExpressionsAnalizersTests
 
 			Assert.AreEqual("([c].[CategoryID]/@p0)", result);
 			_delegatesBuilder.Verify(b => b.CreateDatabaseParameterFactoryAction(IsExp(() => "p0"), IsExp(() => 1), null));
-			_parametersHolder.Verify(h => h.AddPreparator(It.IsAny<CommandPreparator>()), Times.Exactly(1));
-			_parametersHolder.Verify(h => h.AddPreparator(It.Is<CommandPreparator>(d => ((SingleParameterPreparator)d).Name == "p0")));
+			_parametersHolder.Verify(h => h.AddPreProcessor(It.IsAny<CommandPrePostProcessor>()), Times.Exactly(1));
+			_parametersHolder.Verify(h => h.AddPreProcessor(It.Is<CommandPrePostProcessor>(d => ((SingleParameterPrePostProcessor)d).Name == "p0")));
 		}
 		[Test]
 		public void BuildSql_RenderMult()
@@ -247,8 +247,8 @@ namespace ObjectSql.Tests.ExpressionsAnalizersTests
 
 			Assert.AreEqual("([c].[CategoryID]*@p0)", result);
 			_delegatesBuilder.Verify(b => b.CreateDatabaseParameterFactoryAction(IsExp(() => "p0"), IsExp(() => 1), null));
-			_parametersHolder.Verify(h => h.AddPreparator(It.IsAny<CommandPreparator>()), Times.Exactly(1));
-			_parametersHolder.Verify(h => h.AddPreparator(It.Is<CommandPreparator>(d => ((SingleParameterPreparator)d).Name == "p0")));
+			_parametersHolder.Verify(h => h.AddPreProcessor(It.IsAny<CommandPrePostProcessor>()), Times.Exactly(1));
+			_parametersHolder.Verify(h => h.AddPreProcessor(It.Is<CommandPrePostProcessor>(d => ((SingleParameterPrePostProcessor)d).Name == "p0")));
 		}
 		[Test]
 		public void BuildSql_RenderGreater()
@@ -259,8 +259,8 @@ namespace ObjectSql.Tests.ExpressionsAnalizersTests
 
 			Assert.AreEqual("([c].[CategoryID]>@p0)", result);
 			_delegatesBuilder.Verify(b => b.CreateDatabaseParameterFactoryAction(IsExp(() => "p0"), IsExp(() => 1), null));
-			_parametersHolder.Verify(h => h.AddPreparator(It.IsAny<CommandPreparator>()), Times.Exactly(1));
-			_parametersHolder.Verify(h => h.AddPreparator(It.Is<CommandPreparator>(d => ((SingleParameterPreparator)d).Name == "p0")));
+			_parametersHolder.Verify(h => h.AddPreProcessor(It.IsAny<CommandPrePostProcessor>()), Times.Exactly(1));
+			_parametersHolder.Verify(h => h.AddPreProcessor(It.Is<CommandPrePostProcessor>(d => ((SingleParameterPrePostProcessor)d).Name == "p0")));
 		}
 		[Test]
 		public void BuildSql_RenderGreaterOrEqual()
@@ -271,8 +271,8 @@ namespace ObjectSql.Tests.ExpressionsAnalizersTests
 
 			Assert.AreEqual("([c].[CategoryID]>=@p0)", result);
 			_delegatesBuilder.Verify(b => b.CreateDatabaseParameterFactoryAction(IsExp(() => "p0"), IsExp(() => 1), null));
-			_parametersHolder.Verify(h => h.AddPreparator(It.IsAny<CommandPreparator>()), Times.Exactly(1));
-			_parametersHolder.Verify(h => h.AddPreparator(It.Is<CommandPreparator>(d => ((SingleParameterPreparator)d).Name == "p0")));
+			_parametersHolder.Verify(h => h.AddPreProcessor(It.IsAny<CommandPrePostProcessor>()), Times.Exactly(1));
+			_parametersHolder.Verify(h => h.AddPreProcessor(It.Is<CommandPrePostProcessor>(d => ((SingleParameterPrePostProcessor)d).Name == "p0")));
 		}
 		[Test]
 		public void BuildSql_RenderLess()
@@ -283,8 +283,8 @@ namespace ObjectSql.Tests.ExpressionsAnalizersTests
 
 			Assert.AreEqual("([c].[CategoryID]<@p0)", result);
 			_delegatesBuilder.Verify(b => b.CreateDatabaseParameterFactoryAction(IsExp(() => "p0"), IsExp(() => 1), null));
-			_parametersHolder.Verify(h => h.AddPreparator(It.IsAny<CommandPreparator>()), Times.Exactly(1));
-			_parametersHolder.Verify(h => h.AddPreparator(It.Is<CommandPreparator>(d => ((SingleParameterPreparator)d).Name == "p0")));
+			_parametersHolder.Verify(h => h.AddPreProcessor(It.IsAny<CommandPrePostProcessor>()), Times.Exactly(1));
+			_parametersHolder.Verify(h => h.AddPreProcessor(It.Is<CommandPrePostProcessor>(d => ((SingleParameterPrePostProcessor)d).Name == "p0")));
 		}
 		[Test]
 		public void BuildSql_RenderLessOrEqual()
@@ -295,8 +295,8 @@ namespace ObjectSql.Tests.ExpressionsAnalizersTests
 
 			Assert.AreEqual("([c].[CategoryID]<=@p0)", result);
 			_delegatesBuilder.Verify(b => b.CreateDatabaseParameterFactoryAction(IsExp(() => "p0"), IsExp(() => 1), null));
-			_parametersHolder.Verify(h => h.AddPreparator(It.IsAny<CommandPreparator>()), Times.Exactly(1));
-			_parametersHolder.Verify(h => h.AddPreparator(It.Is<CommandPreparator>(d => ((SingleParameterPreparator)d).Name == "p0")));
+			_parametersHolder.Verify(h => h.AddPreProcessor(It.IsAny<CommandPrePostProcessor>()), Times.Exactly(1));
+			_parametersHolder.Verify(h => h.AddPreProcessor(It.Is<CommandPrePostProcessor>(d => ((SingleParameterPrePostProcessor)d).Name == "p0")));
 		}
 		[Test]
 		public void BuildSql_RenderNotEqual()
@@ -307,8 +307,8 @@ namespace ObjectSql.Tests.ExpressionsAnalizersTests
 
 			Assert.AreEqual("([c].[CategoryID]<>@p0)", result);
 			_delegatesBuilder.Verify(b => b.CreateDatabaseParameterFactoryAction(IsExp(() => "p0"), IsExp(() => 1), null));
-			_parametersHolder.Verify(h => h.AddPreparator(It.IsAny<CommandPreparator>()), Times.Exactly(1));
-			_parametersHolder.Verify(h => h.AddPreparator(It.Is<CommandPreparator>(d => ((SingleParameterPreparator)d).Name == "p0")));
+			_parametersHolder.Verify(h => h.AddPreProcessor(It.IsAny<CommandPrePostProcessor>()), Times.Exactly(1));
+			_parametersHolder.Verify(h => h.AddPreProcessor(It.Is<CommandPrePostProcessor>(d => ((SingleParameterPrePostProcessor)d).Name == "p0")));
 		}
 		[Test]
 		public void BuildSql_RenderNull()
@@ -318,7 +318,7 @@ namespace ObjectSql.Tests.ExpressionsAnalizersTests
 			var result = builder.BuildSql(_parametersHolder.Object, exp.Body, true).Prepare();
 
 			Assert.AreEqual("NULL", result);
-			_parametersHolder.Verify(h => h.AddPreparator(It.IsAny<CommandPreparator>()), Times.Never());
+			_parametersHolder.Verify(h => h.AddPreProcessor(It.IsAny<CommandPrePostProcessor>()), Times.Never());
 		}
 		[Test]
 		public void BuildSql_RenderIsNull()
@@ -328,7 +328,7 @@ namespace ObjectSql.Tests.ExpressionsAnalizersTests
 			var result = builder.BuildSql(_parametersHolder.Object, exp.Body, true).Prepare();
 
 			Assert.AreEqual("([c].[Picture]ISNULL)", result);
-			_parametersHolder.Verify(h => h.AddPreparator(It.IsAny<CommandPreparator>()), Times.Never());
+			_parametersHolder.Verify(h => h.AddPreProcessor(It.IsAny<CommandPrePostProcessor>()), Times.Never());
 		}
 		[Test]
 		public void BuildSql_RenderIsNotNull()
@@ -338,7 +338,7 @@ namespace ObjectSql.Tests.ExpressionsAnalizersTests
 			var result = builder.BuildSql(_parametersHolder.Object, exp.Body, true).Prepare();
 
 			Assert.AreEqual("([c].[Picture]ISNOTNULL)", result);
-			_parametersHolder.Verify(h => h.AddPreparator(It.IsAny<CommandPreparator>()), Times.Never());
+			_parametersHolder.Verify(h => h.AddPreProcessor(It.IsAny<CommandPrePostProcessor>()), Times.Never());
 		}
 		[Test]
 		public void BuildSql_RenderAnd()
@@ -349,8 +349,8 @@ namespace ObjectSql.Tests.ExpressionsAnalizersTests
 
 			Assert.AreEqual("(([c].[Description]ISNULL)AND([c].[CategoryID]=@p0))", result);
 			_delegatesBuilder.Verify(b => b.CreateDatabaseParameterFactoryAction(IsExp(() => "p0"), IsExp(() => 1), null));
-			_parametersHolder.Verify(h => h.AddPreparator(It.IsAny<CommandPreparator>()), Times.Exactly(1));
-			_parametersHolder.Verify(h => h.AddPreparator(It.Is<CommandPreparator>(d => ((SingleParameterPreparator)d).Name == "p0")));
+			_parametersHolder.Verify(h => h.AddPreProcessor(It.IsAny<CommandPrePostProcessor>()), Times.Exactly(1));
+			_parametersHolder.Verify(h => h.AddPreProcessor(It.Is<CommandPrePostProcessor>(d => ((SingleParameterPrePostProcessor)d).Name == "p0")));
 		}
 		[Test]
 		public void BuildSql_RenderOr()
@@ -361,8 +361,8 @@ namespace ObjectSql.Tests.ExpressionsAnalizersTests
 
 			Assert.AreEqual("(([c].[Description]ISNULL)OR([c].[CategoryID]=@p0))", result);
 			_delegatesBuilder.Verify(b => b.CreateDatabaseParameterFactoryAction(IsExp(() => "p0"), IsExp(() => 1), null));
-			_parametersHolder.Verify(h => h.AddPreparator(It.IsAny<CommandPreparator>()), Times.Exactly(1));
-			_parametersHolder.Verify(h => h.AddPreparator(It.Is<CommandPreparator>(d => ((SingleParameterPreparator)d).Name == "p0")));
+			_parametersHolder.Verify(h => h.AddPreProcessor(It.IsAny<CommandPrePostProcessor>()), Times.Exactly(1));
+			_parametersHolder.Verify(h => h.AddPreProcessor(It.Is<CommandPrePostProcessor>(d => ((SingleParameterPrePostProcessor)d).Name == "p0")));
 		}
 		[Test]
 		public void BuildSql_RenderNot()
@@ -373,8 +373,8 @@ namespace ObjectSql.Tests.ExpressionsAnalizersTests
 
 			Assert.AreEqual("(NOT([c].[CategoryID]=@p0))", result);
 			_delegatesBuilder.Verify(b => b.CreateDatabaseParameterFactoryAction(IsExp(() => "p0"), IsExp(() => 1), null));
-			_parametersHolder.Verify(h => h.AddPreparator(It.IsAny<CommandPreparator>()), Times.Exactly(1));
-			_parametersHolder.Verify(h => h.AddPreparator(It.Is<CommandPreparator>(d => ((SingleParameterPreparator)d).Name == "p0")));
+			_parametersHolder.Verify(h => h.AddPreProcessor(It.IsAny<CommandPrePostProcessor>()), Times.Exactly(1));
+			_parametersHolder.Verify(h => h.AddPreProcessor(It.Is<CommandPrePostProcessor>(d => ((SingleParameterPrePostProcessor)d).Name == "p0")));
 		}
 		public int GetConstant()
 		{
@@ -400,8 +400,8 @@ namespace ObjectSql.Tests.ExpressionsAnalizersTests
 			Assert.AreEqual("([c].[Description]LIKE@p0)", result);
 			Assert.IsTrue(TestExtension.RenderLikeWasCalled);
 			_delegatesBuilder.Verify(b => b.CreateDatabaseParameterFactoryAction(IsExp(() => "p0"), IsExp(() => "%value%"), null));
-			_parametersHolder.Verify(h => h.AddPreparator(It.IsAny<CommandPreparator>()), Times.Exactly(1));
-			_parametersHolder.Verify(h => h.AddPreparator(It.Is<CommandPreparator>(d => ((SingleParameterPreparator)d).Name == "p0")));
+			_parametersHolder.Verify(h => h.AddPreProcessor(It.IsAny<CommandPrePostProcessor>()), Times.Exactly(1));
+			_parametersHolder.Verify(h => h.AddPreProcessor(It.Is<CommandPrePostProcessor>(d => ((SingleParameterPrePostProcessor)d).Name == "p0")));
 		}
 		protected Expression IsExp<T>(Expression<Func<T>> b)
 		{

@@ -186,9 +186,9 @@ namespace ObjectSql.Core.QueryBuilder.ExpressionsAnalizers
 			return node;
 		}
 
-		private SingleParameterPreparator GetParameterDescriptor(Expression accessor, IStorageFieldType dbTypeInContext)
+		private SingleParameterPrePostProcessor GetParameterDescriptor(Expression accessor, IStorageFieldType dbTypeInContext)
 		{
-			var descriptor = CommandPreparatorsHolder.Preparators
+			var descriptor = CommandPreparatorsHolder.PreProcessors
 											 .Where(p=>p.PreparatorType == CommandPreparatorType.DatabaseCommandConstant ||
 													   p.PreparatorType == CommandPreparatorType.DatabaseCommandParameter)
 											 .Select(p=>p.AsSingleParameter())
@@ -196,13 +196,13 @@ namespace ObjectSql.Core.QueryBuilder.ExpressionsAnalizers
 
 			if (descriptor == null)
 			{
-				var parameterName = "p" + CommandPreparatorsHolder.Preparators.Count;
+				var parameterName = "p" + CommandPreparatorsHolder.PreProcessors.Count;
 				var initializer = CreateParameterInitializer(parameterName, accessor, dbTypeInContext);
 
 				descriptor =  IsConstant(accessor)
-								? new DatabaseCommandConstantPreparator(parameterName,dbTypeInContext,accessor, initializer)
-								: (SingleParameterPreparator)new DatabaseCommandParameterPreparator(parameterName,dbTypeInContext,accessor, initializer);
-				CommandPreparatorsHolder.AddPreparator(descriptor);
+								? new DatabaseCommandConstantPrePostProcessor(parameterName,dbTypeInContext,accessor, initializer)
+								: (SingleParameterPrePostProcessor)new DatabaseCommandParameterPrePostProcessor(parameterName,dbTypeInContext,accessor, initializer);
+				CommandPreparatorsHolder.AddPreProcessor(descriptor);
 			}
 
 			if (descriptor.RootDemanding)

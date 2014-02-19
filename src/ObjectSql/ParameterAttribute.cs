@@ -13,11 +13,18 @@ namespace ObjectSql
 		public string TypeName { get; private set; }
 		public ParameterDirection Direction { get; private set; }
 
-		public ParameterAttribute(string name, string type/*, ParameterDirection direction*/)
+		public ParameterAttribute(string name, string type)
 		{
 			Name = name;
 			TypeName = type;
-			//Direction = direction;
+			Direction = ParameterDirection.Input;
+		}
+
+		public ParameterAttribute(string name, string type, ParameterDirection direction)
+		{
+			Name = name;
+			TypeName = type;
+			Direction = direction;
 		}
 	}
 }

@@ -9,6 +9,7 @@
 
 using System;
 using System.Configuration;
+using System.Data;
 using System.Data.SqlClient;
 using System.Collections.Generic;
 using ObjectSql;
@@ -411,7 +412,7 @@ namespace ObjectSql.Tests
 		[Procedure("CustOrdersDetail", "dbo")] public abstract void CustOrdersDetail([Parameter("OrderID", "int")] int? @OrderID);
 		[Procedure("CustOrdersOrders", "dbo")] public abstract void CustOrdersOrders([Parameter("CustomerID", "nchar")] string @CustomerID);
 		[Procedure("Employee Sales by Country", "dbo")] public abstract void Employee_Sales_by_Country([Parameter("Beginning_Date", "datetime")] DateTime? @Beginning_Date, [Parameter("Ending_Date", "datetime")] DateTime? @Ending_Date);
-		[Procedure("MyProcedure", "dbo")] public abstract void MyProcedure([Parameter("param1", "int")] int? @param1, [Parameter("outParam", "int")] int? @outParam);
+		[Procedure("MyProcedure", "dbo")] public abstract void MyProcedure([Parameter("param1", "int")] int? @param1, [Parameter("outParam", "int", ParameterDirection.InputOutput)] int? @outParam);
 		[Procedure("Sales by Year", "dbo")] public abstract void Sales_by_Year([Parameter("Beginning_Date", "datetime")] DateTime? @Beginning_Date, [Parameter("Ending_Date", "datetime")] DateTime? @Ending_Date);
 		[Procedure("SalesByCategory", "dbo")] public abstract void SalesByCategory([Parameter("CategoryName", "nvarchar")] string @CategoryName, [Parameter("OrdYear", "nvarchar")] string @OrdYear);
 		[Procedure("Ten Most Expensive Products", "dbo")] public abstract void Ten_Most_Expensive_Products();

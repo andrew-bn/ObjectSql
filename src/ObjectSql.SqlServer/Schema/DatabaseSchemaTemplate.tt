@@ -81,7 +81,7 @@ namespace <#= Namespace#>
 		{
 #>
 		[Procedure("<#=proc.Name#>", "<#=proc.Schema#>")] public abstract void <#=ToValidName(proc.Name)#>(<#
-			foreach(var p in proc.Parameters){#><#=p.Position>1?", ":""#>[Parameter("<#=p.Name.Replace("@","")#>", "<#=p.DataType#>")] <#=ToTypeName(p.NetType,true)#> <#=ToValidName(p.Name)#><#}#>);
+			foreach(var p in proc.Parameters){#><#=p.Position>1?", ":""#>[Parameter("<#=p.Name.Replace("@","")#>", "<#=p.DataType#>", <#=p.Direction#>)] <#=ToTypeName(p.NetType,true)#> <#=ToValidName(p.Name)#><#}#>);
 <#
 		}
 #>

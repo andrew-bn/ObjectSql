@@ -18,11 +18,11 @@ namespace ObjectSql.SqlServer.Schema
 		}
 		public bool IsOut(Parameter param)
 		{
-			return param.ParameterType == ParameterDirection.Output;
+			return param.Direction == ParameterDirection.Output;
 		}
 		public bool IsInOut(Parameter param)
 		{
-			return param.ParameterType == ParameterDirection.InputOutput;
+			return param.Direction == ParameterDirection.InputOutput;
 		}
 		public string ToValidName(string value)
 		{
