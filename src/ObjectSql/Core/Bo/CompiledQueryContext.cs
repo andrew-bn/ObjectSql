@@ -10,6 +10,7 @@ namespace ObjectSql.Core.Bo
 			: base(environment)
 		{
 
+			PreparationData = copyFromContext.PreparationData;
 			QueryRootsStruct = copyFromContext.QueryRoots;
 			Prepared = true;
 
