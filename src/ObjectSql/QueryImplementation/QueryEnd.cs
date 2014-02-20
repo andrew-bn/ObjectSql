@@ -2,12 +2,13 @@
 using System.Threading.Tasks;
 using ObjectSql.Core;
 using ObjectSql.Core.Bo;
+using ObjectSql.Core.QueryParts;
 using ObjectSql.QueryInterfaces;
 using System.Collections.Generic;
 
 namespace ObjectSql.QueryImplementation
 {
-	public class QueryEnd : QueryBase, IQueryEnd
+	public class QueryEnd : QueryBase, IStoredProcedureEnd
 	{
 		public QueryEnd(QueryContext context)
 			: base(context)
@@ -19,9 +20,9 @@ namespace ObjectSql.QueryImplementation
 			return ExecutionManager.ExecuteScalar(Context);
 		}
 
-		public IQueryDataReader ExecuteReader()
+		public IStoredProcedureResultReader ExecuteReader()
 		{
-			return ExecutionManager.ExecuteReader(Context);
+			return ExecutionManager.ExecuteReader<object>(Context);
 		}
 
 		public IDbCommand Command
@@ -36,6 +37,13 @@ namespace ObjectSql.QueryImplementation
 		public int ExecuteNonQuery()
 		{
 			return ExecutionManager.ExecuteNonQuery(Context);
+		}
+
+
+		public IStoredProcedureEnd<T> Returns<T>(object dbType)
+		{
+			Context.AddQueryPart(new StoredProcedureResultPart(typeof(T),dbType));
+			return new QueryEnd<T>(Context);
 		}
 	}
 }

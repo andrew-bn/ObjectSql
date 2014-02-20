@@ -29,7 +29,7 @@ namespace ObjectSql
 			return _cache.GetOrAdd(connectionString,
 			                       (cs) =>
 			                       (IEntitySchemaManager)
-			                       Activator.CreateInstance(typeof (EntitySchemaManager<>).MakeGenericType(dbType)));
+								   Activator.CreateInstance(typeof(EntitySchemaManager<>).MakeGenericType(dbType)));
 		}
 	}
 }

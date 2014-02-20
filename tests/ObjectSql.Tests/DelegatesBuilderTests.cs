@@ -317,6 +317,13 @@ namespace ObjectSql.Tests
 			{
 				return CreateParameterFactory(parameterName, parameterAccessor, storageParameterType, ParameterDirection.Input);
 			}
-	}
+
+
+
+			protected override Expression CreateCommandReturnParameter(Type returnType, object dbType)
+			{
+				throw new NotImplementedException();
+			}
+		}
 	}
 }

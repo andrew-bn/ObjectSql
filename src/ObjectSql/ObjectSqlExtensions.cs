@@ -37,6 +37,7 @@ namespace System
 						dbCommand,
 						treatType,
 						sm,
+						dbManager,
 						dbManager.CreateDelegatesBuilder(),
 						dbManager.CreateSqlWriter());
 

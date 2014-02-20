@@ -16,6 +16,7 @@ namespace ObjectSql.Core.Bo
 		public IDbCommand Command { get; private set; }
 		public ResourcesTreatmentType ResourcesTreatmentType { get; set; }
 		public IEntitySchemaManager SchemaManager { get; private set; }
+		public IDatabaseManager DatabaseManager { get; private set; }
 		public IDelegatesBuilder DelegatesBuilder { get; private set; }
 		public ISqlWriter SqlWriter { get; private set; }
 
@@ -23,6 +24,7 @@ namespace ObjectSql.Core.Bo
 								IDbCommand command,
 								ResourcesTreatmentType resourcesTreatmentType,
 								IEntitySchemaManager schemaManager,
+								IDatabaseManager databaseManager,
 								IDelegatesBuilder delegatesBuilder,
 								ISqlWriter sqlWriter)
 		{
@@ -30,6 +32,7 @@ namespace ObjectSql.Core.Bo
 			Command = command;
 			ResourcesTreatmentType = resourcesTreatmentType;
 			SchemaManager = schemaManager;
+			DatabaseManager = databaseManager;
 			DelegatesBuilder = delegatesBuilder;
 			SqlWriter = sqlWriter;
 		}

@@ -104,6 +104,7 @@
     <Compile Include="Core\QueryDataReader.cs" />
     <Compile Include="Core\EntityEnumerable.cs" />
     <Compile Include="Core\ExecutionManager.cs" />
+    <Compile Include="Core\QueryParts\StoredProcedureResultPart.cs" />
     <Compile Include="DefaultSchemaManagerFactory.cs" />
     <Compile Include="IAsyncEnumerable.cs" />
     <Compile Include="IAsyncEnumerator.cs" />

@@ -17,6 +17,7 @@ namespace ObjectSql.Core.QueryBuilder
 {
 	public class ObjectQueryBuilder: IQueryBuilder
 	{
+		private readonly IDatabaseManager _databaseManager;
 		private readonly IEntitySchemaManager _schemaManager;
 		private readonly ISqlWriter _sqlWriter;
 		private readonly IDelegatesBuilder _delegatesBuilder;
@@ -25,20 +26,22 @@ namespace ObjectSql.Core.QueryBuilder
 		private readonly IInsertionInfoExtractor _insertionInfoExtractor;
 
 		public ObjectQueryBuilder(QueryEnvironment env)
-			: this(env.SchemaManager,env.SqlWriter,env.DelegatesBuilder,
+			: this(env.DatabaseManager, env.SchemaManager,env.SqlWriter,env.DelegatesBuilder,
 					new ExpressionAnalizer(env.SchemaManager,env.DelegatesBuilder,env.SqlWriter),
 					new MaterializationInfoExtractor(env.SchemaManager),
 					new InsertionInfoExtractor(env.SchemaManager))
 		{
 		}
 
-		private ObjectQueryBuilder(IEntitySchemaManager schemaManager,
+		private ObjectQueryBuilder(IDatabaseManager databaseManager,
+							   IEntitySchemaManager schemaManager,
 							   ISqlWriter sqlWriter,
 							   IDelegatesBuilder expressionBuilder,
 							   IExpressionAnalizer expressionAnalizer,
 							   IMaterializationInfoExtractor materializationInfoExtrator, 
 							   IInsertionInfoExtractor insertionInfoExtractor)
 		{
+			_databaseManager = databaseManager;
 			_schemaManager = schemaManager;
 			_sqlWriter = sqlWriter;
 			_delegatesBuilder = expressionBuilder;
@@ -49,7 +52,7 @@ namespace ObjectSql.Core.QueryBuilder
 
 		public QueryPreparationData BuildQuery(IQueryPart[] parts)
 		{
-			var context = new BuilderContext(_schemaManager, _sqlWriter,_expressionAnalizer);
+			var context = new BuilderContext(_databaseManager, _schemaManager, _sqlWriter,_expressionAnalizer,_delegatesBuilder);
 
 			foreach (var part in parts)
 			{
@@ -74,6 +77,7 @@ namespace ObjectSql.Core.QueryBuilder
 
 						//sp
 					case QueryPartType.StoredProcedure: BuildStoredProcedure((StoredProcedurePart)part, context); break;
+					case QueryPartType.StoredProcedureReturn: part.BuildPart(context); break;
 				}
 			}
 

@@ -55,6 +55,7 @@ namespace ObjectSql
 					                               cmd,
 					                               result.Context.QueryEnvironment.ResourcesTreatmentType,
 					                               sm,
+												   dbManager,
 					                               delBuilder,
 					                               sqlWriter);
 

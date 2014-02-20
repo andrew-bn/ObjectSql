@@ -19,12 +19,14 @@ namespace ObjectSql.Core.Bo
 		public Delegate MaterializationDelegate { get; set; }
 		public QueryPreparationData PreparationData { get; set; }
 		public bool Prepared { get; set; }
+		public bool ConnectionOpened { get; set; }
 
 		private List<IQueryPart> _queryParts;
 		protected QueryRoots QueryRootsStruct;
 
 		internal QueryContext(QueryEnvironment queryEnvironment)
 		{
+			ConnectionOpened = false;
 			QueryEnvironment = queryEnvironment;
 			_queryParts = new List<IQueryPart>();
 		}

@@ -12,5 +12,6 @@
 		GroupBy,
 		Join,
 		StoredProcedure,
+		StoredProcedureReturn,
 	}
 }

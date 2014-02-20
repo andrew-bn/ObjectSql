@@ -7,7 +7,17 @@ using ObjectSql.QueryInterfaces;
 
 namespace ObjectSql.Core
 {
-	internal class QueryDataReader : IQueryDataReader
+	internal class StoredProcedureResultReader<T>: StoredProcedureResultReader, IStoredProcedureResultReader<T>
+	{
+		public StoredProcedureResultReader(QueryContext context, IDataReader dataReader, Action disposing) : base(context, dataReader, disposing)
+		{
+		}
+		public T ReturnValue
+		{
+			get { throw new NotImplementedException(); }
+		}
+	}
+	internal class StoredProcedureResultReader : IStoredProcedureResultReader
 	{
 		private static readonly ConcurrentDictionary<Type, Delegate> _mapMaterializers = new ConcurrentDictionary<Type, Delegate>();
 
@@ -17,7 +27,7 @@ namespace ObjectSql.Core
 		public bool ConnectionOpened { get; private set; }
 		public IDataReader DataReader { get; private set; }
 
-		public QueryDataReader(QueryContext context, IDataReader dataReader, Action disposing)
+		public StoredProcedureResultReader(QueryContext context, IDataReader dataReader, Action disposing)
 		{
 			_disposing = disposing;
 			Context = context;

@@ -1,13 +1,10 @@
 ﻿using System.Data.Common;
-using System.Linq;
-using System.Reflection;
 using ObjectSql.Core.Bo;
 using ObjectSql.Exceptions;
 using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Threading.Tasks;
-using ObjectSql.QueryImplementation;
 using ObjectSql.QueryInterfaces;
 
 namespace ObjectSql.Core
@@ -20,51 +17,47 @@ namespace ObjectSql.Core
 		}
 		public static object ExecuteScalar(QueryContext context)
 		{
-			PrepareQuery(context);
 			return ExecuteCommand(context, cmd => cmd.ExecuteScalar(), true);
 		}
 		public static int ExecuteNonQuery(QueryContext context)
 		{
-			PrepareQuery(context);
 			return ExecuteCommand(context, cmd => cmd.ExecuteNonQuery(), true);
 		}
 		public static IEnumerable<T> ExecuteQuery<T>(QueryContext context)
 		{
-			PrepareQuery(context);
-			var cmd = context.QueryEnvironment.Command;
-
-			var connectionOpened = OpenConnection(cmd.Connection);
-
-			var dataReader = ExecuteCommand(context, c => c.ExecuteReader(), false);
-
-			return new EntityEnumerable<T>(context.MaterializationDelegate, dataReader, () => DisposeDataReader(context, dataReader, connectionOpened));
+			var dataReader = ExecuteDataReader<T>(context);
+			return new EntityEnumerable<T>(context.MaterializationDelegate, dataReader, () => DisposeDataReader(context, dataReader));
 		}
-		public static IQueryDataReader ExecuteReader(QueryContext context)
+
+		public static IStoredProcedureResultReader<T> ExecuteReader<T>(QueryContext context)
 		{
-			PrepareQuery(context);
-			var cmd = context.QueryEnvironment.Command;
+			var dataReader = ExecuteDataReader<T>(context);
+			return new StoredProcedureResultReader<T>(context, dataReader, () => DisposeDataReader(context, dataReader));
+		}
 
-			var connectionOpened = OpenConnection(cmd.Connection);
-
-			var dataReader = ExecuteCommand(context, c => c.ExecuteReader(), false);
-
-			return new QueryDataReader(context, dataReader, () => DisposeDataReader(context, dataReader, connectionOpened));
+		private static IDataReader ExecuteDataReader<T>(QueryContext context)
+		{
+			return ExecuteCommand(context, c => c.ExecuteReader(), false);
 		}
 
 		private static T ExecuteCommand<T>(QueryContext context, Func<IDbCommand, T> executor, bool freeResources)
 		{
-			var cmd = context.QueryEnvironment.Command;
-			var connectionOpened = OpenConnection(cmd.Connection);
+			PrepareCommand(context);
 			try
 			{
-				var result = executor(cmd);
-				return result;
+				return executor(context.QueryEnvironment.Command);
 			}
 			finally
 			{
 				if (freeResources)
-					FreeResources(context, cmd, connectionOpened);
+					FreeResources(context);
 			}
+		}
+
+		private static void PrepareCommand(QueryContext context)
+		{
+			PrepareQuery(context);
+			context.ConnectionOpened = OpenConnection(context.QueryEnvironment.Command.Connection);
 		}
 
 		private static void RunPostProcessors(QueryContext context)
@@ -85,9 +78,12 @@ namespace ObjectSql.Core
 			}
 		}
 
-		private static void FreeResources(QueryContext context, IDbCommand cmd, bool connectionOpened)
+		private static void FreeResources(QueryContext context)
 		{
 			RunPostProcessors(context);
+
+			var cmd = context.QueryEnvironment.Command;
+			var connectionOpened = context.ConnectionOpened;
 
 			if (connectionOpened)
 				cmd.Connection.Close();
@@ -121,16 +117,16 @@ namespace ObjectSql.Core
 
 			var dataReader = await cmd.ExecuteReaderAsync();
 
-			return new EntityEnumerable<T>(context.MaterializationDelegate, dataReader, () => DisposeDataReader(context, dataReader, connectionOpened));
+			return new EntityEnumerable<T>(context.MaterializationDelegate, dataReader, () => DisposeDataReader(context, dataReader));
 		}
 
 
 		#endregion async
 #endif
-		private static void DisposeDataReader(QueryContext context, IDataReader dataReader, bool connectionOpened)
+		private static void DisposeDataReader(QueryContext context, IDataReader dataReader)
 		{
 			dataReader.Dispose();
-			FreeResources(context, context.QueryEnvironment.Command, connectionOpened);
+			FreeResources(context);
 		}
 	}
 }

@@ -50,6 +50,22 @@ namespace ObjectSql.Core.QueryBuilder.LambdaBuilder
 						rootParam).Compile();
 		}
 
+		public Action<IDbCommand, object> AddCommandReturnParameter(Type returnType, object dbType)
+		{
+			var parameterCreator = CreateCommandReturnParameter(returnType, dbType);
+
+			var rootParam = Expression.Parameter(typeof(object));
+			var cmdParam = Expression.Parameter(typeof(IDbCommand));
+			Expression parameterAdd = Expression.MakeMemberAccess(cmdParam, Reflect.FindProperty<IDbCommand>(c => c.Parameters));
+			parameterAdd = Expression.Call(parameterAdd, Reflect.FindMethod<IDbCommand>(c => c.Parameters.Add(default(object))), parameterCreator);
+
+			return Expression.Lambda<Action<IDbCommand, object>>(
+						parameterAdd,
+						cmdParam,
+						rootParam).Compile();
+		}
+
+		protected abstract Expression CreateCommandReturnParameter(Type returnType, object dbType);
 		public Action<IDbCommand, object> CreateDatabaseParameterFactoryAction(Expression parameterName, Expression valueAccessor, IStorageFieldType parameterType,ParameterDirection direction)
 		{
 			var expQueue = new Stack<Expression>(ExpressionEnumerator.Enumerate(valueAccessor).Cast<Expression>().ToArray());

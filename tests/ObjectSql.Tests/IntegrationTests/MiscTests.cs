@@ -76,7 +76,9 @@ namespace ObjectSql.Tests.IntegrationTests
 			
 			int outP = 12;
 			var rdr = Query.With<TestDatabaseProcedures>(db=>db.MyProcedure(23, outP))
+				.Returns<int>(SqlDbType.Int)
 				.ExecuteReader();
+
 			rdr.Dispose();
 			//var res = rdr.MapResult<Red>().ToArray();
 			//var sp = Query.With<TestDatabaseProcedures>(d=>d.Ten_Most_Expensive_Products());

@@ -7,7 +7,7 @@ using System.Collections.Generic;
 
 namespace ObjectSql.QueryImplementation
 {
-	public class QueryEnd<T> : QueryEnd, IQueryEnd<T>
+	public class QueryEnd<T> : QueryEnd, IStoredProcedureEnd<T>, IQueryEnd<T>
 	{
 		public QueryEnd(QueryContext context)
 			: base(context)
@@ -24,5 +24,10 @@ namespace ObjectSql.QueryImplementation
 			return ExecutionManager.ExecuteQueryAsync<T>(Context);
 		}
 #endif
+
+		public new IStoredProcedureResultReader<T> ExecuteReader()
+		{
+			return ExecutionManager.ExecuteReader<T>(Context);
+		}
 	}
 }
