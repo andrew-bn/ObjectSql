@@ -32,5 +32,10 @@ namespace ObjectSql.QueryImplementation
 				return Context.QueryEnvironment.Command;
 			}
 		}
+
+		public int ExecuteNonQuery()
+		{
+			return ExecutionManager.ExecuteNonQuery(Context);
+		}
 	}
 }

@@ -9,7 +9,7 @@ namespace ObjectSql.QueryInterfaces
 	{
 		IEnumerable<T> MapResult<T>();
 	}
-	public interface IQueryEnd : ISqlEnd, IQueryContextHolder
+	public interface IQueryEnd : ISqlEnd, IQueryContextHolder, INonQueryEnd
 	{
 		object ExecuteScalar();
 		IQueryDataReader ExecuteReader();

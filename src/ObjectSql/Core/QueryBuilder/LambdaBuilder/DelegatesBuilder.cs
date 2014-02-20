@@ -290,6 +290,7 @@ namespace ObjectSql.Core.QueryBuilder.LambdaBuilder
 
 			var dataReaderParameter = Expression.Parameter(typeof(IDataReader));
 
+			var value = Expression.Variable(typeof (object), "value");
 			var index = Expression.Variable(typeof(int), "index");
 			var assignIndex = Expression.Assign(index, Expression.Constant(0));
 			parts.Add(assignIndex);
@@ -312,13 +313,32 @@ namespace ObjectSql.Core.QueryBuilder.LambdaBuilder
 			var fieldType = Expression.Variable(typeof(Type), "fieldType");
 			var fieldTypeAssign = Expression.Assign(fieldType, Expression.Call(dataReaderParameter, getType, index));
 			parts.Add(fieldTypeAssign);
+			
+			Expression valueExp = Expression.Assign(value, Expression.Convert(Expression.Call(dataReaderParameter, getValue, index),typeof (object)));
+			parts.Add(valueExp);
+
 			// ifs ---
 			foreach (var p in schema.EntityFields)
 			{
+				var propType = p.PropertyInfo.PropertyType;
+				Expression readValue = null;
+
+				if (propType.IsValueType && (!propType.IsGenericType || propType.GetGenericTypeDefinition() != typeof (Nullable<>)))
+				{
+					readValue = Expression.Condition(Expression.TypeIs(value, typeof(DBNull)),
+													 Expression.Default(p.PropertyInfo.PropertyType),
+													 Expression.Convert(value, p.PropertyInfo.PropertyType));
+				}
+				else
+				{
+					readValue = Expression.Condition(Expression.TypeIs(value, typeof(DBNull)),
+													 Expression.Constant(null, p.PropertyInfo.PropertyType),
+													 Expression.Convert(value, p.PropertyInfo.PropertyType));
+				}
+
 				var ifExp = Expression.IfThen(
-									Expression.Call(fieldName, stringEquals, Expression.Constant(p.StorageField.Name), Expression.Constant(StringComparison.CurrentCultureIgnoreCase)),
-									Expression.Assign(Expression.Property(newRow, p.PropertyInfo),
-												Expression.Convert(Expression.Call(dataReaderParameter, getValue, index), p.PropertyInfo.PropertyType)));
+					Expression.Call(fieldName, stringEquals, Expression.Constant(p.StorageField.Name), Expression.Constant(StringComparison.CurrentCultureIgnoreCase)),
+					Expression.Assign(Expression.Property(newRow, p.PropertyInfo), readValue));
 				parts.Add(ifExp);
 			}
 			// -------
@@ -330,7 +350,7 @@ namespace ObjectSql.Core.QueryBuilder.LambdaBuilder
 			parts.Add(newRow);
 
 			var body = Expression.Block(
-				new[] { index, newRow, fieldName, fieldType },
+				new[] { value, index, newRow, fieldName, fieldType },
 				parts);
 
 			return Expression.Lambda(delegateType, body, dataReaderParameter).Compile();
