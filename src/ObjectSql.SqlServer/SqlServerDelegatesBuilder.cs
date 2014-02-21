@@ -14,7 +14,8 @@ namespace ObjectSql.SqlServer
 		protected override Expression CreateParameterFactory(Expression parameterName, Expression parameterAccessor, IStorageFieldType storageParameterType, ParameterDirection direction)
 		{
 			var fieldType = storageParameterType as StorageFieldType<SqlDbType>;
-			return CreateParameterFactory(parameterName, parameterAccessor, direction, fieldType.Value);
+			var dbType = (fieldType == null) ? null : (object)fieldType.Value;
+			return CreateParameterFactory(parameterName, parameterAccessor, direction, dbType);
 		}
 
 		private static Expression CreateParameterFactory(Expression parameterName, Expression parameterAccessor,
