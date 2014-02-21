@@ -13,20 +13,20 @@ namespace ObjectSql.QueryInterfaces
 	{
 		T ReturnValue { get; }
 	}
-	public interface IStoredProcedureEnd<T> : IQueryEnd
+	public interface IStoredProcedure<T> : IQueryEnd
 	{
 		IStoredProcedureResultReader<T> ExecuteReader();
 	}
 
-	public interface IStoredProcedureEnd : IQueryEnd
+	public interface IStoredProcedure : IQueryEnd
 	{
 		IStoredProcedureResultReader ExecuteReader();
-		IStoredProcedureEnd<T> Returns<T>(object dbType);
+		IStoredProcedure<T> Returns<T>(object dbType);
 	}
 
-	public interface IStoredProcedure
+	public interface IStoredProcedureRoot
 	{
 		IQueryEnd<TEntity> Exec<TSpHolder, TEntity>(Expression<Func<TSpHolder, IEnumerable<TEntity>>> spExecutor);
-		IStoredProcedureEnd With<TSpHolder>(Expression<Action<TSpHolder>> spExecutor);
+		IStoredProcedure With<TSpHolder>(Expression<Action<TSpHolder>> spExecutor);
 	}
 }

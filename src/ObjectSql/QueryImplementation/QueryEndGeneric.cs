@@ -7,7 +7,7 @@ using System.Collections.Generic;
 
 namespace ObjectSql.QueryImplementation
 {
-	public class QueryEnd<T> : QueryEnd, IStoredProcedureEnd<T>, IQueryEnd<T>
+	public class QueryEnd<T> : QueryEnd, IStoredProcedure<T>, IQueryEnd<T>
 	{
 		public QueryEnd(QueryContext context)
 			: base(context)

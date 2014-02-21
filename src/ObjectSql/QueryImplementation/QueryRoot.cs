@@ -65,7 +65,7 @@ namespace ObjectSql.QueryImplementation
 			Context.AddQueryPart(new StoredProcedurePart(spExecutor,typeof(TEntity),true));
 			return new QueryEnd<TEntity>(Context);
 		}
-		public IStoredProcedureEnd With<THolder>(Expression<Action<THolder>> spExecutor)
+		public IStoredProcedure With<THolder>(Expression<Action<THolder>> spExecutor)
 		{
 			Context.AddQueryPart(new StoredProcedurePart(spExecutor, null, true));
 			return new QueryEnd(Context);

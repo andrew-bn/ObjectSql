@@ -8,7 +8,7 @@ using System.Collections.Generic;
 
 namespace ObjectSql.QueryImplementation
 {
-	public class QueryEnd : QueryBase, IStoredProcedureEnd
+	public class QueryEnd : QueryBase, IStoredProcedure
 	{
 		public QueryEnd(QueryContext context)
 			: base(context)
@@ -40,7 +40,7 @@ namespace ObjectSql.QueryImplementation
 		}
 
 
-		public IStoredProcedureEnd<T> Returns<T>(object dbType)
+		public IStoredProcedure<T> Returns<T>(object dbType)
 		{
 			Context.AddQueryPart(new StoredProcedureResultPart(typeof(T),dbType));
 			return new QueryEnd<T>(Context);
