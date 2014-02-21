@@ -12,15 +12,15 @@ namespace System
 {
 	public static class ObjectSqlExtensions
 	{
-		public static ISql Query(this IDbCommand command)
+		public static ISql ObjectSql(this IDbCommand command)
 		{
-			return command.Query(ResourcesTreatmentType.DisposeReader);
+			return command.ObjectSql(ResourcesTreatmentType.DisposeReader);
 		}
-		public static ISql Query(this IDbConnection connection)
+		public static ISql ObjectSql(this IDbConnection connection)
 		{
-			return connection.CreateCommand().Query(ResourcesTreatmentType.DisposeCommand);
+			return connection.CreateCommand().ObjectSql(ResourcesTreatmentType.DisposeCommand);
 		}
-		public static ISql Query(this IDbCommand command, ResourcesTreatmentType treatType)
+		public static ISql ObjectSql(this IDbCommand command, ResourcesTreatmentType treatType)
 		{
 			var objSqlCommand = command as ObjectSqlCommand;
 			var dbCommand = objSqlCommand == null ? command : objSqlCommand.UnderlyingCommand;

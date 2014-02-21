@@ -22,7 +22,7 @@ namespace ObjectSql
 		public ISql Query()
 		{
 			var connection = CreateConnection();
-			return connection.CreateCommand().Query(ResourcesTreatmentType.DisposeConnection);
+			return connection.CreateCommand().ObjectSql(ResourcesTreatmentType.DisposeConnection);
 		}
 
 		public IDbConnection CreateConnection()

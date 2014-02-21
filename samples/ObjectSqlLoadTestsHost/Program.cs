@@ -85,7 +85,7 @@ namespace ObjectSqlLoadTestsHost
 			var val = "val";
 			var val2 = "val2";
 
-			var result = new SqlConnection().CreateCommand().Query()
+			var result = new SqlConnection().CreateCommand().ObjectSql()
 				.From<Product>()
 				.Join<Category>((p, c) => p.CategoryID == c.CategoryID)
 				.Where((p, c) => p.ProductName != val && p.ReorderLevel == 2 &&
