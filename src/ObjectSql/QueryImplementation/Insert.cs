@@ -14,7 +14,6 @@ namespace ObjectSql.QueryImplementation
 		public INonQueryEnd Values(params TDst[] values)
 		{
 			Context.AddQueryPart(new ValuesPart(typeof(TDst), values));
-			PrepareQuery();
 			return new QueryRoot(Context);
 		}
 	}

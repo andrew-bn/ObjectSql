@@ -12,9 +12,5 @@ namespace ObjectSql.QueryImplementation
 		{
 			Context = context;
 		}
-		protected void PrepareQuery()
-		{
-			QueryManager.PrepareQuery(Context);
-		}
 	}
 }

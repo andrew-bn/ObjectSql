@@ -29,7 +29,7 @@ namespace ObjectSql.QueryImplementation
 		{
 			get
 			{
-				PrepareQuery();
+				QueryManager.PrepareQuery(Context);
 				return Context.QueryEnvironment.Command;
 			}
 		}

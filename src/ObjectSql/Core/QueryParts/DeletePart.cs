@@ -24,5 +24,9 @@ namespace ObjectSql.Core.QueryParts
 		{
 			return base.IsEqualTo(part, ref rootsA, ref rootsB) && Entity == ((DeletePart)part).Entity;
 		}
+		public override void BuildPart(BuilderContext context)
+		{
+			context.SqlWriter.WriteDelete(context.Text, GetSchema(Entity,context));
+		}
 	}
 }
