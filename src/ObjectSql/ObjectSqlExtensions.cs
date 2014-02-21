@@ -20,7 +20,7 @@ namespace System
 		{
 			return connection.CreateCommand().Query(ResourcesTreatmentType.DisposeCommand);
 		}
-		internal static ISql Query(this IDbCommand command, ResourcesTreatmentType treatType)
+		public static ISql Query(this IDbCommand command, ResourcesTreatmentType treatType)
 		{
 			var objSqlCommand = command as ObjectSqlCommand;
 			var dbCommand = objSqlCommand == null ? command : objSqlCommand.UnderlyingCommand;

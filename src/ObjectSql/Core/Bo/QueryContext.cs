@@ -61,7 +61,7 @@ namespace ObjectSql.Core.Bo
 			if (_queryParts.Count != obj._queryParts.Count ||
 				!ExpressionComparer.AreEqual(ref QueryRootsStruct, ref obj.QueryRootsStruct) ||
 				cmd.GetType() != objCmd.GetType() ||
-				cmd.Connection.ConnectionString != objCmd.Connection.ConnectionString)
+				QueryEnvironment.InitialConnectionString != obj.QueryEnvironment.InitialConnectionString)
 				return false;
 
 			for (var i = 0; i < _queryParts.Count; i++)

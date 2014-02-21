@@ -47,6 +47,11 @@ namespace ObjectSql.Core
 			{
 				return executor(context.QueryEnvironment.Command);
 			}
+			catch
+			{
+				freeResources = true;
+				throw;
+			}
 			finally
 			{
 				if (freeResources)
