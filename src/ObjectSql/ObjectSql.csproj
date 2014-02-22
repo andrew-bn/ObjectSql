@@ -105,7 +105,7 @@
     <Compile Include="Core\EntityEnumerable.cs" />
     <Compile Include="Core\ExecutionManager.cs" />
     <Compile Include="Core\QueryParts\SqlPart.cs" />
-    <Compile Include="Core\QueryParts\StoredProcedureResultPart.cs" />
+    <Compile Include="Core\QueryParts\QueryResultPart.cs" />
     <Compile Include="DefaultSchemaManagerFactory.cs" />
     <Compile Include="IAsyncEnumerable.cs" />
     <Compile Include="IAsyncEnumerator.cs" />
@@ -159,53 +159,43 @@
     <Compile Include="ParameterAttribute.cs" />
     <Compile Include="ProcedureAttribute.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="QueryImplementation\QueryEnd.cs" />
     <Compile Include="QueryImplementation\Insert.cs" />
     <Compile Include="QueryImplementation\QueryBase.cs" />
-    <Compile Include="QueryImplementation\QueryEndGeneric.cs" />
-    <Compile Include="QueryImplementation\Source.cs">
+    <Compile Include="QueryImplementation\QueryEnd.cs" />
+    <Compile Include="QueryImplementation\Query.cs" />
+    <Compile Include="QueryImplementation\DatabaseContextHolder.cs" />
+    <Compile Include="QueryImplementation\QueryGeneric1.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>Source.tt</DependentUpon>
+      <DependentUpon>QueryGeneric.tt</DependentUpon>
     </Compile>
-    <Compile Include="QueryImplementation\QueryRoot.cs" />
-    <Compile Include="QueryImplementation\DatabaseContextHolder.cs" />
     <Compile Include="QueryImplementation\TargetDatabaseExtensions.cs" />
     <Compile Include="QueryImplementation\Update.cs" />
     <Compile Include="QueryInterfaces\DatabaseExtension.cs" />
-    <Compile Include="QueryInterfaces\IDeleteRoot.cs" />
-    <Compile Include="QueryInterfaces\IEmit.cs" />
     <Compile Include="QueryInterfaces\IInsert.cs" />
-    <Compile Include="QueryInterfaces\IInsertRoot.cs" />
-    <Compile Include="QueryInterfaces\INonQueryEnd.cs" />
-    <Compile Include="QueryInterfaces\IQueryContextHolder.cs" />
+    <Compile Include="QueryInterfaces\IObjectDataReader.cs" />
     <Compile Include="QueryInterfaces\IQueryEnd.cs" />
-    <Compile Include="QueryInterfaces\IScalarEnd.cs" />
-    <Compile Include="QueryInterfaces\ISelectRoot.cs" />
-    <Compile Include="QueryInterfaces\ISource.cs">
+    <Compile Include="QueryInterfaces\IQueryGeneric.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>ISource.tt</DependentUpon>
+      <DependentUpon>IQueryGeneric.tt</DependentUpon>
     </Compile>
-    <Compile Include="QueryInterfaces\ISql.cs" />
-    <Compile Include="QueryInterfaces\ISqlEnd.cs" />
-    <Compile Include="QueryInterfaces\IStoredProcedureRoot.cs" />
+    <Compile Include="QueryInterfaces\IQuery.cs" />
     <Compile Include="QueryInterfaces\IDatabaseContextHolder.cs" />
     <Compile Include="QueryInterfaces\IUpdate.cs" />
-    <Compile Include="QueryInterfaces\IUpdateRoot.cs" />
     <Compile Include="ObjectSqlExtensions.cs" />
     <Compile Include="ObjectSqlRegistry.cs" />
     <Compile Include="ObjectSqlManager.cs" />
     <Compile Include="TableAttribute.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="QueryImplementation\Source.tt">
+    <None Include="QueryImplementation\QueryGeneric.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>Source.cs</LastGenOutput>
+      <LastGenOutput>QueryGeneric1.cs</LastGenOutput>
     </None>
-    <None Include="QueryInterfaces\ISource.tt">
+    <None Include="QueryInterfaces\IQueryGeneric.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>ISource.cs</LastGenOutput>
+      <LastGenOutput>IQueryGeneric.cs</LastGenOutput>
     </None>
   </ItemGroup>
   <ItemGroup>

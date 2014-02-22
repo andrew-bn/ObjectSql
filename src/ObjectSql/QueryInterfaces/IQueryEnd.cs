@@ -5,16 +5,20 @@ using System.Threading.Tasks;
 
 namespace ObjectSql.QueryInterfaces
 {
-	public interface IQueryEnd : IQueryContextHolder, INonQueryEnd
+	public interface IQueryEnd
 	{
+		IQueryEnd Returns<TResult>(object sqlDbType);
+		int ExecuteNonQuery();
 		object ExecuteScalar();
+		IObjectDataReader ExecuteReader();
+		IDbCommand Command { get; }
 	}
 
-	public interface IQueryEnd<T> : IQueryEnd
+	public interface IQueryEnd<TEntity> : IQueryEnd
 	{
-		IEnumerable<T> ExecuteQuery();
+		IEnumerable<TEntity> ExecuteQuery();
 #if NET45
-		Task<IAsyncEnumerable<T>> ExecuteQueryAsync();
+		Task<IAsyncEnumerable<TEntity>> ExecuteQueryAsync();
 #endif
 	}
 }

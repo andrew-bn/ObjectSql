@@ -5,7 +5,7 @@ namespace ObjectSql
 {
 	public interface IObjectSqlManager
 	{
-		ISql Query();
+		IQuery Query();
 		IDbConnection CreateConnection();
 	}
 }

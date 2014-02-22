@@ -24,13 +24,13 @@ namespace ObjectSql.Tests
 	public static class SqlEndExtenstion
 	{
 		public static T Verify<T>(this T sqlEnd, string expectedSql)
-			where T : ISqlEnd
+			where T : IQueryEnd
 		{
 			return Verify(sqlEnd, expectedSql, new object[0]);
 		}
 		public static T Verify<T>(this T sqlEnd, string expectedSql,
 			params object[] dbParameters)
-			where T : ISqlEnd
+			where T : IQueryEnd
 		{
 			return Verify(sqlEnd, expectedSql, dbParameters.Select(p => new MsSqlParameterToCheck() { DbType = null, ParameterValue = p }).ToArray());
 		}
@@ -49,7 +49,7 @@ namespace ObjectSql.Tests
 		}
 		public static T Verify<T>(this T sqlEnd, string expectedSql,
 			params MsSqlParameterToCheck[] dbParameters)
-			where T : ISqlEnd
+			where T : IQueryEnd
 		{
 			var cmd = sqlEnd.Command;
 			Assert.AreEqual(TestBase.PrepareResult(expectedSql), TestBase.PrepareResult(cmd.CommandText));
@@ -102,14 +102,14 @@ namespace ObjectSql.Tests
 			}
 		}
 		private static ObjectSqlManager<SqlConnection> _objectSqlManager;
-		protected ISql EfQuery
+		protected IQuery EfQuery
 		{
 			get
 			{
 				return _objectSqlManager.Query();
 			}
 		}
-		protected ISql Query
+		protected IQuery Query
 		{
 			get
 			{

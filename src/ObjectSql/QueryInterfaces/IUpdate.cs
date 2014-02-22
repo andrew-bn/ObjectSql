@@ -3,8 +3,8 @@ using System.Linq.Expressions;
 
 namespace ObjectSql.QueryInterfaces
 {
-	public interface IUpdate<T> : INonQueryEnd
+	public interface IUpdate<TSource> : IQueryEnd
 	{
-		INonQueryEnd Where(Expression<Func<T, bool>> condition);
+		IQueryEnd Where(Expression<Func<TSource, bool>> condition);
 	}
 }

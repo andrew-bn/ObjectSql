@@ -2,47 +2,27 @@
 using System.Threading.Tasks;
 using ObjectSql.Core;
 using ObjectSql.Core.Bo;
-using ObjectSql.Core.QueryParts;
 using ObjectSql.QueryInterfaces;
 using System.Collections.Generic;
 
 namespace ObjectSql.QueryImplementation
 {
-	public class QueryEnd : QueryBase, IStoredProcedure
+	public class QueryEnd<T> : Query, IQueryEnd<T>
 	{
 		public QueryEnd(QueryContext context)
 			: base(context)
 		{
 		}
 
-		public object ExecuteScalar()
+		public IEnumerable<T> ExecuteQuery()
 		{
-			return ExecutionManager.ExecuteScalar(Context);
+			return ExecutionManager.ExecuteQuery<T>(Context);
 		}
-
-		public IStoredProcedureResultReader ExecuteReader()
+#if NET45
+		public Task<IAsyncEnumerable<T>> ExecuteQueryAsync()
 		{
-			return ExecutionManager.ExecuteReader<object>(Context);
+			return ExecutionManager.ExecuteQueryAsync<T>(Context);
 		}
-
-		public IDbCommand Command
-		{
-			get
-			{
-				return Context.PrepareQuery();
-			}
-		}
-
-		public int ExecuteNonQuery()
-		{
-			return ExecutionManager.ExecuteNonQuery(Context);
-		}
-
-
-		public IStoredProcedure<T> Returns<T>(object dbType)
-		{
-			Context.SqlPart.AddQueryPart(new StoredProcedureResultPart(typeof(T), dbType));
-			return new QueryEnd<T>(Context);
-		}
+#endif
 	}
 }

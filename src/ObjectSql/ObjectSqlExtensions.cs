@@ -12,15 +12,15 @@ namespace System
 {
 	public static class ObjectSqlExtensions
 	{
-		public static ISql ObjectSql(this IDbCommand command)
+		public static IQuery ObjectSql(this IDbCommand command)
 		{
 			return command.ObjectSql(ResourcesTreatmentType.DisposeReader);
 		}
-		public static ISql ObjectSql(this IDbConnection connection)
+		public static IQuery ObjectSql(this IDbConnection connection)
 		{
 			return connection.CreateCommand().ObjectSql(ResourcesTreatmentType.DisposeCommand);
 		}
-		public static ISql ObjectSql(this IDbCommand command, ResourcesTreatmentType treatType)
+		public static IQuery ObjectSql(this IDbCommand command, ResourcesTreatmentType treatType)
 		{
 			var objSqlCommand = command as ObjectSqlCommand;
 			var dbCommand = objSqlCommand == null ? command : objSqlCommand.UnderlyingCommand;
@@ -33,17 +33,14 @@ namespace System
 			var sm = factory.CreateSchemaManager(dbManager.DbType, initialCs);
 
 			var env = new QueryEnvironment(
-						initialCs,
-						dbCommand,
-						treatType,
 						sm,
 						dbManager,
 						dbManager.CreateDelegatesBuilder(),
 						dbManager.CreateSqlWriter());
 
-			var context = new QueryContext(env);
+			var context = new QueryContext(initialCs,dbCommand,treatType, env);
 
-			return new QueryRoot(context);
+			return new Query(context);
 		}
 	}
 }

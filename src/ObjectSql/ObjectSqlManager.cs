@@ -19,7 +19,7 @@ namespace ObjectSql
 		{
 			_connectionString = connectionString;
 		}
-		public ISql Query()
+		public IQuery Query()
 		{
 			var connection = CreateConnection();
 			return connection.CreateCommand().ObjectSql(ResourcesTreatmentType.DisposeConnection);
@@ -55,15 +55,12 @@ namespace ObjectSql
 					var delBuilder = dbManager.CreateDelegatesBuilder();
 					var sqlWriter = dbManager.CreateSqlWriter();
 
-					var env = new QueryEnvironment(result.Context.QueryEnvironment.InitialConnectionString,
-					                               cmd,
-					                               result.Context.QueryEnvironment.ResourcesTreatmentType,
-					                               sm,
+					var env = new QueryEnvironment(sm,
 												   dbManager,
 					                               delBuilder,
 					                               sqlWriter);
 
-					var context = new CompiledQueryContext(env, new StrongBox<TArgs>(arg1), result.Context);
+					var context = new CompiledQueryContext(result.Context.InitialConnectionString,cmd, result.Context.ResourcesTreatmentType, env, new StrongBox<TArgs>(arg1), result.Context);
 
 					context.PreProcessQuery();
 					return new QueryEnd<TEntity>(context);

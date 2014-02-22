@@ -1,4 +1,5 @@
-﻿using ObjectSql.Core;
+﻿using System.Data;
+using ObjectSql.Core;
 using ObjectSql.Core.Bo;
 using ObjectSql.Core.QueryParts;
 using ObjectSql.QueryInterfaces;
@@ -12,16 +13,16 @@ using System.Threading.Tasks;
 
 namespace ObjectSql.QueryImplementation
 {
-	public class QueryRoot : QueryBase, ISql, INonQueryEnd
+	public class Query : QueryBase, IQuery, IQueryEnd
 	{
-		public QueryRoot(QueryContext context)
+		public Query(QueryContext context)
 			: base(context)
 		{
 		}
-		public ISource<TTable> From<TTable>()
+		public IQuery<TTable> From<TTable>()
 		{
 			Context.SqlPart.AddQueryPart(new FromPart(typeof(TTable)));
-			return new Source<TTable>(Context);
+			return new Query<TTable>(Context);
 		}
 		public IQueryEnd<TValue> Select<TValue>(Expression<Func<TValue>> select)
 		{
@@ -49,13 +50,13 @@ namespace ObjectSql.QueryImplementation
 			return new Update<T>(Context);
 		}
 
-		public INonQueryEnd Delete<T>(Expression<Func<T, bool>> condition)
+		public IQueryEnd Delete<T>(Expression<Func<T, bool>> condition)
 		{
 			Context.SqlPart.AddQueryPart(new DeletePart(typeof(T)));
 			Context.SqlPart.AddQueryPart(new WherePart(false, condition));
 			return this;
 		}
-		public INonQueryEnd Delete<T>()
+		public IQueryEnd Delete<T>()
 		{
 			Context.SqlPart.AddQueryPart(new DeletePart(typeof(T)));
 			return this;
@@ -65,10 +66,28 @@ namespace ObjectSql.QueryImplementation
 			Context.SqlPart.AddQueryPart(new StoredProcedurePart(spExecutor, typeof(TEntity), true));
 			return new QueryEnd<TEntity>(Context);
 		}
-		public IStoredProcedure With<THolder>(Expression<Action<THolder>> spExecutor)
+		public IQueryEnd Exec<THolder>(Expression<Action<THolder>> spExecutor)
 		{
 			Context.SqlPart.AddQueryPart(new StoredProcedurePart(spExecutor, null, true));
-			return new QueryEnd(Context);
+			return this;
+		}
+
+		public object ExecuteScalar()
+		{
+			return ExecutionManager.ExecuteScalar(Context);
+		}
+
+		public IObjectDataReader ExecuteReader()
+		{
+			return ExecutionManager.ExecuteReader<object>(Context);
+		}
+
+		public IDbCommand Command
+		{
+			get
+			{
+				return Context.PrepareQuery();
+			}
 		}
 
 		public int ExecuteNonQuery()
@@ -76,12 +95,10 @@ namespace ObjectSql.QueryImplementation
 			return ExecutionManager.ExecuteNonQuery(Context);
 		}
 
-		public System.Data.IDbCommand Command
+		public IQueryEnd Returns<TResult>(object sqlDbType)
 		{
-			get
-			{
-				return Context.PrepareQuery();
-			}
+			Context.SqlPart.AddQueryPart(new QueryResultPart(typeof(TResult),sqlDbType));
+			return this;
 		}
 	}
 }

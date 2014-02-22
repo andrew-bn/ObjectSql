@@ -17,34 +17,34 @@ namespace ObjectSql.QueryImplementation
 int depth = 10;
 for (int i = 1;i<=depth; i++)
 {#>
-	public class Source<<#=TemplatesSeq(i)#>> : QueryBase, ISource<<#=TemplatesSeq(i)#>>
+	public class Query<<#=TemplatesSeq(i)#>> : QueryBase, IQuery<<#=TemplatesSeq(i)#>>
 	{
-		public Source(QueryContext context)
+		public Query(QueryContext context)
 			: base(context)
 		{
 		}
 
-		public ISource<<#=TemplatesSeq(i)#>> Where(System.Linq.Expressions.Expression<Func<<#=TemplatesSeq(i)#>, bool>> condition)
+		public IQuery<<#=TemplatesSeq(i)#>> Where(Expression<Func<<#=TemplatesSeq(i)#>, bool>> condition)
 		{
 			Context.SqlPart.AddQueryPart(new WherePart(true, condition));
 			return this;
 		}
-		public ISource<<#=TemplatesSeq(i)#>> GroupBy(System.Linq.Expressions.Expression<Func<<#=TemplatesSeq(i)#>,object>> groupBy)
+		public IQuery<<#=TemplatesSeq(i)#>> GroupBy(Expression<Func<<#=TemplatesSeq(i)#>,object>> groupBy)
 		{
 			Context.SqlPart.AddQueryPart(new GroupByPart(groupBy));
 			return this;
 		}
 <# if (i!=depth) {#>
-		public ISource<<#=TemplatesSeq(i)#>,T<#=i+1#>> Join<T<#=i+1#>>(System.Linq.Expressions.Expression<Func<<#=TemplatesSeq(i)#>,T<#=i+1#>, bool>> condition)
+		public IQuery<<#=TemplatesSeq(i)#>,TNewSource> Join<TNewSource>(Expression<Func<<#=TemplatesSeq(i)#>,TNewSource, bool>> condition)
 		{
 			Context.SqlPart.AddQueryPart(new JoinPart(condition));
-			return new Source<<#=TemplatesSeq(i)#>,T<#=i+1#>>(Context);
+			return new Query<<#=TemplatesSeq(i)#>,TNewSource>(Context);
 		}
 <#}#>
-		public IQueryEnd<TNew> Select<TNew>(System.Linq.Expressions.Expression<Func<<#=TemplatesSeq(i)#>, TNew>> select)
+		public IQueryEnd<TEntity> Select<TEntity>(Expression<Func<<#=TemplatesSeq(i)#>, TEntity>> select)
 		{
 			Context.SqlPart.AddQueryPart(new SelectPart(select));
-			return new QueryEnd<TNew>(Context);
+			return new QueryEnd<TEntity>(Context);
 		}
 	}
 
@@ -60,7 +60,7 @@ private string TemplatesSeq(int depth)
 	{
 		if (i>1)
 			sb.Append(",");
-		sb.AppendFormat("T{0}",i);
+		sb.AppendFormat("TSource{0}",i);
 		
 	}
 	return sb.ToString();

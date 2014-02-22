@@ -11,10 +11,10 @@ namespace ObjectSql.QueryImplementation
 			: base(context)
 		{
 		}
-		public INonQueryEnd Values(params TDst[] values)
+		public IQueryEnd Values(params TDst[] values)
 		{
 			Context.SqlPart.AddQueryPart(new ValuesPart(typeof(TDst), values));
-			return new QueryRoot(Context);
+			return new Query(Context);
 		}
 	}
 }

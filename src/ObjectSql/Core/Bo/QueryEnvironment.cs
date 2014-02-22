@@ -12,25 +12,16 @@ namespace ObjectSql.Core.Bo
 {
 	public class QueryEnvironment
 	{
-		public string InitialConnectionString { get; private set; }
-		public IDbCommand Command { get; private set; }
-		public ResourcesTreatmentType ResourcesTreatmentType { get; set; }
 		public IEntitySchemaManager SchemaManager { get; private set; }
 		public IDatabaseManager DatabaseManager { get; private set; }
 		public IDelegatesBuilder DelegatesBuilder { get; private set; }
 		public ISqlWriter SqlWriter { get; private set; }
 
-		public QueryEnvironment(string initialConnectionString,
-								IDbCommand command,
-								ResourcesTreatmentType resourcesTreatmentType,
-								IEntitySchemaManager schemaManager,
+		public QueryEnvironment(IEntitySchemaManager schemaManager,
 								IDatabaseManager databaseManager,
 								IDelegatesBuilder delegatesBuilder,
 								ISqlWriter sqlWriter)
 		{
-			InitialConnectionString = initialConnectionString;
-			Command = command;
-			ResourcesTreatmentType = resourcesTreatmentType;
 			SchemaManager = schemaManager;
 			DatabaseManager = databaseManager;
 			DelegatesBuilder = delegatesBuilder;

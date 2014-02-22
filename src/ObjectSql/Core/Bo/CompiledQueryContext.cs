@@ -6,8 +6,10 @@ namespace ObjectSql.Core.Bo
 {
 	public class CompiledQueryContext: QueryContext
 	{
-		internal CompiledQueryContext(QueryEnvironment environment, object newRootValue, QueryContext copyFromContext)
-			: base(environment)
+		internal CompiledQueryContext(string initialConnectionString,
+								IDbCommand command,
+								ResourcesTreatmentType resourcesTreatmentType, QueryEnvironment environment, object newRootValue, QueryContext copyFromContext)
+			: base(initialConnectionString,command,resourcesTreatmentType, environment)
 		{
 
 			PreparationData = copyFromContext.PreparationData;

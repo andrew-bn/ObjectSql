@@ -12,14 +12,14 @@ namespace ObjectSql.QueryInterfaces
 int depth = 10;
 for (int i = 1;i<=depth; i++)
 {#>
-	public interface ISource<<#=TemplatesSeq(i)#>>
+	public interface IQuery<<#=TemplatesSeq(i)#>>
 	{
-		ISource<<#=TemplatesSeq(i)#>> Where(Expression<Func<<#=TemplatesSeq(i)#>, bool>> condition);
+		IQuery<<#=TemplatesSeq(i)#>> Where(Expression<Func<<#=TemplatesSeq(i)#>, bool>> condition);
 <# if (i != depth) { #>
-		ISource<<#=TemplatesSeq(i)#>, T<#=i+1#>> Join<T<#=i+1#>>(Expression<Func<<#=TemplatesSeq(i)#>, T<#=i+1#>, bool>> condition);
+		IQuery<<#=TemplatesSeq(i)#>, TNewSource> Join<TNewSource>(Expression<Func<<#=TemplatesSeq(i)#>, TNewSource, bool>> condition);
 <#}#>
-		IQueryEnd<TSelect> Select<TSelect>(Expression<Func<<#=TemplatesSeq(i)#>,TSelect>> select);
-		ISource<<#=TemplatesSeq(i)#>> GroupBy(Expression<Func<<#=TemplatesSeq(i)#>,object>> groupBy);
+		IQueryEnd<TEntity> Select<TEntity>(Expression<Func<<#=TemplatesSeq(i)#>,TEntity>> select);
+		IQuery<<#=TemplatesSeq(i)#>> GroupBy(Expression<Func<<#=TemplatesSeq(i)#>,object>> groupBy);
 	}
 <#
 }
@@ -33,7 +33,7 @@ private string TemplatesSeq(int depth)
 	{
 		if (i>1)
 			sb.Append(",");
-		sb.AppendFormat("T{0}",i);
+		sb.AppendFormat("TSource{0}",i);
 		
 	}
 	return sb.ToString();

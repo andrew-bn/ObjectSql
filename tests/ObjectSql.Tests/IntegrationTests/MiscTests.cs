@@ -75,7 +75,7 @@ namespace ObjectSql.Tests.IntegrationTests
 		{
 			
 			int outP = 12;
-			var rdr = Query.With<TestDatabaseProcedures>(db=>db.MyProcedure(23, outP))
+			var rdr = Query.Exec<TestDatabaseProcedures>(db=>db.MyProcedure(23, outP))
 				.Returns<int>(SqlDbType.Int)
 				.ExecuteReader();
 

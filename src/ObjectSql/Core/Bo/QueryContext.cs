@@ -14,7 +14,10 @@ namespace ObjectSql.Core.Bo
 		private static readonly ConcurrentDictionary<QueryContext, QueryPreparationData> _queryCache = new ConcurrentDictionary<QueryContext, QueryPreparationData>();
 
 		public const int PRIME = 397;
-
+		public string InitialConnectionString { get; private set; }
+		public IDbCommand Command { get; private set; }
+		public ResourcesTreatmentType ResourcesTreatmentType { get; set; }
+		
 		public QueryEnvironment QueryEnvironment { get; set; }
 		public SqlPart SqlPart { get; set; }
 		
@@ -23,15 +26,21 @@ namespace ObjectSql.Core.Bo
 		public bool Prepared { get; set; }
 		public bool ConnectionOpened { get; set; }
 
-		internal QueryContext(QueryEnvironment queryEnvironment)
+		internal QueryContext(string initialConnectionString,
+								IDbCommand command,
+								ResourcesTreatmentType resourcesTreatmentType, 
+								QueryEnvironment queryEnvironment)
 		{
 			ConnectionOpened = false;
+			InitialConnectionString = initialConnectionString;
+			Command = command;
+			ResourcesTreatmentType = resourcesTreatmentType;
 			QueryEnvironment = queryEnvironment;
 			SqlPart = new SqlPart(queryEnvironment);
 		}
 		internal QueryContext CopyWith(IDbCommand command)
 		{
-			var result = new QueryContext(QueryEnvironment)
+			var result = new QueryContext(InitialConnectionString,Command,ResourcesTreatmentType, QueryEnvironment)
 				{
 					SqlPart = this.SqlPart,
 					MaterializationDelegate = MaterializationDelegate
@@ -50,12 +59,12 @@ namespace ObjectSql.Core.Bo
 
 		private bool ExpressionCompareBasedEquals(QueryContext obj)
 		{
-			var cmd = QueryEnvironment.Command;
-			var objCmd = obj.QueryEnvironment.Command;
+			var cmd = Command;
+			var objCmd = obj.Command;
 
 			return SqlPart.Equals(obj.SqlPart) &
 			       cmd.GetType() == objCmd.GetType() &&
-			       QueryEnvironment.InitialConnectionString == obj.QueryEnvironment.InitialConnectionString;
+			       InitialConnectionString == obj.InitialConnectionString;
 
 		}
 		#endregion
@@ -73,9 +82,9 @@ namespace ObjectSql.Core.Bo
 		private int CalculateDbCommandHash(int hash)
 		{
 			hash *= PRIME;
-			hash ^= QueryEnvironment.Command.GetType().GetHashCode();
+			hash ^= Command.GetType().GetHashCode();
 			hash *= PRIME;
-			hash ^= QueryEnvironment.Command.Connection.ConnectionString.GetHashCode();
+			hash ^= Command.Connection.ConnectionString.GetHashCode();
 
 			return hash;
 		}
@@ -91,7 +100,7 @@ namespace ObjectSql.Core.Bo
 
 				Prepared = true;
 			}
-			return QueryEnvironment.Command;
+			return Command;
 		}
 
 		public QueryPreparationData GeneratePreparationData()
@@ -102,7 +111,7 @@ namespace ObjectSql.Core.Bo
 		{
 			var preparationData = PreparationData;
 			MaterializationDelegate = preparationData.DataMaterializer;
-			var dbCommand = QueryEnvironment.Command;
+			var dbCommand = Command;
 
 			if (string.IsNullOrEmpty(dbCommand.CommandText))
 				dbCommand.CommandText = preparationData.CommandText;

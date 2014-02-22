@@ -25,17 +25,17 @@ namespace ObjectSql.Core
 		}
 		public static IEnumerable<T> ExecuteQuery<T>(QueryContext context)
 		{
-			var dataReader = ExecuteDataReader<T>(context);
+			var dataReader = ExecuteDataReader(context);
 			return new EntityEnumerable<T>(context.MaterializationDelegate, dataReader, () => DisposeDataReader(context, dataReader));
 		}
 
-		public static IStoredProcedureResultReader<T> ExecuteReader<T>(QueryContext context)
+		public static IObjectDataReader ExecuteReader<T>(QueryContext context)
 		{
-			var dataReader = ExecuteDataReader<T>(context);
-			return new StoredProcedureResultReader<T>(context, dataReader, () => DisposeDataReader(context, dataReader));
+			var dataReader = ExecuteDataReader(context);
+			return new ObjectDataReader(context, dataReader, () => DisposeDataReader(context, dataReader));
 		}
 
-		private static IDataReader ExecuteDataReader<T>(QueryContext context)
+		private static IDataReader ExecuteDataReader(QueryContext context)
 		{
 			return ExecuteCommand(context, c => c.ExecuteReader(), false);
 		}
@@ -45,7 +45,7 @@ namespace ObjectSql.Core
 			PrepareCommand(context);
 			try
 			{
-				return executor(context.QueryEnvironment.Command);
+				return executor(context.Command);
 			}
 			catch
 			{
@@ -62,7 +62,7 @@ namespace ObjectSql.Core
 		private static void PrepareCommand(QueryContext context)
 		{
 			PrepareQuery(context);
-			context.ConnectionOpened = OpenConnection(context.QueryEnvironment.Command.Connection);
+			context.ConnectionOpened = OpenConnection(context.Command.Connection);
 		}
 
 		private static void RunPostProcessors(QueryContext context)
@@ -71,13 +71,13 @@ namespace ObjectSql.Core
 			for (int i = 0; i < postProcessors.Length; i++)
 			{
 				if (!postProcessors[i].RootDemanding)
-					postProcessors[i].CommandPreparationAction(context.QueryEnvironment.Command, null);
+					postProcessors[i].CommandPreparationAction(context.Command, null);
 				else
 				{
 					foreach (var root in context.SqlPart.QueryRoots.Roots)
 					{
 						if ((root.Value & postProcessors[i].RootMap) != 0)
-							postProcessors[i].CommandPreparationAction(context.QueryEnvironment.Command, root.Key);
+							postProcessors[i].CommandPreparationAction(context.Command, root.Key);
 					}
 				}
 			}
@@ -87,15 +87,15 @@ namespace ObjectSql.Core
 		{
 			RunPostProcessors(context);
 
-			var cmd = context.QueryEnvironment.Command;
+			var cmd = context.Command;
 			var connectionOpened = context.ConnectionOpened;
 
 			if (connectionOpened)
 				cmd.Connection.Close();
-			if (context.QueryEnvironment.ResourcesTreatmentType == ResourcesTreatmentType.DisposeCommand ||
-				context.QueryEnvironment.ResourcesTreatmentType == ResourcesTreatmentType.DisposeConnection)
+			if (context.ResourcesTreatmentType == ResourcesTreatmentType.DisposeCommand ||
+				context.ResourcesTreatmentType == ResourcesTreatmentType.DisposeConnection)
 				cmd.Dispose();
-			if (context.QueryEnvironment.ResourcesTreatmentType == ResourcesTreatmentType.DisposeConnection)
+			if (context.ResourcesTreatmentType == ResourcesTreatmentType.DisposeConnection)
 				cmd.Connection.Dispose();
 		}
 
@@ -110,12 +110,12 @@ namespace ObjectSql.Core
 		#region async
 		public static async Task<IAsyncEnumerable<T>> ExecuteQueryAsync<T>(QueryContext context)
 		{
-			if (!(context.QueryEnvironment.Command is DbCommand))
+			if (!(context.Command is DbCommand))
 				throw new ObjectSqlException("Provider does not support async operations");
 
 			PrepareQuery(context);
 
-			var cmd = (DbCommand)context.QueryEnvironment.Command;
+			var cmd = (DbCommand)context.Command;
 			var connection = cmd.Connection;
 			var connectionOpened = connection.State == ConnectionState.Closed;
 			if (connectionOpened) await connection.OpenAsync();

@@ -1,8 +1,8 @@
 ﻿namespace ObjectSql.QueryInterfaces
 {
-	public interface IInsert<TDst>
-		where TDst:class
+	public interface IInsert<TSource>
+		where TSource:class
 	{
-		INonQueryEnd Values(params TDst[] values);
+		IQueryEnd Values(params TSource[] values);
 	}
 }

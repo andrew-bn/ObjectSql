@@ -4,7 +4,7 @@ using ObjectSql.QueryInterfaces;
 
 namespace ObjectSql.QueryImplementation
 {
-	public class QueryBase: IQueryContextHolder
+	public class QueryBase
 	{
 		public QueryContext Context { get; private set; }
 
