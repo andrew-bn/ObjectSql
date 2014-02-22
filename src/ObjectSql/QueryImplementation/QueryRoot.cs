@@ -20,12 +20,12 @@ namespace ObjectSql.QueryImplementation
 		}
 		public ISource<TTable> From<TTable>()
 		{
-			Context.AddQueryPart(new FromPart(typeof(TTable)));
+			Context.SqlPart.AddQueryPart(new FromPart(typeof(TTable)));
 			return new Source<TTable>(Context);
 		}
 		public IQueryEnd<TValue> Select<TValue>(Expression<Func<TValue>> select)
 		{
-			Context.AddQueryPart(new SelectPart(select));
+			Context.SqlPart.AddQueryPart(new SelectPart(select));
 			return new QueryEnd<TValue>(Context);
 		}
 		public IInsert<TDst> Insert<TDst>()
@@ -38,36 +38,36 @@ namespace ObjectSql.QueryImplementation
 		public IInsert<TDst> Insert<TDst>(Expression<Func<TDst, object>> selector)
 			where TDst : class
 		{
-			Context.AddQueryPart(new InsertPart(selector));
+			Context.SqlPart.AddQueryPart(new InsertPart(selector));
 			return new Insert<TDst>(Context);
 		}
 
 
 		public IUpdate<T> Update<T>(Expression<Func<T>> set)
 		{
-			Context.AddQueryPart(new UpdatePart(set));
+			Context.SqlPart.AddQueryPart(new UpdatePart(set));
 			return new Update<T>(Context);
 		}
 
 		public INonQueryEnd Delete<T>(Expression<Func<T, bool>> condition)
 		{
-			Context.AddQueryPart(new DeletePart(typeof(T)));
-			Context.AddQueryPart(new WherePart(false, condition));
+			Context.SqlPart.AddQueryPart(new DeletePart(typeof(T)));
+			Context.SqlPart.AddQueryPart(new WherePart(false, condition));
 			return this;
 		}
 		public INonQueryEnd Delete<T>()
 		{
-			Context.AddQueryPart(new DeletePart(typeof(T)));
+			Context.SqlPart.AddQueryPart(new DeletePart(typeof(T)));
 			return this;
 		}
 		public IQueryEnd<TEntity> Exec<THolder, TEntity>(Expression<Func<THolder, IEnumerable<TEntity>>> spExecutor)
 		{
-			Context.AddQueryPart(new StoredProcedurePart(spExecutor,typeof(TEntity),true));
+			Context.SqlPart.AddQueryPart(new StoredProcedurePart(spExecutor, typeof(TEntity), true));
 			return new QueryEnd<TEntity>(Context);
 		}
 		public IStoredProcedure With<THolder>(Expression<Action<THolder>> spExecutor)
 		{
-			Context.AddQueryPart(new StoredProcedurePart(spExecutor, null, true));
+			Context.SqlPart.AddQueryPart(new StoredProcedurePart(spExecutor, null, true));
 			return new QueryEnd(Context);
 		}
 
@@ -80,8 +80,7 @@ namespace ObjectSql.QueryImplementation
 		{
 			get
 			{
-				QueryManager.PrepareQuery(Context);
-				return Context.QueryEnvironment.Command;
+				return Context.PrepareQuery();
 			}
 		}
 	}

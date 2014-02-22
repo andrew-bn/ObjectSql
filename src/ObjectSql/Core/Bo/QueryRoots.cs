@@ -3,7 +3,7 @@ using ObjectSql.Exceptions;
 
 namespace ObjectSql.Core.Bo
 {
-	public struct QueryRoots
+	public class QueryRoots
 	{
 		public static QueryRoots Empty = new QueryRoots();
 

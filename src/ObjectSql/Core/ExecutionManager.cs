@@ -13,7 +13,7 @@ namespace ObjectSql.Core
 	{
 		private static void PrepareQuery(QueryContext context)
 		{
-			QueryManager.PrepareQuery(context);
+			context.PrepareQuery();
 		}
 		public static object ExecuteScalar(QueryContext context)
 		{
@@ -74,7 +74,7 @@ namespace ObjectSql.Core
 					postProcessors[i].CommandPreparationAction(context.QueryEnvironment.Command, null);
 				else
 				{
-					foreach (var root in context.QueryRoots.Roots)
+					foreach (var root in context.SqlPart.QueryRoots.Roots)
 					{
 						if ((root.Value & postProcessors[i].RootMap) != 0)
 							postProcessors[i].CommandPreparationAction(context.QueryEnvironment.Command, root.Key);

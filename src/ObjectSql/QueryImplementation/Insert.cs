@@ -13,7 +13,7 @@ namespace ObjectSql.QueryImplementation
 		}
 		public INonQueryEnd Values(params TDst[] values)
 		{
-			Context.AddQueryPart(new ValuesPart(typeof(TDst), values));
+			Context.SqlPart.AddQueryPart(new ValuesPart(typeof(TDst), values));
 			return new QueryRoot(Context);
 		}
 	}

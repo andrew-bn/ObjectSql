@@ -104,6 +104,7 @@
     <Compile Include="Core\QueryDataReader.cs" />
     <Compile Include="Core\EntityEnumerable.cs" />
     <Compile Include="Core\ExecutionManager.cs" />
+    <Compile Include="Core\QueryParts\SqlPart.cs" />
     <Compile Include="Core\QueryParts\StoredProcedureResultPart.cs" />
     <Compile Include="DefaultSchemaManagerFactory.cs" />
     <Compile Include="IAsyncEnumerable.cs" />
@@ -195,7 +196,6 @@
     <Compile Include="QueryInterfaces\IDatabaseContextHolder.cs" />
     <Compile Include="QueryInterfaces\IUpdate.cs" />
     <Compile Include="QueryInterfaces\IUpdateRoot.cs" />
-    <Compile Include="Core\QueryManager.cs" />
     <Compile Include="ObjectSqlExtensions.cs" />
     <Compile Include="ObjectSqlRegistry.cs" />
     <Compile Include="ObjectSqlManager.cs" />

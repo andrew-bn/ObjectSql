@@ -2,6 +2,7 @@
 {
 	public enum QueryPartType
 	{
+		Sql,
 		From,
 		Select,
 		Insert,

@@ -16,7 +16,7 @@ namespace ObjectSql.QueryImplementation
 		}
 		public INonQueryEnd Where(Expression<Func<T, bool>> condition)
 		{
-			Context.AddQueryPart(new WherePart(false, condition));
+			Context.SqlPart.AddQueryPart(new WherePart(false, condition));
 			return new QueryRoot(Context);
 		}
 

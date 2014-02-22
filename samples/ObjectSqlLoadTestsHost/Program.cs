@@ -10,6 +10,7 @@ using System.Text;
 using System.Threading.Tasks;
 using ObjectSql;
 using ObjectSql.QueryInterfaces;
+using ObjectSql.SqlServer;
 
 namespace ObjectSqlLoadTestsHost
 {
@@ -44,6 +45,7 @@ namespace ObjectSqlLoadTestsHost
 		public static Func<ParamsHolder, IQueryEnd<Result>> _compiledQuery;
 		static void Main(string[] args)
 		{
+			ObjectSqlSqlServerInitializer.Initialize();
 			_manager = new ObjectSqlManager<SqlConnection>("");
 			_compiledQuery = _manager.CompileQuery(
 				(ParamsHolder param) =>
@@ -70,7 +72,7 @@ namespace ObjectSqlLoadTestsHost
 		}
 		public static void LoadTest()
 		{
-			for (int i = 0; i < 100000; i++)
+			for (int i = 0; i < 100000000; i++)
 				TestMethod();
 		}
 		public static void TestMethod2()

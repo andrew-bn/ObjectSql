@@ -11,14 +11,11 @@ namespace ObjectSql.Core.Bo
 		{
 
 			PreparationData = copyFromContext.PreparationData;
-			QueryRootsStruct = copyFromContext.QueryRoots;
+			SqlPart = copyFromContext.SqlPart;
 			Prepared = true;
 
-			foreach(var part in copyFromContext.QueryParts)
-				AddQueryPart(part);
-
-			QueryRootsStruct.ClearRoots();
-			QueryRootsStruct.AddRoot(newRootValue, -1);
+			SqlPart.QueryRoots.ClearRoots();
+			SqlPart.QueryRoots.AddRoot(newRootValue, -1);
 		}
 	}
 }

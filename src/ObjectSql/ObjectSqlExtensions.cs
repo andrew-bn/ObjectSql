@@ -41,7 +41,7 @@ namespace System
 						dbManager.CreateDelegatesBuilder(),
 						dbManager.CreateSqlWriter());
 
-			var context = QueryManager.CreateQueryContext(env);
+			var context = new QueryContext(env);
 
 			return new QueryRoot(context);
 		}

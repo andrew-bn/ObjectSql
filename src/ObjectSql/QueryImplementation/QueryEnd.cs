@@ -29,8 +29,7 @@ namespace ObjectSql.QueryImplementation
 		{
 			get
 			{
-				QueryManager.PrepareQuery(Context);
-				return Context.QueryEnvironment.Command;
+				return Context.PrepareQuery();
 			}
 		}
 
@@ -42,7 +41,7 @@ namespace ObjectSql.QueryImplementation
 
 		public IStoredProcedure<T> Returns<T>(object dbType)
 		{
-			Context.AddQueryPart(new StoredProcedureResultPart(typeof(T),dbType));
+			Context.SqlPart.AddQueryPart(new StoredProcedureResultPart(typeof(T), dbType));
 			return new QueryEnd<T>(Context);
 		}
 	}

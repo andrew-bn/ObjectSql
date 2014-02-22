@@ -39,13 +39,17 @@ namespace ObjectSql
 		{
 			var func = query.Compile();
 			var result = (QueryEnd<TEntity>)func(default(TArgs));
-			result.Context.PreparationData = QueryManager.GetQueryPreparationData(result.Context);
+			result.Context.GeneratePreparationData();
 
 			return (arg1) =>
 				{
 					var conn = CreateConnection();
-					var factory = ObjectSqlRegistry.FindSchemaManagerFactory(conn, _connectionString);
-					var dbManager = ObjectSqlRegistry.FindDatabaseManager(conn, factory.TryGetProviderName(conn, _connectionString));
+					var dbConnection = conn is ObjectSqlConnection
+						                   ? ((ObjectSqlConnection) conn).UnderlyingConnection
+						                   : conn;
+
+					var factory = ObjectSqlRegistry.FindSchemaManagerFactory(dbConnection, _connectionString);
+					var dbManager = ObjectSqlRegistry.FindDatabaseManager(dbConnection, factory.TryGetProviderName(conn, _connectionString));
 					var sm = factory.CreateSchemaManager(dbManager.DbType, _connectionString);
 					var cmd = conn.CreateCommand();
 					var delBuilder = dbManager.CreateDelegatesBuilder();
@@ -61,7 +65,7 @@ namespace ObjectSql
 
 					var context = new CompiledQueryContext(env, new StrongBox<TArgs>(arg1), result.Context);
 
-					QueryManager.PreProcessQuery(context);
+					context.PreProcessQuery();
 					return new QueryEnd<TEntity>(context);
 				};
 		}

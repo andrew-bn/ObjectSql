@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Data;
 using ObjectSql.Core.Misc;
@@ -10,40 +11,34 @@ namespace ObjectSql.Core.Bo
 {
 	public class QueryContext
 	{
+		private static readonly ConcurrentDictionary<QueryContext, QueryPreparationData> _queryCache = new ConcurrentDictionary<QueryContext, QueryPreparationData>();
+
 		public const int PRIME = 397;
 
 		public QueryEnvironment QueryEnvironment { get; set; }
-
-		public IList<IQueryPart> QueryParts { get { return _queryParts; } }
-		public QueryRoots QueryRoots { get { return QueryRootsStruct; } }
+		public SqlPart SqlPart { get; set; }
+		
 		public Delegate MaterializationDelegate { get; set; }
 		public QueryPreparationData PreparationData { get; set; }
 		public bool Prepared { get; set; }
 		public bool ConnectionOpened { get; set; }
 
-		private List<IQueryPart> _queryParts;
-		protected QueryRoots QueryRootsStruct;
-
 		internal QueryContext(QueryEnvironment queryEnvironment)
 		{
 			ConnectionOpened = false;
 			QueryEnvironment = queryEnvironment;
-			_queryParts = new List<IQueryPart>();
+			SqlPart = new SqlPart(this);
 		}
 		internal QueryContext CopyWith(IDbCommand command)
 		{
 			var result = new QueryContext(QueryEnvironment)
 				{
-					QueryRootsStruct = QueryRootsStruct,
-					_queryParts = _queryParts,
+					SqlPart = this.SqlPart,
 					MaterializationDelegate = MaterializationDelegate
 				};
 			return result;
 		}
-		internal void AddQueryPart(IQueryPart part)
-		{
-			_queryParts.Add(part);
-		}
+
 		#region Equals
 		public override bool Equals(object obj)
 		{
@@ -58,19 +53,10 @@ namespace ObjectSql.Core.Bo
 			var cmd = QueryEnvironment.Command;
 			var objCmd = obj.QueryEnvironment.Command;
 
-			if (_queryParts.Count != obj._queryParts.Count ||
-				!ExpressionComparer.AreEqual(ref QueryRootsStruct, ref obj.QueryRootsStruct) ||
-				cmd.GetType() != objCmd.GetType() ||
-				QueryEnvironment.InitialConnectionString != obj.QueryEnvironment.InitialConnectionString)
-				return false;
+			return SqlPart.Equals(obj.SqlPart) &
+			       cmd.GetType() == objCmd.GetType() &&
+			       QueryEnvironment.InitialConnectionString == obj.QueryEnvironment.InitialConnectionString;
 
-			for (var i = 0; i < _queryParts.Count; i++)
-			{
-				if (!_queryParts[i].IsEqualTo(obj._queryParts[i], ref QueryRootsStruct, ref obj.QueryRootsStruct))
-					return false;
-			}
-
-			return true;
 		}
 		#endregion
 		#region GetHashCode
@@ -79,30 +65,64 @@ namespace ObjectSql.Core.Bo
 		public override int GetHashCode()
 		{
 			if (!_hashCode.HasValue)
-				_hashCode = ExpressionCompareBasedGetHashCode();
+				_hashCode = CalculateDbCommandHash(SqlPart.GetHashCode());
 
 			return _hashCode.Value;
 		}
 
-		private int ExpressionCompareBasedGetHashCode()
+		private int CalculateDbCommandHash(int hash)
 		{
-			if (!QueryRootsStruct.RootsGenerated)
-			{
-				CalculateDbCommandHash(ref QueryRootsStruct);
+			hash *= PRIME;
+			hash ^= QueryEnvironment.Command.GetType().GetHashCode();
+			hash *= PRIME;
+			hash ^= QueryEnvironment.Command.Connection.ConnectionString.GetHashCode();
 
-				foreach (var part in _queryParts)
-					part.CalculateQueryExpressionParameters(ref QueryRootsStruct);
-			}
-			return QueryRootsStruct.Hash;
-		}
-
-		private void CalculateDbCommandHash(ref QueryRoots parameters)
-		{
-			parameters.Hash *= PRIME;
-			parameters.Hash ^= QueryEnvironment.Command.GetType().GetHashCode();
-			parameters.Hash *= PRIME;
-			parameters.Hash ^= QueryEnvironment.Command.Connection.ConnectionString.GetHashCode();
+			return hash;
 		}
 		#endregion
+
+		public IDbCommand PrepareQuery()
+		{
+			if (!Prepared)
+			{
+				PreparationData = _queryCache.GetOrAdd(this, c => GeneratePreparationData());
+
+				PreProcessQuery();
+
+				Prepared = true;
+			}
+			return QueryEnvironment.Command;
+		}
+
+		public QueryPreparationData GeneratePreparationData()
+		{
+			SqlPart.BuildPart();
+			return PreparationData;
+		}
+		internal void PreProcessQuery()
+		{
+			var preparationData = PreparationData;
+			MaterializationDelegate = preparationData.DataMaterializer;
+			var dbCommand = QueryEnvironment.Command;
+
+			if (string.IsNullOrEmpty(dbCommand.CommandText))
+				dbCommand.CommandText = preparationData.CommandText;
+			else
+				dbCommand.CommandText += preparationData.CommandText;
+
+			for (int i = 0; i < preparationData.PreProcessors.Length; i++)
+			{
+				if (!preparationData.PreProcessors[i].RootDemanding)
+					preparationData.PreProcessors[i].CommandPreparationAction(dbCommand, null);
+				else
+				{
+					foreach (var root in this.SqlPart.QueryRoots.Roots)
+					{
+						if ((root.Value & preparationData.PreProcessors[i].RootMap) != 0)
+							preparationData.PreProcessors[i].CommandPreparationAction(dbCommand, root.Key);
+					}
+				}
+			}
+		}
 	}
 }
