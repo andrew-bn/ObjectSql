@@ -19,11 +19,6 @@ namespace ObjectSql.Core.QueryParts
 			DbType = dbType;
 		}
 
-		public override QueryPartType PartType
-		{
-			get { return QueryPartType.StoredProcedureReturn; }
-		}
-
 		public override bool IsEqualTo(QueryPart part, ref Bo.QueryRoots rootsA, ref Bo.QueryRoots rootsB)
 		{
 			return base.IsEqualTo(part, ref rootsA, ref rootsB) &&

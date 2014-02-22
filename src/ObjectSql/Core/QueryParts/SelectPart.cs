@@ -11,10 +11,7 @@ namespace ObjectSql.Core.QueryParts
 			
 		}
 
-		public override QueryPartType PartType
-		{
-			get { return QueryPartType.Select; }
-		}
+
 
 		public override void BuildPart(BuilderContext context)
 		{

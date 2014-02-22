@@ -20,11 +20,6 @@ namespace ObjectSql.Core.QueryParts
 			EntityType = entityType;
 		}
 
-		public override QueryPartType PartType
-		{
-			get { return QueryPartType.StoredProcedure; }
-		}
-
 		public override void BuildPart(Bo.BuilderContext context)
 		{
 			var exp = Expression.Body;

@@ -11,11 +11,6 @@ namespace ObjectSql.Core.QueryParts
 			Entities = entities;
 		}
 
-		public override QueryPartType PartType
-		{
-			get { return QueryPartType.From; }
-		}
-
 		public override void BuildPart(BuilderContext context)
 		{
 			context.State = BuilderState.FromAliasNeeded;

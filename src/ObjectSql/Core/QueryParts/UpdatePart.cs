@@ -11,10 +11,7 @@ namespace ObjectSql.Core.QueryParts
 			
 		}
 
-		public override QueryPartType PartType
-		{
-			get { return QueryPartType.Update; }
-		}
+
 		public override void BuildPart(Bo.BuilderContext context)
 		{
 			var entity = Expression.ReturnType;

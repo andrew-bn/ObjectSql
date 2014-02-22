@@ -12,11 +12,6 @@ namespace ObjectSql.Core.QueryParts
 			
 		}
 
-		public override QueryPartType PartType
-		{
-			get { return QueryPartType.Join; }
-		}
-
 		public override void BuildPart(BuilderContext context)
 		{
 			AppendAlias(Expression, context);

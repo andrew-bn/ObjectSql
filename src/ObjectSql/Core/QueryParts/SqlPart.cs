@@ -34,11 +34,6 @@ namespace ObjectSql.Core.QueryParts
 			_queryParts.Add(part);
 		}
 
-		public override QueryPartType PartType
-		{
-			get { return QueryPartType.Sql; }
-		}
-
 		public override int GetHashCode()
 		{
 

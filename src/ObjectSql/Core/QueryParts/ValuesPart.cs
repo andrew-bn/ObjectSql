@@ -13,10 +13,7 @@ namespace ObjectSql.Core.QueryParts
 			Values = values;
 			Type = type;
 		}
-		public override QueryPartType PartType
-		{
-			get { return QueryPartType.Values; }
-		}
+
 		public override void CalculateQueryExpressionParameters(ref QueryRoots parameters)
 		{
 			base.CalculateQueryExpressionParameters(ref parameters);

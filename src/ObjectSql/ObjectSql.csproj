@@ -141,7 +141,6 @@
     <Compile Include="Core\QueryParts\JoinPart.cs" />
     <Compile Include="Core\QueryParts\LambdaBasedQueryPart.cs" />
     <Compile Include="Core\QueryParts\QueryPart.cs" />
-    <Compile Include="Core\QueryParts\QueryPartType.cs" />
     <Compile Include="Core\QueryParts\SelectPart.cs" />
     <Compile Include="Core\QueryParts\StoredProcedurePart.cs" />
     <Compile Include="Core\QueryParts\UpdatePart.cs" />

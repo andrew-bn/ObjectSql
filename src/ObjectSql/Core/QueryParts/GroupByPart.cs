@@ -10,10 +10,6 @@ namespace ObjectSql.Core.QueryParts
 		{
 			
 		}
-		public override QueryPartType PartType
-		{
-			get { return QueryPartType.GroupBy; }
-		}
 
 		public override void BuildPart(BuilderContext context)
 		{

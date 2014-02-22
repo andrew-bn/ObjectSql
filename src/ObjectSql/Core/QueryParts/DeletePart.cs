@@ -10,10 +10,7 @@ namespace ObjectSql.Core.QueryParts
 		{
 			Entity = entity;
 		}
-		public override QueryPartType PartType
-		{
-			get { return QueryPartType.Delete; }
-		}
+
 		public override void CalculateQueryExpressionParameters(ref QueryRoots parameters)
 		{
 			base.CalculateQueryExpressionParameters(ref parameters);

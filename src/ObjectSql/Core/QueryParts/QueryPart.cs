@@ -9,17 +9,16 @@ namespace ObjectSql.Core.QueryParts
 	public abstract class QueryPart
 	{
 		public const int PRIME = 397;
-		public abstract QueryPartType PartType {get;}
 
 		public virtual void CalculateQueryExpressionParameters(ref QueryRoots parameters)
 		{
 			parameters.Hash *= PRIME;
-			parameters.Hash ^= (int)PartType;
+			parameters.Hash ^= GetType().GetHashCode();
 		}
 
 		public virtual bool IsEqualTo(QueryPart part, ref QueryRoots rootsA, ref QueryRoots rootsB)
 		{
-			return PartType == part.PartType;
+			return GetType() == part.GetType();
 		}
 
 		public abstract void BuildPart(BuilderContext context);

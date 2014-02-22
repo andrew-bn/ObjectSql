@@ -11,10 +11,7 @@ namespace ObjectSql.Core.QueryParts
 		{
 			UseAliases = useAliases;
 		}
-		public override QueryPartType PartType
-		{
-			get { return QueryPartType.Where; }
-		}
+
 		public override void BuildPart(BuilderContext context)
 		{
 			if (UseAliases)
