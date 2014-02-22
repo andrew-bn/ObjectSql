@@ -39,7 +39,7 @@ namespace ObjectSql
 		{
 			var func = query.Compile();
 			var result = (QueryEnd<TEntity>)func(default(TArgs));
-			result.Context.GeneratePreparationData();
+			result.Context.PreparationData = result.Context.GeneratePreparationData();
 
 			return (arg1) =>
 				{

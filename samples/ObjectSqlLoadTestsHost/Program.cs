@@ -61,7 +61,7 @@ namespace ObjectSqlLoadTestsHost
 
 
 			Console.WriteLine("Warming up...");
-			TestMethod();
+			TestMethod2();
 			Console.WriteLine("Start");
 			Stopwatch sw = new Stopwatch();
 			sw.Start();
@@ -72,8 +72,8 @@ namespace ObjectSqlLoadTestsHost
 		}
 		public static void LoadTest()
 		{
-			for (int i = 0; i < 100000000; i++)
-				TestMethod();
+			for (int i = 0; i < 1000000000; i++)
+				TestMethod2();
 		}
 		public static void TestMethod2()
 		{
