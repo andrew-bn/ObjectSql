@@ -6,7 +6,7 @@ using ObjectSql.QueryInterfaces;
 
 namespace ObjectSql.Core.QueryParts
 {
-	public abstract class QueryPartBase: IQueryPart
+	public abstract class QueryPart
 	{
 		public const int PRIME = 397;
 		public abstract QueryPartType PartType {get;}
@@ -17,14 +17,13 @@ namespace ObjectSql.Core.QueryParts
 			parameters.Hash ^= (int)PartType;
 		}
 
-		public virtual bool IsEqualTo(IQueryPart part, ref QueryRoots rootsA, ref QueryRoots rootsB)
+		public virtual bool IsEqualTo(QueryPart part, ref QueryRoots rootsA, ref QueryRoots rootsB)
 		{
 			return PartType == part.PartType;
 		}
 
-		public virtual void BuildPart(BuilderContext context)
-		{
-		}
+		public abstract void BuildPart(BuilderContext context);
+
 		protected EntitySchema GetSchema(Type entityType,BuilderContext context)
 		{
 			return context.SchemaManager.GetSchema(entityType);

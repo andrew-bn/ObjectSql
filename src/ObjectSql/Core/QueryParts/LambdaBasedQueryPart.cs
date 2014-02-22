@@ -4,7 +4,7 @@ using System.Linq.Expressions;
 
 namespace ObjectSql.Core.QueryParts
 {
-	public abstract class LambdaBasedQueryPart: QueryPartBase
+	public abstract class LambdaBasedQueryPart: QueryPart
 	{
 		public LambdaExpression Expression { get; private set; }
 		protected LambdaBasedQueryPart(LambdaExpression expression)
@@ -18,7 +18,7 @@ namespace ObjectSql.Core.QueryParts
 			ExpressionHashCalculator.CalculateHashAndExtractConstantRoots(Expression, ref parameters);
 		}
 
-		public override bool IsEqualTo(IQueryPart part, ref QueryRoots rootsA, ref QueryRoots rootsB)
+		public override bool IsEqualTo(QueryPart part, ref QueryRoots rootsA, ref QueryRoots rootsB)
 		{
 			return base.IsEqualTo(part, ref rootsA, ref rootsB) && 
 				ExpressionComparer.AreEqual(Expression, ref rootsA, ((LambdaBasedQueryPart)part).Expression, ref rootsB);

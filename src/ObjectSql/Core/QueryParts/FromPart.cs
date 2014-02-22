@@ -3,7 +3,7 @@ using ObjectSql.Core.Bo;
 
 namespace ObjectSql.Core.QueryParts
 {
-	public class FromPart : QueryPartBase
+	public class FromPart : QueryPart
 	{
 		public Type[] Entities { get; private set; }
 		public FromPart(params Type[] entities)
@@ -31,7 +31,7 @@ namespace ObjectSql.Core.QueryParts
 				parameters.Hash ^= type.GetHashCode();
 			}
 		}
-		public override bool IsEqualTo(IQueryPart part, ref QueryRoots rootsA, ref QueryRoots rootsB)
+		public override bool IsEqualTo(QueryPart part, ref QueryRoots rootsA, ref QueryRoots rootsB)
 		{
 			if (!base.IsEqualTo(part, ref rootsA, ref rootsB))
 				return false;

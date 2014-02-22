@@ -27,7 +27,7 @@ namespace ObjectSql.Core.Bo
 		{
 			ConnectionOpened = false;
 			QueryEnvironment = queryEnvironment;
-			SqlPart = new SqlPart(this);
+			SqlPart = new SqlPart(queryEnvironment);
 		}
 		internal QueryContext CopyWith(IDbCommand command)
 		{
@@ -96,8 +96,7 @@ namespace ObjectSql.Core.Bo
 
 		public QueryPreparationData GeneratePreparationData()
 		{
-			SqlPart.BuildPart();
-			return PreparationData;
+			return SqlPart.BuildPart();
 		}
 		internal void PreProcessQuery()
 		{

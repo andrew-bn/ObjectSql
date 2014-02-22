@@ -8,7 +8,7 @@ using ObjectSql.Core.Bo.EntitySchema;
 
 namespace ObjectSql.Core.QueryParts
 {
-	public class StoredProcedureResultPart : QueryPartBase
+	public class StoredProcedureResultPart : QueryPart
 	{
 		public Type ResultType { get; private set; }
 		public object DbType { get; private set; }
@@ -24,7 +24,7 @@ namespace ObjectSql.Core.QueryParts
 			get { return QueryPartType.StoredProcedureReturn; }
 		}
 
-		public override bool IsEqualTo(IQueryPart part, ref Bo.QueryRoots rootsA, ref Bo.QueryRoots rootsB)
+		public override bool IsEqualTo(QueryPart part, ref Bo.QueryRoots rootsA, ref Bo.QueryRoots rootsB)
 		{
 			return base.IsEqualTo(part, ref rootsA, ref rootsB) &&
 			       (ResultType == ((StoredProcedureResultPart)part).ResultType);

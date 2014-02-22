@@ -31,7 +31,7 @@ namespace ObjectSql.Core.QueryParts
 			parameters.Hash *= PRIME;
 			parameters.Hash ^= UseAliases ? 1 : 0;
 		}
-		public override bool IsEqualTo(IQueryPart part, ref QueryRoots rootsA, ref QueryRoots rootsB)
+		public override bool IsEqualTo(QueryPart part, ref QueryRoots rootsA, ref QueryRoots rootsB)
 		{
 			return base.IsEqualTo(part, ref rootsA, ref rootsB) && UseAliases == ((WherePart)part).UseAliases;
 		}

@@ -4,7 +4,7 @@ using ObjectSql.Core.Bo.CommandPreparatorDescriptor;
 
 namespace ObjectSql.Core.QueryParts
 {
-	public class ValuesPart: QueryPartBase
+	public class ValuesPart: QueryPart
 	{
 		public object[] Values { get; private set; }
 		public Type Type { get; private set; }
