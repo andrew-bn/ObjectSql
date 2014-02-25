@@ -23,10 +23,11 @@ namespace ObjectSql.Core.QueryParts
 			_queryRoots = new QueryRoots();
 			
 			_queryParts = new List<QueryPart>();
+			
 			BuilderContext = new BuilderContext(env.DatabaseManager, env.SchemaManager, env.SqlWriter,
 				new ExpressionAnalizer(env.SchemaManager, env.DelegatesBuilder, env.SqlWriter),
 				env.DelegatesBuilder, new MaterializationInfoExtractor(env.SchemaManager),
-				new InsertionInfoExtractor(env.SchemaManager));
+				new InsertionInfoExtractor(env.SchemaManager),_queryParts);
 		}
 
 		public void AddQueryPart(QueryPart part)
@@ -85,6 +86,18 @@ namespace ObjectSql.Core.QueryParts
 
 		public override void BuildPart(BuilderContext context)
 		{
+			
+			while (true)
+			{
+				foreach (var part in _queryParts)
+				{
+					if (part.SortParts(context))
+						goto NextIteration;
+				}
+				break;
+				NextIteration:;
+			}
+
 			foreach (var part in _queryParts)
 				part.BuildPart(context);
 		}

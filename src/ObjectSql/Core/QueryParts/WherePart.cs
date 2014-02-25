@@ -14,10 +14,21 @@ namespace ObjectSql.Core.QueryParts
 
 		public override void BuildPart(BuilderContext context)
 		{
-			if (UseAliases)
-				AppendAlias(Expression, context);
+			var index = context.Parts.IndexOf(this);
+			var groupByGenerated = false;
+			for (int i = index - 1; i >= 0; i--)
+			{
+				if (context.Parts[i] is NextQueryPart)
+					break;
+				if (context.Parts[i] is GroupByPart)
+				{
+					groupByGenerated = true;
+					break;
+				}
+			}
+
 			var sql = context.ExpressionAnalizer.AnalizeExpression(context.Preparators, Expression.Body, ExpressionAnalizerType.Expression, UseAliases);
-			if (context.State == BuilderState.GroupByGenerated)
+			if (groupByGenerated)
 				context.SqlWriter.WriteHaving(context.Text, sql);
 			else
 				context.SqlWriter.WriteWhere(context.Text, sql);

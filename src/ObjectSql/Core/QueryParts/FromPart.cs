@@ -13,8 +13,13 @@ namespace ObjectSql.Core.QueryParts
 
 		public override void BuildPart(BuilderContext context)
 		{
-			context.State = BuilderState.FromAliasNeeded;
+			var index = context.Parts.IndexOf(this);
+			var selectPart = (LambdaBasedQueryPart) context.Parts[index - 1];
+
+//			context.State = BuilderState.FromAliasNeeded;
 			context.SqlWriter.WriteFrom(context.Text, GetSchema(Entities[0], context));
+			context.SqlWriter.WriteAlias(context.Text, selectPart.Expression.Parameters[0].Name);
+
 		}
 
 		public override void CalculateQueryExpressionParameters(ref QueryRoots parameters)

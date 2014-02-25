@@ -7,7 +7,6 @@ using System.Linq.Expressions;
 
 namespace ObjectSql.QueryImplementation
 {
-
 	public class Update<T> : Query, IUpdate<T>
 	{
 		public Update(QueryContext context)

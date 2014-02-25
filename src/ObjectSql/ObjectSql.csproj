@@ -73,7 +73,6 @@
     <Compile Include="ColumnAttribute.cs" />
     <Compile Include="CommandText.cs" />
     <Compile Include="Core\Bo\BuilderContext.cs" />
-    <Compile Include="Core\Bo\BuilderState.cs" />
     <Compile Include="Core\Bo\CommandPreparatorDescriptor\CommandPrePostProcessor.cs" />
     <Compile Include="Core\Bo\CommandPreparatorDescriptor\CommandPreparatorType.cs" />
     <Compile Include="Core\Bo\CommandPreparatorDescriptor\DatabaseCommandConstantPrePostProcessor.cs" />
@@ -104,6 +103,7 @@
     <Compile Include="Core\QueryDataReader.cs" />
     <Compile Include="Core\EntityEnumerable.cs" />
     <Compile Include="Core\ExecutionManager.cs" />
+    <Compile Include="Core\QueryParts\NextQueryPart.cs" />
     <Compile Include="Core\QueryParts\SqlPart.cs" />
     <Compile Include="Core\QueryParts\QueryResultPart.cs" />
     <Compile Include="DefaultSchemaManagerFactory.cs" />

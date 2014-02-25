@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq.Expressions;
 using ObjectSql.Core.Bo;
 using ObjectSql.Core.Bo.EntitySchema;
@@ -20,25 +21,15 @@ namespace ObjectSql.Core.QueryParts
 		{
 			return GetType() == part.GetType();
 		}
-
+		public virtual bool SortParts(BuilderContext parts)
+		{
+			return false;
+		}
 		public abstract void BuildPart(BuilderContext context);
 
 		protected EntitySchema GetSchema(Type entityType,BuilderContext context)
 		{
 			return context.SchemaManager.GetSchema(entityType);
-		}
-		protected void AppendAlias(LambdaExpression expression, BuilderContext context)
-		{
-			if (context.State == BuilderState.FromAliasNeeded &&
-				context.State != BuilderState.FromAliasGenerated &&
-				context.State != BuilderState.GroupByGenerated)
-			{
-				if (expression.Parameters[0].Type != typeof(DatabaseExtension))
-					context.SqlWriter.WriteAlias(context.Text, expression.Parameters[0].Name);
-				else context.SqlWriter.WriteAlias(context.Text, expression.Parameters[1].Name);
-				
-				context.State = BuilderState.FromAliasGenerated;
-			}
 		}
 	}
 }
