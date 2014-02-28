@@ -1,5 +1,6 @@
 ﻿using System.Linq.Expressions;
 using ObjectSql.Core.Bo;
+using ObjectSql.Core.Misc;
 
 namespace ObjectSql.Core.QueryParts
 {
@@ -15,16 +16,16 @@ namespace ObjectSql.Core.QueryParts
 		public override bool SortParts(BuilderContext context)
 		{
 			var parts = context.Parts;
-			var index = parts.IndexOf(this);
-			for (int i = index-1; i >= 0; i--)
+			var fromPart = context.Parts.MoveBackAndFind(this, p => p is FromPart || p is NextQueryPart) as FromPart;
+			if (fromPart != null)
 			{
-				if (i == 0 || (parts[i] is NextQueryPart) && i != index)
-				{
-					parts.RemoveAt(index);
-					parts.Insert(i, this);
-					return true;
-				}
+				var selectIndex = context.Parts.IndexOf(this);
+				var fromIndex = context.Parts.IndexOf(fromPart);
+				parts.RemoveAt(selectIndex);
+				parts.Insert(fromIndex,this);
+				return true;
 			}
+
 			return false;
 		}
 

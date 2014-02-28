@@ -1,4 +1,5 @@
-﻿using ObjectSql.Core;
+﻿using System;
+using ObjectSql.Core;
 using ObjectSql.QueryInterfaces;
 
 namespace ObjectSql.SqlServer
@@ -49,6 +50,37 @@ namespace ObjectSql.SqlServer
 		{
 			return BuildSql("REPLACE", parts);
 		}
+
+		public static Interval Day()
+		{
+			return default(Interval);
+		}
+
+		internal static string RenderDay(ICommandPreparatorsHolder commandPreparators, string[] parts)
+		{
+			return "day";
+		}
+
+		public static int DateDiff(Interval interval, DateTime? date1, DateTime? date2)
+		{
+			return default(int);
+		}
+
+		internal static string RenderDateDiff(ICommandPreparatorsHolder commandPreparators, string[] parts)
+		{
+			return BuildSql("DATEDIFF", parts);
+		}
+
+		public static DateTime GetDate()
+		{
+			return default(DateTime);
+		}
+
+		internal static string RenderGetDate(ICommandPreparatorsHolder commandPreparators, string[] parts)
+		{
+			return "GETDATE()";
+		}
+
 		private static string BuildSql(string method, string[] parts)
 		{
 			return string.Format(" {0}({1}) ", method, string.Join(", ", parts));

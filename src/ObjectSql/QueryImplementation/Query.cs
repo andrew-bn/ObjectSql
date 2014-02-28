@@ -90,6 +90,12 @@ namespace ObjectSql.QueryImplementation
 			}
 		}
 
+		public IQuery NextObjectSql()
+		{
+			Context.SqlPart.AddQueryPart(new NextQueryPart());
+			return this;
+		}
+
 		public int ExecuteNonQuery()
 		{
 			return ExecutionManager.ExecuteNonQuery(Context);

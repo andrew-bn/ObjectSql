@@ -1,4 +1,7 @@
-﻿using System.Linq.Expressions;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Linq.Expressions;
 using ObjectSql.Core.Bo.CommandPreparatorDescriptor;
 
 namespace ObjectSql.Core.Misc
@@ -27,6 +30,17 @@ namespace ObjectSql.Core.Misc
 			if (exp.NodeType == ExpressionType.Convert)
 				return ((UnaryExpression) exp).Operand;
 			return exp;
+		}
+
+		public static T MoveBackAndFind<T>(this List<T> enumerable, T obj, Func<T,bool> predicate)
+		{
+			var indexOfObj = enumerable.IndexOf(obj);
+			for (int i = indexOfObj - 1; i >= 0; i--)
+			{
+				if (predicate(enumerable[i]))
+					return enumerable[i];
+			}
+			return default(T);
 		}
 	}
 }

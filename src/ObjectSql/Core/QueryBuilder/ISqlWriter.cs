@@ -36,7 +36,7 @@ namespace ObjectSql.Core.QueryBuilder
 		CommandText WriteEqualNull(CommandText commandText, string left);
 		CommandText WriteNotEqual(CommandText commandText, string left, string right);
 		CommandText WriteNotEqualNull(CommandText commandText, string left);
-
 		CommandText WriteSet(CommandText commandText);
+		CommandText WriteSqlEnd(CommandText commandText);
 	}
 }

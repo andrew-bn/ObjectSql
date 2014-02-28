@@ -168,6 +168,12 @@ namespace ObjectSql.SqlServer
 		{
 			return commandText.Append(" = ");
 		}
+
+		public CommandText WriteSqlEnd(CommandText commandText)
+		{
+			return commandText.Append("; " + Environment.NewLine);
+		}
+
 		private static string PrepareStorageName(EntitySchema entitySchema)
 		{
 			return PrepareStorageName(entitySchema.StorageName);

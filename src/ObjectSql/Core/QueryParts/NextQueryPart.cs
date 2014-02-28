@@ -11,7 +11,7 @@ namespace ObjectSql.Core.QueryParts
 	{
 		public override void BuildPart(BuilderContext context)
 		{
-			
+			context.SqlWriter.WriteSqlEnd(context.Text);
 		}
 	}
 }

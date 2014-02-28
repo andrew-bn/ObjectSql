@@ -12,6 +12,7 @@ namespace ObjectSql.QueryInterfaces
 		object ExecuteScalar();
 		IObjectDataReader ExecuteReader();
 		IDbCommand Command { get; }
+		IQuery NextObjectSql();
 	}
 
 	public interface IQueryEnd<TEntity> : IQueryEnd

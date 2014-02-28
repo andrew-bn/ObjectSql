@@ -25,6 +25,7 @@ namespace ObjectSql.Tests.SqlServerTests
 		private List<CommandPrePostProcessor> _parameters;
 		private Action<IDbCommand, object> _parameterFactory;
 		private EntitySchema _categorySchema;
+		private EntitySchema _employeeSchema;
 		private int _parametersEncountered;
 		[SetUp]
 		public void Setup()
@@ -37,8 +38,14 @@ namespace ObjectSql.Tests.SqlServerTests
 										{ "Description", new StorageField("Description", null) },
 										{ "Picture", new StorageField("Picture", null) },
 									});
+			_employeeSchema = new EntitySchema(typeof(Employee), new StorageName(false, "Employee", null),
+									new Dictionary<string, StorageField>()
+									{
+										{ "BirthDate", new StorageField("BirthDate", null) }
+									});
 			_schemaManager = new Mock<IEntitySchemaManager>();
-			_schemaManager.Setup(m => m.GetSchema(It.IsAny<Type>())).Returns(_categorySchema);
+			_schemaManager.Setup(m => m.GetSchema(typeof(Category))).Returns(_categorySchema);
+			_schemaManager.Setup(m => m.GetSchema(typeof(Employee))).Returns(_employeeSchema);
 
 			_parameterFactory = (c, o) => { };
 			_delegatesBuilder = new Mock<IDelegatesBuilder>();
@@ -94,7 +101,14 @@ namespace ObjectSql.Tests.SqlServerTests
 
 			Assert.AreEqual("UPPER([c].[CategoryName])", result);
 		}
+		[Test]
+		public void BuildSql_DateDiff_GetDate()
+		{
+			Expression<Func<Employee, object>> exp = c => MsSql.DateDiff(MsSql.Day(), c.BirthDate, MsSql.GetDate() );
+			var result = CreateBuilder().BuildSql(_parametersHolder.Object, exp.Body, true).Prepare();
 
+			Assert.AreEqual("DATEDIFF(day,[c].[BirthDate],GETDATE())", result);
+		}
 		protected Expression IsExp<T>(Expression<Func<T>> b)
 		{
 			return It.Is<Expression>(e => e.AreEqual(b));

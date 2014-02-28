@@ -1,5 +1,6 @@
 ﻿using System.Linq.Expressions;
 using ObjectSql.Core.Bo;
+using ObjectSql.Core.Misc;
 
 namespace ObjectSql.Core.QueryParts
 {
@@ -14,18 +15,8 @@ namespace ObjectSql.Core.QueryParts
 
 		public override void BuildPart(BuilderContext context)
 		{
-			var index = context.Parts.IndexOf(this);
-			var groupByGenerated = false;
-			for (int i = index - 1; i >= 0; i--)
-			{
-				if (context.Parts[i] is NextQueryPart)
-					break;
-				if (context.Parts[i] is GroupByPart)
-				{
-					groupByGenerated = true;
-					break;
-				}
-			}
+			var groupByPart = context.Parts.MoveBackAndFind(this, p => p is GroupByPart || p is NextQueryPart) as GroupByPart;
+			var groupByGenerated = groupByPart != null;
 
 			var sql = context.ExpressionAnalizer.AnalizeExpression(context.Preparators, Expression.Body, ExpressionAnalizerType.Expression, UseAliases);
 			if (groupByGenerated)
