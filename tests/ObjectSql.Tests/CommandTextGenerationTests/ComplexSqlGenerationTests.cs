@@ -182,13 +182,13 @@ namespace ObjectSql.Tests.CommandTextGenerationTests
 				.GroupBy((p, c) => new { p.ProductName })
 				.Where((p, c) => p.ProductName != val2)
 				.Select((p, c) => new { p.ProductName, c.CategoryName })
-			.NextObjectSql()
+			.NextQuery()
 				.From<Product>()
 				.Join<Category>((p, c) => p.CategoryID == c.CategoryID)
 				.Where((p, c) => p.ProductName != val && p.ReorderLevel == 2 &&
 									 p.QuantityPerUnit != null || p.QuantityPerUnit != val)
 				.Select((p, c) => p.ProductName)
-			.NextObjectSql()
+			.NextQuery()
 				.Update(() => new Product { ProductName = "ProductName" })
 				.Where(p => p.ProductID == 22)
 				.Verify(

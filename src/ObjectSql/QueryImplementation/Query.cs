@@ -90,7 +90,7 @@ namespace ObjectSql.QueryImplementation
 			}
 		}
 
-		public IQuery NextObjectSql()
+		public IQuery NextQuery()
 		{
 			Context.SqlPart.AddQueryPart(new NextQueryPart());
 			return this;
