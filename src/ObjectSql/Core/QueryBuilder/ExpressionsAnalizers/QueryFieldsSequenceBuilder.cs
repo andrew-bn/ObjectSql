@@ -13,10 +13,10 @@ namespace ObjectSql.Core.QueryBuilder.ExpressionsAnalizers
 		{
 		}
 		private bool _multiFieldSelectionFromTable = true;
-		public override string BuildSql(BuilderContext context, Expression expression, bool useAliases)
+		public override string BuildSql(BuilderContext context, ParameterExpression[] parameters, Expression expression, bool useAliases)
 		{
 			_multiFieldSelectionFromTable = true;
-			return base.BuildSql(context, expression, useAliases);
+			return base.BuildSql(context,parameters, expression, useAliases);
 		}
 		protected override Expression VisitParameter(ParameterExpression alias)
 		{

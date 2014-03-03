@@ -1,4 +1,5 @@
-﻿using System.Linq.Expressions;
+﻿using System.Linq;
+using System.Linq.Expressions;
 using ObjectSql.Core.Bo;
 
 namespace ObjectSql.Core.QueryParts
@@ -15,7 +16,7 @@ namespace ObjectSql.Core.QueryParts
 		public override void BuildPart(Bo.BuilderContext context)
 		{
 			var entity = Expression.ReturnType;
-			var sql = context.AnalizeExpression(Expression.Body, ExpressionAnalizerType.FieldsUpdate, false);
+			var sql = context.AnalizeExpression(Expression.Parameters.ToArray(), Expression.Body, ExpressionAnalizerType.FieldsUpdate, false);
 			context.SqlWriter.WriteUpdate(context.Text, GetSchema(entity,context), sql);
 		}
 	}

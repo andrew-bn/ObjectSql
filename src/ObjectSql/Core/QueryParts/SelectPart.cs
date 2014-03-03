@@ -1,4 +1,5 @@
-﻿using System.Linq.Expressions;
+﻿using System.Linq;
+using System.Linq.Expressions;
 using ObjectSql.Core.Bo;
 using ObjectSql.Core.Misc;
 
@@ -31,7 +32,7 @@ namespace ObjectSql.Core.QueryParts
 
 		public override void BuildPart(BuilderContext context)
 		{
-			var sql = context.AnalizeExpression(Expression.Body, ExpressionAnalizerType.FieldsSelect, true);
+			var sql = context.AnalizeExpression(Expression.Parameters.ToArray(), Expression.Body, ExpressionAnalizerType.FieldsSelect, true);
 			context.SqlWriter.WriteSelect(context.Text, sql);
 
 			var matInfo = context.MaterializationInfoExtractor.ExtractFrom(Expression.Body);

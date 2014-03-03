@@ -214,19 +214,48 @@ namespace ObjectSql.Tests.CommandTextGenerationTests
 		}
 
 		[Test]
-		[Ignore]
-		public void In()
+		public void select_with_subquery()
 		{
 			var p1 = "pn";
 			var p2 = "p324";
 			var result = Query
 				.From<Product>()
 				.Where(p=> p.ProductName == p1 && p.CategoryID.In(Sql.Query.From<Category>()
-														.Where(c=>c.CategoryName == p2)
-														.Select(c=>c.CategoryID))
+																			.Where(c=>c.CategoryName == p2 && c.Description != p1)
+																			.Select(c=>c.CategoryID))
+							&& p.ProductName != p2
 					  )
-				.Select(p => p)
-				.Command;
+				.Select(p => p.ProductName)
+				.Verify(
+				@"SELECT [p].[ProductName]
+				  FROM [Product] AS [p] 
+				  WHERE ((([p].[ProductName]=@p0) AND 
+						 ([p].[CategoryID] IN (SELECT [c].[CategoryID]
+												FROM [Category] AS [c]
+												WHERE (([c].[CategoryName]=@p1) AND ([c].[Description]<>@p0))))) AND
+						  ([p].[ProductName]<>@p1))",
+				  p1, p2);
+		}
+
+		[Test]
+		[Ignore]
+		public void select_with_subquery_that_uses_main_querytable()
+		{
+			var p1 = "pn";
+			var p2 = "p324";
+			var result = Query
+				.From<Product>()
+				.Where(p => p.CategoryID.In(Sql.Query.From<Category>()
+													 .Where(c => c.CategoryName == p.ProductName || 
+																p.CategoryID == c.CategoryID)
+													 .Select(c => c.CategoryID)))
+				.Select(p => p.ProductName)
+				.Verify(
+				@"SELECT [p].[ProductName] 
+				  FROM [Product] AS [p] 
+				  WHERE  ([p].[CategoryID] IN (SELECT [c].[CategoryID] 
+				  							   FROM [Category] AS [c] 
+				  							   WHERE (([c].[CategoryName] = [p].[ProductName]) OR ([p].[CategoryID] = [c].[CategoryID]))))");
 		}
 	}
 }

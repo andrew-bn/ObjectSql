@@ -69,7 +69,7 @@ namespace ObjectSql.Tests.ExpressionsAnalizersTests.TardetDbExtensionsTests
 		public void BuildSql_Avg()
 		{
 			Expression<Func<Category, object>> exp = (c) => Sql.Avg(c.CategoryID);
-			var result = CreateBuilder().BuildSql(_builderContext, exp.Body, true).Prepare();
+			var result = CreateBuilder().BuildSql(_builderContext, exp.Parameters.ToArray(), exp.Body, true).Prepare();
 
 			Assert.AreEqual("AVG([c].[CategoryID])", result);
 		}
@@ -77,7 +77,7 @@ namespace ObjectSql.Tests.ExpressionsAnalizersTests.TardetDbExtensionsTests
 		public void BuildSql_Count()
 		{
 			Expression<Func<Category, object>> exp = c => Sql.Count(c.CategoryID);
-			var result = CreateBuilder().BuildSql(_builderContext, exp.Body, true).Prepare();
+			var result = CreateBuilder().BuildSql(_builderContext, exp.Parameters.ToArray(), exp.Body, true).Prepare();
 
 			Assert.AreEqual("COUNT([c].[CategoryID])", result);
 		}
@@ -85,7 +85,7 @@ namespace ObjectSql.Tests.ExpressionsAnalizersTests.TardetDbExtensionsTests
 		public void BuildSql_Min()
 		{
 			Expression<Func<Category, object>> exp = ( c) => Sql.Min(c.CategoryID);
-			var result = CreateBuilder().BuildSql(_builderContext, exp.Body, true).Prepare();
+			var result = CreateBuilder().BuildSql(_builderContext, exp.Parameters.ToArray(), exp.Body, true).Prepare();
 
 			Assert.AreEqual("MIN([c].[CategoryID])", result);
 		}
@@ -93,7 +93,7 @@ namespace ObjectSql.Tests.ExpressionsAnalizersTests.TardetDbExtensionsTests
 		public void BuildSql_Max()
 		{
 			Expression<Func<Category, object>> exp = (c) => Sql.Max(c.CategoryID);
-			var result = CreateBuilder().BuildSql(_builderContext, exp.Body, true).Prepare();
+			var result = CreateBuilder().BuildSql(_builderContext, exp.Parameters.ToArray(), exp.Body, true).Prepare();
 
 			Assert.AreEqual("MAX([c].[CategoryID])", result);
 		}
@@ -101,7 +101,7 @@ namespace ObjectSql.Tests.ExpressionsAnalizersTests.TardetDbExtensionsTests
 		public void BuildSql_Like()
 		{
 			Expression<Func<Category, object>> exp = ( c) => c.CategoryName.Like("adf");
-			var result = CreateBuilder().BuildSql(_builderContext, exp.Body, true).Prepare();
+			var result = CreateBuilder().BuildSql(_builderContext, exp.Parameters.ToArray(), exp.Body, true).Prepare();
 
 			Assert.AreEqual("([c].[CategoryName]LIKE@p0)", result);
 		}
@@ -109,7 +109,7 @@ namespace ObjectSql.Tests.ExpressionsAnalizersTests.TardetDbExtensionsTests
 		public void BuildSql_NotLike()
 		{
 			Expression<Func<Category, object>> exp = ( c) => c.CategoryName.NotLike("adf");
-			var result = CreateBuilder().BuildSql(_builderContext, exp.Body, true).Prepare();
+			var result = CreateBuilder().BuildSql(_builderContext, exp.Parameters.ToArray(), exp.Body, true).Prepare();
 
 			Assert.AreEqual("([c].[CategoryName]NOTLIKE@p0)", result);
 		}

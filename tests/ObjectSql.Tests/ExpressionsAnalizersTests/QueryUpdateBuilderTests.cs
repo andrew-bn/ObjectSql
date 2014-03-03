@@ -71,7 +71,7 @@ namespace ObjectSql.Tests.ExpressionsAnalizersTests
 			var c = new Category();
 			Expression<Func<Category>> exp = () => c;
 			var builder = CreateBuilder();
-			var result = builder.BuildSql(_builderContext, exp.Body, true);
+			var result = builder.BuildSql(_builderContext, exp.Parameters.ToArray(), exp.Body, true);
 		}
 		[Test]
 		public void BuildSql_ValidResultExpected()
@@ -79,7 +79,7 @@ namespace ObjectSql.Tests.ExpressionsAnalizersTests
 			var c = new Category();
 			Expression<Func<Category>> exp = () => new Category { CategoryID = 2, CategoryName = "cn"};
 			var builder = CreateBuilder();
-			var result = builder.BuildSql(_builderContext, exp.Body, true).Prepare();
+			var result = builder.BuildSql(_builderContext, exp.Parameters.ToArray(), exp.Body, true).Prepare();
 
 			Assert.AreEqual("[CategoryID]=@p0,[CategoryNameFld]=@p1", result);
 		}

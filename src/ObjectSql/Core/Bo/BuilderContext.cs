@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq.Expressions;
 using ObjectSql.Core.QueryBuilder;
 using ObjectSql.Core.QueryBuilder.ExpressionsAnalizers;
 using ObjectSql.Core.QueryBuilder.InfoExtractor;
@@ -50,9 +51,9 @@ namespace ObjectSql.Core.Bo
 
 		}
 
-		public string AnalizeExpression(System.Linq.Expressions.Expression expression, ExpressionAnalizerType expressionType, bool useAliases)
+		public string AnalizeExpression(ParameterExpression[] parameters,System.Linq.Expressions.Expression expression, ExpressionAnalizerType expressionType, bool useAliases)
 		{
-			return _analizers[expressionType].BuildSql(this, expression, useAliases);
+			return _analizers[expressionType].BuildSql(this,parameters, expression, useAliases);
 		}
 	}
 }

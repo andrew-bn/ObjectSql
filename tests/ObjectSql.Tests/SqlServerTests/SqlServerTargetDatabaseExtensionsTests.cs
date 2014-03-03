@@ -1,4 +1,5 @@
-﻿using NUnit.Framework;
+﻿using System.Linq;
+using NUnit.Framework;
 using Moq;
 using ObjectSql.Core;
 using ObjectSql.Core.Bo;
@@ -69,7 +70,7 @@ namespace ObjectSql.Tests.SqlServerTests
 		public void BuildSql_CountBig()
 		{
 			Expression<Func<Category, object>> exp = (c) => MsSql.CountBig(c.CategoryID);
-			var result = CreateBuilder().BuildSql(_builderContext, exp.Body, true).Prepare();
+			var result = CreateBuilder().BuildSql(_builderContext, exp.Parameters.ToArray(), exp.Body, true).Prepare();
 
 			Assert.AreEqual("COUNT_BIG([c].[CategoryID])", result);
 		}
@@ -77,7 +78,7 @@ namespace ObjectSql.Tests.SqlServerTests
 		public void BuildSql_Lower()
 		{
 			Expression<Func<Category, object>> exp = (c) => MsSql.Lower(c.Description);
-			var result = CreateBuilder().BuildSql(_builderContext, exp.Body, true).Prepare();
+			var result = CreateBuilder().BuildSql(_builderContext, exp.Parameters.ToArray(), exp.Body, true).Prepare();
 
 			Assert.AreEqual("LOWER([c].[Description])", result);
 		}
@@ -85,7 +86,7 @@ namespace ObjectSql.Tests.SqlServerTests
 		public void BuildSql_Replace()
 		{
 			Expression<Func<Category, object>> exp = c => MsSql.Replace(c.Description,"p","c");
-			var result = CreateBuilder().BuildSql(_builderContext, exp.Body, true).Prepare();
+			var result = CreateBuilder().BuildSql(_builderContext, exp.Parameters.ToArray(), exp.Body, true).Prepare();
 
 			Assert.AreEqual("REPLACE([c].[Description],@p0,@p1)", result);
 		}
@@ -93,7 +94,7 @@ namespace ObjectSql.Tests.SqlServerTests
 		public void BuildSql_Substring()
 		{
 			Expression<Func<Category, object>> exp = ( c) => MsSql.Substring(c.Description,1,2);
-			var result = CreateBuilder().BuildSql(_builderContext, exp.Body, true).Prepare();
+			var result = CreateBuilder().BuildSql(_builderContext, exp.Parameters.ToArray(), exp.Body, true).Prepare();
 
 			Assert.AreEqual("SUBSTRING([c].[Description],@p0,@p1)", result);
 		}
@@ -101,7 +102,7 @@ namespace ObjectSql.Tests.SqlServerTests
 		public void BuildSql_Upper()
 		{
 			Expression<Func<Category, object>> exp = ( c) => MsSql.Upper(c.CategoryName);
-			var result = CreateBuilder().BuildSql(_builderContext, exp.Body, true).Prepare();
+			var result = CreateBuilder().BuildSql(_builderContext, exp.Parameters.ToArray(), exp.Body, true).Prepare();
 
 			Assert.AreEqual("UPPER([c].[CategoryName])", result);
 		}
@@ -109,7 +110,7 @@ namespace ObjectSql.Tests.SqlServerTests
 		public void BuildSql_DateDiff_GetDate()
 		{
 			Expression<Func<Employee, object>> exp = c => MsSql.DateDiff(MsSql.Day(), c.BirthDate, MsSql.GetDate() );
-			var result = CreateBuilder().BuildSql(_builderContext, exp.Body, true).Prepare();
+			var result = CreateBuilder().BuildSql(_builderContext, exp.Parameters.ToArray(), exp.Body, true).Prepare();
 
 			Assert.AreEqual("DATEDIFF(day,[c].[BirthDate],GETDATE())", result);
 		}

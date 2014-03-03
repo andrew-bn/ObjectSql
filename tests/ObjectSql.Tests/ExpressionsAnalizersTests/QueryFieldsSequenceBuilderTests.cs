@@ -77,7 +77,7 @@ namespace ObjectSql.Tests.ExpressionsAnalizersTests
 		{
 			Expression<Func<Dto, object>> exp = (d) => new Dto {Id = 2 };
 			var builder = CreateBuilder();
-			builder.BuildSql(_builderContext, exp.Body, true);
+			builder.BuildSql(_builderContext, exp.Parameters.ToArray(), exp.Body, true);
 		}
 		[Test]
 		[ExpectedException(typeof(ObjectSqlException))]
@@ -85,14 +85,14 @@ namespace ObjectSql.Tests.ExpressionsAnalizersTests
 		{
 			Expression<Func<Dto, object>> exp = (d) => new Dto(1,"");
 			var builder = CreateBuilder();
-			var result = builder.BuildSql(_builderContext, exp.Body, true);
+			var result = builder.BuildSql(_builderContext, exp.Parameters.ToArray(), exp.Body, true);
 		}
 		[Test]
 		public void BuildSql_SelectNewAnonimus_ValidResult()
 		{
 			Expression<Func<Category, object>> exp = (d) => new { d.Description, d.Picture };
 			var builder = CreateBuilder();
-			var result = builder.BuildSql(_builderContext, exp.Body, false).Prepare();
+			var result = builder.BuildSql(_builderContext, exp.Parameters.ToArray(), exp.Body, false).Prepare();
 
 			Assert.AreEqual("[Description],[Picture]", result);
 		}
@@ -103,7 +103,7 @@ namespace ObjectSql.Tests.ExpressionsAnalizersTests
 			var c = 4;
 			Expression<Func<Category, object>> exp = (d) => new { c, d.Picture };
 			var builder = CreateBuilder();
-			var result = builder.BuildSql(_builderContext, exp.Body, false);
+			var result = builder.BuildSql(_builderContext, exp.Parameters.ToArray(), exp.Body, false);
 		}
 		[Test]
 		[ExpectedException(typeof(ObjectSqlException))]
@@ -111,7 +111,7 @@ namespace ObjectSql.Tests.ExpressionsAnalizersTests
 		{
 			Expression<Func<Category, object>> exp = (d) => new { fld = 5, d.Picture };
 			var builder = CreateBuilder();
-			var result = builder.BuildSql(_builderContext, exp.Body, false);
+			var result = builder.BuildSql(_builderContext, exp.Parameters.ToArray(), exp.Body, false);
 		}
 		[Test]
 		[ExpectedException(typeof(ObjectSqlException))]
@@ -119,7 +119,7 @@ namespace ObjectSql.Tests.ExpressionsAnalizersTests
 		{
 			Expression<Func<Category, object>> exp = (d) => new { d.Picture, fld = new { d.Description } };
 			var builder = CreateBuilder();
-			var result = builder.BuildSql(_builderContext, exp.Body, false);
+			var result = builder.BuildSql(_builderContext, exp.Parameters.ToArray(), exp.Body, false);
 		}
 		private QueryFieldsSequenceBuilder CreateBuilder()
 		{

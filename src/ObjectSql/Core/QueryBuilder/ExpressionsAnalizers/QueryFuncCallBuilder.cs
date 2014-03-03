@@ -17,14 +17,16 @@ namespace ObjectSql.Core.QueryBuilder.ExpressionsAnalizers
 		protected IEntitySchemaManager SchemaManager { get; private set; }
 		protected ICommandPreparatorsHolder CommandPreparatorsHolder { get { return _context.Preparators; }}
 		protected IDelegatesBuilder ExpressionBuilder { get; private set; }
+		private ParameterExpression[] _parameters;
 		public QueryFuncCallBuilder(IEntitySchemaManager schemaManager, IDelegatesBuilder expressionBuilder)
 		{
 			SchemaManager = schemaManager;
 			ExpressionBuilder = expressionBuilder;
 		}
-		public string BuildSql(BuilderContext context, Expression expression, bool useAliases)
+		public string BuildSql(BuilderContext context, ParameterExpression[] parameters, Expression expression, bool useAliases)
 		{
 			_context = context;
+			_parameters = parameters;
 			Visit(expression);
 			return null;
 		}

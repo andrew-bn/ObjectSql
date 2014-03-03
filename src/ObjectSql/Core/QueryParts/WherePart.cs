@@ -1,4 +1,5 @@
-﻿using System.Linq.Expressions;
+﻿using System.Linq;
+using System.Linq.Expressions;
 using ObjectSql.Core.Bo;
 using ObjectSql.Core.Misc;
 
@@ -18,7 +19,7 @@ namespace ObjectSql.Core.QueryParts
 			var groupByPart = context.Parts.MoveBackAndFind(this, p => p is GroupByPart || p is NextQueryPart) as GroupByPart;
 			var groupByGenerated = groupByPart != null;
 
-			var sql = context.AnalizeExpression(Expression.Body, ExpressionAnalizerType.Expression, UseAliases);
+			var sql = context.AnalizeExpression(Expression.Parameters.ToArray(), Expression.Body, ExpressionAnalizerType.Expression, UseAliases);
 			if (groupByGenerated)
 				context.SqlWriter.WriteHaving(context.Text, sql);
 			else

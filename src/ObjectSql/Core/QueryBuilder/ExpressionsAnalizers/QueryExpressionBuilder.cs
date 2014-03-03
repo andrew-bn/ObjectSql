@@ -26,6 +26,7 @@ namespace ObjectSql.Core.QueryBuilder.ExpressionsAnalizers
 		protected IDelegatesBuilder DelegatesBuilder { get; private set; }
 		protected ISqlWriter SqlWriter { get; private set; }
 		protected CommandText Text { get; set; }
+		protected ParameterExpression[] ExpressionParameters { get; set; }
 		public QueryExpressionBuilder(IEntitySchemaManager schemaManager,
 			IDelegatesBuilder expressionBuilder, ISqlWriter sqlWriter)
 		{
@@ -34,11 +35,12 @@ namespace ObjectSql.Core.QueryBuilder.ExpressionsAnalizers
 			DelegatesBuilder = expressionBuilder;
 			SqlWriter = sqlWriter;
 		}
-		public virtual string BuildSql(BuilderContext context, Expression expression, bool useAliases)
+		public virtual string BuildSql(BuilderContext context, ParameterExpression[] parameters, Expression expression, bool useAliases)
 		{
 			_valueWasNull = false;
 			UseAliases = useAliases;
 			BuilderContext = context;
+			ExpressionParameters = parameters;
 			return BuildSql(expression);
 		}
 		private string BuildSql(Expression expression)
@@ -74,26 +76,47 @@ namespace ObjectSql.Core.QueryBuilder.ExpressionsAnalizers
 		}
 		protected override Expression VisitMember(MemberExpression node)
 		{
+			
 			if (node.Expression.NodeType == ExpressionType.Parameter)
 			{
-				var entitySchema = SchemaManager.GetSchema(node.Member.DeclaringType);
+				var entityType = node.Member.DeclaringType;
+				var aliasName = ((ParameterExpression) node.Expression).Name;
+				var fieldName = node.Member.Name;
 
-				if (UseAliases)
-				{
-					SqlWriter.WriteName(Text, ((ParameterExpression)node.Expression).Name);
-					SqlWriter.WriteNameResolve(Text);
-				}
-
-				var storageField = entitySchema.GetStorageField(node.Member.Name);
-				DbTypeInContext = storageField.DbType;
-				SqlWriter.WriteName(Text, storageField.Name);
+				WriteStorageFieldAccess(entityType, aliasName, fieldName);
 			}
 			else
 			{
-				AddParameter(node);
+				var ma = node.Expression as MemberExpression;
+				if (ma != null && ma.Expression.Type.IsGenericType &&
+				    ma.Expression.Type.GetGenericTypeDefinition() == typeof (ParametersSubstitutor<>))
+				{
+					var entityType = ma.Expression.Type.GetGenericArguments()[0];
+					var aliasName = ((IParameterSubstitutor)((ConstantExpression) ma.Expression).Value).Name;
+					var fieldName = node.Member.Name;
+
+					WriteStorageFieldAccess(entityType, aliasName, fieldName);
+				}
+				else AddParameter(node);
 			}
 			return node;
 		}
+
+		private void WriteStorageFieldAccess(Type entityType, string aliasName, string fieldName)
+		{
+			var entitySchema = SchemaManager.GetSchema(entityType);
+
+			if (UseAliases)
+			{
+				SqlWriter.WriteName(Text, aliasName);
+				SqlWriter.WriteNameResolve(Text);
+			}
+
+			var storageField = entitySchema.GetStorageField(fieldName);
+			DbTypeInContext = storageField.DbType;
+			SqlWriter.WriteName(Text, storageField.Name);
+		}
+
 		protected override Expression VisitUnary(UnaryExpression node)
 		{
 			if (node.NodeType == ExpressionType.Not)
@@ -173,7 +196,7 @@ namespace ObjectSql.Core.QueryBuilder.ExpressionsAnalizers
 
 				var parts = new string[node.Arguments.Count];
 				for (int i = 0; i < node.Arguments.Count; i++)
-				{
+				{	
 					DbTypeInContext = null;
 					Text = new CommandText();
 					Visit(node.Arguments[i]);
@@ -188,30 +211,35 @@ namespace ObjectSql.Core.QueryBuilder.ExpressionsAnalizers
 			}
 			else
 			{
-				throw new ObjectSqlException("Invalid method call expression detected. Do not use method calls to pass parameters to SQL");
-
 				var nodes = ExpressionEnumerator.Enumerate(node).ToList();
 				var rootNode = nodes.FirstOrDefault(n => (n is MemberExpression) &&
 				                          ((MemberExpression) n).Expression == null &&
 				                          ((MemberExpression) n).Member == typeof (Sql).GetProperty("Query"));
+
+				if (rootNode == null)
+					throw new ObjectSqlException("Invalid method call expression detected. Do not use method calls to pass parameters to SQL");
+
 				var indexOfRoot = nodes.IndexOf(rootNode);
 				var param = Expression.Parameter(typeof (Query));
+				nodes[indexOfRoot] = param;
 				Expression newNode = param;
 				
 				for (int i = indexOfRoot - 1; i >= 0; i--)
-					newNode = ((MethodCallExpression) nodes[i]).Update(newNode, ((MethodCallExpression) nodes[i]).Arguments);
+					 nodes[i] = newNode = ((MethodCallExpression)nodes[i]).Update(newNode, ((MethodCallExpression)nodes[i]).Arguments);
+
+				newNode = new ParametersSubstitutorVisitor(ExpressionParameters).Visit(newNode);
 
 				var exp = Expression.Lambda<Func<Query,IQueryEnd>>(newNode, param).Compile();
 				var ctx = new QueryContext(BuilderContext.Context.InitialConnectionString,
 				                           BuilderContext.Context.Command, BuilderContext.Context.ResourcesTreatmentType,
 				                           BuilderContext.Context.QueryEnvironment);
-				foreach (var r in BuilderContext.Context.SqlPart.QueryRoots.Roots)
-				{
-					ctx.SqlPart.QueryRoots.AddRoot(r.Key,r.Value);
-				}
+
 				var q = new Query(ctx);
-				var queryEnd = exp(q);
-				var cmd = queryEnd.Command;
+				exp(q);
+				q.Context.SqlPart.BuilderContext.Preparators = BuilderContext.Preparators;
+
+				q.Context.SqlPart.BuildPart();
+				Text.Append(q.Context.SqlPart.BuilderContext.Text.ToString());
 			}
 
 			return node;
