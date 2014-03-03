@@ -32,6 +32,7 @@ namespace ObjectSql.Tests.ExpressionsAnalizersTests
 		private EntitySchema _categorySchema;
 		private string _categoryNameField;
 		private int _parametersEncountered;
+		private BuilderContext _builderContext;
 		[SetUp]
 		public void Setup()
 		{
@@ -60,6 +61,8 @@ namespace ObjectSql.Tests.ExpressionsAnalizersTests
 			_parametersHolder.SetupSet(h => h.ParametersEncountered).Callback(i => _parametersEncountered = i);
 			_parametersHolder.Setup(h => h.ParametersEncountered).Returns(() => _parametersEncountered);
 
+			_builderContext = new BuilderContext(null, null, null, null, null, null, null, null);
+			_builderContext.Preparators = _parametersHolder.Object;
 		}
 		public class Dto
 		{
@@ -74,7 +77,7 @@ namespace ObjectSql.Tests.ExpressionsAnalizersTests
 		{
 			Expression<Func<Dto, object>> exp = (d) => new Dto {Id = 2 };
 			var builder = CreateBuilder();
-			builder.BuildSql(_parametersHolder.Object, exp.Body, true);
+			builder.BuildSql(_builderContext, exp.Body, true);
 		}
 		[Test]
 		[ExpectedException(typeof(ObjectSqlException))]
@@ -82,14 +85,14 @@ namespace ObjectSql.Tests.ExpressionsAnalizersTests
 		{
 			Expression<Func<Dto, object>> exp = (d) => new Dto(1,"");
 			var builder = CreateBuilder();
-			var result = builder.BuildSql(_parametersHolder.Object, exp.Body, true);
+			var result = builder.BuildSql(_builderContext, exp.Body, true);
 		}
 		[Test]
 		public void BuildSql_SelectNewAnonimus_ValidResult()
 		{
 			Expression<Func<Category, object>> exp = (d) => new { d.Description, d.Picture };
 			var builder = CreateBuilder();
-			var result = builder.BuildSql(_parametersHolder.Object, exp.Body, false).Prepare();
+			var result = builder.BuildSql(_builderContext, exp.Body, false).Prepare();
 
 			Assert.AreEqual("[Description],[Picture]", result);
 		}
@@ -100,7 +103,7 @@ namespace ObjectSql.Tests.ExpressionsAnalizersTests
 			var c = 4;
 			Expression<Func<Category, object>> exp = (d) => new { c, d.Picture };
 			var builder = CreateBuilder();
-			var result = builder.BuildSql(_parametersHolder.Object, exp.Body, false);
+			var result = builder.BuildSql(_builderContext, exp.Body, false);
 		}
 		[Test]
 		[ExpectedException(typeof(ObjectSqlException))]
@@ -108,7 +111,7 @@ namespace ObjectSql.Tests.ExpressionsAnalizersTests
 		{
 			Expression<Func<Category, object>> exp = (d) => new { fld = 5, d.Picture };
 			var builder = CreateBuilder();
-			var result = builder.BuildSql(_parametersHolder.Object, exp.Body, false);
+			var result = builder.BuildSql(_builderContext, exp.Body, false);
 		}
 		[Test]
 		[ExpectedException(typeof(ObjectSqlException))]
@@ -116,7 +119,7 @@ namespace ObjectSql.Tests.ExpressionsAnalizersTests
 		{
 			Expression<Func<Category, object>> exp = (d) => new { d.Picture, fld = new { d.Description } };
 			var builder = CreateBuilder();
-			var result = builder.BuildSql(_parametersHolder.Object, exp.Body, false);
+			var result = builder.BuildSql(_builderContext, exp.Body, false);
 		}
 		private QueryFieldsSequenceBuilder CreateBuilder()
 		{

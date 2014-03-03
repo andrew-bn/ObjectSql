@@ -9,35 +9,50 @@ using ObjectSql.Core.SchemaManager;
 
 namespace ObjectSql.Core.Bo
 {
-	public class BuilderContext
+	public class BuilderContext : IExpressionAnalizer
 	{
+		public QueryContext Context { get; private set; }
 		public IDatabaseManager DatabaseManager { get; private set; }
 		public IEntitySchemaManager SchemaManager { get; private set; }
 		public ISqlWriter SqlWriter { get; private set; }
-		public IExpressionAnalizer ExpressionAnalizer { get; private set; }
+
 		public IDelegatesBuilder DelegatesBuilder { get; private set; }
 		public IMaterializationInfoExtractor MaterializationInfoExtractor { get; private set; }
 		public IInsertionInfoExtractor InsertionInfoExtractor { get; private set; }
 		public List<QueryPart> Parts { get; private set; }
-		public CommandPreparatorsHolder Preparators { get; private set; }
+		public ICommandPreparatorsHolder Preparators { get; set; }
 		public CommandText Text { get; set; }
 		public EntityInsertionInformation InsertionInfo { get; set; }
 		public EntityMaterializationInformation MaterializationInfo { get; set; }
 		public Delegate MaterializationDelegate { get; set; }
+		public QueryPart CurrentPart { get; set; }
+		private readonly Dictionary<ExpressionAnalizerType, ISqlQueryBuilder> _analizers = new Dictionary<ExpressionAnalizerType, ISqlQueryBuilder>();
 
-		public BuilderContext(IDatabaseManager databaseManager, IEntitySchemaManager schemaManager, ISqlWriter sqlWriter, IExpressionAnalizer expressionAnalizer, IDelegatesBuilder delegatesBuilder,
+		public BuilderContext(QueryContext context, IDatabaseManager databaseManager, IEntitySchemaManager schemaManager, ISqlWriter sqlWriter, IDelegatesBuilder delegatesBuilder,
 			IMaterializationInfoExtractor materializationInfoExtractor, IInsertionInfoExtractor insertionInfoExtractor, List<QueryPart> parts)
 		{
+			Context = context;
 			DatabaseManager = databaseManager;
 			SchemaManager = schemaManager;
 			SqlWriter = sqlWriter;
-			ExpressionAnalizer = expressionAnalizer;
 			DelegatesBuilder = delegatesBuilder;
 			MaterializationInfoExtractor = materializationInfoExtractor;
 			InsertionInfoExtractor = insertionInfoExtractor;
 			Parts = parts;
 			Text = new CommandText();
 			Preparators = new CommandPreparatorsHolder();
+
+			_analizers.Add(ExpressionAnalizerType.Expression, new QueryExpressionBuilder(schemaManager, DelegatesBuilder, SqlWriter));
+			_analizers.Add(ExpressionAnalizerType.FieldsSelect, new QuerySelectBuilder(schemaManager, DelegatesBuilder, SqlWriter));
+			_analizers.Add(ExpressionAnalizerType.FieldsSequence, new QueryFieldsSequenceBuilder(schemaManager, DelegatesBuilder, SqlWriter));
+			_analizers.Add(ExpressionAnalizerType.FieldsUpdate, new QueryUpdateBuilder(schemaManager, DelegatesBuilder, SqlWriter));
+			_analizers.Add(ExpressionAnalizerType.FuncCall, new QueryFuncCallBuilder(schemaManager, DelegatesBuilder));
+
+		}
+
+		public string AnalizeExpression(System.Linq.Expressions.Expression expression, ExpressionAnalizerType expressionType, bool useAliases)
+		{
+			return _analizers[expressionType].BuildSql(this, expression, useAliases);
 		}
 	}
 }

@@ -18,7 +18,7 @@ namespace ObjectSql.Core.QueryParts
 			var groupByPart = context.Parts.MoveBackAndFind(this, p => p is GroupByPart || p is NextQueryPart) as GroupByPart;
 			var groupByGenerated = groupByPart != null;
 
-			var sql = context.ExpressionAnalizer.AnalizeExpression(context.Preparators, Expression.Body, ExpressionAnalizerType.Expression, UseAliases);
+			var sql = context.AnalizeExpression(Expression.Body, ExpressionAnalizerType.Expression, UseAliases);
 			if (groupByGenerated)
 				context.SqlWriter.WriteHaving(context.Text, sql);
 			else

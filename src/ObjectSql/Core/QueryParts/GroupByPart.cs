@@ -13,7 +13,7 @@ namespace ObjectSql.Core.QueryParts
 
 		public override void BuildPart(BuilderContext context)
 		{
-			var sql = context.ExpressionAnalizer.AnalizeExpression(context.Preparators, Expression.Body, ExpressionAnalizerType.FieldsSequence, true);
+			var sql = context.AnalizeExpression(Expression.Body, ExpressionAnalizerType.FieldsSequence, true);
 			context.SqlWriter.WriteGroupBy(context.Text, sql);
 		}
 	}

@@ -117,7 +117,6 @@
     <Compile Include="Core\Misc\Reflect.cs" />
     <Compile Include="Core\EntityInsertionInformation.cs" />
     <Compile Include="Core\EntityMaterializationInformation.cs" />
-    <Compile Include="Core\QueryBuilder\ExpressionsAnalizers\ExpressionAnalizer.cs" />
     <Compile Include="Core\QueryBuilder\ExpressionsAnalizers\IExpressionAnalizer.cs" />
     <Compile Include="Core\QueryBuilder\ExpressionsAnalizers\ISqlQueryBuilder.cs" />
     <Compile Include="Core\QueryBuilder\ExpressionsAnalizers\QueryExpressionBuilder.cs" />
@@ -170,7 +169,7 @@
     </Compile>
     <Compile Include="QueryImplementation\TargetDatabaseExtensions.cs" />
     <Compile Include="QueryImplementation\Update.cs" />
-    <Compile Include="QueryInterfaces\DatabaseExtension.cs" />
+    <Compile Include="QueryInterfaces\DatabaseExtensionAttribute.cs" />
     <Compile Include="QueryInterfaces\IInsert.cs" />
     <Compile Include="QueryInterfaces\IObjectDataReader.cs" />
     <Compile Include="QueryInterfaces\IQueryEnd.cs" />

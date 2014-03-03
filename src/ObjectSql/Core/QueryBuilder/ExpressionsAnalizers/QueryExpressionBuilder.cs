@@ -1,9 +1,11 @@
-﻿using ObjectSql.Core.Bo.CommandPreparatorDescriptor;
+﻿using ObjectSql.Core.Bo;
+using ObjectSql.Core.Bo.CommandPreparatorDescriptor;
 using ObjectSql.Core.Bo.EntitySchema;
 using ObjectSql.Core.Misc;
 using ObjectSql.Core.QueryBuilder.LambdaBuilder;
 using ObjectSql.Core.SchemaManager;
 using ObjectSql.Exceptions;
+using ObjectSql.QueryImplementation;
 using ObjectSql.QueryInterfaces;
 using System;
 using System.Data;
@@ -16,10 +18,11 @@ namespace ObjectSql.Core.QueryBuilder.ExpressionsAnalizers
 	public class QueryExpressionBuilder : ExpressionVisitor, ISqlQueryBuilder
 	{
 		private bool _valueWasNull;
+		protected BuilderContext BuilderContext { get; private set; }
 		protected IEntitySchemaManager SchemaManager { get; private set; }
 		protected bool UseAliases { get; private set; }
 		protected IStorageFieldType DbTypeInContext { get; set; }
-		protected ICommandPreparatorsHolder CommandPreparatorsHolder { get; private set; }
+		protected ICommandPreparatorsHolder CommandPreparatorsHolder { get { return BuilderContext.Preparators; } }
 		protected IDelegatesBuilder DelegatesBuilder { get; private set; }
 		protected ISqlWriter SqlWriter { get; private set; }
 		protected CommandText Text { get; set; }
@@ -31,11 +34,11 @@ namespace ObjectSql.Core.QueryBuilder.ExpressionsAnalizers
 			DelegatesBuilder = expressionBuilder;
 			SqlWriter = sqlWriter;
 		}
-		public virtual string BuildSql(ICommandPreparatorsHolder commandPreparators, Expression expression, bool useAliases)
+		public virtual string BuildSql(BuilderContext context, Expression expression, bool useAliases)
 		{
 			_valueWasNull = false;
 			UseAliases = useAliases;
-			CommandPreparatorsHolder = commandPreparators;
+			BuilderContext = context;
 			return BuildSql(expression);
 		}
 		private string BuildSql(Expression expression)
@@ -164,7 +167,7 @@ namespace ObjectSql.Core.QueryBuilder.ExpressionsAnalizers
 
 		protected override Expression VisitMethodCall(MethodCallExpression node)
 		{
-			if (typeof(DatabaseExtension).IsAssignableFrom(node.Method.DeclaringType))
+			if (node.Method.DeclaringType.GetCustomAttribute(typeof (DatabaseExtensionAttribute)) != null)
 			{
 				var buff = Text;
 
@@ -177,11 +180,39 @@ namespace ObjectSql.Core.QueryBuilder.ExpressionsAnalizers
 					parts[i] = Text.ToString();
 				}
 				Text = buff;
-				var meth = node.Method.DeclaringType.GetMethod("Render" + node.Method.Name, BindingFlags.Static | BindingFlags.IgnoreCase | BindingFlags.NonPublic);
-				var renderResult = meth.Invoke(null,new object[]{ CommandPreparatorsHolder, parts});
+				var meth = node.Method.DeclaringType.GetMethod("Render" + node.Method.Name,
+				                                               BindingFlags.Static | BindingFlags.IgnoreCase |
+				                                               BindingFlags.NonPublic);
+				var renderResult = meth.Invoke(null, new object[] {BuilderContext, parts});
 				Text.Append(renderResult.ToString());
 			}
-			else throw new ObjectSqlException("Invalid method call expression detected. Do not use method calls to pass parameters to SQL");
+			else
+			{
+				throw new ObjectSqlException("Invalid method call expression detected. Do not use method calls to pass parameters to SQL");
+
+				var nodes = ExpressionEnumerator.Enumerate(node).ToList();
+				var rootNode = nodes.FirstOrDefault(n => (n is MemberExpression) &&
+				                          ((MemberExpression) n).Expression == null &&
+				                          ((MemberExpression) n).Member == typeof (Sql).GetProperty("Query"));
+				var indexOfRoot = nodes.IndexOf(rootNode);
+				var param = Expression.Parameter(typeof (Query));
+				Expression newNode = param;
+				
+				for (int i = indexOfRoot - 1; i >= 0; i--)
+					newNode = ((MethodCallExpression) nodes[i]).Update(newNode, ((MethodCallExpression) nodes[i]).Arguments);
+
+				var exp = Expression.Lambda<Func<Query,IQueryEnd>>(newNode, param).Compile();
+				var ctx = new QueryContext(BuilderContext.Context.InitialConnectionString,
+				                           BuilderContext.Context.Command, BuilderContext.Context.ResourcesTreatmentType,
+				                           BuilderContext.Context.QueryEnvironment);
+				foreach (var r in BuilderContext.Context.SqlPart.QueryRoots.Roots)
+				{
+					ctx.SqlPart.QueryRoots.AddRoot(r.Key,r.Value);
+				}
+				var q = new Query(ctx);
+				var queryEnd = exp(q);
+				var cmd = queryEnd.Command;
+			}
 
 			return node;
 		}

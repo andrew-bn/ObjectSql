@@ -18,14 +18,14 @@ namespace ObjectSql.Core.QueryParts
 		public QueryRoots _queryRoots;
 		public QueryRoots QueryRoots { get { return _queryRoots; } }
 		public BuilderContext BuilderContext { get; private set; }
-		public SqlPart(QueryEnvironment env)
+		public SqlPart(QueryContext context)
 		{
 			_queryRoots = new QueryRoots();
 			
 			_queryParts = new List<QueryPart>();
-			
-			BuilderContext = new BuilderContext(env.DatabaseManager, env.SchemaManager, env.SqlWriter,
-				new ExpressionAnalizer(env.SchemaManager, env.DelegatesBuilder, env.SqlWriter),
+
+			var env = context.QueryEnvironment;
+			BuilderContext = new BuilderContext(context, env.DatabaseManager, env.SchemaManager, env.SqlWriter,
 				env.DelegatesBuilder, new MaterializationInfoExtractor(env.SchemaManager),
 				new InsertionInfoExtractor(env.SchemaManager),_queryParts);
 		}
@@ -99,7 +99,10 @@ namespace ObjectSql.Core.QueryParts
 			}
 
 			foreach (var part in _queryParts)
+			{
+				context.CurrentPart = part;
 				part.BuildPart(context);
+			}
 		}
 	}
 }

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ObjectSql.QueryInterfaces
 {
-	public abstract class DatabaseExtension
+	public class DatabaseExtensionAttribute:Attribute
 	{
 	}
 }

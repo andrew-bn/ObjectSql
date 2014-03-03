@@ -5,14 +5,13 @@ using System.Threading.Tasks;
 
 namespace ObjectSql.QueryInterfaces
 {
-	public interface IQueryEnd
+	public interface IQueryEnd: IQuery
 	{
 		IQueryEnd Returns<TResult>(object sqlDbType);
 		int ExecuteNonQuery();
 		object ExecuteScalar();
 		IObjectDataReader ExecuteReader();
 		IDbCommand Command { get; }
-		IQuery NextQuery();
 	}
 
 	public interface IQueryEnd<TEntity> : IQueryEnd

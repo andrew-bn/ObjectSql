@@ -48,7 +48,7 @@ namespace ObjectSql.Core.QueryParts
 				context.MaterializationDelegate = context.DelegatesBuilder.CreateEntityMaterializationDelegate(entitySchema, materializationInfo);
 			}
 
-			context.ExpressionAnalizer.AnalizeExpression(context.Preparators, methodCall, ExpressionAnalizerType.FuncCall, false);
+			context.AnalizeExpression(methodCall, ExpressionAnalizerType.FuncCall, false);
 		}
 	}
 }

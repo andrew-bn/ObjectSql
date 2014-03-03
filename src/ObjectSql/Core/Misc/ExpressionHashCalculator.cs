@@ -44,7 +44,7 @@ namespace ObjectSql.Core.Misc
 					parameters.Hash ^= memberNode.Member.GetHashCode();
 					// we have roots only if there is a member access because of closure
 					// otherwise it is constant which is not root
-					if (memberNode.Expression.NodeType == ExpressionType.Constant)
+					if (memberNode.Expression!=null && memberNode.Expression.NodeType == ExpressionType.Constant)
 						parameters.AddRoot(((ConstantExpression)memberNode.Expression).Value);
 					break;
 				case ExpressionType.Constant:

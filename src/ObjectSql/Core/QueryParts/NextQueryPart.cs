@@ -11,7 +11,8 @@ namespace ObjectSql.Core.QueryParts
 	{
 		public override void BuildPart(BuilderContext context)
 		{
-			context.SqlWriter.WriteSqlEnd(context.Text);
+			if (context.Parts.IndexOf(this) > 0)
+				context.SqlWriter.WriteSqlEnd(context.Text);
 		}
 	}
 }

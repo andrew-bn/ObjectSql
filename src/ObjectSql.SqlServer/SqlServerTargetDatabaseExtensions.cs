@@ -1,10 +1,12 @@
 ﻿using System;
 using ObjectSql.Core;
+using ObjectSql.Core.Bo;
 using ObjectSql.QueryInterfaces;
 
 namespace ObjectSql.SqlServer
 {
-	public class MsSql : DatabaseExtension
+	[DatabaseExtension]
+	public class MsSql
 	{
 		private MsSql()
 		{
@@ -14,7 +16,7 @@ namespace ObjectSql.SqlServer
 		{
 			return default(long);
 		}
-		internal static string RenderCountBig(ICommandPreparatorsHolder commandPreparators, string[] parts)
+		internal static string RenderCountBig(BuilderContext commandPreparators, string[] parts)
 		{
 			return BuildSql("COUNT_BIG", parts);
 		}
@@ -22,7 +24,7 @@ namespace ObjectSql.SqlServer
 		{
 			return default(string);
 		}
-		internal static string RenderUpper(ICommandPreparatorsHolder commandPreparators, string[] parts)
+		internal static string RenderUpper(BuilderContext commandPreparators, string[] parts)
 		{
 			return BuildSql("UPPER", parts);
 		}
@@ -30,7 +32,7 @@ namespace ObjectSql.SqlServer
 		{
 			return default(string);
 		}
-		internal static string RenderLower(ICommandPreparatorsHolder commandPreparators, string[] parts)
+		internal static string RenderLower(BuilderContext commandPreparators, string[] parts)
 		{
 			return BuildSql("LOWER", parts);
 		}
@@ -38,7 +40,7 @@ namespace ObjectSql.SqlServer
 		{
 			return default(string);
 		}
-		internal static string RenderSubstring(ICommandPreparatorsHolder commandPreparators, string[] parts)
+		internal static string RenderSubstring(BuilderContext commandPreparators, string[] parts)
 		{
 			return BuildSql("SUBSTRING", parts);
 		}
@@ -46,7 +48,7 @@ namespace ObjectSql.SqlServer
 		{
 			return default(string);
 		}
-		internal static string RenderReplace(ICommandPreparatorsHolder commandPreparators, string[] parts)
+		internal static string RenderReplace(BuilderContext commandPreparators, string[] parts)
 		{
 			return BuildSql("REPLACE", parts);
 		}
@@ -56,7 +58,7 @@ namespace ObjectSql.SqlServer
 			return default(Interval);
 		}
 
-		internal static string RenderDay(ICommandPreparatorsHolder commandPreparators, string[] parts)
+		internal static string RenderDay(BuilderContext commandPreparators, string[] parts)
 		{
 			return "day";
 		}
@@ -66,7 +68,7 @@ namespace ObjectSql.SqlServer
 			return default(int);
 		}
 
-		internal static string RenderDateDiff(ICommandPreparatorsHolder commandPreparators, string[] parts)
+		internal static string RenderDateDiff(BuilderContext commandPreparators, string[] parts)
 		{
 			return BuildSql("DATEDIFF", parts);
 		}
@@ -76,7 +78,7 @@ namespace ObjectSql.SqlServer
 			return default(DateTime);
 		}
 
-		internal static string RenderGetDate(ICommandPreparatorsHolder commandPreparators, string[] parts)
+		internal static string RenderGetDate(BuilderContext commandPreparators, string[] parts)
 		{
 			return "GETDATE()";
 		}

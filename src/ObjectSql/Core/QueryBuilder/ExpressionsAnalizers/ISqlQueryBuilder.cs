@@ -1,9 +1,10 @@
 ﻿using System.Linq.Expressions;
+using ObjectSql.Core.Bo;
 
 namespace ObjectSql.Core.QueryBuilder.ExpressionsAnalizers
 {
 	public interface ISqlQueryBuilder
 	{
-		string BuildSql(ICommandPreparatorsHolder commandPreparators, Expression expression,bool useAliases);
+		string BuildSql(BuilderContext builderContext, Expression expression, bool useAliases);
 	}
 }

@@ -1,4 +1,5 @@
 ﻿
+using ObjectSql.Core.Bo;
 using ObjectSql.Core.QueryBuilder.LambdaBuilder;
 using ObjectSql.Core.SchemaManager;
 using ObjectSql.Exceptions;
@@ -13,10 +14,10 @@ namespace ObjectSql.Core.QueryBuilder.ExpressionsAnalizers
 			: base(schemaManager, expressionBuilder, sqlWriter)
 		{
 		}
-		public override string BuildSql(ICommandPreparatorsHolder commandPreparators, Expression expression, bool useAliases)
+		public override string BuildSql(BuilderContext context, Expression expression, bool useAliases)
 		{
 			_initNodeEncountered = false;
-			var result = base.BuildSql(commandPreparators, expression, useAliases);
+			var result = base.BuildSql(context, expression, useAliases);
 			if (!_initNodeEncountered)
 				throw new ObjectSqlException("Update builder expects entity initialization");
 			return result;

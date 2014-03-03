@@ -32,6 +32,7 @@ namespace ObjectSql.Tests.ExpressionsAnalizersTests
 		private EntitySchema _categorySchema;
 		private string _categoryNameField;
 		private int _parametersEncountered;
+		private BuilderContext _builderContext;
 		[SetUp]
 		public void Setup()
 		{
@@ -60,6 +61,8 @@ namespace ObjectSql.Tests.ExpressionsAnalizersTests
 			_parametersHolder.SetupSet(h => h.ParametersEncountered).Callback(i => _parametersEncountered = i);
 			_parametersHolder.Setup(h => h.ParametersEncountered).Returns(() => _parametersEncountered);
 
+			_builderContext = new BuilderContext(null,null, null, null, null, null, null, null);
+			_builderContext.Preparators = _parametersHolder.Object;
 		}
 		[Test]
 		[ExpectedException(typeof(ObjectSqlException))]
@@ -68,7 +71,7 @@ namespace ObjectSql.Tests.ExpressionsAnalizersTests
 			var c = new Category();
 			Expression<Func<Category>> exp = () => c;
 			var builder = CreateBuilder();
-			var result = builder.BuildSql(_parametersHolder.Object, exp.Body, true);
+			var result = builder.BuildSql(_builderContext, exp.Body, true);
 		}
 		[Test]
 		public void BuildSql_ValidResultExpected()
@@ -76,7 +79,7 @@ namespace ObjectSql.Tests.ExpressionsAnalizersTests
 			var c = new Category();
 			Expression<Func<Category>> exp = () => new Category { CategoryID = 2, CategoryName = "cn"};
 			var builder = CreateBuilder();
-			var result = builder.BuildSql(_parametersHolder.Object, exp.Body, true).Prepare();
+			var result = builder.BuildSql(_builderContext, exp.Body, true).Prepare();
 
 			Assert.AreEqual("[CategoryID]=@p0,[CategoryNameFld]=@p1", result);
 		}

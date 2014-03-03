@@ -175,6 +175,7 @@ namespace ObjectSql.Tests.CommandTextGenerationTests
 			var val = "val";
 			var val2 = "val";
 			var result = Query
+				//select p.productname as productname, c.categoryname as categoryname
 				.From<Product>()
 				.Join<Category>((p, c) => p.CategoryID == c.CategoryID)
 				.Where((p, c) => p.ProductName != val && p.ReorderLevel == 2 &&
@@ -182,15 +183,16 @@ namespace ObjectSql.Tests.CommandTextGenerationTests
 				.GroupBy((p, c) => new { p.ProductName })
 				.Where((p, c) => p.ProductName != val2)
 				.Select((p, c) => new { p.ProductName, c.CategoryName })
-			.NextQuery()
+
 				.From<Product>()
 				.Join<Category>((p, c) => p.CategoryID == c.CategoryID)
 				.Where((p, c) => p.ProductName != val && p.ReorderLevel == 2 &&
 									 p.QuantityPerUnit != null || p.QuantityPerUnit != val)
 				.Select((p, c) => p.ProductName)
-			.NextQuery()
+
 				.Update(() => new Product { ProductName = "ProductName" })
 				.Where(p => p.ProductID == 22)
+				
 				.Verify(
 				@"SELECT [p].[ProductName] AS [ProductName],[c].[CategoryName] AS [CategoryName] 
 				  FROM [Product] AS [p] 
@@ -209,6 +211,22 @@ namespace ObjectSql.Tests.CommandTextGenerationTests
 				  UPDATE [Product] SET [ProductName] = @p3 
 				  WHERE([ProductID] = @p4 )",
 					val, 2, val2, "ProductName", 22);
+		}
+
+		[Test]
+		[Ignore]
+		public void In()
+		{
+			var p1 = "pn";
+			var p2 = "p324";
+			var result = Query
+				.From<Product>()
+				.Where(p=> p.ProductName == p1 && p.CategoryID.In(Sql.Query.From<Category>()
+														.Where(c=>c.CategoryName == p2)
+														.Select(c=>c.CategoryID))
+					  )
+				.Select(p => p)
+				.Command;
 		}
 	}
 }

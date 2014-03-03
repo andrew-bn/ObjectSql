@@ -1,21 +1,25 @@
-﻿using ObjectSql.Core;
+﻿using System;
+using ObjectSql.Core;
+using ObjectSql.Core.Bo;
 using ObjectSql.QueryInterfaces;
 
 namespace ObjectSql
 {
-	public class Sql: DatabaseExtension
+	[DatabaseExtension]
+	public static class Sql
 	{
-		private Sql()
+		public static IQuery Query
 		{
+			get { return null; }
 		}
 
-		public static bool Like(string expression,string pattern) { return false; }
-		internal static string RenderLike(ICommandPreparatorsHolder commandPreparators, string[] parts)
+		public static bool Like(this string expression,string pattern) { return false; }
+		internal static string RenderLike(BuilderContext commandPreparators, string[] parts)
 		{
 			return string.Format(" ({0} LIKE {1})", parts[0], parts[1]);
 		}
-		public static bool NotLike(string expression, string pattern) { return false; }
-		internal static string RenderNotLike(ICommandPreparatorsHolder commandPreparators, string[] parts)
+		public static bool NotLike(this string expression, string pattern) { return false; }
+		internal static string RenderNotLike(BuilderContext commandPreparators, string[] parts)
 		{
 			return string.Format(" ({0} NOT LIKE {1})", parts[0], parts[1]);
 		}
@@ -33,7 +37,7 @@ namespace ObjectSql
 		public static float Avg(float? columnSelector) { return default(int); }
 		public static float Avg(double columnSelector) { return default(int); }
 		public static float Avg(double? columnSelector) { return default(int); }
-		internal static string RenderAvg(ICommandPreparatorsHolder commandPreparators, string[] parts)
+		internal static string RenderAvg(BuilderContext commandPreparators, string[] parts)
 		{
 			return BuildSql("AVG", parts);
 		}
@@ -41,7 +45,7 @@ namespace ObjectSql
 		{
 			return default(T);
 		}
-		internal static string RenderMax(ICommandPreparatorsHolder commandPreparators, string[] parts)
+		internal static string RenderMax(BuilderContext commandPreparators, string[] parts)
 		{
 			return BuildSql("MAX", parts);
 		}
@@ -49,7 +53,7 @@ namespace ObjectSql
 		{
 			return default(T);
 		}
-		internal static string RenderMin(ICommandPreparatorsHolder commandPreparators, string[] parts)
+		internal static string RenderMin(BuilderContext commandPreparators, string[] parts)
 		{
 			return BuildSql("MIN", parts);
 		}
@@ -57,10 +61,17 @@ namespace ObjectSql
 		{
 			return default(int);
 		}
-		internal static string RenderCount(ICommandPreparatorsHolder commandPreparators, string[] parts)
+		internal static string RenderCount(BuilderContext commandPreparators, string[] parts)
 		{
 			return BuildSql("COUNT", parts);
 		}
+
+		public static bool In<T,TEntity>(this T field, IQueryEnd<TEntity> query) { return false; }
+		internal static string RenderIn(BuilderContext commandPreparators, string[] parts)
+		{
+			return string.Format(" ({0} in)", parts[0]);
+		}
+
 		private static string BuildSql(string method, string[] parts)
 		{
 			return string.Format(" {0}({1}) ",method, string.Join(", ", parts[0]));

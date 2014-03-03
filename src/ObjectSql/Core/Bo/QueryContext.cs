@@ -36,7 +36,7 @@ namespace ObjectSql.Core.Bo
 			Command = command;
 			ResourcesTreatmentType = resourcesTreatmentType;
 			QueryEnvironment = queryEnvironment;
-			SqlPart = new SqlPart(queryEnvironment);
+			SqlPart = new SqlPart(this);
 		}
 		internal QueryContext CopyWith(IDbCommand command)
 		{

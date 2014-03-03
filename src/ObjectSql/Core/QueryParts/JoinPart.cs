@@ -15,7 +15,7 @@ namespace ObjectSql.Core.QueryParts
 		public override void BuildPart(BuilderContext context)
 		{
 			var joinToTable = Expression.Parameters.Last().Type;
-			var sql = context.ExpressionAnalizer.AnalizeExpression(context.Preparators, Expression.Body, ExpressionAnalizerType.Expression, true);
+			var sql = context.AnalizeExpression(Expression.Body, ExpressionAnalizerType.Expression, true);
 			context.SqlWriter.WriteJoin(context.Text, GetSchema(joinToTable,context), Expression.Parameters.Last().Name, sql);
 		}
 	}

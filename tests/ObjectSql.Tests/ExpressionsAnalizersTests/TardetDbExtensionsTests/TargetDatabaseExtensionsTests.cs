@@ -31,6 +31,7 @@ namespace ObjectSql.Tests.ExpressionsAnalizersTests.TardetDbExtensionsTests
 		private List<CommandPrePostProcessor> _parameters;
 		private Action<IDbCommand, object> _parameterFactory;
 		private EntitySchema _categorySchema;
+		private BuilderContext _builderContext;
 		private int _parametersEncountered;
 		[SetUp]
 		public void Setup()
@@ -52,6 +53,8 @@ namespace ObjectSql.Tests.ExpressionsAnalizersTests.TardetDbExtensionsTests
 				.Returns(_parameterFactory);
 
 			_parameters = new List<CommandPrePostProcessor>();
+
+
 			_parametersHolder = new Mock<ICommandPreparatorsHolder>();
 			_parametersHolder.Setup(h => h.PreProcessors).Returns(_parameters);
 			_parametersHolder.Setup(h => h.AddPreProcessor(It.IsAny<CommandPrePostProcessor>()))
@@ -59,12 +62,14 @@ namespace ObjectSql.Tests.ExpressionsAnalizersTests.TardetDbExtensionsTests
 			_parametersHolder.SetupSet(h => h.ParametersEncountered).Callback(i => _parametersEncountered = i);
 			_parametersHolder.Setup(h => h.ParametersEncountered).Returns(() => _parametersEncountered);
 
+			_builderContext = new BuilderContext(null, null, null, null, null, null, null, null);
+			_builderContext.Preparators = _parametersHolder.Object;
 		}
 		[Test]
 		public void BuildSql_Avg()
 		{
 			Expression<Func<Category, object>> exp = (c) => Sql.Avg(c.CategoryID);
-			var result = CreateBuilder().BuildSql(_parametersHolder.Object, exp.Body, true).Prepare();
+			var result = CreateBuilder().BuildSql(_builderContext, exp.Body, true).Prepare();
 
 			Assert.AreEqual("AVG([c].[CategoryID])", result);
 		}
@@ -72,7 +77,7 @@ namespace ObjectSql.Tests.ExpressionsAnalizersTests.TardetDbExtensionsTests
 		public void BuildSql_Count()
 		{
 			Expression<Func<Category, object>> exp = c => Sql.Count(c.CategoryID);
-			var result = CreateBuilder().BuildSql(_parametersHolder.Object, exp.Body, true).Prepare();
+			var result = CreateBuilder().BuildSql(_builderContext, exp.Body, true).Prepare();
 
 			Assert.AreEqual("COUNT([c].[CategoryID])", result);
 		}
@@ -80,7 +85,7 @@ namespace ObjectSql.Tests.ExpressionsAnalizersTests.TardetDbExtensionsTests
 		public void BuildSql_Min()
 		{
 			Expression<Func<Category, object>> exp = ( c) => Sql.Min(c.CategoryID);
-			var result = CreateBuilder().BuildSql(_parametersHolder.Object, exp.Body, true).Prepare();
+			var result = CreateBuilder().BuildSql(_builderContext, exp.Body, true).Prepare();
 
 			Assert.AreEqual("MIN([c].[CategoryID])", result);
 		}
@@ -88,23 +93,23 @@ namespace ObjectSql.Tests.ExpressionsAnalizersTests.TardetDbExtensionsTests
 		public void BuildSql_Max()
 		{
 			Expression<Func<Category, object>> exp = (c) => Sql.Max(c.CategoryID);
-			var result = CreateBuilder().BuildSql(_parametersHolder.Object, exp.Body, true).Prepare();
+			var result = CreateBuilder().BuildSql(_builderContext, exp.Body, true).Prepare();
 
 			Assert.AreEqual("MAX([c].[CategoryID])", result);
 		}
 		[Test]
 		public void BuildSql_Like()
 		{
-			Expression<Func<Category, object>> exp = ( c) => Sql.Like(c.CategoryName,"adf");
-			var result = CreateBuilder().BuildSql(_parametersHolder.Object, exp.Body, true).Prepare();
+			Expression<Func<Category, object>> exp = ( c) => c.CategoryName.Like("adf");
+			var result = CreateBuilder().BuildSql(_builderContext, exp.Body, true).Prepare();
 
 			Assert.AreEqual("([c].[CategoryName]LIKE@p0)", result);
 		}
 		[Test]
 		public void BuildSql_NotLike()
 		{
-			Expression<Func<Category, object>> exp = ( c) => Sql.NotLike(c.CategoryName, "adf");
-			var result = CreateBuilder().BuildSql(_parametersHolder.Object, exp.Body, true).Prepare();
+			Expression<Func<Category, object>> exp = ( c) => c.CategoryName.NotLike("adf");
+			var result = CreateBuilder().BuildSql(_builderContext, exp.Body, true).Prepare();
 
 			Assert.AreEqual("([c].[CategoryName]NOTLIKE@p0)", result);
 		}

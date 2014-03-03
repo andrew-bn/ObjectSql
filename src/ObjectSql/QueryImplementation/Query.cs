@@ -21,17 +21,20 @@ namespace ObjectSql.QueryImplementation
 		}
 		public IQuery<TTable> From<TTable>()
 		{
+			Context.SqlPart.AddQueryPart(new NextQueryPart());
 			Context.SqlPart.AddQueryPart(new FromPart(typeof(TTable)));
 			return new Query<TTable>(Context);
 		}
 		public IQueryEnd<TValue> Select<TValue>(Expression<Func<TValue>> select)
 		{
+			Context.SqlPart.AddQueryPart(new NextQueryPart());
 			Context.SqlPart.AddQueryPart(new SelectPart(select));
 			return new QueryEnd<TValue>(Context);
 		}
 		public IInsert<TDst> Insert<TDst>()
 			where TDst : class
 		{
+			Context.SqlPart.AddQueryPart(new NextQueryPart());
 			Expression<Func<TDst, object>> selector = c => c;
 			return Insert<TDst>(selector);
 		}
@@ -39,6 +42,7 @@ namespace ObjectSql.QueryImplementation
 		public IInsert<TDst> Insert<TDst>(Expression<Func<TDst, object>> selector)
 			where TDst : class
 		{
+			Context.SqlPart.AddQueryPart(new NextQueryPart());
 			Context.SqlPart.AddQueryPart(new InsertPart(selector));
 			return new Insert<TDst>(Context);
 		}
@@ -46,28 +50,33 @@ namespace ObjectSql.QueryImplementation
 
 		public IUpdate<T> Update<T>(Expression<Func<T>> set)
 		{
+			Context.SqlPart.AddQueryPart(new NextQueryPart());
 			Context.SqlPart.AddQueryPart(new UpdatePart(set));
 			return new Update<T>(Context);
 		}
 
 		public IQueryEnd Delete<T>(Expression<Func<T, bool>> condition)
 		{
+			Context.SqlPart.AddQueryPart(new NextQueryPart());
 			Context.SqlPart.AddQueryPart(new DeletePart(typeof(T)));
 			Context.SqlPart.AddQueryPart(new WherePart(false, condition));
 			return this;
 		}
 		public IQueryEnd Delete<T>()
 		{
+			Context.SqlPart.AddQueryPart(new NextQueryPart());
 			Context.SqlPart.AddQueryPart(new DeletePart(typeof(T)));
 			return this;
 		}
 		public IQueryEnd<TEntity> Exec<THolder, TEntity>(Expression<Func<THolder, IEnumerable<TEntity>>> spExecutor)
 		{
+			Context.SqlPart.AddQueryPart(new NextQueryPart());
 			Context.SqlPart.AddQueryPart(new StoredProcedurePart(spExecutor, typeof(TEntity), true));
 			return new QueryEnd<TEntity>(Context);
 		}
 		public IQueryEnd Exec<THolder>(Expression<Action<THolder>> spExecutor)
 		{
+			Context.SqlPart.AddQueryPart(new NextQueryPart());
 			Context.SqlPart.AddQueryPart(new StoredProcedurePart(spExecutor, null, true));
 			return this;
 		}
@@ -88,12 +97,6 @@ namespace ObjectSql.QueryImplementation
 			{
 				return Context.PrepareQuery();
 			}
-		}
-
-		public IQuery NextQuery()
-		{
-			Context.SqlPart.AddQueryPart(new NextQueryPart());
-			return this;
 		}
 
 		public int ExecuteNonQuery()

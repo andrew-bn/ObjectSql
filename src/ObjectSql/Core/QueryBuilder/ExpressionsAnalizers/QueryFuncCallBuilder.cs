@@ -1,4 +1,5 @@
-﻿using ObjectSql.Core.Bo.CommandPreparatorDescriptor;
+﻿using ObjectSql.Core.Bo;
+using ObjectSql.Core.Bo.CommandPreparatorDescriptor;
 using ObjectSql.Core.Bo.EntitySchema;
 using ObjectSql.Core.Misc;
 using ObjectSql.Core.QueryBuilder.LambdaBuilder;
@@ -12,17 +13,18 @@ namespace ObjectSql.Core.QueryBuilder.ExpressionsAnalizers
 {
 	public class QueryFuncCallBuilder : ExpressionVisitor, ISqlQueryBuilder
 	{
+		private BuilderContext _context;
 		protected IEntitySchemaManager SchemaManager { get; private set; }
-		protected ICommandPreparatorsHolder CommandPreparatorsHolder { get; private set; }
+		protected ICommandPreparatorsHolder CommandPreparatorsHolder { get { return _context.Preparators; }}
 		protected IDelegatesBuilder ExpressionBuilder { get; private set; }
 		public QueryFuncCallBuilder(IEntitySchemaManager schemaManager, IDelegatesBuilder expressionBuilder)
 		{
 			SchemaManager = schemaManager;
 			ExpressionBuilder = expressionBuilder;
 		}
-		public string BuildSql(ICommandPreparatorsHolder commandPreparators, Expression expression, bool useAliases)
+		public string BuildSql(BuilderContext context, Expression expression, bool useAliases)
 		{
-			CommandPreparatorsHolder = commandPreparators;
+			_context = context;
 			Visit(expression);
 			return null;
 		}

@@ -32,6 +32,7 @@ namespace ObjectSql.Tests.ExpressionsAnalizersTests
 		private EntitySchema _categorySchema;
 		private string _categoryNameField;
 		private int _parametersEncountered;
+		private BuilderContext _builderContext;
 		[SetUp]
 		public void Setup()
 		{
@@ -60,6 +61,8 @@ namespace ObjectSql.Tests.ExpressionsAnalizersTests
 			_parametersHolder.SetupSet(h => h.ParametersEncountered).Callback(i => _parametersEncountered = i);
 			_parametersHolder.Setup(h => h.ParametersEncountered).Returns(() => _parametersEncountered);
 
+			_builderContext = new BuilderContext(null, null, null, null, null, null, null, null);
+			_builderContext.Preparators = _parametersHolder.Object;
 		}
 		public class Dto
 		{
@@ -73,7 +76,7 @@ namespace ObjectSql.Tests.ExpressionsAnalizersTests
 		{
 			Expression<Func<Dto>> exp = () => new Dto(3, "name");
 			var builder = CreateBuilder();
-			var result = builder.BuildSql(_parametersHolder.Object, exp.Body, true).Prepare();
+			var result = builder.BuildSql(_builderContext, exp.Body, true).Prepare();
 
 			Assert.AreEqual("@p0AS[identity],@p1AS[dtoName]", result);
 		}
@@ -82,7 +85,7 @@ namespace ObjectSql.Tests.ExpressionsAnalizersTests
 		{
 			Expression<Func<Dto>> exp = () => new Dto { Id = 2, Name = "name" };
 			var builder = CreateBuilder();
-			var result = builder.BuildSql(_parametersHolder.Object, exp.Body, true).Prepare();
+			var result = builder.BuildSql(_builderContext, exp.Body, true).Prepare();
 
 			Assert.AreEqual("@p0AS[Id],@p1AS[Name]", result);
 		}
@@ -92,14 +95,14 @@ namespace ObjectSql.Tests.ExpressionsAnalizersTests
 		{
 			Expression<Func<Dto>> exp = () => new Dto(4, "name") { Name = "name" };
 			var builder = CreateBuilder();
-			var result = builder.BuildSql(_parametersHolder.Object, exp.Body, true).Prepare();
+			var result = builder.BuildSql(_builderContext, exp.Body, true).Prepare();
 		}
 		[Test]
 		public void BuildSql_SelectAnonimus_ParametersInitializer()
 		{
 			Expression<Func<object>> exp = () => new { Id = 2, Name = "name" };
 			var builder = CreateBuilder();
-			var result = builder.BuildSql(_parametersHolder.Object, exp.Body, true).Prepare();
+			var result = builder.BuildSql(_builderContext, exp.Body, true).Prepare();
 
 			Assert.AreEqual("@p0AS[Id],@p1AS[Name]", result);
 		}
@@ -108,7 +111,7 @@ namespace ObjectSql.Tests.ExpressionsAnalizersTests
 		{
 			Expression<Func<Category, Category>> exp = (p) => p;
 			var builder = CreateBuilder();
-			var result = builder.BuildSql(_parametersHolder.Object, exp.Body, true).Prepare();
+			var result = builder.BuildSql(_builderContext, exp.Body, true).Prepare();
 
 			Assert.AreEqual("[p].[CategoryID],[p].[CategoryNameFld],[p].[Description],[p].[Picture]", result);
 		}
@@ -119,7 +122,7 @@ namespace ObjectSql.Tests.ExpressionsAnalizersTests
 		{
 			Expression<Func<object>> exp = () => new { Id = 2, Name = "name", D = new { Descr = "descr" } };
 			var builder = CreateBuilder();
-			var result = builder.BuildSql(_parametersHolder.Object, exp.Body, true).Prepare();
+			var result = builder.BuildSql(_builderContext, exp.Body, true).Prepare();
 		}
 
 		private QuerySelectBuilder CreateBuilder()

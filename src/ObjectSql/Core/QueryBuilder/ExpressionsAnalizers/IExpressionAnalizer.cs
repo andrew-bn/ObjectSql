@@ -5,6 +5,6 @@ namespace ObjectSql.Core.QueryBuilder.ExpressionsAnalizers
 {
 	public interface IExpressionAnalizer
 	{
-		string AnalizeExpression(ICommandPreparatorsHolder commandPreparators, Expression expression, ExpressionAnalizerType expressionType, bool useAliases);
+		string AnalizeExpression(Expression expression, ExpressionAnalizerType expressionType, bool useAliases);
 	}
 }

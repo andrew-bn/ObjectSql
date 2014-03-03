@@ -31,7 +31,7 @@ namespace ObjectSql.Core.QueryParts
 
 		public override void BuildPart(BuilderContext context)
 		{
-			var sql = context.ExpressionAnalizer.AnalizeExpression(context.Preparators, Expression.Body, ExpressionAnalizerType.FieldsSelect, true);
+			var sql = context.AnalizeExpression(Expression.Body, ExpressionAnalizerType.FieldsSelect, true);
 			context.SqlWriter.WriteSelect(context.Text, sql);
 
 			var matInfo = context.MaterializationInfoExtractor.ExtractFrom(Expression.Body);
