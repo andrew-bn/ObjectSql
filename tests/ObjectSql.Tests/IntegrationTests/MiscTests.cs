@@ -75,18 +75,76 @@ namespace ObjectSql.Tests.IntegrationTests
 		{
 			
 			int outP = 12;
-			var rdr = Query.Exec<TestDatabaseProcedures>(db=>db.MyProcedure(23, outP))
-				.Returns<int>(SqlDbType.Int)
-				.ExecuteReader();
-
-			rdr.Dispose();
-			//var res = rdr.MapResult<Red>().ToArray();
-			//var sp = Query.With<TestDatabaseProcedures>(d=>d.Ten_Most_Expensive_Products());
-			//var reader = sp.ExecuteReader();
-			//var res = reader.MapResult<Ten_Most_Expensive_Products_Result>().ToArray();
-
-			//Assert.AreEqual(10, res.Length);
+			using (var rdr = Query.Exec<TestDatabaseProcedures>(db => db.MyProcedure(23, outP)).Returns<int>(SqlDbType.Int).ExecuteReader())
+			{
+				var res = rdr.MapResult<Red>().ToArray();
+				var returnValue = rdr.MapReturnValue<int>();
+				
+				Assert.AreEqual(43, returnValue);
+				Assert.AreEqual(64, outP);
+			}
 		}
-	
+		public class SelectProductResult
+		{
+			public int ProductId { get; set; }
+			public string ProductName { get; set; }
+		}
+		[Test]
+		public void Select_MapResult()
+		{
+			var res = EfQuery.From<Product>()
+							 .Select(p => new { p.ProductID, p.ProductName }).ExecuteReader();
+
+			var data = res.MapResult(dr => new SelectProductResult
+											{
+												ProductId = (int)dr["ProductId"],
+												ProductName = dr["ProductName"].ToString()
+											}).ToArray();
+			Assert.AreEqual(77, data.Length);
+			Assert.AreEqual("Alice Mutton", data[0].ProductName);
+		}
+		[Test]
+		public void Select_MapResult_CustomDto()
+		{
+			var res = EfQuery.From<Product>()
+			                 .Select(p => new {p.ProductID, p.ProductName}).ExecuteReader();
+			var data = res.MapResult<SelectProductResult>().ToArray();
+			Assert.AreEqual(77, data.Length);
+			Assert.AreEqual("Alice Mutton", data[0].ProductName);
+		}
+		[Test]
+		public void Select_MapResult_Entity_Only_Two_Fields_Selected()
+		{
+			var res = EfQuery.From<Product>()
+							 .Select(p => new { p.ProductID, p.ProductName }).ExecuteReader();
+			var data = res.MapResult<Product>().ToArray();
+			Assert.AreEqual(77, data.Length);
+			Assert.AreEqual("Alice Mutton", data[0].ProductName);
+			Assert.AreEqual(17, data[0].ProductID);
+		}
+		[Test]
+		public void Select_MapResult_Entity()
+		{
+			var res = EfQuery.From<Product>()
+							 .Select(p => p).ExecuteReader();
+
+			var data = res.MapResult<Product>().ToArray();
+			Assert.AreEqual(77, data.Length);
+			Assert.AreEqual("Alice Mutton", data[16].ProductName);
+			Assert.AreEqual(17, data[16].ProductID);
+		}
+
+		[Test]
+		public void Select_MapResult_To_Dictionary()
+		{
+			var res = EfQuery.From<Product>()
+							 .Select(p => p).ExecuteReader();
+
+			var data = res.MapResultToDictionary().ToArray();
+			Assert.AreEqual(77, data.Length);
+			Assert.AreEqual("Alice Mutton", data[16]["ProductName"]);
+			Assert.AreEqual(17, data[16]["ProductID"]);
+		}
+
 	}
 }

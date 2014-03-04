@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq.Expressions;
 using ObjectSql.Core.QueryBuilder;
 using ObjectSql.Core.QueryBuilder.ExpressionsAnalizers;
@@ -27,6 +28,7 @@ namespace ObjectSql.Core.Bo
 		public EntityMaterializationInformation MaterializationInfo { get; set; }
 		public Delegate MaterializationDelegate { get; set; }
 		public QueryPart CurrentPart { get; set; }
+		public Func<IDbCommand, object> ReturnParameterReader { get; set; }
 		private readonly Dictionary<ExpressionAnalizerType, ISqlQueryBuilder> _analizers = new Dictionary<ExpressionAnalizerType, ISqlQueryBuilder>();
 
 		public BuilderContext(QueryContext context, IDatabaseManager databaseManager, IEntitySchemaManager schemaManager, ISqlWriter sqlWriter, IDelegatesBuilder delegatesBuilder,

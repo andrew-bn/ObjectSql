@@ -319,6 +319,10 @@ namespace ObjectSql.Tests
 			}
 
 
+			protected override string ReturnParameterName
+			{
+				get { throw new NotImplementedException(); }
+			}
 
 			protected override Expression CreateCommandReturnParameter(Type returnType, object dbType)
 			{

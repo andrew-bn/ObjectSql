@@ -11,7 +11,6 @@ using System.Data.EntityClient;
 
 namespace ObjectSql
 {
-
 	public class ObjectSqlManager<T> : IObjectSqlManager where T : IDbConnection, new()
 	{
 		private readonly string _connectionString;
@@ -19,6 +18,7 @@ namespace ObjectSql
 		{
 			_connectionString = connectionString;
 		}
+
 		public IQuery Query()
 		{
 			var connection = CreateConnection();

@@ -22,13 +22,22 @@ namespace ObjectSql.Core.QueryParts
 		public override bool IsEqualTo(QueryPart part, ref Bo.QueryRoots rootsA, ref Bo.QueryRoots rootsB)
 		{
 			return base.IsEqualTo(part, ref rootsA, ref rootsB) &&
-			       (ResultType == ((QueryResultPart)part).ResultType);
+				   (ResultType == ((QueryResultPart)part).ResultType) && 
+				   Equals(DbType, ((QueryResultPart)part).DbType);
 		}
-
+		public override void CalculateQueryExpressionParameters(ref Bo.QueryRoots parameters)
+		{
+			base.CalculateQueryExpressionParameters(ref parameters);
+			parameters.Hash *= PRIME;
+			parameters.Hash ^= ResultType.GetHashCode();
+			parameters.Hash *= PRIME;
+			parameters.Hash ^= DbType==null? 0: DbType.GetHashCode();
+		}
 		public override void BuildPart(Bo.BuilderContext context)
 		{
 			var preparator = new SimpleCommandPrePostProcessor(context.DelegatesBuilder.AddCommandReturnParameter(ResultType, DbType));
 			context.Preparators.AddPreProcessor(preparator);
+			context.ReturnParameterReader = context.DelegatesBuilder.ReadCommandReturnParameter();
 		}
 	}
 }

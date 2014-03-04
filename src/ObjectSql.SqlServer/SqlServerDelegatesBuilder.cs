@@ -45,8 +45,13 @@ namespace ObjectSql.SqlServer
 
 		protected override Expression CreateCommandReturnParameter(System.Type returnType, object dbType)
 		{
-			return CreateParameterFactory(Expression.Constant("__l_return_l__"), Expression.Convert(Expression.Default(returnType),typeof(object)),
+			return CreateParameterFactory(Expression.Constant(ReturnParameterName), Expression.Convert(Expression.Default(returnType), typeof(object)),
 			                              ParameterDirection.ReturnValue, dbType);
+		}
+
+		protected override string ReturnParameterName
+		{
+			get { return "__l_return_l__"; }
 		}
 	}
 }

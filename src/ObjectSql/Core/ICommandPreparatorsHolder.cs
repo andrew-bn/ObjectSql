@@ -1,4 +1,6 @@
-﻿using ObjectSql.Core.Bo.CommandPreparatorDescriptor;
+﻿using System;
+using System.Data;
+using ObjectSql.Core.Bo.CommandPreparatorDescriptor;
 using System.Collections.Generic;
 
 namespace ObjectSql.Core

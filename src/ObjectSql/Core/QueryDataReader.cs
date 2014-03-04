@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Concurrent;
+using System.Collections.Generic;
 using System.Data;
 using System.Linq;
 using ObjectSql.Core.Bo;
@@ -28,8 +29,16 @@ namespace ObjectSql.Core
 		{
 			_disposing();
 		}
-
-		public System.Collections.Generic.IEnumerable<T> MapResult<T>()
+		public IEnumerable<IDictionary<string,object>> MapResultToDictionary()
+		{
+			Func<IDataReader, IDictionary<string, object>> materializer = MapResultToDictionaryMaterializer;
+			return MapData<IDictionary<string, object>>(materializer);
+		}
+		public IEnumerable<T> MapResult<T>(Func<IDataReader, T> materializer)
+		{
+			return MapData<T>(materializer);
+		}
+		public IEnumerable<T> MapResult<T>()
 		{
 			var materializer = _mapMaterializers.GetOrAdd(typeof (T), t =>
 				{
@@ -39,16 +48,32 @@ namespace ObjectSql.Core
 					return builder.CreateEntityMaterializationDelegate(entitySchema, info);
 				});
 
+			return MapData<T>(materializer);
+		}
+
+		private IEnumerable<T> MapData<T>(Delegate materializer)
+		{
 			return new EntityEnumerable<T>(materializer, DataReader, () =>
-			{
-				if (!DataReader.NextResult())
-					Dispose();
-			});
+				{
+					if (!DataReader.NextResult())
+						Dispose();
+				});
 		}
 
 		public TReturn MapReturnValue<TReturn>()
 		{
-			throw new NotImplementedException();
+			return (TReturn) Context.PreparationData.ReturnParameterReader(Context.Command);
+		}
+
+		public IDictionary<string, object> MapResultToDictionaryMaterializer(IDataReader dataReader)
+		{
+			var result = new Dictionary<string, object>();
+			for (int i = 0; i < dataReader.FieldCount; i++ )
+			{
+				result.Add(dataReader.GetName(i),
+						  (dataReader.GetValue(i) is DBNull)? null: dataReader.GetValue(i));
+			}
+			return result;
 		}
 	}
 }

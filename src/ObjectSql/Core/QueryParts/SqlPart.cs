@@ -81,7 +81,8 @@ namespace ObjectSql.Core.QueryParts
 			return new QueryPreparationData(BuilderContext.Text.ToString(),
 											BuilderContext.Preparators.PreProcessors.ToArray(),
 											BuilderContext.Preparators.PostProcessors.ToArray(),
-											BuilderContext.MaterializationDelegate);
+											BuilderContext.MaterializationDelegate,
+											BuilderContext.ReturnParameterReader);
 		}
 
 		public override void BuildPart(BuilderContext context)

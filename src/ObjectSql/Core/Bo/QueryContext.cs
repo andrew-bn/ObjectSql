@@ -113,10 +113,7 @@ namespace ObjectSql.Core.Bo
 			MaterializationDelegate = preparationData.DataMaterializer;
 			var dbCommand = Command;
 
-			if (string.IsNullOrEmpty(dbCommand.CommandText))
-				dbCommand.CommandText = preparationData.CommandText;
-			else
-				dbCommand.CommandText += preparationData.CommandText;
+			dbCommand.CommandText = preparationData.CommandText;
 
 			for (int i = 0; i < preparationData.PreProcessors.Length; i++)
 			{

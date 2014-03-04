@@ -64,7 +64,16 @@ namespace ObjectSql.Core.QueryBuilder.LambdaBuilder
 						cmdParam,
 						rootParam).Compile();
 		}
+		public Func<IDbCommand, object> ReadCommandReturnParameter()
+		{
+			var cmdParam = Expression.Parameter(typeof (IDbCommand));
+			Expression result = Expression.MakeMemberAccess(cmdParam, Reflect.FindProperty<IDbCommand>(c => c.Parameters));
+			result = Expression.MakeIndex(result, typeof (IDataParameterCollection).GetProperty("Item"), new[]{Expression.Constant(ReturnParameterName)});
+			result = Expression.Condition(Expression.TypeIs(result, typeof (DBNull)), Expression.Constant(null, typeof (object)), result);
 
+			return Expression.Lambda<Func<IDbCommand, object>>(result, cmdParam).Compile();
+		}
+		protected abstract string ReturnParameterName { get; }
 		protected abstract Expression CreateCommandReturnParameter(Type returnType, object dbType);
 		public Action<IDbCommand, object> CreateDatabaseParameterFactoryAction(Expression parameterName, Expression valueAccessor, IStorageFieldType parameterType,ParameterDirection direction)
 		{
@@ -280,17 +289,7 @@ namespace ObjectSql.Core.QueryBuilder.LambdaBuilder
 					dataReaderParameter)
 				.Compile();
 		}
-		/*IDataReader dr;
-			dynamic res = new object();
-			for (int i = 0; i < dr.FieldCount; i++)
-			{
-				var fieldName = dr.GetName(i);
-				var fieldType = dr.GetFieldType(i);
-				if (fieldName.Equals("myField", StringComparison.CurrentCultureIgnoreCase) && fieldType == typeof (string))
-					res.myField = (string) dr.GetValue(i);
-				else (fieldName.Equals("myField2", StringComparison.CurrentCultureIgnoreCase) && fieldType == typeof (string))
-					res.myField2 = (string) dr.GetValue(i);
-			}*/
+
 		private Delegate CreateResultMappingFactory(EntitySchema schema, Type delegateType)
 		{
 			var parts = new List<Expression>();
@@ -437,6 +436,5 @@ namespace ObjectSql.Core.QueryBuilder.LambdaBuilder
 						cmdParam,
 						rootParam).Compile();
 		}
-
 	}
 }

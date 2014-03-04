@@ -238,12 +238,9 @@ namespace ObjectSql.Tests.CommandTextGenerationTests
 		}
 
 		[Test]
-		[Ignore]
 		public void select_with_subquery_that_uses_main_querytable()
 		{
-			var p1 = "pn";
-			var p2 = "p324";
-			var result = Query
+			Query
 				.From<Product>()
 				.Where(p => p.CategoryID.In(Sql.Query.From<Category>()
 													 .Where(c => c.CategoryName == p.ProductName || 
@@ -256,6 +253,33 @@ namespace ObjectSql.Tests.CommandTextGenerationTests
 				  WHERE  ([p].[CategoryID] IN (SELECT [c].[CategoryID] 
 				  							   FROM [Category] AS [c] 
 				  							   WHERE (([c].[CategoryName] = [p].[ProductName]) OR ([p].[CategoryID] = [c].[CategoryID]))))");
+		}
+
+		[Test]
+		public void select_with_nested_subquery_that_uses_main_querytable()
+		{
+			Query
+				.From<Product>()
+				.Where(p => p.CategoryID.In(Sql.Query.From<Category>()
+													 .Where(c => c.CategoryName == p.ProductName &&
+																c.CategoryID.NotIn(Sql.Query.From<Product>()
+																							 .Where(pr=>pr.ProductID != p.ProductID &&
+																									pr.CategoryID != c.CategoryID)
+																							 .Select(pr=>pr.CategoryID)))
+													 .Select(c => c.CategoryID)))
+				.Select(p => p.ProductName)
+				.Verify(
+				@"SELECT [p].[ProductName] 
+FROM [Product] AS [p] 
+WHERE  ([p].[CategoryID] IN (SELECT [c].[CategoryID] 
+							 FROM [Category] AS [c] 
+							 WHERE (([c].[CategoryName] = [p].[ProductName]) AND  
+									([c].[CategoryID] NOT IN (SELECT [pr].[CategoryID] 
+															  FROM [Product] AS [pr] 
+															  WHERE (([pr].[ProductID] <> [p].[ProductID]) AND 
+																	([pr].[CategoryID] <> [c].[CategoryID])))
+									 )))
+		) ");
 		}
 	}
 }
