@@ -143,12 +143,6 @@
     <Compile Include="MultiTypeTable.cs">
       <DependentUpon>Northwind.tt</DependentUpon>
     </Compile>
-    <Compile Include="NamecheapCore.SqlServer.cs">
-      <DependentUpon>NamecheapCore.SqlServer.tt</DependentUpon>
-      <SubType>Code</SubType>
-      <DesignTime>True</DesignTime>
-      <AutoGen>True</AutoGen>
-    </Compile>
     <Compile Include="Northwind.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -244,10 +238,6 @@
   <ItemGroup>
     <None Include="App.Config">
       <SubType>Designer</SubType>
-    </None>
-    <None Include="NamecheapCore.SqlServer.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>NamecheapCore.SqlServer.cs</LastGenOutput>
     </None>
     <None Include="TestDatabase.SqlServer.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
