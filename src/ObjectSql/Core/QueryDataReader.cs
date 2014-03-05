@@ -4,11 +4,12 @@ using System.Collections.Generic;
 using System.Data;
 using System.Linq;
 using ObjectSql.Core.Bo;
+using ObjectSql.Exceptions;
 using ObjectSql.QueryInterfaces;
 
 namespace ObjectSql.Core
 {
-	internal class ObjectDataReader : IObjectDataReader
+	internal class DataReaderHolder : IDataReaderHolder
 	{
 		private static readonly ConcurrentDictionary<Type, Delegate> _mapMaterializers = new ConcurrentDictionary<Type, Delegate>();
 
@@ -18,7 +19,7 @@ namespace ObjectSql.Core
 		public bool ConnectionOpened { get; private set; }
 		public IDataReader DataReader { get; private set; }
 
-		public ObjectDataReader(QueryContext context, IDataReader dataReader, Action disposing)
+		public DataReaderHolder(QueryContext context, IDataReader dataReader, Action disposing)
 		{
 			_disposing = disposing;
 			Context = context;
@@ -62,6 +63,9 @@ namespace ObjectSql.Core
 
 		public TReturn MapReturnValue<TReturn>()
 		{
+			if (Context.PreparationData.ReturnParameterReader == null)
+				throw new ObjectSqlException("Return mapping is not set. Use IQueryEnd.Returns<TResult>(object sqlDbType) to set mapping");
+
 			return (TReturn) Context.PreparationData.ReturnParameterReader(Context.Command);
 		}
 

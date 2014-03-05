@@ -15,24 +15,29 @@ namespace ObjectSql.Core
 		{
 			context.PrepareQuery();
 		}
-		public static object ExecuteScalar(QueryContext context)
+
+		public static IScalarResultHolder ExecuteScalar(QueryContext context)
 		{
-			return ExecuteCommand(context, cmd => cmd.ExecuteScalar(), true);
+			var result = ExecuteCommand(context, cmd => cmd.ExecuteScalar(), true);
+			return new ScalarResultHolder(context,result);
 		}
-		public static int ExecuteNonQuery(QueryContext context)
+
+		public static INonQueryResultHolder ExecuteNonQuery(QueryContext context)
 		{
-			return ExecuteCommand(context, cmd => cmd.ExecuteNonQuery(), true);
+			var result = ExecuteCommand(context, cmd => cmd.ExecuteNonQuery(), true);
+			return new NonQueryResultHolder(context,result);
 		}
+
 		public static IEnumerable<T> ExecuteQuery<T>(QueryContext context)
 		{
 			var dataReader = ExecuteDataReader(context);
 			return new EntityEnumerable<T>(context.MaterializationDelegate, dataReader, () => DisposeDataReader(context, dataReader));
 		}
 
-		public static IObjectDataReader ExecuteReader<T>(QueryContext context)
+		public static IDataReaderHolder ExecuteReader<T>(QueryContext context)
 		{
 			var dataReader = ExecuteDataReader(context);
-			return new ObjectDataReader(context, dataReader, () => DisposeDataReader(context, dataReader));
+			return new DataReaderHolder(context, dataReader, () => DisposeDataReader(context, dataReader));
 		}
 
 		private static IDataReader ExecuteDataReader(QueryContext context)

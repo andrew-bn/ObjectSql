@@ -100,6 +100,7 @@
     <Compile Include="Core\Bo\QueryRoots.cs" />
     <Compile Include="Core\Bo\ResourcesTreatmentType.cs" />
     <Compile Include="Core\Bo\StorageType.cs" />
+    <Compile Include="Core\NonQueryResultHolder.cs" />
     <Compile Include="Core\QueryBuilder\ExpressionsAnalizers\IParameterSubstitutor.cs" />
     <Compile Include="Core\QueryBuilder\ExpressionsAnalizers\ParametersSubstitutor.cs" />
     <Compile Include="Core\QueryBuilder\ExpressionsAnalizers\ParametersSubstitutorVisitor.cs" />
@@ -109,6 +110,7 @@
     <Compile Include="Core\QueryParts\NextQueryPart.cs" />
     <Compile Include="Core\QueryParts\SqlPart.cs" />
     <Compile Include="Core\QueryParts\QueryResultPart.cs" />
+    <Compile Include="Core\ScalarResultHolder.cs" />
     <Compile Include="DefaultSchemaManagerFactory.cs" />
     <Compile Include="IAsyncEnumerable.cs" />
     <Compile Include="IAsyncEnumerator.cs" />
@@ -174,7 +176,8 @@
     <Compile Include="QueryImplementation\Update.cs" />
     <Compile Include="QueryInterfaces\DatabaseExtensionAttribute.cs" />
     <Compile Include="QueryInterfaces\IInsert.cs" />
-    <Compile Include="QueryInterfaces\IObjectDataReader.cs" />
+    <Compile Include="QueryInterfaces\IDataReaderHolder.cs" />
+    <Compile Include="QueryInterfaces\INonQueryResultHolder.cs" />
     <Compile Include="QueryInterfaces\IQueryEnd.cs" />
     <Compile Include="QueryInterfaces\IQueryGeneric.cs">
       <AutoGen>True</AutoGen>
@@ -183,6 +186,8 @@
     </Compile>
     <Compile Include="QueryInterfaces\IQuery.cs" />
     <Compile Include="QueryInterfaces\IDatabaseContextHolder.cs" />
+    <Compile Include="QueryInterfaces\IReturnValueHolder.cs" />
+    <Compile Include="QueryInterfaces\IScalarResultHolder.cs" />
     <Compile Include="QueryInterfaces\IUpdate.cs" />
     <Compile Include="ObjectSqlExtensions.cs" />
     <Compile Include="ObjectSqlRegistry.cs" />

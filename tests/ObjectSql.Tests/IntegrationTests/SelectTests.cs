@@ -36,7 +36,7 @@ namespace ObjectSql.Tests.IntegrationTests
 		{
 			var c = "cost";
 			var scalar = EfQuery.Select(() => c).ExecuteScalar();
-			Assert.AreEqual(c, scalar);
+			Assert.AreEqual(c, scalar.ScalarResult);
 		}
 		[Test]
 		public void Select_Constants_In_AnonimusType_Integration()
@@ -114,7 +114,7 @@ namespace ObjectSql.Tests.IntegrationTests
 		public void Select_CountFunctionCall()
 		{
 			var res = EfQuery.From<Product>().Select((p) => Sql.Count(p.ProductID)).ExecuteScalar();
-			Assert.AreEqual(77, res);
+			Assert.AreEqual(77, res.ScalarResult);
 		}
 		[Test]
 		public void Select_WithoutSource_TSqlFunctionResult()
@@ -122,7 +122,7 @@ namespace ObjectSql.Tests.IntegrationTests
 			var c = "cost";
 			var res = EfQuery.Select(() => MsSql.Substring(c, 1, 3)).ExecuteScalar();
 
-			Assert.AreEqual("cos", res);
+			Assert.AreEqual("cos", res.ScalarResult);
 		}
 		[Test]
 		public void Select_WithoutSource_TSqlFunctionResult_AndConstant()

@@ -81,12 +81,12 @@ namespace ObjectSql.QueryImplementation
 			return this;
 		}
 
-		public object ExecuteScalar()
+		public IScalarResultHolder ExecuteScalar()
 		{
 			return ExecutionManager.ExecuteScalar(Context);
 		}
 
-		public IObjectDataReader ExecuteReader()
+		public IDataReaderHolder ExecuteReader()
 		{
 			return ExecutionManager.ExecuteReader<object>(Context);
 		}
@@ -99,7 +99,7 @@ namespace ObjectSql.QueryImplementation
 			}
 		}
 
-		public int ExecuteNonQuery()
+		public INonQueryResultHolder ExecuteNonQuery()
 		{
 			return ExecutionManager.ExecuteNonQuery(Context);
 		}

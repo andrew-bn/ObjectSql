@@ -8,9 +8,9 @@ namespace ObjectSql.QueryInterfaces
 	public interface IQueryEnd: IQuery
 	{
 		IQueryEnd Returns<TResult>(object sqlDbType);
-		int ExecuteNonQuery();
-		object ExecuteScalar();
-		IObjectDataReader ExecuteReader();
+		INonQueryResultHolder ExecuteNonQuery();
+		IScalarResultHolder ExecuteScalar();
+		IDataReaderHolder ExecuteReader();
 		IDbCommand Command { get; }
 	}
 
