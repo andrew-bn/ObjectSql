@@ -100,6 +100,7 @@
     <Compile Include="Core\Bo\QueryRoots.cs" />
     <Compile Include="Core\Bo\ResourcesTreatmentType.cs" />
     <Compile Include="Core\Bo\StorageType.cs" />
+    <Compile Include="Core\DynamicResult.cs" />
     <Compile Include="Core\NonQueryResultHolder.cs" />
     <Compile Include="Core\QueryBuilder\ExpressionsAnalizers\IParameterSubstitutor.cs" />
     <Compile Include="Core\QueryBuilder\ExpressionsAnalizers\ParametersSubstitutor.cs" />

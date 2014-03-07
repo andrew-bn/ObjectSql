@@ -30,6 +30,12 @@ namespace ObjectSql.Core
 		{
 			_disposing();
 		}
+		public IEnumerable<dynamic> MapResultToDynamic()
+		{
+			Func<IDataReader, dynamic> materializer = MapResultToDynamicMaterializer;
+			return MapData<dynamic>(materializer);
+
+		}
 		public IEnumerable<IDictionary<string,object>> MapResultToDictionary()
 		{
 			Func<IDataReader, IDictionary<string, object>> materializer = MapResultToDictionaryMaterializer;
@@ -76,6 +82,15 @@ namespace ObjectSql.Core
 			{
 				result.Add(dataReader.GetName(i),
 						  (dataReader.GetValue(i) is DBNull)? null: dataReader.GetValue(i));
+			}
+			return result;
+		}
+		public dynamic MapResultToDynamicMaterializer(IDataReader dataReader)
+		{
+			var result = new DynamicResult();
+			for (int i = 0; i < dataReader.FieldCount; i++)
+			{
+				result[dataReader.GetName(i)] = (dataReader.GetValue(i) is DBNull) ? null : dataReader.GetValue(i);
 			}
 			return result;
 		}

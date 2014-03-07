@@ -153,6 +153,16 @@ namespace ObjectSql.Tests.IntegrationTests
 			Assert.AreEqual("Alice Mutton", data[16]["ProductName"]);
 			Assert.AreEqual(17, data[16]["ProductID"]);
 		}
+		[Test]
+		public void Select_MapResult_To_Dynamic()
+		{
+			var res = EfQuery.From<Product>()
+							 .Select(p => p).ExecuteReader();
 
+			var data = res.MapResultToDynamic().ToArray();
+			Assert.AreEqual(77, data.Length);
+			Assert.AreEqual("Alice Mutton", data[16].ProductName);
+			Assert.AreEqual(17, data[16].ProductID);
+		}
 	}
 }
