@@ -2,13 +2,11 @@ using System;
 
 namespace ObjectSql.SqlServer.Schema
 {
-	public class Column
+	public class Column : NameHolder
 	{
-		public string Schema { get; set; }
 		public string TableName { get; set; }
 		public int Position { get; set; }
 		public bool IsNullable { get; set; }
-		public string Name { get; set; }
 		public string DataType { get; set; }
 		public Type NetType { get; set; }
 

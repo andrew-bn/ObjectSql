@@ -2,15 +2,13 @@ using System.Collections.Generic;
 
 namespace ObjectSql.SqlServer.Schema
 {
-	public class Table
+	public class Table: NameHolder
 	{
 		public Table()
 		{
 			Columns = new List<Column>();
 		}
 
-		public string Schema { get; set; }
-		public string Name { get; set; }
 		public List<Column> Columns { get; set; }
 
 		public override string ToString()

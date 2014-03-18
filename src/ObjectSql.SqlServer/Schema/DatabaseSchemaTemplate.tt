@@ -40,13 +40,13 @@ namespace <#= Namespace#>
 		}
 
 #>		[Table("<#=tbl.Name#>",Schema="<#=tbl.Schema#>")]
-		public partial class <#=ToValidName(tbl.Name)#>
+		public partial class <#=ToValidName(tbl)#>
 		{
 <#
 			foreach(var col in tbl.Columns)
 			{
 #>
-			[Column("<#=col.Name#>",TypeName="<#=col.DataType#>")] public <#=ToTypeName(col.NetType,col.IsNullable)#> <#=ToValidName(col.Name)#> {get; set;}
+			[Column("<#=col.Name#>",TypeName="<#=col.DataType#>")] public <#=ToTypeName(col.NetType,col.IsNullable)#> <#=ToValidName(col)#> {get; set;}
 <#
 			}
 #>
@@ -64,8 +64,8 @@ namespace <#= Namespace#>
 		foreach(var proc in Schema.Procedures)
 		{
 #>
-		[Procedure("<#=proc.Name#>", "<#=proc.Schema#>")] public abstract void <#=ToValidName(proc.Name)#>(<#
-			foreach(var p in proc.Parameters){#><#=p.Position>1?", ":""#>[Parameter("<#=p.Name.Replace("@","")#>", "<#=p.DataType#>", ParameterDirection.<#=p.Direction#>)] <#=ToTypeName(p.NetType,true)#> <#=ToValidName(p.Name)#><#}#>);
+		[Procedure("<#=proc.Name#>", "<#=proc.Schema#>")] public abstract void <#=ToValidName(proc)#>(<#
+			foreach(var p in proc.Parameters){#><#=p.Position>1?", ":""#>[Parameter("<#=p.Name.Replace("@","")#>", "<#=p.DataType#>", ParameterDirection.<#=p.Direction#>)] <#=ToTypeName(p.NetType,true)#> <#=ToValidName(p)#><#}#>);
 <#
 		}
 #>

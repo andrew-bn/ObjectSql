@@ -74,6 +74,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="..\CommonAssemblyInfo.cs">
+      <Link>Properties\CommonAssemblyInfo.cs</Link>
+    </Compile>
     <Compile Include="ConnStrHere.SqlServer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -89,8 +92,10 @@
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Schema\DatabaseSchemaTemplateExt.cs" />
+    <Compile Include="Schema\NameHolder.cs" />
     <Compile Include="Schema\Parameter.cs" />
     <Compile Include="Schema\Procedure.cs" />
+    <Compile Include="Schema\RoutineType.cs" />
     <Compile Include="Schema\SchemaGenerator.cs" />
     <Compile Include="Schema\Table.cs" />
     <Compile Include="SqlServerDatabaseManager.cs" />

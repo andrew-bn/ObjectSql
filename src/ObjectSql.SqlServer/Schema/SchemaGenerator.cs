@@ -34,7 +34,12 @@ namespace ObjectSql.SqlServer.Schema
 					tbl.Columns = tbl.Columns.OrderBy(c => c.Position).ToList();
 
 				foreach (var proc in p)
+				{
 					proc.Parameters = proc.Parameters.OrderBy(par => par.Position).ToList();
+					
+					if (p.Any(pr => pr!=proc && pr.Name.Equals(proc.Name, StringComparison.InvariantCultureIgnoreCase)))
+						proc.UseSchema = true;
+				}
 
 				var schema = new DatabaseSchema()
 					{

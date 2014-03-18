@@ -24,21 +24,25 @@ namespace ObjectSql.SqlServer.Schema
 		{
 			return param.Direction == ParameterDirection.InputOutput;
 		}
-		public string ToValidName(string value)
+		public string ToValidName(NameHolder name)
 		{
+			var value = name.Name;
+
 			if (value.Length > 0 && char.IsDigit(value[0]))
 				value = "_" + value;
 
 			if (value.Length > 1 && value[0] == '@' && char.IsDigit(value[1]))
 				value = "@_" + value.TrimStart('@');
 
-			return value.Replace(" ", "_")
+			var result = value.Replace(" ", "_")
 						.Replace("-", "_")
 						.Replace("'", "")
 						.Replace(".", "_")
 						.Replace("$", "");
-		}
 
+			return name.UseSchema ? name.Schema + "_" + result : result;
+		}
+		
 		public string ToTypeName(Type netType, bool nullable)
 		{
 			var result = "object";
