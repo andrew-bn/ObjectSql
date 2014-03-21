@@ -212,7 +212,51 @@ namespace ObjectSql.Tests.CommandTextGenerationTests
 				  WHERE([ProductID] = @p4 )",
 					val, 2, val2, "ProductName", 22);
 		}
-
+		[Test]
+		public void select_with_in_array()
+		{
+			var p1 = "pn";
+			var result = Query
+				.From<Product>()
+				.Where(p => p.ProductName == p1 && p.CategoryID.In(11,22,33))
+				.Select(p => p.ProductName)
+				.Verify(
+				@"SELECT [p].[ProductName] 
+				FROM [Product] AS [p] 
+				WHERE (([p].[ProductName] = @p0) AND  
+					   ([p].[CategoryID] IN (@p1, @p2, @p3)))",
+				  p1, 11, 22,33);
+		}
+		[Test]
+		public void select_with_not_in_array()
+		{
+			var p1 = "pn";
+			var result = Query
+				.From<Product>()
+				.Where(p => p.ProductName == p1 && p.CategoryID.NotIn(11, 22, 33))
+				.Select(p => p.ProductName)
+				.Verify(
+				@"SELECT [p].[ProductName] 
+				FROM [Product] AS [p] 
+				WHERE (([p].[ProductName] = @p0) AND  
+					   ([p].[CategoryID] NOT IN (@p1, @p2, @p3)))",
+				  p1, 11, 22, 33);
+		}
+		[Test]
+		public void select_with_in_array_variable()
+		{
+			var p1 = "pn";
+			var result = Query
+				.From<Product>()
+				.Where(p => p.ProductName == p1 && p.CategoryID.In(11, 22, 33))
+				.Select(p => p.ProductName)
+				.Verify(
+				@"SELECT [p].[ProductName] 
+				FROM [Product] AS [p] 
+				WHERE (([p].[ProductName] = @p0) AND  
+					   ([p].[CategoryID] IN (@p1, @p2, @p3)))",
+				  p1, 11, 22, 33);
+		}
 		[Test]
 		public void select_with_subquery()
 		{

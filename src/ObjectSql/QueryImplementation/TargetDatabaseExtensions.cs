@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using ObjectSql.Core;
 using ObjectSql.Core.Bo;
 using ObjectSql.QueryInterfaces;
@@ -66,15 +67,20 @@ namespace ObjectSql
 			return BuildSql("COUNT", parts);
 		}
 		public static bool NotIn<T, TEntity>(this T field, IQueryEnd<TEntity> query) { return false; }
+		public static bool NotIn<T, TEntity>(this T field, params TEntity[] enumeration) { return false; }
 		internal static string RenderNotIn(BuilderContext commandPreparators, string[] parts)
 		{
 			return string.Format(" ({0} NOT IN ({1})) ", parts[0], parts[1]);
 		}
+
 		public static bool In<T,TEntity>(this T field, IQueryEnd<TEntity> query) { return false; }
+		public static bool In<T, TEntity>(this T field, params TEntity[] enumeration) { return false; }
+
 		internal static string RenderIn(BuilderContext commandPreparators, string[] parts)
 		{
-			return string.Format(" ({0} IN ({1})) ", parts[0],parts[1]);
+			return string.Format(" ({0} IN ({1})) ", parts[0],string.Join(", ",parts.Skip(1)));
 		}
+
 
 		private static string BuildSql(string method, string[] parts)
 		{

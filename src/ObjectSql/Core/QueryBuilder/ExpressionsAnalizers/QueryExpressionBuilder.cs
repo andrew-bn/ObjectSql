@@ -1,4 +1,5 @@
-﻿using ObjectSql.Core.Bo;
+﻿using System.Collections.Generic;
+using ObjectSql.Core.Bo;
 using ObjectSql.Core.Bo.CommandPreparatorDescriptor;
 using ObjectSql.Core.Bo.EntitySchema;
 using ObjectSql.Core.Misc;
@@ -72,6 +73,24 @@ namespace ObjectSql.Core.QueryBuilder.ExpressionsAnalizers
 		protected override Expression VisitParameter(ParameterExpression node)
 		{
 			SqlWriter.WriteName(Text, node.Name);
+			return node;
+		}
+		protected override Expression VisitNewArray(NewArrayExpression node)
+		{
+			var buf = Text;
+
+			var parameters = new List<string>();
+
+			foreach (var item in node.Expressions)
+			{
+				Text = new CommandText();
+				Visit(item);
+				parameters.Add(Text.ToString());
+			}
+
+			Text = buf;
+			Text.Append(string.Join(", ", parameters));
+
 			return node;
 		}
 		protected override Expression VisitMember(MemberExpression node)
