@@ -275,7 +275,13 @@ namespace ObjectSql.Core.QueryBuilder.ExpressionsAnalizers
 			if (descriptor == null)
 			{
 				var parameterName = "p" + CommandPreparatorsHolder.PreProcessors.Count;
-				var initializer = CreateParameterInitializer(parameterName, accessor, dbTypeInContext);
+
+				if (accessor.Type.IsArray)
+					parameterName += "_"+Guid.NewGuid().ToString().Replace("-","");
+
+				var initializer = accessor.Type.IsArray
+									? CreateArrayParameterInitializer(parameterName, accessor, dbTypeInContext)
+									: CreateParameterInitializer(parameterName, accessor, dbTypeInContext);
 
 				descriptor =  IsConstant(accessor)
 								? new DatabaseCommandConstantPrePostProcessor(parameterName,dbTypeInContext,accessor, initializer)
@@ -294,9 +300,12 @@ namespace ObjectSql.Core.QueryBuilder.ExpressionsAnalizers
 
 		protected Action<IDbCommand, object> CreateParameterInitializer(string name, Expression accessor, IStorageFieldType dbTypeInContext)
 		{
-			return DelegatesBuilder.CreateDatabaseParameterFactoryAction(Expression.Constant(name, typeof(string)), accessor, dbTypeInContext, ParameterDirection.Input);
+				return DelegatesBuilder.CreateDatabaseParameterFactoryAction(Expression.Constant(name, typeof(string)), accessor, dbTypeInContext, ParameterDirection.Input);
 		}
-
+		protected Action<IDbCommand, object> CreateArrayParameterInitializer(string name, Expression accessor, IStorageFieldType dbTypeInContext)
+		{
+				return DelegatesBuilder.CreateArrayParameters(name, accessor, dbTypeInContext, ParameterDirection.Input);
+		}
 		private static bool IsConstant(Expression accessor)
 		{
 			var expressions = ExpressionEnumerator.Enumerate(accessor).ToArray();

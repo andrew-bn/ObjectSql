@@ -436,5 +436,97 @@ namespace ObjectSql.Core.QueryBuilder.LambdaBuilder
 						cmdParam,
 						rootParam).Compile();
 		}
+
+
+		public Action<IDbCommand, object> CreateArrayParameters(string paramName, Expression valueAccessor, IStorageFieldType parameterType, ParameterDirection direction)
+		{
+			var expQueue = new Stack<Expression>(ExpressionEnumerator.Enumerate(valueAccessor).Cast<Expression>().ToArray());
+			var rootParam = Expression.Parameter(typeof(object));
+			var cmdParam = Expression.Parameter(typeof(IDbCommand));
+
+			Expression parameterName = Expression.Constant(paramName.Substring(0, paramName.IndexOf("_")));
+			Expression parametersPlaceholder = Expression.Constant(paramName);
+			Expression parameterAccessor = null;
+
+			if (expQueue.Count > 1)
+			{
+				while (expQueue.Count != 0)
+				{
+					var exp = expQueue.Pop();
+					if (exp == null) // static type
+						throw new ObjectSqlException("Invalid constant accessor detected. You can not use static fields as constants holders. Consider passing this value as variable");
+
+
+					else if (exp.NodeType == ExpressionType.Constant)
+						parameterAccessor = Expression.Convert(rootParam, exp.Type);
+					else if (exp.NodeType == ExpressionType.MemberAccess)
+						parameterAccessor = Expression.MakeMemberAccess(parameterAccessor, ((MemberExpression)exp).Member);
+					else if (exp.NodeType != ExpressionType.Convert)
+						throw new ObjectSqlException("Invalid constant accessor detected");
+				}
+			}
+
+			var paramType = parameterAccessor.Type.GetElementType();
+
+
+			var exprList = new List<Expression>();
+
+			var indexVar = Expression.Variable(typeof (int), "index");
+			var sb = Expression.Variable(typeof (StringBuilder), "sb");
+			
+			var loopLbl = Expression.Label("loopLabel");
+			var exitLbl = Expression.Label("exitLabel");
+			
+			exprList.Add(Expression.Assign(sb,Expression.New(typeof(StringBuilder))));
+			exprList.Add(Expression.Label(loopLbl));
+			exprList.Add(Expression.IfThen(Expression.Equal(indexVar,
+				Expression.MakeMemberAccess(parameterAccessor,Reflect.FindProperty<Array>(a=>a.Length))),
+				Expression.Goto(exitLbl)));
+
+			parameterAccessor = Expression.ArrayIndex(parameterAccessor, indexVar);
+
+			if (!paramType.IsValueType)
+				parameterAccessor = Expression.Condition(
+					Expression.Equal(parameterAccessor, Expression.Constant(null)),
+					Expression.Convert(Expression.Constant(DBNull.Value), typeof(object)),
+					Expression.Convert(parameterAccessor, typeof(object)));
+			else if (paramType.IsGenericType && paramType.GetGenericTypeDefinition() == typeof(Nullable<>))
+				parameterAccessor = Expression.Condition(
+					Expression.MakeMemberAccess(parameterAccessor, paramType.GetProperty("HasValue")),
+					Expression.Convert(Expression.MakeMemberAccess(parameterAccessor, paramType.GetProperty("Value")), typeof(object)),
+					Expression.Convert(Expression.MakeMemberAccess(null, typeof(DBNull).GetField("Value")), typeof(object)));
+			else
+				parameterAccessor = Expression.Convert(parameterAccessor, typeof(object));
+
+			var arrayParamName = Expression.Call(null, typeof(string).GetMethod("Concat", new[] { typeof(string), typeof(string), typeof(string) }), parameterName,
+											Expression.Constant("_"), Expression.Call(indexVar, Reflect.FindMethod<int>(i => i.ToString())));
+
+
+			var parameterCreate = CreateParameterFactory(arrayParamName, parameterAccessor, parameterType, direction);
+			
+			Expression parameterAdd = Expression.MakeMemberAccess(cmdParam, Reflect.FindProperty<IDbCommand>(c => c.Parameters));
+			parameterAdd = Expression.Call(parameterAdd, Reflect.FindMethod<IDbCommand>(c => c.Parameters.Add(default(object))), parameterCreate);
+
+			exprList.Add(Expression.IfThen(Expression.GreaterThan(indexVar,Expression.Constant(0)) , Expression.Call(sb, Reflect.FindMethod<StringBuilder>(s => s.Append("")), Expression.Constant(", "))));
+			exprList.Add(Expression.Call(sb, Reflect.FindMethod<StringBuilder>(s => s.Append("")), Expression.Constant("@")));
+			exprList.Add(Expression.Call(sb,Reflect.FindMethod<StringBuilder>(s=>s.Append("")),arrayParamName));
+			exprList.Add(parameterAdd);
+			exprList.Add(Expression.Assign(indexVar,Expression.Increment(indexVar)));
+			exprList.Add(Expression.Goto(loopLbl));
+			exprList.Add(Expression.Label(exitLbl));
+
+			Expression changeCmd = Expression.MakeMemberAccess(cmdParam, Reflect.FindProperty<IDbCommand>(c => c.CommandText));
+			changeCmd = Expression.Assign(changeCmd,
+			                              Expression.Call(changeCmd, Reflect.FindMethod<string>(s => s.Replace("", "")),
+										  Expression.Call(null, typeof(string).GetMethod("Concat", new[] { typeof(string), typeof(string) }), Expression.Constant("@"), parametersPlaceholder),
+										  Expression.Call(sb,Reflect.FindMethod<StringBuilder>(s=>s.ToString()))));
+
+			exprList.Add(changeCmd);
+
+			return Expression.Lambda<Action<IDbCommand, object>>(
+						Expression.Block(new[]{indexVar,sb}, exprList),
+						cmdParam,
+						rootParam).Compile();
+		}
 	}
 }

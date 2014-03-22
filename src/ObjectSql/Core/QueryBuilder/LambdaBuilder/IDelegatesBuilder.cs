@@ -10,6 +10,7 @@ namespace ObjectSql.Core.QueryBuilder.LambdaBuilder
 		Func<IDbCommand, object> ReadCommandReturnParameter();
 		Action<IDbCommand, object> AddCommandReturnParameter(Type returnType,object dbType);
 		Action<IDbCommand, object> CreateDatabaseParameterFactoryAction(Expression parameterName, Expression valueAccessor, IStorageFieldType parameterType,ParameterDirection direction);
+		Action<IDbCommand, object> CreateArrayParameters(string paramName, Expression valueAccessor, IStorageFieldType parameterType, ParameterDirection direction);
 		Action<IDbCommand, object> CreateInsertionParametersInitializerAction(EntitySchema entitySchema, EntityInsertionInformation insertionInfo);
 		Action<IDbCommand, object> CreateChangeDatabaseCommandTypeAction(CommandType commandType);
 		Delegate CreateEntityMaterializationDelegate(EntitySchema schema, EntityMaterializationInformation materializationInfo);

@@ -32,7 +32,13 @@ namespace ObjectSql.Tests
 			params object[] dbParameters)
 			where T : IQueryEnd
 		{
-			return Verify(sqlEnd, expectedSql, dbParameters.Select(p => new MsSqlParameterToCheck() { DbType = null, ParameterValue = p }).ToArray());
+			return Verify(sqlEnd, expectedSql, dbParameters
+					.Select(p => new MsSqlParameterToCheck() 
+					{
+						DbType = null, 
+						ParameterValue = (p is MsSqlParameterToCheck)?((MsSqlParameterToCheck)p).ParameterValue:p,
+						ParameterName = (p is MsSqlParameterToCheck) ? ((MsSqlParameterToCheck)p).ParameterName : null,
+					}).ToArray());
 		}
 		public static string Prepare(this string str)
 		{
@@ -71,6 +77,10 @@ namespace ObjectSql.Tests
 		public static MsSqlParameterToCheck DbType(this object value, SqlDbType dbType)
 		{
 			return new MsSqlParameterToCheck() { DbType = dbType, ParameterValue = value };
+		}
+		public static MsSqlParameterToCheck Name(this int value, string name)
+		{
+			return new MsSqlParameterToCheck() {  ParameterValue = value, ParameterName = name};
 		}
 		public static MsSqlParameterToCheck Name(this MsSqlParameterToCheck value, string name)
 		{
