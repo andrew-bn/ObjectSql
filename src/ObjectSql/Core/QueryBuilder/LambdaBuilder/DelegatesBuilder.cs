@@ -69,6 +69,7 @@ namespace ObjectSql.Core.QueryBuilder.LambdaBuilder
 			var cmdParam = Expression.Parameter(typeof (IDbCommand));
 			Expression result = Expression.MakeMemberAccess(cmdParam, Reflect.FindProperty<IDbCommand>(c => c.Parameters));
 			result = Expression.MakeIndex(result, typeof (IDataParameterCollection).GetProperty("Item"), new[]{Expression.Constant(ReturnParameterName)});
+			result = Expression.MakeMemberAccess(Expression.Convert(result, typeof (IDataParameter)), Reflect.FindProperty<IDataParameter>(p => p.Value));
 			result = Expression.Condition(Expression.TypeIs(result, typeof (DBNull)), Expression.Constant(null, typeof (object)), result);
 
 			return Expression.Lambda<Func<IDbCommand, object>>(result, cmdParam).Compile();

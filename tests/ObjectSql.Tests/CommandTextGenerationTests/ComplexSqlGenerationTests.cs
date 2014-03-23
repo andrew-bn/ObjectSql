@@ -228,6 +228,20 @@ namespace ObjectSql.Tests.CommandTextGenerationTests
 				  p1, 11, 22,33);
 		}
 		[Test]
+		public void select_with_in_array_of_strings()
+		{
+			var p1 = "pn";
+			var result = Query
+				.From<Product>()
+				.Where(p => p.ProductName.In("name1","name2"))
+				.Select(p => p.ProductName)
+				.Verify(
+				@"SELECT [p].[ProductName] 
+				FROM [Product] AS [p] 
+				WHERE ([p].[ProductName] IN (@p0, @p1))",
+				  "name1", "name2");
+		}
+		[Test]
 		public void select_with_not_in_array()
 		{
 			var p1 = "pn";
