@@ -109,7 +109,7 @@ namespace ObjectSql.Tests.SqlServerTests
 		[Test]
 		public void BuildSql_DateDiff_GetDate()
 		{
-			Expression<Func<Employee, object>> exp = c => MsSql.DateDiff(MsSql.Day(), c.BirthDate, MsSql.GetDate() );
+			Expression<Func<Employee, object>> exp = c => MsSql.DateDiff(DatePart.Day, c.BirthDate, MsSql.GetDate());
 			var result = CreateBuilder().BuildSql(_builderContext, exp.Parameters.ToArray(), exp.Body, true).Prepare();
 
 			Assert.AreEqual("DATEDIFF(day,[c].[BirthDate],GETDATE())", result);

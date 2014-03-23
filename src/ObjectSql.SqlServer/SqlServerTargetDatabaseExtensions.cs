@@ -5,9 +5,11 @@ using ObjectSql.QueryInterfaces;
 
 namespace ObjectSql.SqlServer
 {
+
 	[DatabaseExtension]
 	public class MsSql
 	{
+		
 		private MsSql()
 		{
 		}
@@ -53,17 +55,7 @@ namespace ObjectSql.SqlServer
 			return BuildSql("REPLACE", parts);
 		}
 
-		public static Interval Day()
-		{
-			return default(Interval);
-		}
-
-		internal static string RenderDay(BuilderContext commandPreparators, string[] parts)
-		{
-			return "day";
-		}
-
-		public static int DateDiff(Interval interval, DateTime? date1, DateTime? date2)
+		public static int DateDiff(DatePart datePart, DateTime? date1, DateTime? date2)
 		{
 			return default(int);
 		}

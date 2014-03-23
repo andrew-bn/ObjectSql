@@ -82,7 +82,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>ConnStrHere.SqlServer.tt</DependentUpon>
     </Compile>
-    <Compile Include="Interval.cs" />
+    <Compile Include="DatePart.cs" />
     <Compile Include="Schema\Column.cs" />
     <Compile Include="Schema\DatabaseSchema.cs" />
     <Compile Include="Schema\DatabaseSchemaTemplate.cs">

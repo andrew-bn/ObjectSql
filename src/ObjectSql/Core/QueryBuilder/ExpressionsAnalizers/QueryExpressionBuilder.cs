@@ -67,9 +67,17 @@ namespace ObjectSql.Core.QueryBuilder.ExpressionsAnalizers
 		
 		protected override Expression VisitConstant(ConstantExpression node)
 		{
-			AddParameter(node);
+			if (node.Type.GetCustomAttribute(typeof (DatabaseExtensionAttribute)) != null)
+			{
+				RenderDatabaseExtension(node);
+			}
+			else
+			{
+				AddParameter(node);
+			}
 			return node;
 		}
+
 		protected override Expression VisitParameter(ParameterExpression node)
 		{
 			SqlWriter.WriteName(Text, node.Name);
@@ -312,5 +320,18 @@ namespace ObjectSql.Core.QueryBuilder.ExpressionsAnalizers
 			var isConstant = expressions.Length == 1 && (expressions[0] is ConstantExpression);
 			return isConstant;
  		}
+
+		private void RenderDatabaseExtension(ConstantExpression node)
+		{
+			if (node.Type.IsEnum)
+			{
+				var member = node.Type.GetMember(node.Value.ToString())[0];
+				var emitAttr = member.GetCustomAttribute(typeof (EmitAttribute)) as EmitAttribute;
+				if (emitAttr != null)
+					Text.Append(emitAttr.Value);
+				else
+					Text.Append(node.Value.ToString());
+			}
+		}
 	}
 }
