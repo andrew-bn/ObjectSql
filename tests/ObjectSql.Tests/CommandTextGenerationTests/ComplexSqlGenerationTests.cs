@@ -343,5 +343,42 @@ WHERE  ([p].[CategoryID] IN (SELECT [c].[CategoryID]
 									 )))
 		) ");
 		}
+		[Test]
+		public void ComplexSelectSql_LeftJoin()
+		{
+			Query
+				.From<Product>()
+				.LeftJoin<Category>((p, c) => p.CategoryID == c.CategoryID)
+				.Select((p, c) => new { p.ProductName, c.CategoryName })
+				.Verify(
+				@"SELECT [p].[ProductName] AS [ProductName],[c].[CategoryName] AS [CategoryName] 
+				  FROM [Product] AS [p] 
+				  LEFT JOIN [Category] AS [c] ON ([p].[CategoryID] = [c].[CategoryID])");
+		}
+		[Test]
+		public void ComplexSelectSql_RightJoin()
+		{
+			Query
+				.From<Product>()
+				.RightJoin<Category>((p, c) => p.CategoryID == c.CategoryID)
+				.Select((p, c) => new { p.ProductName, c.CategoryName })
+				.Verify(
+				@"SELECT [p].[ProductName] AS [ProductName],[c].[CategoryName] AS [CategoryName] 
+				  FROM [Product] AS [p] 
+				  RIGHT JOIN [Category] AS [c] ON ([p].[CategoryID] = [c].[CategoryID])");
+		}
+
+		[Test]
+		public void ComplexSelectSql_FullJoin()
+		{
+			Query
+				.From<Product>()
+				.FullJoin<Category>((p, c) => p.CategoryID == c.CategoryID)
+				.Select((p, c) => new { p.ProductName, c.CategoryName })
+				.Verify(
+				@"SELECT [p].[ProductName] AS [ProductName],[c].[CategoryName] AS [CategoryName] 
+				  FROM [Product] AS [p] 
+				  FULL JOIN [Category] AS [c] ON ([p].[CategoryID] = [c].[CategoryID])");
+		}
 	}
 }

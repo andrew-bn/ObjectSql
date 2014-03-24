@@ -111,6 +111,7 @@
     <Compile Include="Core\QueryDataReader.cs" />
     <Compile Include="Core\EntityEnumerable.cs" />
     <Compile Include="Core\ExecutionManager.cs" />
+    <Compile Include="Core\JoinType.cs" />
     <Compile Include="Core\QueryParts\NextQueryPart.cs" />
     <Compile Include="Core\QueryParts\SqlPart.cs" />
     <Compile Include="Core\QueryParts\QueryResultPart.cs" />

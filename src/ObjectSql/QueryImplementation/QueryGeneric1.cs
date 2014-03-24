@@ -27,7 +27,25 @@ namespace ObjectSql.QueryImplementation
 		}
 		public IQuery<TSource1,TNewSource> Join<TNewSource>(Expression<Func<TSource1,TNewSource, bool>> condition)
 		{
-			Context.SqlPart.AddQueryPart(new JoinPart(condition));
+			Context.SqlPart.AddQueryPart(new JoinPart(condition, JoinType.Inner));
+			return new Query<TSource1,TNewSource>(Context);
+		}
+
+		public IQuery<TSource1,TNewSource> LeftJoin<TNewSource>(Expression<Func<TSource1,TNewSource, bool>> condition)
+		{
+			Context.SqlPart.AddQueryPart(new JoinPart(condition, JoinType.Left));
+			return new Query<TSource1,TNewSource>(Context);
+		}
+
+		public IQuery<TSource1,TNewSource> RightJoin<TNewSource>(Expression<Func<TSource1,TNewSource, bool>> condition)
+		{
+			Context.SqlPart.AddQueryPart(new JoinPart(condition, JoinType.Right));
+			return new Query<TSource1,TNewSource>(Context);
+		}
+
+		public IQuery<TSource1,TNewSource> FullJoin<TNewSource>(Expression<Func<TSource1,TNewSource, bool>> condition)
+		{
+			Context.SqlPart.AddQueryPart(new JoinPart(condition, JoinType.Full));
 			return new Query<TSource1,TNewSource>(Context);
 		}
 		public IQueryEnd<TEntity> Select<TEntity>(Expression<Func<TSource1, TEntity>> select)
@@ -56,7 +74,25 @@ namespace ObjectSql.QueryImplementation
 		}
 		public IQuery<TSource1,TSource2,TNewSource> Join<TNewSource>(Expression<Func<TSource1,TSource2,TNewSource, bool>> condition)
 		{
-			Context.SqlPart.AddQueryPart(new JoinPart(condition));
+			Context.SqlPart.AddQueryPart(new JoinPart(condition, JoinType.Inner));
+			return new Query<TSource1,TSource2,TNewSource>(Context);
+		}
+
+		public IQuery<TSource1,TSource2,TNewSource> LeftJoin<TNewSource>(Expression<Func<TSource1,TSource2,TNewSource, bool>> condition)
+		{
+			Context.SqlPart.AddQueryPart(new JoinPart(condition, JoinType.Left));
+			return new Query<TSource1,TSource2,TNewSource>(Context);
+		}
+
+		public IQuery<TSource1,TSource2,TNewSource> RightJoin<TNewSource>(Expression<Func<TSource1,TSource2,TNewSource, bool>> condition)
+		{
+			Context.SqlPart.AddQueryPart(new JoinPart(condition, JoinType.Right));
+			return new Query<TSource1,TSource2,TNewSource>(Context);
+		}
+
+		public IQuery<TSource1,TSource2,TNewSource> FullJoin<TNewSource>(Expression<Func<TSource1,TSource2,TNewSource, bool>> condition)
+		{
+			Context.SqlPart.AddQueryPart(new JoinPart(condition, JoinType.Full));
 			return new Query<TSource1,TSource2,TNewSource>(Context);
 		}
 		public IQueryEnd<TEntity> Select<TEntity>(Expression<Func<TSource1,TSource2, TEntity>> select)
@@ -85,7 +121,25 @@ namespace ObjectSql.QueryImplementation
 		}
 		public IQuery<TSource1,TSource2,TSource3,TNewSource> Join<TNewSource>(Expression<Func<TSource1,TSource2,TSource3,TNewSource, bool>> condition)
 		{
-			Context.SqlPart.AddQueryPart(new JoinPart(condition));
+			Context.SqlPart.AddQueryPart(new JoinPart(condition, JoinType.Inner));
+			return new Query<TSource1,TSource2,TSource3,TNewSource>(Context);
+		}
+
+		public IQuery<TSource1,TSource2,TSource3,TNewSource> LeftJoin<TNewSource>(Expression<Func<TSource1,TSource2,TSource3,TNewSource, bool>> condition)
+		{
+			Context.SqlPart.AddQueryPart(new JoinPart(condition, JoinType.Left));
+			return new Query<TSource1,TSource2,TSource3,TNewSource>(Context);
+		}
+
+		public IQuery<TSource1,TSource2,TSource3,TNewSource> RightJoin<TNewSource>(Expression<Func<TSource1,TSource2,TSource3,TNewSource, bool>> condition)
+		{
+			Context.SqlPart.AddQueryPart(new JoinPart(condition, JoinType.Right));
+			return new Query<TSource1,TSource2,TSource3,TNewSource>(Context);
+		}
+
+		public IQuery<TSource1,TSource2,TSource3,TNewSource> FullJoin<TNewSource>(Expression<Func<TSource1,TSource2,TSource3,TNewSource, bool>> condition)
+		{
+			Context.SqlPart.AddQueryPart(new JoinPart(condition, JoinType.Full));
 			return new Query<TSource1,TSource2,TSource3,TNewSource>(Context);
 		}
 		public IQueryEnd<TEntity> Select<TEntity>(Expression<Func<TSource1,TSource2,TSource3, TEntity>> select)
@@ -114,7 +168,25 @@ namespace ObjectSql.QueryImplementation
 		}
 		public IQuery<TSource1,TSource2,TSource3,TSource4,TNewSource> Join<TNewSource>(Expression<Func<TSource1,TSource2,TSource3,TSource4,TNewSource, bool>> condition)
 		{
-			Context.SqlPart.AddQueryPart(new JoinPart(condition));
+			Context.SqlPart.AddQueryPart(new JoinPart(condition, JoinType.Inner));
+			return new Query<TSource1,TSource2,TSource3,TSource4,TNewSource>(Context);
+		}
+
+		public IQuery<TSource1,TSource2,TSource3,TSource4,TNewSource> LeftJoin<TNewSource>(Expression<Func<TSource1,TSource2,TSource3,TSource4,TNewSource, bool>> condition)
+		{
+			Context.SqlPart.AddQueryPart(new JoinPart(condition, JoinType.Left));
+			return new Query<TSource1,TSource2,TSource3,TSource4,TNewSource>(Context);
+		}
+
+		public IQuery<TSource1,TSource2,TSource3,TSource4,TNewSource> RightJoin<TNewSource>(Expression<Func<TSource1,TSource2,TSource3,TSource4,TNewSource, bool>> condition)
+		{
+			Context.SqlPart.AddQueryPart(new JoinPart(condition, JoinType.Right));
+			return new Query<TSource1,TSource2,TSource3,TSource4,TNewSource>(Context);
+		}
+
+		public IQuery<TSource1,TSource2,TSource3,TSource4,TNewSource> FullJoin<TNewSource>(Expression<Func<TSource1,TSource2,TSource3,TSource4,TNewSource, bool>> condition)
+		{
+			Context.SqlPart.AddQueryPart(new JoinPart(condition, JoinType.Full));
 			return new Query<TSource1,TSource2,TSource3,TSource4,TNewSource>(Context);
 		}
 		public IQueryEnd<TEntity> Select<TEntity>(Expression<Func<TSource1,TSource2,TSource3,TSource4, TEntity>> select)
@@ -143,7 +215,25 @@ namespace ObjectSql.QueryImplementation
 		}
 		public IQuery<TSource1,TSource2,TSource3,TSource4,TSource5,TNewSource> Join<TNewSource>(Expression<Func<TSource1,TSource2,TSource3,TSource4,TSource5,TNewSource, bool>> condition)
 		{
-			Context.SqlPart.AddQueryPart(new JoinPart(condition));
+			Context.SqlPart.AddQueryPart(new JoinPart(condition, JoinType.Inner));
+			return new Query<TSource1,TSource2,TSource3,TSource4,TSource5,TNewSource>(Context);
+		}
+
+		public IQuery<TSource1,TSource2,TSource3,TSource4,TSource5,TNewSource> LeftJoin<TNewSource>(Expression<Func<TSource1,TSource2,TSource3,TSource4,TSource5,TNewSource, bool>> condition)
+		{
+			Context.SqlPart.AddQueryPart(new JoinPart(condition, JoinType.Left));
+			return new Query<TSource1,TSource2,TSource3,TSource4,TSource5,TNewSource>(Context);
+		}
+
+		public IQuery<TSource1,TSource2,TSource3,TSource4,TSource5,TNewSource> RightJoin<TNewSource>(Expression<Func<TSource1,TSource2,TSource3,TSource4,TSource5,TNewSource, bool>> condition)
+		{
+			Context.SqlPart.AddQueryPart(new JoinPart(condition, JoinType.Right));
+			return new Query<TSource1,TSource2,TSource3,TSource4,TSource5,TNewSource>(Context);
+		}
+
+		public IQuery<TSource1,TSource2,TSource3,TSource4,TSource5,TNewSource> FullJoin<TNewSource>(Expression<Func<TSource1,TSource2,TSource3,TSource4,TSource5,TNewSource, bool>> condition)
+		{
+			Context.SqlPart.AddQueryPart(new JoinPart(condition, JoinType.Full));
 			return new Query<TSource1,TSource2,TSource3,TSource4,TSource5,TNewSource>(Context);
 		}
 		public IQueryEnd<TEntity> Select<TEntity>(Expression<Func<TSource1,TSource2,TSource3,TSource4,TSource5, TEntity>> select)
@@ -172,7 +262,25 @@ namespace ObjectSql.QueryImplementation
 		}
 		public IQuery<TSource1,TSource2,TSource3,TSource4,TSource5,TSource6,TNewSource> Join<TNewSource>(Expression<Func<TSource1,TSource2,TSource3,TSource4,TSource5,TSource6,TNewSource, bool>> condition)
 		{
-			Context.SqlPart.AddQueryPart(new JoinPart(condition));
+			Context.SqlPart.AddQueryPart(new JoinPart(condition, JoinType.Inner));
+			return new Query<TSource1,TSource2,TSource3,TSource4,TSource5,TSource6,TNewSource>(Context);
+		}
+
+		public IQuery<TSource1,TSource2,TSource3,TSource4,TSource5,TSource6,TNewSource> LeftJoin<TNewSource>(Expression<Func<TSource1,TSource2,TSource3,TSource4,TSource5,TSource6,TNewSource, bool>> condition)
+		{
+			Context.SqlPart.AddQueryPart(new JoinPart(condition, JoinType.Left));
+			return new Query<TSource1,TSource2,TSource3,TSource4,TSource5,TSource6,TNewSource>(Context);
+		}
+
+		public IQuery<TSource1,TSource2,TSource3,TSource4,TSource5,TSource6,TNewSource> RightJoin<TNewSource>(Expression<Func<TSource1,TSource2,TSource3,TSource4,TSource5,TSource6,TNewSource, bool>> condition)
+		{
+			Context.SqlPart.AddQueryPart(new JoinPart(condition, JoinType.Right));
+			return new Query<TSource1,TSource2,TSource3,TSource4,TSource5,TSource6,TNewSource>(Context);
+		}
+
+		public IQuery<TSource1,TSource2,TSource3,TSource4,TSource5,TSource6,TNewSource> FullJoin<TNewSource>(Expression<Func<TSource1,TSource2,TSource3,TSource4,TSource5,TSource6,TNewSource, bool>> condition)
+		{
+			Context.SqlPart.AddQueryPart(new JoinPart(condition, JoinType.Full));
 			return new Query<TSource1,TSource2,TSource3,TSource4,TSource5,TSource6,TNewSource>(Context);
 		}
 		public IQueryEnd<TEntity> Select<TEntity>(Expression<Func<TSource1,TSource2,TSource3,TSource4,TSource5,TSource6, TEntity>> select)
@@ -201,7 +309,25 @@ namespace ObjectSql.QueryImplementation
 		}
 		public IQuery<TSource1,TSource2,TSource3,TSource4,TSource5,TSource6,TSource7,TNewSource> Join<TNewSource>(Expression<Func<TSource1,TSource2,TSource3,TSource4,TSource5,TSource6,TSource7,TNewSource, bool>> condition)
 		{
-			Context.SqlPart.AddQueryPart(new JoinPart(condition));
+			Context.SqlPart.AddQueryPart(new JoinPart(condition, JoinType.Inner));
+			return new Query<TSource1,TSource2,TSource3,TSource4,TSource5,TSource6,TSource7,TNewSource>(Context);
+		}
+
+		public IQuery<TSource1,TSource2,TSource3,TSource4,TSource5,TSource6,TSource7,TNewSource> LeftJoin<TNewSource>(Expression<Func<TSource1,TSource2,TSource3,TSource4,TSource5,TSource6,TSource7,TNewSource, bool>> condition)
+		{
+			Context.SqlPart.AddQueryPart(new JoinPart(condition, JoinType.Left));
+			return new Query<TSource1,TSource2,TSource3,TSource4,TSource5,TSource6,TSource7,TNewSource>(Context);
+		}
+
+		public IQuery<TSource1,TSource2,TSource3,TSource4,TSource5,TSource6,TSource7,TNewSource> RightJoin<TNewSource>(Expression<Func<TSource1,TSource2,TSource3,TSource4,TSource5,TSource6,TSource7,TNewSource, bool>> condition)
+		{
+			Context.SqlPart.AddQueryPart(new JoinPart(condition, JoinType.Right));
+			return new Query<TSource1,TSource2,TSource3,TSource4,TSource5,TSource6,TSource7,TNewSource>(Context);
+		}
+
+		public IQuery<TSource1,TSource2,TSource3,TSource4,TSource5,TSource6,TSource7,TNewSource> FullJoin<TNewSource>(Expression<Func<TSource1,TSource2,TSource3,TSource4,TSource5,TSource6,TSource7,TNewSource, bool>> condition)
+		{
+			Context.SqlPart.AddQueryPart(new JoinPart(condition, JoinType.Full));
 			return new Query<TSource1,TSource2,TSource3,TSource4,TSource5,TSource6,TSource7,TNewSource>(Context);
 		}
 		public IQueryEnd<TEntity> Select<TEntity>(Expression<Func<TSource1,TSource2,TSource3,TSource4,TSource5,TSource6,TSource7, TEntity>> select)
@@ -230,7 +356,25 @@ namespace ObjectSql.QueryImplementation
 		}
 		public IQuery<TSource1,TSource2,TSource3,TSource4,TSource5,TSource6,TSource7,TSource8,TNewSource> Join<TNewSource>(Expression<Func<TSource1,TSource2,TSource3,TSource4,TSource5,TSource6,TSource7,TSource8,TNewSource, bool>> condition)
 		{
-			Context.SqlPart.AddQueryPart(new JoinPart(condition));
+			Context.SqlPart.AddQueryPart(new JoinPart(condition, JoinType.Inner));
+			return new Query<TSource1,TSource2,TSource3,TSource4,TSource5,TSource6,TSource7,TSource8,TNewSource>(Context);
+		}
+
+		public IQuery<TSource1,TSource2,TSource3,TSource4,TSource5,TSource6,TSource7,TSource8,TNewSource> LeftJoin<TNewSource>(Expression<Func<TSource1,TSource2,TSource3,TSource4,TSource5,TSource6,TSource7,TSource8,TNewSource, bool>> condition)
+		{
+			Context.SqlPart.AddQueryPart(new JoinPart(condition, JoinType.Left));
+			return new Query<TSource1,TSource2,TSource3,TSource4,TSource5,TSource6,TSource7,TSource8,TNewSource>(Context);
+		}
+
+		public IQuery<TSource1,TSource2,TSource3,TSource4,TSource5,TSource6,TSource7,TSource8,TNewSource> RightJoin<TNewSource>(Expression<Func<TSource1,TSource2,TSource3,TSource4,TSource5,TSource6,TSource7,TSource8,TNewSource, bool>> condition)
+		{
+			Context.SqlPart.AddQueryPart(new JoinPart(condition, JoinType.Right));
+			return new Query<TSource1,TSource2,TSource3,TSource4,TSource5,TSource6,TSource7,TSource8,TNewSource>(Context);
+		}
+
+		public IQuery<TSource1,TSource2,TSource3,TSource4,TSource5,TSource6,TSource7,TSource8,TNewSource> FullJoin<TNewSource>(Expression<Func<TSource1,TSource2,TSource3,TSource4,TSource5,TSource6,TSource7,TSource8,TNewSource, bool>> condition)
+		{
+			Context.SqlPart.AddQueryPart(new JoinPart(condition, JoinType.Full));
 			return new Query<TSource1,TSource2,TSource3,TSource4,TSource5,TSource6,TSource7,TSource8,TNewSource>(Context);
 		}
 		public IQueryEnd<TEntity> Select<TEntity>(Expression<Func<TSource1,TSource2,TSource3,TSource4,TSource5,TSource6,TSource7,TSource8, TEntity>> select)
@@ -259,7 +403,25 @@ namespace ObjectSql.QueryImplementation
 		}
 		public IQuery<TSource1,TSource2,TSource3,TSource4,TSource5,TSource6,TSource7,TSource8,TSource9,TNewSource> Join<TNewSource>(Expression<Func<TSource1,TSource2,TSource3,TSource4,TSource5,TSource6,TSource7,TSource8,TSource9,TNewSource, bool>> condition)
 		{
-			Context.SqlPart.AddQueryPart(new JoinPart(condition));
+			Context.SqlPart.AddQueryPart(new JoinPart(condition, JoinType.Inner));
+			return new Query<TSource1,TSource2,TSource3,TSource4,TSource5,TSource6,TSource7,TSource8,TSource9,TNewSource>(Context);
+		}
+
+		public IQuery<TSource1,TSource2,TSource3,TSource4,TSource5,TSource6,TSource7,TSource8,TSource9,TNewSource> LeftJoin<TNewSource>(Expression<Func<TSource1,TSource2,TSource3,TSource4,TSource5,TSource6,TSource7,TSource8,TSource9,TNewSource, bool>> condition)
+		{
+			Context.SqlPart.AddQueryPart(new JoinPart(condition, JoinType.Left));
+			return new Query<TSource1,TSource2,TSource3,TSource4,TSource5,TSource6,TSource7,TSource8,TSource9,TNewSource>(Context);
+		}
+
+		public IQuery<TSource1,TSource2,TSource3,TSource4,TSource5,TSource6,TSource7,TSource8,TSource9,TNewSource> RightJoin<TNewSource>(Expression<Func<TSource1,TSource2,TSource3,TSource4,TSource5,TSource6,TSource7,TSource8,TSource9,TNewSource, bool>> condition)
+		{
+			Context.SqlPart.AddQueryPart(new JoinPart(condition, JoinType.Right));
+			return new Query<TSource1,TSource2,TSource3,TSource4,TSource5,TSource6,TSource7,TSource8,TSource9,TNewSource>(Context);
+		}
+
+		public IQuery<TSource1,TSource2,TSource3,TSource4,TSource5,TSource6,TSource7,TSource8,TSource9,TNewSource> FullJoin<TNewSource>(Expression<Func<TSource1,TSource2,TSource3,TSource4,TSource5,TSource6,TSource7,TSource8,TSource9,TNewSource, bool>> condition)
+		{
+			Context.SqlPart.AddQueryPart(new JoinPart(condition, JoinType.Full));
 			return new Query<TSource1,TSource2,TSource3,TSource4,TSource5,TSource6,TSource7,TSource8,TSource9,TNewSource>(Context);
 		}
 		public IQueryEnd<TEntity> Select<TEntity>(Expression<Func<TSource1,TSource2,TSource3,TSource4,TSource5,TSource6,TSource7,TSource8,TSource9, TEntity>> select)

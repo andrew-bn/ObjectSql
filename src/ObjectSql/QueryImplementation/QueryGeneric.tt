@@ -37,7 +37,25 @@ for (int i = 1;i<=depth; i++)
 <# if (i!=depth) {#>
 		public IQuery<<#=TemplatesSeq(i)#>,TNewSource> Join<TNewSource>(Expression<Func<<#=TemplatesSeq(i)#>,TNewSource, bool>> condition)
 		{
-			Context.SqlPart.AddQueryPart(new JoinPart(condition));
+			Context.SqlPart.AddQueryPart(new JoinPart(condition, JoinType.Inner));
+			return new Query<<#=TemplatesSeq(i)#>,TNewSource>(Context);
+		}
+
+		public IQuery<<#=TemplatesSeq(i)#>,TNewSource> LeftJoin<TNewSource>(Expression<Func<<#=TemplatesSeq(i)#>,TNewSource, bool>> condition)
+		{
+			Context.SqlPart.AddQueryPart(new JoinPart(condition, JoinType.Left));
+			return new Query<<#=TemplatesSeq(i)#>,TNewSource>(Context);
+		}
+
+		public IQuery<<#=TemplatesSeq(i)#>,TNewSource> RightJoin<TNewSource>(Expression<Func<<#=TemplatesSeq(i)#>,TNewSource, bool>> condition)
+		{
+			Context.SqlPart.AddQueryPart(new JoinPart(condition, JoinType.Right));
+			return new Query<<#=TemplatesSeq(i)#>,TNewSource>(Context);
+		}
+
+		public IQuery<<#=TemplatesSeq(i)#>,TNewSource> FullJoin<TNewSource>(Expression<Func<<#=TemplatesSeq(i)#>,TNewSource, bool>> condition)
+		{
+			Context.SqlPart.AddQueryPart(new JoinPart(condition, JoinType.Full));
 			return new Query<<#=TemplatesSeq(i)#>,TNewSource>(Context);
 		}
 <#}#>

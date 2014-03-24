@@ -1,4 +1,5 @@
 ﻿using ObjectSql.Core.Bo.EntitySchema;
+using ObjectSql.Core.QueryParts;
 
 namespace ObjectSql.Core.QueryBuilder
 {
@@ -9,7 +10,7 @@ namespace ObjectSql.Core.QueryBuilder
 		CommandText WriteInsert(CommandText commandText, EntitySchema entity, string fieldsSql);
 		CommandText WriteFrom(CommandText commandText, EntitySchema entity);
 		CommandText WriteAlias(CommandText commandText, string aliasName);
-		CommandText WriteJoin(CommandText commandText, EntitySchema entity, string alias, string conditionSql);
+		CommandText WriteJoin(CommandText commandText, EntitySchema entity, string alias, string conditionSql, JoinType joinType);
 		CommandText WriteWhere(CommandText commandText, string sql);
 		CommandText WriteHaving(CommandText commandText, string sql);
 		CommandText WriteGroupBy(CommandText commandText, string sql);

@@ -1,6 +1,8 @@
 ﻿using System;
+using ObjectSql.Core;
 using ObjectSql.Core.Bo.EntitySchema;
 using ObjectSql.Core.QueryBuilder;
+using ObjectSql.Core.QueryParts;
 
 namespace ObjectSql.SqlServer
 {
@@ -34,9 +36,13 @@ namespace ObjectSql.SqlServer
 			return commandText.Append(" AS [{0}]", aliasName);
 		}
 
-		public CommandText WriteJoin(CommandText commandText, EntitySchema entity, string alias, string conditionSql)
+		public CommandText WriteJoin(CommandText commandText, EntitySchema entity, string alias, string conditionSql, JoinType joinType)
 		{
-			return commandText.Append("JOIN {0} AS [{1}] ON {2}", PrepareStorageName(entity), alias, conditionSql);
+			var join = "";
+			if (joinType != JoinType.Inner)
+				join = " "+joinType.ToString().ToUpper();
+
+			return commandText.Append("{3} JOIN {0} AS [{1}] ON {2}", PrepareStorageName(entity), alias, conditionSql, join);
 		}
 
 		public CommandText WriteWhere(CommandText commandText, string sql)
