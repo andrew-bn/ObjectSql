@@ -8,6 +8,7 @@ using NUnit.Framework;
 using System.Data.SqlClient;
 using System.Reflection;
 using System.Data;
+using ObjectSql.SqlServer;
 
 namespace ObjectSql.Tests.CommandTextGenerationTests
 {
@@ -379,6 +380,22 @@ WHERE  ([p].[CategoryID] IN (SELECT [c].[CategoryID]
 				@"SELECT [p].[ProductName] AS [ProductName],[c].[CategoryName] AS [CategoryName] 
 				  FROM [Product] AS [p] 
 				  FULL JOIN [Category] AS [c] ON ([p].[CategoryID] = [c].[CategoryID])");
+		}
+
+		[Test]
+		public void BuildSql_OutputClause()
+		{
+			EfQuery
+				.Insert<Product>(p => new { p.ProductName, p.QuantityPerUnit, p.SupplierID })
+				.Output((i,d) => i)
+				.Values(new Product() { ProductName = "P1", QuantityPerUnit = "23", SupplierID = null },
+						new Product() { ProductName = "P2", QuantityPerUnit = "223", SupplierID = 2 })
+				.Verify(
+				@"INSERT INTO [dbo].[Products] ([ProductName],[QuantityPerUnit],[SupplierID])
+				  OUTPUT [INSERTED].[ProductID], [INSERTED].[ProductName], [INSERTED].[SupplierID], [INSERTED].[CategoryID], [INSERTED].[QuantityPerUnit], [INSERTED].[UnitPrice], [INSERTED].[UnitsInStock], [INSERTED].[UnitsOnOrder], [INSERTED].[ReorderLevel], [INSERTED].[Discontinued]
+				  VALUES (@p0,@p1,NULL),(@p2,@p3,@p4)",
+				"P1".DbType(SqlDbType.NVarChar), "23".DbType(SqlDbType.NVarChar),
+				"P2".DbType(SqlDbType.NVarChar), "223".DbType(SqlDbType.NVarChar), 2.DbType(SqlDbType.Int));
 		}
 	}
 }

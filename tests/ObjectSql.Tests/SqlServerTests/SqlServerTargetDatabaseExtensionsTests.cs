@@ -114,6 +114,7 @@ namespace ObjectSql.Tests.SqlServerTests
 
 			Assert.AreEqual("DATEDIFF(day,[c].[BirthDate],GETDATE())", result);
 		}
+
 		protected Expression IsExp<T>(Expression<Func<T>> b)
 		{
 			return It.Is<Expression>(e => e.AreEqual(b));

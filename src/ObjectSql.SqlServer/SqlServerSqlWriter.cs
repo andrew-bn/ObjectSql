@@ -64,6 +64,11 @@ namespace ObjectSql.SqlServer
 		{
 			return commandText.Append("SELECT {0} ", sql);
 		}
+		
+		public CommandText WriteOutput(CommandText commandText, string sql)
+		{
+			return commandText.Append("OUTPUT {0} ", sql);
+		}
 
 		public CommandText WriteProcedureCall(CommandText commandText, FuncSchema func)
 		{

@@ -56,5 +56,7 @@ namespace ObjectSql.Tests.CommandTextGenerationTests
 			.Verify("SELECT([p].[ProductName]+[p].[ProductName])AS[Fld1]" +
 						"FROM[dbo].[Products]AS[p]");
 		}
+
+
 	}
 }

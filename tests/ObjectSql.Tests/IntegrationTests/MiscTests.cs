@@ -168,5 +168,6 @@ namespace ObjectSql.Tests.IntegrationTests
 			Assert.AreEqual("Alice Mutton", data[16].ProductName);
 			Assert.AreEqual(17, data[16].ProductID);
 		}
+
 	}
 }

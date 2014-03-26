@@ -184,6 +184,7 @@
     <Compile Include="QueryInterfaces\IInsert.cs" />
     <Compile Include="QueryInterfaces\IDataReaderHolder.cs" />
     <Compile Include="QueryInterfaces\INonQueryResultHolder.cs" />
+    <Compile Include="QueryInterfaces\IQueryContextHolder.cs" />
     <Compile Include="QueryInterfaces\IQueryEnd.cs" />
     <Compile Include="QueryInterfaces\IQueryGeneric.cs">
       <AutoGen>True</AutoGen>

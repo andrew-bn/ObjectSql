@@ -83,6 +83,7 @@
       <DependentUpon>ConnStrHere.SqlServer.tt</DependentUpon>
     </Compile>
     <Compile Include="DatePart.cs" />
+    <Compile Include="QueryInterfaceExtensions.cs" />
     <Compile Include="Schema\Column.cs" />
     <Compile Include="Schema\DatabaseSchema.cs" />
     <Compile Include="Schema\DatabaseSchemaTemplate.cs">
@@ -98,6 +99,7 @@
     <Compile Include="Schema\RoutineType.cs" />
     <Compile Include="Schema\SchemaGenerator.cs" />
     <Compile Include="Schema\Table.cs" />
+    <Compile Include="OutputPart.cs" />
     <Compile Include="SqlServerDatabaseManager.cs" />
     <Compile Include="SqlServerDelegatesBuilder.cs" />
     <Compile Include="ObjectSqlSqlServerInitializer.cs" />
