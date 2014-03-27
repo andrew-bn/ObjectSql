@@ -1,4 +1,5 @@
-﻿using ObjectSql.Core.Bo;
+﻿using System.Linq;
+using ObjectSql.Core.Bo;
 using ObjectSql.Core.QueryBuilder.LambdaBuilder;
 using ObjectSql.Core.SchemaManager;
 using ObjectSql.Exceptions;
@@ -45,7 +46,18 @@ namespace ObjectSql.Core.QueryBuilder.ExpressionsAnalizers
 		}
 		protected override Expression VisitMemberInit(MemberInitExpression node)
 		{
-			throw new ObjectSqlException("Not anonimus types are not allowed then you select fields sequence");
+			var props = SchemaManager.GetSchema(node.Type).EntityProperties;
+			for (int i = 0; i < node.Bindings.Count; i++)
+			{
+				if (i > 0) SqlWriter.WriteComma(Text);
+
+				var sf = props.FirstOrDefault(p=>p.Name == node.Bindings[i].Member.Name);
+				if (sf.StorageField == null)
+					SqlWriter.WriteName(Text, sf.Name);
+				else
+					SqlWriter.WriteName(Text, sf.StorageField.Name);
+			}
+			return node;
 		}
 		protected override Expression VisitConstant(ConstantExpression node)
 		{

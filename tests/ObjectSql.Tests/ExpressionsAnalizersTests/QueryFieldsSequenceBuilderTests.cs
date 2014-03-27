@@ -45,6 +45,7 @@ namespace ObjectSql.Tests.ExpressionsAnalizersTests
 										{ "Description", new StorageField("Description", null) },
 										{ "Picture", new StorageField("Picture", null) },
 									});
+
 			_schemaManager = new Mock<IEntitySchemaManager>();
 			_schemaManager.Setup(m => m.GetSchema(It.IsAny<Type>())).Returns(_categorySchema);
 
@@ -71,26 +72,28 @@ namespace ObjectSql.Tests.ExpressionsAnalizersTests
 			public int Id { get; set; }
 			public string Name { get; set; }
 		}
-		[Test]
-		[ExpectedException(typeof(ObjectSqlException))]
-		public void BuildSql_SelectNewDto_MemberInit_ErrorExpected()
-		{
-			Expression<Func<Dto, object>> exp = (d) => new Dto {Id = 2 };
-			var builder = CreateBuilder();
-			builder.BuildSql(_builderContext, exp.Parameters.ToArray(), exp.Body, true);
-		}
+
 		[Test]
 		[ExpectedException(typeof(ObjectSqlException))]
 		public void BuildSql_SelectNewDto_ConstructorInitializer_ErrorExpected()
 		{
 			Expression<Func<Dto, object>> exp = (d) => new Dto(1,"");
 			var builder = CreateBuilder();
-			var result = builder.BuildSql(_builderContext, exp.Parameters.ToArray(), exp.Body, true);
+			builder.BuildSql(_builderContext, exp.Parameters.ToArray(), exp.Body, true);
 		}
 		[Test]
 		public void BuildSql_SelectNewAnonimus_ValidResult()
 		{
 			Expression<Func<Category, object>> exp = (d) => new { d.Description, d.Picture };
+			var builder = CreateBuilder();
+			var result = builder.BuildSql(_builderContext, exp.Parameters.ToArray(), exp.Body, false).Prepare();
+
+			Assert.AreEqual("[Description],[Picture]", result);
+		}
+		[Test]
+		public void BuildSql_SelectNewNotAnonimus_ValidResult()
+		{
+			Expression<Func<Category, object>> exp = (d) => new Category { Description = d.Description, Picture = null };
 			var builder = CreateBuilder();
 			var result = builder.BuildSql(_builderContext, exp.Parameters.ToArray(), exp.Body, false).Prepare();
 

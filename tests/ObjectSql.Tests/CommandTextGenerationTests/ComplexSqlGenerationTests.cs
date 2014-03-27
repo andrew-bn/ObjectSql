@@ -381,7 +381,19 @@ WHERE  ([p].[CategoryID] IN (SELECT [c].[CategoryID]
 				  FROM [Product] AS [p] 
 				  FULL JOIN [Category] AS [c] ON ([p].[CategoryID] = [c].[CategoryID])");
 		}
-
+		[Test]
+		public void BuildSql_Insert_SelectedFieldsWithDto()
+		{
+			EfQuery
+				.Insert<Product>(p => new Product {ProductName = null,QuantityPerUnit = null, SupplierID = 1 })
+				.Values(new Product() { ProductName = "P1", QuantityPerUnit = "23", SupplierID = null },
+						new Product() { ProductName = "P2", QuantityPerUnit = "223", SupplierID = 2 })
+				.Verify(
+				@"INSERT INTO [dbo].[Products] ([ProductName],[QuantityPerUnit],[SupplierID])
+				  VALUES (@p0,@p1,NULL),(@p2,@p3,@p4)",
+				"P1".DbType(SqlDbType.NVarChar), "23".DbType(SqlDbType.NVarChar),
+				"P2".DbType(SqlDbType.NVarChar), "223".DbType(SqlDbType.NVarChar), 2.DbType(SqlDbType.Int));
+		}
 		[Test]
 		public void BuildSql_OutputClause()
 		{

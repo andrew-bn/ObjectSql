@@ -32,7 +32,13 @@ namespace ObjectSql.Core.QueryBuilder.InfoExtractor
 			}
 			return alias;
 		}
-		
+		protected override Expression VisitMemberInit(MemberInitExpression node)
+		{
+			var props = _schemaManager.GetSchema(node.Type).EntityProperties;
+			var indexes = node.Bindings.Select(b => props.First(p => p.Name == b.Member.Name).Index).ToArray();
+			_result = new EntityInsertionInformation(indexes);
+			return node;
+		}
 		protected override Expression VisitNew(NewExpression node)
 		{
 			if (_result == null)
