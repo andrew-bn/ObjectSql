@@ -159,7 +159,7 @@ namespace ObjectSql.Core.SchemaManager
 					: new StorageParameter(attr.Name, ParseDbType(attr.TypeName), attr.Direction);
 		}
 		#endregion
-		protected IStorageFieldType ParseDbType(string value)
+		public IStorageFieldType ParseDbType(string value)
 		{
 			TTypeEnum result;
 			return Enum.TryParse(value, true, out result)

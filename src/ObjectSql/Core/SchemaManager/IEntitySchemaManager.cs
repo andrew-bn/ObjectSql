@@ -8,5 +8,6 @@ namespace ObjectSql.Core.SchemaManager
 	{
 		EntitySchema GetSchema(Type entityType);
 		FuncSchema GetFuncSchema(MethodInfo method);
+		IStorageFieldType ParseDbType(string value);
 	}
 }

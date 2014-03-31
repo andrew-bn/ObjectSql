@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Data;
 using ObjectSql.Core;
 using ObjectSql.Core.Bo;
 using ObjectSql.QueryInterfaces;
@@ -55,6 +56,7 @@ namespace ObjectSql.SqlServer
 			return BuildSql("REPLACE", parts);
 		}
 
+		[DatabaseTypes("","DateTime2","DateTime2", "Int")]
 		public static int DateDiff(DatePart datePart, DateTime? date1, DateTime? date2)
 		{
 			return default(int);

@@ -118,6 +118,7 @@
     <Compile Include="Core\ScalarResultHolder.cs" />
     <Compile Include="DefaultSchemaManagerFactory.cs" />
     <Compile Include="EmitAttribute.cs" />
+    <Compile Include="DatabaseTypesAttribute.cs" />
     <Compile Include="IAsyncEnumerable.cs" />
     <Compile Include="IAsyncEnumerator.cs" />
     <Compile Include="Core\ICommandPreparatorsHolder.cs" />

@@ -219,16 +219,24 @@ namespace ObjectSql.Core.QueryBuilder.ExpressionsAnalizers
 		{
 			if (node.Method.DeclaringType.GetCustomAttribute(typeof (DatabaseExtensionAttribute)) != null)
 			{
+				var dbTypesAttr = node.Method.GetCustomAttribute(typeof (DatabaseTypesAttribute)) as DatabaseTypesAttribute;
+				var dbTypes = dbTypesAttr == null ? new string[0] : dbTypesAttr.Types;
+
 				var buff = Text;
 
 				var parts = new string[node.Arguments.Count];
 				for (int i = 0; i < node.Arguments.Count; i++)
-				{	
-					DbTypeInContext = null;
+				{
+					DbTypeInContext = (dbTypes.Length == 0)?null:DbTypeInContext = SchemaManager.ParseDbType(dbTypes[i]);
+
 					Text = new CommandText();
 					Visit(node.Arguments[i]);
 					parts[i] = Text.ToString();
 				}
+
+				if (dbTypes.Length>0)
+					DbTypeInContext = SchemaManager.ParseDbType(dbTypes[dbTypes.Length-1]);
+
 				Text = buff;
 				var meth = node.Method.DeclaringType.GetMethod("Render" + node.Method.Name,
 				                                               BindingFlags.Static | BindingFlags.IgnoreCase |
