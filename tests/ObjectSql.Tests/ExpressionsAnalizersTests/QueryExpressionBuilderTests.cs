@@ -313,6 +313,36 @@ namespace ObjectSql.Tests.ExpressionsAnalizersTests
 			_parametersHolder.Verify(h => h.AddPreProcessor(It.IsAny<CommandPrePostProcessor>()), Times.Exactly(1));
 			_parametersHolder.Verify(h => h.AddPreProcessor(It.Is<CommandPrePostProcessor>(d => ((SingleParameterPrePostProcessor)d).Name == "p0")));
 		}
+		public enum Foo
+		{
+			Val1,
+			Val2
+		}
+		[Test]
+		public void BuildSql_RenderEqualToEnum()
+		{
+			Expression<Func<Category, object>> exp = (c) => c.CategoryID == (int)Foo.Val2;
+			var builder = CreateBuilder();
+			var result = builder.BuildSql(_builderContext, exp.Parameters.ToArray(), exp.Body, true).Prepare();
+
+			Assert.AreEqual("([c].[CategoryID]=@p0)", result);
+			_delegatesBuilder.Verify(b => b.CreateDatabaseParameterFactoryAction(IsExp(() => "p0"), IsExp(() => (int)Foo.Val2), null, ParameterDirection.Input));
+			_parametersHolder.Verify(h => h.AddPreProcessor(It.IsAny<CommandPrePostProcessor>()), Times.Exactly(1));
+			_parametersHolder.Verify(h => h.AddPreProcessor(It.Is<CommandPrePostProcessor>(d => ((SingleParameterPrePostProcessor)d).Name == "p0")));
+		}
+		[Test]
+		public void BuildSql_RenderEqualToEnumVariable()
+		{
+			var enumVar = (Foo) Enum.Parse(typeof (Foo), "Val2");
+			Expression<Func<Category, object>> exp = (c) => c.CategoryID == (int)enumVar;
+			var builder = CreateBuilder();
+			var result = builder.BuildSql(_builderContext, exp.Parameters.ToArray(), exp.Body, true).Prepare();
+
+			Assert.AreEqual("([c].[CategoryID]=@p0)", result);
+			_delegatesBuilder.Verify(b => b.CreateDatabaseParameterFactoryAction(IsExp(() => "p0"), IsExp(() => (int)enumVar), null, ParameterDirection.Input));
+			_parametersHolder.Verify(h => h.AddPreProcessor(It.IsAny<CommandPrePostProcessor>()), Times.Exactly(1));
+			_parametersHolder.Verify(h => h.AddPreProcessor(It.Is<CommandPrePostProcessor>(d => ((SingleParameterPrePostProcessor)d).Name == "p0")));
+		}
 		[Test]
 		public void BuildSql_RenderNull()
 		{

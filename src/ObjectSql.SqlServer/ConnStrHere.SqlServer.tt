@@ -87,16 +87,13 @@ public class ConfigurationAccessor
 	public string FindNs(string fileName, IServiceProvider host)
 	{
 		EnvDTE.DTE env = (EnvDTE.DTE)host.GetService(typeof(EnvDTE.DTE));
-		var proj = env.Solution.Projects.GetEnumerator();
 
-		while(proj.MoveNext())
-		{
-			var p = (EnvDTE.Project)proj.Current; 
-			
-			var res = FindNs(fileName,p.Name, "    ",p.ProjectItems);
-			if (res != null)
-				return res;
-		}
+		var prj = (EnvDTE.Project)((Array)env.ActiveSolutionProjects).GetValue(0);
+
+		var res = FindNs(fileName,prj.Name, "    ",prj.ProjectItems);
+		if (res != null)
+			return res;
+
 		return null;
 	}
 
