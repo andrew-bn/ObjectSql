@@ -8,7 +8,7 @@ namespace ObjectSql.Core.Bo
 	{
 		internal CompiledQueryContext(string initialConnectionString,
 								IDbCommand command,
-								ResourcesTreatmentType resourcesTreatmentType, QueryEnvironment environment, object newRootValue, QueryContext copyFromContext)
+								ResourcesTreatmentType resourcesTreatmentType, QueryEnvironment environment, object newRootValue,int rootIndex, QueryContext copyFromContext)
 			: base(initialConnectionString,command,resourcesTreatmentType, environment)
 		{
 
@@ -16,8 +16,7 @@ namespace ObjectSql.Core.Bo
 			SqlPart = copyFromContext.SqlPart;
 			Prepared = true;
 
-			SqlPart.QueryRoots.ClearRoots();
-			SqlPart.QueryRoots.AddRoot(newRootValue);
+			SqlPart.QueryRoots.ReplaceRoot(rootIndex, newRootValue);
 		}
 	}
 }

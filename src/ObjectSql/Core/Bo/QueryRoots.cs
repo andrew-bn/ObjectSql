@@ -29,5 +29,11 @@ namespace ObjectSql.Core.Bo
 			_roots.Clear();
 		}
 
+
+		internal void ReplaceRoot(int rootIndex, object newRootValue)
+		{
+			_roots.RemoveAt(rootIndex);
+			_roots.Insert(rootIndex,newRootValue);
+		}
 	}
 }

@@ -35,12 +35,20 @@ namespace ObjectSql
 
 			return new ObjectSqlConnection(_connectionString, connection);
 		}
-		public Func<TArgs, IQueryEnd<TEntity>> CompileQuery<TArgs, TEntity>(Func<TArgs, IQueryEnd<TEntity>> query)
+		public Func<TArgs, IQueryEnd<TEntity>> CompileQuery<TArgs, TEntity>(Expression<Func<TArgs, IQueryEnd<TEntity>>> query)
 		{
-			var result = (QueryEnd<TEntity>)query(default(TArgs));
+			var func = query.Compile();
+			var result = (Query)func(default(TArgs));
 			result.Context.GetHashCode();
 			result.Context.PreparationData = result.Context.GeneratePreparationData();
-
+			int idx = 0;
+			foreach (var root in result.Context.SqlPart.QueryRoots.Roots)
+			{
+				var rootType = root.GetType();
+				if (rootType.IsGenericType && rootType.GetGenericTypeDefinition() == typeof (StrongBox<>))
+					break;
+				idx++;
+			}
 			return (arg1) =>
 				{
 					var conn = CreateConnection();
@@ -60,7 +68,7 @@ namespace ObjectSql
 					                               delBuilder,
 					                               sqlWriter);
 
-					var context = new CompiledQueryContext(result.Context.InitialConnectionString,cmd, result.Context.ResourcesTreatmentType, env, new StrongBox<TArgs>(arg1), result.Context);
+					var context = new CompiledQueryContext(result.Context.InitialConnectionString,cmd, result.Context.ResourcesTreatmentType, env, new StrongBox<TArgs>(arg1), idx, result.Context);
 
 					context.PreProcessQuery();
 					return new QueryEnd<TEntity>(context);

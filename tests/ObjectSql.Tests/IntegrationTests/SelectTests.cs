@@ -174,7 +174,7 @@ namespace ObjectSql.Tests.IntegrationTests
 						(Tuple<int,int> args) =>
 						mng.Query().From<Product>()
 						.GroupBy((p) => new { p.CategoryID })
-						.Where((p) => p.CategoryID > args.Item1 && Sql.Avg(p.ReorderLevel) > 15)
+						.Where((p) => Sql.Avg(p.ReorderLevel) > 15 && p.CategoryID > args.Item1 )
 						.Select((p) => new { Fld1 = p.CategoryID, Fld2 = Sql.Avg(p.ReorderLevel) }));
 
 			var arr = q(new Tuple<int, int>(2, 15)).ExecuteQuery().ToArray();
