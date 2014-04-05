@@ -9,23 +9,6 @@ namespace ObjectSql.Core.Misc
 {
 	public static class CoreExtensions
 	{
-		public static InsertionParameterPrePostProcessor AsInsertion(this CommandPrePostProcessor descriptor)
-		{
-			return (InsertionParameterPrePostProcessor)descriptor;
-		}
-		public static CommandParameterPreProcessor AsDatabaseParameter(this CommandPrePostProcessor descriptor)
-		{
-			return (CommandParameterPreProcessor)descriptor;
-		}
-		public static StoredProcedureOutParameterProcessor AsStoredProcedureOutParameterProcessor(this CommandPrePostProcessor descriptor)
-		{
-			return (StoredProcedureOutParameterProcessor)descriptor;
-		}
-
-		public static CommandParameterPreProcessor AsSingleParameter(this CommandPrePostProcessor descriptor)
-		{
-			return (CommandParameterPreProcessor) descriptor;
-		}
 		public static Expression StripConvert(this Expression exp)
 		{
 			if (exp.NodeType == ExpressionType.Convert)

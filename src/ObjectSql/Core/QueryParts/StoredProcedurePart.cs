@@ -37,7 +37,7 @@ namespace ObjectSql.Core.QueryParts
 
 			var changeDbCommandType = context.DelegatesBuilder.CreateChangeDatabaseCommandTypeAction(CommandType.StoredProcedure);
 
-			var param = new SimpleCommandPrePostProcessor(changeDbCommandType);
+			var param = new CommandPrePostProcessor(changeDbCommandType);
 			context.Preparators.AddPreProcessor(param);
 
 			if (HasResultEntityType)

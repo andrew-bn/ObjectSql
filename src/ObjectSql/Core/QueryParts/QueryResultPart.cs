@@ -35,7 +35,7 @@ namespace ObjectSql.Core.QueryParts
 		}
 		public override void BuildPart(Bo.BuilderContext context)
 		{
-			var preparator = new SimpleCommandPrePostProcessor(context.DelegatesBuilder.AddCommandReturnParameter(ResultType, DbType));
+			var preparator = new CommandPrePostProcessor(context.DelegatesBuilder.AddCommandReturnParameter(ResultType, DbType));
 			context.Preparators.AddPreProcessor(preparator);
 			context.ReturnParameterReader = context.DelegatesBuilder.ReadCommandReturnParameter();
 		}

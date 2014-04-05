@@ -3,9 +3,9 @@ using System.Data;
 
 namespace ObjectSql.Core.Bo.CommandPreparatorDescriptor
 {
-	public abstract class CommandPrePostProcessor
+	public class CommandPrePostProcessor
 	{
-		protected CommandPrePostProcessor(Action<IDbCommand, object> preparationAction)
+		public CommandPrePostProcessor(Action<IDbCommand, object> preparationAction)
 		{
 			CommandPreparationAction = preparationAction;
 			RootIndex = -1;
