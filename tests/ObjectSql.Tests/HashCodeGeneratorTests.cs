@@ -39,11 +39,10 @@ namespace ObjectSql.Tests
 			Assert.AreEqual(3, p.Roots.Count);
 			var pairs = p.Roots.ToArray();
 
-			dynamic firstVal = pairs[0].Key;
+			dynamic firstVal = pairs[0];
 			Assert.AreEqual(closureSource, firstVal.closureSource);
-			Assert.AreEqual(constantClosureSource, pairs[1].Key);
-			Assert.AreEqual(12, pairs[2].Key);
-			Assert.AreEqual(1, pairs[0].Value);
+			Assert.AreEqual(constantClosureSource, pairs[1]);
+			Assert.AreEqual(12, pairs[2]);
 
 		}
 		[Test]
@@ -63,11 +62,11 @@ namespace ObjectSql.Tests
 			Assert.AreEqual(3, p.Roots.Count);
 			var pairs = p.Roots.ToArray();
 
-			dynamic firstVal = pairs[0].Key;
+			dynamic firstVal = pairs[0];
 
 			Assert.AreEqual(closureSource, firstVal.closureSource);
-			Assert.AreEqual(constantClosureSource, pairs[1].Key);
-			Assert.AreEqual(12, pairs[2].Key);
+			Assert.AreEqual(constantClosureSource, pairs[1]);
+			Assert.AreEqual(12, pairs[2]);
 
 		}
 		[Test]
@@ -82,7 +81,7 @@ namespace ObjectSql.Tests
 			ExpressionHashCalculator.CalculateHashAndExtractConstantRoots(exp, ref p);
 
 			Assert.AreEqual(1, p.Roots.Count);
-			Assert.AreEqual(12, p.Roots.ToArray()[0].Key);
+			Assert.AreEqual(12, p.Roots.ToArray()[0]);
 		}
 		[Test]
 		public void DuplicatedRoot()
@@ -103,12 +102,12 @@ namespace ObjectSql.Tests
 			var pairs = p.Roots.ToArray();
 
 
-			dynamic firstVal = pairs[0].Key;
+			dynamic firstVal = pairs[0];
 
 			Assert.AreEqual(closureSource, firstVal.closureSource);
 			Assert.AreEqual(closureSource2, firstVal.closureSource2);
-			Assert.AreEqual(constantClosureSource, pairs[1].Key);
-			Assert.AreEqual(12, pairs[2].Key);
+			Assert.AreEqual(constantClosureSource, pairs[1]);
+			Assert.AreEqual(12, pairs[2]);
 		}
 
 		public int Value = 4;
@@ -129,11 +128,11 @@ namespace ObjectSql.Tests
 			Assert.AreEqual(4, p.Roots.Count);
 			var pairs = p.Roots.ToArray();
 
-			dynamic firstVal = pairs[0].Key;
-			dynamic secondVal = pairs[3].Key;
+			dynamic firstVal = pairs[0];
+			dynamic secondVal = pairs[3];
 			Assert.AreEqual(closureSource, firstVal.closureSource);
-			Assert.AreEqual(constantClosureSource, pairs[1].Key);
-			Assert.AreEqual(12, pairs[2].Key);
+			Assert.AreEqual(constantClosureSource, pairs[1]);
+			Assert.AreEqual(12, pairs[2]);
 			Assert.AreEqual(Value, secondVal.Value);
 		}
 		[Test]

@@ -275,7 +275,11 @@ namespace ObjectSql.Core.QueryBuilder.ExpressionsAnalizers
 
 					var q = new Query(ctx);
 					exp(q);
-					q.Context.SqlPart.BuilderContext.Preparators = BuilderContext.Preparators;
+
+					foreach(var root in BuilderContext.Context.SqlPart.QueryRoots.Roots)
+						q.Context.SqlPart.QueryRoots.AddRoot(root);
+
+					q.Context.SqlPart.BuilderContext .Preparators = BuilderContext.Preparators;
 
 					q.Context.SqlPart.BuildPart();
 					Text.Append(q.Context.SqlPart.BuilderContext.Text.ToString());
@@ -297,16 +301,16 @@ namespace ObjectSql.Core.QueryBuilder.ExpressionsAnalizers
 		}
 
 
-		private SingleParameterPrePostProcessor GetParameterDescriptor(Expression accessor, IStorageFieldType dbTypeInContext)
+		private CommandParameterPreProcessor GetParameterDescriptor(Expression accessor, IStorageFieldType dbTypeInContext)
 		{
 			var descriptor = CommandPreparatorsHolder.PreProcessors
-											 .Where(p => p.PreparatorType == CommandPreparatorType.DatabaseCommandParameter)
-											 .Select(p => p.AsSingleParameter())
+											 .Select(p => p as CommandParameterPreProcessor)
+											 .Where(p => p != null)
 											 .SingleOrDefault(d => ExpressionComparer.AreEqual(d.ValueAccessorExp, accessor) && Equals(d.DbType, dbTypeInContext));
 
 			if (descriptor == null)
 			{
-				var parameterName = "p" + CommandPreparatorsHolder.PreProcessors.Count;
+				var parameterName = "p" + CommandPreparatorsHolder.PreProcessors.Count(p => p is CommandParameterPreProcessor);
 
 				if (accessor.Type.IsArray)
 					parameterName += "_" + Guid.NewGuid().ToString().Replace("-", "");
@@ -315,12 +319,11 @@ namespace ObjectSql.Core.QueryBuilder.ExpressionsAnalizers
 									? CreateArrayParameterInitializer(parameterName, accessor, dbTypeInContext)
 									: CreateParameterInitializer(parameterName, accessor, dbTypeInContext);
 
-				descriptor = new DatabaseCommandParameterPrePostProcessor(parameterName, dbTypeInContext, accessor, initializer);
+				descriptor = new CommandParameterPreProcessor(parameterName, dbTypeInContext, accessor, initializer);
 				CommandPreparatorsHolder.AddPreProcessor(descriptor);
 			}
 
-			descriptor.AsDatabaseParameter().ParameterWasEncountered(CommandPreparatorsHolder.ParametersEncountered);
-			CommandPreparatorsHolder.ParametersEncountered++;
+			descriptor.RootIndex = accessor.IndexOfRoot(BuilderContext.Context.SqlPart.QueryRoots);
 
 			return descriptor;
 		}

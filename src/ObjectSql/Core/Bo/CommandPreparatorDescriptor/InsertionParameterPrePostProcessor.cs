@@ -8,20 +8,7 @@ namespace ObjectSql.Core.Bo.CommandPreparatorDescriptor
 		public InsertionParameterPrePostProcessor(Action<IDbCommand, object> preparationAction) 
 			: base(preparationAction)
 		{
-			RootMap = 1;
-		}
-
-		public override CommandPreparatorType PreparatorType
-		{
-			get
-			{
-				return CommandPreparatorType.InsertionParameter;
-			}
-		}
-
-		public override bool RootDemanding
-		{
-			get { return true; }
+			RootIndex = 0;
 		}
 	}
 }

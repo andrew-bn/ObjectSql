@@ -5,6 +5,7 @@ using ObjectSql.Core.Bo.CommandPreparatorDescriptor;
 using ObjectSql.Core.Bo.EntitySchema;
 using ObjectSql.Core.QueryBuilder.ExpressionsAnalizers;
 using ObjectSql.Core.QueryBuilder.LambdaBuilder;
+using ObjectSql.Core.QueryParts;
 using ObjectSql.Core.SchemaManager;
 using ObjectSql.SqlServer;
 using ObjectSql.Core.Bo;
@@ -22,7 +23,7 @@ using System.Threading.Tasks;
 namespace ObjectSql.Tests.ExpressionsAnalizersTests.TardetDbExtensionsTests
 {
 	[TestFixture]
-	public class TargetDatabaseExtensionsTests
+	public class TargetDatabaseExtensionsTests:TestBase
 	{
 		private Mock<IEntitySchemaManager> _schemaManager;
 		private Mock<IDelegatesBuilder> _delegatesBuilder;
@@ -62,8 +63,11 @@ namespace ObjectSql.Tests.ExpressionsAnalizersTests.TardetDbExtensionsTests
 			_parametersHolder.SetupSet(h => h.ParametersEncountered).Callback(i => _parametersEncountered = i);
 			_parametersHolder.Setup(h => h.ParametersEncountered).Returns(() => _parametersEncountered);
 
-			_builderContext = new BuilderContext(null, null, null, null, null, null, null, null);
+			_builderContext = new BuilderContext(new QueryContext(null, null, ResourcesTreatmentType.DisposeCommand,
+				new QueryEnvironment(null, null, null, null)), null, null, null, null, null, null, null);
+			_builderContext.Context.SqlPart = new SqlPart(_builderContext.Context);
 			_builderContext.Preparators = _parametersHolder.Object;
+			QueryRoots = _builderContext.Context.SqlPart.QueryRoots;
 		}
 		[Test]
 		public void BuildSql_Avg()

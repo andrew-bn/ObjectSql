@@ -9,15 +9,5 @@ namespace ObjectSql.Core.Bo.CommandPreparatorDescriptor
 			: base(preparationAction)
 		{
 		}
-
-		public override CommandPreparatorType PreparatorType
-		{
-			get { return CommandPreparatorType.CommandPreparator; }
-		}
-
-		public override bool RootDemanding
-		{
-			get { return false; }
-		}
 	}
 }

@@ -35,10 +35,10 @@ namespace ObjectSql
 
 			return new ObjectSqlConnection(_connectionString, connection);
 		}
-		public Func<TArgs, IQueryEnd<TEntity>> CompileQuery<TArgs, TEntity>(Expression<Func<TArgs, IQueryEnd<TEntity>>> query)
+		public Func<TArgs, IQueryEnd<TEntity>> CompileQuery<TArgs, TEntity>(Func<TArgs, IQueryEnd<TEntity>> query)
 		{
-			var func = query.Compile();
-			var result = (QueryEnd<TEntity>)func(default(TArgs));
+			var result = (QueryEnd<TEntity>)query(default(TArgs));
+			result.Context.GetHashCode();
 			result.Context.PreparationData = result.Context.GeneratePreparationData();
 
 			return (arg1) =>

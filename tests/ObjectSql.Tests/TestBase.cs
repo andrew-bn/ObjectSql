@@ -1,4 +1,5 @@
 ﻿using NUnit.Framework;
+using ObjectSql.Core.Bo;
 using ObjectSql.Core.Misc;
 using ObjectSql.EF5;
 using ObjectSql.QueryInterfaces;
@@ -91,11 +92,18 @@ namespace ObjectSql.Tests
 	[TestFixture]
 	public abstract class TestBase
 	{
+		public QueryRoots QueryRoots;
 		static TestBase()
 		{
 			ObjectSqlSqlServerInitializer.Initialize();
 			ObjectSqlEf5Initializer.Initialize();
 			_objectSqlManager = new ObjectSqlManager<SqlConnection>(EfConnectionString);
+		}
+		public void AddQueryRoot<T1>(Expression<Func<T1>> exp)
+		{
+			object val = null;
+			exp.Visit<ConstantExpression>((v, e) => { val = e.Value; return e; });
+			QueryRoots.AddRoot(val);
 		}
 		protected static string EfConnectionString
 		{

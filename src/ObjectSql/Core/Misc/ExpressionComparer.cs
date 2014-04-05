@@ -51,9 +51,7 @@ namespace ObjectSql.Core.Misc
 					{
 						if (!bEnumerator.MoveNext())
 							return false;
-						if (aEnumerator.Current.Value != bEnumerator.Current.Value)
-							return false;
-						if (aEnumerator.Current.Key.GetType() != bEnumerator.Current.Key.GetType())
+						if (aEnumerator.Current.GetType() != bEnumerator.Current.GetType())
 							return false;
 					}
 					return true;

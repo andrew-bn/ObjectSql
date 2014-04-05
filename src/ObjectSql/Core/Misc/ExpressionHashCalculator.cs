@@ -1,4 +1,5 @@
-﻿using System.Linq.Expressions;
+﻿using System;
+using System.Linq.Expressions;
 using ObjectSql.Core.Bo;
 
 namespace ObjectSql.Core.Misc
@@ -19,9 +20,6 @@ namespace ObjectSql.Core.Misc
 					HashBinding(node as MemberBinding, ref treeParameters);
 				}
 			}
-
-			foreach (var root in treeParameters.Roots)
-				treeParameters.Hash = (treeParameters.Hash * PRIME) ^ root.Value;
 		}
 		private static void HashBinding(MemberBinding bind, ref QueryRoots treeParameters)
 		{
@@ -45,7 +43,10 @@ namespace ObjectSql.Core.Misc
 					break;
 				case ExpressionType.Constant:
 					var value = ((ConstantExpression)node).Value;
-					if (value != null) parameters.AddRoot(value);
+					if (value != null)
+						parameters.AddRoot(value);
+					else
+						parameters.Hash ^= DBNull.Value.GetHashCode();
 					break;
 				case ExpressionType.Call:
 					parameters.Hash ^= ((MethodCallExpression)node).Method.GetHashCode();

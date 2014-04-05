@@ -17,7 +17,7 @@ namespace ObjectSql.Core.Bo
 			Prepared = true;
 
 			SqlPart.QueryRoots.ClearRoots();
-			SqlPart.QueryRoots.AddRoot(newRootValue, -1);
+			SqlPart.QueryRoots.AddRoot(newRootValue);
 		}
 	}
 }

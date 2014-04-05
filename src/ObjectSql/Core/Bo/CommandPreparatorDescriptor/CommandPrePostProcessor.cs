@@ -8,12 +8,12 @@ namespace ObjectSql.Core.Bo.CommandPreparatorDescriptor
 		protected CommandPrePostProcessor(Action<IDbCommand, object> preparationAction)
 		{
 			CommandPreparationAction = preparationAction;
+			RootIndex = -1;
 		}
 
 		public Action<IDbCommand, object> CommandPreparationAction { get; private set; }
 
-		public abstract CommandPreparatorType PreparatorType { get; }
-		public abstract bool RootDemanding { get; }
-		public int RootMap { get; protected set; }
+		public bool RootDemanding { get { return RootIndex > -1; } }
+		public int RootIndex { get; set; }
 	}
 }

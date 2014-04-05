@@ -5,6 +5,7 @@ using ObjectSql.Core.Bo.CommandPreparatorDescriptor;
 using ObjectSql.Core.Bo.EntitySchema;
 using ObjectSql.Core.QueryBuilder.ExpressionsAnalizers;
 using ObjectSql.Core.QueryBuilder.LambdaBuilder;
+using ObjectSql.Core.QueryParts;
 using ObjectSql.Core.SchemaManager;
 using ObjectSql.Exceptions;
 using ObjectSql.SqlServer;
@@ -61,8 +62,11 @@ namespace ObjectSql.Tests.ExpressionsAnalizersTests
 			_parametersHolder.SetupSet(h => h.ParametersEncountered).Callback(i => _parametersEncountered = i);
 			_parametersHolder.Setup(h => h.ParametersEncountered).Returns(() => _parametersEncountered);
 
-			_builderContext = new BuilderContext(null,null, null, null, null, null, null, null);
+			_builderContext = new BuilderContext(new QueryContext(null, null, ResourcesTreatmentType.DisposeCommand,
+				new QueryEnvironment(null, null, null, null)), null, null, null, null, null, null, null);
+			_builderContext.Context.SqlPart = new SqlPart(_builderContext.Context);
 			_builderContext.Preparators = _parametersHolder.Object;
+			QueryRoots = _builderContext.Context.SqlPart.QueryRoots;
 		}
 		[Test]
 		[ExpectedException(typeof(ObjectSqlException))]
@@ -70,7 +74,9 @@ namespace ObjectSql.Tests.ExpressionsAnalizersTests
 		{
 			var c = new Category();
 			Expression<Func<Category>> exp = () => c;
+			AddQueryRoot(()=>c);
 			var builder = CreateBuilder();
+
 			var result = builder.BuildSql(_builderContext, exp.Parameters.ToArray(), exp.Body, true);
 		}
 		[Test]
@@ -78,6 +84,8 @@ namespace ObjectSql.Tests.ExpressionsAnalizersTests
 		{
 			var c = new Category();
 			Expression<Func<Category>> exp = () => new Category { CategoryID = 2, CategoryName = "cn"};
+			QueryRoots.AddRoot(2);
+			QueryRoots.AddRoot("cn");
 			var builder = CreateBuilder();
 			var result = builder.BuildSql(_builderContext, exp.Parameters.ToArray(), exp.Body, true).Prepare();
 

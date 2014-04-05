@@ -40,25 +40,19 @@ namespace ObjectSql.Core.QueryBuilder.ExpressionsAnalizers
 				var funcParam = funcSchema.FuncParameters.First(p => p.Index == i).StorageParameter;
 				var initializer = CreateParameterInitializer(funcParam.Name, valueAccessor, funcParam.DbType,funcParam.Direction);
 
-				var descriptor = IsNullConstant(valueAccessor)
-									? new DatabaseCommandConstantPrePostProcessor(funcParam.Name, funcParam.DbType, valueAccessor, initializer)
-									: (SingleParameterPrePostProcessor)new DatabaseCommandParameterPrePostProcessor(funcParam.Name, funcParam.DbType, node.Arguments[i], initializer);
+				var descriptor = new CommandParameterPreProcessor(funcParam.Name, funcParam.DbType, node.Arguments[i], initializer);
 
 				CommandPreparatorsHolder.AddPreProcessor(descriptor);
-
+				descriptor.RootIndex = valueAccessor.IndexOfRoot(_context.Context.SqlPart.QueryRoots);
 				if (descriptor.RootDemanding)
 				{
-					descriptor.AsDatabaseParameter().ParameterWasEncountered(CommandPreparatorsHolder.ParametersEncountered);
-
-					if (funcParam.IsOut && !IsNullConstant(valueAccessor))
+					if (funcParam.IsOut)
 					{
 						var parameterReader = CreateParameterReader(funcParam.Name, valueAccessor);
 						var postProcessor = new StoredProcedureOutParameterProcessor(parameterReader);
 						CommandPreparatorsHolder.AddPostProcessor(postProcessor);
-						postProcessor.AsStoredProcedureOutParameterProcessor().ParameterWasEncountered(CommandPreparatorsHolder.ParametersEncountered);
+						postProcessor.RootIndex = descriptor.RootIndex;
 					}
-
-					CommandPreparatorsHolder.ParametersEncountered++;
 				}
 			}
 

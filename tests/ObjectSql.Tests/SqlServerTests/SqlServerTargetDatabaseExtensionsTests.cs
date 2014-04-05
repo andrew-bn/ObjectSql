@@ -7,6 +7,7 @@ using ObjectSql.Core.Bo.CommandPreparatorDescriptor;
 using ObjectSql.Core.Bo.EntitySchema;
 using ObjectSql.Core.QueryBuilder.ExpressionsAnalizers;
 using ObjectSql.Core.QueryBuilder.LambdaBuilder;
+using ObjectSql.Core.QueryParts;
 using ObjectSql.Core.SchemaManager;
 using ObjectSql.SqlServer;
 using ObjectSql.QueryInterfaces;
@@ -18,7 +19,7 @@ using System.Linq.Expressions;
 namespace ObjectSql.Tests.SqlServerTests
 {
 	[TestFixture]
-	public class SqlServerTargetDatabaseExtensionsTests
+	public class SqlServerTargetDatabaseExtensionsTests: TestBase
 	{
 		private Mock<IEntitySchemaManager> _schemaManager;
 		private Mock<IDelegatesBuilder> _delegatesBuilder;
@@ -63,8 +64,11 @@ namespace ObjectSql.Tests.SqlServerTests
 			_parametersHolder.SetupSet(h => h.ParametersEncountered).Callback(i => _parametersEncountered = i);
 			_parametersHolder.Setup(h => h.ParametersEncountered).Returns(() => _parametersEncountered);
 
-			_builderContext = new BuilderContext(null, null, null, null, null, null, null, null);
+			_builderContext = new BuilderContext(new QueryContext(null, null, ResourcesTreatmentType.DisposeCommand,
+				new QueryEnvironment(null, null, null, null)), null, null, null, null, null, null, null);
+			_builderContext.Context.SqlPart = new SqlPart(_builderContext.Context);
 			_builderContext.Preparators = _parametersHolder.Object;
+			QueryRoots = _builderContext.Context.SqlPart.QueryRoots;
 		}
 		[Test]
 		public void BuildSql_CountBig()
@@ -86,6 +90,8 @@ namespace ObjectSql.Tests.SqlServerTests
 		public void BuildSql_Replace()
 		{
 			Expression<Func<Category, object>> exp = c => MsSql.Replace(c.Description,"p","c");
+			QueryRoots.AddRoot("p");
+			QueryRoots.AddRoot("c");
 			var result = CreateBuilder().BuildSql(_builderContext, exp.Parameters.ToArray(), exp.Body, true).Prepare();
 
 			Assert.AreEqual("REPLACE([c].[Description],@p0,@p1)", result);

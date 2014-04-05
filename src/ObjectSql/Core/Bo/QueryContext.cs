@@ -115,18 +115,15 @@ namespace ObjectSql.Core.Bo
 
 			dbCommand.CommandText = preparationData.CommandText;
 
+
 			for (int i = 0; i < preparationData.PreProcessors.Length; i++)
 			{
-				if (!preparationData.PreProcessors[i].RootDemanding)
-					preparationData.PreProcessors[i].CommandPreparationAction(dbCommand, null);
+				var prc = preparationData.PreProcessors[i];
+
+				if (!prc.RootDemanding)
+					prc.CommandPreparationAction(dbCommand, null);
 				else
-				{
-					foreach (var root in this.SqlPart.QueryRoots.Roots)
-					{
-						if ((root.Value & preparationData.PreProcessors[i].RootMap) != 0)
-							preparationData.PreProcessors[i].CommandPreparationAction(dbCommand, root.Key);
-					}
-				}
+					prc.CommandPreparationAction(dbCommand, SqlPart.QueryRoots.Roots[prc.RootIndex]);
 			}
 		}
 	}

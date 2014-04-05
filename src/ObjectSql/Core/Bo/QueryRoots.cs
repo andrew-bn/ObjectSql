@@ -6,57 +6,28 @@ namespace ObjectSql.Core.Bo
 	public class QueryRoots
 	{
 		public static QueryRoots Empty = new QueryRoots();
+		private List<object> _roots = new List<object>();
+		public IList<object> Roots { get { return _roots; } }
 
-		const int MAX_PARAMETERS_COUNT = sizeof(int)*8;
-		private int _rootsCount;
-		private Dictionary<object, int> _roots;
-		public ICollection<KeyValuePair<object, int>> Roots { get { return _roots ?? new Dictionary<object, int>(); } }
-		public bool RootsGenerated
-		{
-			get { return _roots != null; }
-		
-		}
 		public bool ContainsRoot(object value)
 		{
-			return value!=null && _roots != null && _roots.ContainsKey(value);
+			return value != null && _roots.Contains(value);
+		}
+		public int IndexOf(object value)
+		{
+			return _roots.IndexOf(value);
 		}
 		public void AddRoot(object value)
 		{
-			if (_roots == null)
-			{
-				_roots = new Dictionary<object, int>();
-				_rootsCount = -1;
-			}
-			++_rootsCount;
-
-			if (_rootsCount >= MAX_PARAMETERS_COUNT)
-				throw new ObjectSqlException("Maximum parameters count acceded");
-
-			int currentIndex;
-			if (_roots.TryGetValue(value, out currentIndex))
-				_roots[value] = currentIndex | (1 << _rootsCount);
-			else
-				_roots.Add(value, 1 << _rootsCount);
+			if (!_roots.Contains(value))
+				_roots.Add(value);
 		 }
 		public int Hash;
 
 		internal void ClearRoots()
 		{
-			if (_roots!=null)
-				_roots.Clear();
+			_roots.Clear();
 		}
 
-		public void AddRoot(object value,int rootMap)
-		{
-			if (value == null)
-				return;
-
-			if (_roots == null)
-			{
-				_roots = new Dictionary<object, int>();
-				_rootsCount = -1;
-			}
-			_roots.Add(value,rootMap);
-		}
 	}
 }

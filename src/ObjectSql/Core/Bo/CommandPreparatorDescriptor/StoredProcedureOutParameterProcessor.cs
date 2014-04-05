@@ -13,18 +13,5 @@ namespace ObjectSql.Core.Bo.CommandPreparatorDescriptor
 			: base(preparationAction)
 		{
 		}
-		public void ParameterWasEncountered(int place)
-		{
-			RootMap = RootMap ^ (1 << place);
-		}
-		public override CommandPreparatorType PreparatorType
-		{
-			get { return CommandPreparatorType.StoredProcedureOutParameterReader; }
-		}
-
-		public override bool RootDemanding
-		{
-			get { return true; }
-		}
 	}
 }

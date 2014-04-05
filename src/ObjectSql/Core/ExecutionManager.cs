@@ -75,16 +75,11 @@ namespace ObjectSql.Core
 			var postProcessors = context.PreparationData.PostProcessors;
 			for (int i = 0; i < postProcessors.Length; i++)
 			{
-				if (!postProcessors[i].RootDemanding)
-					postProcessors[i].CommandPreparationAction(context.Command, null);
+				var prc = postProcessors[i];
+				if (!prc.RootDemanding)
+					prc.CommandPreparationAction(context.Command, null);
 				else
-				{
-					foreach (var root in context.SqlPart.QueryRoots.Roots)
-					{
-						if ((root.Value & postProcessors[i].RootMap) != 0)
-							postProcessors[i].CommandPreparationAction(context.Command, root.Key);
-					}
-				}
+					prc.CommandPreparationAction(context.Command, context.SqlPart.QueryRoots.Roots[prc.RootIndex]);
 			}
 		}
 

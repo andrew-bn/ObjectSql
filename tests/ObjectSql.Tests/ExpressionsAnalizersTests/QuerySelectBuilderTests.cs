@@ -5,6 +5,7 @@ using ObjectSql.Core.Bo.CommandPreparatorDescriptor;
 using ObjectSql.Core.Bo.EntitySchema;
 using ObjectSql.Core.QueryBuilder.ExpressionsAnalizers;
 using ObjectSql.Core.QueryBuilder.LambdaBuilder;
+using ObjectSql.Core.QueryParts;
 using ObjectSql.Core.SchemaManager;
 using ObjectSql.Exceptions;
 using ObjectSql.SqlServer;
@@ -21,7 +22,7 @@ using System.Threading.Tasks;
 namespace ObjectSql.Tests.ExpressionsAnalizersTests
 {
 	[TestFixture]
-	public class QuerySelectBuilderTests
+	public class QuerySelectBuilderTests:TestBase
 	{
 		private Mock<IEntitySchemaManager> _schemaManager;
 		private Mock<IDelegatesBuilder> _delegatesBuilder;
@@ -61,8 +62,11 @@ namespace ObjectSql.Tests.ExpressionsAnalizersTests
 			_parametersHolder.SetupSet(h => h.ParametersEncountered).Callback(i => _parametersEncountered = i);
 			_parametersHolder.Setup(h => h.ParametersEncountered).Returns(() => _parametersEncountered);
 
-			_builderContext = new BuilderContext(null, null, null, null, null, null, null, null);
+			_builderContext = new BuilderContext(new QueryContext(null, null, ResourcesTreatmentType.DisposeCommand,
+				new QueryEnvironment(null, null, null, null)), null, null, null, null, null, null, null);
+			_builderContext.Context.SqlPart = new SqlPart(_builderContext.Context);
 			_builderContext.Preparators = _parametersHolder.Object;
+			QueryRoots = _builderContext.Context.SqlPart.QueryRoots;
 		}
 		public class Dto
 		{
@@ -76,6 +80,7 @@ namespace ObjectSql.Tests.ExpressionsAnalizersTests
 		{
 			Expression<Func<Dto>> exp = () => new Dto(3, "name");
 			var builder = CreateBuilder();
+			QueryRoots.AddRoot("name");
 			var result = builder.BuildSql(_builderContext, exp.Parameters.ToArray(), exp.Body, true).Prepare();
 
 			Assert.AreEqual("@p0AS[identity],@p1AS[dtoName]", result);
@@ -85,6 +90,7 @@ namespace ObjectSql.Tests.ExpressionsAnalizersTests
 		{
 			Expression<Func<Dto>> exp = () => new Dto { Id = 2, Name = "name" };
 			var builder = CreateBuilder();
+			QueryRoots.AddRoot("name");
 			var result = builder.BuildSql(_builderContext, exp.Parameters.ToArray(), exp.Body, true).Prepare();
 
 			Assert.AreEqual("@p0AS[Id],@p1AS[Name]", result);
@@ -102,6 +108,9 @@ namespace ObjectSql.Tests.ExpressionsAnalizersTests
 		{
 			Expression<Func<object>> exp = () => new { Id = 2, Name = "name" };
 			var builder = CreateBuilder();
+
+			QueryRoots.AddRoot(2);
+			QueryRoots.AddRoot("name");
 			var result = builder.BuildSql(_builderContext, exp.Parameters.ToArray(), exp.Body, true).Prepare();
 
 			Assert.AreEqual("@p0AS[Id],@p1AS[Name]", result);
@@ -122,6 +131,9 @@ namespace ObjectSql.Tests.ExpressionsAnalizersTests
 		{
 			Expression<Func<object>> exp = () => new { Id = 2, Name = "name", D = new { Descr = "descr" } };
 			var builder = CreateBuilder();
+			QueryRoots.AddRoot(2);
+			QueryRoots.AddRoot("name");
+			QueryRoots.AddRoot("descr");
 			var result = builder.BuildSql(_builderContext, exp.Parameters.ToArray(), exp.Body, true).Prepare();
 		}
 

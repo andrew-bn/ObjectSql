@@ -3,8 +3,10 @@ using Moq;
 using ObjectSql.Core;
 using ObjectSql.Core.Bo.CommandPreparatorDescriptor;
 using ObjectSql.Core.Bo.EntitySchema;
+using ObjectSql.Core.Misc;
 using ObjectSql.Core.QueryBuilder.ExpressionsAnalizers;
 using ObjectSql.Core.QueryBuilder.LambdaBuilder;
+using ObjectSql.Core.QueryParts;
 using ObjectSql.Core.SchemaManager;
 using ObjectSql.Exceptions;
 using ObjectSql.QueryInterfaces;
@@ -36,6 +38,7 @@ namespace ObjectSql.Tests.ExpressionsAnalizersTests
 		private string _categoryNameField;
 		private int _parametersEncountered;
 		private BuilderContext _builderContext;
+		
 		[SetUp]
 		public void Setup()
 		{
@@ -64,20 +67,24 @@ namespace ObjectSql.Tests.ExpressionsAnalizersTests
 			_parametersHolder.SetupSet(h => h.ParametersEncountered).Callback(i => _parametersEncountered = i);
 			_parametersHolder.Setup(h => h.ParametersEncountered).Returns(() => _parametersEncountered);
 
-			_builderContext = new BuilderContext(null, null, null, null, null, null, null, null);
+			_builderContext = new BuilderContext(new QueryContext(null,null,ResourcesTreatmentType.DisposeCommand,
+				new QueryEnvironment(null,null,null,null)), null, null, null, null, null, null, null);
+			_builderContext.Context.SqlPart = new SqlPart(_builderContext.Context);
 			_builderContext.Preparators = _parametersHolder.Object;
+			QueryRoots = _builderContext.Context.SqlPart.QueryRoots;
 		}
 		[Test]
 		public void BuildSql_RenderConstant()
 		{
 			Expression<Func<object>> exp = () => 5;
 			var builder = CreateBuilder();
+			QueryRoots.AddRoot(5);
 			var result = builder.BuildSql(_builderContext, exp.Parameters.ToArray(), exp.Body, true).Prepare();
 
 			Assert.AreEqual("@p0", result);
 			_delegatesBuilder.Verify(b => b.CreateDatabaseParameterFactoryAction(IsExp(() => "p0"), IsExp(() => 5), null, ParameterDirection.Input));
 			_parametersHolder.Verify(h => h.AddPreProcessor(It.IsAny<CommandPrePostProcessor>()), Times.Once());
-			_parametersHolder.Verify(h => h.AddPreProcessor(It.Is<CommandPrePostProcessor>(d => ((SingleParameterPrePostProcessor)d).Name == "p0")));
+			_parametersHolder.Verify(h => h.AddPreProcessor(It.Is<CommandPrePostProcessor>(d => ((CommandParameterPreProcessor)d).Name == "p0")));
 		}
 		[Test]
 		public void BuildSql_RenderClassProperty()
@@ -85,25 +92,29 @@ namespace ObjectSql.Tests.ExpressionsAnalizersTests
 			var value = 5;
 			Expression<Func<object>> exp = () => value;
 			var builder = CreateBuilder();
+			AddQueryRoot(() => value);
+
 			var result = builder.BuildSql(_builderContext, exp.Parameters.ToArray(), exp.Body, true).Prepare();
 
 			Assert.AreEqual("@p0", result);
 			_delegatesBuilder.Verify(b=>b.CreateDatabaseParameterFactoryAction(IsExp(()=>"p0"),IsExp(()=>value),null, ParameterDirection.Input));
 			_parametersHolder.Verify(h => h.AddPreProcessor(It.IsAny<CommandPrePostProcessor>()), Times.Once());
-			_parametersHolder.Verify(h => h.AddPreProcessor(It.Is<CommandPrePostProcessor>(d => ((SingleParameterPrePostProcessor)d).Name == "p0")));
+			_parametersHolder.Verify(h => h.AddPreProcessor(It.Is<CommandPrePostProcessor>(d => ((CommandParameterPreProcessor)d).Name == "p0")));
 		}
+		
 		[Test]
 		public void BuildSql_RenderNestedClassProperty()
 		{
 			var value = new { Val = false };
 			Expression<Func<object>> exp = () => value.Val;
+			AddQueryRoot(()=>value);
 			var builder = CreateBuilder();
 			var result = builder.BuildSql(_builderContext, exp.Parameters.ToArray(), exp.Body, true).Prepare();
 
 			Assert.AreEqual("@p0", result);
 			_delegatesBuilder.Verify(b => b.CreateDatabaseParameterFactoryAction(IsExp(() => "p0"), IsExp(() => value.Val), null, ParameterDirection.Input));
 			_parametersHolder.Verify(h => h.AddPreProcessor(It.IsAny<CommandPrePostProcessor>()), Times.Once());
-			_parametersHolder.Verify(h => h.AddPreProcessor(It.Is<CommandPrePostProcessor>(d => ((SingleParameterPrePostProcessor)d).Name == "p0")));
+			_parametersHolder.Verify(h => h.AddPreProcessor(It.Is<CommandPrePostProcessor>(d => ((CommandParameterPreProcessor)d).Name == "p0")));
 		}
 
 		[Test]
@@ -129,22 +140,24 @@ namespace ObjectSql.Tests.ExpressionsAnalizersTests
 			_delegatesBuilder.Verify(b => b.CreateDatabaseParameterFactoryAction(IsExp(() => "p0"), IsExp(() => "val"), null, ParameterDirection.Input));
 			_delegatesBuilder.Verify(b => b.CreateDatabaseParameterFactoryAction(IsExp(() => "p1"), IsExp(() => 2), null, ParameterDirection.Input));
 			_parametersHolder.Verify(h => h.AddPreProcessor(It.IsAny<CommandPrePostProcessor>()), Times.Exactly(2));
-			_parametersHolder.Verify(h => h.AddPreProcessor(It.Is<CommandPrePostProcessor>(d => ((SingleParameterPrePostProcessor)d).Name == "p0")));
-			_parametersHolder.Verify(h => h.AddPreProcessor(It.Is<CommandPrePostProcessor>(d => ((SingleParameterPrePostProcessor)d).Name == "p1")));
+			_parametersHolder.Verify(h => h.AddPreProcessor(It.Is<CommandPrePostProcessor>(d => ((CommandParameterPreProcessor)d).Name == "p0")));
+			_parametersHolder.Verify(h => h.AddPreProcessor(It.Is<CommandPrePostProcessor>(d => ((CommandParameterPreProcessor)d).Name == "p1")));
 		}
 		[Test]
 		public void BuildSql_RenderSameParameters()
 		{
 			Expression<Func<Category, object>> exp = (c) => "val" + 2 + "val";
 			var builder = CreateBuilder();
+			QueryRoots.AddRoot("val");
+			QueryRoots.AddRoot(2);
 			var result = builder.BuildSql(_builderContext, exp.Parameters.ToArray(), exp.Body, true).Prepare();
 
 			Assert.AreEqual("((@p0+@p1)+@p0)", result);
 			_delegatesBuilder.Verify(b => b.CreateDatabaseParameterFactoryAction(IsExp(() => "p0"), IsExp(() => "val"), null, ParameterDirection.Input));
 			_delegatesBuilder.Verify(b => b.CreateDatabaseParameterFactoryAction(IsExp(() => "p1"), IsExp(() => 2), null, ParameterDirection.Input));
 			_parametersHolder.Verify(h => h.AddPreProcessor(It.IsAny<CommandPrePostProcessor>()), Times.Exactly(2));
-			_parametersHolder.Verify(h => h.AddPreProcessor(It.Is<CommandPrePostProcessor>(d => ((SingleParameterPrePostProcessor)d).Name == "p0")));
-			_parametersHolder.Verify(h => h.AddPreProcessor(It.Is<CommandPrePostProcessor>(d => ((SingleParameterPrePostProcessor)d).Name == "p1")));
+			_parametersHolder.Verify(h => h.AddPreProcessor(It.Is<CommandPrePostProcessor>(d => ((CommandParameterPreProcessor)d).Name == "p0")));
+			_parametersHolder.Verify(h => h.AddPreProcessor(It.Is<CommandPrePostProcessor>(d => ((CommandParameterPreProcessor)d).Name == "p1")));
 		}
 		[Test]
 		public void BuildSql_RenderSameParameterTypes()
@@ -158,9 +171,9 @@ namespace ObjectSql.Tests.ExpressionsAnalizersTests
 			_delegatesBuilder.Verify(b => b.CreateDatabaseParameterFactoryAction(IsExp(() => "p1"), IsExp(() => 2), null, ParameterDirection.Input));
 			_delegatesBuilder.Verify(b => b.CreateDatabaseParameterFactoryAction(IsExp(() => "p2"), IsExp(() => "val2"), null, ParameterDirection.Input));
 			_parametersHolder.Verify(h => h.AddPreProcessor(It.IsAny<CommandPrePostProcessor>()), Times.Exactly(3));
-			_parametersHolder.Verify(h => h.AddPreProcessor(It.Is<CommandPrePostProcessor>(d => ((SingleParameterPrePostProcessor)d).Name == "p0")));
-			_parametersHolder.Verify(h => h.AddPreProcessor(It.Is<CommandPrePostProcessor>(d => ((SingleParameterPrePostProcessor)d).Name == "p1")));
-			_parametersHolder.Verify(h => h.AddPreProcessor(It.Is<CommandPrePostProcessor>(d => ((SingleParameterPrePostProcessor)d).Name == "p2")));
+			_parametersHolder.Verify(h => h.AddPreProcessor(It.Is<CommandPrePostProcessor>(d => ((CommandParameterPreProcessor)d).Name == "p0")));
+			_parametersHolder.Verify(h => h.AddPreProcessor(It.Is<CommandPrePostProcessor>(d => ((CommandParameterPreProcessor)d).Name == "p1")));
+			_parametersHolder.Verify(h => h.AddPreProcessor(It.Is<CommandPrePostProcessor>(d => ((CommandParameterPreProcessor)d).Name == "p2")));
 		}
 		[Test]
 		public void BuildSql_RenderSameParameters_SameRoot_DifferentProperties()
@@ -169,6 +182,8 @@ namespace ObjectSql.Tests.ExpressionsAnalizersTests
 			var val2 = "val";
 			Expression<Func<Category, object>> exp = (c) => val1 + 2 + val2;
 			var builder = CreateBuilder();
+			AddQueryRoot(()=>val1);
+			QueryRoots.AddRoot(2);
 			var result = builder.BuildSql(_builderContext, exp.Parameters.ToArray(), exp.Body, true).Prepare();
 
 			Assert.AreEqual("((@p0+@p1)+@p2)", result);
@@ -176,9 +191,9 @@ namespace ObjectSql.Tests.ExpressionsAnalizersTests
 			_delegatesBuilder.Verify(b => b.CreateDatabaseParameterFactoryAction(IsExp(() => "p1"), IsExp(() => 2), null, ParameterDirection.Input));
 			_delegatesBuilder.Verify(b => b.CreateDatabaseParameterFactoryAction(IsExp(() => "p2"), IsExp(() => val2), null, ParameterDirection.Input));
 			_parametersHolder.Verify(h => h.AddPreProcessor(It.IsAny<CommandPrePostProcessor>()), Times.Exactly(3));
-			_parametersHolder.Verify(h => h.AddPreProcessor(It.Is<CommandPrePostProcessor>(d => ((SingleParameterPrePostProcessor)d).Name == "p0")));
-			_parametersHolder.Verify(h => h.AddPreProcessor(It.Is<CommandPrePostProcessor>(d => ((SingleParameterPrePostProcessor)d).Name == "p1")));
-			_parametersHolder.Verify(h => h.AddPreProcessor(It.Is<CommandPrePostProcessor>(d => ((SingleParameterPrePostProcessor)d).Name == "p2")));
+			_parametersHolder.Verify(h => h.AddPreProcessor(It.Is<CommandPrePostProcessor>(d => ((CommandParameterPreProcessor)d).Name == "p0")));
+			_parametersHolder.Verify(h => h.AddPreProcessor(It.Is<CommandPrePostProcessor>(d => ((CommandParameterPreProcessor)d).Name == "p1")));
+			_parametersHolder.Verify(h => h.AddPreProcessor(It.Is<CommandPrePostProcessor>(d => ((CommandParameterPreProcessor)d).Name == "p2")));
 		}
 		public class Root
 		{
@@ -198,9 +213,9 @@ namespace ObjectSql.Tests.ExpressionsAnalizersTests
 			_delegatesBuilder.Verify(b => b.CreateDatabaseParameterFactoryAction(IsExp(() => "p1"), IsExp(() => 2), null, ParameterDirection.Input));
 			_delegatesBuilder.Verify(b => b.CreateDatabaseParameterFactoryAction(IsExp(() => "p2"), IsExp(() => v2.Val), null, ParameterDirection.Input));
 			_parametersHolder.Verify(h => h.AddPreProcessor(It.IsAny<CommandPrePostProcessor>()), Times.Exactly(3));
-			_parametersHolder.Verify(h => h.AddPreProcessor(It.Is<CommandPrePostProcessor>(d => ((SingleParameterPrePostProcessor)d).Name == "p0")));
-			_parametersHolder.Verify(h => h.AddPreProcessor(It.Is<CommandPrePostProcessor>(d => ((SingleParameterPrePostProcessor)d).Name == "p1")));
-			_parametersHolder.Verify(h => h.AddPreProcessor(It.Is<CommandPrePostProcessor>(d => ((SingleParameterPrePostProcessor)d).Name == "p2")));
+			_parametersHolder.Verify(h => h.AddPreProcessor(It.Is<CommandPrePostProcessor>(d => ((CommandParameterPreProcessor)d).Name == "p0")));
+			_parametersHolder.Verify(h => h.AddPreProcessor(It.Is<CommandPrePostProcessor>(d => ((CommandParameterPreProcessor)d).Name == "p1")));
+			_parametersHolder.Verify(h => h.AddPreProcessor(It.Is<CommandPrePostProcessor>(d => ((CommandParameterPreProcessor)d).Name == "p2")));
 		}
 		[Test]
 		public void BuildSql_RenderSameRootParameters()
@@ -214,104 +229,112 @@ namespace ObjectSql.Tests.ExpressionsAnalizersTests
 			_delegatesBuilder.Verify(b => b.CreateDatabaseParameterFactoryAction(IsExp(() => "p0"), IsExp(() => v1.Val), null, ParameterDirection.Input));
 			_delegatesBuilder.Verify(b => b.CreateDatabaseParameterFactoryAction(IsExp(() => "p1"), IsExp(() => 2), null, ParameterDirection.Input));
 			_parametersHolder.Verify(h => h.AddPreProcessor(It.IsAny<CommandPrePostProcessor>()), Times.Exactly(2));
-			_parametersHolder.Verify(h => h.AddPreProcessor(It.Is<CommandPrePostProcessor>(d => ((SingleParameterPrePostProcessor)d).Name == "p0")));
-			_parametersHolder.Verify(h => h.AddPreProcessor(It.Is<CommandPrePostProcessor>(d => ((SingleParameterPrePostProcessor)d).Name == "p1")));
+			_parametersHolder.Verify(h => h.AddPreProcessor(It.Is<CommandPrePostProcessor>(d => ((CommandParameterPreProcessor)d).Name == "p0")));
+			_parametersHolder.Verify(h => h.AddPreProcessor(It.Is<CommandPrePostProcessor>(d => ((CommandParameterPreProcessor)d).Name == "p1")));
 		}
 		[Test]
 		public void BuildSql_RenderBinarySub()
 		{
 			Expression<Func<Category, object>> exp = (c) => c.CategoryID-1;
 			var builder = CreateBuilder();
+			QueryRoots.AddRoot(1);
 			var result = builder.BuildSql(_builderContext, exp.Parameters.ToArray(), exp.Body, true).Prepare();
 
 			Assert.AreEqual("([c].[CategoryID]-@p0)", result);
 			_delegatesBuilder.Verify(b => b.CreateDatabaseParameterFactoryAction(IsExp(() => "p0"), IsExp(() => 1), null, ParameterDirection.Input));
 			_parametersHolder.Verify(h => h.AddPreProcessor(It.IsAny<CommandPrePostProcessor>()), Times.Exactly(1));
-			_parametersHolder.Verify(h => h.AddPreProcessor(It.Is<CommandPrePostProcessor>(d => ((SingleParameterPrePostProcessor)d).Name == "p0")));
+			_parametersHolder.Verify(h => h.AddPreProcessor(It.Is<CommandPrePostProcessor>(d => ((CommandParameterPreProcessor)d).Name == "p0")));
 		}
 		[Test]
 		public void BuildSql_RenderDivide()
 		{
 			Expression<Func<Category, object>> exp = (c) => c.CategoryID / 1;
 			var builder = CreateBuilder();
+			QueryRoots.AddRoot(1);
 			var result = builder.BuildSql(_builderContext, exp.Parameters.ToArray(), exp.Body, true).Prepare();
 
 			Assert.AreEqual("([c].[CategoryID]/@p0)", result);
 			_delegatesBuilder.Verify(b => b.CreateDatabaseParameterFactoryAction(IsExp(() => "p0"), IsExp(() => 1), null, ParameterDirection.Input));
 			_parametersHolder.Verify(h => h.AddPreProcessor(It.IsAny<CommandPrePostProcessor>()), Times.Exactly(1));
-			_parametersHolder.Verify(h => h.AddPreProcessor(It.Is<CommandPrePostProcessor>(d => ((SingleParameterPrePostProcessor)d).Name == "p0")));
+			_parametersHolder.Verify(h => h.AddPreProcessor(It.Is<CommandPrePostProcessor>(d => ((CommandParameterPreProcessor)d).Name == "p0")));
 		}
 		[Test]
 		public void BuildSql_RenderMult()
 		{
 			Expression<Func<Category, object>> exp = (c) => c.CategoryID * 1;
 			var builder = CreateBuilder();
+			QueryRoots.AddRoot(1);
 			var result = builder.BuildSql(_builderContext, exp.Parameters.ToArray(), exp.Body, true).Prepare();
 
 			Assert.AreEqual("([c].[CategoryID]*@p0)", result);
 			_delegatesBuilder.Verify(b => b.CreateDatabaseParameterFactoryAction(IsExp(() => "p0"), IsExp(() => 1), null, ParameterDirection.Input));
 			_parametersHolder.Verify(h => h.AddPreProcessor(It.IsAny<CommandPrePostProcessor>()), Times.Exactly(1));
-			_parametersHolder.Verify(h => h.AddPreProcessor(It.Is<CommandPrePostProcessor>(d => ((SingleParameterPrePostProcessor)d).Name == "p0")));
+			_parametersHolder.Verify(h => h.AddPreProcessor(It.Is<CommandPrePostProcessor>(d => ((CommandParameterPreProcessor)d).Name == "p0")));
 		}
 		[Test]
 		public void BuildSql_RenderGreater()
 		{
 			Expression<Func<Category, object>> exp = (c) => c.CategoryID > 1;
 			var builder = CreateBuilder();
+			QueryRoots.AddRoot(1);
 			var result = builder.BuildSql(_builderContext, exp.Parameters.ToArray(), exp.Body, true).Prepare();
 
 			Assert.AreEqual("([c].[CategoryID]>@p0)", result);
 			_delegatesBuilder.Verify(b => b.CreateDatabaseParameterFactoryAction(IsExp(() => "p0"), IsExp(() => 1), null, ParameterDirection.Input));
 			_parametersHolder.Verify(h => h.AddPreProcessor(It.IsAny<CommandPrePostProcessor>()), Times.Exactly(1));
-			_parametersHolder.Verify(h => h.AddPreProcessor(It.Is<CommandPrePostProcessor>(d => ((SingleParameterPrePostProcessor)d).Name == "p0")));
+			_parametersHolder.Verify(h => h.AddPreProcessor(It.Is<CommandPrePostProcessor>(d => ((CommandParameterPreProcessor)d).Name == "p0")));
 		}
 		[Test]
 		public void BuildSql_RenderGreaterOrEqual()
 		{
 			Expression<Func<Category, object>> exp = (c) => c.CategoryID >= 1;
 			var builder = CreateBuilder();
+			QueryRoots.AddRoot(1);
 			var result = builder.BuildSql(_builderContext, exp.Parameters.ToArray(), exp.Body, true).Prepare();
 
 			Assert.AreEqual("([c].[CategoryID]>=@p0)", result);
 			_delegatesBuilder.Verify(b => b.CreateDatabaseParameterFactoryAction(IsExp(() => "p0"), IsExp(() => 1), null, ParameterDirection.Input));
 			_parametersHolder.Verify(h => h.AddPreProcessor(It.IsAny<CommandPrePostProcessor>()), Times.Exactly(1));
-			_parametersHolder.Verify(h => h.AddPreProcessor(It.Is<CommandPrePostProcessor>(d => ((SingleParameterPrePostProcessor)d).Name == "p0")));
+			_parametersHolder.Verify(h => h.AddPreProcessor(It.Is<CommandPrePostProcessor>(d => ((CommandParameterPreProcessor)d).Name == "p0")));
 		}
 		[Test]
 		public void BuildSql_RenderLess()
 		{
 			Expression<Func<Category, object>> exp = (c) => c.CategoryID < 1;
 			var builder = CreateBuilder();
+			QueryRoots.AddRoot(1);
 			var result = builder.BuildSql(_builderContext,exp.Parameters.ToArray(),  exp.Body, true).Prepare();
 
 			Assert.AreEqual("([c].[CategoryID]<@p0)", result);
 			_delegatesBuilder.Verify(b => b.CreateDatabaseParameterFactoryAction(IsExp(() => "p0"), IsExp(() => 1), null, ParameterDirection.Input));
 			_parametersHolder.Verify(h => h.AddPreProcessor(It.IsAny<CommandPrePostProcessor>()), Times.Exactly(1));
-			_parametersHolder.Verify(h => h.AddPreProcessor(It.Is<CommandPrePostProcessor>(d => ((SingleParameterPrePostProcessor)d).Name == "p0")));
+			_parametersHolder.Verify(h => h.AddPreProcessor(It.Is<CommandPrePostProcessor>(d => ((CommandParameterPreProcessor)d).Name == "p0")));
 		}
 		[Test]
 		public void BuildSql_RenderLessOrEqual()
 		{
 			Expression<Func<Category, object>> exp = (c) => c.CategoryID <= 1;
 			var builder = CreateBuilder();
+			QueryRoots.AddRoot(1);
 			var result = builder.BuildSql(_builderContext, exp.Parameters.ToArray(), exp.Body, true).Prepare();
 
 			Assert.AreEqual("([c].[CategoryID]<=@p0)", result);
 			_delegatesBuilder.Verify(b => b.CreateDatabaseParameterFactoryAction(IsExp(() => "p0"), IsExp(() => 1), null, ParameterDirection.Input));
 			_parametersHolder.Verify(h => h.AddPreProcessor(It.IsAny<CommandPrePostProcessor>()), Times.Exactly(1));
-			_parametersHolder.Verify(h => h.AddPreProcessor(It.Is<CommandPrePostProcessor>(d => ((SingleParameterPrePostProcessor)d).Name == "p0")));
+			_parametersHolder.Verify(h => h.AddPreProcessor(It.Is<CommandPrePostProcessor>(d => ((CommandParameterPreProcessor)d).Name == "p0")));
 		}
 		[Test]
 		public void BuildSql_RenderNotEqual()
 		{
 			Expression<Func<Category, object>> exp = (c) => c.CategoryID != 1;
 			var builder = CreateBuilder();
+			QueryRoots.AddRoot(1);
 			var result = builder.BuildSql(_builderContext, exp.Parameters.ToArray(), exp.Body, true).Prepare();
 
 			Assert.AreEqual("([c].[CategoryID]<>@p0)", result);
 			_delegatesBuilder.Verify(b => b.CreateDatabaseParameterFactoryAction(IsExp(() => "p0"), IsExp(() => 1), null, ParameterDirection.Input));
 			_parametersHolder.Verify(h => h.AddPreProcessor(It.IsAny<CommandPrePostProcessor>()), Times.Exactly(1));
-			_parametersHolder.Verify(h => h.AddPreProcessor(It.Is<CommandPrePostProcessor>(d => ((SingleParameterPrePostProcessor)d).Name == "p0")));
+			_parametersHolder.Verify(h => h.AddPreProcessor(It.Is<CommandPrePostProcessor>(d => ((CommandParameterPreProcessor)d).Name == "p0")));
 		}
 		public enum Foo
 		{
@@ -328,7 +351,7 @@ namespace ObjectSql.Tests.ExpressionsAnalizersTests
 			Assert.AreEqual("([c].[CategoryID]=@p0)", result);
 			_delegatesBuilder.Verify(b => b.CreateDatabaseParameterFactoryAction(IsExp(() => "p0"), IsExp(() => (int)Foo.Val2), null, ParameterDirection.Input));
 			_parametersHolder.Verify(h => h.AddPreProcessor(It.IsAny<CommandPrePostProcessor>()), Times.Exactly(1));
-			_parametersHolder.Verify(h => h.AddPreProcessor(It.Is<CommandPrePostProcessor>(d => ((SingleParameterPrePostProcessor)d).Name == "p0")));
+			_parametersHolder.Verify(h => h.AddPreProcessor(It.Is<CommandPrePostProcessor>(d => ((CommandParameterPreProcessor)d).Name == "p0")));
 		}
 		[Test]
 		public void BuildSql_RenderEqualToEnumVariable()
@@ -341,7 +364,7 @@ namespace ObjectSql.Tests.ExpressionsAnalizersTests
 			Assert.AreEqual("([c].[CategoryID]=@p0)", result);
 			_delegatesBuilder.Verify(b => b.CreateDatabaseParameterFactoryAction(IsExp(() => "p0"), IsExp(() => (int)enumVar), null, ParameterDirection.Input));
 			_parametersHolder.Verify(h => h.AddPreProcessor(It.IsAny<CommandPrePostProcessor>()), Times.Exactly(1));
-			_parametersHolder.Verify(h => h.AddPreProcessor(It.Is<CommandPrePostProcessor>(d => ((SingleParameterPrePostProcessor)d).Name == "p0")));
+			_parametersHolder.Verify(h => h.AddPreProcessor(It.Is<CommandPrePostProcessor>(d => ((CommandParameterPreProcessor)d).Name == "p0")));
 		}
 		[Test]
 		public void BuildSql_RenderNull()
@@ -378,36 +401,39 @@ namespace ObjectSql.Tests.ExpressionsAnalizersTests
 		{
 			Expression<Func<Category, object>> exp = (c) => c.Description==null && c.CategoryID == 1;
 			var builder = CreateBuilder();
+			QueryRoots.AddRoot(1);
 			var result = builder.BuildSql(_builderContext, exp.Parameters.ToArray(), exp.Body, true).Prepare();
 
 			Assert.AreEqual("(([c].[Description]ISNULL)AND([c].[CategoryID]=@p0))", result);
 			_delegatesBuilder.Verify(b => b.CreateDatabaseParameterFactoryAction(IsExp(() => "p0"), IsExp(() => 1), null, ParameterDirection.Input));
 			_parametersHolder.Verify(h => h.AddPreProcessor(It.IsAny<CommandPrePostProcessor>()), Times.Exactly(1));
-			_parametersHolder.Verify(h => h.AddPreProcessor(It.Is<CommandPrePostProcessor>(d => ((SingleParameterPrePostProcessor)d).Name == "p0")));
+			_parametersHolder.Verify(h => h.AddPreProcessor(It.Is<CommandPrePostProcessor>(d => ((CommandParameterPreProcessor)d).Name == "p0")));
 		}
 		[Test]
 		public void BuildSql_RenderOr()
 		{
 			Expression<Func<Category, object>> exp = (c) => c.Description == null || c.CategoryID == 1;
 			var builder = CreateBuilder();
+			QueryRoots.AddRoot(1);
 			var result = builder.BuildSql(_builderContext, exp.Parameters.ToArray(), exp.Body, true).Prepare();
 
 			Assert.AreEqual("(([c].[Description]ISNULL)OR([c].[CategoryID]=@p0))", result);
 			_delegatesBuilder.Verify(b => b.CreateDatabaseParameterFactoryAction(IsExp(() => "p0"), IsExp(() => 1), null, ParameterDirection.Input));
 			_parametersHolder.Verify(h => h.AddPreProcessor(It.IsAny<CommandPrePostProcessor>()), Times.Exactly(1));
-			_parametersHolder.Verify(h => h.AddPreProcessor(It.Is<CommandPrePostProcessor>(d => ((SingleParameterPrePostProcessor)d).Name == "p0")));
+			_parametersHolder.Verify(h => h.AddPreProcessor(It.Is<CommandPrePostProcessor>(d => ((CommandParameterPreProcessor)d).Name == "p0")));
 		}
 		[Test]
 		public void BuildSql_RenderNot()
 		{
 			Expression<Func<Category, object>> exp = (c) => !(c.CategoryID == 1);
 			var builder = CreateBuilder();
+			QueryRoots.AddRoot(1);
 			var result = builder.BuildSql(_builderContext, exp.Parameters.ToArray(), exp.Body, true).Prepare();
 
 			Assert.AreEqual("(NOT([c].[CategoryID]=@p0))", result);
 			_delegatesBuilder.Verify(b => b.CreateDatabaseParameterFactoryAction(IsExp(() => "p0"), IsExp(() => 1), null, ParameterDirection.Input));
 			_parametersHolder.Verify(h => h.AddPreProcessor(It.IsAny<CommandPrePostProcessor>()), Times.Exactly(1));
-			_parametersHolder.Verify(h => h.AddPreProcessor(It.Is<CommandPrePostProcessor>(d => ((SingleParameterPrePostProcessor)d).Name == "p0")));
+			_parametersHolder.Verify(h => h.AddPreProcessor(It.Is<CommandPrePostProcessor>(d => ((CommandParameterPreProcessor)d).Name == "p0")));
 		}
 		public int GetConstant()
 		{
@@ -433,7 +459,7 @@ namespace ObjectSql.Tests.ExpressionsAnalizersTests
 			Assert.IsTrue(TestExtension.RenderLikeWasCalled);
 			_delegatesBuilder.Verify(b => b.CreateDatabaseParameterFactoryAction(IsExp(() => "p0"), IsExp(() => "%value%"), null, ParameterDirection.Input));
 			_parametersHolder.Verify(h => h.AddPreProcessor(It.IsAny<CommandPrePostProcessor>()), Times.Exactly(1));
-			_parametersHolder.Verify(h => h.AddPreProcessor(It.Is<CommandPrePostProcessor>(d => ((SingleParameterPrePostProcessor)d).Name == "p0")));
+			_parametersHolder.Verify(h => h.AddPreProcessor(It.Is<CommandPrePostProcessor>(d => ((CommandParameterPreProcessor)d).Name == "p0")));
 		}
 		protected Expression IsExp<T>(Expression<Func<T>> b)
 		{
