@@ -18,10 +18,8 @@ namespace ObjectSql.Core.QueryBuilder.ExpressionsAnalizers
 {
 	public class QueryExpressionBuilder : ExpressionVisitor, ISqlQueryBuilder
 	{
-		private bool _valueWasNull;
 		protected BuilderContext BuilderContext { get; private set; }
 		protected IEntitySchemaManager SchemaManager { get; private set; }
-		protected bool UseAliases { get; private set; }
 		public IStorageFieldType DbTypeInContext { get; set; }
 		protected ICommandPreparatorsHolder CommandPreparatorsHolder { get { return BuilderContext.Preparators; } }
 		protected IDelegatesBuilder DelegatesBuilder { get; private set; }
@@ -36,10 +34,8 @@ namespace ObjectSql.Core.QueryBuilder.ExpressionsAnalizers
 			DelegatesBuilder = expressionBuilder;
 			SqlWriter = sqlWriter;
 		}
-		public virtual string BuildSql(BuilderContext context, ParameterExpression[] parameters, Expression expression, bool useAliases)
+		public virtual string BuildSql(BuilderContext context, ParameterExpression[] parameters, Expression expression)
 		{
-			_valueWasNull = false;
-			UseAliases = useAliases;
 			BuilderContext = context;
 			ExpressionParameters = parameters;
 			return BuildSql(expression);
@@ -63,7 +59,6 @@ namespace ObjectSql.Core.QueryBuilder.ExpressionsAnalizers
 			if (accessor.NodeType == ExpressionType.Constant &&
 				((ConstantExpression)accessor).Value == null)
 			{
-				_valueWasNull = true;
 				SqlWriter.WriteNull(Text);
 			}
 			else
@@ -86,7 +81,7 @@ namespace ObjectSql.Core.QueryBuilder.ExpressionsAnalizers
 
 		protected override Expression VisitParameter(ParameterExpression node)
 		{
-			SqlWriter.WriteName(Text, node.Name);
+			SqlWriter.WriteName(BuilderContext, Text, "", node.Name);
 			return node;
 		}
 		protected override Expression VisitNewArray(NewArrayExpression node)
@@ -143,86 +138,27 @@ namespace ObjectSql.Core.QueryBuilder.ExpressionsAnalizers
 		private void WriteStorageFieldAccess(Type entityType, string aliasName, string fieldName)
 		{
 			var entitySchema = SchemaManager.GetSchema(entityType);
-
-			if (UseAliases)
-			{
-				SqlWriter.WriteName(Text, aliasName);
-				SqlWriter.WriteNameResolve(Text);
-			}
-
 			var storageField = entitySchema.GetStorageField(fieldName);
 			DbTypeInContext = storageField.DbType;
-			SqlWriter.WriteName(Text, storageField.Name);
+			SqlWriter.WriteName(BuilderContext, Text, aliasName, storageField.Name);
 		}
 
 		protected override Expression VisitUnary(UnaryExpression node)
 		{
-			if (node.NodeType == ExpressionType.Not)
-			{
-				var buf = Text;
-				var not = SqlWriter.WriteNot(new CommandText(), BuildSql(node.Operand));
-				SqlWriter.WriteBlock(buf, not.ToString());
-				Text = buf;
-				return node;
-			}
-			return base.VisitUnary(node);
+			if (node.ContainsSql())
+				SqlWriter.WriteExpression(this, BuilderContext, Text, node);
+			else
+				AddParameter(node);
+
+			return node;
 		}
 		protected override Expression VisitBinary(BinaryExpression node)
 		{
-			DbTypeInContext = null;
+			if (node.ContainsSql())
+				SqlWriter.WriteExpression(this, BuilderContext, Text, node);
+			else
+				AddParameter(node);
 
-			var sql = Text;
-
-			var left = BuildSql(node.Left);
-			_valueWasNull = false;
-			var right = BuildSql(node.Right);
-			var commandText = new CommandText();
-			switch (node.NodeType)
-			{
-				case ExpressionType.Equal:
-					if (_valueWasNull)
-						SqlWriter.WriteEqualNull(commandText, left);
-					else
-						SqlWriter.WriteEqual(commandText, left, right);
-					break;
-				case ExpressionType.NotEqual:
-					if (_valueWasNull)
-						SqlWriter.WriteNotEqualNull(commandText, left);
-					else
-						SqlWriter.WriteNotEqual(commandText, left, right);
-					break;
-				case ExpressionType.GreaterThan:
-					SqlWriter.WriteGreater(commandText, left, right);
-					break;
-				case ExpressionType.GreaterThanOrEqual:
-					SqlWriter.WriteGreaterOrEqual(commandText, left, right);
-					break;
-				case ExpressionType.LessThan:
-					SqlWriter.WriteLess(commandText, left, right);
-					break;
-				case ExpressionType.LessThanOrEqual:
-					SqlWriter.WriteLessOrEqual(commandText, left, right);
-					break;
-				case ExpressionType.AndAlso:
-					SqlWriter.WriteAnd(commandText, left, right);
-					break;
-				case ExpressionType.OrElse:
-					SqlWriter.WriteOr(commandText, left, right);
-					break;
-				case ExpressionType.Add:
-					SqlWriter.WriteAdd(commandText, left, right);
-					break;
-				case ExpressionType.Subtract:
-					SqlWriter.WriteSubtract(commandText, left, right);
-					break;
-				case ExpressionType.Divide:
-					SqlWriter.WriteDivide(commandText, left, right);
-					break;
-				case ExpressionType.Multiply:
-					SqlWriter.WriteMultiply(commandText, left, right);
-					break;
-			}
-			Text = SqlWriter.WriteBlock(sql, commandText.ToString());
 			return node;
 		}
 
@@ -238,36 +174,27 @@ namespace ObjectSql.Core.QueryBuilder.ExpressionsAnalizers
 			}
 			else
 			{
-				var nodes = ExpressionEnumerator.Enumerate(node).ToList();
-				var rootNode = nodes.FirstOrDefault(n => (n is MemberExpression) &&
-										  ((MemberExpression)n).Expression == null &&
-										  ((MemberExpression)n).Member == typeof(Sql).GetProperty("Query"));
-
-				var indexOfRoot = nodes.IndexOf(rootNode);
+				MemberExpression sqlQueryNode = null;
+				node.Visit<MemberExpression>((v, e) => { if (sqlQueryNode == null && e.Member == typeof(Sql).GetProperty("Query")) sqlQueryNode = e; return e; });
 				var param = Expression.Parameter(typeof(Query));
-				nodes[indexOfRoot] = param;
-				Expression newNode = param;
-
-				for (int i = indexOfRoot - 1; i >= 0; i--)
-					nodes[i] = newNode = ((MethodCallExpression)nodes[i]).Update(newNode, ((MethodCallExpression)nodes[i]).Arguments);
-
+				var newNode = node.Visit<MemberExpression>((v, e) => (e == sqlQueryNode) ? param : (Expression)e);
 				newNode = newNode.Visit<ParameterExpression>((v, e) => SubstituteParameter(ExpressionParameters, e));
+				var queryBuilder = Expression.Lambda<Func<Query, IQueryEnd>>(newNode, param).Compile();
 
-				var exp = Expression.Lambda<Func<Query, IQueryEnd>>(newNode, param).Compile();
 				var ctx = new QueryContext(BuilderContext.Context.InitialConnectionString,
 										   BuilderContext.Context.Command, BuilderContext.Context.ResourcesTreatmentType,
 										   BuilderContext.Context.QueryEnvironment);
 
-				var q = new Query(ctx);
-				exp(q);
+				var query = new Query(ctx);
+				queryBuilder(query);
 
 				foreach (var root in BuilderContext.Context.SqlPart.QueryRoots.Roots)
-					q.Context.SqlPart.QueryRoots.AddRoot(root);
+					query.Context.SqlPart.QueryRoots.AddRoot(root);
 
-				q.Context.SqlPart.BuilderContext.Preparators = BuilderContext.Preparators;
+				query.Context.SqlPart.BuilderContext.Preparators = BuilderContext.Preparators;
 
-				q.Context.SqlPart.BuildPart();
-				Text.Append(q.Context.SqlPart.BuilderContext.Text.ToString());
+				query.Context.SqlPart.BuildPart();
+				Text.Append(query.Context.SqlPart.BuilderContext.Text.ToString());
 			}
 
 			return node;
@@ -319,19 +246,6 @@ namespace ObjectSql.Core.QueryBuilder.ExpressionsAnalizers
 		protected Action<IDbCommand, object> CreateArrayParameterInitializer(string name, Expression accessor, IStorageFieldType dbTypeInContext)
 		{
 			return DelegatesBuilder.CreateArrayParameters(name, accessor, dbTypeInContext, ParameterDirection.Input);
-		}
-
-		private void RenderDatabaseExtension(ConstantExpression node)
-		{
-			if (node.Type.IsEnum)
-			{
-				var member = node.Type.GetMember(node.Value.ToString())[0];
-				var emitAttr = member.GetCustomAttribute(typeof(EmitAttribute)) as EmitAttribute;
-				if (emitAttr != null)
-					Text.Append(emitAttr.Value);
-				else
-					Text.Append(node.Value.ToString());
-			}
 		}
 	}
 }

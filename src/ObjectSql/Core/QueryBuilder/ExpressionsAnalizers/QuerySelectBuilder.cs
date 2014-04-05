@@ -13,10 +13,10 @@ namespace ObjectSql.Core.QueryBuilder.ExpressionsAnalizers
 			: base(schemaManager, expressionBuilder, sqlWriter)
 		{
 		}
-		public override string BuildSql(BuilderContext context, ParameterExpression[] parameters, Expression expression, bool useAliases)
+		public override string BuildSql(BuilderContext context, ParameterExpression[] parameters, Expression expression)
 		{
 			_multiFieldSelectionFromTable = true;
-			return base.BuildSql(context,parameters, expression, useAliases);
+			return base.BuildSql(context,parameters, expression);
 		}
 
 		protected override Expression VisitMember(MemberExpression node)
@@ -36,9 +36,7 @@ namespace ObjectSql.Core.QueryBuilder.ExpressionsAnalizers
 				{
 					if (appendComma) SqlWriter.WriteComma(Text);
 					appendComma = true;
-					SqlWriter.WriteName(Text, alias.Name);
-					SqlWriter.WriteNameResolve(Text);
-					SqlWriter.WriteName(Text, fld.StorageField.Name);
+					SqlWriter.WriteName(BuilderContext, Text, alias.Name, fld.StorageField.Name);
 				}
 			}
 			else base.VisitParameter(alias);

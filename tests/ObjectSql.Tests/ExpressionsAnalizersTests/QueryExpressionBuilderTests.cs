@@ -79,7 +79,7 @@ namespace ObjectSql.Tests.ExpressionsAnalizersTests
 			Expression<Func<object>> exp = () => 5;
 			var builder = CreateBuilder();
 			QueryRoots.AddRoot(5);
-			var result = builder.BuildSql(_builderContext, exp.Parameters.ToArray(), exp.Body, true).Prepare();
+			var result = builder.BuildSql(_builderContext, exp.Parameters.ToArray(), exp.Body).Prepare();
 
 			Assert.AreEqual("@p0", result);
 			_delegatesBuilder.Verify(b => b.CreateDatabaseParameterFactoryAction(IsExp(() => "p0"), IsExp(() => 5), null, ParameterDirection.Input));
@@ -94,7 +94,7 @@ namespace ObjectSql.Tests.ExpressionsAnalizersTests
 			var builder = CreateBuilder();
 			AddQueryRoot(() => value);
 
-			var result = builder.BuildSql(_builderContext, exp.Parameters.ToArray(), exp.Body, true).Prepare();
+			var result = builder.BuildSql(_builderContext, exp.Parameters.ToArray(), exp.Body).Prepare();
 
 			Assert.AreEqual("@p0", result);
 			_delegatesBuilder.Verify(b=>b.CreateDatabaseParameterFactoryAction(IsExp(()=>"p0"),IsExp(()=>value),null, ParameterDirection.Input));
@@ -109,7 +109,7 @@ namespace ObjectSql.Tests.ExpressionsAnalizersTests
 			Expression<Func<object>> exp = () => value.Val;
 			AddQueryRoot(()=>value);
 			var builder = CreateBuilder();
-			var result = builder.BuildSql(_builderContext, exp.Parameters.ToArray(), exp.Body, true).Prepare();
+			var result = builder.BuildSql(_builderContext, exp.Parameters.ToArray(), exp.Body).Prepare();
 
 			Assert.AreEqual("@p0", result);
 			_delegatesBuilder.Verify(b => b.CreateDatabaseParameterFactoryAction(IsExp(() => "p0"), IsExp(() => value.Val), null, ParameterDirection.Input));
@@ -123,7 +123,7 @@ namespace ObjectSql.Tests.ExpressionsAnalizersTests
 			var value = new { Val = false };
 			Expression<Func<Category,object>> exp = (catPar) => catPar.CategoryName;
 			var builder = CreateBuilder();
-			var result = builder.BuildSql(_builderContext, exp.Parameters.ToArray(), exp.Body, true);
+			var result = builder.BuildSql(_builderContext, exp.Parameters.ToArray(), exp.Body);
 
 			Assert.AreEqual("[catPar].["+_categoryNameField+"]", result);
 			_parametersHolder.Verify(h => h.AddPreProcessor(It.IsAny<CommandPrePostProcessor>()), Times.Never());
@@ -134,7 +134,7 @@ namespace ObjectSql.Tests.ExpressionsAnalizersTests
 		{
 			Expression<Func<Category,object>> exp = (c) => "val"+2;
 			var builder = CreateBuilder();
-			var result = builder.BuildSql(_builderContext, exp.Parameters.ToArray(), exp.Body, true).Prepare();
+			var result = builder.BuildSql(_builderContext, exp.Parameters.ToArray(), exp.Body).Prepare();
 
 			Assert.AreEqual("(@p0+@p1)", result);
 			_delegatesBuilder.Verify(b => b.CreateDatabaseParameterFactoryAction(IsExp(() => "p0"), IsExp(() => "val"), null, ParameterDirection.Input));
@@ -150,7 +150,7 @@ namespace ObjectSql.Tests.ExpressionsAnalizersTests
 			var builder = CreateBuilder();
 			QueryRoots.AddRoot("val");
 			QueryRoots.AddRoot(2);
-			var result = builder.BuildSql(_builderContext, exp.Parameters.ToArray(), exp.Body, true).Prepare();
+			var result = builder.BuildSql(_builderContext, exp.Parameters.ToArray(), exp.Body).Prepare();
 
 			Assert.AreEqual("((@p0+@p1)+@p0)", result);
 			_delegatesBuilder.Verify(b => b.CreateDatabaseParameterFactoryAction(IsExp(() => "p0"), IsExp(() => "val"), null, ParameterDirection.Input));
@@ -164,7 +164,7 @@ namespace ObjectSql.Tests.ExpressionsAnalizersTests
 		{
 			Expression<Func<Category, object>> exp = (c) => "val" + 2 + "val2";
 			var builder = CreateBuilder();
-			var result = builder.BuildSql(_builderContext, exp.Parameters.ToArray(), exp.Body, true).Prepare();
+			var result = builder.BuildSql(_builderContext, exp.Parameters.ToArray(), exp.Body).Prepare();
 
 			Assert.AreEqual("((@p0+@p1)+@p2)", result);
 			_delegatesBuilder.Verify(b => b.CreateDatabaseParameterFactoryAction(IsExp(() => "p0"), IsExp(() => "val"), null, ParameterDirection.Input));
@@ -184,7 +184,7 @@ namespace ObjectSql.Tests.ExpressionsAnalizersTests
 			var builder = CreateBuilder();
 			AddQueryRoot(()=>val1);
 			QueryRoots.AddRoot(2);
-			var result = builder.BuildSql(_builderContext, exp.Parameters.ToArray(), exp.Body, true).Prepare();
+			var result = builder.BuildSql(_builderContext, exp.Parameters.ToArray(), exp.Body).Prepare();
 
 			Assert.AreEqual("((@p0+@p1)+@p2)", result);
 			_delegatesBuilder.Verify(b => b.CreateDatabaseParameterFactoryAction(IsExp(() => "p0"), IsExp(() => val1), null, ParameterDirection.Input));
@@ -206,7 +206,7 @@ namespace ObjectSql.Tests.ExpressionsAnalizersTests
 			var v2 = new Root() { Val = "val" };
 			Expression<Func<Category, object>> exp = (c) => v1.Val + 2 + v2.Val;
 			var builder = CreateBuilder();
-			var result = builder.BuildSql(_builderContext, exp.Parameters.ToArray(), exp.Body, true).Prepare();
+			var result = builder.BuildSql(_builderContext, exp.Parameters.ToArray(), exp.Body).Prepare();
 
 			Assert.AreEqual("((@p0+@p1)+@p2)", result);
 			_delegatesBuilder.Verify(b => b.CreateDatabaseParameterFactoryAction(IsExp(() => "p0"), IsExp(() => v1.Val), null, ParameterDirection.Input));
@@ -223,7 +223,7 @@ namespace ObjectSql.Tests.ExpressionsAnalizersTests
 			var v1 = new Root() { Val = "val" };
 			Expression<Func<Category, object>> exp = (c) => v1.Val + 2 + v1.Val;
 			var builder = CreateBuilder();
-			var result = builder.BuildSql(_builderContext, exp.Parameters.ToArray(), exp.Body, true).Prepare();
+			var result = builder.BuildSql(_builderContext, exp.Parameters.ToArray(), exp.Body).Prepare();
 
 			Assert.AreEqual("((@p0+@p1)+@p0)", result);
 			_delegatesBuilder.Verify(b => b.CreateDatabaseParameterFactoryAction(IsExp(() => "p0"), IsExp(() => v1.Val), null, ParameterDirection.Input));
@@ -238,7 +238,7 @@ namespace ObjectSql.Tests.ExpressionsAnalizersTests
 			Expression<Func<Category, object>> exp = (c) => c.CategoryID-1;
 			var builder = CreateBuilder();
 			QueryRoots.AddRoot(1);
-			var result = builder.BuildSql(_builderContext, exp.Parameters.ToArray(), exp.Body, true).Prepare();
+			var result = builder.BuildSql(_builderContext, exp.Parameters.ToArray(), exp.Body).Prepare();
 
 			Assert.AreEqual("([c].[CategoryID]-@p0)", result);
 			_delegatesBuilder.Verify(b => b.CreateDatabaseParameterFactoryAction(IsExp(() => "p0"), IsExp(() => 1), null, ParameterDirection.Input));
@@ -251,7 +251,7 @@ namespace ObjectSql.Tests.ExpressionsAnalizersTests
 			Expression<Func<Category, object>> exp = (c) => c.CategoryID / 1;
 			var builder = CreateBuilder();
 			QueryRoots.AddRoot(1);
-			var result = builder.BuildSql(_builderContext, exp.Parameters.ToArray(), exp.Body, true).Prepare();
+			var result = builder.BuildSql(_builderContext, exp.Parameters.ToArray(), exp.Body).Prepare();
 
 			Assert.AreEqual("([c].[CategoryID]/@p0)", result);
 			_delegatesBuilder.Verify(b => b.CreateDatabaseParameterFactoryAction(IsExp(() => "p0"), IsExp(() => 1), null, ParameterDirection.Input));
@@ -264,7 +264,7 @@ namespace ObjectSql.Tests.ExpressionsAnalizersTests
 			Expression<Func<Category, object>> exp = (c) => c.CategoryID * 1;
 			var builder = CreateBuilder();
 			QueryRoots.AddRoot(1);
-			var result = builder.BuildSql(_builderContext, exp.Parameters.ToArray(), exp.Body, true).Prepare();
+			var result = builder.BuildSql(_builderContext, exp.Parameters.ToArray(), exp.Body).Prepare();
 
 			Assert.AreEqual("([c].[CategoryID]*@p0)", result);
 			_delegatesBuilder.Verify(b => b.CreateDatabaseParameterFactoryAction(IsExp(() => "p0"), IsExp(() => 1), null, ParameterDirection.Input));
@@ -277,7 +277,7 @@ namespace ObjectSql.Tests.ExpressionsAnalizersTests
 			Expression<Func<Category, object>> exp = (c) => c.CategoryID > 1;
 			var builder = CreateBuilder();
 			QueryRoots.AddRoot(1);
-			var result = builder.BuildSql(_builderContext, exp.Parameters.ToArray(), exp.Body, true).Prepare();
+			var result = builder.BuildSql(_builderContext, exp.Parameters.ToArray(), exp.Body).Prepare();
 
 			Assert.AreEqual("([c].[CategoryID]>@p0)", result);
 			_delegatesBuilder.Verify(b => b.CreateDatabaseParameterFactoryAction(IsExp(() => "p0"), IsExp(() => 1), null, ParameterDirection.Input));
@@ -290,7 +290,7 @@ namespace ObjectSql.Tests.ExpressionsAnalizersTests
 			Expression<Func<Category, object>> exp = (c) => c.CategoryID >= 1;
 			var builder = CreateBuilder();
 			QueryRoots.AddRoot(1);
-			var result = builder.BuildSql(_builderContext, exp.Parameters.ToArray(), exp.Body, true).Prepare();
+			var result = builder.BuildSql(_builderContext, exp.Parameters.ToArray(), exp.Body).Prepare();
 
 			Assert.AreEqual("([c].[CategoryID]>=@p0)", result);
 			_delegatesBuilder.Verify(b => b.CreateDatabaseParameterFactoryAction(IsExp(() => "p0"), IsExp(() => 1), null, ParameterDirection.Input));
@@ -303,7 +303,7 @@ namespace ObjectSql.Tests.ExpressionsAnalizersTests
 			Expression<Func<Category, object>> exp = (c) => c.CategoryID < 1;
 			var builder = CreateBuilder();
 			QueryRoots.AddRoot(1);
-			var result = builder.BuildSql(_builderContext,exp.Parameters.ToArray(),  exp.Body, true).Prepare();
+			var result = builder.BuildSql(_builderContext,exp.Parameters.ToArray(),  exp.Body).Prepare();
 
 			Assert.AreEqual("([c].[CategoryID]<@p0)", result);
 			_delegatesBuilder.Verify(b => b.CreateDatabaseParameterFactoryAction(IsExp(() => "p0"), IsExp(() => 1), null, ParameterDirection.Input));
@@ -316,7 +316,7 @@ namespace ObjectSql.Tests.ExpressionsAnalizersTests
 			Expression<Func<Category, object>> exp = (c) => c.CategoryID <= 1;
 			var builder = CreateBuilder();
 			QueryRoots.AddRoot(1);
-			var result = builder.BuildSql(_builderContext, exp.Parameters.ToArray(), exp.Body, true).Prepare();
+			var result = builder.BuildSql(_builderContext, exp.Parameters.ToArray(), exp.Body).Prepare();
 
 			Assert.AreEqual("([c].[CategoryID]<=@p0)", result);
 			_delegatesBuilder.Verify(b => b.CreateDatabaseParameterFactoryAction(IsExp(() => "p0"), IsExp(() => 1), null, ParameterDirection.Input));
@@ -329,7 +329,7 @@ namespace ObjectSql.Tests.ExpressionsAnalizersTests
 			Expression<Func<Category, object>> exp = (c) => c.CategoryID != 1;
 			var builder = CreateBuilder();
 			QueryRoots.AddRoot(1);
-			var result = builder.BuildSql(_builderContext, exp.Parameters.ToArray(), exp.Body, true).Prepare();
+			var result = builder.BuildSql(_builderContext, exp.Parameters.ToArray(), exp.Body).Prepare();
 
 			Assert.AreEqual("([c].[CategoryID]<>@p0)", result);
 			_delegatesBuilder.Verify(b => b.CreateDatabaseParameterFactoryAction(IsExp(() => "p0"), IsExp(() => 1), null, ParameterDirection.Input));
@@ -347,7 +347,7 @@ namespace ObjectSql.Tests.ExpressionsAnalizersTests
 			Expression<Func<Category, object>> exp = (c) => c.CategoryID == (int)Foo.Val2;
 			var builder = CreateBuilder();
 			QueryRoots.AddRoot((int)Foo.Val2);
-			var result = builder.BuildSql(_builderContext, exp.Parameters.ToArray(), exp.Body, true).Prepare();
+			var result = builder.BuildSql(_builderContext, exp.Parameters.ToArray(), exp.Body).Prepare();
 
 			Assert.AreEqual("([c].[CategoryID]=@p0)", result);
 			_delegatesBuilder.Verify(b => b.CreateDatabaseParameterFactoryAction(IsExp(() => "p0"), IsExp(() => (int)Foo.Val2), null, ParameterDirection.Input));
@@ -361,7 +361,7 @@ namespace ObjectSql.Tests.ExpressionsAnalizersTests
 			AddQueryRoot(()=>enumVar);
 			Expression<Func<Category, object>> exp = (c) => c.CategoryID == (int)enumVar;
 			var builder = CreateBuilder();
-			var result = builder.BuildSql(_builderContext, exp.Parameters.ToArray(), exp.Body, true).Prepare();
+			var result = builder.BuildSql(_builderContext, exp.Parameters.ToArray(), exp.Body).Prepare();
 
 			Assert.AreEqual("([c].[CategoryID]=@p0)", result);
 			_parametersHolder.Verify(h => h.AddPreProcessor(It.IsAny<CommandPrePostProcessor>()), Times.Exactly(1));
@@ -372,7 +372,7 @@ namespace ObjectSql.Tests.ExpressionsAnalizersTests
 		{
 			Expression<Func<object>> exp = () => null;
 			var builder = CreateBuilder();
-			var result = builder.BuildSql(_builderContext, exp.Parameters.ToArray(), exp.Body, true).Prepare();
+			var result = builder.BuildSql(_builderContext, exp.Parameters.ToArray(), exp.Body).Prepare();
 
 			Assert.AreEqual("NULL", result);
 			_parametersHolder.Verify(h => h.AddPreProcessor(It.IsAny<CommandPrePostProcessor>()), Times.Never());
@@ -382,7 +382,7 @@ namespace ObjectSql.Tests.ExpressionsAnalizersTests
 		{
 			Expression<Func<Category, object>> exp = (c) => c.Picture == null;
 			var builder = CreateBuilder();
-			var result = builder.BuildSql(_builderContext, exp.Parameters.ToArray(), exp.Body, true).Prepare();
+			var result = builder.BuildSql(_builderContext, exp.Parameters.ToArray(), exp.Body).Prepare();
 
 			Assert.AreEqual("([c].[Picture]ISNULL)", result);
 			_parametersHolder.Verify(h => h.AddPreProcessor(It.IsAny<CommandPrePostProcessor>()), Times.Never());
@@ -392,7 +392,7 @@ namespace ObjectSql.Tests.ExpressionsAnalizersTests
 		{
 			Expression<Func<Category, object>> exp = (c) => c.Picture != null;
 			var builder = CreateBuilder();
-			var result = builder.BuildSql(_builderContext, exp.Parameters.ToArray(), exp.Body, true).Prepare();
+			var result = builder.BuildSql(_builderContext, exp.Parameters.ToArray(), exp.Body).Prepare();
 
 			Assert.AreEqual("([c].[Picture]ISNOTNULL)", result);
 			_parametersHolder.Verify(h => h.AddPreProcessor(It.IsAny<CommandPrePostProcessor>()), Times.Never());
@@ -403,7 +403,7 @@ namespace ObjectSql.Tests.ExpressionsAnalizersTests
 			Expression<Func<Category, object>> exp = (c) => c.Description==null && c.CategoryID == 1;
 			var builder = CreateBuilder();
 			QueryRoots.AddRoot(1);
-			var result = builder.BuildSql(_builderContext, exp.Parameters.ToArray(), exp.Body, true).Prepare();
+			var result = builder.BuildSql(_builderContext, exp.Parameters.ToArray(), exp.Body).Prepare();
 
 			Assert.AreEqual("(([c].[Description]ISNULL)AND([c].[CategoryID]=@p0))", result);
 			_delegatesBuilder.Verify(b => b.CreateDatabaseParameterFactoryAction(IsExp(() => "p0"), IsExp(() => 1), null, ParameterDirection.Input));
@@ -416,7 +416,7 @@ namespace ObjectSql.Tests.ExpressionsAnalizersTests
 			Expression<Func<Category, object>> exp = (c) => c.Description == null || c.CategoryID == 1;
 			var builder = CreateBuilder();
 			QueryRoots.AddRoot(1);
-			var result = builder.BuildSql(_builderContext, exp.Parameters.ToArray(), exp.Body, true).Prepare();
+			var result = builder.BuildSql(_builderContext, exp.Parameters.ToArray(), exp.Body).Prepare();
 
 			Assert.AreEqual("(([c].[Description]ISNULL)OR([c].[CategoryID]=@p0))", result);
 			_delegatesBuilder.Verify(b => b.CreateDatabaseParameterFactoryAction(IsExp(() => "p0"), IsExp(() => 1), null, ParameterDirection.Input));
@@ -429,7 +429,7 @@ namespace ObjectSql.Tests.ExpressionsAnalizersTests
 			Expression<Func<Category, object>> exp = (c) => !(c.CategoryID == 1);
 			var builder = CreateBuilder();
 			QueryRoots.AddRoot(1);
-			var result = builder.BuildSql(_builderContext, exp.Parameters.ToArray(), exp.Body, true).Prepare();
+			var result = builder.BuildSql(_builderContext, exp.Parameters.ToArray(), exp.Body).Prepare();
 
 			Assert.AreEqual("(NOT([c].[CategoryID]=@p0))", result);
 			_delegatesBuilder.Verify(b => b.CreateDatabaseParameterFactoryAction(IsExp(() => "p0"), IsExp(() => 1), null, ParameterDirection.Input));
@@ -441,11 +441,11 @@ namespace ObjectSql.Tests.ExpressionsAnalizersTests
 			return 0;
 		}
 		[Test]
-		public void BuildSql_MethodCall_ErrorExpected()
+		public void BuildSql_MethodCall_ErrorNotExpected()
 		{
 			Expression<Func<object>> exp = () => this.GetConstant();
 			var builder = CreateBuilder();
-			builder.BuildSql(_builderContext, exp.Parameters.ToArray(), exp.Body, true).Prepare();
+			builder.BuildSql(_builderContext, exp.Parameters.ToArray(), exp.Body).Prepare();
 		}
 		
 		protected Expression IsExp<T>(Expression<Func<T>> b)

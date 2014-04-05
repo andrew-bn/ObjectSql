@@ -77,7 +77,7 @@ namespace ObjectSql.Tests.ExpressionsAnalizersTests
 			AddQueryRoot(()=>c);
 			var builder = CreateBuilder();
 
-			var result = builder.BuildSql(_builderContext, exp.Parameters.ToArray(), exp.Body, true);
+			var result = builder.BuildSql(_builderContext, exp.Parameters.ToArray(), exp.Body);
 		}
 		[Test]
 		public void BuildSql_ValidResultExpected()
@@ -87,7 +87,7 @@ namespace ObjectSql.Tests.ExpressionsAnalizersTests
 			QueryRoots.AddRoot(2);
 			QueryRoots.AddRoot("cn");
 			var builder = CreateBuilder();
-			var result = builder.BuildSql(_builderContext, exp.Parameters.ToArray(), exp.Body, true).Prepare();
+			var result = builder.BuildSql(_builderContext, exp.Parameters.ToArray(), exp.Body).Prepare();
 
 			Assert.AreEqual("[CategoryID]=@p0,[CategoryNameFld]=@p1", result);
 		}

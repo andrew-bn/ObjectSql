@@ -17,7 +17,7 @@ namespace ObjectSql.Core.QueryParts
 		public override bool SortParts(BuilderContext context)
 		{
 			var parts = context.Parts;
-			var fromPart = context.Parts.MoveBackAndFind(this, p => p is FromPart || p is NextQueryPart) as FromPart;
+			var fromPart = context.Parts.MoveBackAndFind(this, p => p is FromPart) as FromPart;
 			if (fromPart != null)
 			{
 				var selectIndex = context.Parts.IndexOf(this);
@@ -32,7 +32,7 @@ namespace ObjectSql.Core.QueryParts
 
 		public override void BuildPart(BuilderContext context)
 		{
-			var sql = context.AnalizeExpression(Expression.Parameters.ToArray(), Expression.Body, ExpressionAnalizerType.FieldsSelect, true);
+			var sql = context.AnalizeExpression(Expression.Parameters.ToArray(), Expression.Body, ExpressionAnalizerType.FieldsSelect);
 			context.SqlWriter.WriteSelect(context.Text, sql);
 
 			var matInfo = context.MaterializationInfoExtractor.ExtractFrom(Expression.Body);

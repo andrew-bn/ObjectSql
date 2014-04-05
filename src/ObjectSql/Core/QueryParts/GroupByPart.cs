@@ -14,7 +14,7 @@ namespace ObjectSql.Core.QueryParts
 
 		public override void BuildPart(BuilderContext context)
 		{
-			var sql = context.AnalizeExpression(Expression.Parameters.ToArray(), Expression.Body, ExpressionAnalizerType.FieldsSequence, true);
+			var sql = context.AnalizeExpression(Expression.Parameters.ToArray(), Expression.Body, ExpressionAnalizerType.FieldsSequence);
 			context.SqlWriter.WriteGroupBy(context.Text, sql);
 		}
 	}

@@ -6,6 +6,7 @@ using System.Reflection;
 using ObjectSql.Core.Bo;
 using ObjectSql.Core.Bo.CommandPreparatorDescriptor;
 using ObjectSql.Core.QueryBuilder.ExpressionsAnalizers;
+using ObjectSql.Core.QueryParts;
 using ObjectSql.QueryInterfaces;
 
 namespace ObjectSql.Core.Misc
@@ -21,9 +22,13 @@ namespace ObjectSql.Core.Misc
 
 		public static T MoveBackAndFind<T>(this List<T> enumerable, T obj, Func<T,bool> predicate)
 		{
+			if (enumerable == null)
+				return default(T);
 			var indexOfObj = enumerable.IndexOf(obj);
 			for (int i = indexOfObj - 1; i >= 0; i--)
 			{
+				if (enumerable[i] is NextQueryPart)
+					return default(T);
 				if (predicate(enumerable[i]))
 					return enumerable[i];
 			}

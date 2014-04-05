@@ -81,7 +81,7 @@ namespace ObjectSql.Tests.ExpressionsAnalizersTests
 			Expression<Func<Dto>> exp = () => new Dto(3, "name");
 			var builder = CreateBuilder();
 			QueryRoots.AddRoot("name");
-			var result = builder.BuildSql(_builderContext, exp.Parameters.ToArray(), exp.Body, true).Prepare();
+			var result = builder.BuildSql(_builderContext, exp.Parameters.ToArray(), exp.Body).Prepare();
 
 			Assert.AreEqual("@p0AS[identity],@p1AS[dtoName]", result);
 		}
@@ -91,7 +91,7 @@ namespace ObjectSql.Tests.ExpressionsAnalizersTests
 			Expression<Func<Dto>> exp = () => new Dto { Id = 2, Name = "name" };
 			var builder = CreateBuilder();
 			QueryRoots.AddRoot("name");
-			var result = builder.BuildSql(_builderContext, exp.Parameters.ToArray(), exp.Body, true).Prepare();
+			var result = builder.BuildSql(_builderContext, exp.Parameters.ToArray(), exp.Body).Prepare();
 
 			Assert.AreEqual("@p0AS[Id],@p1AS[Name]", result);
 		}
@@ -101,7 +101,7 @@ namespace ObjectSql.Tests.ExpressionsAnalizersTests
 		{
 			Expression<Func<Dto>> exp = () => new Dto(4, "name") { Name = "name" };
 			var builder = CreateBuilder();
-			var result = builder.BuildSql(_builderContext, exp.Parameters.ToArray(), exp.Body, true).Prepare();
+			var result = builder.BuildSql(_builderContext, exp.Parameters.ToArray(), exp.Body).Prepare();
 		}
 		[Test]
 		public void BuildSql_SelectAnonimus_ParametersInitializer()
@@ -111,7 +111,7 @@ namespace ObjectSql.Tests.ExpressionsAnalizersTests
 
 			QueryRoots.AddRoot(2);
 			QueryRoots.AddRoot("name");
-			var result = builder.BuildSql(_builderContext, exp.Parameters.ToArray(), exp.Body, true).Prepare();
+			var result = builder.BuildSql(_builderContext, exp.Parameters.ToArray(), exp.Body).Prepare();
 
 			Assert.AreEqual("@p0AS[Id],@p1AS[Name]", result);
 		}
@@ -120,7 +120,7 @@ namespace ObjectSql.Tests.ExpressionsAnalizersTests
 		{
 			Expression<Func<Category, Category>> exp = (p) => p;
 			var builder = CreateBuilder();
-			var result = builder.BuildSql(_builderContext, exp.Parameters.ToArray(), exp.Body, true).Prepare();
+			var result = builder.BuildSql(_builderContext, exp.Parameters.ToArray(), exp.Body).Prepare();
 
 			Assert.AreEqual("[p].[CategoryID],[p].[CategoryNameFld],[p].[Description],[p].[Picture]", result);
 		}
@@ -134,7 +134,7 @@ namespace ObjectSql.Tests.ExpressionsAnalizersTests
 			QueryRoots.AddRoot(2);
 			QueryRoots.AddRoot("name");
 			QueryRoots.AddRoot("descr");
-			var result = builder.BuildSql(_builderContext, exp.Parameters.ToArray(), exp.Body, true).Prepare();
+			var result = builder.BuildSql(_builderContext, exp.Parameters.ToArray(), exp.Body).Prepare();
 		}
 
 		private QuerySelectBuilder CreateBuilder()

@@ -18,7 +18,7 @@ namespace ObjectSql.SqlServer
 		{
 			var expr = (LambdaExpression)new OutputClauseParameterSubstitutor(Expression.Parameters.ToArray()).Visit(Expression);
 
-			var sql = context.AnalizeExpression(expr.Parameters.ToArray(), expr.Body, ExpressionAnalizerType.FieldsSelect, true);
+			var sql = context.AnalizeExpression(expr.Parameters.ToArray(), expr.Body, ExpressionAnalizerType.FieldsSelect);
 			((SqlServerSqlWriter)context.SqlWriter).WriteOutput(context.Text, sql);
 
 			var matInfo = context.MaterializationInfoExtractor.ExtractFrom(expr.Body);

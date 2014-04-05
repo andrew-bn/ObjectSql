@@ -28,7 +28,6 @@ namespace ObjectSql.Core.QueryBuilder
 		public abstract CommandText WriteParameter(CommandText commandText, string parameterName);
 		public abstract CommandText WriteNull(CommandText commandText);
 		public abstract CommandText WriteComma(CommandText commandText);
-		public abstract CommandText WriteName(CommandText commandText, string name);
 		public abstract CommandText WriteNameResolve(CommandText commandText);
 		public abstract CommandText WriteBlock(CommandText commandText, string expression);
 		public abstract CommandText WriteNot(CommandText commandText, string condition);
@@ -49,7 +48,7 @@ namespace ObjectSql.Core.QueryBuilder
 		public abstract CommandText WriteSet(CommandText commandText);
 		public abstract CommandText WriteSqlEnd(CommandText commandText);
 
-
+		#region sql 
 		[DeclaringType(typeof(Sql))]
 		public virtual void Count(SqlWriterContext context, params Expression[] args)
 		{
@@ -92,6 +91,123 @@ namespace ObjectSql.Core.QueryBuilder
 			var str = string.Format(" ({0} NOT LIKE {1})", context.BuildSql(args[1]), context.BuildSql(args[2]));
 			context.CommandText.Append(str);
 		}
+		#endregion sql
+		#region Binary
+		[DeclaringType(typeof(BinaryExpression))]
+		public virtual void Equal(SqlWriterContext context, Expression left, Expression right)
+		{
+			var str = string.Empty;
+			if (right.StripConvert().NodeType == ExpressionType.Constant && ((ConstantExpression)right.StripConvert()).Value == null)
+				str = string.Format(" ({0} IS NULL)", context.BuildSql(left));
+
+			else if (left.StripConvert().NodeType == ExpressionType.Constant && ((ConstantExpression)left.StripConvert()).Value == null)
+				str = string.Format(" ({0} IS NULL)", context.BuildSql(right));
+
+			else str = string.Format(" ({0} = {1})", context.BuildSql(left), context.BuildSql(right));
+			context.CommandText.Append(str);
+		}
+		[DeclaringType(typeof(BinaryExpression))]
+		public virtual void NotEqual(SqlWriterContext context, Expression left, Expression right)
+		{
+			var str = string.Empty;
+			if (right.StripConvert().NodeType == ExpressionType.Constant && ((ConstantExpression)right.StripConvert()).Value == null)
+				str = string.Format(" ({0} IS NOT NULL)", context.BuildSql(left));
+
+			else if (left.StripConvert().NodeType == ExpressionType.Constant && ((ConstantExpression)left.StripConvert()).Value == null)
+				str = string.Format(" ({0} IS NOT NULL)", context.BuildSql(right));
+
+			else str = string.Format(" ({0} <> {1})", context.BuildSql(left), context.BuildSql(right));
+			context.CommandText.Append(str);
+		}
+		[DeclaringType(typeof(BinaryExpression))]
+		public virtual void AndAlso(SqlWriterContext context, Expression left, Expression right)
+		{
+			var str = string.Format(" ({0} AND {1})", context.BuildSql(left), context.BuildSql(right));
+			context.CommandText.Append(str);
+		}
+		[DeclaringType(typeof(BinaryExpression))]
+		public virtual void Subtract(SqlWriterContext context, Expression left, Expression right)
+		{
+			var str = string.Format(" ({0} - {1})", context.BuildSql(left), context.BuildSql(right));
+			context.CommandText.Append(str);
+		}
+		[DeclaringType(typeof(BinaryExpression))]
+		public virtual void Divide(SqlWriterContext context, Expression left, Expression right)
+		{
+			var str = string.Format(" ({0} / {1})", context.BuildSql(left), context.BuildSql(right));
+			context.CommandText.Append(str);
+		}
+		[DeclaringType(typeof(BinaryExpression))]
+		public virtual void GreaterThan(SqlWriterContext context, Expression left, Expression right)
+		{
+			var str = string.Format(" ({0} > {1})", context.BuildSql(left), context.BuildSql(right));
+			context.CommandText.Append(str);
+		}
+		[DeclaringType(typeof(BinaryExpression))]
+		public virtual void GreaterThanOrEqual(SqlWriterContext context, Expression left, Expression right)
+		{
+			var str = string.Format(" ({0} >= {1})", context.BuildSql(left), context.BuildSql(right));
+			context.CommandText.Append(str);
+		}
+		[DeclaringType(typeof(BinaryExpression))]
+		public virtual void LessThan(SqlWriterContext context, Expression left, Expression right)
+		{
+			var str = string.Format(" ({0} < {1})", context.BuildSql(left), context.BuildSql(right));
+			context.CommandText.Append(str);
+		}
+		[DeclaringType(typeof(BinaryExpression))]
+		public virtual void LessThanOrEqual(SqlWriterContext context, Expression left, Expression right)
+		{
+			var str = string.Format(" ({0} <= {1})", context.BuildSql(left), context.BuildSql(right));
+			context.CommandText.Append(str);
+		}
+		[DeclaringType(typeof(BinaryExpression))]
+		public virtual void Multiply(SqlWriterContext context, Expression left, Expression right)
+		{
+			var str = string.Format(" ({0} * {1})", context.BuildSql(left), context.BuildSql(right));
+			context.CommandText.Append(str);
+		}
+		[DeclaringType(typeof(BinaryExpression))]
+		public virtual void OrElse(SqlWriterContext context, Expression left, Expression right)
+		{
+			var str = string.Format(" ({0} OR {1})", context.BuildSql(left), context.BuildSql(right));
+			context.CommandText.Append(str);
+		}
+		[DeclaringType(typeof(BinaryExpression))]
+		public virtual void Add(SqlWriterContext context, Expression left, Expression right)
+		{
+			var str = string.Format(" ({0} + {1})", context.BuildSql(left), context.BuildSql(right));
+			context.CommandText.Append(str);
+		}
+
+
+		#endregion Binary
+		#region Unary
+		[DeclaringType(typeof(UnaryExpression))]
+		public virtual void Not(SqlWriterContext context, Expression operand)
+		{
+			var str = string.Format("(NOT {0})", context.BuildSql(operand));
+			context.CommandText.Append(str);
+		}
+		[DeclaringType(typeof(UnaryExpression))]
+		public virtual void Convert(SqlWriterContext context, Expression operand)
+		{
+			context.CommandText.Append(context.BuildSql(operand));
+		}
+		#endregion Unary
+		#region common
+		public virtual CommandText WriteName(BuilderContext context, CommandText commandText,string alias, string name)
+		{
+			var useAlial = !string.IsNullOrWhiteSpace(alias)
+			               && !(context.CurrentPart is InsertPart)
+			               && context.Parts.MoveBackAndFind(context.CurrentPart, p => p is DeletePart) == null
+						   && context.Parts.MoveBackAndFind(context.CurrentPart, p => p is UpdatePart) == null;
+
+			if (!useAlial)
+				return commandText.Append("[{0}]", name);
+			return commandText.Append("[{0}].[{1}]",alias, name);
+		}
+		#endregion
 		protected static string BuildSql(string method, IEnumerable<string> parts)
 		{
 			return string.Format(" {0}({1}) ", method, string.Join(", ", parts));
@@ -114,7 +230,26 @@ namespace ObjectSql.Core.QueryBuilder
 				if (m == null)
 					throw new ObjectSqlException("value '" + (c.Value ?? "null") + "' can't be rendered to SQL");
 
-				m.Invoke(this, new object[] { new SqlWriterContext(expression, expressionVisitor, context, commandText), c.Value });
+				m.Invoke(this, new [] { new SqlWriterContext(expression, expressionVisitor, context, commandText), c.Value });
+			}
+			else if (expression is BinaryExpression)
+			{
+				var bi = expression as BinaryExpression;
+				var m = FindMethod(expression.NodeType.ToString(), typeof(BinaryExpression));
+				if (m == null)
+					throw new ObjectSqlException("binary expression '" + expression.NodeType.ToString() + "' can't be rendered to SQL");
+
+				m.Invoke(this, new object[] { new SqlWriterContext(expression, expressionVisitor, context, commandText), bi.Left, bi.Right });
+			}
+			else if (expression is UnaryExpression)
+			{
+				var un = expression as UnaryExpression;
+				var m = FindMethod(expression.NodeType.ToString(), typeof(UnaryExpression));
+				if (m == null)
+					throw new ObjectSqlException("unary expression '" + expression.NodeType.ToString() + "' can't be rendered to SQL");
+
+				m.Invoke(this, new object[] { new SqlWriterContext(expression, expressionVisitor, context, commandText), un.Operand });
+			
 			}
 			return commandText;
 		}

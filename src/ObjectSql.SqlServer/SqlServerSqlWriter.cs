@@ -92,10 +92,7 @@ namespace ObjectSql.SqlServer
 			return commandText.Append("NULL");
 		}
 
-		public override CommandText WriteName(CommandText commandText, string name)
-		{
-			return commandText.Append("[{0}]", name);
-		}
+
 
 		public override CommandText WriteNameResolve(CommandText commandText)
 		{

@@ -7,7 +7,7 @@ namespace ObjectSql.Core.QueryBuilder.ExpressionsAnalizers
 	public interface ISqlQueryBuilder
 	{
 		IStorageFieldType DbTypeInContext { get; set; }
-		string BuildSql(BuilderContext builderContext,ParameterExpression[] parameters, Expression expression, bool useAliases);
+		string BuildSql(BuilderContext builderContext,ParameterExpression[] parameters, Expression expression);
 		string BuildSql(IStorageFieldType dbTypeInContext, Expression expression);
 		string BuildSql(Expression expression);
 	}

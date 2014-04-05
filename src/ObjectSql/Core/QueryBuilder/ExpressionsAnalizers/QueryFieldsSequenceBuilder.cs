@@ -14,10 +14,10 @@ namespace ObjectSql.Core.QueryBuilder.ExpressionsAnalizers
 		{
 		}
 		private bool _multiFieldSelectionFromTable = true;
-		public override string BuildSql(BuilderContext context, ParameterExpression[] parameters, Expression expression, bool useAliases)
+		public override string BuildSql(BuilderContext context, ParameterExpression[] parameters, Expression expression)
 		{
 			_multiFieldSelectionFromTable = true;
-			return base.BuildSql(context,parameters, expression, useAliases);
+			return base.BuildSql(context,parameters, expression);
 		}
 		protected override Expression VisitParameter(ParameterExpression alias)
 		{
@@ -30,7 +30,7 @@ namespace ObjectSql.Core.QueryBuilder.ExpressionsAnalizers
 				{
 					if (appendComma) SqlWriter.WriteComma(Text);
 					appendComma = true;
-					SqlWriter.WriteName(Text, fld.StorageField.Name);
+					SqlWriter.WriteName(BuilderContext, Text,"", fld.StorageField.Name);
 				}
 			}
 			else base.VisitParameter(alias);
@@ -53,9 +53,9 @@ namespace ObjectSql.Core.QueryBuilder.ExpressionsAnalizers
 
 				var sf = props.FirstOrDefault(p=>p.Name == node.Bindings[i].Member.Name);
 				if (sf.StorageField == null)
-					SqlWriter.WriteName(Text, sf.Name);
+					SqlWriter.WriteName(BuilderContext, Text, "", sf.Name);
 				else
-					SqlWriter.WriteName(Text, sf.StorageField.Name);
+					SqlWriter.WriteName(BuilderContext, Text, "", sf.StorageField.Name);
 			}
 			return node;
 		}

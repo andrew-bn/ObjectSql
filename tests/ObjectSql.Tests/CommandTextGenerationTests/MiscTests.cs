@@ -33,8 +33,8 @@ namespace ObjectSql.Tests.CommandTextGenerationTests
 			var c = "const";
 			var c2 = "ant";
 			EfQuery.Select(() => c + c2)
-				.Verify(@"SELECT (@p0 + @p1)",
-				c.DbType(SqlDbType.NVarChar), c2.DbType(SqlDbType.NVarChar));
+				.Verify(@"SELECT @p0",
+				(c+c2).DbType(SqlDbType.NVarChar));
 		}
 		[Test]
 		public void Select_Anonimus_ConcatFieldWithConstant()

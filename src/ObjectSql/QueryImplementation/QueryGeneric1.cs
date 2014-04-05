@@ -17,7 +17,7 @@ namespace ObjectSql.QueryImplementation
 
 		public IQuery<TSource1> Where(Expression<Func<TSource1, bool>> condition)
 		{
-			Context.SqlPart.AddQueryPart(new WherePart(true, condition));
+			Context.SqlPart.AddQueryPart(new WherePart(condition));
 			return this;
 		}
 		public IQuery<TSource1> GroupBy(Expression<Func<TSource1,object>> groupBy)
@@ -64,7 +64,7 @@ namespace ObjectSql.QueryImplementation
 
 		public IQuery<TSource1,TSource2> Where(Expression<Func<TSource1,TSource2, bool>> condition)
 		{
-			Context.SqlPart.AddQueryPart(new WherePart(true, condition));
+			Context.SqlPart.AddQueryPart(new WherePart(condition));
 			return this;
 		}
 		public IQuery<TSource1,TSource2> GroupBy(Expression<Func<TSource1,TSource2,object>> groupBy)
@@ -111,7 +111,7 @@ namespace ObjectSql.QueryImplementation
 
 		public IQuery<TSource1,TSource2,TSource3> Where(Expression<Func<TSource1,TSource2,TSource3, bool>> condition)
 		{
-			Context.SqlPart.AddQueryPart(new WherePart(true, condition));
+			Context.SqlPart.AddQueryPart(new WherePart(condition));
 			return this;
 		}
 		public IQuery<TSource1,TSource2,TSource3> GroupBy(Expression<Func<TSource1,TSource2,TSource3,object>> groupBy)
@@ -158,7 +158,7 @@ namespace ObjectSql.QueryImplementation
 
 		public IQuery<TSource1,TSource2,TSource3,TSource4> Where(Expression<Func<TSource1,TSource2,TSource3,TSource4, bool>> condition)
 		{
-			Context.SqlPart.AddQueryPart(new WherePart(true, condition));
+			Context.SqlPart.AddQueryPart(new WherePart(condition));
 			return this;
 		}
 		public IQuery<TSource1,TSource2,TSource3,TSource4> GroupBy(Expression<Func<TSource1,TSource2,TSource3,TSource4,object>> groupBy)
@@ -205,7 +205,7 @@ namespace ObjectSql.QueryImplementation
 
 		public IQuery<TSource1,TSource2,TSource3,TSource4,TSource5> Where(Expression<Func<TSource1,TSource2,TSource3,TSource4,TSource5, bool>> condition)
 		{
-			Context.SqlPart.AddQueryPart(new WherePart(true, condition));
+			Context.SqlPart.AddQueryPart(new WherePart(condition));
 			return this;
 		}
 		public IQuery<TSource1,TSource2,TSource3,TSource4,TSource5> GroupBy(Expression<Func<TSource1,TSource2,TSource3,TSource4,TSource5,object>> groupBy)
@@ -252,7 +252,7 @@ namespace ObjectSql.QueryImplementation
 
 		public IQuery<TSource1,TSource2,TSource3,TSource4,TSource5,TSource6> Where(Expression<Func<TSource1,TSource2,TSource3,TSource4,TSource5,TSource6, bool>> condition)
 		{
-			Context.SqlPart.AddQueryPart(new WherePart(true, condition));
+			Context.SqlPart.AddQueryPart(new WherePart(condition));
 			return this;
 		}
 		public IQuery<TSource1,TSource2,TSource3,TSource4,TSource5,TSource6> GroupBy(Expression<Func<TSource1,TSource2,TSource3,TSource4,TSource5,TSource6,object>> groupBy)
@@ -299,7 +299,7 @@ namespace ObjectSql.QueryImplementation
 
 		public IQuery<TSource1,TSource2,TSource3,TSource4,TSource5,TSource6,TSource7> Where(Expression<Func<TSource1,TSource2,TSource3,TSource4,TSource5,TSource6,TSource7, bool>> condition)
 		{
-			Context.SqlPart.AddQueryPart(new WherePart(true, condition));
+			Context.SqlPart.AddQueryPart(new WherePart(condition));
 			return this;
 		}
 		public IQuery<TSource1,TSource2,TSource3,TSource4,TSource5,TSource6,TSource7> GroupBy(Expression<Func<TSource1,TSource2,TSource3,TSource4,TSource5,TSource6,TSource7,object>> groupBy)
@@ -346,7 +346,7 @@ namespace ObjectSql.QueryImplementation
 
 		public IQuery<TSource1,TSource2,TSource3,TSource4,TSource5,TSource6,TSource7,TSource8> Where(Expression<Func<TSource1,TSource2,TSource3,TSource4,TSource5,TSource6,TSource7,TSource8, bool>> condition)
 		{
-			Context.SqlPart.AddQueryPart(new WherePart(true, condition));
+			Context.SqlPart.AddQueryPart(new WherePart(condition));
 			return this;
 		}
 		public IQuery<TSource1,TSource2,TSource3,TSource4,TSource5,TSource6,TSource7,TSource8> GroupBy(Expression<Func<TSource1,TSource2,TSource3,TSource4,TSource5,TSource6,TSource7,TSource8,object>> groupBy)
@@ -393,7 +393,7 @@ namespace ObjectSql.QueryImplementation
 
 		public IQuery<TSource1,TSource2,TSource3,TSource4,TSource5,TSource6,TSource7,TSource8,TSource9> Where(Expression<Func<TSource1,TSource2,TSource3,TSource4,TSource5,TSource6,TSource7,TSource8,TSource9, bool>> condition)
 		{
-			Context.SqlPart.AddQueryPart(new WherePart(true, condition));
+			Context.SqlPart.AddQueryPart(new WherePart(condition));
 			return this;
 		}
 		public IQuery<TSource1,TSource2,TSource3,TSource4,TSource5,TSource6,TSource7,TSource8,TSource9> GroupBy(Expression<Func<TSource1,TSource2,TSource3,TSource4,TSource5,TSource6,TSource7,TSource8,TSource9,object>> groupBy)
@@ -440,7 +440,7 @@ namespace ObjectSql.QueryImplementation
 
 		public IQuery<TSource1,TSource2,TSource3,TSource4,TSource5,TSource6,TSource7,TSource8,TSource9,TSource10> Where(Expression<Func<TSource1,TSource2,TSource3,TSource4,TSource5,TSource6,TSource7,TSource8,TSource9,TSource10, bool>> condition)
 		{
-			Context.SqlPart.AddQueryPart(new WherePart(true, condition));
+			Context.SqlPart.AddQueryPart(new WherePart(condition));
 			return this;
 		}
 		public IQuery<TSource1,TSource2,TSource3,TSource4,TSource5,TSource6,TSource7,TSource8,TSource9,TSource10> GroupBy(Expression<Func<TSource1,TSource2,TSource3,TSource4,TSource5,TSource6,TSource7,TSource8,TSource9,TSource10,object>> groupBy)

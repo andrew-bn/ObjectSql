@@ -14,10 +14,10 @@ namespace ObjectSql.Core.QueryBuilder.ExpressionsAnalizers
 			: base(schemaManager, expressionBuilder, sqlWriter)
 		{
 		}
-		public override string BuildSql(BuilderContext context, ParameterExpression[] parameters, Expression expression, bool useAliases)
+		public override string BuildSql(BuilderContext context, ParameterExpression[] parameters, Expression expression)
 		{
 			_initNodeEncountered = false;
-			var result = base.BuildSql(context,parameters, expression, useAliases);
+			var result = base.BuildSql(context,parameters, expression);
 			if (!_initNodeEncountered)
 				throw new ObjectSqlException("Update builder expects entity initialization");
 			return result;
@@ -31,7 +31,7 @@ namespace ObjectSql.Core.QueryBuilder.ExpressionsAnalizers
 				if (i > 0) SqlWriter.WriteComma(Text);
 
 				var storageField = entitySchema.GetStorageField(node.Bindings[i].Member.Name);
-				SqlWriter.WriteName(Text, storageField.Name);
+				SqlWriter.WriteName(BuilderContext, Text, "", storageField.Name);
 				SqlWriter.WriteSet(Text);
 				DbTypeInContext = storageField.DbType;
 				Visit(((MemberAssignment)node.Bindings[i]).Expression);

@@ -53,9 +53,9 @@ namespace ObjectSql.Core.Bo
 
 		}
 
-		public string AnalizeExpression(ParameterExpression[] parameters,System.Linq.Expressions.Expression expression, ExpressionAnalizerType expressionType, bool useAliases)
+		public string AnalizeExpression(ParameterExpression[] parameters,System.Linq.Expressions.Expression expression, ExpressionAnalizerType expressionType)
 		{
-			return _analizers[expressionType].BuildSql(this,parameters, expression, useAliases);
+			return _analizers[expressionType].BuildSql(this,parameters, expression);
 		}
 	}
 }

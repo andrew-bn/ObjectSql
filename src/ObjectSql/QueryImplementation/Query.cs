@@ -59,7 +59,7 @@ namespace ObjectSql.QueryImplementation
 		{
 			Context.SqlPart.AddQueryPart(new NextQueryPart());
 			Context.SqlPart.AddQueryPart(new DeletePart(typeof(T)));
-			Context.SqlPart.AddQueryPart(new WherePart(false, condition));
+			Context.SqlPart.AddQueryPart(new WherePart(condition));
 			return this;
 		}
 		public IQueryEnd Delete<T>()
