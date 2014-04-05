@@ -95,30 +95,6 @@ namespace ObjectSql.Tests
 		}
 		#region CreateDatabaseParameterFactoryAction
 		[Test]
-		public void CreateParameterToCommandAppender_CreatesParameterFactory_ValidCall()
-		{
-			var builder = CreateBuilder();
-			bool validCall = false;
-			builder.CreateParameterFactoryFunc = 
-				(pName, pAccessor, dbType) => 
-				{
-					validCall = pName == _paramName && dbType == _fieldType.Object &&
-								pAccessor.NodeType == ExpressionType.MemberAccess &&
-								pAccessor.Type == typeof(string);
-					var nextExp = ((MemberExpression)pAccessor).Expression;
-					validCall = validCall && nextExp.NodeType == ExpressionType.Convert &&
-								nextExp.Type == typeof(Root);
-					nextExp = ((UnaryExpression)nextExp).Operand;
-					validCall = validCall && nextExp.NodeType == ExpressionType.Parameter &&
-									nextExp.Type == typeof(object);
-					return ParameterFactory(pName,pAccessor,dbType);
-				};
-
-			builder.CreateDatabaseParameterFactoryAction(_paramName, _valueAccessor, _fieldType.Object, ParameterDirection.Input);
-
-			Assert.IsTrue(validCall);
-		}
-		[Test]
 		public void CreateParameterToCommandAppender_ValidDelegateCreated()
 		{
 			var builder = CreateBuilder();
@@ -135,7 +111,7 @@ namespace ObjectSql.Tests
 			return 234;
 		}
 		[Test]
-		[ExpectedException(typeof(ObjectSqlException))]
+		
 		public void CreateParameterToCommandAppender_MethodCallConstant_ErrorExpected()
 		{
 			Expression<Func<int>> exp = () => this.GetConstant();
@@ -147,34 +123,12 @@ namespace ObjectSql.Tests
 			var result = builder.CreateDatabaseParameterFactoryAction(_paramName, _valueAccessor, _fieldType.Object, ParameterDirection.Input);
 
 		}
-		[Test]
-		[ExpectedException(typeof(ObjectSqlException))]
-		public void CreateParameterToCommandAppender_ValueAccessorRootIsParameter_ErrorExpected()
-		{
-			Expression<Func<Root, string>> exp = (p) => p.Value;
-			_valueAccessor = exp.Body;
-
-			var builder = CreateBuilder();
-			builder.CreateParameterFactoryFunc = (pName, pAccessor, dbType) => ParameterFactory(pName, pAccessor, dbType);
-
-			var result = builder.CreateDatabaseParameterFactoryAction(_paramName, _valueAccessor, _fieldType.Object, ParameterDirection.Input);
-		}
+		
 		public class ValueHolder
 		{
 			public static string Value { get; set; }
 		}
-		[Test]
-		[ExpectedException(typeof(ObjectSqlException))]
-		public void CreateParameterToCommandAppender_ValueAccessorRootIsStatic_ErrorExpected()
-		{
-			Expression<Func<string>> exp = () => ValueHolder.Value;
-			_valueAccessor = exp.Body;
 
-			var builder = CreateBuilder();
-			builder.CreateParameterFactoryFunc = (pName, pAccessor, dbType) => ParameterFactory(pName, pAccessor, dbType);
-
-			var result = builder.CreateDatabaseParameterFactoryAction(_paramName, _valueAccessor, _fieldType.Object, ParameterDirection.Input);
-		}
 		#endregion
 		#region GenerateMaterializationDelegate
 		[Test]

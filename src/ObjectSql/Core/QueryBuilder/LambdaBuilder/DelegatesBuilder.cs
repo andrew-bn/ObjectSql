@@ -85,22 +85,7 @@ namespace ObjectSql.Core.QueryBuilder.LambdaBuilder
 			Expression parameterAccessor = null;
 
 			if (expQueue.Count > 1)
-			{
-				while (expQueue.Count != 0)
-				{
-					var exp = expQueue.Pop();
-					if (exp == null) // static type
-						throw new ObjectSqlException("Invalid constant accessor detected. You can not use static fields as constants holders. Consider passing this value as variable");
-					
-				
-					else if (exp.NodeType == ExpressionType.Constant)
-						parameterAccessor = Expression.Convert(rootParam, exp.Type);
-					else if (exp.NodeType == ExpressionType.MemberAccess)
-						parameterAccessor = Expression.MakeMemberAccess(parameterAccessor, ((MemberExpression) exp).Member);
-					else if (exp.NodeType != ExpressionType.Convert)  
-						throw new ObjectSqlException("Invalid constant accessor detected");
-				}
-			}
+				parameterAccessor = valueAccessor.Visit<ConstantExpression>((v,e) => Expression.Convert(rootParam, e.Type));
 			else if (expQueue.Peek().NodeType != ExpressionType.Constant)
 				throw new ObjectSqlException("Invalid constant accessor detected");
 			else if (((ConstantExpression)expQueue.Peek()).Value != null)
@@ -111,15 +96,9 @@ namespace ObjectSql.Core.QueryBuilder.LambdaBuilder
 			var paramType = parameterAccessor.Type;
 
 			if (!paramType.IsValueType)
-				parameterAccessor = Expression.Condition(
-					Expression.Equal(parameterAccessor, Expression.Constant(null)),
-					Expression.Convert(Expression.Constant(DBNull.Value), typeof(object)),
-					Expression.Convert(parameterAccessor, typeof(object)));
+				parameterAccessor = Expression.Coalesce(parameterAccessor, Expression.Convert(Expression.Constant(DBNull.Value), typeof (object)));
 			else if (paramType.IsGenericType && paramType.GetGenericTypeDefinition() == typeof(Nullable<>))
-				parameterAccessor = Expression.Condition(
-					Expression.MakeMemberAccess(parameterAccessor, paramType.GetProperty("HasValue")),
-					Expression.Convert(Expression.MakeMemberAccess(parameterAccessor, paramType.GetProperty("Value")), typeof(object)),
-					Expression.Convert(Expression.MakeMemberAccess(null, typeof(DBNull).GetField("Value")), typeof(object)));
+				parameterAccessor = Expression.Coalesce(parameterAccessor, Expression.Convert(Expression.Constant(DBNull.Value), typeof (object)));
 			else
 				parameterAccessor = Expression.Convert(parameterAccessor, typeof(object));
 

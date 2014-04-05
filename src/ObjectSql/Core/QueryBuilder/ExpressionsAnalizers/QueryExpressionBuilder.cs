@@ -252,33 +252,50 @@ namespace ObjectSql.Core.QueryBuilder.ExpressionsAnalizers
 				                          ((MemberExpression) n).Member == typeof (Sql).GetProperty("Query"));
 
 				if (rootNode == null)
-					throw new ObjectSqlException("Invalid method call expression detected. Do not use method calls to pass parameters to SQL");
+				{
+					AddParameter(node);
 
-				var indexOfRoot = nodes.IndexOf(rootNode);
-				var param = Expression.Parameter(typeof (Query));
-				nodes[indexOfRoot] = param;
-				Expression newNode = param;
-				
-				for (int i = indexOfRoot - 1; i >= 0; i--)
-					 nodes[i] = newNode = ((MethodCallExpression)nodes[i]).Update(newNode, ((MethodCallExpression)nodes[i]).Arguments);
+				}
+				else
+				{
+					var indexOfRoot = nodes.IndexOf(rootNode);
+					var param = Expression.Parameter(typeof (Query));
+					nodes[indexOfRoot] = param;
+					Expression newNode = param;
 
-				newNode = new ParametersSubstitutorVisitor(ExpressionParameters).Visit(newNode);
+					for (int i = indexOfRoot - 1; i >= 0; i--)
+						nodes[i] = newNode = ((MethodCallExpression) nodes[i]).Update(newNode, ((MethodCallExpression) nodes[i]).Arguments);
 
-				var exp = Expression.Lambda<Func<Query,IQueryEnd>>(newNode, param).Compile();
-				var ctx = new QueryContext(BuilderContext.Context.InitialConnectionString,
-				                           BuilderContext.Context.Command, BuilderContext.Context.ResourcesTreatmentType,
-				                           BuilderContext.Context.QueryEnvironment);
+					newNode = newNode.Visit<ParameterExpression>((v, e) => SubstituteParameter(ExpressionParameters, e));
 
-				var q = new Query(ctx);
-				exp(q);
-				q.Context.SqlPart.BuilderContext.Preparators = BuilderContext.Preparators;
+					var exp = Expression.Lambda<Func<Query, IQueryEnd>>(newNode, param).Compile();
+					var ctx = new QueryContext(BuilderContext.Context.InitialConnectionString,
+					                           BuilderContext.Context.Command, BuilderContext.Context.ResourcesTreatmentType,
+					                           BuilderContext.Context.QueryEnvironment);
 
-				q.Context.SqlPart.BuildPart();
-				Text.Append(q.Context.SqlPart.BuilderContext.Text.ToString());
+					var q = new Query(ctx);
+					exp(q);
+					q.Context.SqlPart.BuilderContext.Preparators = BuilderContext.Preparators;
+
+					q.Context.SqlPart.BuildPart();
+					Text.Append(q.Context.SqlPart.BuilderContext.Text.ToString());
+				}
 			}
 
 			return node;
 		}
+
+		private Expression SubstituteParameter(IEnumerable<ParameterExpression> parameters, ParameterExpression node)
+		{
+			if (parameters.Contains(node))
+			{
+				var s = (IParameterSubstitutor)Activator.CreateInstance(typeof(ParametersSubstitutor<>).MakeGenericType(node.Type));
+				s.Name = node.Name;
+				return Expression.MakeMemberAccess(Expression.Constant(s, s.GetType()), s.GetType().GetProperty("Table"));
+			}
+			return node;
+		}
+
 
 		private SingleParameterPrePostProcessor GetParameterDescriptor(Expression accessor, IStorageFieldType dbTypeInContext)
 		{

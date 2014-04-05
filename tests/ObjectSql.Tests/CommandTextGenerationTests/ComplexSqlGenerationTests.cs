@@ -409,5 +409,57 @@ WHERE  ([p].[CategoryID] IN (SELECT [c].[CategoryID]
 				"P1".DbType(SqlDbType.NVarChar), "23".DbType(SqlDbType.NVarChar),
 				"P2".DbType(SqlDbType.NVarChar), "223".DbType(SqlDbType.NVarChar), 2.DbType(SqlDbType.Int));
 		}
+		[Test]
+		public void should_correctly_use_complex_parameters1()
+		{
+			int? param = 5;
+			Query
+				.From<Product>()
+				.Where(p=> p.ProductName == param.ToString())
+				.Select(p=>p.ProductName)
+				.Verify(
+				@"SELECT [p].[ProductName] 
+				  FROM [Product] AS [p] 
+				  WHERE ([p].[ProductName] = @p0)","5");
+		}
+
+		[Test]
+		public void should_correctly_use_complex_parameters2()
+		{
+			int? param = 5;
+			Query
+				.From<Product>()
+				.Where(p => p.ProductID == param.ToString().Length)
+				.Select(p => p.ProductName)
+				.Verify(
+				@"SELECT [p].[ProductName] 
+				  FROM [Product] AS [p] 
+				  WHERE ([p].[ProductID] = @p0)", 1);
+		}
+		[Test]
+		public void should_correctly_use_complex_parameters3()
+		{
+			var param = new DateTime(2014, 2, 23);
+			Query
+				.From<Product>()
+				.Where(p => p.ProductID == param.Day)
+				.Select(p => p.ProductName)
+				.Verify(
+				@"SELECT [p].[ProductName] 
+				  FROM [Product] AS [p] 
+				  WHERE ([p].[ProductID] = @p0)", 23);
+		}
+		[Test]
+		public void should_correctly_use_complex_parameters4()
+		{
+			Query
+				.From<Product>()
+				.Where(p => p.ProductID == new DateTime(2014, 2, 23).Day)
+				.Select(p => p.ProductName)
+				.Verify(
+				@"SELECT [p].[ProductName] 
+				  FROM [Product] AS [p] 
+				  WHERE ([p].[ProductID] = @p0)", 23);
+		}
 	}
 }

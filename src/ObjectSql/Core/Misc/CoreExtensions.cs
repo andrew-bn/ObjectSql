@@ -42,5 +42,10 @@ namespace ObjectSql.Core.Misc
 			}
 			return default(T);
 		}
+
+		public static Expression Visit<T1>(this Expression exp, Func<ExpressionVisitor, T1, Expression> visitor1) where T1:Expression
+		{
+			return new ExpressionVisitorManager(visitor1).Visit(exp);
+		}
 	}
 }

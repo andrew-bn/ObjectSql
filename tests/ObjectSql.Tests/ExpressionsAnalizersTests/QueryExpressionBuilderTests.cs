@@ -414,7 +414,6 @@ namespace ObjectSql.Tests.ExpressionsAnalizersTests
 			return 0;
 		}
 		[Test]
-		[ExpectedException(typeof(ObjectSqlException))]
 		public void BuildSql_MethodCall_ErrorExpected()
 		{
 			Expression<Func<object>> exp = () => this.GetConstant();
