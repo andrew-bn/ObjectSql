@@ -1,6 +1,5 @@
 ﻿using NUnit.Framework;
 using Moq;
-using ObjectSql.Core.Bo.EntitySchema;
 using ObjectSql.Core.QueryBuilder.InfoExtractor;
 using ObjectSql.Core.SchemaManager;
 using ObjectSql.Core.Bo;
@@ -10,6 +9,7 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
+using ObjectSql.Core.SchemaManager.EntitySchema;
 
 namespace ObjectSql.Tests
 {

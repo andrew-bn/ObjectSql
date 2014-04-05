@@ -1,6 +1,6 @@
 ﻿using System.Data.Common;
-using ObjectSql.Core.Bo.EntitySchema;
 using ObjectSql.Core.Misc;
+using ObjectSql.Core.SchemaManager.EntitySchema;
 using ObjectSql.Exceptions;
 using System;
 using System.Collections.Generic;

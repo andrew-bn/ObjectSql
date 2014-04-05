@@ -5,7 +5,6 @@ using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 using ObjectSql.Core.Bo;
-using ObjectSql.Core.Bo.EntitySchema;
 using ObjectSql.Core.QueryBuilder.ExpressionsAnalizers;
 
 namespace ObjectSql.Core.QueryBuilder

@@ -1,6 +1,6 @@
 using System.Data;
 
-namespace ObjectSql.Core.Bo.EntitySchema
+namespace ObjectSql.Core.SchemaManager.EntitySchema
 {
 	public class StorageParameter:StorageField
 	{

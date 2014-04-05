@@ -1,10 +1,10 @@
 ﻿using NUnit.Framework;
 using Moq;
-using ObjectSql.Core.Bo.EntitySchema;
 using ObjectSql.Core.Misc;
 using ObjectSql.Core.QueryBuilder.InfoExtractor;
 using ObjectSql.Core.SchemaManager;
 using ObjectSql.Core.Bo;
+using ObjectSql.Core.SchemaManager.EntitySchema;
 using ObjectSql.QueryInterfaces;
 using System;
 using System.Collections.Generic;

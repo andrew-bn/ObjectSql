@@ -1,7 +1,7 @@
 ﻿using System.Data;
 using System.Data.EntityClient;
-using ObjectSql.Core.Bo.EntitySchema;
 using ObjectSql.Core.SchemaManager;
+using ObjectSql.Core.SchemaManager.EntitySchema;
 using ObjectSql.Exceptions;
 using System;
 using System.Collections.Generic;

@@ -3,15 +3,15 @@ using System.Collections.Concurrent;
 using System.Data;
 using System.Linq;
 using System.Reflection;
-using ObjectSql.Core.Bo.EntitySchema;
 using ObjectSql.Core.Misc;
+using ObjectSql.Core.SchemaManager.EntitySchema;
 
 namespace ObjectSql.Core.SchemaManager
 {
 	public class EntitySchemaManager<TTypeEnum> : IEntitySchemaManager
 		where TTypeEnum : struct
 	{
-		readonly ConcurrentDictionary<Type, EntitySchema> _schemas = new ConcurrentDictionary<Type, EntitySchema>();
+		readonly ConcurrentDictionary<Type, EntitySchema.EntitySchema> _schemas = new ConcurrentDictionary<Type, EntitySchema.EntitySchema>();
 		readonly ConcurrentDictionary<MethodInfo, FuncSchema> _funcSchemas = new ConcurrentDictionary<MethodInfo, FuncSchema>();
 
 		public StorageName StorageName(Type entityType)
@@ -20,7 +20,7 @@ namespace ObjectSql.Core.SchemaManager
 			return entitySchema.StorageName;
 		}
 
-		public EntitySchema GetSchema(Type entityType)
+		public EntitySchema.EntitySchema GetSchema(Type entityType)
 		{
 			return _schemas.GetOrAdd(entityType, CreateSchema);
 		}
@@ -41,13 +41,13 @@ namespace ObjectSql.Core.SchemaManager
 		}
 
 		#region entitySchema
-		protected virtual EntitySchema CreateSchema(Type entity)
+		protected virtual EntitySchema.EntitySchema CreateSchema(Type entity)
 		{
 			var entityFields = entity.GetProperties()
 									.Where(NotFilteredEntityProperty)
 									.ToArray();
 
-			return new EntitySchema(
+			return new EntitySchema.EntitySchema(
 				entity,
 				ObtainStorageName(entity),
 				entityFields.ToDictionary(f => f.Name, ObtainStorageField));

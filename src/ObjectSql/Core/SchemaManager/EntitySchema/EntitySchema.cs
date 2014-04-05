@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 
-namespace ObjectSql.Core.Bo.EntitySchema
+namespace ObjectSql.Core.SchemaManager.EntitySchema
 {
 	public class EntitySchema
 	{

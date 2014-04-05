@@ -1,12 +1,12 @@
 ﻿using System;
 using System.Reflection;
-using ObjectSql.Core.Bo.EntitySchema;
+using ObjectSql.Core.SchemaManager.EntitySchema;
 
 namespace ObjectSql.Core.SchemaManager
 {
 	public interface IEntitySchemaManager
 	{
-		EntitySchema GetSchema(Type entityType);
+		EntitySchema.EntitySchema GetSchema(Type entityType);
 		FuncSchema GetFuncSchema(MethodInfo method);
 		IStorageFieldType ParseDbType(string value);
 	}

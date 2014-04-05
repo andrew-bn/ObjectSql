@@ -1,6 +1,6 @@
 ﻿using NUnit.Framework;
-using ObjectSql.Core.Bo.EntitySchema;
 using ObjectSql.Core.SchemaManager;
+using ObjectSql.Core.SchemaManager.EntitySchema;
 using ObjectSql.EF5;
 using ObjectSql.Exceptions;
 using ObjectSql.Core.Bo;

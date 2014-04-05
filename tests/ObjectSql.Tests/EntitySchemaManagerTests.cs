@@ -1,5 +1,4 @@
 ﻿using NUnit.Framework;
-using ObjectSql.Core.Bo.EntitySchema;
 using ObjectSql.Core.SchemaManager;
 using ObjectSql.Core.Bo;
 using System;
@@ -9,6 +8,7 @@ using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using ObjectSql.Core.SchemaManager.EntitySchema;
 
 namespace ObjectSql.Tests
 {

@@ -1,7 +1,7 @@
 using System;
 using System.Data;
 using System.Linq.Expressions;
-using ObjectSql.Core.Bo.EntitySchema;
+using ObjectSql.Core.SchemaManager.EntitySchema;
 
 namespace ObjectSql.Core.Bo.CommandPreparatorDescriptor
 {

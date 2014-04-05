@@ -1,6 +1,5 @@
 ﻿using ObjectSql.Core.Bo;
 using ObjectSql.Core.Bo.CommandPreparatorDescriptor;
-using ObjectSql.Core.Bo.EntitySchema;
 using ObjectSql.Core.Misc;
 using ObjectSql.Core.QueryBuilder.LambdaBuilder;
 using ObjectSql.Core.SchemaManager;
@@ -8,6 +7,7 @@ using System;
 using System.Data;
 using System.Linq;
 using System.Linq.Expressions;
+using ObjectSql.Core.SchemaManager.EntitySchema;
 
 namespace ObjectSql.Core.QueryBuilder.ExpressionsAnalizers
 {

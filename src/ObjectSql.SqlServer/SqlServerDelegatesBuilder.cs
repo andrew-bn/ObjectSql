@@ -1,9 +1,9 @@
-﻿using ObjectSql.Core.Bo.EntitySchema;
-using ObjectSql.Core.Misc;
+﻿using ObjectSql.Core.Misc;
 using ObjectSql.Core.QueryBuilder.LambdaBuilder;
 using System.Data;
 using System.Data.SqlClient;
 using System.Linq.Expressions;
+using ObjectSql.Core.SchemaManager.EntitySchema;
 
 namespace ObjectSql.SqlServer
 {

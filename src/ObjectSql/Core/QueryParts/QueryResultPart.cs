@@ -4,7 +4,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using ObjectSql.Core.Bo.CommandPreparatorDescriptor;
-using ObjectSql.Core.Bo.EntitySchema;
 
 namespace ObjectSql.Core.QueryParts
 {

@@ -2,10 +2,10 @@
 using Moq;
 using ObjectSql.Core;
 using ObjectSql.Core.Bo.CommandPreparatorDescriptor;
-using ObjectSql.Core.Bo.EntitySchema;
 using ObjectSql.Core.QueryBuilder.ExpressionsAnalizers;
 using ObjectSql.Core.QueryBuilder.LambdaBuilder;
 using ObjectSql.Core.SchemaManager;
+using ObjectSql.Core.SchemaManager.EntitySchema;
 using ObjectSql.Exceptions;
 using ObjectSql.SqlServer;
 using ObjectSql.Core.Bo;

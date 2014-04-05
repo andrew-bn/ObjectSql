@@ -4,10 +4,10 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
 using ObjectSql.Core.Bo;
-using ObjectSql.Core.Bo.EntitySchema;
 using ObjectSql.Core.Misc;
 using ObjectSql.Core.QueryBuilder.ExpressionsAnalizers;
 using ObjectSql.Core.QueryParts;
+using ObjectSql.Core.SchemaManager.EntitySchema;
 using ObjectSql.Exceptions;
 
 namespace ObjectSql.Core.QueryBuilder
@@ -96,6 +96,7 @@ namespace ObjectSql.Core.QueryBuilder
 		{
 			return string.Format(" {0}({1}) ", method, string.Join(", ", parts));
 		}
+
 		public CommandText WriteExpression(ISqlQueryBuilder expressionVisitor, Core.Bo.BuilderContext context, CommandText commandText, System.Linq.Expressions.Expression expression)
 		{
 			if (expression.NodeType == ExpressionType.Call)

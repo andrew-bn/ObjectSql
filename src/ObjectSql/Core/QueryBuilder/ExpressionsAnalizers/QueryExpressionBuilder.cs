@@ -1,10 +1,10 @@
 ﻿using System.Collections.Generic;
 using ObjectSql.Core.Bo;
 using ObjectSql.Core.Bo.CommandPreparatorDescriptor;
-using ObjectSql.Core.Bo.EntitySchema;
 using ObjectSql.Core.Misc;
 using ObjectSql.Core.QueryBuilder.LambdaBuilder;
 using ObjectSql.Core.SchemaManager;
+using ObjectSql.Core.SchemaManager.EntitySchema;
 using ObjectSql.Exceptions;
 using ObjectSql.QueryImplementation;
 using ObjectSql.QueryInterfaces;
@@ -231,11 +231,8 @@ namespace ObjectSql.Core.QueryBuilder.ExpressionsAnalizers
 			if (!node.ContainsSql())
 			{
 				AddParameter(node);
-				return node;
 			}
-			var isNestedQuery = typeof(IQuery).IsAssignableFrom(node.Type);
-			
-			if (!isNestedQuery)
+			else if (!typeof(IQuery).IsAssignableFrom(node.Type))//is nested query
 			{
 				SqlWriter.WriteExpression(this, BuilderContext, Text, node);
 			}
@@ -271,36 +268,7 @@ namespace ObjectSql.Core.QueryBuilder.ExpressionsAnalizers
 
 				q.Context.SqlPart.BuildPart();
 				Text.Append(q.Context.SqlPart.BuilderContext.Text.ToString());
-
 			}
-			
-			//if (node.Method.DeclaringType.GetCustomAttribute(typeof(DatabaseExtensionAttribute)) != null)
-			//{
-			//	var dbTypesAttr = node.Method.GetCustomAttribute(typeof(DatabaseTypesAttribute)) as DatabaseTypesAttribute;
-			//	var dbTypes = dbTypesAttr == null ? new string[0] : dbTypesAttr.Types;
-
-			//	var buff = Text;
-
-			//	var parts = new string[node.Arguments.Count];
-			//	for (int i = 0; i < node.Arguments.Count; i++)
-			//	{
-			//		DbTypeInContext = (dbTypes.Length == 0) ? null : DbTypeInContext = SchemaManager.ParseDbType(dbTypes[i]);
-
-			//		Text = new CommandText();
-			//		Visit(node.Arguments[i]);
-			//		parts[i] = Text.ToString();
-			//	}
-
-			//	if (dbTypes.Length > 0)
-			//		DbTypeInContext = SchemaManager.ParseDbType(dbTypes[dbTypes.Length - 1]);
-
-			//	Text = buff;
-			//	var meth = node.Method.DeclaringType.GetMethod("Render" + node.Method.Name,
-			//												   BindingFlags.Static | BindingFlags.IgnoreCase |
-			//												   BindingFlags.NonPublic);
-			//	var renderResult = meth.Invoke(null, new object[] { BuilderContext, parts });
-			//	Text.Append(renderResult.ToString());
-			//}
 
 			return node;
 		}

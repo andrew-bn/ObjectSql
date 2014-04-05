@@ -5,10 +5,10 @@ using System.Linq.Expressions;
 using System.Reflection;
 using ObjectSql.Core;
 using ObjectSql.Core.Bo;
-using ObjectSql.Core.Bo.EntitySchema;
 using ObjectSql.Core.QueryBuilder;
 using ObjectSql.Core.QueryBuilder.ExpressionsAnalizers;
 using ObjectSql.Core.QueryParts;
+using ObjectSql.Core.SchemaManager.EntitySchema;
 using ObjectSql.Exceptions;
 
 namespace ObjectSql.SqlServer
