@@ -98,13 +98,14 @@
     <Compile Include="Core\Bo\QueryPreparationData.cs" />
     <Compile Include="Core\Bo\QueryRoots.cs" />
     <Compile Include="Core\Bo\ResourcesTreatmentType.cs" />
-    <Compile Include="Core\Bo\StorageType.cs" />
+    <Compile Include="Core\DeclaringTypeAttribute.cs" />
     <Compile Include="Core\DynamicResult.cs" />
     <Compile Include="Core\ExpressionVisitorManager.cs" />
     <Compile Include="Core\NonQueryResultHolder.cs" />
     <Compile Include="Core\QueryBuilder\ExpressionsAnalizers\IParameterSubstitutor.cs" />
     <Compile Include="Core\QueryBuilder\ExpressionsAnalizers\ParametersSubstitutor.cs" />
     <Compile Include="Core\QueryBuilder\ExpressionsAnalizers\ParametersSubstitutorVisitor.cs" />
+    <Compile Include="Core\QueryBuilder\SqlWriterContext.cs" />
     <Compile Include="Core\QueryDataReader.cs" />
     <Compile Include="Core\EntityEnumerable.cs" />
     <Compile Include="Core\ExecutionManager.cs" />
@@ -115,7 +116,6 @@
     <Compile Include="Core\ScalarResultHolder.cs" />
     <Compile Include="DefaultSchemaManagerFactory.cs" />
     <Compile Include="EmitAttribute.cs" />
-    <Compile Include="DatabaseTypesAttribute.cs" />
     <Compile Include="IAsyncEnumerable.cs" />
     <Compile Include="IAsyncEnumerator.cs" />
     <Compile Include="Core\ICommandPreparatorsHolder.cs" />
@@ -137,7 +137,7 @@
     <Compile Include="Core\QueryBuilder\InfoExtractor\IMaterializationInfoExtractor.cs" />
     <Compile Include="Core\QueryBuilder\InfoExtractor\InsertionInfoExtractor.cs" />
     <Compile Include="Core\QueryBuilder\InfoExtractor\MaterializationInfoExtractor.cs" />
-    <Compile Include="Core\QueryBuilder\ISqlWriter.cs" />
+    <Compile Include="Core\QueryBuilder\SqlWriter.cs" />
     <Compile Include="Core\QueryBuilder\LambdaBuilder\IDelegatesBuilder.cs" />
     <Compile Include="Core\QueryBuilder\LambdaBuilder\DelegatesBuilder.cs" />
     <Compile Include="Core\Misc\ExpressionEnumerator.cs" />

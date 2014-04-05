@@ -9,7 +9,7 @@ namespace ObjectSql.Core.QueryBuilder.ExpressionsAnalizers
 {
 	public class QueryFieldsSequenceBuilder: QueryExpressionBuilder
 	{
-		public QueryFieldsSequenceBuilder(IEntitySchemaManager schemaManager, IDelegatesBuilder expressionBuilder, ISqlWriter sqlWriter)
+		public QueryFieldsSequenceBuilder(IEntitySchemaManager schemaManager, IDelegatesBuilder expressionBuilder, SqlWriter sqlWriter)
 			: base(schemaManager, expressionBuilder, sqlWriter)
 		{
 		}

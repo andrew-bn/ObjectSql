@@ -22,14 +22,14 @@ namespace ObjectSql.Core.QueryBuilder.ExpressionsAnalizers
 		protected BuilderContext BuilderContext { get; private set; }
 		protected IEntitySchemaManager SchemaManager { get; private set; }
 		protected bool UseAliases { get; private set; }
-		protected IStorageFieldType DbTypeInContext { get; set; }
+		public IStorageFieldType DbTypeInContext { get; set; }
 		protected ICommandPreparatorsHolder CommandPreparatorsHolder { get { return BuilderContext.Preparators; } }
 		protected IDelegatesBuilder DelegatesBuilder { get; private set; }
-		protected ISqlWriter SqlWriter { get; private set; }
+		protected SqlWriter SqlWriter { get; private set; }
 		protected CommandText Text { get; set; }
 		protected ParameterExpression[] ExpressionParameters { get; set; }
 		public QueryExpressionBuilder(IEntitySchemaManager schemaManager,
-			IDelegatesBuilder expressionBuilder, ISqlWriter sqlWriter)
+			IDelegatesBuilder expressionBuilder, SqlWriter sqlWriter)
 		{
 			DbTypeInContext = null;
 			SchemaManager = schemaManager;
@@ -44,11 +44,19 @@ namespace ObjectSql.Core.QueryBuilder.ExpressionsAnalizers
 			ExpressionParameters = parameters;
 			return BuildSql(expression);
 		}
-		private string BuildSql(Expression expression)
+		public string BuildSql(IStorageFieldType dbTypeInContext, Expression expression)
 		{
+			DbTypeInContext = dbTypeInContext;
+			return BuildSql(expression);
+		}
+		public string BuildSql(Expression expression)
+		{
+			var buf = Text;
 			Text = new CommandText();
 			Visit(expression);
-			return Text.ToString();
+			var result = Text.ToString();
+			Text = buf;
+			return result;
 		}
 		private void AddParameter(Expression accessor)
 		{
@@ -60,6 +68,7 @@ namespace ObjectSql.Core.QueryBuilder.ExpressionsAnalizers
 			}
 			else
 			{
+
 				var param = GetParameterDescriptor(accessor, DbTypeInContext);
 				SqlWriter.WriteParameter(Text, param.Name);
 			}
@@ -67,14 +76,11 @@ namespace ObjectSql.Core.QueryBuilder.ExpressionsAnalizers
 
 		protected override Expression VisitConstant(ConstantExpression node)
 		{
-			if (node.Type.GetCustomAttribute(typeof(DatabaseExtensionAttribute)) != null)
-			{
-				RenderDatabaseExtension(node);
-			}
-			else
-			{
+			if (!node.ContainsSql())
 				AddParameter(node);
-			}
+			else
+				SqlWriter.WriteExpression(this, BuilderContext, Text, node);
+
 			return node;
 		}
 
@@ -103,8 +109,11 @@ namespace ObjectSql.Core.QueryBuilder.ExpressionsAnalizers
 		}
 		protected override Expression VisitMember(MemberExpression node)
 		{
-
-			if (node.Expression.NodeType == ExpressionType.Parameter)
+			if (!node.ContainsSql())
+			{
+				AddParameter(node);
+			}
+			else if (node.Expression.NodeType == ExpressionType.Parameter)
 			{
 				var entityType = node.Member.DeclaringType;
 				var aliasName = ((ParameterExpression)node.Expression).Name;
@@ -112,20 +121,22 @@ namespace ObjectSql.Core.QueryBuilder.ExpressionsAnalizers
 
 				WriteStorageFieldAccess(entityType, aliasName, fieldName);
 			}
+			else if (node.Expression is MemberExpression &&
+				((MemberExpression)node.Expression).Expression.Type.IsGenericType &&
+				((MemberExpression)node.Expression).Expression.Type.GetGenericTypeDefinition() == typeof(ParametersSubstitutor<>))
+			{
+
+				var entityType = ((MemberExpression)node.Expression).Expression.Type.GetGenericArguments()[0];
+				var aliasName = ((IParameterSubstitutor)((ConstantExpression)((MemberExpression)node.Expression).Expression).Value).Name;
+				var fieldName = node.Member.Name;
+
+				WriteStorageFieldAccess(entityType, aliasName, fieldName);
+			}
 			else
 			{
-				var ma = node.Expression as MemberExpression;
-				if (ma != null && ma.Expression.Type.IsGenericType &&
-					ma.Expression.Type.GetGenericTypeDefinition() == typeof(ParametersSubstitutor<>))
-				{
-					var entityType = ma.Expression.Type.GetGenericArguments()[0];
-					var aliasName = ((IParameterSubstitutor)((ConstantExpression)ma.Expression).Value).Name;
-					var fieldName = node.Member.Name;
-
-					WriteStorageFieldAccess(entityType, aliasName, fieldName);
-				}
-				else AddParameter(node);
+				SqlWriter.WriteExpression(this, BuilderContext, Text, node);
 			}
+
 			return node;
 		}
 
@@ -217,32 +228,16 @@ namespace ObjectSql.Core.QueryBuilder.ExpressionsAnalizers
 
 		protected override Expression VisitMethodCall(MethodCallExpression node)
 		{
-			if (node.Method.DeclaringType.GetCustomAttribute(typeof(DatabaseExtensionAttribute)) != null)
+			if (!node.ContainsSql())
 			{
-				var dbTypesAttr = node.Method.GetCustomAttribute(typeof(DatabaseTypesAttribute)) as DatabaseTypesAttribute;
-				var dbTypes = dbTypesAttr == null ? new string[0] : dbTypesAttr.Types;
-
-				var buff = Text;
-
-				var parts = new string[node.Arguments.Count];
-				for (int i = 0; i < node.Arguments.Count; i++)
-				{
-					DbTypeInContext = (dbTypes.Length == 0) ? null : DbTypeInContext = SchemaManager.ParseDbType(dbTypes[i]);
-
-					Text = new CommandText();
-					Visit(node.Arguments[i]);
-					parts[i] = Text.ToString();
-				}
-
-				if (dbTypes.Length > 0)
-					DbTypeInContext = SchemaManager.ParseDbType(dbTypes[dbTypes.Length - 1]);
-
-				Text = buff;
-				var meth = node.Method.DeclaringType.GetMethod("Render" + node.Method.Name,
-															   BindingFlags.Static | BindingFlags.IgnoreCase |
-															   BindingFlags.NonPublic);
-				var renderResult = meth.Invoke(null, new object[] { BuilderContext, parts });
-				Text.Append(renderResult.ToString());
+				AddParameter(node);
+				return node;
+			}
+			var isNestedQuery = typeof(IQuery).IsAssignableFrom(node.Type);
+			
+			if (!isNestedQuery)
+			{
+				SqlWriter.WriteExpression(this, BuilderContext, Text, node);
 			}
 			else
 			{
@@ -251,40 +246,61 @@ namespace ObjectSql.Core.QueryBuilder.ExpressionsAnalizers
 										  ((MemberExpression)n).Expression == null &&
 										  ((MemberExpression)n).Member == typeof(Sql).GetProperty("Query"));
 
-				if (rootNode == null)
-				{
-					AddParameter(node);
+				var indexOfRoot = nodes.IndexOf(rootNode);
+				var param = Expression.Parameter(typeof(Query));
+				nodes[indexOfRoot] = param;
+				Expression newNode = param;
 
-				}
-				else
-				{
-					var indexOfRoot = nodes.IndexOf(rootNode);
-					var param = Expression.Parameter(typeof(Query));
-					nodes[indexOfRoot] = param;
-					Expression newNode = param;
+				for (int i = indexOfRoot - 1; i >= 0; i--)
+					nodes[i] = newNode = ((MethodCallExpression)nodes[i]).Update(newNode, ((MethodCallExpression)nodes[i]).Arguments);
 
-					for (int i = indexOfRoot - 1; i >= 0; i--)
-						nodes[i] = newNode = ((MethodCallExpression)nodes[i]).Update(newNode, ((MethodCallExpression)nodes[i]).Arguments);
+				newNode = newNode.Visit<ParameterExpression>((v, e) => SubstituteParameter(ExpressionParameters, e));
 
-					newNode = newNode.Visit<ParameterExpression>((v, e) => SubstituteParameter(ExpressionParameters, e));
+				var exp = Expression.Lambda<Func<Query, IQueryEnd>>(newNode, param).Compile();
+				var ctx = new QueryContext(BuilderContext.Context.InitialConnectionString,
+										   BuilderContext.Context.Command, BuilderContext.Context.ResourcesTreatmentType,
+										   BuilderContext.Context.QueryEnvironment);
 
-					var exp = Expression.Lambda<Func<Query, IQueryEnd>>(newNode, param).Compile();
-					var ctx = new QueryContext(BuilderContext.Context.InitialConnectionString,
-											   BuilderContext.Context.Command, BuilderContext.Context.ResourcesTreatmentType,
-											   BuilderContext.Context.QueryEnvironment);
+				var q = new Query(ctx);
+				exp(q);
 
-					var q = new Query(ctx);
-					exp(q);
+				foreach (var root in BuilderContext.Context.SqlPart.QueryRoots.Roots)
+					q.Context.SqlPart.QueryRoots.AddRoot(root);
 
-					foreach(var root in BuilderContext.Context.SqlPart.QueryRoots.Roots)
-						q.Context.SqlPart.QueryRoots.AddRoot(root);
+				q.Context.SqlPart.BuilderContext.Preparators = BuilderContext.Preparators;
 
-					q.Context.SqlPart.BuilderContext .Preparators = BuilderContext.Preparators;
+				q.Context.SqlPart.BuildPart();
+				Text.Append(q.Context.SqlPart.BuilderContext.Text.ToString());
 
-					q.Context.SqlPart.BuildPart();
-					Text.Append(q.Context.SqlPart.BuilderContext.Text.ToString());
-				}
 			}
+			
+			//if (node.Method.DeclaringType.GetCustomAttribute(typeof(DatabaseExtensionAttribute)) != null)
+			//{
+			//	var dbTypesAttr = node.Method.GetCustomAttribute(typeof(DatabaseTypesAttribute)) as DatabaseTypesAttribute;
+			//	var dbTypes = dbTypesAttr == null ? new string[0] : dbTypesAttr.Types;
+
+			//	var buff = Text;
+
+			//	var parts = new string[node.Arguments.Count];
+			//	for (int i = 0; i < node.Arguments.Count; i++)
+			//	{
+			//		DbTypeInContext = (dbTypes.Length == 0) ? null : DbTypeInContext = SchemaManager.ParseDbType(dbTypes[i]);
+
+			//		Text = new CommandText();
+			//		Visit(node.Arguments[i]);
+			//		parts[i] = Text.ToString();
+			//	}
+
+			//	if (dbTypes.Length > 0)
+			//		DbTypeInContext = SchemaManager.ParseDbType(dbTypes[dbTypes.Length - 1]);
+
+			//	Text = buff;
+			//	var meth = node.Method.DeclaringType.GetMethod("Render" + node.Method.Name,
+			//												   BindingFlags.Static | BindingFlags.IgnoreCase |
+			//												   BindingFlags.NonPublic);
+			//	var renderResult = meth.Invoke(null, new object[] { BuilderContext, parts });
+			//	Text.Append(renderResult.ToString());
+			//}
 
 			return node;
 		}
@@ -335,12 +351,6 @@ namespace ObjectSql.Core.QueryBuilder.ExpressionsAnalizers
 		protected Action<IDbCommand, object> CreateArrayParameterInitializer(string name, Expression accessor, IStorageFieldType dbTypeInContext)
 		{
 			return DelegatesBuilder.CreateArrayParameters(name, accessor, dbTypeInContext, ParameterDirection.Input);
-		}
-		private static bool IsConstant(Expression accessor)
-		{
-			var expressions = ExpressionEnumerator.Enumerate(accessor).ToArray();
-			var isConstant = expressions.Length == 1 && (expressions[0] is ConstantExpression);
-			return isConstant;
 		}
 
 		private void RenderDatabaseExtension(ConstantExpression node)

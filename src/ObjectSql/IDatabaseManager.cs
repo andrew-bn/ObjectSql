@@ -17,6 +17,6 @@ namespace ObjectSql
 		bool MatchManager(IDataReader dataReader);
 		IDelegatesBuilder CreateDelegatesBuilder();
 
-		ISqlWriter CreateSqlWriter();
+		SqlWriter CreateSqlWriter();
 	}
 }

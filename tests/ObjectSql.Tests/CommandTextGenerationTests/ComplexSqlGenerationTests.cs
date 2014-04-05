@@ -39,29 +39,6 @@ namespace ObjectSql.Tests.CommandTextGenerationTests
 					val, 2, val2);
 		}
 		[Test]
-		public void ComplexSelectSql_TypeSchema2()
-		{
-			var val = "val";
-			var val2 = "val";
-			var result = Query
-				.From<Product>()
-				.Join<Category>((p, c) => p.CategoryID == c.CategoryID)
-				.Where((p, c) => p.ProductName != val && p.ReorderLevel == 2 &&
-									 p.QuantityPerUnit != null || p.QuantityPerUnit != val)
-				.GroupBy((p, c) => new { p.ProductName })
-				.Where((p, c) => p.ProductName != val2)
-				.Select((p, c) => new { p, c })
-				.Verify(
-				@"SELECT [p].[ProductName] AS [ProductName],[c].[CategoryName] AS [CategoryName] 
-				  FROM [Product] AS [p] 
-					JOIN [Category] AS [c] ON ([p].[CategoryID] = [c].[CategoryID])
-				  WHERE (((([p].[ProductName] <> @p0) AND ([p].[ReorderLevel] = @p1)) AND 
-							([p].[QuantityPerUnit] IS NOT NULL)) OR ([p].[QuantityPerUnit] <> @p0))
-				  GROUP BY [p].[ProductName]
-				  HAVING ([p].[ProductName] <> @p2)",
-					val, 2, val2);
-		}
-		[Test]
 		public void ComplexSelectSql_EfSchema()
 		{
 			var val = "val";

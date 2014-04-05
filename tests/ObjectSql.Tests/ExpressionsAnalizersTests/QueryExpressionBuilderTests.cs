@@ -346,6 +346,7 @@ namespace ObjectSql.Tests.ExpressionsAnalizersTests
 		{
 			Expression<Func<Category, object>> exp = (c) => c.CategoryID == (int)Foo.Val2;
 			var builder = CreateBuilder();
+			QueryRoots.AddRoot((int)Foo.Val2);
 			var result = builder.BuildSql(_builderContext, exp.Parameters.ToArray(), exp.Body, true).Prepare();
 
 			Assert.AreEqual("([c].[CategoryID]=@p0)", result);
@@ -357,12 +358,12 @@ namespace ObjectSql.Tests.ExpressionsAnalizersTests
 		public void BuildSql_RenderEqualToEnumVariable()
 		{
 			var enumVar = (Foo) Enum.Parse(typeof (Foo), "Val2");
+			AddQueryRoot(()=>enumVar);
 			Expression<Func<Category, object>> exp = (c) => c.CategoryID == (int)enumVar;
 			var builder = CreateBuilder();
 			var result = builder.BuildSql(_builderContext, exp.Parameters.ToArray(), exp.Body, true).Prepare();
 
 			Assert.AreEqual("([c].[CategoryID]=@p0)", result);
-			_delegatesBuilder.Verify(b => b.CreateDatabaseParameterFactoryAction(IsExp(() => "p0"), IsExp(() => (int)enumVar), null, ParameterDirection.Input));
 			_parametersHolder.Verify(h => h.AddPreProcessor(It.IsAny<CommandPrePostProcessor>()), Times.Exactly(1));
 			_parametersHolder.Verify(h => h.AddPreProcessor(It.Is<CommandPrePostProcessor>(d => ((CommandParameterPreProcessor)d).Name == "p0")));
 		}
@@ -447,20 +448,6 @@ namespace ObjectSql.Tests.ExpressionsAnalizersTests
 			builder.BuildSql(_builderContext, exp.Parameters.ToArray(), exp.Body, true).Prepare();
 		}
 		
-		[Test]
-		public void BuildSql_TargetDatabaseExtensionMethodCall_ValidResult()
-		{
-			TestExtension.RenderLikeWasCalled = false;
-			Expression<Func<Category,object>> exp = (c) => TestExtension.LikeForTests(c.Description,"%value%");
-			var builder = CreateBuilder();
-			var result = builder.BuildSql(_builderContext, exp.Parameters.ToArray(), exp.Body, true).Prepare();
-
-			Assert.AreEqual("([c].[Description]LIKE@p0)", result);
-			Assert.IsTrue(TestExtension.RenderLikeWasCalled);
-			_delegatesBuilder.Verify(b => b.CreateDatabaseParameterFactoryAction(IsExp(() => "p0"), IsExp(() => "%value%"), null, ParameterDirection.Input));
-			_parametersHolder.Verify(h => h.AddPreProcessor(It.IsAny<CommandPrePostProcessor>()), Times.Exactly(1));
-			_parametersHolder.Verify(h => h.AddPreProcessor(It.Is<CommandPrePostProcessor>(d => ((CommandParameterPreProcessor)d).Name == "p0")));
-		}
 		protected Expression IsExp<T>(Expression<Func<T>> b)
 		{
 			return It.Is<Expression>(e=>e.AreEqual(b));

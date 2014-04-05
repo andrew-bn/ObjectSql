@@ -9,7 +9,7 @@ namespace ObjectSql.Core.QueryBuilder.ExpressionsAnalizers
 	public class QuerySelectBuilder : QueryExpressionBuilder
 	{
 		private bool _multiFieldSelectionFromTable = true;		
-		public QuerySelectBuilder(IEntitySchemaManager schemaManager, IDelegatesBuilder expressionBuilder, ISqlWriter sqlWriter)
+		public QuerySelectBuilder(IEntitySchemaManager schemaManager, IDelegatesBuilder expressionBuilder, SqlWriter sqlWriter)
 			: base(schemaManager, expressionBuilder, sqlWriter)
 		{
 		}

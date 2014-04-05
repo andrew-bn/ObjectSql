@@ -9,7 +9,13 @@ namespace ObjectSql.Core.Misc
 #if NET40
 		public static object GetCustomAttribute(this MemberInfo mi, Type attrType)
 		{
+
 			var attrs = mi.GetCustomAttributes(attrType,true);
+			return attrs.Length > 0 ? attrs[0] : null;
+		}
+		public static object GetCustomAttribute(this MethodInfo mi, Type attrType)
+		{
+			var attrs = mi.GetCustomAttributes(attrType, true);
 			return attrs.Length > 0 ? attrs[0] : null;
 		}
 		public static object GetCustomAttribute(this ParameterInfo mi, Type attrType)

@@ -23,6 +23,9 @@ namespace ObjectSql.Core.QueryBuilder.ExpressionsAnalizers
 			SchemaManager = schemaManager;
 			ExpressionBuilder = expressionBuilder;
 		}
+
+		public IStorageFieldType DbTypeInContext { get; set; }
+
 		public string BuildSql(BuilderContext context, ParameterExpression[] parameters, Expression expression, bool useAliases)
 		{
 			_context = context;
@@ -75,6 +78,18 @@ namespace ObjectSql.Core.QueryBuilder.ExpressionsAnalizers
 			var isConstant = (expressions.Length == 1 && (expressions[0] is ConstantExpression)&& 
 				((ConstantExpression)expressions[0]).Value == null);
 			return isConstant;
+		}
+
+
+		public string BuildSql(IStorageFieldType dbTypeInContext, Expression expression)
+		{
+			throw new NotImplementedException();
+		}
+
+
+		public string BuildSql(Expression expression)
+		{
+			throw new NotImplementedException();
 		}
 	}
 } 

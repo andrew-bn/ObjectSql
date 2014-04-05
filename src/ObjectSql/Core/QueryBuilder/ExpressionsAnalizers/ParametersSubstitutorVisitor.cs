@@ -18,7 +18,6 @@ namespace ObjectSql.Core.QueryBuilder.ExpressionsAnalizers
 
 		protected override Expression VisitParameter(ParameterExpression node)
 		{
-			
 			if (_parameters.Contains(node))
 			{
 				var s = (IParameterSubstitutor)Activator.CreateInstance(typeof (ParametersSubstitutor<>).MakeGenericType(node.Type));

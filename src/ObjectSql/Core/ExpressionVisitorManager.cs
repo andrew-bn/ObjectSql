@@ -18,6 +18,7 @@ namespace ObjectSql.Core
 
 		public override Expression Visit(Expression node)
 		{
+			if (node == null) return node;
 			var visitor = FindVisitor(node.GetType());
 			if (visitor == null)
 				return base.Visit(node);

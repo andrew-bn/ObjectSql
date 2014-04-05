@@ -65,7 +65,7 @@ namespace ObjectSql.Tests.SqlServerTests
 			_parametersHolder.Setup(h => h.ParametersEncountered).Returns(() => _parametersEncountered);
 
 			_builderContext = new BuilderContext(new QueryContext(null, null, ResourcesTreatmentType.DisposeCommand,
-				new QueryEnvironment(null, null, null, null)), null, null, null, null, null, null, null);
+				new QueryEnvironment(_schemaManager.Object, null, null, null)), null, _schemaManager.Object, null, null, null, null, null);
 			_builderContext.Context.SqlPart = new SqlPart(_builderContext.Context);
 			_builderContext.Preparators = _parametersHolder.Object;
 			QueryRoots = _builderContext.Context.SqlPart.QueryRoots;
@@ -82,6 +82,14 @@ namespace ObjectSql.Tests.SqlServerTests
 		public void BuildSql_Lower()
 		{
 			Expression<Func<Category, object>> exp = (c) => MsSql.Lower(c.Description);
+			var result = CreateBuilder().BuildSql(_builderContext, exp.Parameters.ToArray(), exp.Body, true).Prepare();
+
+			Assert.AreEqual("LOWER([c].[Description])", result);
+		}
+		[Test]
+		public void BuildSql_Lower2()
+		{
+			Expression<Func<Category, object>> exp = (c) => c.Description.ToLower();
 			var result = CreateBuilder().BuildSql(_builderContext, exp.Parameters.ToArray(), exp.Body, true).Prepare();
 
 			Assert.AreEqual("LOWER([c].[Description])", result);
@@ -105,9 +113,25 @@ namespace ObjectSql.Tests.SqlServerTests
 			Assert.AreEqual("SUBSTRING([c].[Description],@p0,@p1)", result);
 		}
 		[Test]
+		public void BuildSql_Substring2()
+		{
+			Expression<Func<Category, object>> exp = (c) => MsSql.Substring(c.Description, 1, 2);
+			var result = CreateBuilder().BuildSql(_builderContext, exp.Parameters.ToArray(), exp.Body, true).Prepare();
+
+			Assert.AreEqual("SUBSTRING([c].[Description],@p0,@p1)", result);
+		}
+		[Test]
 		public void BuildSql_Upper()
 		{
 			Expression<Func<Category, object>> exp = ( c) => MsSql.Upper(c.CategoryName);
+			var result = CreateBuilder().BuildSql(_builderContext, exp.Parameters.ToArray(), exp.Body, true).Prepare();
+
+			Assert.AreEqual("UPPER([c].[CategoryName])", result);
+		}
+		[Test]
+		public void BuildSql_Upper2()
+		{
+			Expression<Func<Category, object>> exp = (c) => c.CategoryName.ToUpper();
 			var result = CreateBuilder().BuildSql(_builderContext, exp.Parameters.ToArray(), exp.Body, true).Prepare();
 
 			Assert.AreEqual("UPPER([c].[CategoryName])", result);

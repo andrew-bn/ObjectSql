@@ -2,8 +2,11 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
+using System.Reflection;
 using ObjectSql.Core.Bo;
 using ObjectSql.Core.Bo.CommandPreparatorDescriptor;
+using ObjectSql.Core.QueryBuilder.ExpressionsAnalizers;
+using ObjectSql.QueryInterfaces;
 
 namespace ObjectSql.Core.Misc
 {
@@ -31,11 +34,28 @@ namespace ObjectSql.Core.Misc
 		{
 			return new ExpressionVisitorManager(visitor1).Visit(exp);
 		}
+
 		public static int IndexOfRoot(this Expression exp, QueryRoots roots)
 		{
 			int index = -1;
 			exp.Visit<ConstantExpression>((v, e) => { index = roots.IndexOf(e.Value); return e; });
 			return index;
+		}
+		public static bool ContainsSql(this Expression exp)
+		{
+			bool hasSql = false;
+			exp.Visit<ParameterExpression>((v, e) => { hasSql = true; return e; });
+
+			if (!hasSql)
+				exp.Visit<MemberExpression>((v, e) => { hasSql = e.Member.DeclaringType.GetCustomAttribute(typeof(DatabaseExtensionAttribute)) != null; return e; });
+
+			if (!hasSql)
+				exp.Visit<MethodCallExpression>((v, e) => { hasSql = e.Method.DeclaringType.GetCustomAttribute(typeof(DatabaseExtensionAttribute)) != null; return e; });
+
+			if (!hasSql)
+				exp.Visit<ConstantExpression>((v, e) => { hasSql = e.Type.GetCustomAttribute(typeof (DatabaseExtensionAttribute)) != null; return e; });
+
+			return hasSql;
 		}
 	}
 }

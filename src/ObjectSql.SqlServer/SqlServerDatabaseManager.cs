@@ -30,7 +30,7 @@ namespace ObjectSql.SqlServer
 			return SqlServerDelegatesBuilder.Instance;
 		}
 
-		public ISqlWriter CreateSqlWriter()
+		public SqlWriter CreateSqlWriter()
 		{
 			return SqlServerSqlWriter.Instance;
 		}

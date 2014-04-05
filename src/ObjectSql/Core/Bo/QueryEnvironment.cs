@@ -15,12 +15,12 @@ namespace ObjectSql.Core.Bo
 		public IEntitySchemaManager SchemaManager { get; private set; }
 		public IDatabaseManager DatabaseManager { get; private set; }
 		public IDelegatesBuilder DelegatesBuilder { get; private set; }
-		public ISqlWriter SqlWriter { get; private set; }
+		public SqlWriter SqlWriter { get; private set; }
 
 		public QueryEnvironment(IEntitySchemaManager schemaManager,
 								IDatabaseManager databaseManager,
 								IDelegatesBuilder delegatesBuilder,
-								ISqlWriter sqlWriter)
+								SqlWriter sqlWriter)
 		{
 			SchemaManager = schemaManager;
 			DatabaseManager = databaseManager;

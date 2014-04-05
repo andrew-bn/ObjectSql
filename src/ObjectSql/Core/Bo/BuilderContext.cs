@@ -16,7 +16,7 @@ namespace ObjectSql.Core.Bo
 		public QueryContext Context { get; private set; }
 		public IDatabaseManager DatabaseManager { get; private set; }
 		public IEntitySchemaManager SchemaManager { get; private set; }
-		public ISqlWriter SqlWriter { get; private set; }
+		public SqlWriter SqlWriter { get; private set; }
 
 		public IDelegatesBuilder DelegatesBuilder { get; private set; }
 		public IMaterializationInfoExtractor MaterializationInfoExtractor { get; private set; }
@@ -31,7 +31,7 @@ namespace ObjectSql.Core.Bo
 		public Func<IDbCommand, object> ReturnParameterReader { get; set; }
 		private readonly Dictionary<ExpressionAnalizerType, ISqlQueryBuilder> _analizers = new Dictionary<ExpressionAnalizerType, ISqlQueryBuilder>();
 
-		public BuilderContext(QueryContext context, IDatabaseManager databaseManager, IEntitySchemaManager schemaManager, ISqlWriter sqlWriter, IDelegatesBuilder delegatesBuilder,
+		public BuilderContext(QueryContext context, IDatabaseManager databaseManager, IEntitySchemaManager schemaManager, SqlWriter sqlWriter, IDelegatesBuilder delegatesBuilder,
 			IMaterializationInfoExtractor materializationInfoExtractor, IInsertionInfoExtractor insertionInfoExtractor, List<QueryPart> parts)
 		{
 			Context = context;
