@@ -126,7 +126,7 @@ namespace ObjectSql.Tests
 
 			var result = ExpressionComparer.AreEqual(exp1, ref p1, exp2, ref p2);
 
-			Assert.IsFalse(result);
+			Assert.IsTrue(result);
 		}
 	}
 }

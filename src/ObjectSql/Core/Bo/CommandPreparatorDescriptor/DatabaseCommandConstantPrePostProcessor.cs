@@ -15,7 +15,7 @@ namespace ObjectSql.Core.Bo.CommandPreparatorDescriptor
 
 		public override CommandPreparatorType PreparatorType
 		{
-			get { return CommandPreparatorType.DatabaseCommandConstant; }
+			get { return CommandPreparatorType.DatabaseCommandParameter; }
 		}
 
 		public override bool RootDemanding

@@ -42,17 +42,10 @@ namespace ObjectSql.Core.Misc
 				case ExpressionType.MemberAccess:
 					var memberNode = (MemberExpression) node;
 					parameters.Hash ^= memberNode.Member.GetHashCode();
-					// we have roots only if there is a member access because of closure
-					// otherwise it is constant which is not root
-					if (memberNode.Expression!=null && memberNode.Expression.NodeType == ExpressionType.Constant)
-						parameters.AddRoot(((ConstantExpression)memberNode.Expression).Value);
 					break;
 				case ExpressionType.Constant:
 					var value = ((ConstantExpression)node).Value;
-					// here we should verify whether this is root that was added above
-					// or this is constant and we shoul include its value to hash calculation
-					if (value != null && !parameters.ContainsRoot(value))
-						parameters.Hash ^= value.GetHashCode();
+					if (value != null) parameters.AddRoot(value);
 					break;
 				case ExpressionType.Call:
 					parameters.Hash ^= ((MethodCallExpression)node).Method.GetHashCode();

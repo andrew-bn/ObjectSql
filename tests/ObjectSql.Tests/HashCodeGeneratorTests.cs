@@ -36,12 +36,13 @@ namespace ObjectSql.Tests
 			var p = new QueryRoots();
 			ExpressionHashCalculator.CalculateHashAndExtractConstantRoots(exp, ref p);
 
-			Assert.AreEqual(1, p.Roots.Count);
+			Assert.AreEqual(3, p.Roots.Count);
 			var pairs = p.Roots.ToArray();
 
 			dynamic firstVal = pairs[0].Key;
-
 			Assert.AreEqual(closureSource, firstVal.closureSource);
+			Assert.AreEqual(constantClosureSource, pairs[1].Key);
+			Assert.AreEqual(12, pairs[2].Key);
 			Assert.AreEqual(1, pairs[0].Value);
 
 		}
@@ -59,13 +60,14 @@ namespace ObjectSql.Tests
 			var p = new QueryRoots();
 			ExpressionHashCalculator.CalculateHashAndExtractConstantRoots(exp, ref p);
 
-			Assert.AreEqual(1, p.Roots.Count);
+			Assert.AreEqual(3, p.Roots.Count);
 			var pairs = p.Roots.ToArray();
 
 			dynamic firstVal = pairs[0].Key;
 
 			Assert.AreEqual(closureSource, firstVal.closureSource);
-			Assert.AreEqual(1, pairs[0].Value);
+			Assert.AreEqual(constantClosureSource, pairs[1].Key);
+			Assert.AreEqual(12, pairs[2].Key);
 
 		}
 		[Test]
@@ -79,7 +81,8 @@ namespace ObjectSql.Tests
 			var p = new QueryRoots();
 			ExpressionHashCalculator.CalculateHashAndExtractConstantRoots(exp, ref p);
 
-			Assert.AreEqual(0, p.Roots.Count);
+			Assert.AreEqual(1, p.Roots.Count);
+			Assert.AreEqual(12, p.Roots.ToArray()[0].Key);
 		}
 		[Test]
 		public void DuplicatedRoot()
@@ -96,7 +99,7 @@ namespace ObjectSql.Tests
 			var p = new QueryRoots();
 			ExpressionHashCalculator.CalculateHashAndExtractConstantRoots(exp,ref p);
 
-			Assert.AreEqual(1, p.Roots.Count);
+			Assert.AreEqual(3, p.Roots.Count);
 			var pairs = p.Roots.ToArray();
 
 
@@ -104,7 +107,8 @@ namespace ObjectSql.Tests
 
 			Assert.AreEqual(closureSource, firstVal.closureSource);
 			Assert.AreEqual(closureSource2, firstVal.closureSource2);
-			Assert.AreEqual(1 | (1<<1), pairs[0].Value);
+			Assert.AreEqual(constantClosureSource, pairs[1].Key);
+			Assert.AreEqual(12, pairs[2].Key);
 		}
 
 		public int Value = 4;
@@ -122,15 +126,15 @@ namespace ObjectSql.Tests
 			var p = new QueryRoots();
 			ExpressionHashCalculator.CalculateHashAndExtractConstantRoots(exp, ref p);
 
-			Assert.AreEqual(2, p.Roots.Count);
+			Assert.AreEqual(4, p.Roots.Count);
 			var pairs = p.Roots.ToArray();
 
 			dynamic firstVal = pairs[0].Key;
-			dynamic secondVal = pairs[1].Key;
+			dynamic secondVal = pairs[3].Key;
 			Assert.AreEqual(closureSource, firstVal.closureSource);
+			Assert.AreEqual(constantClosureSource, pairs[1].Key);
+			Assert.AreEqual(12, pairs[2].Key);
 			Assert.AreEqual(Value, secondVal.Value);
-			Assert.AreEqual(1, pairs[0].Value);
-			Assert.AreEqual(2, pairs[1].Value);
 		}
 		[Test]
 		public void DifferentHashCodes_ParameterReplacement()
@@ -177,7 +181,7 @@ namespace ObjectSql.Tests
 			Assert.IsTrue(p1.Hash == p2.Hash);
 		}
 		[Test]
-		public void DifferentConstantValues_DifferentHashCodes()
+		public void DifferentConstantValues_SameHashCodes()
 		{
 			Expression<Func<Foo, object>> exp1 =
 				f => 5 == f.FooParam.FooParam.Method();
@@ -192,7 +196,7 @@ namespace ObjectSql.Tests
 			var p2 = new QueryRoots();
 			ExpressionHashCalculator.CalculateHashAndExtractConstantRoots(exp2, ref p2);
 
-			Assert.IsFalse(p1.Hash == p2.Hash);
+			Assert.IsTrue(p1.Hash == p2.Hash);
 		}
 		[Test]
 		public void SameConstantValues_SameHashCodes()
@@ -308,7 +312,7 @@ namespace ObjectSql.Tests
 			var p2 = new QueryRoots();
 			ExpressionHashCalculator.CalculateHashAndExtractConstantRoots(exp2,ref p2);
 
-			Assert.IsFalse(p1.Hash == p2.Hash);
+			Assert.IsTrue(p1.Hash == p2.Hash);
 		}
 	}
 }

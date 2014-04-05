@@ -40,7 +40,7 @@ namespace ObjectSql.Core.QueryBuilder.ExpressionsAnalizers
 				var funcParam = funcSchema.FuncParameters.First(p => p.Index == i).StorageParameter;
 				var initializer = CreateParameterInitializer(funcParam.Name, valueAccessor, funcParam.DbType,funcParam.Direction);
 
-				var descriptor = IsConstant(valueAccessor)
+				var descriptor = IsNullConstant(valueAccessor)
 									? new DatabaseCommandConstantPrePostProcessor(funcParam.Name, funcParam.DbType, valueAccessor, initializer)
 									: (SingleParameterPrePostProcessor)new DatabaseCommandParameterPrePostProcessor(funcParam.Name, funcParam.DbType, node.Arguments[i], initializer);
 
@@ -50,7 +50,7 @@ namespace ObjectSql.Core.QueryBuilder.ExpressionsAnalizers
 				{
 					descriptor.AsDatabaseParameter().ParameterWasEncountered(CommandPreparatorsHolder.ParametersEncountered);
 
-					if (funcParam.IsOut && !IsConstant(valueAccessor))
+					if (funcParam.IsOut && !IsNullConstant(valueAccessor))
 					{
 						var parameterReader = CreateParameterReader(funcParam.Name, valueAccessor);
 						var postProcessor = new StoredProcedureOutParameterProcessor(parameterReader);
@@ -75,10 +75,11 @@ namespace ObjectSql.Core.QueryBuilder.ExpressionsAnalizers
 			return ExpressionBuilder.CreateDatabaseParameterFactoryAction(Expression.Constant(name, typeof(string)), accessor, dbTypeInContext,direction);
 		}
 
-		private static bool IsConstant(Expression accessor)
+		private static bool IsNullConstant(Expression accessor)
 		{
 			var expressions = ExpressionEnumerator.Enumerate(accessor).ToArray();
-			var isConstant = (expressions.Length == 1 && (expressions[0] is ConstantExpression));
+			var isConstant = (expressions.Length == 1 && (expressions[0] is ConstantExpression)&& 
+				((ConstantExpression)expressions[0]).Value == null);
 			return isConstant;
 		}
 	}
