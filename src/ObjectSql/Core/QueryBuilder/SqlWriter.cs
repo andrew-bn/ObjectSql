@@ -52,22 +52,22 @@ namespace ObjectSql.Core.QueryBuilder
 		[DeclaringType(typeof(Sql))]
 		public virtual void Count(SqlWriterContext context, params Expression[] args)
 		{
-			context.CommandText.Append(BuildSql("COUNT", args.Skip(1).Select(context.BuildSql)));
+			context.CommandText.Append(WriteMethodCall("COUNT", args.Skip(1).Select(context.BuildSql)));
 		}
 		[DeclaringType(typeof(Sql))]
 		public virtual void Avg(SqlWriterContext context, params Expression[] args)
 		{
-			context.CommandText.Append(BuildSql("AVG", args.Skip(1).Select(context.BuildSql)));
+			context.CommandText.Append(WriteMethodCall("AVG", args.Skip(1).Select(context.BuildSql)));
 		}
 		[DeclaringType(typeof(Sql))]
 		public virtual void Max(SqlWriterContext context, params Expression[] args)
 		{
-			context.CommandText.Append(BuildSql("MAX", args.Skip(1).Select(context.BuildSql)));
+			context.CommandText.Append(WriteMethodCall("MAX", args.Skip(1).Select(context.BuildSql)));
 		}
 		[DeclaringType(typeof(Sql))]
 		public virtual void Min(SqlWriterContext context, params Expression[] args)
 		{
-			context.CommandText.Append(BuildSql("MIN", args.Skip(1).Select(context.BuildSql)));
+			context.CommandText.Append(WriteMethodCall("MIN", args.Skip(1).Select(context.BuildSql)));
 		}
 		[DeclaringType(typeof(Sql))]
 		public virtual void In(SqlWriterContext context, params Expression[] args)
@@ -195,20 +195,27 @@ namespace ObjectSql.Core.QueryBuilder
 			context.CommandText.Append(context.BuildSql(operand));
 		}
 		#endregion Unary
+
 		#region common
 		public virtual CommandText WriteName(BuilderContext context, CommandText commandText,string alias, string name)
 		{
-			var useAlial = !string.IsNullOrWhiteSpace(alias)
+			var useAlias = !string.IsNullOrWhiteSpace(alias)
 			               && !(context.CurrentPart is InsertPart)
 			               && context.Parts.MoveBackAndFind(context.CurrentPart, p => p is DeletePart) == null
 						   && context.Parts.MoveBackAndFind(context.CurrentPart, p => p is UpdatePart) == null;
 
-			if (!useAlial)
+			if (!useAlias)
 				return commandText.Append("[{0}]", name);
 			return commandText.Append("[{0}].[{1}]",alias, name);
 		}
 		#endregion
-		protected static string BuildSql(string method, IEnumerable<string> parts)
+		protected static string ParameterSql(ISqlQueryBuilder builder, Expression methodCall, Expression expression)
+		{
+			var mc = (MethodCallExpression) methodCall;
+
+			return builder.BuildSql(expression);
+		}
+		protected static string WriteMethodCall(string method, IEnumerable<string> parts)
 		{
 			return string.Format(" {0}({1}) ", method, string.Join(", ", parts));
 		}
@@ -221,6 +228,7 @@ namespace ObjectSql.Core.QueryBuilder
 				var m = FindMethod(mc.Method.Name, mc.Method.DeclaringType);
 				if (m == null)
 					throw new ObjectSqlException("method '" + mc.Method.Name + "' can't be rendered to SQL");
+				
 				m.Invoke(this, new object[] { new SqlWriterContext(expression, expressionVisitor, context, commandText), new Expression[] { mc.Object }.Concat(mc.Arguments).ToArray() });
 			}
 			else if (expression.NodeType == ExpressionType.Constant)

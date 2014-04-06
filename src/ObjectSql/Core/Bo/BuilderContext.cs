@@ -8,12 +8,14 @@ using ObjectSql.Core.QueryBuilder.InfoExtractor;
 using ObjectSql.Core.QueryBuilder.LambdaBuilder;
 using ObjectSql.Core.QueryParts;
 using ObjectSql.Core.SchemaManager;
+using ObjectSql.Core.SchemaManager.EntitySchema;
 
 namespace ObjectSql.Core.Bo
 {
 	public class BuilderContext : IExpressionAnalizer
 	{
 		public QueryContext Context { get; private set; }
+		public IStorageFieldType DbTypeInContext { get; set; }
 		public IDatabaseManager DatabaseManager { get; private set; }
 		public IEntitySchemaManager SchemaManager { get; private set; }
 		public SqlWriter SqlWriter { get; private set; }

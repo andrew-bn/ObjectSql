@@ -31,13 +31,12 @@ namespace ObjectSql.Core.QueryBuilder.ExpressionsAnalizers
 				if (i > 0) SqlWriter.WriteComma(Text);
 
 				var storageField = entitySchema.GetStorageField(node.Bindings[i].Member.Name);
+				BuilderContext.DbTypeInContext = storageField.DbType;
 				SqlWriter.WriteName(BuilderContext, Text, "", storageField.Name);
 				SqlWriter.WriteSet(Text);
-				DbTypeInContext = storageField.DbType;
 				Visit(((MemberAssignment)node.Bindings[i]).Expression);
 			}
 			Text.Append(" ");
-			DbTypeInContext = null;
 			return node;
 		}
 	}

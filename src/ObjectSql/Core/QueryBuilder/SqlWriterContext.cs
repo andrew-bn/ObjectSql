@@ -27,15 +27,16 @@ namespace ObjectSql.Core.QueryBuilder
 
 		public string BuildSql(Expression ex)
 		{
-			return QueryBuilder.BuildSql(null,ex);
+			return QueryBuilder.BuildSql(ex);
 		}
 		public string BuildSql(string dbTypeName, Expression ex)
 		{
-			return QueryBuilder.BuildSql(Context.SchemaManager.ParseDbType(dbTypeName), ex);
+			Context.DbTypeInContext = Context.SchemaManager.ParseDbType(dbTypeName);
+			return QueryBuilder.BuildSql(ex);
 		}
 		public void UpdateTypeInContext(string dbTypeName)
 		{
-			QueryBuilder.DbTypeInContext = Context.SchemaManager.ParseDbType(dbTypeName);
+			Context.DbTypeInContext = Context.SchemaManager.ParseDbType(dbTypeName);
 		}
 	}
 }

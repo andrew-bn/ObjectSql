@@ -211,42 +211,42 @@ namespace ObjectSql.SqlServer
 		[DeclaringType(typeof(MsSql))]
 		public void CountBig(SqlWriterContext context, params Expression[] args)
 		{
-			context.CommandText.Append(BuildSql("COUNT_BIG", args.Skip(1).Select(context.BuildSql)));
+			context.CommandText.Append(WriteMethodCall("COUNT_BIG", args.Skip(1).Select(context.BuildSql)));
 		}
 
 		[DeclaringType(typeof(MsSql))]
 		public void Replace(SqlWriterContext context, params Expression[] args)
 		{
-			context.CommandText.Append(BuildSql("REPLACE", args.Skip(1).Select(context.BuildSql)));
+			context.CommandText.Append(WriteMethodCall("REPLACE", args.Skip(1).Select(context.BuildSql)));
 		}
 
 		[DeclaringType(typeof(MsSql))]
 		public void Lower(SqlWriterContext context, params Expression[] args)
 		{
-			context.CommandText.Append(BuildSql("LOWER", args.Skip(1).Select(context.BuildSql)));
+			context.CommandText.Append(WriteMethodCall("LOWER", args.Skip(1).Select(context.BuildSql)));
 		}
 
 		[DeclaringType(typeof(MsSql))]
 		public void Substring(SqlWriterContext context, params Expression[] args)
 		{
-			context.CommandText.Append(BuildSql("SUBSTRING", args.Skip(1).Select(context.BuildSql)));
+			context.CommandText.Append(WriteMethodCall("SUBSTRING", args.Skip(1).Select(context.BuildSql)));
 		}
 
 		[DeclaringType(typeof(MsSql))]
 		public void Upper(SqlWriterContext context, params Expression[] args)
 		{
-			context.CommandText.Append(BuildSql("UPPER", args.Skip(1).Select(context.BuildSql)));
+			context.CommandText.Append(WriteMethodCall("UPPER", args.Skip(1).Select(context.BuildSql)));
 		}
 
 		[DeclaringType(typeof(String))]
 		public void ToUpper(SqlWriterContext context, params Expression[] args)
 		{
-			context.CommandText.Append(BuildSql("UPPER", args.Select(context.BuildSql)));
+			context.CommandText.Append(WriteMethodCall("UPPER", args.Select(context.BuildSql)));
 		}
 		[DeclaringType(typeof(String))]
 		public void ToLower(SqlWriterContext context, params Expression[] args)
 		{
-			context.CommandText.Append(BuildSql("LOWER", args.Select(context.BuildSql)));
+			context.CommandText.Append(WriteMethodCall("LOWER", args.Select(context.BuildSql)));
 		}
 		[DeclaringType(typeof(MsSql))]
 		public void GetDate(SqlWriterContext context, params Expression[] args)
@@ -260,7 +260,7 @@ namespace ObjectSql.SqlServer
 			var p1 = context.BuildSql("DateTime2", args[2]);
 			var p2 = context.BuildSql("DateTime2", args[3]);
 			
-			context.CommandText.Append(BuildSql("DATEDIFF",new[]{p0,p1,p2}));
+			context.CommandText.Append(WriteMethodCall("DATEDIFF",new[]{p0,p1,p2}));
 			context.UpdateTypeInContext("Int");
 		}
 

@@ -20,7 +20,6 @@ namespace ObjectSql.Core.QueryBuilder.ExpressionsAnalizers
 	{
 		protected BuilderContext BuilderContext { get; private set; }
 		protected IEntitySchemaManager SchemaManager { get; private set; }
-		public IStorageFieldType DbTypeInContext { get; set; }
 		protected ICommandPreparatorsHolder CommandPreparatorsHolder { get { return BuilderContext.Preparators; } }
 		protected IDelegatesBuilder DelegatesBuilder { get; private set; }
 		protected SqlWriter SqlWriter { get; private set; }
@@ -29,7 +28,6 @@ namespace ObjectSql.Core.QueryBuilder.ExpressionsAnalizers
 		public QueryExpressionBuilder(IEntitySchemaManager schemaManager,
 			IDelegatesBuilder expressionBuilder, SqlWriter sqlWriter)
 		{
-			DbTypeInContext = null;
 			SchemaManager = schemaManager;
 			DelegatesBuilder = expressionBuilder;
 			SqlWriter = sqlWriter;
@@ -38,11 +36,6 @@ namespace ObjectSql.Core.QueryBuilder.ExpressionsAnalizers
 		{
 			BuilderContext = context;
 			ExpressionParameters = parameters;
-			return BuildSql(expression);
-		}
-		public string BuildSql(IStorageFieldType dbTypeInContext, Expression expression)
-		{
-			DbTypeInContext = dbTypeInContext;
 			return BuildSql(expression);
 		}
 		public string BuildSql(Expression expression)
@@ -64,7 +57,7 @@ namespace ObjectSql.Core.QueryBuilder.ExpressionsAnalizers
 			else
 			{
 
-				var param = GetParameterDescriptor(accessor, DbTypeInContext);
+				var param = GetParameterDescriptor(accessor);
 				SqlWriter.WriteParameter(Text, param.Name);
 			}
 		}
@@ -139,7 +132,7 @@ namespace ObjectSql.Core.QueryBuilder.ExpressionsAnalizers
 		{
 			var entitySchema = SchemaManager.GetSchema(entityType);
 			var storageField = entitySchema.GetStorageField(fieldName);
-			DbTypeInContext = storageField.DbType;
+			BuilderContext.DbTypeInContext = storageField.DbType;
 			SqlWriter.WriteName(BuilderContext, Text, aliasName, storageField.Name);
 		}
 
@@ -212,8 +205,9 @@ namespace ObjectSql.Core.QueryBuilder.ExpressionsAnalizers
 		}
 
 
-		private CommandParameterPreProcessor GetParameterDescriptor(Expression accessor, IStorageFieldType dbTypeInContext)
+		private CommandParameterPreProcessor GetParameterDescriptor(Expression accessor)
 		{
+			var dbTypeInContext = BuilderContext.DbTypeInContext;
 			var descriptor = CommandPreparatorsHolder.PreProcessors
 											 .Select(p => p as CommandParameterPreProcessor)
 											 .Where(p => p != null)

@@ -16,7 +16,7 @@ namespace ObjectSql
 		bool MatchManager(IDbConnection dbConnection, string providerName);
 		bool MatchManager(IDataReader dataReader);
 		IDelegatesBuilder CreateDelegatesBuilder();
-
+		string MapToDbType(Type netType);
 		SqlWriter CreateSqlWriter();
 	}
 }
