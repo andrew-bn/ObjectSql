@@ -36,7 +36,7 @@ namespace ObjectSql.Tests
 			return Verify(sqlEnd, expectedSql, dbParameters
 					.Select(p => new MsSqlParameterToCheck() 
 					{
-						DbType = null, 
+						DbType = (p is MsSqlParameterToCheck)?((MsSqlParameterToCheck)p).DbType:null, 
 						ParameterValue = (p is MsSqlParameterToCheck)?((MsSqlParameterToCheck)p).ParameterValue:p,
 						ParameterName = (p is MsSqlParameterToCheck) ? ((MsSqlParameterToCheck)p).ParameterName : null,
 					}).ToArray());

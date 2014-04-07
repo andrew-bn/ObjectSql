@@ -36,7 +36,8 @@ namespace ObjectSql.Tests.CommandTextGenerationTests
 							([p].[QuantityPerUnit] IS NOT NULL)) OR ([p].[QuantityPerUnit] <> @p0))
 				  GROUP BY [p].[ProductName]
 				  HAVING ([p].[ProductName] <> @p2)",
-					val, 2, val2);
+					val.DbType(SqlDbType.NVarChar), 2.DbType(SqlDbType.Int),
+					val2.DbType(SqlDbType.NVarChar));
 		}
 		[Test]
 		public void ComplexSelectSql_EfSchema()
@@ -114,6 +115,20 @@ namespace ObjectSql.Tests.CommandTextGenerationTests
 									 WHERE ((([UnitPrice] = @p3) AND ([UnitsInStock] IS NULL)) AND ([ProductName] <> @p1))",
 									23.DbType(SqlDbType.Int), val.DbType(SqlDbType.NVarChar), false.DbType(SqlDbType.Bit),
 									23M.DbType(SqlDbType.Money));
+
+		}
+		[Test]
+		public void ComplexUpdate_EfSchema_DateDiff()
+		{
+			var val = DateTime.Now;
+		
+			var result = EfQuery.
+							Update(() => new Order() { CustomerID = "1"})
+							.Where(o => MsSql.DateDiff(DatePart.Year, o.OrderDate, val) > 13)
+							.Verify(@"UPDATE [dbo].[Orders] 
+									  SET [CustomerID] = @p0  
+									 WHERE  (DATEDIFF(year, [OrderDate], @p1) > @p2)",
+										"1".DbType(SqlDbType.NChar),val.DbType(SqlDbType.DateTime2),13.DbType(SqlDbType.Int));
 
 		}
 		[Test]
