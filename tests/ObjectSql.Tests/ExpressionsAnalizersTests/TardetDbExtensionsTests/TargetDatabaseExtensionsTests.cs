@@ -63,8 +63,9 @@ namespace ObjectSql.Tests.ExpressionsAnalizersTests.TardetDbExtensionsTests
 			_parametersHolder.SetupSet(h => h.ParametersEncountered).Callback(i => _parametersEncountered = i);
 			_parametersHolder.Setup(h => h.ParametersEncountered).Returns(() => _parametersEncountered);
 
+			var dbManager = new SqlServerDatabaseManager();
 			_builderContext = new BuilderContext(new QueryContext(null, null, ResourcesTreatmentType.DisposeCommand,
-				new QueryEnvironment(null, null, null, null)), null, null, null, null, null, null, null);
+				new QueryEnvironment(_schemaManager.Object, dbManager, null, null)), dbManager, _schemaManager.Object, null, null, null, null, null);
 			_builderContext.Context.SqlPart = new SqlPart(_builderContext.Context);
 			_builderContext.Preparators = _parametersHolder.Object;
 			QueryRoots = _builderContext.Context.SqlPart.QueryRoots;

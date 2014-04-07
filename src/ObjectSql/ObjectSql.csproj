@@ -176,6 +176,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>QueryGeneric.tt</DependentUpon>
     </Compile>
+    <Compile Include="QueryImplementation\SqlAttribute.cs" />
     <Compile Include="QueryImplementation\TargetDatabaseExtensions.cs" />
     <Compile Include="QueryImplementation\Update.cs" />
     <Compile Include="QueryInterfaces\DatabaseExtensionAttribute.cs" />

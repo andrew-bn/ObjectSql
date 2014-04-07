@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
@@ -209,59 +210,29 @@ namespace ObjectSql.SqlServer
 		}
 
 		[DeclaringType(typeof(MsSql))]
-		public void CountBig(SqlWriterContext context, params Expression[] args)
+		public void CountBig(SqlWriterContext context, MethodCallExpression methodCall)
 		{
-			context.CommandText.Append(WriteMethodCall("COUNT_BIG", args.Skip(1).Select(context.BuildSql)));
-		}
-
-		[DeclaringType(typeof(MsSql))]
-		public void Replace(SqlWriterContext context, params Expression[] args)
-		{
-			context.CommandText.Append(WriteMethodCall("REPLACE", args.Skip(1).Select(context.BuildSql)));
-		}
-
-		[DeclaringType(typeof(MsSql))]
-		public void Lower(SqlWriterContext context, params Expression[] args)
-		{
-			context.CommandText.Append(WriteMethodCall("LOWER", args.Skip(1).Select(context.BuildSql)));
-		}
-
-		[DeclaringType(typeof(MsSql))]
-		public void Substring(SqlWriterContext context, params Expression[] args)
-		{
-			context.CommandText.Append(WriteMethodCall("SUBSTRING", args.Skip(1).Select(context.BuildSql)));
-		}
-
-		[DeclaringType(typeof(MsSql))]
-		public void Upper(SqlWriterContext context, params Expression[] args)
-		{
-			context.CommandText.Append(WriteMethodCall("UPPER", args.Skip(1).Select(context.BuildSql)));
+			context.CommandText.Append(WriteMethodCall("COUNT_BIG", 
+				methodCall.Arguments.Select(a => 
+				{ 
+					context.UpdateTypeInContext("");
+					return context.BuildSql(a);
+				})));
+			context.UpdateTypeInContext(SqlDbType.BigInt.ToString());
 		}
 
 		[DeclaringType(typeof(String))]
-		public void ToUpper(SqlWriterContext context, params Expression[] args)
+		public void ToUpper(SqlWriterContext context, MethodCallExpression methodCall)
 		{
-			context.CommandText.Append(WriteMethodCall("UPPER", args.Select(context.BuildSql)));
+			var parameter = ParameterSql(context, methodCall.Object);
+			context.CommandText.Append(string.Format("UPPER({0})", parameter));
 		}
 		[DeclaringType(typeof(String))]
-		public void ToLower(SqlWriterContext context, params Expression[] args)
+		public void ToLower(SqlWriterContext context, MethodCallExpression methodCall)
 		{
-			context.CommandText.Append(WriteMethodCall("LOWER", args.Select(context.BuildSql)));
-		}
-		[DeclaringType(typeof(MsSql))]
-		public void GetDate(SqlWriterContext context, params Expression[] args)
-		{
-			context.CommandText.Append("GETDATE()");
-		}
-		[DeclaringType(typeof(MsSql))]
-		public void DateDiff(SqlWriterContext context, params Expression[] args)
-		{
-			var p0 = context.BuildSql(args[1]);
-			var p1 = context.BuildSql("DateTime2", args[2]);
-			var p2 = context.BuildSql("DateTime2", args[3]);
-			
-			context.CommandText.Append(WriteMethodCall("DATEDIFF",new[]{p0,p1,p2}));
-			context.UpdateTypeInContext("Int");
+			var parameter = ParameterSql(context, methodCall.Object);
+			context.CommandText.Append(string.Format("LOWER({0})", parameter));
+
 		}
 
 		[DeclaringType(typeof(DatePart))]
@@ -269,7 +240,5 @@ namespace ObjectSql.SqlServer
 		{
 			context.CommandText.Append(value.ToString().ToLower());
 		}
-
-
 	}
 }

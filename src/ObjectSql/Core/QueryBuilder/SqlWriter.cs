@@ -50,46 +50,16 @@ namespace ObjectSql.Core.QueryBuilder
 
 		#region sql 
 		[DeclaringType(typeof(Sql))]
-		public virtual void Count(SqlWriterContext context, params Expression[] args)
+		public virtual void Count(SqlWriterContext context, MethodCallExpression methodCall)
 		{
-			context.CommandText.Append(WriteMethodCall("COUNT", args.Skip(1).Select(context.BuildSql)));
-		}
-		[DeclaringType(typeof(Sql))]
-		public virtual void Avg(SqlWriterContext context, params Expression[] args)
-		{
-			context.CommandText.Append(WriteMethodCall("AVG", args.Skip(1).Select(context.BuildSql)));
-		}
-		[DeclaringType(typeof(Sql))]
-		public virtual void Max(SqlWriterContext context, params Expression[] args)
-		{
-			context.CommandText.Append(WriteMethodCall("MAX", args.Skip(1).Select(context.BuildSql)));
-		}
-		[DeclaringType(typeof(Sql))]
-		public virtual void Min(SqlWriterContext context, params Expression[] args)
-		{
-			context.CommandText.Append(WriteMethodCall("MIN", args.Skip(1).Select(context.BuildSql)));
-		}
-		[DeclaringType(typeof(Sql))]
-		public virtual void In(SqlWriterContext context, params Expression[] args)
-		{
-			context.CommandText.Append(" ({0} IN ({1})) ", context.BuildSql(args[1]), string.Join(", ", args.Skip(2).Select(a => context.BuildSql(a))));
-		}
-		[DeclaringType(typeof(Sql))]
-		public virtual void NotIn(SqlWriterContext context, params Expression[] args)
-		{
-			context.CommandText.Append(" ({0} NOT IN ({1})) ", context.BuildSql(args[1]), string.Join(", ", args.Skip(2).Select(a => context.BuildSql(a))));
-		}
-		[DeclaringType(typeof(Sql))]
-		public virtual void Like(SqlWriterContext context, params Expression[] args)
-		{
-			var str = string.Format(" ({0} LIKE {1})", context.BuildSql(args[1]), context.BuildSql(args[2]));
-			context.CommandText.Append(str);
-		}
-		[DeclaringType(typeof(Sql))]
-		public virtual void NotLike(SqlWriterContext context, params Expression[] args)
-		{
-			var str = string.Format(" ({0} NOT LIKE {1})", context.BuildSql(args[1]), context.BuildSql(args[2]));
-			context.CommandText.Append(str);
+			context.CommandText.Append(WriteMethodCall("COUNT",
+			methodCall.Arguments.Select(a =>
+			{
+				context.UpdateTypeInContext("");
+				return context.BuildSql(a);
+			})));
+			var dbType = context.Context.DatabaseManager.MapToDbType(typeof(int));
+			context.UpdateTypeInContext(dbType);
 		}
 		#endregion sql
 		#region Binary
@@ -209,12 +179,14 @@ namespace ObjectSql.Core.QueryBuilder
 			return commandText.Append("[{0}].[{1}]",alias, name);
 		}
 		#endregion
-		protected static string ParameterSql(ISqlQueryBuilder builder, Expression methodCall, Expression expression)
+		
+		protected static string ParameterSql(SqlWriterContext builder, Expression expression)
 		{
-			var mc = (MethodCallExpression) methodCall;
-
+			var dbType = builder.Context.DatabaseManager.MapToDbType(expression.Type);
+			builder.UpdateTypeInContext(dbType);
 			return builder.BuildSql(expression);
 		}
+
 		protected static string WriteMethodCall(string method, IEnumerable<string> parts)
 		{
 			return string.Format(" {0}({1}) ", method, string.Join(", ", parts));
@@ -224,12 +196,22 @@ namespace ObjectSql.Core.QueryBuilder
 		{
 			if (expression.NodeType == ExpressionType.Call)
 			{
+				var sqlContext = new SqlWriterContext(expression, expressionVisitor, context, commandText);
 				var mc = (MethodCallExpression)expression;
+				var sqlAttr = mc.Method.GetCustomAttribute<SqlAttribute>();
 				var m = FindMethod(mc.Method.Name, mc.Method.DeclaringType);
-				if (m == null)
+				if (m == null && sqlAttr == null)
 					throw new ObjectSqlException("method '" + mc.Method.Name + "' can't be rendered to SQL");
-				
-				m.Invoke(this, new object[] { new SqlWriterContext(expression, expressionVisitor, context, commandText), new Expression[] { mc.Object }.Concat(mc.Arguments).ToArray() });
+				if (m!=null)
+					m.Invoke(this, new object[] { sqlContext, mc });
+				else
+					RenderMethodCallToSql(sqlContext, mc, sqlAttr);
+
+				if (mc.Method.ReturnType != typeof(void))
+				{
+					var dbType = context.DatabaseManager.MapToDbType(mc.Method.ReturnType);
+					sqlContext.UpdateTypeInContext(dbType);
+				}
 			}
 			else if (expression.NodeType == ExpressionType.Constant)
 			{
@@ -262,6 +244,13 @@ namespace ObjectSql.Core.QueryBuilder
 			return commandText;
 		}
 
+		protected void RenderMethodCallToSql(SqlWriterContext context, MethodCallExpression expression, SqlAttribute sqlAttr)
+		{
+			var parameters = expression.Arguments.Select(a => ParameterSql(context, a)).ToArray();
+			
+			context.CommandText.Append(string.Format(sqlAttr.Pattern,parameters));
+
+		}
 		private MethodInfo FindMethod(string methodName, Type type)
 		{
 			var sqlWriter = GetType();
