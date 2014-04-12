@@ -161,11 +161,11 @@ namespace ObjectSql.Core.QueryBuilder.ExpressionsAnalizers
 			{
 				AddParameter(node);
 			}
-			else if (!typeof(IQuery).IsAssignableFrom(node.Type))//is nested query
+			else if (!typeof(IQuery).IsAssignableFrom(node.Type))//not nested query
 			{
 				SqlWriter.WriteExpression(this, BuilderContext, Text, node);
 			}
-			else
+			else//is nested query
 			{
 				MemberExpression sqlQueryNode = null;
 				node.Visit<MemberExpression>((v, e) => { if (sqlQueryNode == null && e.Member == typeof(Sql).GetProperty("Query")) sqlQueryNode = e; return e; });
