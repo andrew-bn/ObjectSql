@@ -73,14 +73,8 @@ namespace ObjectSql.Core
 		private static void RunPostProcessors(QueryContext context)
 		{
 			var postProcessors = context.PreparationData.PostProcessors;
-			for (int i = 0; i < postProcessors.Length; i++)
-			{
-				var prc = postProcessors[i];
-				if (!prc.RootDemanding)
-					prc.CommandPreparationAction(context.Command, null);
-				else
-					prc.CommandPreparationAction(context.Command, context.SqlPart.QueryRoots.Roots[prc.RootIndex]);
-			}
+			foreach (var p in postProcessors)
+				p.CommandPreparationAction(context.Command, context.SqlPart.QueryRoots);
 		}
 
 		private static void FreeResources(QueryContext context)

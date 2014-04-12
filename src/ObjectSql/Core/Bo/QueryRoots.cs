@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using ObjectSql.Exceptions;
 
@@ -13,9 +14,22 @@ namespace ObjectSql.Core.Bo
 		{
 			return value != null && _roots.Contains(value);
 		}
+		public object Get(int index)
+		{
+			return _roots[index];
+		}
 		public int IndexOf(object value)
 		{
 			return _roots.IndexOf(value);
+		}
+		public int IndexOf(Func<object ,bool> predicate)
+		{
+			foreach (var o in _roots)
+			{
+				if (predicate(o))
+					return _roots.IndexOf(o);
+			}
+			return -1;
 		}
 		public void AddRoot(object value)
 		{

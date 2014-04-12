@@ -8,7 +8,7 @@ namespace ObjectSql.Core.Bo.CommandPreparatorDescriptor
 	public class CommandParameterPreProcessor : CommandPrePostProcessor
 	{
 		public CommandParameterPreProcessor(string name, 
-			IStorageFieldType type, Expression accessor, Action<IDbCommand, object> preparationAction) 
+			IStorageFieldType type, Expression accessor, Action<IDbCommand, QueryRoots> preparationAction) 
 			: base(preparationAction)
 		{
 			Name = name;

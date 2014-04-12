@@ -40,12 +40,6 @@ namespace ObjectSql.Core.Misc
 			return new ExpressionVisitorManager(visitor1).Visit(exp);
 		}
 
-		public static int IndexOfRoot(this Expression exp, QueryRoots roots)
-		{
-			int index = -1;
-			exp.Visit<ConstantExpression>((v, e) => { index = roots.IndexOf(e.Value); return e; });
-			return index;
-		}
 		public static bool ContainsSql(this Expression exp)
 		{
 			bool hasSql = false;

@@ -9,7 +9,7 @@ namespace ObjectSql.Core.Bo.CommandPreparatorDescriptor
 {
 	public class StoredProcedureOutParameterProcessor : CommandPrePostProcessor
 	{
-		public StoredProcedureOutParameterProcessor(Action<IDbCommand, object> preparationAction) 
+		public StoredProcedureOutParameterProcessor(Action<IDbCommand, QueryRoots> preparationAction) 
 			: base(preparationAction)
 		{
 		}

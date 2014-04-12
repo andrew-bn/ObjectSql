@@ -15,7 +15,7 @@ namespace ObjectSql.Core.QueryBuilder.ExpressionsAnalizers
 	{
 		private BuilderContext _context;
 		protected IEntitySchemaManager SchemaManager { get; private set; }
-		protected ICommandPreparatorsHolder CommandPreparatorsHolder { get { return _context.Preparators; }}
+		protected ICommandPreparatorsHolder CommandPreparatorsHolder { get { return _context.Preparators; } }
 		protected IDelegatesBuilder ExpressionBuilder { get; private set; }
 		private ParameterExpression[] _parameters;
 		public QueryFuncCallBuilder(IEntitySchemaManager schemaManager, IDelegatesBuilder expressionBuilder)
@@ -41,41 +41,38 @@ namespace ObjectSql.Core.QueryBuilder.ExpressionsAnalizers
 			{
 				var valueAccessor = node.Arguments[i].StripConvert();
 				var funcParam = funcSchema.FuncParameters.First(p => p.Index == i).StorageParameter;
-				var initializer = CreateParameterInitializer(funcParam.Name, valueAccessor, funcParam.DbType,funcParam.Direction);
+				var initializer = CreateParameterInitializer(_context.Context.SqlPart.QueryRoots, funcParam.Name, valueAccessor, funcParam.DbType, funcParam.Direction);
 
 				var descriptor = new CommandParameterPreProcessor(funcParam.Name, funcParam.DbType, node.Arguments[i], initializer);
 
 				CommandPreparatorsHolder.AddPreProcessor(descriptor);
-				descriptor.RootIndex = valueAccessor.IndexOfRoot(_context.Context.SqlPart.QueryRoots);
-				if (descriptor.RootDemanding)
+
+				if (funcParam.IsOut)
 				{
-					if (funcParam.IsOut)
-					{
-						var parameterReader = CreateParameterReader(funcParam.Name, valueAccessor);
-						var postProcessor = new StoredProcedureOutParameterProcessor(parameterReader);
-						CommandPreparatorsHolder.AddPostProcessor(postProcessor);
-						postProcessor.RootIndex = descriptor.RootIndex;
-					}
+					var parameterReader = CreateParameterReader(_context.Context.SqlPart.QueryRoots, funcParam.Name, valueAccessor);
+					var postProcessor = new StoredProcedureOutParameterProcessor(parameterReader);
+					CommandPreparatorsHolder.AddPostProcessor(postProcessor);
 				}
+
 			}
 
 			return node;
 		}
 
-		private Action<IDbCommand, object> CreateParameterReader(string name, Expression accessor)
+		private Action<IDbCommand, QueryRoots> CreateParameterReader(QueryRoots queryRoots, string name, Expression accessor)
 		{
-			return ExpressionBuilder.CreateCommandParameterReader(Expression.Constant(name, typeof(string)), accessor);
+			return ExpressionBuilder.CreateCommandParameterReader(queryRoots, Expression.Constant(name, typeof(string)), accessor);
 		}
 
-		protected Action<IDbCommand, object> CreateParameterInitializer(string name, Expression accessor, IStorageFieldType dbTypeInContext, ParameterDirection direction)
+		protected Action<IDbCommand, QueryRoots> CreateParameterInitializer(QueryRoots roots, string name, Expression accessor, IStorageFieldType dbTypeInContext, ParameterDirection direction)
 		{
-			return ExpressionBuilder.CreateDatabaseParameterFactoryAction(Expression.Constant(name, typeof(string)), accessor, dbTypeInContext,direction);
+			return ExpressionBuilder.CreateDatabaseParameterFactoryAction(roots, Expression.Constant(name, typeof(string)), accessor, dbTypeInContext, direction);
 		}
 
 		private static bool IsNullConstant(Expression accessor)
 		{
 			var expressions = ExpressionEnumerator.Enumerate(accessor).ToArray();
-			var isConstant = (expressions.Length == 1 && (expressions[0] is ConstantExpression)&& 
+			var isConstant = (expressions.Length == 1 && (expressions[0] is ConstantExpression) &&
 				((ConstantExpression)expressions[0]).Value == null);
 			return isConstant;
 		}
@@ -92,4 +89,4 @@ namespace ObjectSql.Core.QueryBuilder.ExpressionsAnalizers
 			throw new NotImplementedException();
 		}
 	}
-} 
+}

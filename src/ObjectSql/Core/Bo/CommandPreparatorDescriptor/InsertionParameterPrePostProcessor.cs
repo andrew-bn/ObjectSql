@@ -5,10 +5,9 @@ namespace ObjectSql.Core.Bo.CommandPreparatorDescriptor
 {
 	public class InsertionParameterPrePostProcessor : CommandPrePostProcessor
 	{
-		public InsertionParameterPrePostProcessor(Action<IDbCommand, object> preparationAction) 
+		public InsertionParameterPrePostProcessor(Action<IDbCommand, QueryRoots> preparationAction) 
 			: base(preparationAction)
 		{
-			RootIndex = 0;
 		}
 	}
 }

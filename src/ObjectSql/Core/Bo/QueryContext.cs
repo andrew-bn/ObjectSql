@@ -109,22 +109,12 @@ namespace ObjectSql.Core.Bo
 		}
 		internal void PreProcessQuery()
 		{
-			var preparationData = PreparationData;
-			MaterializationDelegate = preparationData.DataMaterializer;
-			var dbCommand = Command;
+			MaterializationDelegate = PreparationData.DataMaterializer;
 
-			dbCommand.CommandText = preparationData.CommandText;
+			Command.CommandText = PreparationData.CommandText;
 
-
-			for (int i = 0; i < preparationData.PreProcessors.Length; i++)
-			{
-				var prc = preparationData.PreProcessors[i];
-
-				if (!prc.RootDemanding)
-					prc.CommandPreparationAction(dbCommand, null);
-				else
-					prc.CommandPreparationAction(dbCommand, SqlPart.QueryRoots.Roots[prc.RootIndex]);
-			}
+			foreach (var p in PreparationData.PreProcessors)
+				p.CommandPreparationAction(Command, SqlPart.QueryRoots);
 		}
 	}
 }

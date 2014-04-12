@@ -23,7 +23,7 @@ namespace ObjectSql.Core.QueryParts
 		public override void BuildPart(BuilderContext context)
 		{
 			var entitySchema = GetSchema(Type,context);
-			var insertionAction = context.DelegatesBuilder.CreateInsertionParametersInitializerAction(entitySchema, context.InsertionInfo);
+			var insertionAction = context.DelegatesBuilder.CreateInsertionParametersInitializerAction(context.Context.SqlPart.QueryRoots, entitySchema, context.InsertionInfo);
 
 			var param = new InsertionParameterPrePostProcessor(insertionAction);
 			context.Preparators.AddPreProcessor(param);

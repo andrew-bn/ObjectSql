@@ -221,25 +221,23 @@ namespace ObjectSql.Core.QueryBuilder.ExpressionsAnalizers
 					parameterName += "_" + Guid.NewGuid().ToString().Replace("-", "");
 
 				var initializer = accessor.Type.IsArray
-									? CreateArrayParameterInitializer(parameterName, accessor, dbTypeInContext)
-									: CreateParameterInitializer(parameterName, accessor, dbTypeInContext);
+									? CreateArrayParameterInitializer(BuilderContext.Context.SqlPart.QueryRoots, parameterName, accessor, dbTypeInContext)
+									: CreateParameterInitializer(BuilderContext.Context.SqlPart.QueryRoots, parameterName, accessor, dbTypeInContext);
 
 				descriptor = new CommandParameterPreProcessor(parameterName, dbTypeInContext, accessor, initializer);
 				CommandPreparatorsHolder.AddPreProcessor(descriptor);
 			}
 
-			descriptor.RootIndex = accessor.IndexOfRoot(BuilderContext.Context.SqlPart.QueryRoots);
-
 			return descriptor;
 		}
 
-		protected Action<IDbCommand, object> CreateParameterInitializer(string name, Expression accessor, IStorageFieldType dbTypeInContext)
+		protected Action<IDbCommand, QueryRoots> CreateParameterInitializer(QueryRoots roots, string name, Expression accessor, IStorageFieldType dbTypeInContext)
 		{
-			return DelegatesBuilder.CreateDatabaseParameterFactoryAction(Expression.Constant(name, typeof(string)), accessor, dbTypeInContext, ParameterDirection.Input);
+			return DelegatesBuilder.CreateDatabaseParameterFactoryAction(roots, Expression.Constant(name, typeof(string)), accessor, dbTypeInContext, ParameterDirection.Input);
 		}
-		protected Action<IDbCommand, object> CreateArrayParameterInitializer(string name, Expression accessor, IStorageFieldType dbTypeInContext)
+		protected Action<IDbCommand, QueryRoots> CreateArrayParameterInitializer(QueryRoots roots, string name, Expression accessor, IStorageFieldType dbTypeInContext)
 		{
-			return DelegatesBuilder.CreateArrayParameters(name, accessor, dbTypeInContext, ParameterDirection.Input);
+			return DelegatesBuilder.CreateArrayParameters(roots, name, accessor, dbTypeInContext, ParameterDirection.Input);
 		}
 	}
 }
