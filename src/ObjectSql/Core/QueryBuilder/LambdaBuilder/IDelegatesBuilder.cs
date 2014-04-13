@@ -9,11 +9,11 @@ namespace ObjectSql.Core.QueryBuilder.LambdaBuilder
 	public interface IDelegatesBuilder
 	{
 		Func<IDbCommand, object> ReadCommandReturnParameter();
-		Action<IDbCommand, object> AddCommandReturnParameter(Type returnType,object dbType);
+		Action<IDbCommand, QueryRoots> AddCommandReturnParameter(Type returnType,object dbType);
 		Action<IDbCommand, QueryRoots> CreateDatabaseParameterFactoryAction(QueryRoots roots, Expression parameterName, Expression valueAccessor, IStorageFieldType parameterType, ParameterDirection direction);
 		Action<IDbCommand, QueryRoots> CreateArrayParameters(QueryRoots roots, string paramName, Expression valueAccessor, IStorageFieldType parameterType, ParameterDirection direction);
 		Action<IDbCommand, QueryRoots> CreateInsertionParametersInitializerAction(QueryRoots roots, EntitySchema entitySchema, EntityInsertionInformation insertionInfo);
-		Action<IDbCommand, object> CreateChangeDatabaseCommandTypeAction(CommandType commandType);
+		Action<IDbCommand, QueryRoots> CreateChangeDatabaseCommandTypeAction(CommandType commandType);
 		Delegate CreateEntityMaterializationDelegate(EntitySchema schema, EntityMaterializationInformation materializationInfo);
 		Action<IDbCommand, QueryRoots> CreateCommandParameterReader(QueryRoots queryRoots, ConstantExpression parameterName, Expression valueAccessor);
 	}

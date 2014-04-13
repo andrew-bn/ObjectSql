@@ -26,7 +26,12 @@ namespace ObjectSql.Core.QueryBuilder.InfoExtractor
 				_result = new EntityMaterializationInformation(node.Type);
 			return node;
 		}
-
+		protected override Expression VisitConstant(ConstantExpression node)
+		{
+			if (_result == null)
+				_result = new EntityMaterializationInformation(node.Type);
+			return node;
+		}
 		protected override Expression VisitMember(MemberExpression node)
 		{
 			if (_result == null)
