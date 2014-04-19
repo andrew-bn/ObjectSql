@@ -9,6 +9,7 @@ using ObjectSql.Core.QueryBuilder.ExpressionsAnalizers;
 using ObjectSql.Core.QueryParts;
 using ObjectSql.Core.SchemaManager.EntitySchema;
 using ObjectSql.Exceptions;
+using ObjectSql.Core.Misc;
 
 namespace ObjectSql.Core.QueryBuilder
 {

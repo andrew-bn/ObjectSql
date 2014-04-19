@@ -18,6 +18,10 @@ namespace ObjectSql.Core.Misc
 			var attrs = mi.GetCustomAttributes(attrType, true);
 			return attrs.Length > 0 ? attrs[0] : null;
 		}
+		public static T GetCustomAttribute<T>(this MethodInfo mi) where T: class
+		{
+			return mi.GetCustomAttribute(typeof (T)) as T;
+		}
 		public static object GetCustomAttribute(this ParameterInfo mi, Type attrType)
 		{
 			var attrs = mi.GetCustomAttributes(attrType, true);
