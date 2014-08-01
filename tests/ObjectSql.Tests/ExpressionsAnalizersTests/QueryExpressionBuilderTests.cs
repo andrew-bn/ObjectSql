@@ -1,27 +1,5 @@
 ﻿using NUnit.Framework;
-using Moq;
-using ObjectSql.Core;
-using ObjectSql.Core.Bo.CommandPreparatorDescriptor;
-using ObjectSql.Core.Misc;
-using ObjectSql.Core.QueryBuilder.ExpressionsAnalizers;
-using ObjectSql.Core.QueryBuilder.LambdaBuilder;
-using ObjectSql.Core.QueryParts;
-using ObjectSql.Core.SchemaManager;
-using ObjectSql.Core.SchemaManager.EntitySchema;
-using ObjectSql.Exceptions;
-using ObjectSql.QueryInterfaces;
-using ObjectSql.SqlServer;
-using ObjectSql.Core.Bo;
-using ObjectSql.Core.QueryBuilder;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
 using System.Data;
-using System.Linq;
-using System.Linq.Expressions;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ObjectSql.Tests.ExpressionsAnalizersTests
 {

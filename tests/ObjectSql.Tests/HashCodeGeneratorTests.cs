@@ -180,7 +180,7 @@ namespace ObjectSql.Tests
 			Assert.IsTrue(p1.Hash == p2.Hash);
 		}
 		[Test]
-		public void DifferentConstantValues_SameHashCodes()
+		public void DifferentConstantValues_DiffHashCodes()
 		{
 			Expression<Func<Foo, object>> exp1 =
 				f => 5 == f.FooParam.FooParam.Method();
@@ -195,7 +195,7 @@ namespace ObjectSql.Tests
 			var p2 = new QueryRoots();
 			ExpressionHashCalculator.CalculateHashAndExtractConstantRoots(exp2, ref p2);
 
-			Assert.IsTrue(p1.Hash == p2.Hash);
+			Assert.IsTrue(p1.Hash != p2.Hash);
 		}
 		[Test]
 		public void SameConstantValues_SameHashCodes()
@@ -267,7 +267,7 @@ namespace ObjectSql.Tests
 		}
 
 		[Test]
-		public void ComplexCase_ConstantsHasDifferentValues_RootsPropertiesHasSameValues()
+		public void ComplexCase_ConstantsHasDifferentValues_RootsPropertiesHasDiffValues()
 		{
 			const bool constantClosureSource = true;
 			var closureSource = "closureSource";
@@ -311,7 +311,7 @@ namespace ObjectSql.Tests
 			var p2 = new QueryRoots();
 			ExpressionHashCalculator.CalculateHashAndExtractConstantRoots(exp2,ref p2);
 
-			Assert.IsTrue(p1.Hash == p2.Hash);
+			Assert.IsTrue(p1.Hash != p2.Hash);
 		}
 	}
 }

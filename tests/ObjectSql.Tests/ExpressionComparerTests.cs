@@ -126,7 +126,96 @@ namespace ObjectSql.Tests
 
 			var result = ExpressionComparer.AreEqual(exp1, ref p1, exp2, ref p2);
 
+			Assert.IsFalse(result);
+		}
+
+		[Test]
+		public void ExpressionsAreEqual_EqualArrays()
+		{
+			Expression<Func<Foo, object>> exp1 =
+				f => new
+				{
+
+					P9 = new[] { 1, 2, 3 }
+				};
+
+			var p1 = new QueryRoots();
+			ExpressionHashCalculator.CalculateHashAndExtractConstantRoots(exp1, ref p1);
+
+			Expression<Func<Foo, object>> exp2 =
+				f => new
+				{
+
+					P9 = new[] { 1, 2, 3 }
+				};
+
+
+			var p2 = new QueryRoots();
+			ExpressionHashCalculator.CalculateHashAndExtractConstantRoots(exp2, ref p2);
+
+			var result = ExpressionComparer.AreEqual(exp1, ref p1, exp2, ref p2);
+
 			Assert.IsTrue(result);
 		}
+
+		[Test]
+		public void ExpressionsAreNotEqual_NotEqualArrays()
+		{
+			Expression<Func<Foo, object>> exp1 =
+				f => new
+				{
+
+					P9 = new[] { 1, 2, 3 }
+				};
+
+			var p1 = new QueryRoots();
+			ExpressionHashCalculator.CalculateHashAndExtractConstantRoots(exp1, ref p1);
+
+			Expression<Func<Foo, object>> exp2 =
+				f => new
+				{
+
+					P9 = new[] { 1, 2, 9 }
+				};
+
+
+			var p2 = new QueryRoots();
+			ExpressionHashCalculator.CalculateHashAndExtractConstantRoots(exp2, ref p2);
+
+			var result = ExpressionComparer.AreEqual(exp1, ref p1, exp2, ref p2);
+
+			Assert.IsFalse(result);
+		}
+
+		[Test]
+		public void ExpressionsAreEqual_ArrayVariables()
+		{
+			var arr = new[] {1, 2, 3};
+			Expression<Func<Foo, object>> exp1 =
+				f => new
+				{
+
+					P9 = arr
+				};
+
+			var p1 = new QueryRoots();
+			ExpressionHashCalculator.CalculateHashAndExtractConstantRoots(exp1, ref p1);
+			arr[2] = 33;
+			Expression<Func<Foo, object>> exp2 =
+				f => new
+				{
+
+					P9 = arr
+				};
+
+
+			var p2 = new QueryRoots();
+			ExpressionHashCalculator.CalculateHashAndExtractConstantRoots(exp2, ref p2);
+
+			var result = ExpressionComparer.AreEqual(exp1, ref p1, exp2, ref p2);
+
+			Assert.IsTrue(result);
+		}
+
 	}
 }

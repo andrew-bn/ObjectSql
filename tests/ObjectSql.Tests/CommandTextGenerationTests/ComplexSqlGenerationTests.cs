@@ -219,6 +219,7 @@ namespace ObjectSql.Tests.CommandTextGenerationTests
 				WHERE (([p].[ProductName] = @p0) AND  
 					   ([p].[CategoryID] IN (@p1, @p2, @p3)))",
 				  p1, 11, 22,33);
+
 		}
 		[Test]
 		public void select_with_in_array_of_strings()

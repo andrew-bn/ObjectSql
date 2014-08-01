@@ -44,7 +44,10 @@ namespace ObjectSql.Core.Misc
 				case ExpressionType.Constant:
 					var value = ((ConstantExpression)node).Value;
 					if (value != null)
+					{
 						parameters.AddRoot(value);
+						parameters.Hash ^= value.GetHashCode();
+					}
 					else
 						parameters.Hash ^= DBNull.Value.GetHashCode();
 					break;

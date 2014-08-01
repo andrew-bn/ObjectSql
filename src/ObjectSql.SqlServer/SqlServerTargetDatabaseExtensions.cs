@@ -11,6 +11,8 @@ namespace ObjectSql.SqlServer
 	{
 		private MsSql() { }
 
+		[Sql("OBJECT_ID({0})")]
+		public static int ObjectId(string objectName) { return 0; }
 		public static long CountBig(params object[] columnSelector) { return default(long); }
 		[Sql("UPPER({0})")]
 		public static string Upper(string characterExpression) { return default(string); }

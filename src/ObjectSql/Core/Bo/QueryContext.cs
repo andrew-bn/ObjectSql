@@ -94,6 +94,7 @@ namespace ObjectSql.Core.Bo
 		{
 			if (!Prepared)
 			{
+				SqlPart.SortParts();
 				PreparationData = _queryCache.GetOrAdd(this, c => GeneratePreparationData());
 
 				PreProcessQuery();
