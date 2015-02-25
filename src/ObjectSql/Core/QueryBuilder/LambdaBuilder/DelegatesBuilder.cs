@@ -294,24 +294,54 @@ namespace ObjectSql.Core.QueryBuilder.LambdaBuilder
 			foreach (var p in schema.EntityFields)
 			{
 				var propType = p.PropertyInfo.PropertyType;
-				Expression readValue = null;
+				Expression readValue;
+
+				Expression typeConverter = Expression.Convert(value, propType);
+
+				if (propType.IsEnum) 
+				{
+					typeConverter = Expression.Condition(Expression.TypeIs(value, typeof(string)),
+													Expression.Convert(
+														Expression.Call(typeof(Enum).GetMethod("Parse", new[] { typeof(Type), typeof(string), typeof(bool) }),
+																	Expression.Constant(propType),
+																	Expression.Convert(value, typeof(string)),
+																	Expression.Constant(true)),
+														propType),
+													Expression.Convert(value, propType));
+				}
+				if (propType.IsGenericType && propType.GetGenericTypeDefinition() == typeof (Nullable<>) && 
+								propType.GetGenericArguments()[0].IsEnum)
+				{
+					typeConverter = Expression.Condition(Expression.TypeIs(value, typeof(string)),
+													Expression.Convert(
+														Expression.Call(typeof(Enum).GetMethod("Parse", new[] { typeof(Type), typeof(string), typeof(bool) }),
+																	Expression.Constant(propType.GetGenericArguments()[0]),
+																	Expression.Convert(value, typeof(string)),
+																	Expression.Constant(true)),
+														propType),
+													Expression.Convert(value, propType));
+				}
 
 				if (propType.IsValueType && (!propType.IsGenericType || propType.GetGenericTypeDefinition() != typeof (Nullable<>)))
 				{
 					readValue = Expression.Condition(Expression.TypeIs(value, typeof(DBNull)),
-													 Expression.Default(p.PropertyInfo.PropertyType),
-													 Expression.Convert(value, p.PropertyInfo.PropertyType));
+													 Expression.Throw(Expression.Constant(new InvalidCastException("Unable to set null value to non nullable type for field '{0}'")),propType),
+													 typeConverter);
 				}
 				else
 				{
 					readValue = Expression.Condition(Expression.TypeIs(value, typeof(DBNull)),
-													 Expression.Constant(null, p.PropertyInfo.PropertyType),
-													 Expression.Convert(value, p.PropertyInfo.PropertyType));
+													 Expression.Constant(null, propType),
+													 typeConverter);
 				}
+
+				readValue = Expression.TryCatch(readValue, Expression.Catch(typeof (InvalidCastException), Expression.Throw(
+					Expression.Constant(new InvalidCastException(string.Format("Unable to cast result set value to Field '{0}'. Possible cast error of DBNull and non nullable type",p.PropertyInfo.Name))),readValue.Type)));
 
 				var ifExp = Expression.IfThen(
 					Expression.Call(fieldName, stringEquals, Expression.Constant(p.StorageField.Name), Expression.Constant(StringComparison.CurrentCultureIgnoreCase)),
 					Expression.Assign(Expression.Property(newRow, p.PropertyInfo), readValue));
+
 				parts.Add(ifExp);
 			}
 			// -------

@@ -96,9 +96,42 @@ namespace ObjectSql.Tests.IntegrationTests
 			Assert.AreEqual(43, res.MapReturnValue<int>());
 			Assert.AreEqual(64, outP);
 		}
+
+		public enum RegionType
+		{
+			Wa
+		}
+		public class EmployeeResultWithNonNullable
+		{
+			public RegionType Region { get; set; }
+			public string LastName { get; set; }
+			public string FirstName { get; set; }
+		}
+		public class EmployeeResultWithNullable
+		{
+			public RegionType? Region { get; set; }
+			public string LastName { get; set; }
+			public string FirstName { get; set; }
+		}
 		public class SelectProductResult
 		{
 			public int ProductId { get; set; }
+			public string ProductName { get; set; }
+		}
+
+		public enum CustomEnum
+		{
+			Konbu
+		}
+
+		public class SelectProductResultToEnum
+		{
+			public int ProductId { get; set; }
+			public CustomEnum ProductName { get; set; }
+		}
+		public class SelectProductResultInvalid
+		{
+			public double ProductId { get; set; }
 			public string ProductName { get; set; }
 		}
 		[Test]
@@ -106,7 +139,7 @@ namespace ObjectSql.Tests.IntegrationTests
 		{
 			var res = EfQuery.From<Product>()
 							 .Select(p => new { p.ProductID, p.ProductName }).ExecuteReader();
-
+			
 			var data = res.MapResult(dr => new SelectProductResult
 											{
 												ProductId = (int)dr["ProductId"],
@@ -115,6 +148,7 @@ namespace ObjectSql.Tests.IntegrationTests
 			Assert.AreEqual(77, data.Length);
 			Assert.AreEqual("Alice Mutton", data[0].ProductName);
 		}
+
 		[Test]
 		public void Select_MapResult_CustomDto()
 		{
@@ -123,6 +157,49 @@ namespace ObjectSql.Tests.IntegrationTests
 			var data = res.MapResult<SelectProductResult>().ToArray();
 			Assert.AreEqual(77, data.Length);
 			Assert.AreEqual("Alice Mutton", data[0].ProductName);
+		}
+
+		[Test]
+		public void Select_MapResult_Error_If_Map_DBNull_To_NullableEnum()
+		{
+			var res = EfQuery.From<Employee>()
+				.Select(p => p).ExecuteReader();
+
+			var data = res.MapResult<EmployeeResultWithNullable>().ToArray();
+			Assert.AreEqual(9, data.Length);
+			Assert.IsTrue(data.Any(d=>d.Region == null));
+			Assert.IsTrue(data.Any(d => d.Region == RegionType.Wa));
+		}
+
+		[Test]
+		[ExpectedException(typeof(InvalidCastException), ExpectedMessage = "Unable to cast result set value to Field 'Region'. Possible cast error of DBNull and non nullable type")]
+		public void Select_MapResult_Error_If_Map_DBNull_To_NonNullable()
+		{
+			var res = EfQuery.From<Employee>()
+				.Select(p => p).ExecuteReader();
+
+			res.MapResult<EmployeeResultWithNonNullable>().ToArray();
+		}
+
+		[Test]
+		[ExpectedException(typeof(InvalidCastException), ExpectedMessage = "Unable to cast result set value to Field 'ProductId'. Possible cast error of DBNull and non nullable type")]
+		public void Select_MapResult_InvalidMapping()
+		{
+			var res = EfQuery.From<Product>()
+							 .Select(p => new { p.ProductID, p.ProductName }).ExecuteReader();
+			var data = res.MapResult<SelectProductResultInvalid>().ToArray();
+			Assert.AreEqual(77, data.Length);
+			Assert.AreEqual("Alice Mutton", data[0].ProductName);
+		}
+		[Test]
+		public void Select_MapResult_EnumMapping()
+		{
+			var res = EfQuery.From<Product>()
+							.Where(p=>p.ProductID == 13)
+							 .Select(p => new { p.ProductID, p.ProductName }).ExecuteReader();
+			var data = res.MapResult<SelectProductResultToEnum>().ToArray();
+			Assert.AreEqual(1, data.Length);
+			Assert.AreEqual(CustomEnum.Konbu, data[0].ProductName);
 		}
 		[Test]
 		public void Select_MapResult_Entity_Only_Two_Fields_Selected()
