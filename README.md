@@ -10,6 +10,21 @@ ObjectSql is a lightweight component that simplifies Database access.
 
 --------
 ObjectSql is an extension for *IDbConnection*, *IDbCommand*
+## Schema generation
+ObjectSql.SqlServer project contains a tt file with name ConnStrHere.SqlServer.tt.
+In order to generate schema do the following:
+* Add reference to ObjectSql.dll and ObjectSql.SqlServer.dll to your project and recompile
+	![Add-Reference ObjectSql](https://github.com/andrew-bn/ObjectSql/blob/master/images/ObjSql1.png)
+* Copy ConnStrHere.SqlServer.tt into your project into some directory with the name of Database
+* Add App.config or Web.config to your project and define ConnectionString setting
+* Rename ConnStrHere.SqlServer.tt to <Connection string setting name from App.Config>.SqlServer.tt
+	![Configure ObjectSql](https://github.com/andrew-bn/ObjectSql/blob/master/images/ObjSql2.png)
+* Right-click on tt file and click "Run custom tool"
+* If connection with DB was established then you'll get C# generated schema 
+	* db shemas are generated as C# namespaces
+	* tables are generated as partial C# classes
+		![Schema1 ObjectSql](https://github.com/andrew-bn/ObjectSql/blob/master/images/ObjSql3.png)
+	* stored procedures are generated as methods of abstract class with name <ConnectionStringName>Procedures
 
 ## Access to ObjectSql infrastructure
 Access from SqlConnection
