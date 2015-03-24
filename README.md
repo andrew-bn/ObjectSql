@@ -1,15 +1,8 @@
-ObjectSql
-========
-ObjectSql is a lightweight component that simplifies Database access.
+#ObjectSql
+=======
 
-* Supports MsSql database
-* Object mappers for result sets
-* StoredProcedure calling
-* Bulk Update/Delete/Insert
-* Sql support
+[Wiki Home](https://github.com/andrew-bn/ObjectSql/wiki)
 
---------
-ObjectSql is an extension for *IDbConnection*, *IDbCommand*
 
 ## Access to ObjectSql infrastructure
 Access from SqlConnection
