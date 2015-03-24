@@ -1,5 +1,3 @@
 #ObjectSql
-=======
-
-[Home](https://github.com/andrew-bn/ObjectSql/wiki)
+[Wiki](https://github.com/andrew-bn/ObjectSql/wiki)
 
