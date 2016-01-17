@@ -7,20 +7,21 @@ using ObjectSql.Core.QueryBuilder.InfoExtractor;
 using ObjectSql.QueryImplementation;
 using ObjectSql.QueryInterfaces;
 using System.Data;
+using System.Data.Common;
 
 namespace System
 {
 	public static class ObjectSqlExtensions
 	{
-		public static IQuery ObjectSql(this IDbCommand command)
+		public static IQuery ObjectSql(this DbCommand command)
 		{
 			return command.ObjectSql(ResourcesTreatmentType.DisposeReader);
 		}
-		public static IQuery ObjectSql(this IDbConnection connection)
+		public static IQuery ObjectSql(this DbConnection connection)
 		{
 			return connection.CreateCommand().ObjectSql(ResourcesTreatmentType.DisposeCommand);
 		}
-		public static IQuery ObjectSql(this IDbCommand command, ResourcesTreatmentType treatType)
+		public static IQuery ObjectSql(this DbCommand command, ResourcesTreatmentType treatType)
 		{
 			var objSqlCommand = command as ObjectSqlCommand;
 			var dbCommand = objSqlCommand == null ? command : objSqlCommand.UnderlyingCommand;

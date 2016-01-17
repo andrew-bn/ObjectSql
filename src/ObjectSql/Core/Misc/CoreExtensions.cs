@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq.Expressions;
 using ObjectSql.Core.QueryParts;
 using ObjectSql.QueryInterfaces;
-
+using System.Reflection;
 namespace ObjectSql.Core.Misc
 {
 	public static class CoreExtensions
@@ -32,7 +32,7 @@ namespace ObjectSql.Core.Misc
 
 		public static Expression Visit<T1>(this Expression exp, Func<ExpressionVisitor, T1, Expression> visitor1) where T1:Expression
 		{
-			return new ExpressionVisitorManager(visitor1).Visit(exp);
+			return new ExpressionVisitorManager<T1>(visitor1).Visit(exp);
 		}
 
 		public static bool ContainsSql(this Expression exp)
@@ -41,15 +41,16 @@ namespace ObjectSql.Core.Misc
 			exp.Visit<ParameterExpression>((v, e) => { hasSql = true; return e; });
 
 			if (!hasSql)
-				exp.Visit<MemberExpression>((v, e) => { hasSql = e.Member.DeclaringType.GetCustomAttribute(typeof(DatabaseExtensionAttribute)) != null; return e; });
+				exp.Visit<MemberExpression>((v, e) => { hasSql = e.Member.DeclaringType.GetCustomAttr(typeof(DatabaseExtensionAttribute)) != null; return e; });
 
 			if (!hasSql)
-				exp.Visit<MethodCallExpression>((v, e) => { hasSql = e.Method.DeclaringType.GetCustomAttribute(typeof(DatabaseExtensionAttribute)) != null; return e; });
+				exp.Visit<MethodCallExpression>((v, e) => { hasSql = e.Method.DeclaringType.GetCustomAttr(typeof(DatabaseExtensionAttribute)) != null; return e; });
 
 			if (!hasSql)
-				exp.Visit<ConstantExpression>((v, e) => { hasSql = e.Type.GetCustomAttribute(typeof (DatabaseExtensionAttribute)) != null; return e; });
+				exp.Visit<ConstantExpression>((v, e) => { hasSql = e.Type.GetCustomAttr(typeof (DatabaseExtensionAttribute)) != null; return e; });
 
 			return hasSql;
 		}
+
 	}
 }

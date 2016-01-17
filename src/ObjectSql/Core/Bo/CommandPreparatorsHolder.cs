@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Data.Common;
 using ObjectSql.Core.Bo.CommandPreparatorDescriptor;
 
 namespace ObjectSql.Core.Bo
@@ -34,6 +35,6 @@ namespace ObjectSql.Core.Bo
 			_postProcessors.Add(prePostProcessor);
 		}
 
-		public Func<IDbCommand, object> ReturnParameterReader { get; set; }
+		public Func<DbCommand, object> ReturnParameterReader { get; set; }
 	}
 }

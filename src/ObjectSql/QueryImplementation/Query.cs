@@ -6,6 +6,7 @@ using ObjectSql.QueryInterfaces;
 using ObjectSql.Core.QueryBuilder;
 using System;
 using System.Collections.Generic;
+using System.Data.Common;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Text;
@@ -91,7 +92,7 @@ namespace ObjectSql.QueryImplementation
 			return ExecutionManager.ExecuteReader<object>(Context);
 		}
 
-		public IDbCommand Command
+		public DbCommand Command
 		{
 			get
 			{

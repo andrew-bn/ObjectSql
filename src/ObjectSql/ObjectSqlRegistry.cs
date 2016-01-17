@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Data.Common;
 using System.Linq;
 
 namespace ObjectSql
@@ -24,7 +25,7 @@ namespace ObjectSql
 			DatabaseManager.Add(manager);
 		}
 
-		public static ISchemaManagerFactory FindSchemaManagerFactory(IDbConnection connection, string cs)
+		public static ISchemaManagerFactory FindSchemaManagerFactory(DbConnection connection, string cs)
 		{
 			foreach (var p in ProviderManager)
 			{
@@ -36,7 +37,7 @@ namespace ObjectSql
 			throw new NotImplementedException();
 		}
 
-		public static IDatabaseManager FindDatabaseManager(IDbConnection connection, string provider)
+		public static IDatabaseManager FindDatabaseManager(DbConnection connection, string provider)
 		{
 			foreach (var m in DatabaseManager)
 			{
@@ -45,7 +46,7 @@ namespace ObjectSql
 			}
 			throw new NotImplementedException();
 		}
-		public static IDatabaseManager FindDatabaseManager(IDataReader dataReader)
+		public static IDatabaseManager FindDatabaseManager(DbDataReader dataReader)
 		{
 			var result = DatabaseManager.FirstOrDefault(m => m.MatchManager(dataReader));
 			if (result == null)

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Data.Common;
 using System.Threading.Tasks;
 
 namespace ObjectSql.QueryInterfaces
@@ -11,13 +12,13 @@ namespace ObjectSql.QueryInterfaces
 		INonQueryResultHolder ExecuteNonQuery();
 		IScalarResultHolder ExecuteScalar();
 		IDataReaderHolder ExecuteReader();
-		IDbCommand Command { get; }
+		DbCommand Command { get; }
 	}
 
 	public interface IQueryEnd<TEntity> : IQueryEnd
 	{
 		IEnumerable<TEntity> ExecuteQuery();
-#if NET45
+#if !NET40
 		Task<IAsyncEnumerable<TEntity>> ExecuteQueryAsync();
 #endif
 	}

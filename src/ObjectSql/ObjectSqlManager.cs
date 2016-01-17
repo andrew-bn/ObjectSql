@@ -7,11 +7,11 @@ using ObjectSql.QueryInterfaces;
 using ObjectSql.Core.Misc;
 using System;
 using System.Data;
-using System.Data.EntityClient;
+using System.Data.Common;
 
 namespace ObjectSql
 {
-	public class ObjectSqlManager<T> : IObjectSqlManager where T : IDbConnection, new()
+	public class ObjectSqlManager<T> : IObjectSqlManager where T : DbConnection, new()
 	{
 		private readonly string _connectionString;
 		public ObjectSqlManager(string connectionString)
@@ -25,7 +25,7 @@ namespace ObjectSql
 			return connection.CreateCommand().ObjectSql(ResourcesTreatmentType.DisposeConnection);
 		}
 
-		public IDbConnection CreateConnection()
+		public DbConnection CreateConnection()
 		{
 			var connection = new T();
 
@@ -45,7 +45,7 @@ namespace ObjectSql
 			foreach (var root in result.Context.SqlPart.QueryRoots.Roots)
 			{
 				var rootType = root.GetType();
-				if (rootType.IsGenericType && rootType.GetGenericTypeDefinition() == typeof (StrongBox<>))
+				if (rootType.IsGenericType() && rootType.GetGenericTypeDefinition() == typeof (StrongBox<>))
 					break;
 				idx++;
 			}

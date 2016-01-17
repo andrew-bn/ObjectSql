@@ -18,7 +18,7 @@ namespace ObjectSql.QueryImplementation
 		{
 			return ExecutionManager.ExecuteQuery<T>(Context);
 		}
-#if NET45
+#if !NET40
 		public Task<IAsyncEnumerable<T>> ExecuteQueryAsync()
 		{
 			return ExecutionManager.ExecuteQueryAsync<T>(Context);

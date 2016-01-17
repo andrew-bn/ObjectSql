@@ -2,10 +2,9 @@
 using System.Collections.Concurrent;
 using System.Data;
 using System.Linq;
+using ObjectSql.Core.SchemaManager.EntitySchema;
 using System.Reflection;
 using ObjectSql.Core.Misc;
-using ObjectSql.Core.SchemaManager.EntitySchema;
-
 namespace ObjectSql.Core.SchemaManager
 {
 	public class EntitySchemaManager<TTypeEnum> : IEntitySchemaManager
@@ -43,7 +42,7 @@ namespace ObjectSql.Core.SchemaManager
 		#region entitySchema
 		protected virtual EntitySchema.EntitySchema CreateSchema(Type entity)
 		{
-			var entityFields = entity.GetProperties()
+			var entityFields =  entity.GetProperties()
 									.Where(NotFilteredEntityProperty)
 									.ToArray();
 
@@ -57,10 +56,10 @@ namespace ObjectSql.Core.SchemaManager
 		{
 			object notMappedAttr = null;
 #if NET45
-			notMappedAttr = prop.GetCustomAttribute(typeof(System.ComponentModel.DataAnnotations.Schema.NotMappedAttribute)) as System.ComponentModel.DataAnnotations.Schema.NotMappedAttribute;
+			notMappedAttr = prop.GetCustomAttr(typeof(System.ComponentModel.DataAnnotations.Schema.NotMappedAttribute)) as System.ComponentModel.DataAnnotations.Schema.NotMappedAttribute;
 #endif
 			if (notMappedAttr == null)
-				notMappedAttr = prop.GetCustomAttribute(typeof(NotMappedAttribute)) as NotMappedAttribute;
+				notMappedAttr = prop.GetCustomAttr(typeof(NotMappedAttribute)) as NotMappedAttribute;
 
 			return notMappedAttr == null;
 		}
@@ -71,17 +70,17 @@ namespace ObjectSql.Core.SchemaManager
 			string dbType = string.Empty;
 			bool attrFound = false;
 
-			var objSqlAttr = prop.GetCustomAttribute(typeof(ColumnAttribute)) as ColumnAttribute;
+			var objSqlAttr = prop.GetCustomAttr(typeof(ColumnAttribute)) as ColumnAttribute;
 			if (attrFound = (objSqlAttr != null))
 			{
 				entityName = objSqlAttr.Name;
 				dbType = objSqlAttr.TypeName;
 			}
 
-#if NET45
+#if !NET40
 			if (!attrFound)
 			{
-				var netAttr = prop.GetCustomAttribute(typeof(System.ComponentModel.DataAnnotations.Schema.ColumnAttribute)) as System.ComponentModel.DataAnnotations.Schema.ColumnAttribute;
+				var netAttr = prop.GetCustomAttr(typeof(System.ComponentModel.DataAnnotations.Schema.ColumnAttribute)) as System.ComponentModel.DataAnnotations.Schema.ColumnAttribute;
 				if (netAttr != null)
 				{
 					entityName = netAttr.Name;
@@ -92,7 +91,7 @@ namespace ObjectSql.Core.SchemaManager
 #if NET40
 			if (!attrFound)
 			{
-				var netAttr = prop.GetCustomAttribute(typeof(System.Data.Linq.Mapping.ColumnAttribute)) as System.Data.Linq.Mapping.ColumnAttribute;
+				var netAttr = prop.GetCustomAttr(typeof(System.Data.Linq.Mapping.ColumnAttribute)) as System.Data.Linq.Mapping.ColumnAttribute;
 				if (netAttr != null)
 				{
 					entityName = netAttr.Name;
@@ -112,7 +111,7 @@ namespace ObjectSql.Core.SchemaManager
 			var nameOnly = false;
 			bool attrFound = false;
 
-			var objSqlAttr = entity.GetCustomAttribute(typeof(TableAttribute)) as TableAttribute;
+			var objSqlAttr = entity.GetCustomAttr(typeof(TableAttribute)) as TableAttribute;
 			if (attrFound = (objSqlAttr != null))
 			{
 				entityName = objSqlAttr.Name;
@@ -122,7 +121,7 @@ namespace ObjectSql.Core.SchemaManager
 #if NET45
 			if (!attrFound)
 			{
-				var netAttr = entity.GetCustomAttribute(typeof(System.ComponentModel.DataAnnotations.Schema.TableAttribute)) as System.ComponentModel.DataAnnotations.Schema.TableAttribute;
+				var netAttr = entity.GetCustomAttr(typeof(System.ComponentModel.DataAnnotations.Schema.TableAttribute)) as System.ComponentModel.DataAnnotations.Schema.TableAttribute;
 				if (netAttr != null)
 				{
 					entityName = netAttr.Name;
@@ -133,7 +132,7 @@ namespace ObjectSql.Core.SchemaManager
 #if NET40
 			if (!attrFound)
 			{
-				var netAttr = entity.GetCustomAttribute(typeof(System.Data.Linq.Mapping.TableAttribute)) as System.Data.Linq.Mapping.TableAttribute;
+				var netAttr = entity.GetCustomAttr(typeof(System.Data.Linq.Mapping.TableAttribute)) as System.Data.Linq.Mapping.TableAttribute;
 				if (netAttr != null)
 				{
 					entityName = netAttr.Name;
@@ -145,7 +144,7 @@ namespace ObjectSql.Core.SchemaManager
 		}
 		private StorageName ObtainStorageProcedureName(MethodInfo entity)
 		{
-			var attr = entity.GetCustomAttribute(typeof(ProcedureAttribute)) as ProcedureAttribute;
+			var attr = entity.GetCustomAttr(typeof(ProcedureAttribute)) as ProcedureAttribute;
 			return attr == null
 					? new StorageName(false, entity.Name, String.Empty)
 					: new StorageName(false, attr.Name, attr.Schema);
@@ -153,7 +152,7 @@ namespace ObjectSql.Core.SchemaManager
 		}
 		private StorageParameter ObtainStorageParameter(ParameterInfo prop)
 		{
-			var attr = prop.GetCustomAttribute(typeof(ParameterAttribute)) as ParameterAttribute;
+			var attr = prop.GetCustomAttr(typeof(ParameterAttribute)) as ParameterAttribute;
 			return attr == null
 					? new StorageParameter(prop.Name, ParameterDirection.Input)
 					: new StorageParameter(attr.Name, ParseDbType(attr.TypeName), attr.Direction);

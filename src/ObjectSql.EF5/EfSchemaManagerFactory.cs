@@ -2,6 +2,7 @@
 using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Data;
+using System.Data.Common;
 using System.Data.EntityClient;
 using System.Linq;
 using System.Text;
@@ -25,7 +26,7 @@ namespace ObjectSql.EF5
 			return stringBuilder != null;
 		}
 
-		public bool MatchSchemaManager(IDbConnection connection, string connectionString)
+		public bool MatchSchemaManager(DbConnection connection, string connectionString)
 		{
 			if (connection is EntityConnection)
 				return true;
@@ -33,7 +34,7 @@ namespace ObjectSql.EF5
 			return TryGetEfConnectionString(connectionString, out entityStringBuilder);
 		}
 
-		public void SetupConnectionString(IDbConnection connection, string connectionString)
+		public void SetupConnectionString(DbConnection connection, string connectionString)
 		{
 			if (connection is EntityConnection)
 			{
@@ -57,7 +58,7 @@ namespace ObjectSql.EF5
 		}
 
 
-		public string TryGetProviderName(IDbConnection connection, string connectionString)
+		public string TryGetProviderName(DbConnection connection, string connectionString)
 		{
 			EntityConnectionStringBuilder entityStringBuilder;
 			if (TryGetEfConnectionString(connectionString, out entityStringBuilder))

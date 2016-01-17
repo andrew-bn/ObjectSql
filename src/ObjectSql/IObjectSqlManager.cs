@@ -1,4 +1,5 @@
 ﻿using System.Data;
+using System.Data.Common;
 using ObjectSql.QueryInterfaces;
 
 namespace ObjectSql
@@ -6,6 +7,6 @@ namespace ObjectSql
 	public interface IObjectSqlManager
 	{
 		IQuery Query();
-		IDbConnection CreateConnection();
+		DbConnection CreateConnection();
 	}
 }

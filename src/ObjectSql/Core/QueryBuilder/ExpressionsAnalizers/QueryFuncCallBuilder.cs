@@ -5,6 +5,7 @@ using ObjectSql.Core.QueryBuilder.LambdaBuilder;
 using ObjectSql.Core.SchemaManager;
 using System;
 using System.Data;
+using System.Data.Common;
 using System.Linq;
 using System.Linq.Expressions;
 using ObjectSql.Core.SchemaManager.EntitySchema;
@@ -59,12 +60,12 @@ namespace ObjectSql.Core.QueryBuilder.ExpressionsAnalizers
 			return node;
 		}
 
-		private Action<IDbCommand, QueryRoots> CreateParameterReader(QueryRoots queryRoots, string name, Expression accessor)
+		private Action<DbCommand, QueryRoots> CreateParameterReader(QueryRoots queryRoots, string name, Expression accessor)
 		{
 			return ExpressionBuilder.CreateCommandParameterReader(queryRoots, Expression.Constant(name, typeof(string)), accessor);
 		}
 
-		protected Action<IDbCommand, QueryRoots> CreateParameterInitializer(QueryRoots roots, string name, Expression accessor, IStorageFieldType dbTypeInContext, ParameterDirection direction)
+		protected Action<DbCommand, QueryRoots> CreateParameterInitializer(QueryRoots roots, string name, Expression accessor, IStorageFieldType dbTypeInContext, ParameterDirection direction)
 		{
 			return ExpressionBuilder.CreateDatabaseParameterFactoryAction(roots, Expression.Constant(name, typeof(string)), accessor, dbTypeInContext, direction);
 		}

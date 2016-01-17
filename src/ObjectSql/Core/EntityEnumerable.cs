@@ -9,22 +9,22 @@ using ObjectSql.Exceptions;
 namespace ObjectSql.Core
 {
 	public class EntityEnumerable<T> : IEnumerable<T>, IEnumerator<T>
-#if NET45
+#if !NET40
 	                                   , IAsyncEnumerable<T>
 	                                   , IAsyncEnumerator<T>
 #endif
 	{
-		private readonly IDataReader _dataReader;
+		private readonly DbDataReader _dataReader;
 		private readonly Action _disposing;
-		private readonly Func<IDataReader, T> _materializer;
+		private readonly Func<DbDataReader, T> _materializer;
 		private volatile bool _enumeratorReturned;
 
-		public EntityEnumerable(Delegate materializationDelegate, IDataReader dataReader, Action disposing)
+		public EntityEnumerable(Delegate materializationDelegate, DbDataReader dataReader, Action disposing)
 		{
 			_dataReader = dataReader;
 
 			_disposing = disposing;
-			_materializer = (Func<IDataReader, T>)materializationDelegate;
+			_materializer = (Func<DbDataReader, T>)materializationDelegate;
 		}
 
 		public IEnumerator<T> GetEnumerator()
@@ -36,7 +36,7 @@ namespace ObjectSql.Core
 		{
 			return GetValidEnumerator();
 		}
-#if NET45
+#if !NET40
 		public IAsyncEnumerator<T> GetAsyncEnumerator()
 		{
 			return GetValidEnumerator();
@@ -59,7 +59,7 @@ namespace ObjectSql.Core
 		{
 			return _dataReader.Read();
 		}
-#if NET45
+#if !NET40
 		public Task<bool> MoveNextAsync()
 		{
 			return ((DbDataReader)_dataReader).ReadAsync();
@@ -73,8 +73,7 @@ namespace ObjectSql.Core
 
 		public void Dispose()
 		{
-			if (_disposing != null)
-				_disposing();
+			_disposing?.Invoke();
 		}
 
 		private EntityEnumerable<T> GetValidEnumerator()

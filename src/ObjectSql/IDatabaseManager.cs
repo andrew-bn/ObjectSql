@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Data.Common;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -13,8 +14,8 @@ namespace ObjectSql
 	public interface IDatabaseManager
 	{
 		Type DbType { get; }
-		bool MatchManager(IDbConnection dbConnection, string providerName);
-		bool MatchManager(IDataReader dataReader);
+		bool MatchManager(DbConnection dbConnection, string providerName);
+		bool MatchManager(DbDataReader dataReader);
 		IDelegatesBuilder CreateDelegatesBuilder();
 		string MapToDbType(Type netType);
 		SqlWriter CreateSqlWriter();

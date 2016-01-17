@@ -1,40 +1,37 @@
 ﻿using System.Data;
+using System.Data.Common;
 using ObjectSql.Exceptions;
 
 namespace ObjectSql.Core
 {
-	internal sealed class ObjectSqlConnection : IObjectSqlConnection
+	internal sealed class ObjectSqlConnection : DbConnection, IObjectSqlConnection
 	{
-		private readonly IDbConnection _connection;
 		private readonly string _connectionString;
-		public IDbConnection UnderlyingConnection { get { return _connection; } }
-		internal ObjectSqlConnection(string connectionString, IDbConnection connection)
+		public DbConnection UnderlyingConnection { get; }
+
+		internal ObjectSqlConnection(string connectionString, DbConnection connection)
 		{
-			_connection = connection;
+			UnderlyingConnection = connection;
 			_connectionString = connectionString;
 		}
 
-		public IDbTransaction BeginTransaction(IsolationLevel il)
+		protected override DbTransaction BeginDbTransaction(IsolationLevel isolationLevel)
 		{
-			return _connection.BeginTransaction(il);
+			return UnderlyingConnection.BeginTransaction(isolationLevel);
 		}
 
-		public IDbTransaction BeginTransaction()
+
+		public override void ChangeDatabase(string databaseName)
 		{
-			return _connection.BeginTransaction();
+			UnderlyingConnection.ChangeDatabase(databaseName);
 		}
 
-		public void ChangeDatabase(string databaseName)
+		public override void Close()
 		{
-			_connection.ChangeDatabase(databaseName);
+			UnderlyingConnection.Close();
 		}
 
-		public void Close()
-		{
-			_connection.Close();
-		}
-
-		public string ConnectionString
+		public override string ConnectionString
 		{
 			get
 			{
@@ -45,35 +42,22 @@ namespace ObjectSql.Core
 				throw new ObjectSqlException("Invalid operation");
 			}
 		}
-
-		public int ConnectionTimeout
+		protected override DbCommand CreateDbCommand()
 		{
-			get { return _connection.ConnectionTimeout; }
+			return new ObjectSqlCommand(this, UnderlyingConnection.CreateCommand());
 		}
 
-		public IDbCommand CreateCommand()
-		{
-			return new ObjectSqlCommand(this, _connection.CreateCommand());
-		}
+		public override int ConnectionTimeout => UnderlyingConnection.ConnectionTimeout;
+		public override string Database => UnderlyingConnection.Database;
+		public override string DataSource => UnderlyingConnection.DataSource;
+		public override string ServerVersion => UnderlyingConnection.ServerVersion;
+		public override void Open() => UnderlyingConnection.Open();
+		public override ConnectionState State => UnderlyingConnection.State;
 
-		public string Database
+		protected override void Dispose(bool disposing)
 		{
-			get { return _connection.Database; }
-		}
-
-		public void Open()
-		{
-			_connection.Open();
-		}
-
-		public ConnectionState State
-		{
-			get { return _connection.State; }
-		}
-
-		public void Dispose()
-		{
-			_connection.Dispose();
+			if (disposing)
+				UnderlyingConnection.Dispose();
 		}
 	}
 }

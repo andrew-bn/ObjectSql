@@ -1,9 +1,10 @@
 ﻿using System.Data;
+using System.Data.Common;
 
 namespace ObjectSql.Core
 {
-	public interface IObjectSqlConnection: IDbConnection
+	public interface IObjectSqlConnection
 	{
-		IDbConnection UnderlyingConnection { get; }
+		DbConnection UnderlyingConnection { get; }
 	}
 }

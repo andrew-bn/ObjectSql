@@ -1,3 +1,4 @@
+using ObjectSql.Core.Misc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -24,7 +25,7 @@ namespace ObjectSql.Core.SchemaManager.EntitySchema
 			_entityFieldsMap = entityToStorageFieldsMap;
 			StorageFields = _entityFieldsMap.Values.ToArray();
 
-			var entityProperties = entityType.GetProperties().ToArray();
+			var entityProperties = entityType.GetProps().ToArray();
 			
 			EntityProperties = new EntityProperty[entityProperties.Length];
 			for(int i = 0;i<entityProperties.Length;i++)
@@ -68,7 +69,7 @@ namespace ObjectSql.Core.SchemaManager.EntitySchema
 									LambdaExpression.Convert(
 										LambdaExpression.MakeMemberAccess(
 											LambdaExpression.Convert(entityParam, entity),
-											entity.GetProperties()[i]),
+											entity.GetProps()[i]),
 										typeof(object)),
 									LambdaExpression.Constant(i));
 			}

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Data.Common;
 
 namespace ObjectSql.QueryInterfaces
 {
@@ -8,7 +9,7 @@ namespace ObjectSql.QueryInterfaces
 	{
 		IEnumerable<IDictionary<string, object>> MapResultToDictionary();
 		IEnumerable<dynamic> MapResultToDynamic();
-		IEnumerable<T> MapResult<T>(Func<IDataReader, T> materializer);
+		IEnumerable<T> MapResult<T>(Func<DbDataReader, T> materializer);
 		IEnumerable<TData> MapResult<TData>();
 	}
 }

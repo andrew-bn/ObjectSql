@@ -199,7 +199,7 @@ namespace ObjectSql.Core.QueryBuilder
 			{
 				var sqlContext = new SqlWriterContext(expression, expressionVisitor, context, commandText);
 				var mc = (MethodCallExpression)expression;
-				var sqlAttr = mc.Method.GetCustomAttribute<SqlAttribute>();
+				var sqlAttr = mc.Method.GetCustomAttr<SqlAttribute>();
 				var m = FindMethod(mc.Method.Name, mc.Method.DeclaringType);
 				if (m == null && sqlAttr == null)
 					throw new ObjectSqlException("method '" + mc.Method.Name + "' can't be rendered to SQL");
@@ -258,7 +258,7 @@ namespace ObjectSql.Core.QueryBuilder
 			foreach (var m in sqlWriter.GetMethods())
 			{
 				
-				var attr = m.GetCustomAttribute(typeof(DeclaringTypeAttribute)) as DeclaringTypeAttribute;
+				var attr = m.GetCustomAttr(typeof(DeclaringTypeAttribute)) as DeclaringTypeAttribute;
 				if (attr != null && m.Name == methodName && attr.Type == type)
 					return m;
 			}

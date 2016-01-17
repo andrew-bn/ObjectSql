@@ -1,9 +1,10 @@
 ﻿using System.Data;
+using System.Data.Common;
 
 namespace ObjectSql.Core
 {
-	public interface IObjectSqlCommand: IDbCommand
+	public interface IObjectSqlCommand
 	{
-		IDbCommand UnderlyingCommand { get; }
+		DbCommand UnderlyingCommand { get; }
 	}
 }

@@ -1,5 +1,6 @@
 using System;
 using System.Data;
+using System.Data.Common;
 using System.Linq.Expressions;
 using ObjectSql.Core.SchemaManager.EntitySchema;
 
@@ -8,7 +9,7 @@ namespace ObjectSql.Core.Bo.CommandPreparatorDescriptor
 	public class CommandParameterPreProcessor : CommandPrePostProcessor
 	{
 		public CommandParameterPreProcessor(string name, 
-			IStorageFieldType type, Expression accessor, Action<IDbCommand, QueryRoots> preparationAction) 
+			IStorageFieldType type, Expression accessor, Action<DbCommand, QueryRoots> preparationAction) 
 			: base(preparationAction)
 		{
 			Name = name;

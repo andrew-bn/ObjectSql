@@ -2,6 +2,7 @@ using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Data;
+using System.Data.Common;
 using ObjectSql.Core.Misc;
 using ObjectSql.Core.QueryBuilder;
 using ObjectSql.Core.QueryParts;
@@ -15,7 +16,7 @@ namespace ObjectSql.Core.Bo
 
 		public const int PRIME = 397;
 		public string InitialConnectionString { get; private set; }
-		public IDbCommand Command { get; private set; }
+		public DbCommand Command { get; private set; }
 		public ResourcesTreatmentType ResourcesTreatmentType { get; set; }
 		
 		public QueryEnvironment QueryEnvironment { get; set; }
@@ -27,7 +28,7 @@ namespace ObjectSql.Core.Bo
 		public bool ConnectionOpened { get; set; }
 
 		internal QueryContext(string initialConnectionString,
-								IDbCommand command,
+								DbCommand command,
 								ResourcesTreatmentType resourcesTreatmentType, 
 								QueryEnvironment queryEnvironment)
 		{
@@ -38,7 +39,7 @@ namespace ObjectSql.Core.Bo
 			QueryEnvironment = queryEnvironment;
 			SqlPart = new SqlPart(this);
 		}
-		internal QueryContext CopyWith(IDbCommand command)
+		internal QueryContext CopyWith(DbCommand command)
 		{
 			var result = new QueryContext(InitialConnectionString,Command,ResourcesTreatmentType, QueryEnvironment)
 				{
@@ -90,7 +91,7 @@ namespace ObjectSql.Core.Bo
 		}
 		#endregion
 
-		public IDbCommand PrepareQuery()
+		public DbCommand PrepareQuery()
 		{
 			if (!Prepared)
 			{

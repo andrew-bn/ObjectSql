@@ -1,61 +1,59 @@
 ﻿using System;
 using System.Data;
+using System.Data.Common;
 
 namespace ObjectSql.Core
 {
-	internal sealed class ObjectSqlCommand : IObjectSqlCommand
+	internal sealed class ObjectSqlCommand : DbCommand, IObjectSqlCommand
 	{
-		private readonly IDbCommand _command;
 		private readonly ObjectSqlConnection _connection;
-		public IDbCommand UnderlyingCommand { get { return _command; } }
-		internal ObjectSqlCommand(ObjectSqlConnection connection, IDbCommand command)
+		public DbCommand UnderlyingCommand { get; }
+
+		internal ObjectSqlCommand(ObjectSqlConnection connection, DbCommand command)
 		{
-			_command = command;
+			UnderlyingCommand = command;
 			_connection = connection;
 		}
 
-		public void Cancel()
-		{
-			_command.Cancel();
-		}
+		public override void Cancel() => UnderlyingCommand.Cancel();
 
-		public string CommandText
+		public override string CommandText
 		{
 			get
 			{
-				return _command.CommandText;
+				return UnderlyingCommand.CommandText;
 			}
 			set
 			{
-				_command.CommandText = value;
+				UnderlyingCommand.CommandText = value;
 			}
 		}
 
-		public int CommandTimeout
+		public override int CommandTimeout
 		{
 			get
 			{
-				return _command.CommandTimeout;
+				return UnderlyingCommand.CommandTimeout;
 			}
 			set
 			{
-				_command.CommandTimeout = value;
+				UnderlyingCommand.CommandTimeout = value;
 			}
 		}
 
-		public CommandType CommandType
+		public override CommandType CommandType
 		{
 			get
 			{
-				return _command.CommandType;
+				return UnderlyingCommand.CommandType;
 			}
 			set
 			{
-				_command.CommandType = value;
+				UnderlyingCommand.CommandType = value;
 			}
 		}
 
-		public IDbConnection Connection
+		protected override DbConnection DbConnection
 		{
 			get
 			{
@@ -67,83 +65,83 @@ namespace ObjectSql.Core
 			}
 		}
 
-		public IDbDataParameter CreateParameter()
+		protected override DbParameter CreateDbParameter()
 		{
-			return _command.CreateParameter();
+			return UnderlyingCommand.CreateParameter();
 		}
 
-		public int ExecuteNonQuery()
+		public override int ExecuteNonQuery()
 		{
-			return _command.ExecuteNonQuery();
+			return UnderlyingCommand.ExecuteNonQuery();
 		}
 
-		public IDataReader ExecuteReader(CommandBehavior behavior)
+		protected override DbDataReader ExecuteDbDataReader(CommandBehavior behavior)
 		{
-			return _command.ExecuteReader(behavior);
+			return UnderlyingCommand.ExecuteReader(behavior);
 		}
 
-		public IDataReader ExecuteReader()
+		public override object ExecuteScalar()
 		{
-			return _command.ExecuteReader();
+			return UnderlyingCommand.ExecuteScalar();
 		}
 
-		public object ExecuteScalar()
+		protected override DbParameterCollection DbParameterCollection => UnderlyingCommand.Parameters;
+
+		public override void Prepare()
 		{
-			return _command.ExecuteScalar();
+			UnderlyingCommand.Prepare();
 		}
 
-		public IDataParameterCollection Parameters
-		{
-			get { return _command.Parameters; }
-		}
-
-		public void Prepare()
-		{
-			_command.Prepare();
-		}
-
-		public IDbTransaction Transaction
+		protected override DbTransaction DbTransaction
 		{
 			get
 			{
-				return _command.Transaction;
+				return UnderlyingCommand.Transaction;
 			}
 			set
 			{
-				_command.Transaction = value;
+				UnderlyingCommand.Transaction = value;
 			}
 		}
 
-		public UpdateRowSource UpdatedRowSource
+		public override bool DesignTimeVisible
 		{
-			get
-			{
-				return _command.UpdatedRowSource;
-			}
-			set
-			{
-				_command.UpdatedRowSource = value;
-			}
-		}
-		public override bool Equals(object obj)
-		{
-			if (ReferenceEquals(null, obj)) return false;
-			if (ReferenceEquals(this, obj)) return true;
-			return obj is ObjectSqlCommand && Equals((ObjectSqlCommand) obj);
+			get { return UnderlyingCommand.DesignTimeVisible; }
+			set { UnderlyingCommand.DesignTimeVisible = value; }
 		}
 
-		private bool Equals(ObjectSqlCommand other)
+	public override UpdateRowSource UpdatedRowSource
+	{
+		get
 		{
-			return Equals(_command, other._command);
+			return UnderlyingCommand.UpdatedRowSource;
 		}
-
-		public override int GetHashCode()
+		set
 		{
-			return (_command != null ? _command.GetHashCode() : 0);
-		}
-		public void Dispose()
-		{
-			_command.Dispose();
+			UnderlyingCommand.UpdatedRowSource = value;
 		}
 	}
+	public override bool Equals(object obj)
+	{
+		if (ReferenceEquals(null, obj)) return false;
+		if (ReferenceEquals(this, obj)) return true;
+		return obj is ObjectSqlCommand && Equals((ObjectSqlCommand)obj);
+	}
+
+	private bool Equals(ObjectSqlCommand other)
+	{
+		return Equals(UnderlyingCommand, other.UnderlyingCommand);
+	}
+
+	public override int GetHashCode()
+	{
+		return (UnderlyingCommand != null ? UnderlyingCommand.GetHashCode() : 0);
+	}
+
+	protected override void Dispose(bool disposing)
+	{
+		if (disposing)
+			UnderlyingCommand.Dispose();
+	}
+}
 }

@@ -40,12 +40,12 @@ namespace ObjectSql.Core
 			return new DataReaderHolder(context, dataReader, () => DisposeDataReader(context, dataReader));
 		}
 
-		private static IDataReader ExecuteDataReader(QueryContext context)
+		private static DbDataReader ExecuteDataReader(QueryContext context)
 		{
 			return ExecuteCommand(context, c => c.ExecuteReader(), false);
 		}
 
-		private static T ExecuteCommand<T>(QueryContext context, Func<IDbCommand, T> executor, bool freeResources)
+		private static T ExecuteCommand<T>(QueryContext context, Func<DbCommand, T> executor, bool freeResources)
 		{
 			PrepareCommand(context);
 			try
@@ -93,14 +93,14 @@ namespace ObjectSql.Core
 				cmd.Connection.Dispose();
 		}
 
-		private static bool OpenConnection(IDbConnection dbConnection)
+		private static bool OpenConnection(DbConnection dbConnection)
 		{
 			bool openConnection = dbConnection.State == ConnectionState.Closed;
 			if (openConnection)
 				dbConnection.Open();
 			return openConnection;
 		}
-#if NET45
+#if !NET40
 		#region async
 		public static async Task<IAsyncEnumerable<T>> ExecuteQueryAsync<T>(QueryContext context)
 		{
@@ -122,7 +122,7 @@ namespace ObjectSql.Core
 
 		#endregion async
 #endif
-		private static void DisposeDataReader(QueryContext context, IDataReader dataReader)
+		private static void DisposeDataReader(QueryContext context, DbDataReader dataReader)
 		{
 			dataReader.Dispose();
 			FreeResources(context);

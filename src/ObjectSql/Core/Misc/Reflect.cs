@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
 
@@ -7,28 +8,81 @@ namespace ObjectSql.Core.Misc
 	public static class Reflect
 	{
 #if NET40
-		public static object GetCustomAttribute(this MemberInfo mi, Type attrType)
-		{
-
-			var attrs = mi.GetCustomAttributes(attrType,true);
-			return attrs.Length > 0 ? attrs[0] : null;
-		}
-		public static object GetCustomAttribute(this MethodInfo mi, Type attrType)
+		public static object GetCustomAttr(this Type mi, Type attrType)
 		{
 			var attrs = mi.GetCustomAttributes(attrType, true);
-			return attrs.Length > 0 ? attrs[0] : null;
+			return attrs.FirstOrDefault();
 		}
-		public static T GetCustomAttribute<T>(this MethodInfo mi) where T: class
+#else
+		public static object GetCustomAttr(this Type mi, Type attrType)
 		{
-			return mi.GetCustomAttribute(typeof (T)) as T;
-		}
-		public static object GetCustomAttribute(this ParameterInfo mi, Type attrType)
-		{
-			var attrs = mi.GetCustomAttributes(attrType, true);
-			return attrs.Length > 0 ? attrs[0] : null;
+			var attrs = mi.GetTypeInfo().GetCustomAttributes(attrType, true);
+			return attrs.FirstOrDefault();
 		}
 #endif
-	public static ConstructorInfo FindCtor<T>(Expression<Func<T>> ctor)
+
+		public static PropertyInfo[] GetProps(this Type type)
+		{
+			return type.GetProperties(BindingFlags.Instance | BindingFlags.Public | BindingFlags.IgnoreCase);
+		}
+
+		public static PropertyInfo GetProp(this Type type, string name)
+		{
+			return type.GetProperty(name, BindingFlags.Instance | BindingFlags.Public | BindingFlags.IgnoreCase);
+		}
+
+#if !NET45
+
+		public static object GetCustomAttr(this MemberInfo mi, Type attrType)
+		{
+			var attrs = mi.GetCustomAttributes(attrType,true);
+			return attrs.FirstOrDefault();
+		}
+		public static object GetCustomAttr(this MethodInfo mi, Type attrType)
+		{
+			var attrs = mi.GetCustomAttributes(attrType, true);
+			return attrs.FirstOrDefault();
+		}
+		public static T GetCustomAttr<T>(this MethodInfo mi) where T: class
+		{
+			return mi.GetCustomAttr(typeof (T)) as T;
+		}
+		public static object GetCustomAttr(this ParameterInfo mi, Type attrType)
+		{
+			var attrs = mi.GetCustomAttributes(attrType, true);
+			return attrs.FirstOrDefault();
+		}
+#endif
+		public static bool IsEnum(this Type type)
+		{
+#if NET40
+			return type.IsEnum;
+#else
+			return type.GetTypeInfo().IsEnum;
+#endif
+
+		}
+
+		public static bool IsGenericType(this Type type)
+		{
+#if NET40
+			return type.IsGenericType;
+#else
+			return type.GetTypeInfo().IsGenericType;
+#endif
+		}
+
+
+		public static bool IsValueType(this Type type)
+		{
+#if NET40
+			return type.IsValueType;
+#else
+			return type.GetTypeInfo().IsValueType;
+#endif
+		}
+
+		public static ConstructorInfo FindCtor<T>(Expression<Func<T>> ctor)
 		{
 			return ((NewExpression)ctor.Body).Constructor;
 		}

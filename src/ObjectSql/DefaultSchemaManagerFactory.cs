@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Concurrent;
 using System.Data;
+using System.Data.Common;
 using ObjectSql.Core.SchemaManager;
 
 namespace ObjectSql
@@ -8,17 +9,17 @@ namespace ObjectSql
 	public class DefaultSchemaManagerFactory: ISchemaManagerFactory
 	{
 
-		public bool MatchSchemaManager(IDbConnection connection, string connectionString)
+		public bool MatchSchemaManager(DbConnection connection, string connectionString)
 		{
 			return true;
 		}
 
-		public void SetupConnectionString(IDbConnection connection, string connectionString)
+		public void SetupConnectionString(DbConnection connection, string connectionString)
 		{
 			connection.ConnectionString = connectionString;
 		}
 
-		public string TryGetProviderName(IDbConnection connection, string connectionString)
+		public string TryGetProviderName(DbConnection connection, string connectionString)
 		{
 			return string.Empty;
 		}

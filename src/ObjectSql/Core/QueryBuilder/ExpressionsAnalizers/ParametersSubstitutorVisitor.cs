@@ -4,6 +4,7 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
+using ObjectSql.Core.Misc;
 
 namespace ObjectSql.Core.QueryBuilder.ExpressionsAnalizers
 {
@@ -22,7 +23,7 @@ namespace ObjectSql.Core.QueryBuilder.ExpressionsAnalizers
 			{
 				var s = (IParameterSubstitutor)Activator.CreateInstance(typeof (ParametersSubstitutor<>).MakeGenericType(node.Type));
 				s.Name = node.Name;
-				return Expression.MakeMemberAccess(Expression.Constant(s,s.GetType()), s.GetType().GetProperty("Table"));
+				return Expression.MakeMemberAccess(Expression.Constant(s,s.GetType()), s.GetType().GetProp("Table"));
 			}
 			return node;
 		}

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Data;
+using System.Data.Common;
 using System.Data.SqlClient;
 using System.Xml;
 using ObjectSql.Core.QueryBuilder;
@@ -10,12 +11,12 @@ namespace ObjectSql.SqlServer
 {
 	public class SqlServerDatabaseManager : IDatabaseManager
 	{
-		public bool MatchManager(IDbConnection dbConnection, string providerName)
+		public bool MatchManager(DbConnection dbConnection, string providerName)
 		{
 			return providerName == "System.Data.SqlClient" || (dbConnection is SqlConnection);
 		}
 
-		public bool MatchManager(IDataReader dataReader)
+		public bool MatchManager(DbDataReader dataReader)
 		{
 			return dataReader is SqlDataReader;
 		}

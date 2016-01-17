@@ -2,6 +2,7 @@
 using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Data;
+using System.Data.Common;
 using System.Linq;
 using ObjectSql.Core.Bo;
 using ObjectSql.Exceptions;
@@ -17,9 +18,9 @@ namespace ObjectSql.Core
 		public QueryContext Context { get; private set; }
 		public ResourcesTreatmentType TreatmentType { get; private set; }
 		public bool ConnectionOpened { get; private set; }
-		public IDataReader DataReader { get; private set; }
+		public DbDataReader DataReader { get; private set; }
 
-		public DataReaderHolder(QueryContext context, IDataReader dataReader, Action disposing)
+		public DataReaderHolder(QueryContext context, DbDataReader dataReader, Action disposing)
 		{
 			_disposing = disposing;
 			Context = context;
@@ -32,16 +33,16 @@ namespace ObjectSql.Core
 		}
 		public IEnumerable<dynamic> MapResultToDynamic()
 		{
-			Func<IDataReader, dynamic> materializer = MapResultToDynamicMaterializer;
+			Func<DbDataReader, dynamic> materializer = MapResultToDynamicMaterializer;
 			return MapData<dynamic>(materializer);
 
 		}
 		public IEnumerable<IDictionary<string,object>> MapResultToDictionary()
 		{
-			Func<IDataReader, IDictionary<string, object>> materializer = MapResultToDictionaryMaterializer;
+			Func<DbDataReader, IDictionary<string, object>> materializer = MapResultToDictionaryMaterializer;
 			return MapData<IDictionary<string, object>>(materializer);
 		}
-		public IEnumerable<T> MapResult<T>(Func<IDataReader, T> materializer)
+		public IEnumerable<T> MapResult<T>(Func<DbDataReader, T> materializer)
 		{
 			return MapData<T>(materializer);
 		}
@@ -75,7 +76,7 @@ namespace ObjectSql.Core
 			return (TReturn) Context.PreparationData.ReturnParameterReader(Context.Command);
 		}
 
-		public IDictionary<string, object> MapResultToDictionaryMaterializer(IDataReader dataReader)
+		public IDictionary<string, object> MapResultToDictionaryMaterializer(DbDataReader dataReader)
 		{
 			var result = new Dictionary<string, object>();
 			for (int i = 0; i < dataReader.FieldCount; i++ )
@@ -85,7 +86,7 @@ namespace ObjectSql.Core
 			}
 			return result;
 		}
-		public dynamic MapResultToDynamicMaterializer(IDataReader dataReader)
+		public dynamic MapResultToDynamicMaterializer(DbDataReader dataReader)
 		{
 			var result = new DynamicResult();
 			for (int i = 0; i < dataReader.FieldCount; i++)

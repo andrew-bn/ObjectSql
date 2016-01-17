@@ -10,6 +10,7 @@ using ObjectSql.QueryImplementation;
 using ObjectSql.QueryInterfaces;
 using System;
 using System.Data;
+using System.Data.Common;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
@@ -110,7 +111,7 @@ namespace ObjectSql.Core.QueryBuilder.ExpressionsAnalizers
 				WriteStorageFieldAccess(entityType, aliasName, fieldName);
 			}
 			else if (node.Expression is MemberExpression &&
-				((MemberExpression)node.Expression).Expression.Type.IsGenericType &&
+				((MemberExpression)node.Expression).Expression.Type.IsGenericType() &&
 				((MemberExpression)node.Expression).Expression.Type.GetGenericTypeDefinition() == typeof(ParametersSubstitutor<>))
 			{
 
@@ -231,11 +232,11 @@ namespace ObjectSql.Core.QueryBuilder.ExpressionsAnalizers
 			return descriptor;
 		}
 
-		protected Action<IDbCommand, QueryRoots> CreateParameterInitializer(QueryRoots roots, string name, Expression accessor, IStorageFieldType dbTypeInContext)
+		protected Action<DbCommand, QueryRoots> CreateParameterInitializer(QueryRoots roots, string name, Expression accessor, IStorageFieldType dbTypeInContext)
 		{
 			return DelegatesBuilder.CreateDatabaseParameterFactoryAction(roots, Expression.Constant(name, typeof(string)), accessor, dbTypeInContext, ParameterDirection.Input);
 		}
-		protected Action<IDbCommand, QueryRoots> CreateArrayParameterInitializer(QueryRoots roots, string name, Expression accessor, IStorageFieldType dbTypeInContext)
+		protected Action<DbCommand, QueryRoots> CreateArrayParameterInitializer(QueryRoots roots, string name, Expression accessor, IStorageFieldType dbTypeInContext)
 		{
 			return DelegatesBuilder.CreateArrayParameters(roots, name, accessor, dbTypeInContext, ParameterDirection.Input);
 		}

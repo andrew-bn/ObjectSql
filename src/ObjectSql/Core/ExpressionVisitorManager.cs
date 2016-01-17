@@ -7,28 +7,21 @@ using System.Threading.Tasks;
 
 namespace ObjectSql.Core
 {
-	public class ExpressionVisitorManager: ExpressionVisitor
+	public class ExpressionVisitorManager<T1>: ExpressionVisitor where T1 : Expression
 	{
-		private readonly Delegate[] _visitors;
-
-		public ExpressionVisitorManager(params Delegate[] visitors)
+		private readonly Func<ExpressionVisitor, T1, Expression> _visitor;
+		public ExpressionVisitorManager(Func<ExpressionVisitor, T1, Expression> visitor)
 		{
-			_visitors = visitors;
+			_visitor = visitor;
 		}
 
 		public override Expression Visit(Expression node)
 		{
 			if (node == null) return node;
-			var visitor = FindVisitor(node.GetType());
-			if (visitor == null)
+			if (typeof(T1) != node.GetType())
 				return base.Visit(node);
 
-			return (Expression) visitor.DynamicInvoke(this, node);
-		}
-
-		private Delegate FindVisitor(Type expType)
-		{
-			return _visitors.FirstOrDefault(d => d.Method.GetParameters()[1].ParameterType.IsAssignableFrom(expType));
+			return _visitor(this, (T1)node);
 		}
 	}
 }
