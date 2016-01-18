@@ -1,4 +1,5 @@
 using System;
+using ObjectSql.Core.Misc;
 
 namespace ObjectSql.SqlServer.Schema
 {
@@ -12,7 +13,7 @@ namespace ObjectSql.SqlServer.Schema
 
 		public override string ToString()
 		{
-			if (IsNullable && NetType.IsValueType)
+			if (IsNullable && NetType.IsValueType())
 				return string.Format("Nullable<{0}> {1}",NetType, Name);
 			return string.Format("{0} {1}", NetType, Name);
 		}

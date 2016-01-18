@@ -37,7 +37,7 @@ namespace ObjectSql.SqlServer.Schema
 				{
 					proc.Parameters = proc.Parameters.OrderBy(par => par.Position).ToList();
 					
-					if (p.Any(pr => pr!=proc && pr.Name.Equals(proc.Name, StringComparison.InvariantCultureIgnoreCase)))
+					if (p.Any(pr => pr!=proc && pr.Name.Equals(proc.Name, StringComparison.OrdinalIgnoreCase)))
 						proc.UseSchema = true;
 				}
 
@@ -54,62 +54,54 @@ namespace ObjectSql.SqlServer.Schema
 
 		private static void FillTableParameters(IEnumerable<Table> tables, SqlConnection connection)
 		{
-			var table = connection.GetSchema("Columns");
-			foreach (DataRow row in table.Rows)
+			using (var cmd = connection.CreateCommand())
 			{
-				var column = new Column();
-				foreach (DataColumn col in table.Columns)
+				cmd.CommandText = "SELECT * FROM information_schema.COLUMNS";
+				using (var row = cmd.ExecuteReader())
 				{
-					if (Column(col, "table_schema"))
-						column.Schema = row[col].ToString();
-					if (Column(col, "table_name"))
-						column.TableName = row[col].ToString();
-					if (Column(col, "ordinal_position"))
-						column.Position = int.Parse(row[col].ToString());
-					if (Column(col, "is_nullable"))
-						column.IsNullable = row[col].ToString().ToLower() == "yes";
-					if (Column(col, "column_name"))
-						column.Name = (row[col] is DBNull) ? null : row[col].ToString();
-					if (Column(col, "data_type"))
-						column.DataType = row[col].ToString();
+					while (row.Read())
+					{
+						var column = new Column();
+						column.Schema = row["TABLE_SCHEMA"].ToString();
+						column.TableName = row["TABLE_NAME"].ToString();
+						column.Position = int.Parse(row["ORDINAL_POSITION"].ToString());
+						column.IsNullable = row["IS_NULLABLE"].ToString().ToLower() == "yes";
+						column.Name = (row["COLUMN_NAME"] is DBNull) ? null : row["COLUMN_NAME"].ToString();
+						column.DataType = row["DATA_TYPE"].ToString();
+						column.NetType = MapToNetType(column.DataType, column.IsNullable);
+						tables.First(p => p.Name == column.TableName && p.Schema == column.Schema).Columns.Add(column);
+					}
 				}
-				column.NetType = MapToNetType(column.DataType, column.IsNullable);
-				tables.First(p => p.Name == column.TableName && p.Schema == column.Schema).Columns.Add(column);
 			}
 		}
 
 		private static void FillProcedureParameters(IEnumerable<Procedure> procedures, SqlConnection connection)
 		{
-			var table = connection.GetSchema("ProcedureParameters");
-			foreach (DataRow row in table.Rows)
+			using (var cmd = connection.CreateCommand())
 			{
-				var param = new Parameter();
-				foreach (DataColumn col in table.Columns)
+				cmd.CommandText = "SELECT * FROM information_schema.PARAMETERS";
+				using (var row = cmd.ExecuteReader())
 				{
-					if (Column(col, "specific_schema"))
-						param.Schema = row[col].ToString();
-					if (Column(col, "specific_name"))
-						param.ProcedureName = row[col].ToString();
-					if (Column(col, "parameter_mode"))
-						param.Direction = ParseParameterMode(row[col].ToString());
-					if (Column(col, "ordinal_position"))
-						param.Position = int.Parse(row[col].ToString());
-					
-					if (Column(col, "is_result"))
-						param.IsResult = row[col].ToString().ToLower() == "yes";
-					if (Column(col, "parameter_name"))
-						param.Name = (row[col] is DBNull) ? null : row[col].ToString();
-					if (Column(col, "data_type"))
+					while (row.Read())
 					{
-						param.DataType = row[col].ToString();
+						var param = new Parameter();
+
+						param.Schema = row["SPECIFIC_SCHEMA"].ToString();
+						param.ProcedureName = row["SPECIFIC_NAME"].ToString();
+						param.Direction = ParseParameterMode(row["PARAMETER_MODE"].ToString());
+						param.Position = int.Parse(row["ORDINAL_POSITION"].ToString());
+						param.IsResult = row["IS_RESULT"].ToString().ToLower() == "yes";
+						param.Name = (row["PARAMETER_NAME"] is DBNull) ? null : row["PARAMETER_NAME"].ToString();
+						param.DataType = row["DATA_TYPE"].ToString();
 						param.NetType = MapToNetType(param.DataType, true);
+
+						if (param.Position == 0)
+							param.Direction = ParameterDirection.ReturnValue;
+
+						procedures.First(p => p.Name == param.ProcedureName && p.Schema == param.Schema).Parameters.Add(param);
+
 					}
 				}
-
-				if (param.Position == 0)
-					param.Direction = ParameterDirection.ReturnValue;
-
-				procedures.First(p => p.Name == param.ProcedureName && p.Schema == param.Schema).Parameters.Add(param);
 			}
 		}
 
@@ -125,44 +117,41 @@ namespace ObjectSql.SqlServer.Schema
 			return ParameterDirection.ReturnValue;
 		}
 
-		private static bool Column(DataColumn col, string name)
-		{
-			return col.ColumnName.Equals(name, StringComparison.OrdinalIgnoreCase);
-		}
 		private static IEnumerable<Table> Tables(SqlConnection connection)
 		{
-			var table = connection.GetSchema("Tables");
-			foreach (DataRow row in table.Rows)
+			using (var cmd = connection.CreateCommand())
 			{
-				var p = new Table();
-				foreach (DataColumn col in table.Columns)
+				cmd.CommandText = "SELECT * FROM information_schema.tables";
+				using (var r = cmd.ExecuteReader())
 				{
-					if (col.ColumnName.ToLower() == "table_schema")
-						p.Schema = row[col].ToString();
-					if (col.ColumnName.ToLower() == "table_name")
-						p.Name = row[col].ToString();
+					while(r.Read())
+					{
+						var p = new Table();
+						p.Schema = r["TABLE_SCHEMA"].ToString();
+						p.Name = r["TABLE_NAME"].ToString();
+						yield return p;
+					}
 				}
-				yield return p;
 			}
 		}
 		private static IEnumerable<Procedure> ProceduresAndFunctions(SqlConnection connection)
 		{
-			var table = connection.GetSchema("Procedures");
-			foreach (DataRow row in table.Rows)
+			using (var cmd = connection.CreateCommand())
 			{
-				var p = new Procedure();
-				foreach (DataColumn col in table.Columns)
+				cmd.CommandText = "SELECT * FROM information_schema.ROUTINES";
+				using (var row = cmd.ExecuteReader())
 				{
-					if (col.ColumnName.ToLower() == "routine_schema")
-						p.Schema = row[col].ToString();
-					if (col.ColumnName.ToLower() == "routine_name")
-						p.Name = row[col].ToString();
-					if (Column(col, "routine_type"))
-						p.RoutineType = (row[col].ToString().ToLower() == "procedure")
-							                ? RoutineType.Procedure
-							                : RoutineType.Function;
+					while (row.Read())
+					{
+						var p = new Procedure();
+						p.Schema = row["ROUTINE_SCHEMA"].ToString();
+						p.Name = row["ROUTINE_NAME"].ToString();
+						p.RoutineType = (row["ROUTINE_TYPE"].ToString().ToLower() == "procedure")
+											? RoutineType.Procedure
+											: RoutineType.Function;
+						yield return p;
+					}
 				}
-				yield return p;
 			}
 		}
 

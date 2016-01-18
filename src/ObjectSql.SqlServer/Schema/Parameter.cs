@@ -1,6 +1,6 @@
 using System;
 using System.Data;
-
+using ObjectSql.Core.Misc;
 namespace ObjectSql.SqlServer.Schema
 {
 	public class Parameter : NameHolder
@@ -14,7 +14,7 @@ namespace ObjectSql.SqlServer.Schema
 
 		public override string ToString()
 		{
-			if (NetType.IsValueType)
+			if (NetType.IsValueType())
 				return string.Format("Nullable<{0}> {1}", NetType, Name);
 			return string.Format("{0} {1}", NetType, Name);
 		}

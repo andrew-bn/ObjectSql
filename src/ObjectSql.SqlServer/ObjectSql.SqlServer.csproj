@@ -107,12 +107,6 @@
     <Compile Include="SqlServerTargetDatabaseExtensions.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\ObjectSql\ObjectSql.csproj">
-      <Project>{6261f88c-20c4-49c6-8d12-97f46451a909}</Project>
-      <Name>ObjectSql</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
     <None Include="ConnStrHere.SqlServer.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>ConnStrHere.SqlServer.cs</LastGenOutput>
@@ -141,6 +135,12 @@
       <ProductName>.NET Framework 3.5 SP1</ProductName>
       <Install>false</Install>
     </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\ObjectSql\ObjectSql.csproj">
+      <Project>{6261f88c-20c4-49c6-8d12-97f46451a909}</Project>
+      <Name>ObjectSql</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

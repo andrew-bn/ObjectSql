@@ -284,7 +284,7 @@ namespace ObjectSql.SqlServer.Schema
     {
         #region Fields
         private global::System.Text.StringBuilder generationEnvironmentField;
-        private global::System.CodeDom.Compiler.CompilerErrorCollection errorsField;
+        //private global::System.CodeDom.Compiler.CompilerErrorCollection errorsField;
         private global::System.Collections.Generic.List<int> indentLengthsField;
         private string currentIndentField = "";
         private bool endsWithNewline;
@@ -312,17 +312,17 @@ namespace ObjectSql.SqlServer.Schema
         /// <summary>
         /// The error collection for the generation process
         /// </summary>
-        public System.CodeDom.Compiler.CompilerErrorCollection Errors
-        {
-            get
-            {
-                if ((this.errorsField == null))
-                {
-                    this.errorsField = new global::System.CodeDom.Compiler.CompilerErrorCollection();
-                }
-                return this.errorsField;
-            }
-        }
+        //public System.CodeDom.Compiler.CompilerErrorCollection Errors
+        //{
+        //    get
+        //    {
+        //        if ((this.errorsField == null))
+        //        {
+        //            this.errorsField = new global::System.CodeDom.Compiler.CompilerErrorCollection();
+        //        }
+        //        return this.errorsField;
+        //    }
+        //}
         /// <summary>
         /// A list of the lengths of each indent that was added with PushIndent
         /// </summary>
@@ -433,19 +433,19 @@ namespace ObjectSql.SqlServer.Schema
         /// </summary>
         public void Error(string message)
         {
-            System.CodeDom.Compiler.CompilerError error = new global::System.CodeDom.Compiler.CompilerError();
-            error.ErrorText = message;
-            this.Errors.Add(error);
+        //    System.CodeDom.Compiler.CompilerError error = new global::System.CodeDom.Compiler.CompilerError();
+        //    error.ErrorText = message;
+        //    this.Errors.Add(error);
         }
         /// <summary>
         /// Raise a warning
         /// </summary>
         public void Warning(string message)
         {
-            System.CodeDom.Compiler.CompilerError error = new global::System.CodeDom.Compiler.CompilerError();
-            error.ErrorText = message;
-            error.IsWarning = true;
-            this.Errors.Add(error);
+            //System.CodeDom.Compiler.CompilerError error = new global::System.CodeDom.Compiler.CompilerError();
+            //error.ErrorText = message;
+            //error.IsWarning = true;
+            //this.Errors.Add(error);
         }
         /// <summary>
         /// Increase the indent
@@ -519,18 +519,19 @@ namespace ObjectSql.SqlServer.Schema
                 {
                     throw new global::System.ArgumentNullException("objectToConvert");
                 }
-                System.Type t = objectToConvert.GetType();
-                System.Reflection.MethodInfo method = t.GetMethod("ToString", new System.Type[] {
-                            typeof(System.IFormatProvider)});
-                if ((method == null))
-                {
-                    return objectToConvert.ToString();
-                }
-                else
-                {
-                    return ((string)(method.Invoke(objectToConvert, new object[] {
-                                this.formatProviderField })));
-                }
+				return objectToConvert.ToString();
+                //System.Type t = objectToConvert.GetType();
+                //System.Reflection.MethodInfo method = t.GetMethod("ToString", new System.Type[] {
+                //            typeof(System.IFormatProvider)});
+                //if ((method == null))
+                //{
+                //    return objectToConvert.ToString();
+                //}
+                //else
+                //{
+                //    return ((string)(method.Invoke(objectToConvert, new object[] {
+                //                this.formatProviderField })));
+                //}
             }
         }
         private ToStringInstanceHelper toStringHelperField = new ToStringInstanceHelper();

@@ -1,7 +1,7 @@
 using System;
 using System.Data;
 using System.Xml;
-
+using ObjectSql.Core.Misc;
 namespace ObjectSql.SqlServer.Schema
 {
 	public partial class DatabaseSchemaTemplate
@@ -78,7 +78,7 @@ namespace ObjectSql.SqlServer.Schema
 			else if (netType == typeof(TimeSpan))
 				result = "TimeSpan";
 
-			return (nullable && netType.IsValueType) ? result + "?" : result;
+			return (nullable && netType.IsValueType()) ? result + "?" : result;
 		}
 	}
 }

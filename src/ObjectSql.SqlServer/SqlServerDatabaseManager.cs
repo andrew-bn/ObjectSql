@@ -6,7 +6,8 @@ using System.Xml;
 using ObjectSql.Core.QueryBuilder;
 using ObjectSql.Core.QueryBuilder.LambdaBuilder;
 using ObjectSql.Core.SchemaManager;
-
+using ObjectSql.Core.Misc;
+using System.Reflection;
 namespace ObjectSql.SqlServer
 {
 	public class SqlServerDatabaseManager : IDatabaseManager
@@ -40,7 +41,7 @@ namespace ObjectSql.SqlServer
 
 		public string MapToDbType(Type netType)
 		{
-			if (netType.IsGenericType && netType.GetGenericTypeDefinition() == typeof(Nullable<>))
+			if (netType.IsGenericType() && netType.GetGenericTypeDefinition() == typeof(Nullable<>))
 				netType = netType.GetGenericArguments()[0];
 
 			if (netType == typeof(long))
