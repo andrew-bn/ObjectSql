@@ -22,7 +22,7 @@ DefaultNamespace: {ns}
 FileName: {filename}
 
 Script generation. Please wait...");
-			File.WriteAllText(filename, SchemaGenerator.Generate(ns, "connstr", cs));
+			File.WriteAllText(filename, SchemaGenerator.Generate(ns, args[3], cs));
 			Console.WriteLine(" Done");
 
 		}

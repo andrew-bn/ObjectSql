@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Linq;
 using System.Threading.Tasks;
+using ObjectSql.SqlServer;
 using ObjectSql.Test.Database.TestDatabase.dbo;
 using Xunit;
 
@@ -96,6 +97,87 @@ namespace ObjectSql.Test.CommandTextGenerationTests
 			.Select(p => new { Fld1 = p.CategoryID, Fld2 = p.Discontinued })
 			.Verify("SELECT[p].[CategoryID]AS[Fld1],[p].[Discontinued]AS[Fld2]" +
 						"FROM[dbo].[Products]AS[p]");
+		}
+
+		[Fact]
+		public void Select_TSqlComplexFunctionCall()
+		{
+			Query
+				.From<Products>()
+				.Select((p) => MsSql.Substring(p.ProductName, 1, 5))
+				.Verify("SELECTSUBSTRING([p].[ProductName],@p0,@p1)FROM[dbo].[Products]AS[p]",
+						1.DbType(SqlDbType.Int), 5.DbType(SqlDbType.Int));
+		}
+		[Fact]
+		public void Select_CountFunctionCall()
+		{
+			Query
+				.From<Products>()
+				.Select((p) => Sql.Count(p.ProductID))
+				.Verify("SELECTCOUNT([p].[ProductID])FROM[dbo].[Products]AS[p]");
+		}
+		[Fact]
+		public void Select_WithoutSource_TSqlFunctionResult()
+		{
+			var c = "cost";
+			var res = Query.Select(() => MsSql.Substring(c, 1, 3))
+				.Verify(@"SELECTSUBSTRING(@p0,@p1,@p2)",
+				c.DbType(SqlDbType.NVarChar), 1.DbType(SqlDbType.Int), 3.DbType(SqlDbType.Int));
+		}
+		[Fact]
+		public void Select_WithoutSource_TSqlFunctionResult_AndConstant()
+		{
+			var c = "cost";
+			Query.Select(() => new { res = MsSql.Substring(c, 1, 3), c })
+				.Verify(@"SELECT SUBSTRING(@p0,@p1,@p2) AS [res], @p0 AS [c]",
+				c.DbType(SqlDbType.NVarChar), 1.DbType(SqlDbType.Int), 3.DbType(SqlDbType.Int));
+
+		}
+		[Fact]
+		public void Select_PassEntity_ButSelectConstant()
+		{
+			var c = "constant";
+			Query.From<Products>()
+				.Select((p) => MsSql.Substring(c, 1, 4))
+				.Verify("SELECT SUBSTRING(@p0,@p1,@p2) FROM [dbo].[Products] AS [p]"
+				, c.DbType(SqlDbType.NVarChar), 1.DbType(SqlDbType.Int),
+				4.DbType(SqlDbType.Int));
+		}
+		[Fact]
+		public void Select_GroupBy()
+		{
+			Query.From<Products>()
+				.GroupBy((p) => new { p.CategoryID })
+				.Select((p) => new { Fld1 = p.CategoryID })
+				.Verify("SELECT[p].[CategoryID]AS[Fld1]" +
+							"FROM[dbo].[Products]AS[p]" +
+							"GROUPBY[p].[CategoryID]");
+		}
+		[Fact]
+		public void Select_GroupBy_Having()
+		{
+			Query.From<Products>()
+				.GroupBy((p) => new { p.CategoryID })
+				.Where((p) => p.CategoryID > 5)
+				.Select((p) => new { Fld1 = p.CategoryID })
+				.Verify("SELECT[p].[CategoryID]AS[Fld1]" +
+							"FROM[dbo].[Products]AS[p]" +
+							"GROUPBY[p].[CategoryID]" +
+							"HAVING([p].[CategoryID]>@p0)",
+						5.DbType(SqlDbType.Int));
+		}
+		[Fact]
+		public void Select_GroupBy_Having_AggregateFunction()
+		{
+			Query.From<Products>()
+				.GroupBy((p) => new { p.CategoryID })
+				.Where((p) => p.CategoryID > 5 && Sql.Avg(p.UnitPrice) > 5)
+				.Select((p) => new { Fld1 = p.CategoryID, Fld2 = Sql.Avg(p.UnitPrice) })
+				.Verify("SELECT[p].[CategoryID]AS[Fld1],AVG([p].[UnitPrice])AS[Fld2]" +
+							"FROM[dbo].[Products]AS[p]" +
+							"GROUPBY[p].[CategoryID]" +
+							"HAVING(([p].[CategoryID]>@p0)AND(AVG([p].[UnitPrice])>@p1))",
+							5.DbType(SqlDbType.Int), 5M.DbType(SqlDbType.Money));
 		}
 	}
 }

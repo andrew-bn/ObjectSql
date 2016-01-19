@@ -19,7 +19,7 @@
   },
   "commands": {
     "test": "xunit.runner.dnx",
-    "gen": "ObjectSql.SqlServer \"ObjectSql.Test.Database.TestDatabase\" \"Database\\Test\\Test.SqlServer.cs\" \"data source=(LocalDB)\\v11.0;attachdbfilename=d:\\GitHub\\ObjectSql\\tests\\ObjectSql.Test\\TestDatabase.mdf;integrated security=True;connect timeout=30;MultipleActiveResultSets=True;App=EntityFramework"
+    "gen": "ObjectSql.SqlServer \"ObjectSql.Test.Database.TestDatabase\" \"Database\\Test\\Test.SqlServer.cs\" \"data source=(LocalDB)\\v11.0;attachdbfilename=d:\\GitHub\\ObjectSql\\tests\\ObjectSql.Test\\TestDatabase.mdf;integrated security=True;connect timeout=30;MultipleActiveResultSets=True;App=EntityFramework\" TestDatabase"
   },
 
   "frameworks": {

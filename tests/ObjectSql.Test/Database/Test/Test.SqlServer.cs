@@ -388,7 +388,7 @@ namespace ObjectSql.Test.Database.TestDatabase
 
 	}
 
-	public abstract class connstrProcedures
+	public abstract class TestDatabaseProcedures
 	{
 		[Procedure("CustOrderHist", "dbo")] public abstract void CustOrderHist([Parameter("CustomerID", "nchar", ParameterDirection.Input)] string @CustomerID);
 		[Procedure("CustOrdersDetail", "dbo")] public abstract void CustOrdersDetail([Parameter("OrderID", "int", ParameterDirection.Input)] int? @OrderID);
