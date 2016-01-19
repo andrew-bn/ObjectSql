@@ -38,7 +38,7 @@ namespace ObjectSql.SqlServer.Schema
 //------------------------------------------------------------------------------
 
 ");
-            this.Write("using System;\r\nusing System.Configuration;\r\nusing System.Data.SqlClient;\r\nusing S" +
+            this.Write("using System;\r\nusing System.Data.SqlClient;\r\nusing S" +
                     "ystem.Collections.Generic;\r\nusing System.Data;\r\nusing ObjectSql;\r\nusing ObjectSq" +
                     "l.QueryInterfaces;\r\n\r\nnamespace ");
             

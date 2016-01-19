@@ -4,7 +4,7 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
-
+using System.Reflection;
 namespace ObjectSql.Core
 {
 	public class ExpressionVisitorManager<T1>: ExpressionVisitor where T1 : Expression
@@ -18,7 +18,7 @@ namespace ObjectSql.Core
 		public override Expression Visit(Expression node)
 		{
 			if (node == null) return node;
-			if (typeof(T1) != node.GetType())
+			if (!typeof(T1).IsAssignableFrom(node.GetType()))
 				return base.Visit(node);
 
 			return _visitor(this, (T1)node);

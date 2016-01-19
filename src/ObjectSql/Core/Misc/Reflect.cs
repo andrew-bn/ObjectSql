@@ -7,6 +7,13 @@ namespace ObjectSql.Core.Misc
 {
 	public static class Reflect
 	{
+#if !NET40
+		public static bool IsAssignableFrom(this Type type, Type type2)
+		{
+			return type.GetTypeInfo().IsAssignableFrom(type2);
+		}
+
+#endif
 #if NET40
 		public static object GetCustomAttr(this Type mi, Type attrType)
 		{

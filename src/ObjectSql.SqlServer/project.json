@@ -41,8 +41,9 @@
         "System.Reflection": "4.0.0-beta-23109",
         "System.Reflection.Extensions": "4.0.1-beta-23516",
         "System.Diagnostics.Tools": "4.0.1-beta-23516",
-        "System.Data.SqlClient": "4.0.0-beta-23516"
-
+        "System.Data.SqlClient": "4.0.0-beta-23516",
+        "System.Console": "4.0.0-beta-23225",
+        "System.IO.FileSystem": "4.0.1-beta-23516"
       }
     },
     "dnxcore50": {
@@ -55,8 +56,9 @@
         "System.Reflection": "4.0.0-beta-23109",
         "System.Reflection.Extensions": "4.0.1-beta-23516",
         "System.Diagnostics.Tools": "4.0.1-beta-23516",
-        "System.Data.SqlClient": "4.0.0-beta-23516"
-
+        "System.Data.SqlClient": "4.0.0-beta-23516",
+        "System.Console": "4.0.0-beta-23225",
+        "System.IO.FileSystem": "4.0.1-beta-23516"
       }
     }
   }
