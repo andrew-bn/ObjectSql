@@ -280,7 +280,7 @@ namespace ObjectSql.Tests.CommandTextGenerationTests
 			var result = Query
 				.From<Products>()
 				.Where(p => p.ProductName == p1 && p.CategoryID.In(Sql.Query.From<Categories>()
-																			.Where(c => c.CategoryName == p2 && c.Description != p1)
+																			.Where(c => c.CategoryName == p1 && c.Description != p2)
 																			.Select(c => c.CategoryID))
 							&& p.ProductName != p2
 					  )
@@ -291,9 +291,9 @@ namespace ObjectSql.Tests.CommandTextGenerationTests
 				  WHERE ((([p].[ProductName]=@p0) AND 
 						 ([p].[CategoryID] IN (SELECT [c].[CategoryID]
 												FROM [dbo].[Categories] AS [c]
-												WHERE (([c].[CategoryName]=@p1) AND ([c].[Description]<>@p0))))) AND
-						  ([p].[ProductName]<>@p1))",
-				  p1, p2);
+												WHERE (([c].[CategoryName]=@p0) AND ([c].[Description]<>@p1))))) AND
+						  ([p].[ProductName]<>@p2))",
+				  p1, p2, p2);
 		}
 
 		[Fact]
