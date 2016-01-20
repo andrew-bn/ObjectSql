@@ -22,7 +22,7 @@ namespace ObjectSql.Core.QueryBuilder.LambdaBuilder
 			var parameterAccessor = ReplaceConstantsToRootsAccessors(roots,valueAccessor,rootParam);
 
 			Expression commandAccessor = Expression.MakeMemberAccess(cmdParam, Reflect.FindProperty<DbCommand>(c => c.Parameters));
-			commandAccessor = Expression.MakeIndex(commandAccessor, typeof(DbParameterCollection).GetProperty("Item"), new[] { parameterName });
+			commandAccessor = Expression.MakeIndex(commandAccessor, typeof(DbParameterCollection).GetProperty("Item", typeof(DbParameter), new[] { typeof(string)}), new[] { parameterName });
 			commandAccessor = Expression.Convert(commandAccessor, typeof (DbParameter));
 			commandAccessor = Expression.MakeMemberAccess(commandAccessor, Reflect.FindProperty<DbParameter>(p => p.Value));
 
@@ -54,7 +54,7 @@ namespace ObjectSql.Core.QueryBuilder.LambdaBuilder
 		{
 			var cmdParam = Expression.Parameter(typeof (DbCommand));
 			Expression result = Expression.MakeMemberAccess(cmdParam, Reflect.FindProperty<DbCommand>(c => c.Parameters));
-			result = Expression.MakeIndex(result, typeof (DbParameterCollection).GetProperty("Item"), new[]{Expression.Constant(ReturnParameterName)});
+			result = Expression.MakeIndex(result, typeof (DbParameterCollection).GetProperty("Item", typeof(DbParameter), new[] { typeof(string) }), new[]{Expression.Constant(ReturnParameterName)});
 			result = Expression.MakeMemberAccess(Expression.Convert(result, typeof (DbParameter)), Reflect.FindProperty<DbParameter>(p => p.Value));
 			result = Expression.Condition(Expression.TypeIs(result, typeof (DBNull)), Expression.Constant(null, typeof (object)), result);
 
