@@ -1,5 +1,4 @@
-﻿using NUnit.Framework;
-using ObjectSql.Core.Bo;
+﻿using ObjectSql.Core.Bo;
 using ObjectSql.Core.Misc;
 using ObjectSql.Core;
 using System;
@@ -8,10 +7,10 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
+using Xunit;
 
 namespace ObjectSql.Tests
 {
-	[TestFixture]
 	public class ExpressionComparerTests
 	{
 		public class Foo
@@ -26,7 +25,7 @@ namespace ObjectSql.Tests
 			public bool Param3 { get; set; }
 			public Foo FooParam { get; set; }
 		}
-		[Test]
+		[Fact]
 		public void ExpressionsAreEqual_ConstantsHasSameValues()
 		{
 			const bool constantClosureSource = true;
@@ -50,7 +49,7 @@ namespace ObjectSql.Tests
 				};
 
 			var p1 = new QueryRoots();
-			ExpressionHashCalculator.CalculateHashAndExtractConstantRoots(exp1,ref p1);
+			ExpressionHashCalculator.CalculateHashAndExtractConstantRoots(exp1, ref p1);
 
 			closureSource = "new value of closureSource";
 			closureSource2 = 234;
@@ -72,13 +71,13 @@ namespace ObjectSql.Tests
 
 
 			var p2 = new QueryRoots();
-			ExpressionHashCalculator.CalculateHashAndExtractConstantRoots(exp2,ref p2);
+			ExpressionHashCalculator.CalculateHashAndExtractConstantRoots(exp2, ref p2);
 
-			var result = ExpressionComparer.AreEqual(exp1,ref p1, exp2,ref p2);
+			var result = ExpressionComparer.AreEqual(exp1, ref p1, exp2, ref p2);
 
-			Assert.IsTrue(result);
+			Assert.True(result);
 		}
-		[Test]
+		[Fact]
 		public void ExpressionsAreEqual_RootsHaveSameValues()
 		{
 			const bool constantClosureSource = true;
@@ -126,10 +125,10 @@ namespace ObjectSql.Tests
 
 			var result = ExpressionComparer.AreEqual(exp1, ref p1, exp2, ref p2);
 
-			Assert.IsFalse(result);
+			Assert.False(result);
 		}
 
-		[Test]
+		[Fact]
 		public void ExpressionsAreEqual_EqualArrays()
 		{
 			Expression<Func<Foo, object>> exp1 =
@@ -155,10 +154,10 @@ namespace ObjectSql.Tests
 
 			var result = ExpressionComparer.AreEqual(exp1, ref p1, exp2, ref p2);
 
-			Assert.IsTrue(result);
+			Assert.True(result);
 		}
 
-		[Test]
+		[Fact]
 		public void ExpressionsAreNotEqual_NotEqualArrays()
 		{
 			Expression<Func<Foo, object>> exp1 =
@@ -184,13 +183,13 @@ namespace ObjectSql.Tests
 
 			var result = ExpressionComparer.AreEqual(exp1, ref p1, exp2, ref p2);
 
-			Assert.IsFalse(result);
+			Assert.False(result);
 		}
 
-		[Test]
+		[Fact]
 		public void ExpressionsAreEqual_ArrayVariables()
 		{
-			var arr = new[] {1, 2, 3};
+			var arr = new[] { 1, 2, 3 };
 			Expression<Func<Foo, object>> exp1 =
 				f => new
 				{
@@ -214,7 +213,7 @@ namespace ObjectSql.Tests
 
 			var result = ExpressionComparer.AreEqual(exp1, ref p1, exp2, ref p2);
 
-			Assert.IsTrue(result);
+			Assert.True(result);
 		}
 
 	}
