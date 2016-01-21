@@ -4,7 +4,7 @@ using System.Runtime.Serialization;
 #endif
 namespace ObjectSql.Exceptions
 {
-#if NET40 || NET45 || NET451
+#if !DOTNET5_4
 	[Serializable]
 #endif
 	public class ObjectSqlException : Exception
@@ -20,7 +20,7 @@ namespace ObjectSql.Exceptions
 		{
 
 		}
-#if NET40 || NET45 || NET451
+#if !DOTNET5_4
 		protected ObjectSqlException(SerializationInfo serializationInfo, StreamingContext streamingContext)
 			: base(serializationInfo, streamingContext)
 		{

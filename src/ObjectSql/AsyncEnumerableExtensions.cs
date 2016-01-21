@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace ObjectSql
 {
-#if NET45
+#if !NET40
 	public static class AsyncEnumerableExtensions
 	{
 		public static Task ForEachEntityAsync<T>(this IAsyncEnumerable<T> enumerable, Action<T> action)

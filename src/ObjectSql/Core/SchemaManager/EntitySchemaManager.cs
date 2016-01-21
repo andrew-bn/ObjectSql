@@ -55,7 +55,7 @@ namespace ObjectSql.Core.SchemaManager
 		private bool NotFilteredEntityProperty(PropertyInfo prop)
 		{
 			object notMappedAttr = null;
-#if NET45
+#if !NET40
 			notMappedAttr = prop.GetCustomAttr(typeof(System.ComponentModel.DataAnnotations.Schema.NotMappedAttribute)) as System.ComponentModel.DataAnnotations.Schema.NotMappedAttribute;
 #endif
 			if (notMappedAttr == null)
@@ -118,7 +118,7 @@ namespace ObjectSql.Core.SchemaManager
 				schemaName = objSqlAttr.Schema;
 			}
 
-#if NET45
+#if !NET40
 			if (!attrFound)
 			{
 				var netAttr = entity.GetCustomAttr(typeof(System.ComponentModel.DataAnnotations.Schema.TableAttribute)) as System.ComponentModel.DataAnnotations.Schema.TableAttribute;
@@ -160,6 +160,7 @@ namespace ObjectSql.Core.SchemaManager
 		#endregion
 		public IStorageFieldType ParseDbType(string value)
 		{
+			
 			TTypeEnum result;
 			return Enum.TryParse(value, true, out result)
 					? new StorageFieldType<TTypeEnum>(result)
