@@ -15,7 +15,8 @@
     "System.Collections": "4.0.11-beta-23516",
     "System.Linq": "4.0.1-beta-23516",
     "System.Runtime": "4.0.21-beta-23516",
-    "System.Threading": "4.0.11-beta-23516"
+    "System.Threading": "4.0.11-beta-23516",
+    "Moq": "4.2.1510.2205"
   },
   "commands": {
     "test": "xunit.runner.dnx",
@@ -24,10 +25,7 @@
   },
 
   "frameworks": {
-    "dnxcore50": {
-      "dependencies": {
-        "System.Console": "4.0.0-beta-23225"
-      }
+    "dnx451": {
     }
   }
 }
