@@ -1,10 +1,10 @@
 ﻿using System;
-#if NET40 || NET45 || NET451
+#if !COREFX
 using System.Runtime.Serialization;
 #endif
 namespace ObjectSql.Exceptions
 {
-#if !DOTNET5_4
+#if !COREFX
 	[Serializable]
 #endif
 	public class ObjectSqlException : Exception
@@ -20,7 +20,7 @@ namespace ObjectSql.Exceptions
 		{
 
 		}
-#if !DOTNET5_4
+#if !COREFX
 		protected ObjectSqlException(SerializationInfo serializationInfo, StreamingContext streamingContext)
 			: base(serializationInfo, streamingContext)
 		{
