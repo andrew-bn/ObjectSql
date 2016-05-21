@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.Extensions.Configuration;
 
 namespace dotnet_objsql_sqlgen
 {
@@ -11,19 +12,40 @@ namespace dotnet_objsql_sqlgen
     {
         public static void Main(string[] args)
         {
-			var ns = args[0];
-			var filename = args[1];
-			var cs = args[2];
+	        var curDir = Directory.GetCurrentDirectory();
+			var projectName = curDir.Substring(curDir.LastIndexOf(Path.DirectorySeparatorChar)+1);
 
-			Console.Write($@"
+			if (!File.Exists(Path.Combine(curDir,"project.json")))
+				throw new FileNotFoundException("It is expected that objsql-sqlgen utility runs at the root of project folder");
+
+			var files = Directory.GetFiles(curDir, "*.objsql.*.json", SearchOption.AllDirectories);
+	        foreach (var f in files)
+	        {
+		        var dbDir = Path.GetDirectoryName(f);
+		        var configFileName = Path.GetFileName(f);
+
+				var ns = projectName + dbDir.Substring(curDir.Length).Replace(Path.DirectorySeparatorChar,'.');
+		        var csFileName = configFileName;
+		        csFileName = Path.Combine(dbDir, csFileName.Substring(0, csFileName.IndexOf(".objsql"))+".cs");
+		        var config = new ConfigurationBuilder()
+											.SetBasePath(dbDir)
+											.AddJsonFile(configFileName)
+											.Build();
+
+		        var cs = config["connectionstring"].Replace("{projectDir}", curDir);
+		        var proceduresName = dbDir.Substring(dbDir.LastIndexOf(Path.DirectorySeparatorChar)+1);
+		        
+
+				Console.Write($@"
 
 ConnetionString: {cs}
-DefaultNamespace: {ns}
-FileName: {filename}
+FileName: {csFileName}
 
 Script generation. Please wait...");
-			File.WriteAllText(filename, SchemaGenerator.Generate(ns, args[3], cs));
-			Console.WriteLine(" Done");
-		}
+		        File.WriteAllText(csFileName, SchemaGenerator.Generate(ns, proceduresName, cs));
+				Console.WriteLine(" Done");
+			}
+	
+        }
     }
 }

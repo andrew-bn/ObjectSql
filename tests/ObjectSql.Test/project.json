@@ -4,7 +4,7 @@
   "authors": [ "user" ],
   "testRunner": "xunit",
 
-   "dependencies": {
+  "dependencies": {
     "Microsoft.NETCore.App": {
       "type": "platform",
       "version": "1.0.0-rc2-*"
@@ -14,6 +14,9 @@
     "ObjectSql": "3.0.0-*",
     "ObjectSql.SqlServer": "3.0.0-*"
 
+  },
+  "tools": {
+    "dotnet-objsql-sqlgen": "3.0.0-rc2-*"
   },
   "frameworks": {
     "netcoreapp1.0": {
