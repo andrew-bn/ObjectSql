@@ -39,6 +39,16 @@ namespace ObjectSql.Tests.IntegrationTests
 			Assert.AreEqual(c, scalar.ScalarResult);
 		}
 		[Test]
+		public void Select_Different_Constant_Integration()
+		{
+			var c = "cost";
+			var scalar = EfQuery.Select(() => c).ExecuteScalar();
+			Assert.AreEqual(c, scalar.ScalarResult);
+
+			c = "cost2";
+			scalar = EfQuery.Select(() => c).ExecuteScalar();
+		}
+		[Test]
 		public void Select_Constants_In_AnonimusType_Integration()
 		{
 			var c = "cost";

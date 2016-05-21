@@ -35,6 +35,33 @@ namespace ObjectSql.Tests.CommandTextGenerationTests
 			EfQuery.Select(() => c)
 				.Verify(@"SELECT @p0", c.DbType(SqlDbType.NVarChar));
 		}
+
+		[Test]
+		public void Select_Different_Constant()
+		{
+			var c = "cost";
+			EfQuery.Select(() => c)
+				.Verify(@"SELECT @p0", c.DbType(SqlDbType.NVarChar));
+
+			c = "cost2";
+			EfQuery.Select(() => c)
+				.Verify(@"SELECT @p0", c.DbType(SqlDbType.NVarChar));
+		}
+		[Test]
+		public void Select_Different_Constant_WithClosure()
+		{
+			var c = "cost";
+			Closure(c);
+			c = "cost2";
+			Closure(c);
+			Closure("somevalue");
+		}
+
+		private void Closure(string value)
+		{
+			EfQuery.Select(() => value)
+				.Verify(@"SELECT @p0", value.DbType(SqlDbType.NVarChar));
+		}
 		[Test]
 		public void Select_Constants_In_AnonimusType()
 		{
