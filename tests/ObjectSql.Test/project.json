@@ -16,7 +16,7 @@
 
   },
   "tools": {
-    "dotnet-objsql-sqlgen": "3.0.0-rc2-*"
+    "dotnet-objsql": "3.0.0-rc2-*"
   },
   "frameworks": {
     "netcoreapp1.0": {

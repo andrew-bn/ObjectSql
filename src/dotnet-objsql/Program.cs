@@ -6,7 +6,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Configuration;
 
-namespace dotnet_objsql_sqlgen
+namespace dotnet_objsql
 {
 	public class Program
 	{

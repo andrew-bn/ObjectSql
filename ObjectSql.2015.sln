@@ -14,7 +14,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 EndProject
 Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "ObjectSql.Test", "tests\ObjectSql.Test\ObjectSql.Test.xproj", "{2D11930C-978E-4D7C-8667-4EDB76A68F97}"
 EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "dotnet-objsql-sqlgen", "src\dotnet-objsql-sqlgen\dotnet-objsql-sqlgen.xproj", "{7118BAFA-BDDC-4122-8E5F-C4E9F44E10F7}"
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "dotnet-objsql", "src\dotnet-objsql\dotnet-objsql.xproj", "{7118BAFA-BDDC-4122-8E5F-C4E9F44E10F7}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
