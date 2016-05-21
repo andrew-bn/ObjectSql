@@ -29,7 +29,9 @@ namespace ObjectSql.Core.Misc
 
 		public static PropertyInfo[] GetProps(this Type type)
 		{
-			return type.GetProperties(BindingFlags.Instance | BindingFlags.Public | BindingFlags.IgnoreCase);
+			return type.GetProperties(BindingFlags.Instance | BindingFlags.Public | BindingFlags.IgnoreCase )
+							.Where(p=>p.GetGetMethod().GetParameters().Length == 0)
+							.ToArray();
 		}
 
 		public static PropertyInfo GetProp(this Type type, string name)

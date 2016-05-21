@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using ObjectSql.QueryInterfaces;
@@ -18,9 +19,11 @@ namespace ObjectSql.Test
 	}
 	public abstract class TestBase
 	{
-		public static string ConnectionString = "data source=(LocalDB)\\v11.0;attachdbfilename=c:\\Users\\Andrew\\Source\\Repos\\ObjectSql\\tests\\ObjectSql.Test\\TestDatabase.mdf;integrated security=True;connect timeout=30;MultipleActiveResultSets=True;App=EntityFramework";
+		public static string ConnectionString;
 		static TestBase()
 		{
+			var path = Directory.GetCurrentDirectory();
+			ConnectionString = $@"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename={path}\TestDatabase.mdf;Integrated Security=True;Connect Timeout=30";
 			ObjectSqlSqlServerInitializer.Initialize();
 		}
 		protected IQuery Query
