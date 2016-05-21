@@ -59,23 +59,23 @@ namespace ObjectSql.Core.SchemaManager.EntitySchema
 		{
 			if (entityProperties.Length == 0)
 				return null;
-			var entityParam = LambdaExpression.Parameter(typeof(object));
-			var fieldIndexParam = LambdaExpression.Parameter(typeof(int));
+			var entityParam = Expression.Parameter(typeof(object));
+			var fieldIndexParam = Expression.Parameter(typeof(int));
 
 			var switchCases = new SwitchCase[entityProperties.Length];
 			for (int i = 0;i<switchCases.Length;i++)
 			{
-				switchCases[i] = LambdaExpression.SwitchCase(
-									LambdaExpression.Convert(
-										LambdaExpression.MakeMemberAccess(
-											LambdaExpression.Convert(entityParam, entity),
+				switchCases[i] = Expression.SwitchCase(
+									Expression.Convert(
+										Expression.MakeMemberAccess(
+											Expression.Convert(entityParam, entity),
 											entity.GetProps()[i]),
 										typeof(object)),
-									LambdaExpression.Constant(i));
+									Expression.Constant(i));
 			}
 
-			return LambdaExpression.Lambda<Func<object, int, object>>(
-				LambdaExpression.Switch(fieldIndexParam, LambdaExpression.Constant(null,typeof(object)), switchCases),
+			return Expression.Lambda<Func<object, int, object>>(
+				Expression.Switch(fieldIndexParam, Expression.Constant(null,typeof(object)), switchCases),
 				entityParam,fieldIndexParam)
 				.Compile();
 		}

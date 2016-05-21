@@ -1,31 +1,26 @@
 ﻿{
-  "version": "1.0.0-*",
+  "version": "3.0.0-*",
   "description": "ObjectSql.Test Class Library",
   "authors": [ "user" ],
-  "tags": [ "" ],
-  "projectUrl": "",
-  "licenseUrl": "",
-  "dependencies": {
-    "ObjectSql": "3.0.0-*",
-    "ObjectSql.SqlServer": "3.0.0-*",
-    "xunit": "2.1.0",
-    "xunit.runner.dnx": "2.1.0-rc1-build204",
-    "xunit.runners": "2.0.0",
-    "Microsoft.CSharp": "4.0.1-beta-23516",
-    "System.Collections": "4.0.11-beta-23516",
-    "System.Linq": "4.0.1-beta-23516",
-    "System.Runtime": "4.0.21-beta-23516",
-    "System.Threading": "4.0.11-beta-23516",
-    "Moq": "4.2.1510.2205"
-  },
-  "commands": {
-    "test": "xunit.runner.dnx",
-    "load": "ObjectSql.Test load",
-    "gen": "ObjectSql.SqlServer \"ObjectSql.Test.Database.TestDatabase\" \"Database\\Test\\Test.SqlServer.cs\" \"data source=(LocalDB)\\v11.0;attachdbfilename=d:\\GitHub\\ObjectSql\\tests\\ObjectSql.Test\\TestDatabase.mdf;integrated security=True;connect timeout=30;MultipleActiveResultSets=True;App=EntityFramework\" TestDatabase"
-  },
+  "testRunner": "xunit",
 
+   "dependencies": {
+    "Microsoft.NETCore.App": {
+      "type": "platform",
+      "version": "1.0.0-rc2-*"
+    },
+    "xunit": "2.1.0-rc2-*",
+    "dotnet-test-xunit": "1.0.0-rc2-*",
+    "ObjectSql": "3.0.0-*",
+    "ObjectSql.SqlServer": "3.0.0-*"
+
+  },
   "frameworks": {
-    "dnx451": {
+    "netcoreapp1.0": {
+      "imports": [
+        "dnxcore50",
+        "portable-net451+win8"
+      ]
     }
   }
 }

@@ -18,7 +18,7 @@ namespace ObjectSql.Test
 	}
 	public abstract class TestBase
 	{
-		public static string ConnectionString = "data source=(LocalDB)\\v11.0;attachdbfilename=d:\\GitHub\\ObjectSql\\tests\\ObjectSql.Test\\TestDatabase.mdf;integrated security=True;connect timeout=30;MultipleActiveResultSets=True;App=EntityFramework";
+		public static string ConnectionString = "data source=(LocalDB)\\v11.0;attachdbfilename=c:\\Users\\Andrew\\Source\\Repos\\ObjectSql\\tests\\ObjectSql.Test\\TestDatabase.mdf;integrated security=True;connect timeout=30;MultipleActiveResultSets=True;App=EntityFramework";
 		static TestBase()
 		{
 			ObjectSqlSqlServerInitializer.Initialize();

@@ -1,16 +1,16 @@
-﻿using System;
+﻿using ObjectSql.SqlServer.Schema;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
-using ObjectSql.SqlServer.Schema;
 
-namespace ObjectSql.SqlServer
+namespace dotnet_objsql_sqlgen
 {
-    public static class Program
+    public class Program
     {
-		public static void Main(string[] args)
-		{
+        public static void Main(string[] args)
+        {
 			var ns = args[0];
 			var filename = args[1];
 			var cs = args[2];
@@ -24,7 +24,6 @@ FileName: {filename}
 Script generation. Please wait...");
 			File.WriteAllText(filename, SchemaGenerator.Generate(ns, args[3], cs));
 			Console.WriteLine(" Done");
-
 		}
     }
 }
