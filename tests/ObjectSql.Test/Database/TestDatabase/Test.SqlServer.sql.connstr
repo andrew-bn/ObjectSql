@@ -1,0 +1,1 @@
+Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename={projectDir}\TestDatabase.mdf;Integrated Security=True;Connect Timeout=30
