@@ -10,7 +10,7 @@ namespace dotnet_objsql
 		{
 			var curDir = Directory.GetCurrentDirectory();
 			var projectName = curDir.Substring(curDir.LastIndexOf(Path.DirectorySeparatorChar) + 1);
-
+			 
 			if (!File.Exists(Path.Combine(curDir, "project.json")))
 				throw new FileNotFoundException("It is expected that objsql-sqlgen utility runs at the root of project folder");
 
