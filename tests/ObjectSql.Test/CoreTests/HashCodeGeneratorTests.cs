@@ -179,7 +179,122 @@ namespace ObjectSql.Tests
 			Assert.True(p1.Hash == p2.Hash);
 		}
 		[Fact]
-		public void DifferentConstantValues_DiffHashCodes()
+		public void DifferentRoots_SameHashCodes()
+		{
+			var closureSource2 = 4;
+			var exp1 = GetExpressionTree(closureSource2);
+
+			var p1 = new QueryRoots();
+			ExpressionHashCalculator.CalculateHashAndExtractConstantRoots(exp1, ref p1);
+
+			closureSource2 = 234;
+			var exp2 = GetExpressionTree(closureSource2);
+
+
+			var p2 = new QueryRoots();
+			ExpressionHashCalculator.CalculateHashAndExtractConstantRoots(exp2, ref p2);
+
+			Assert.IsTrue(p1.Hash == p2.Hash);
+		}
+
+		private Expression<Func<Foo, object>> GetExpressionTree(int value)
+		{
+			
+			Expression<Func<Foo, object>> exp =
+				f => value == f.FooParam.FooParam.Method() && value != 4;
+			return exp;
+		}
+		[Fact]
+		public void DifferentRoots_SameHashCodes_ComplexClosure()
+		{
+			var closureSource2 = 4;
+			var strSrc = "asdf";
+			var exp1 = GetExpressionTree4(closureSource2, strSrc);
+
+			var p1 = new QueryRoots();
+			ExpressionHashCalculator.CalculateHashAndExtractConstantRoots(exp1, ref p1);
+
+			closureSource2 = 234;
+			strSrc = "asddf";
+			var exp2 = GetExpressionTree4(closureSource2, strSrc);
+
+
+			var p2 = new QueryRoots();
+			ExpressionHashCalculator.CalculateHashAndExtractConstantRoots(exp2, ref p2);
+
+			Assert.IsTrue(p1.Hash == p2.Hash);
+		}
+
+		private Expression<Func<Foo, object>> GetExpressionTree4(int value, string value2)
+		{
+
+			Expression<Func<Foo, object>> exp =
+				f => value == f.FooParam.FooParam.Method() && value != 4 && f.Param1 != value2;
+			return exp;
+		}
+		[Fact]
+		public void DifferentRoots_DiffHashCodes_ComplexClosure()
+		{
+			var closureSource2 = 4;
+			var strSrc = "asdf";
+			var exp1 = GetExpressionTree4(closureSource2, strSrc);
+
+			var p1 = new QueryRoots();
+			ExpressionHashCalculator.CalculateHashAndExtractConstantRoots(exp1, ref p1);
+
+			closureSource2 = 234;
+			strSrc = "asddf";
+			var exp2 = GetExpressionTree5(closureSource2, strSrc);
+
+
+			var p2 = new QueryRoots();
+			ExpressionHashCalculator.CalculateHashAndExtractConstantRoots(exp2, ref p2);
+
+			Assert.IsTrue(p1.Hash != p2.Hash);
+		}
+
+		private Expression<Func<Foo, object>> GetExpressionTree5(int value, string value2)
+		{
+
+			Expression<Func<Foo, object>> exp =
+				f => value == f.FooParam.FooParam.Method() && f.Param1 != value2 && value != 4;
+			return exp;
+		}
+		[Fact]
+		public void DifferentRoots_DifferentHashCodes()
+		{
+			var closureSource2 = 4;
+			var exp1 = GetExpressionTree2(closureSource2);
+
+			var p1 = new QueryRoots();
+			ExpressionHashCalculator.CalculateHashAndExtractConstantRoots(exp1, ref p1);
+
+			closureSource2 = 234;
+			var exp2 = GetExpressionTree3(closureSource2);
+
+
+			var p2 = new QueryRoots();
+			ExpressionHashCalculator.CalculateHashAndExtractConstantRoots(exp2, ref p2);
+
+			Assert.IsTrue(p1.Hash != p2.Hash);
+		}
+
+		private Expression<Func<Foo, object>> GetExpressionTree2(int value)
+		{
+
+			Expression<Func<Foo, object>> exp =
+				f => value == f.FooParam.FooParam.Method() && value != 4;
+			return exp;
+		}
+		private Expression<Func<Foo, object>> GetExpressionTree3(int value)
+		{
+
+			Expression<Func<Foo, object>> exp =
+				f => value != 4 && value == f.FooParam.FooParam.Method();
+			return exp;
+		}
+		[Fact]
+		public void DifferentConstantValues_SameHashCodes()
 		{
 			Expression<Func<Foo, object>> exp1 =
 				f => 5 == f.FooParam.FooParam.Method();
@@ -194,7 +309,7 @@ namespace ObjectSql.Tests
 			var p2 = new QueryRoots();
 			ExpressionHashCalculator.CalculateHashAndExtractConstantRoots(exp2, ref p2);
 
-			Assert.True(p1.Hash != p2.Hash);
+			Assert.True(p1.Hash == p2.Hash);
 		}
 		[Fact]
 		public void SameConstantValues_SameHashCodes()
@@ -266,7 +381,7 @@ namespace ObjectSql.Tests
 		}
 
 		[Fact]
-		public void ComplexCase_ConstantsHasDifferentValues_RootsPropertiesHasDiffValues()
+		public void ComplexCase_ConstantsHasDifferentValues_RootsPropertiesHasSameValues()
 		{
 			const bool constantClosureSource = true;
 			var closureSource = "closureSource";
@@ -310,7 +425,7 @@ namespace ObjectSql.Tests
 			var p2 = new QueryRoots();
 			ExpressionHashCalculator.CalculateHashAndExtractConstantRoots(exp2, ref p2);
 
-			Assert.True(p1.Hash != p2.Hash);
+			Assert.True(p1.Hash == p2.Hash);
 		}
 	}
 }

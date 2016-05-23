@@ -125,7 +125,7 @@ namespace ObjectSql.Tests
 
 			var result = ExpressionComparer.AreEqual(exp1, ref p1, exp2, ref p2);
 
-			Assert.False(result);
+			Assert.True(result);
 		}
 
 		[Fact]
@@ -183,7 +183,7 @@ namespace ObjectSql.Tests
 
 			var result = ExpressionComparer.AreEqual(exp1, ref p1, exp2, ref p2);
 
-			Assert.False(result);
+			Assert.True(result);
 		}
 
 		[Fact]

@@ -17,7 +17,7 @@ namespace ObjectSql.Core.Misc
 				return false;
 			if (a == null) return true;
 
-			return AreEqual(a, b, true, ref QueryRoots.Empty, ref QueryRoots.Empty);
+			return AreEqual(a, b, false, ref QueryRoots.Empty, ref QueryRoots.Empty);
 		}
 		/// <summary>
 		/// Compare two expressions. Only not root constants are compared
@@ -33,7 +33,7 @@ namespace ObjectSql.Core.Misc
 				return false;
 			if (a == null) return true;
 
-			return AreEqual(ref pa, ref pb) && AreEqual(a, b, true, ref pa, ref pb);
+			return AreEqual(ref pa, ref pb) && AreEqual(a, b, false, ref pa, ref pb);
 		}
 
 		public static bool AreEqual(ref QueryRoots pa, ref QueryRoots pb)

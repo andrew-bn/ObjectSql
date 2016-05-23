@@ -273,6 +273,58 @@ namespace ObjectSql.Tests.CommandTextGenerationTests
 				  p1, 11.Name("p1_0"), 22.Name("p1_1"), 33.Name("p1_2"));
 		}
 		[Fact]
+		public void select_with_in_array_variable_complex()
+		{
+			var p1 = "pn";
+			var array_variable = new[] { 11, 22, 33 };
+			var result = Query
+				.From<Product>()
+				.Where(p => p.ProductName == p1 && p.CategoryID.In(array_variable) &&
+					p.ProductID.In(array_variable))
+				.Select(p => p.ProductName)
+				.Verify(
+				@"SELECT [p].[ProductName] 
+				FROM [Product] AS [p] 
+				WHERE ((([p].[ProductName] = @p0) AND  
+					   ([p].[CategoryID] IN (@p1_0, @p1_1, @p1_2))) AND
+                       ([p].[ProductID] IN (@p1_0, @p1_1, @p1_2)))",
+
+				  p1, 11.Name("p1_0"), 22.Name("p1_1"), 33.Name("p1_2"));
+
+
+			p1 = "pn2";
+			array_variable = new[] { 11, 25, 33 };
+			result = Query
+				.From<Product>()
+				.Where(p => p.ProductName == p1 && p.CategoryID.In(array_variable) &&
+					p.ProductID.In(array_variable))
+				.Select(p => p.ProductName)
+				.Verify(
+				@"SELECT [p].[ProductName] 
+				FROM [Product] AS [p] 
+				WHERE ((([p].[ProductName] = @p0) AND  
+					   ([p].[CategoryID] IN (@p1_0, @p1_1, @p1_2))) AND
+                       ([p].[ProductID] IN (@p1_0, @p1_1, @p1_2)))",
+
+				  p1, 11.Name("p1_0"), 25.Name("p1_1"), 33.Name("p1_2"));
+
+			p1 = "pn2";
+			array_variable = new[] { 11, 25, 33, 45 };
+			result = Query
+				.From<Product>()
+				.Where(p => p.ProductName == p1 && p.CategoryID.In(array_variable) &&
+					p.ProductID.In(array_variable))
+				.Select(p => p.ProductName)
+				.Verify(
+				@"SELECT [p].[ProductName] 
+				FROM [Product] AS [p] 
+				WHERE ((([p].[ProductName] = @p0) AND  
+					   ([p].[CategoryID] IN (@p1_0, @p1_1, @p1_2, @p1_3))) AND
+                       ([p].[ProductID] IN (@p1_0, @p1_1, @p1_2, @p1_3)))",
+
+				  p1, 11.Name("p1_0"), 25.Name("p1_1"), 33.Name("p1_2"), 45.Name("p1_3"));
+		}
+		[Fact]
 		public void select_with_subquery()
 		{
 			var p1 = "pn";
