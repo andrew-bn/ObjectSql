@@ -18,6 +18,7 @@
         "System.Data.DataSetExtensions": "4.0.0.0"
       }
     },
+
     "net451": {
       "frameworkAssemblies": {
         "System.Data": "4.0.0.0",

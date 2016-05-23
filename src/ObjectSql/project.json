@@ -33,11 +33,11 @@
       "buildOptions": { "define": [ "COREFX" ] },
       "dependencies": {
         "NETStandard.Library": "1.5.0-rc2-24027",
-        "System.Data.Common": "4.0.1-rc2-24027",
         "System.ComponentModel.Annotations": "4.1.0-rc2-24027",
         "System.Linq.Expressions": "4.0.11-rc2-24027",
         "System.Dynamic.Runtime": "4.0.11-rc2-24027",
-        "System.Reflection.TypeExtensions": "4.1.0-rc2-24027"
+        "System.Reflection.TypeExtensions": "4.1.0-rc2-24027",
+        "System.Data.Common": "4.0.1-rc2-24027"
       }
 
     }
