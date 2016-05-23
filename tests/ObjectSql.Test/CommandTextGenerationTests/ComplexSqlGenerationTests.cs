@@ -278,13 +278,13 @@ namespace ObjectSql.Tests.CommandTextGenerationTests
 			var p1 = "pn";
 			var array_variable = new[] { 11, 22, 33 };
 			var result = Query
-				.From<Product>()
+				.From<Products>()
 				.Where(p => p.ProductName == p1 && p.CategoryID.In(array_variable) &&
 					p.ProductID.In(array_variable))
 				.Select(p => p.ProductName)
 				.Verify(
 				@"SELECT [p].[ProductName] 
-				FROM [Product] AS [p] 
+				FROM [dbo].[Products] AS [p] 
 				WHERE ((([p].[ProductName] = @p0) AND  
 					   ([p].[CategoryID] IN (@p1_0, @p1_1, @p1_2))) AND
                        ([p].[ProductID] IN (@p1_0, @p1_1, @p1_2)))",
@@ -295,13 +295,13 @@ namespace ObjectSql.Tests.CommandTextGenerationTests
 			p1 = "pn2";
 			array_variable = new[] { 11, 25, 33 };
 			result = Query
-				.From<Product>()
+				.From<Products>()
 				.Where(p => p.ProductName == p1 && p.CategoryID.In(array_variable) &&
 					p.ProductID.In(array_variable))
 				.Select(p => p.ProductName)
 				.Verify(
 				@"SELECT [p].[ProductName] 
-				FROM [Product] AS [p] 
+				FROM [dbo].[Products] AS [p] 
 				WHERE ((([p].[ProductName] = @p0) AND  
 					   ([p].[CategoryID] IN (@p1_0, @p1_1, @p1_2))) AND
                        ([p].[ProductID] IN (@p1_0, @p1_1, @p1_2)))",
@@ -311,13 +311,13 @@ namespace ObjectSql.Tests.CommandTextGenerationTests
 			p1 = "pn2";
 			array_variable = new[] { 11, 25, 33, 45 };
 			result = Query
-				.From<Product>()
+				.From<Products>()
 				.Where(p => p.ProductName == p1 && p.CategoryID.In(array_variable) &&
 					p.ProductID.In(array_variable))
 				.Select(p => p.ProductName)
 				.Verify(
 				@"SELECT [p].[ProductName] 
-				FROM [Product] AS [p] 
+				FROM [dbo].[Products] AS [p] 
 				WHERE ((([p].[ProductName] = @p0) AND  
 					   ([p].[CategoryID] IN (@p1_0, @p1_1, @p1_2, @p1_3))) AND
                        ([p].[ProductID] IN (@p1_0, @p1_1, @p1_2, @p1_3)))",

@@ -39,11 +39,11 @@ namespace ObjectSql.Test.CommandTextGenerationTests
 		public void Select_Different_Constant()
 		{
 			var c = "cost";
-			EfQuery.Select(() => c)
+			Query.Select(() => c)
 				.Verify(@"SELECT @p0", c.DbType(SqlDbType.NVarChar));
 
 			c = "cost2";
-			EfQuery.Select(() => c)
+			Query.Select(() => c)
 				.Verify(@"SELECT @p0", c.DbType(SqlDbType.NVarChar));
 		}
 		[Fact]
@@ -58,7 +58,7 @@ namespace ObjectSql.Test.CommandTextGenerationTests
 
 		private void Closure(string value)
 		{
-			EfQuery.Select(() => value)
+			Query.Select(() => value)
 				.Verify(@"SELECT @p0", value.DbType(SqlDbType.NVarChar));
 		}
 		[Fact]

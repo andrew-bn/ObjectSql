@@ -194,7 +194,7 @@ namespace ObjectSql.Tests
 			var p2 = new QueryRoots();
 			ExpressionHashCalculator.CalculateHashAndExtractConstantRoots(exp2, ref p2);
 
-			Assert.IsTrue(p1.Hash == p2.Hash);
+			Assert.True(p1.Hash == p2.Hash);
 		}
 
 		private Expression<Func<Foo, object>> GetExpressionTree(int value)
@@ -222,7 +222,7 @@ namespace ObjectSql.Tests
 			var p2 = new QueryRoots();
 			ExpressionHashCalculator.CalculateHashAndExtractConstantRoots(exp2, ref p2);
 
-			Assert.IsTrue(p1.Hash == p2.Hash);
+			Assert.True(p1.Hash == p2.Hash);
 		}
 
 		private Expression<Func<Foo, object>> GetExpressionTree4(int value, string value2)
@@ -250,7 +250,7 @@ namespace ObjectSql.Tests
 			var p2 = new QueryRoots();
 			ExpressionHashCalculator.CalculateHashAndExtractConstantRoots(exp2, ref p2);
 
-			Assert.IsTrue(p1.Hash != p2.Hash);
+			Assert.True(p1.Hash != p2.Hash);
 		}
 
 		private Expression<Func<Foo, object>> GetExpressionTree5(int value, string value2)
@@ -276,7 +276,7 @@ namespace ObjectSql.Tests
 			var p2 = new QueryRoots();
 			ExpressionHashCalculator.CalculateHashAndExtractConstantRoots(exp2, ref p2);
 
-			Assert.IsTrue(p1.Hash != p2.Hash);
+			Assert.True(p1.Hash != p2.Hash);
 		}
 
 		private Expression<Func<Foo, object>> GetExpressionTree2(int value)
