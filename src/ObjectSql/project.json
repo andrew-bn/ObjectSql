@@ -1,34 +1,10 @@
 ﻿{
-  "version": "3.0.0-*",
+  "version": "3.0.1-*",
   "description": "ObjectSql",
   "authors": [ "AB" ],
 
   "frameworks": {
-    "net40": {
-      "frameworkAssemblies": {
-        "System.Data": "4.0.0.0",
-        "System.Data.Linq": "4.0.0.0",
-        "System.Data.Entity": "4.0.0.0",
-        "System.Xml": "4.0.0.0",
-        "System.Xml.Linq": "4.0.0.0",
-        "System.Data.DataSetExtensions": "4.0.0.0",
-        "System.ComponentModel.DataAnnotations": "4.0.0.0"
-      }
-    },
-    "net451": {
-      "frameworkAssemblies": {
-        "System.Data": "4.0.0.0",
-        "System.Data.Linq": "4.0.0.0",
-        "System.Data.Entity": "4.0.0.0",
-        "System.Xml": "4.0.0.0",
-        "System.Xml.Linq": "4.0.0.0",
-        "System.Data.DataSetExtensions": "4.0.0.0",
-        "System.ComponentModel.DataAnnotations": "4.0.0.0"
-      },
-      "dependencies": {
-        "System.Reflection.Extensions": "4.0.0"
-      }
-    },
+  
     "netstandard1.5": {
       "buildOptions": { "define": [ "COREFX" ] },
       "dependencies": {

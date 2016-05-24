@@ -2,18 +2,6 @@
   "locked": false,
   "version": 2,
   "targets": {
-    ".NETFramework,Version=v4.0": {},
-    ".NETFramework,Version=v4.5.1": {
-      "System.Reflection.Extensions/4.0.0": {
-        "type": "package",
-        "compile": {
-          "ref/net45/_._": {}
-        },
-        "runtime": {
-          "lib/net45/_._": {}
-        }
-      }
-    },
     ".NETStandard,Version=v1.5": {
       "Microsoft.NETCore.Platforms/1.0.1-rc2-24027": {
         "type": "package",
@@ -2883,39 +2871,6 @@
         "runtimes/aot/lib/netcore50/_._"
       ]
     },
-    "System.Reflection.Extensions/4.0.0": {
-      "sha512": "dbYaZWCyFAu1TGYUqR2n+Q+1casSHPR2vVW0WVNkXpZbrd2BXcZ7cpvpu9C98CTHtNmyfMWCLpCclDqly23t6A==",
-      "type": "package",
-      "files": [
-        "System.Reflection.Extensions.4.0.0.nupkg",
-        "System.Reflection.Extensions.4.0.0.nupkg.sha512",
-        "System.Reflection.Extensions.nuspec",
-        "lib/DNXCore50/System.Reflection.Extensions.dll",
-        "lib/net45/_._",
-        "lib/netcore50/System.Reflection.Extensions.dll",
-        "lib/win8/_._",
-        "lib/wp80/_._",
-        "lib/wpa81/_._",
-        "ref/dotnet/System.Reflection.Extensions.dll",
-        "ref/dotnet/System.Reflection.Extensions.xml",
-        "ref/dotnet/de/System.Reflection.Extensions.xml",
-        "ref/dotnet/es/System.Reflection.Extensions.xml",
-        "ref/dotnet/fr/System.Reflection.Extensions.xml",
-        "ref/dotnet/it/System.Reflection.Extensions.xml",
-        "ref/dotnet/ja/System.Reflection.Extensions.xml",
-        "ref/dotnet/ko/System.Reflection.Extensions.xml",
-        "ref/dotnet/ru/System.Reflection.Extensions.xml",
-        "ref/dotnet/zh-hans/System.Reflection.Extensions.xml",
-        "ref/dotnet/zh-hant/System.Reflection.Extensions.xml",
-        "ref/net45/_._",
-        "ref/netcore50/System.Reflection.Extensions.dll",
-        "ref/netcore50/System.Reflection.Extensions.xml",
-        "ref/win8/_._",
-        "ref/wp80/_._",
-        "ref/wpa81/_._",
-        "runtimes/win8-aot/lib/netcore50/System.Reflection.Extensions.dll"
-      ]
-    },
     "System.Reflection.Extensions/4.0.1-rc2-24027": {
       "sha512": "5N1tt+n0OHyaZ3Wb73FIfNsRrkFDW1I2fuAzojudgcZ0XcAHqLE0Wb9/JQ2eG6Lp89l2qntx4HvXcIDjVwvYuw==",
       "type": "package",
@@ -4317,25 +4272,6 @@
   },
   "projectFileDependencyGroups": {
     "": [],
-    ".NETFramework,Version=v4.0": [
-      "System.ComponentModel.DataAnnotations >= 4.0.0",
-      "System.Data >= 4.0.0",
-      "System.Data.DataSetExtensions >= 4.0.0",
-      "System.Data.Entity >= 4.0.0",
-      "System.Data.Linq >= 4.0.0",
-      "System.Xml >= 4.0.0",
-      "System.Xml.Linq >= 4.0.0"
-    ],
-    ".NETFramework,Version=v4.5.1": [
-      "System.ComponentModel.DataAnnotations >= 4.0.0",
-      "System.Data >= 4.0.0",
-      "System.Data.DataSetExtensions >= 4.0.0",
-      "System.Data.Entity >= 4.0.0",
-      "System.Data.Linq >= 4.0.0",
-      "System.Reflection.Extensions >= 4.0.0",
-      "System.Xml >= 4.0.0",
-      "System.Xml.Linq >= 4.0.0"
-    ],
     ".NETStandard,Version=v1.5": [
       "NETStandard.Library >= 1.5.0-rc2-24027",
       "System.ComponentModel.Annotations >= 4.1.0-rc2-24027",

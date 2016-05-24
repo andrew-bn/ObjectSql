@@ -1,5 +1,5 @@
 ﻿{
-  "version": "3.0.0-*",
+  "version": "3.0.1-*",
   "description": "ObjectSql.Test Class Library",
   "authors": [ "user" ],
   "testRunner": "xunit",
@@ -11,13 +11,11 @@
     },
     "xunit": "2.1.0-rc2-*",
     "dotnet-test-xunit": "1.0.0-rc2-*",
-    "ObjectSql": "3.0.0-*",
-    "ObjectSql.SqlServer": "3.0.0-*"
+    "ObjectSql": "3.0.1-*",
+    "ObjectSql.SqlServer": "3.0.1-*"
 
   },
-  "tools": {
-    "dotnet-objsql": "3.0.0-rc2-*"
-  },
+
   "frameworks": {
     "netcoreapp1.0": {
       "imports": [
