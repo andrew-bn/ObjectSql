@@ -2,6 +2,57 @@
   "locked": false,
   "version": 2,
   "targets": {
+    ".NETFramework,Version=v4.5": {
+      "ObjectSql/3.0.1": {
+        "type": "project",
+        "framework": ".NETFramework,Version=v4.5",
+        "frameworkAssemblies": [
+          "System.ComponentModel.Annotations",
+          "System.ComponentModel.DataAnnotations",
+          "System.Data"
+        ],
+        "compile": {
+          "net45/ObjectSql.dll": {}
+        },
+        "runtime": {
+          "net45/ObjectSql.dll": {}
+        }
+      }
+    },
+    ".NETFramework,Version=v4.5.1": {
+      "ObjectSql/3.0.1": {
+        "type": "project",
+        "framework": ".NETFramework,Version=v4.5.1",
+        "frameworkAssemblies": [
+          "System.ComponentModel.Annotations",
+          "System.ComponentModel.DataAnnotations",
+          "System.Data"
+        ],
+        "compile": {
+          "net451/ObjectSql.dll": {}
+        },
+        "runtime": {
+          "net451/ObjectSql.dll": {}
+        }
+      }
+    },
+    ".NETFramework,Version=v4.5.2": {
+      "ObjectSql/3.0.1": {
+        "type": "project",
+        "framework": ".NETFramework,Version=v4.5.2",
+        "frameworkAssemblies": [
+          "System.ComponentModel.Annotations",
+          "System.ComponentModel.DataAnnotations",
+          "System.Data"
+        ],
+        "compile": {
+          "net452/ObjectSql.dll": {}
+        },
+        "runtime": {
+          "net452/ObjectSql.dll": {}
+        }
+      }
+    },
     ".NETStandard,Version=v1.5": {
       "Microsoft.NETCore.Platforms/1.0.1-rc2-24027": {
         "type": "package",
@@ -5084,6 +5135,24 @@
   "projectFileDependencyGroups": {
     "": [
       "ObjectSql >= 3.0.1-*"
+    ],
+    ".NETFramework,Version=v4.5": [
+      "System.ComponentModel.Annotations >= 4.0.0",
+      "System.ComponentModel.DataAnnotations >= 4.0.0",
+      "System.Data >= 4.0.0",
+      "System.Xml >= 4.0.0"
+    ],
+    ".NETFramework,Version=v4.5.1": [
+      "System.ComponentModel.Annotations >= 4.0.0",
+      "System.ComponentModel.DataAnnotations >= 4.0.0",
+      "System.Data >= 4.0.0",
+      "System.Xml >= 4.0.0"
+    ],
+    ".NETFramework,Version=v4.5.2": [
+      "System.ComponentModel.Annotations >= 4.0.0",
+      "System.ComponentModel.DataAnnotations >= 4.0.0",
+      "System.Data >= 4.0.0",
+      "System.Xml >= 4.0.0"
     ],
     ".NETStandard,Version=v1.5": [
       "NETStandard.Library >= 1.5.0-rc2-24027",

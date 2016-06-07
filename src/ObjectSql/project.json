@@ -4,7 +4,27 @@
   "authors": [ "AB" ],
 
   "frameworks": {
-  
+    "net451": {
+      "frameworkAssemblies": {
+        "System.Data": "4.0.0.0",
+        "System.ComponentModel.Annotations": "4.0.0.0",
+        "System.ComponentModel.DataAnnotations": "4.0.0.0"
+      }
+    },
+    "net45": {
+      "frameworkAssemblies": {
+        "System.Data": "4.0.0.0",
+        "System.ComponentModel.Annotations": "4.0.0.0",
+        "System.ComponentModel.DataAnnotations": "4.0.0.0"
+      }
+    },
+    "net452": {
+      "frameworkAssemblies": {
+        "System.Data": "4.0.0.0",
+        "System.ComponentModel.Annotations": "4.0.0.0",
+        "System.ComponentModel.DataAnnotations": "4.0.0.0"
+      }
+    },
     "netstandard1.5": {
       "buildOptions": { "define": [ "COREFX" ] },
       "dependencies": {

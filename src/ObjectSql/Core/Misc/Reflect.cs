@@ -39,8 +39,7 @@ namespace ObjectSql.Core.Misc
 			return type.GetProperty(name, BindingFlags.Instance | BindingFlags.Public | BindingFlags.IgnoreCase);
 		}
 
-#if !NET45
-
+ 
 		public static object GetCustomAttr(this MemberInfo mi, Type attrType)
 		{
 			var attrs = mi.GetCustomAttributes(attrType,true);
@@ -60,7 +59,7 @@ namespace ObjectSql.Core.Misc
 			var attrs = mi.GetCustomAttributes(attrType, true);
 			return attrs.FirstOrDefault();
 		}
-#endif
+
 		public static bool IsEnum(this Type type)
 		{
 #if NET40
