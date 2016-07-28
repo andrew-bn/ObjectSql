@@ -25,6 +25,25 @@ namespace ObjectSql.Tests
 			public bool Param3 { get; set; }
 			public Foo FooParam { get; set; }
 		}
+
+		[Fact]
+		public void ExpressionsAreEqual_DiffValues()
+		{
+			Expression<Func<Foo, object>> exp1 = f => new { P1 = true, P2 = true };
+
+			var p1 = new QueryRoots();
+			ExpressionHashCalculator.CalculateHashAndExtractConstantRoots(exp1, ref p1);
+
+			Expression<Func<Foo, object>> exp2 = f => new { P1 = true, P2 = false };
+
+			var p2 = new QueryRoots();
+			ExpressionHashCalculator.CalculateHashAndExtractConstantRoots(exp2, ref p2);
+
+			var result = ExpressionComparer.AreEqual(exp1, ref p1, exp2, ref p2);
+
+			Assert.False(result);
+		}
+
 		[Fact]
 		public void ExpressionsAreEqual_ConstantsHasSameValues()
 		{
@@ -125,7 +144,7 @@ namespace ObjectSql.Tests
 
 			var result = ExpressionComparer.AreEqual(exp1, ref p1, exp2, ref p2);
 
-			Assert.True(result);
+			Assert.False(result);
 		}
 
 		[Fact]
@@ -183,7 +202,7 @@ namespace ObjectSql.Tests
 
 			var result = ExpressionComparer.AreEqual(exp1, ref p1, exp2, ref p2);
 
-			Assert.True(result);
+			Assert.False(result);
 		}
 
 		[Fact]

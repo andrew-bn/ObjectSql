@@ -1,4 +1,5 @@
-﻿using System.Data;
+﻿using System;
+using System.Data;
 using ObjectSql.Test;
 using Xunit;
 
@@ -12,6 +13,7 @@ namespace ObjectSql.Tests.ExpressionsAnalizersTests
 			Query.Select(() => 5)
 				 .Verify("SELECT @p0", 5.DbType(SqlDbType.Int));
 		}
+
 		[Fact]
 		public void ClassProperty()
 		{
@@ -38,6 +40,126 @@ namespace ObjectSql.Tests.ExpressionsAnalizersTests
 		{
 			Query.Select(() => "val" + 2 + "val")
 				 .Verify("SELECT @p0", "val2val".DbType(SqlDbType.NVarChar));
+		}
+
+		[Fact]
+		public void Should_Create_Valid_Sql()
+		{
+			var userName = "user";
+			var data = new { Password = "pwd"};
+			var data2 = new {Id = 234};
+			Query.From<Mailboxes>()
+				.Where(m => m.Username == userName && m.Locked == true && m.ManualLock == true &&
+				            m.UserDisabled == false && m.Password == data.Password && m.SubscriptionsId == data2.Id)
+				.Select(m => m)
+				.Verify("SELECT [m].[Id], [m].[Username], [m].[Password], [m].[Name], [m].[Quota], [m].[Domain], [m].[SubscriptionsId], " +
+							"[m].[Created], [m].[Modified], [m].[LocalPart], [m].[UserDisabled], [m].[Locked], [m].[Pending], [m].[UsedBytes]," +
+							" [m].[LastUpdateUsedBytesTime], [m].[ActualFeatureSetVersion], [m].[ManualLock], [m].[UserLocked], " +
+							"[m].[AdminLocked], [m].[AutoLocked] " +
+							"FROM [mail].[Mailboxes] AS [m] " +
+							"WHERE  ( ( ( ( ( ([m].[Username] = @p0) AND  ([m].[Locked] = @p1)) " +
+							"AND  ([m].[ManualLock] = @p1)) " +
+							"AND  ([m].[UserDisabled] = @p2)) " +
+							"AND  ([m].[Password] = @p3)) " +
+							"AND  ([m].[SubscriptionsId] = @p4))",
+				  userName.DbType(SqlDbType.NVarChar),
+				  true.DbType(SqlDbType.Bit),
+				  false.DbType(SqlDbType.Bit),
+				  data.Password.DbType(SqlDbType.NVarChar),
+				  data2.Id.DbType(SqlDbType.Int));
+
+		}
+
+		[Fact]
+		public void Should_Create_Valid_Cache()
+		{
+			var data = new {Username = "user", Password = "pwd"};
+			var data2 = new { Id = 234};
+			Query.From<Mailboxes>()
+					.Where(m => m.Username == data.Username && m.Locked == true && m.ManualLock == true &&
+					m.UserDisabled == false && m.Password == data.Password && m.SubscriptionsId == data2.Id)
+					.Select(m=>m)
+					.Verify("SELECT [m].[Id], [m].[Username], [m].[Password], [m].[Name], [m].[Quota], [m].[Domain], [m].[SubscriptionsId], " +
+					        "[m].[Created], [m].[Modified], [m].[LocalPart], [m].[UserDisabled], [m].[Locked], [m].[Pending], [m].[UsedBytes]," +
+					        " [m].[LastUpdateUsedBytesTime], [m].[ActualFeatureSetVersion], [m].[ManualLock], [m].[UserLocked], " +
+					        "[m].[AdminLocked], [m].[AutoLocked] " +
+					        "FROM [mail].[Mailboxes] AS [m] " +
+					        "WHERE  ( ( ( ( ( ([m].[Username] = @p0) AND  ([m].[Locked] = @p1)) " +
+					        "AND  ([m].[ManualLock] = @p1)) " +
+					        "AND  ([m].[UserDisabled] = @p2)) " +
+					        "AND  ([m].[Password] = @p3)) " +
+					        "AND  ([m].[SubscriptionsId] = @p4))",
+
+				  data.Username.DbType(SqlDbType.NVarChar),
+				  true.DbType(SqlDbType.Bit),
+				  false.DbType(SqlDbType.Bit),
+				  data.Password.DbType(SqlDbType.NVarChar),
+				  data2.Id.DbType(SqlDbType.Int));
+
+			Query.From<Mailboxes>()
+					.Where(m => m.Username == data.Username && m.Locked == true && m.ManualLock == false &&
+					m.UserDisabled == false && m.Password == data.Password && m.SubscriptionsId == data2.Id)
+					.Select(m => m)
+					.Verify("SELECT [m].[Id], [m].[Username], [m].[Password], [m].[Name], [m].[Quota], [m].[Domain], [m].[SubscriptionsId], " +
+					        "[m].[Created], [m].[Modified], [m].[LocalPart], [m].[UserDisabled], [m].[Locked], [m].[Pending]," +
+					        " [m].[UsedBytes], [m].[LastUpdateUsedBytesTime], [m].[ActualFeatureSetVersion], [m].[ManualLock], " +
+					        "[m].[UserLocked], [m].[AdminLocked], [m].[AutoLocked] " +
+					        "FROM [mail].[Mailboxes] AS [m] " +
+					        "WHERE  ( ( ( ( ( ([m].[Username] = @p0) AND  ([m].[Locked] = @p1)) " +
+					        "AND  ([m].[ManualLock] = @p2)) " +
+					        "AND  ([m].[UserDisabled] = @p2)) " +
+					        "AND  ([m].[Password] = @p3)) " +
+					        "AND  ([m].[SubscriptionsId] = @p4))",
+				  data.Username.DbType(SqlDbType.NVarChar),
+				  true.DbType(SqlDbType.Bit),
+				  false.DbType(SqlDbType.Bit),
+				  data.Password.DbType(SqlDbType.NVarChar),
+				  data2.Id.DbType(SqlDbType.Int));
+		}
+
+		[Table("Mailboxes", Schema = "mail")]
+		public partial class Mailboxes
+		{
+			[Column("Id", TypeName = "int")]
+			public int Id { get; set; }
+			[Column("Username", TypeName = "nvarchar")]
+			public string Username { get; set; }
+			[Column("Password", TypeName = "nvarchar")]
+			public string Password { get; set; }
+			[Column("Name", TypeName = "nvarchar")]
+			public string Name { get; set; }
+			[Column("Quota", TypeName = "int")]
+			public int Quota { get; set; }
+			[Column("Domain", TypeName = "nvarchar")]
+			public string Domain { get; set; }
+			[Column("SubscriptionsId", TypeName = "int")]
+			public int SubscriptionsId { get; set; }
+			[Column("Created", TypeName = "datetime")]
+			public DateTime Created { get; set; }
+			[Column("Modified", TypeName = "datetime")]
+			public DateTime? Modified { get; set; }
+			[Column("LocalPart", TypeName = "nvarchar")]
+			public string LocalPart { get; set; }
+			[Column("UserDisabled", TypeName = "bit")]
+			public bool UserDisabled { get; set; }
+			[Column("Locked", TypeName = "bit")]
+			public bool Locked { get; set; }
+			[Column("Pending", TypeName = "bit")]
+			public bool Pending { get; set; }
+			[Column("UsedBytes", TypeName = "bigint")]
+			public long UsedBytes { get; set; }
+			[Column("LastUpdateUsedBytesTime", TypeName = "datetime2")]
+			public DateTime LastUpdateUsedBytesTime { get; set; }
+			[Column("ActualFeatureSetVersion", TypeName = "uniqueidentifier")]
+			public Guid ActualFeatureSetVersion { get; set; }
+			[Column("ManualLock", TypeName = "bit")]
+			public bool ManualLock { get; set; }
+			[Column("UserLocked", TypeName = "bit")]
+			public bool UserLocked { get; set; }
+			[Column("AdminLocked", TypeName = "bit")]
+			public bool AdminLocked { get; set; }
+			[Column("AutoLocked", TypeName = "bit")]
+			public bool AutoLocked { get; set; }
 		}
 
 		//	[Fact]

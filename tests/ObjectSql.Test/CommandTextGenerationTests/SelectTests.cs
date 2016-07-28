@@ -205,5 +205,6 @@ namespace ObjectSql.Test.CommandTextGenerationTests
 							"HAVING(([p].[CategoryID]>@p0)AND(AVG([p].[UnitPrice])>@p1))",
 							5.DbType(SqlDbType.Int), 5M.DbType(SqlDbType.Money));
 		}
+
 	}
 }

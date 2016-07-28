@@ -65,7 +65,6 @@ namespace ObjectSql.Core.Misc
 			{
 				using (var bEnumerator = ExpressionEnumerator.Enumerate(b).GetEnumerator())
 				{
-
 					while (true)
 					{
 						var moveNext = aEnumerator.MoveNext();

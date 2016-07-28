@@ -12,8 +12,8 @@
     "xunit": "2.1.0-rc2-*",
     "dotnet-test-xunit": "1.0.0-rc2-*",
     "ObjectSql": "3.0.1-*",
-    "ObjectSql.SqlServer": "3.0.1-*"
-
+    "ObjectSql.SqlServer": "3.0.1-*",
+    "Moq": "4.6.36-alpha"
   },
 
   "frameworks": {

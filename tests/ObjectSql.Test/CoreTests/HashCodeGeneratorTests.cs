@@ -309,7 +309,7 @@ namespace ObjectSql.Tests
 			var p2 = new QueryRoots();
 			ExpressionHashCalculator.CalculateHashAndExtractConstantRoots(exp2, ref p2);
 
-			Assert.True(p1.Hash == p2.Hash);
+			Assert.True(p1.Hash != p2.Hash);
 		}
 		[Fact]
 		public void SameConstantValues_SameHashCodes()
@@ -425,7 +425,7 @@ namespace ObjectSql.Tests
 			var p2 = new QueryRoots();
 			ExpressionHashCalculator.CalculateHashAndExtractConstantRoots(exp2, ref p2);
 
-			Assert.True(p1.Hash == p2.Hash);
+			Assert.True(p1.Hash != p2.Hash);
 		}
 	}
 }
