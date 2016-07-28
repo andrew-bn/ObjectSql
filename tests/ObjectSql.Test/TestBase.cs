@@ -23,7 +23,9 @@ namespace ObjectSql.Test
 		static TestBase()
 		{
 			var path = Directory.GetCurrentDirectory();
-			ConnectionString = $@"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename={path}\TestDatabase.mdf;Integrated Security=True;Connect Timeout=30";
+			ConnectionString =
+				$@"DATA SOURCE=(local);AttachDbFilename={path}\TestDatabase.mdf; Integrated Security=True;";
+				//$@"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename={path}\TestDatabase.mdf;Integrated Security=True;Connect Timeout=30";
 			ObjectSqlSqlServerInitializer.Initialize();
 		}
 		protected IQuery Query

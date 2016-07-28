@@ -1,10 +1,10 @@
 ﻿{
-  "version": "3.0.1-*",
+  "version": "3.0.2-*",
   "description": "ObjectSql.SqlServer",
   "authors": [ "AB" ],
 
   "dependencies": {
-    "ObjectSql": "3.0.1-*"
+    "ObjectSql": "3.0.2-*"
   },
 
   "frameworks": {
@@ -45,13 +45,13 @@
     "netstandard1.5": {
       "buildOptions": { "define": [ "COREFX" ] },
       "dependencies": {
-        "NETStandard.Library": "1.5.0-rc2-24027",
-        "System.Data.Common": "4.0.1-rc2-24027",
-        "System.ComponentModel.Annotations": "4.1.0-rc2-24027",
-        "System.Linq.Expressions": "4.0.11-rc2-24027",
-        "System.Dynamic.Runtime": "4.0.11-rc2-24027",
-        "System.Reflection.TypeExtensions": "4.1.0-rc2-24027",
-        "System.Data.SqlClient": "4.1.0-rc2-24027"
+        "NETStandard.Library": "1.6.0",
+        "System.Data.Common": "4.1.0",
+        "System.ComponentModel.Annotations": "4.1.0",
+        "System.Linq.Expressions": "4.1.0",
+        "System.Dynamic.Runtime": "4.0.11",
+        "System.Reflection.TypeExtensions": "4.1.0",
+        "System.Data.SqlClient": "4.1.0"
       }
     }
   }
