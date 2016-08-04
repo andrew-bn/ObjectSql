@@ -55,9 +55,6 @@ namespace ObjectSql.Core.SchemaManager
 		private bool NotFilteredEntityProperty(PropertyInfo prop)
 		{
 			object notMappedAttr = null;
-#if !NET40
-			notMappedAttr = prop.GetCustomAttr(typeof(System.ComponentModel.DataAnnotations.Schema.NotMappedAttribute)) as System.ComponentModel.DataAnnotations.Schema.NotMappedAttribute;
-#endif
 			if (notMappedAttr == null)
 				notMappedAttr = prop.GetCustomAttr(typeof(NotMappedAttribute)) as NotMappedAttribute;
 
@@ -77,28 +74,6 @@ namespace ObjectSql.Core.SchemaManager
 				dbType = objSqlAttr.TypeName;
 			}
 
-#if !NET40
-			if (!attrFound)
-			{
-				var netAttr = prop.GetCustomAttr(typeof(System.ComponentModel.DataAnnotations.Schema.ColumnAttribute)) as System.ComponentModel.DataAnnotations.Schema.ColumnAttribute;
-				if (netAttr != null)
-				{
-					entityName = netAttr.Name;
-					dbType = netAttr.TypeName;
-				}
-			}
-#endif
-#if NET40
-			if (!attrFound)
-			{
-				var netAttr = prop.GetCustomAttr(typeof(System.Data.Linq.Mapping.ColumnAttribute)) as System.Data.Linq.Mapping.ColumnAttribute;
-				if (netAttr != null)
-				{
-					entityName = netAttr.Name;
-					dbType = netAttr.DbType;
-				}
-			}
-#endif
 			return string.IsNullOrEmpty(dbType)
 					? new StorageField(entityName)
 					: new StorageField(entityName, ParseDbType(dbType));
@@ -118,28 +93,6 @@ namespace ObjectSql.Core.SchemaManager
 				schemaName = objSqlAttr.Schema;
 			}
 
-#if !NET40
-			if (!attrFound)
-			{
-				var netAttr = entity.GetCustomAttr(typeof(System.ComponentModel.DataAnnotations.Schema.TableAttribute)) as System.ComponentModel.DataAnnotations.Schema.TableAttribute;
-				if (netAttr != null)
-				{
-					entityName = netAttr.Name;
-					schemaName = netAttr.Schema;
-				}
-			}
-#endif
-#if NET40
-			if (!attrFound)
-			{
-				var netAttr = entity.GetCustomAttr(typeof(System.Data.Linq.Mapping.TableAttribute)) as System.Data.Linq.Mapping.TableAttribute;
-				if (netAttr != null)
-				{
-					entityName = netAttr.Name;
-					nameOnly = true;
-				}
-			}
-#endif
 			return new StorageName(nameOnly, entityName, schemaName);
 		}
 		private StorageName ObtainStorageProcedureName(MethodInfo entity)
