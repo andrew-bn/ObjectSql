@@ -14,7 +14,7 @@ namespace ObjectSql.QueryImplementation
 {
 
 <#
-int depth = 10;
+int depth = 15;
 for (int i = 1;i<=depth; i++)
 {#>
 	public class Query<<#=TemplatesSeq(i)#>> : QueryBase, IQuery<<#=TemplatesSeq(i)#>>

@@ -9,7 +9,7 @@ using System.Linq.Expressions;
 namespace ObjectSql.QueryInterfaces
 {
 <#
-int depth = 10;
+int depth = 15;
 for (int i = 1;i<=depth; i++)
 {#>
 	public interface IQuery<<#=TemplatesSeq(i)#>>

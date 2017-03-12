@@ -229,6 +229,7 @@ namespace ObjectSql.Core.QueryBuilder.LambdaBuilder
 					dataReaderParameter)
 				.Compile();
 		}
+
 		private static Delegate CreateConstructorBasedRowFactory(ConstructorInfo ctorInfo, Type delegateType)
 		{
 			var dataReaderParameter = Expression.Parameter(typeof(DbDataReader));
@@ -367,6 +368,7 @@ namespace ObjectSql.Core.QueryBuilder.LambdaBuilder
 								: (Expression)Expression.Convert(
 									Expression.Call(parameter, Reflect.FindMethod<DbDataReader>(r => r.GetValue(1)), LambdaExpression.Constant(propertyIndex, typeof(int))),
 									fieldType);
+
 			if (!fieldType.IsValueType() ||
 				(fieldType.IsGenericType() &&
 				 fieldType.GetGenericTypeDefinition() == typeof(Nullable<>)))
@@ -377,6 +379,7 @@ namespace ObjectSql.Core.QueryBuilder.LambdaBuilder
 						Expression.Constant(null, fieldType),
 						Expression.Convert(readMethod, fieldType));
 			}
+
 			return readMethod;
 		}
 
