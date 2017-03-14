@@ -1,10 +1,10 @@
 ﻿{
-  "version": "3.0.2-*",
+  "version": "4.0.0-*",
   "description": "ObjectSql.SqlServer",
   "authors": [ "AB" ],
 
   "dependencies": {
-    "ObjectSql": "3.0.2-*"
+    "ObjectSql": "4.0.0-*"
   },
 
   "frameworks": {
