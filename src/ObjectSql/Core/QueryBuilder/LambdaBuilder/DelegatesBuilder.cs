@@ -67,7 +67,6 @@ namespace ObjectSql.Core.QueryBuilder.LambdaBuilder
 			var rootParam = Expression.Parameter(typeof(QueryRoots));
 			var cmdParam = Expression.Parameter(typeof(DbCommand));
 			var parameterAccessor = ReplaceConstantsToRootsAccessors(roots, valueAccessor, rootParam);
-		
 
 			var paramType = parameterAccessor.Type;
 
@@ -90,7 +89,11 @@ namespace ObjectSql.Core.QueryBuilder.LambdaBuilder
 		}
 
 		
-		public Action<DbCommand, QueryRoots> CreateInsertionParametersInitializerAction(QueryRoots roots, EntitySchema entitySchema, EntityInsertionInformation insertionInfo)
+		public Action<DbCommand, QueryRoots> CreateInsertionParametersInitializerAction(
+			QueryRoots roots,
+			EntitySchema entitySchema,
+			EntityInsertionInformation insertionInfo,
+			string placeHolder)
 		{
 			var sbAppend = Reflect.FindMethod<StringBuilder>(s => s.Append(""));
 			// input cmd
@@ -108,12 +111,10 @@ namespace ObjectSql.Core.QueryBuilder.LambdaBuilder
 			var breakLable = Expression.Label();
 
 			var methodBody = new List<Expression>();
-			//sb = inputObj as Entity[]
+			//ent = inputObj as Entity[]
 			methodBody.Add(Expression.Assign(ent, Expression.Convert(GetRootValueByIndex(objParam,roots.IndexOf(o=>o.GetType() == ent.Type)), ent.Type)));
 			//sb = new StringBuilder();
 			methodBody.Add(Expression.Assign(sb, Expression.New(Reflect.FindCtor(() => new StringBuilder()))));
-			//sb.Append(dbCommand.CommandText);
-			methodBody.Add(Expression.Call(sb, sbAppend, Expression.MakeMemberAccess(dbCmdParam, Reflect.FindProperty<DbCommand>(c => c.CommandText))));
 			//sb.Append(" VALUES (")
 			methodBody.Add(Expression.Call(sb, sbAppend, Expression.Constant(" VALUES ")));
 			// while(true)
@@ -174,10 +175,14 @@ namespace ObjectSql.Core.QueryBuilder.LambdaBuilder
 
 			methodBody.Add(Expression.Loop(Expression.Block(loopBody.ToArray())));
 			methodBody.Add(Expression.Label(breakLable));
-			//cmd.CommandText+=""
+			//cmd.CommandText = cmd.CommandText.Replace(placeHolder, sb.ToString()
 			methodBody.Add(Expression.Assign(
 				Expression.MakeMemberAccess(dbCmdParam, Reflect.FindProperty<DbCommand>(c => c.CommandText)),
-				Expression.Call(sb, Reflect.FindMethod<StringBuilder>(s => s.ToString()))));
+				Expression.Call(
+						Expression.MakeMemberAccess(dbCmdParam, Reflect.FindProperty<DbCommand>(c => c.CommandText)),
+						Reflect.FindMethod<string>(s => s.Replace(string.Empty, string.Empty)),
+						Expression.Constant(placeHolder),
+						Expression.Call(sb, Reflect.FindMethod<StringBuilder>(s => s.ToString())))));
 
 			return Expression.Lambda<Action<DbCommand, QueryRoots>>(
 						Expression.Block(new[] { ent, sb, index, dbParamIndex, dbParamName }, methodBody.ToArray()),

@@ -93,12 +93,11 @@ namespace ObjectSql.SqlServer
 			return commandText.Append("NULL");
 		}
 
-
-
 		public override CommandText WriteNameResolve(CommandText commandText)
 		{
 			return commandText.Append(".");
 		}
+
 		public override CommandText WriteBlock(CommandText commandText, string expression)
 		{
 			return commandText.Append("({0})", expression);
@@ -227,6 +226,7 @@ namespace ObjectSql.SqlServer
 			var parameter = ParameterSql(context, methodCall.Object);
 			context.CommandText.Append(string.Format("UPPER({0})", parameter));
 		}
+
 		[DeclaringType(typeof(String))]
 		public void ToLower(SqlWriterContext context, MethodCallExpression methodCall)
 		{

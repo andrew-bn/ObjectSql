@@ -9,10 +9,7 @@ namespace ObjectSql.Core.QueryParts
 		public InsertPart(LambdaExpression expression)
 			: base(expression)
 		{
-
 		}
-
-
 
 		public override void BuildPart(BuilderContext context)
 		{
@@ -20,7 +17,6 @@ namespace ObjectSql.Core.QueryParts
 			var sql = context.AnalizeExpression(Expression.Parameters.ToArray(), Expression.Body, ExpressionAnalizerType.FieldsSequence);
 			context.SqlWriter.WriteInsert(context.Text, GetSchema(entity, context), sql);
 			context.InsertionInfo = context.InsertionInfoExtractor.ExtractFrom(Expression);
-
 		}
 	}
 }

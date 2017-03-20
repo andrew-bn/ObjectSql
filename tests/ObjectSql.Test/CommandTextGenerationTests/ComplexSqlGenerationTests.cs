@@ -509,5 +509,20 @@ WHERE  ([p].[CategoryID] IN (SELECT [c].[CategoryID]
 				  FROM [dbo].[Products] AS [p] 
 				  WHERE ([p].[ProductID] = @p0)", 23);
 		}
+
+		[Fact]
+		public void insert_select_identity()
+		{
+			var result = Query
+				.Insert<Products>(p => new { p.ProductName, p.QuantityPerUnit, p.SupplierID })
+							.Values(new Products() { ProductName = "P1", QuantityPerUnit = "23", SupplierID = null })
+				.Select(() => new { Id = MsSql.ScopeIdentity() })
+				.Verify(
+				@"INSERT INTO [dbo].[Products] ([ProductName],[QuantityPerUnit],[SupplierID])
+							  VALUES (@p0,@p1,NULL);
+
+				  SELECT SCOPE_IDENTITY() AS [Id]",
+				"P1".DbType(SqlDbType.NVarChar), "23".DbType(SqlDbType.NVarChar));
+		}
 	}
 }

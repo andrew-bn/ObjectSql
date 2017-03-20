@@ -26,5 +26,7 @@ namespace ObjectSql.SqlServer
 		public static int DateDiff(DatePart datePart, DateTime? date1, DateTime? date2) { return default(int); }
 		[Sql("GETDATE()")]
 		public static DateTime GetDate() { return default(DateTime); }
+		[Sql("SCOPE_IDENTITY()")]
+		public static DateTime ScopeIdentity() { return default(DateTime); }
 	}
 }

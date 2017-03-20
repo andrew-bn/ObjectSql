@@ -13,7 +13,7 @@ namespace ObjectSql.Core.QueryBuilder.LambdaBuilder
 		Action<DbCommand, QueryRoots> AddCommandReturnParameter(Type returnType,object dbType);
 		Action<DbCommand, QueryRoots> CreateDatabaseParameterFactoryAction(QueryRoots roots, Expression parameterName, Expression valueAccessor, IStorageFieldType parameterType, ParameterDirection direction);
 		Action<DbCommand, QueryRoots> CreateArrayParameters(QueryRoots roots, string paramName, Expression valueAccessor, IStorageFieldType parameterType, ParameterDirection direction);
-		Action<DbCommand, QueryRoots> CreateInsertionParametersInitializerAction(QueryRoots roots, EntitySchema entitySchema, EntityInsertionInformation insertionInfo);
+		Action<DbCommand, QueryRoots> CreateInsertionParametersInitializerAction(QueryRoots roots, EntitySchema entitySchema, EntityInsertionInformation insertionInfo, string placeHolder);
 		Action<DbCommand, QueryRoots> CreateChangeDatabaseCommandTypeAction(CommandType commandType);
 		Delegate CreateEntityMaterializationDelegate(EntitySchema schema, EntityMaterializationInformation materializationInfo);
 		Action<DbCommand, QueryRoots> CreateCommandParameterReader(QueryRoots queryRoots, ConstantExpression parameterName, Expression valueAccessor);

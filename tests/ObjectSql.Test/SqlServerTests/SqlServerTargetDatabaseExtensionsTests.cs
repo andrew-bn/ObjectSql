@@ -9,24 +9,40 @@ namespace ObjectSql.Tests.SqlServerTests
 	public class SqlServerTargetDatabaseExtensionsTests : TestBase
 	{
 		[Fact]
+		public void Scope_Identity()
+		{
+			Query.Select(()=> MsSql.ScopeIdentity())
+				.Verify("SELECT SCOPE_IDENTITY()");
+		}
+
+		[Fact]
+		public void Scope_Identity_with_alias()
+		{
+			Query.Select(() =>new { Id = MsSql.ScopeIdentity()})
+				.Verify("SELECT SCOPE_IDENTITY() AS [Id]");
+		}
+
+		[Fact]
 		public void Count_Big()
 		{
 			Query.From<Categories>().Select(c => MsSql.CountBig(c.CategoryID))
 				 .Verify("SELECT COUNT_BIG([c].[CategoryID])FROM[dbo].[Categories]AS[c]");
-
 		}
+
 		[Fact]
 		public void Lower()
 		{
 			Query.From<Categories>().Select(c => MsSql.Lower(c.CategoryName))
 				 .Verify("SELECT LOWER([c].[CategoryName])FROM[dbo].[Categories]AS[c]");
 		}
+
 		[Fact]
 		public void Lower2()
 		{
 			Query.From<Categories>().Select(c => c.CategoryName.ToLower())
 				 .Verify("SELECT LOWER([c].[CategoryName])FROM[dbo].[Categories]AS[c]");
 		}
+
 		[Fact]
 		public void Replace()
 		{
@@ -34,6 +50,7 @@ namespace ObjectSql.Tests.SqlServerTests
 				 .Verify("SELECT REPLACE([c].[Description],@p0,@p1)FROM[dbo].[Categories]AS[c]",
 				 "p".DbType(SqlDbType.NVarChar), "c".DbType(SqlDbType.NVarChar));
 		}
+
 		[Fact]
 		public void Substring()
 		{
@@ -41,12 +58,14 @@ namespace ObjectSql.Tests.SqlServerTests
 				 .Verify("SELECT SUBSTRING([c].[Description],@p0,@p1)FROM[dbo].[Categories]AS[c]",
 				 1.DbType(SqlDbType.Int), 2.DbType(SqlDbType.Int));
 		}
+
 		[Fact]
 		public void Upper()
 		{
 			Query.From<Categories>().Select(c => MsSql.Upper(c.Description))
 				 .Verify("SELECT UPPER([c].[Description])FROM[dbo].[Categories]AS[c]");
 		}
+
 		[Fact]
 		public void Upper2()
 		{

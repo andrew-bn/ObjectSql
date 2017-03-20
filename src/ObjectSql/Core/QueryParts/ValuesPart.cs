@@ -22,8 +22,10 @@ namespace ObjectSql.Core.QueryParts
 
 		public override void BuildPart(BuilderContext context)
 		{
+			var placeHolder = Guid.NewGuid().ToString();
+			context.Text.Append($"{placeHolder}");
 			var entitySchema = GetSchema(Type,context);
-			var insertionAction = context.DelegatesBuilder.CreateInsertionParametersInitializerAction(context.Context.SqlPart.QueryRoots, entitySchema, context.InsertionInfo);
+			var insertionAction = context.DelegatesBuilder.CreateInsertionParametersInitializerAction(context.Context.SqlPart.QueryRoots, entitySchema, context.InsertionInfo, placeHolder);
 
 			var param = new InsertionParameterPrePostProcessor(insertionAction);
 			context.Preparators.AddPreProcessor(param);

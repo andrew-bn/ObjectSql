@@ -102,6 +102,7 @@ namespace ObjectSql.Core.Bo
 
 				Prepared = true;
 			}
+
 			return Command;
 		}
 
