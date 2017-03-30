@@ -16,6 +16,13 @@ namespace ObjectSql.Tests.SqlServerTests
 		}
 
 		[Fact]
+		public void Is_Null()
+		{
+			Query.Select(() => MsSql.IsNull(1))
+				.Verify("SELECT @p0 IS NULL", 1.DbType(SqlDbType.Int));
+		}
+
+		[Fact]
 		public void Scope_Identity_with_alias()
 		{
 			Query.Select(() =>new { Id = MsSql.ScopeIdentity()})

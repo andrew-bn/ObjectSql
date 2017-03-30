@@ -392,6 +392,7 @@ WHERE  ([p].[CategoryID] IN (SELECT [c].[CategoryID]
 									 )))
 		) ");
 		}
+
 		[Fact]
 		public void ComplexSelectSql_LeftJoin()
 		{

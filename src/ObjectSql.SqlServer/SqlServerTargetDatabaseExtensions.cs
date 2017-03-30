@@ -27,6 +27,8 @@ namespace ObjectSql.SqlServer
 		[Sql("GETDATE()")]
 		public static DateTime GetDate() { return default(DateTime); }
 		[Sql("SCOPE_IDENTITY()")]
-		public static DateTime ScopeIdentity() { return default(DateTime); }
+		public static decimal ScopeIdentity() { return default(decimal); }
+		[Sql("{0} IS NULL")]
+		public static bool IsNull(object target) { return default(bool); }
 	}
 }
