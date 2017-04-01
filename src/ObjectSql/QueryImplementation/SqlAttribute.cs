@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ObjectSql
 {
-	public class SqlAttribute:Attribute
+	public class SqlAttribute : Attribute
 	{
 		public string Pattern { get; private set; }
 

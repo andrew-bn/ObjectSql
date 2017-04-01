@@ -11,6 +11,8 @@ using ObjectSql.Core.QueryBuilder.ExpressionsAnalizers;
 using ObjectSql.Core.QueryParts;
 using ObjectSql.Core.SchemaManager.EntitySchema;
 using ObjectSql.Exceptions;
+using ObjectSql.Core.Bo.CommandPreparatorDescriptor;
+using System.Text.RegularExpressions;
 
 namespace ObjectSql.SqlServer
 {
@@ -232,7 +234,32 @@ namespace ObjectSql.SqlServer
 		{
 			var parameter = ParameterSql(context, methodCall.Object);
 			context.CommandText.Append(string.Format("LOWER({0})", parameter));
+		}
 
+		[DeclaringType(typeof(MsSql))]
+		public void IsNull(SqlWriterContext context, MethodCallExpression methodCall)
+		{
+			var placeHolder = Guid.NewGuid().ToString().Replace("-", "");
+			var parameter = ParameterSql(context, methodCall.Arguments.First());
+			context.CommandText.Append($" ({placeHolder}{{0}} IS NULL{placeHolder}) ", parameter);
+
+			context.Context.Preparators.PreProcessors.Add(new CommandPrePostProcessor((cmd, roots) =>
+			{
+				var startReplacement = cmd.CommandText.IndexOf($"{placeHolder}");
+				var endReplacement = cmd.CommandText.LastIndexOf($"{placeHolder}");
+
+				var substringToAnalize = cmd.CommandText.Substring(startReplacement, endReplacement - startReplacement);
+				if (cmd.CommandText.Contains($" ({placeHolder} IS NULL") || substringToAnalize.Contains($"_"))
+				{
+					cmd.CommandText =
+						cmd.CommandText.Substring(0, startReplacement) + "1=0" +
+						cmd.CommandText.Substring(endReplacement + placeHolder.Length, cmd.CommandText.Length - endReplacement - placeHolder.Length);
+				}
+				else
+				{
+					cmd.CommandText = cmd.CommandText.Replace($"{placeHolder}", "");
+				}
+			}));
 		}
 
 		[DeclaringType(typeof(DatePart))]

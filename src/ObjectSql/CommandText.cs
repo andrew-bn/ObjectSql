@@ -17,6 +17,7 @@ namespace ObjectSql
 			_sb.AppendFormat(format, args);
 			return this;
 		}
+
 		public override string ToString()
 		{
 			return _sb.ToString();

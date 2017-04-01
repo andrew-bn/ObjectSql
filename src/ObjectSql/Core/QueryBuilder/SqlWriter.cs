@@ -9,6 +9,7 @@ using ObjectSql.Core.QueryBuilder.ExpressionsAnalizers;
 using ObjectSql.Core.QueryParts;
 using ObjectSql.Core.SchemaManager.EntitySchema;
 using ObjectSql.Exceptions;
+using ObjectSql.Core.Bo.CommandPreparatorDescriptor;
 
 namespace ObjectSql.Core.QueryBuilder
 {
@@ -150,6 +151,29 @@ namespace ObjectSql.Core.QueryBuilder
 			context.CommandText.Append(str);
 		}
 
+		[DeclaringType(typeof(Sql))]
+		public virtual void In(SqlWriterContext context, MethodCallExpression callExpression)
+		{
+			var placeHolder = Guid.NewGuid().ToString().Replace("-", "");
+			RenderMethodCallToSql(context, callExpression, $" ({placeHolder}{{0}} IN ({{1}}){placeHolder}) ");
+
+			context.Context.Preparators.PreProcessors.Add(new CommandPrePostProcessor((cmd, roots) =>
+			{
+				if (cmd.CommandText.Contains($" IN (){placeHolder})") || cmd.CommandText.Contains($" IN (NULL){placeHolder})"))
+				{
+					var startReplacement = cmd.CommandText.IndexOf($"{placeHolder}");
+					var endReplacement = cmd.CommandText.LastIndexOf($"{placeHolder}");
+
+					cmd.CommandText =
+						cmd.CommandText.Substring(0, startReplacement) + "1=0" + 
+						cmd.CommandText.Substring(endReplacement + placeHolder.Length, cmd.CommandText.Length - endReplacement - placeHolder.Length);
+				}
+				else
+				{
+					cmd.CommandText = cmd.CommandText.Replace($"{placeHolder}", "");
+				}
+			}));
+		}
 
 		#endregion Binary
 		#region Unary
@@ -167,19 +191,19 @@ namespace ObjectSql.Core.QueryBuilder
 		#endregion Unary
 
 		#region common
-		public virtual CommandText WriteName(BuilderContext context, CommandText commandText,string alias, string name)
+		public virtual CommandText WriteName(BuilderContext context, CommandText commandText, string alias, string name)
 		{
 			var useAlias = !string.IsNullOrWhiteSpace(alias)
-			               && !(context.CurrentPart is InsertPart)
-			               && context.Parts.MoveBackAndFind(context.CurrentPart, p => p is DeletePart) == null
+						   && !(context.CurrentPart is InsertPart)
+						   && context.Parts.MoveBackAndFind(context.CurrentPart, p => p is DeletePart) == null
 						   && context.Parts.MoveBackAndFind(context.CurrentPart, p => p is UpdatePart) == null;
 
 			if (!useAlias)
 				return commandText.Append("[{0}]", name);
-			return commandText.Append("[{0}].[{1}]",alias, name);
+			return commandText.Append("[{0}].[{1}]", alias, name);
 		}
 		#endregion
-		
+
 		protected static string ParameterSql(SqlWriterContext builder, Expression expression)
 		{
 			var dbType = builder.Context.DatabaseManager.MapToDbType(expression.Type);
@@ -201,11 +225,17 @@ namespace ObjectSql.Core.QueryBuilder
 				var sqlAttr = mc.Method.GetCustomAttr<SqlAttribute>();
 				var m = FindMethod(mc.Method.Name, mc.Method.DeclaringType);
 				if (m == null && sqlAttr == null)
+				{
 					throw new ObjectSqlException("method '" + mc.Method.Name + "' can't be rendered to SQL");
-				if (m!=null)
+				}
+				if (m != null)
+				{
 					m.Invoke(this, new object[] { sqlContext, mc });
+				}
 				else
+				{
 					RenderMethodCallToSql(sqlContext, mc, sqlAttr);
+				}
 
 				if (mc.Method.ReturnType != typeof(void))
 				{
@@ -218,9 +248,11 @@ namespace ObjectSql.Core.QueryBuilder
 				var c = expression as ConstantExpression;
 				var m = FindMethod("Constant", c.Type);
 				if (m == null)
+				{
 					throw new ObjectSqlException("value '" + (c.Value ?? "null") + "' can't be rendered to SQL");
+				}
 
-				m.Invoke(this, new [] { new SqlWriterContext(expression, expressionVisitor, context, commandText), c.Value });
+				m.Invoke(this, new[] { new SqlWriterContext(expression, expressionVisitor, context, commandText), c.Value });
 			}
 			else if (expression is BinaryExpression)
 			{
@@ -239,24 +271,29 @@ namespace ObjectSql.Core.QueryBuilder
 					throw new ObjectSqlException("unary expression '" + expression.NodeType.ToString() + "' can't be rendered to SQL");
 
 				m.Invoke(this, new object[] { new SqlWriterContext(expression, expressionVisitor, context, commandText), un.Operand });
-			
+
 			}
+
 			return commandText;
 		}
 
 		protected void RenderMethodCallToSql(SqlWriterContext context, MethodCallExpression expression, SqlAttribute sqlAttr)
 		{
-			var parameters = expression.Arguments.Select(a => ParameterSql(context, a)).ToArray();
-			
-			context.CommandText.Append(string.Format(sqlAttr.Pattern,parameters));
-
+			RenderMethodCallToSql(context, expression, sqlAttr.Pattern);
 		}
+
+		private void RenderMethodCallToSql(SqlWriterContext context, MethodCallExpression expression, string pattern)
+		{
+			var parameters = expression.Arguments.Select(a => ParameterSql(context, a)).ToArray();
+			var sqlToAppend = string.Format(pattern, parameters);
+			context.CommandText.Append(sqlToAppend);
+		}
+
 		private MethodInfo FindMethod(string methodName, Type type)
 		{
 			var sqlWriter = GetType();
 			foreach (var m in sqlWriter.GetMethods())
 			{
-				
 				var attr = m.GetCustomAttr(typeof(DeclaringTypeAttribute)) as DeclaringTypeAttribute;
 				if (attr != null && m.Name == methodName && attr.Type == type)
 					return m;

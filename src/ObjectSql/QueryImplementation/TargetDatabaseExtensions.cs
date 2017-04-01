@@ -13,39 +13,55 @@ namespace ObjectSql
 
 		[Sql("({0} LIKE {1})")]
 		public static bool Like(this string expression,string pattern) { return false; }
+
 		[Sql("({0} NOT LIKE {1})")]
 		public static bool NotLike(this string expression, string pattern) { return false; }
+
 		[Sql("AVG({0})")]
 		public static int Avg(short columnSelector) { return default(int); }
+
 		[Sql("AVG({0})")]
 		public static int Avg(short? columnSelector) { return default(int); }
+
 		[Sql("AVG({0})")]
 		public static int Avg(byte columnSelector) { return default(int); }
+
 		[Sql("AVG({0})")]
 		public static int Avg(byte? columnSelector) { return default(int); }
+
 		[Sql("AVG({0})")]
 		public static int Avg(int columnSelector) { return default(int); }
+
 		[Sql("AVG({0})")]
 		public static int Avg(int? columnSelector) { return default(int); }
+
 		[Sql("AVG({0})")]
 		public static long Avg(long columnSelector) { return default(int); }
+
 		[Sql("AVG({0})")]
 		public static long Avg(long? columnSelector) { return default(int); }
+
 		[Sql("AVG({0})")]
 		public static decimal Avg(decimal columnSelector) { return default(int); }
+
 		[Sql("AVG({0})")]
 		public static decimal Avg(decimal? columnSelector) { return default(int); }
+
 		[Sql("AVG({0})")]
 		public static float Avg(float columnSelector) { return default(int); }
+
 		[Sql("AVG({0})")]
 		public static float Avg(float? columnSelector) { return default(int); }
+
 		[Sql("AVG({0})")]
 		public static float Avg(double columnSelector) { return default(int); }
+
 		[Sql("AVG({0})")]
 		public static float Avg(double? columnSelector) { return default(int); }
 
 		[Sql("MAX({0})")]
 		public static T Max<T>(T columnSelector){ return default(T); }
+
 		[Sql("MIN({0})")]
 		public static T Min<T>(T columnSelector) { return default(T);}
 
@@ -53,12 +69,14 @@ namespace ObjectSql
 
 		[Sql(" ({0} NOT IN ({1})) ")]
 		public static bool NotIn<T, TEntity>(this T field, IQueryEnd<TEntity> query) { return false; }
+
 		[Sql(" ({0} NOT IN ({1})) ")]
 		public static bool NotIn<T, TEntity>(this T field, params TEntity[] enumeration) { return false; }
 
-		[Sql(" ({0} IN ({1})) ")]
+		[Sql("")]
 		public static bool In<T,TEntity>(this T field, IQueryEnd<TEntity> query) { return false; }
-		[Sql(" ({0} IN ({1})) ")]
+
+		[Sql("")]
 		public static bool In<T, TEntity>(this T field, params TEntity[] enumeration) { return false; }
 	}
 }

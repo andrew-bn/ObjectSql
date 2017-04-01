@@ -443,9 +443,7 @@ namespace ObjectSql.Core.QueryBuilder.LambdaBuilder
 			Expression parametersPlaceholder = Expression.Constant(paramName);
 			var parameterAccessor = ReplaceConstantsToRootsAccessors(roots,valueAccessor,rootParam);
 
-
 			var paramType = parameterAccessor.Type.GetElementType();
-
 
 			var exprList = new List<Expression>();
 
@@ -453,10 +451,16 @@ namespace ObjectSql.Core.QueryBuilder.LambdaBuilder
 			var sb = Expression.Variable(typeof (StringBuilder), "sb");
 			
 			var loopLbl = Expression.Label("loopLabel");
+			var nullLbl = Expression.Label("nullLabel");
 			var exitLbl = Expression.Label("exitLabel");
-			
+
 			exprList.Add(Expression.Assign(sb,Expression.New(typeof(StringBuilder))));
 			exprList.Add(Expression.Label(loopLbl));
+
+			exprList.Add(Expression.IfThen(
+							Expression.Equal(parameterAccessor, Expression.Constant(null, parameterAccessor.Type)),
+							Expression.Goto(nullLbl)));
+
 			exprList.Add(Expression.IfThen(Expression.Equal(indexVar,
 				Expression.MakeMemberAccess(parameterAccessor,Reflect.FindProperty<Array>(a=>a.Length))),
 				Expression.Goto(exitLbl)));
@@ -491,6 +495,8 @@ namespace ObjectSql.Core.QueryBuilder.LambdaBuilder
 			exprList.Add(parameterAdd);
 			exprList.Add(Expression.Assign(indexVar,Expression.Increment(indexVar)));
 			exprList.Add(Expression.Goto(loopLbl));
+			exprList.Add(Expression.Label(nullLbl));
+			exprList.Add(Expression.Call(sb, Reflect.FindMethod<StringBuilder>(s => s.Append("")), Expression.Constant("NULL")));
 			exprList.Add(Expression.Label(exitLbl));
 
 			Expression changeCmd = Expression.MakeMemberAccess(cmdParam, Reflect.FindProperty<DbCommand>(c => c.CommandText));
@@ -506,6 +512,7 @@ namespace ObjectSql.Core.QueryBuilder.LambdaBuilder
 						cmdParam,
 						rootParam).Compile();
 		}
+
 		private static Expression ReplaceConstantsToRootsAccessors(QueryRoots roots, Expression valueAccessor, ParameterExpression rootParam)
 		{
 			return valueAccessor.Visit<ConstantExpression>((v, e) =>

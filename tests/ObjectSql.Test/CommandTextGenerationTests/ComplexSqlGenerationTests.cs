@@ -15,7 +15,7 @@ using ObjectSql.Test.Database.TestDatabase;
 
 namespace ObjectSql.Tests.CommandTextGenerationTests
 {
-	
+
 	public class ComplexSqlGenerationTests : TestBase
 	{
 		[Fact]
@@ -224,6 +224,7 @@ namespace ObjectSql.Tests.CommandTextGenerationTests
 				  p1, 11, 22, 33);
 
 		}
+
 		[Fact]
 		public void select_with_in_array_of_strings()
 		{
@@ -272,6 +273,44 @@ namespace ObjectSql.Tests.CommandTextGenerationTests
 
 				  p1, 11.Name("p1_0"), 22.Name("p1_1"), 33.Name("p1_2"));
 		}
+
+		[Fact]
+		public void select_with_sql_equal_and_empty_arrays()
+		{
+			int[] array_variable = null;
+
+			array_variable = null;
+			Query
+				.From<Products>()
+				.Where(p => MsSql.IsNull(array_variable) || p.CategoryID.In(array_variable))
+				.Select(p => p.ProductName)
+				.Verify(
+				@"SELECT [p].[ProductName] 
+				FROM [dbo].[Products] AS [p] 
+				WHERE ((NULL IS NULL) OR (1 = 0))");
+
+			array_variable = new int[0];
+			Query
+				.From<Products>()
+				.Where(p => MsSql.IsNull(array_variable) || p.CategoryID.In(array_variable))
+				.Select(p => p.ProductName)
+				.Verify(
+				@"SELECT [p].[ProductName] 
+				FROM [dbo].[Products] AS [p] 
+				WHERE ((1=0) OR (1=0))");
+
+			array_variable = new[] { 1, 2, 3 };
+			Query
+				.From<Products>()
+				.Where(p => MsSql.IsNull(array_variable) || p.CategoryID.In(array_variable))
+				.Select(p => p.ProductName)
+				.Verify(
+				@"SELECT [p].[ProductName] 
+				FROM [dbo].[Products] AS [p] 
+				WHERE ((1=0) OR ([p].[CategoryID] IN (@p0_0, @p0_1, @p0_2)))",
+				1.Name("p0_0"), 2.Name("p0_1"), 3.Name("p0_2"));
+		}
+
 		[Fact]
 		public void select_with_in_array_variable_complex()
 		{

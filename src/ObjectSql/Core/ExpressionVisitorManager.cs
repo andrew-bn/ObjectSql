@@ -10,6 +10,7 @@ namespace ObjectSql.Core
 	public class ExpressionVisitorManager<T1>: ExpressionVisitor where T1 : Expression
 	{
 		private readonly Func<ExpressionVisitor, T1, Expression> _visitor;
+
 		public ExpressionVisitorManager(Func<ExpressionVisitor, T1, Expression> visitor)
 		{
 			_visitor = visitor;
@@ -17,9 +18,14 @@ namespace ObjectSql.Core
 
 		public override Expression Visit(Expression node)
 		{
-			if (node == null) return node;
-			if (!typeof(T1).IsAssignableFrom(node.GetType()))
+			if (node == null)
+			{
+				return node;
+			}
+			else if (!typeof (T1).IsAssignableFrom(node.GetType()))
+			{
 				return base.Visit(node);
+			}
 
 			return _visitor(this, (T1)node);
 		}
