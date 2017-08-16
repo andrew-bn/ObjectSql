@@ -56,7 +56,6 @@ namespace ObjectSql.Tests.IntegrationTests
 		[Fact]
 		public void Select_Anonimus_ConcatFieldWithField()
 		{
-			var c = "_const";
 			var res = Query.From<Products>()
 			.Select((p) => new { Fld1 = p.ProductName + p.ProductName }).ExecuteQuery().ToArray();
 
@@ -76,7 +75,6 @@ namespace ObjectSql.Tests.IntegrationTests
 		// [Fact]
 		public void StoredProcedure_ObjectReader_ResultMapping()
 		{
-
 			int outP = 12;
 			using (var rdr = Query.Exec<TestDatabaseProcedures>(db => db.MyProcedure(23, outP)).Returns<int>(SqlDbType.Int).ExecuteReader())
 			{

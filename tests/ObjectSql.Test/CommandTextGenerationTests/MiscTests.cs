@@ -52,7 +52,6 @@ namespace ObjectSql.Tests.CommandTextGenerationTests
 		[Fact]
 		public void Select_Anonimus_ConcatFieldWithField()
 		{
-			var c = "_const";
 			Query.From<Products>()
 			.Select((p) => new { Fld1 = p.ProductName + p.ProductName })
 			.Verify("SELECT([p].[ProductName]+[p].[ProductName])AS[Fld1]" +

@@ -1,20 +1,20 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 14
-VisualStudioVersion = 14.0.25123.0
+# Visual Studio 15
+VisualStudioVersion = 15.0.26730.3
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "ObjectSql", "src\ObjectSql\ObjectSql.xproj", "{24D76A0D-611A-4314-88D6-C21C416EEE87}"
-EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "ObjectSql.SqlServer", "src\ObjectSql.SqlServer\ObjectSql.SqlServer.xproj", "{46579857-FC88-41C5-AE06-9390D765C3DD}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{1E792664-05BA-4440-A739-123307461175}"
 	ProjectSection(SolutionItems) = preProject
 		global.json = global.json
 	EndProjectSection
 EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "ObjectSql.Test", "tests\ObjectSql.Test\ObjectSql.Test.xproj", "{2D11930C-978E-4D7C-8667-4EDB76A68F97}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ObjectSql", "src\ObjectSql\ObjectSql.csproj", "{24D76A0D-611A-4314-88D6-C21C416EEE87}"
 EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "dotnet-objsql", "src\dotnet-objsql\dotnet-objsql.xproj", "{7118BAFA-BDDC-4122-8E5F-C4E9F44E10F7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ObjectSql.SqlServer", "src\ObjectSql.SqlServer\ObjectSql.SqlServer.csproj", "{46579857-FC88-41C5-AE06-9390D765C3DD}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ObjectSql.Test", "tests\ObjectSql.Test\ObjectSql.Test.csproj", "{2D11930C-978E-4D7C-8667-4EDB76A68F97}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "dotnet-objsql", "src\dotnet-objsql\dotnet-objsql.csproj", "{7118BAFA-BDDC-4122-8E5F-C4E9F44E10F7}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -41,5 +41,8 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {E02DFC7C-34E7-49C1-95B2-3E62EC4F9717}
 	EndGlobalSection
 EndGlobal

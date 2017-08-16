@@ -228,8 +228,7 @@ namespace ObjectSql.Tests.CommandTextGenerationTests
 		[Fact]
 		public void select_with_in_array_of_strings()
 		{
-			var p1 = "pn";
-			var result = Query
+			Query
 				.From<Products>()
 				.Where(p => p.ProductName.In("name1", "name2"))
 				.Select(p => p.ProductName)

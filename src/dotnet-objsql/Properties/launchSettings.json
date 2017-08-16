@@ -2,7 +2,7 @@
   "profiles": {
     "dotnet-objsql": {
       "commandName": "Project",
-      "workingDirectory": "D:\\GitHub\\ObjectSql\\tests\\ObjectSql.Test"
+      "workingDirectory": "..\\..\\tests\\ObjectSql.Test"
     }
   }
 }
