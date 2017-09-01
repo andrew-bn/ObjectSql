@@ -15,6 +15,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\ObjectSql.MySql\ObjectSql.MySql.csproj" />
     <ProjectReference Include="..\ObjectSql\ObjectSql.csproj" />
     <ProjectReference Include="..\ObjectSql.SqlServer\ObjectSql.SqlServer.csproj" />
   </ItemGroup>

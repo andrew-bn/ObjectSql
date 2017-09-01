@@ -15,6 +15,8 @@ namespace ObjectSql.Core.QueryBuilder
 {
 	public abstract class SqlWriter
 	{
+		public abstract string LeftBoundary { get; }
+		public abstract string RightBoundary { get; }
 		public abstract CommandText WriteUpdate(CommandText commandText, EntitySchema entity, string updateSql);
 		public abstract CommandText WriteDelete(CommandText commandText, EntitySchema entity);
 		public abstract CommandText WriteInsert(CommandText commandText, EntitySchema entity, string fieldsSql);
@@ -63,6 +65,7 @@ namespace ObjectSql.Core.QueryBuilder
 			context.UpdateTypeInContext(dbType);
 		}
 		#endregion sql
+
 		#region Binary
 		[DeclaringType(typeof(BinaryExpression))]
 		public virtual void Equal(SqlWriterContext context, Expression left, Expression right)
@@ -191,6 +194,7 @@ namespace ObjectSql.Core.QueryBuilder
 		#endregion Unary
 
 		#region common
+
 		public virtual CommandText WriteName(BuilderContext context, CommandText commandText, string alias, string name)
 		{
 			var useAlias = !string.IsNullOrWhiteSpace(alias)
@@ -199,9 +203,20 @@ namespace ObjectSql.Core.QueryBuilder
 						   && context.Parts.MoveBackAndFind(context.CurrentPart, p => p is UpdatePart) == null;
 
 			if (!useAlias)
-				return commandText.Append("[{0}]", name);
-			return commandText.Append("[{0}].[{1}]", alias, name);
+			{
+				commandText.Append(LeftBoundary);
+				commandText.Append(name);
+				return commandText.Append(RightBoundary);
+			}
+			commandText.Append(LeftBoundary);
+			commandText.Append(alias);
+			commandText.Append(RightBoundary);
+			commandText.Append(".");
+			commandText.Append(LeftBoundary);
+			commandText.Append(name);
+			return commandText.Append(RightBoundary);
 		}
+
 		#endregion
 
 		protected static string ParameterSql(SqlWriterContext builder, Expression expression)

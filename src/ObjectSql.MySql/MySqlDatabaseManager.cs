@@ -1,38 +1,41 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Data;
 using System.Data.Common;
 using System.Data.SqlClient;
+using System.Reflection;
+using System.Text;
 using System.Xml;
+using MySql.Data.MySqlClient;
+using ObjectSql.Core.Misc;
 using ObjectSql.Core.QueryBuilder;
 using ObjectSql.Core.QueryBuilder.LambdaBuilder;
-using ObjectSql.Core.SchemaManager;
-using ObjectSql.Core.Misc;
-using System.Reflection;
-namespace ObjectSql.SqlServer
+
+namespace ObjectSql.MySql
 {
-	public class SqlServerDatabaseManager : IDatabaseManager
+	public class MySqlDatabaseManager : IDatabaseManager
 	{
 		public bool MatchManager(DbConnection dbConnection, string providerName)
 		{
-			return providerName == "System.Data.SqlClient" || (dbConnection is SqlConnection);
+			return providerName == "System.Data.SqlClient" || (dbConnection is MySqlConnection);
 		}
 
 		public bool MatchManager(DbDataReader dataReader)
 		{
-			return dataReader is SqlDataReader;
+			return dataReader is MySqlDataReader;
 		}
 
-		public Type DbType => typeof(SqlDbType);
+		public Type DbType => typeof(MySqlDbType);
 
 
 		public IDelegatesBuilder CreateDelegatesBuilder()
 		{
-			return SqlServerDelegatesBuilder.Instance;
+			return MySqlDelegatesBuilder.Instance;
 		}
 
 		public SqlWriter CreateSqlWriter()
 		{
-			return SqlServerSqlWriter.Instance;
+			return MySqlSqlWriter.Instance;
 		}
 
 
@@ -46,7 +49,7 @@ namespace ObjectSql.SqlServer
 			if (netType == typeof(byte[]))
 				return "binary";
 			if (netType == typeof(Guid))
-				return "uniqueidentifier";
+				return "varchar";
 			if (netType == typeof(int))
 				return "int";
 			if (netType == typeof(short))
@@ -56,25 +59,23 @@ namespace ObjectSql.SqlServer
 			if (netType == typeof(byte))
 				return "tinyint";
 			if (netType == typeof(bool))
-				return "bit";
+				return "tinyint(1)";
 			if (netType == typeof(string))
-				return "nvarchar";
+				return "varchar";
 			if (netType == typeof(DateTime))
-				return "datetime2";
+				return "timestamp";
 			if (netType == typeof(DateTimeOffset))
 				return "datetimeoffset";
 			if (netType == typeof(decimal))
-				return "money";
+				return "decimal";
 			if (netType == typeof(double))
-				return "float";
+				return "double";
 			if (netType == typeof(float))
-				return "real";
-			if (netType == typeof(object))
-				return "sql_variant";
+				return "float";
 			if (netType == typeof(TimeSpan))
 				return "time";
 
-			return "sql_variant";
+			return "varchar";
 		}
 	}
 }

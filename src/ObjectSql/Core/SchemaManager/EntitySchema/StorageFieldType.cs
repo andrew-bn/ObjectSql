@@ -7,13 +7,14 @@ namespace ObjectSql.Core.SchemaManager.EntitySchema
 		{
 			Value = value;
 		}
-		public TTypeEnum Value { get; private set; }
+		public TTypeEnum Value { get; }
 
 		public override bool Equals(object obj)
 		{
-			var b = obj as StorageFieldType<TTypeEnum>;
-			if (b == null)
+			if (!(obj is StorageFieldType<TTypeEnum> b))
+			{
 				return false;
+			}
 
 			return Equals(b.Value, Value);
 

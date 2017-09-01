@@ -1,40 +1,35 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Data;
 using System.Linq;
 using System.Linq.Expressions;
-using System.Reflection;
 using ObjectSql.Core;
-using ObjectSql.Core.Bo;
-using ObjectSql.Core.QueryBuilder;
-using ObjectSql.Core.QueryBuilder.ExpressionsAnalizers;
-using ObjectSql.Core.QueryParts;
-using ObjectSql.Core.SchemaManager.EntitySchema;
-using ObjectSql.Exceptions;
 using ObjectSql.Core.Bo.CommandPreparatorDescriptor;
-using System.Text.RegularExpressions;
+using ObjectSql.Core.QueryBuilder;
+using ObjectSql.Core.SchemaManager.EntitySchema;
 
-namespace ObjectSql.SqlServer
+namespace ObjectSql.MySql
 {
-	public class SqlServerSqlWriter : SqlWriter
+	public class MySqlSqlWriter : SqlWriter
 	{
-		public static SqlServerSqlWriter Instance = new SqlServerSqlWriter();
-		private SqlServerSqlWriter()
+		public static MySqlSqlWriter Instance = new MySqlSqlWriter();
+
+		private MySqlSqlWriter()
 		{
 		}
 
-		public override string LeftBoundary { get; } = "[";
+		public override string LeftBoundary { get; } = "`";
 
-		public override string RightBoundary { get; } = "]";
+		public override string RightBoundary { get; } = "`";
 
 		public override CommandText WriteUpdate(CommandText commandText, EntitySchema entity, string updateSql)
 		{
 			return commandText.Append("UPDATE {0} SET {1}", PrepareStorageName(entity), updateSql);
 		}
+
 		public override CommandText WriteDelete(CommandText commandText, EntitySchema entity)
 		{
 			return commandText.Append("DELETE FROM {0} ", PrepareStorageName(entity));
 		}
+
 		public override CommandText WriteInsert(CommandText commandText, EntitySchema entity, string fieldsSql)
 		{
 			return commandText.Append("INSERT INTO {0} ({1})", PrepareStorageName(entity), fieldsSql);
@@ -47,16 +42,17 @@ namespace ObjectSql.SqlServer
 
 		public override CommandText WriteAlias(CommandText commandText, string aliasName)
 		{
-			return commandText.Append(" AS [{0}]", aliasName);
+			return commandText.Append(" AS `{0}`", aliasName);
 		}
 
-		public override CommandText WriteJoin(CommandText commandText, EntitySchema entity, string alias, string conditionSql, JoinType joinType)
+		public override CommandText WriteJoin(CommandText commandText, EntitySchema entity, string alias, string conditionSql,
+			JoinType joinType)
 		{
 			var join = "";
 			if (joinType != JoinType.Inner)
 				join = " " + joinType.ToString().ToUpper();
 
-			return commandText.Append("{3} JOIN {0} AS [{1}] ON {2}", PrepareStorageName(entity), alias, conditionSql, join);
+			return commandText.Append("{3} JOIN {0} AS `{1}` ON {2}", PrepareStorageName(entity), alias, conditionSql, join);
 		}
 
 		public override CommandText WriteWhere(CommandText commandText, string sql)
@@ -163,10 +159,12 @@ namespace ObjectSql.SqlServer
 		{
 			return commandText.Append("{0} * {1}", left, right);
 		}
+
 		public override CommandText WriteEqual(CommandText commandText, string left, string right)
 		{
 			return commandText.Append("{0} = {1}", left, right);
 		}
+
 		public override CommandText WriteEqualNull(CommandText commandText, string left)
 		{
 			return commandText.Append("{0} IS NULL", left);
@@ -176,6 +174,7 @@ namespace ObjectSql.SqlServer
 		{
 			return commandText.Append(", ");
 		}
+
 		public override CommandText WriteNotEqual(CommandText commandText, string left, string right)
 		{
 			return commandText.Append("{0} <> {1}", left, right);
@@ -185,6 +184,7 @@ namespace ObjectSql.SqlServer
 		{
 			return commandText.Append("{0} IS NOT NULL", left);
 		}
+
 		public override CommandText WriteSet(CommandText commandText)
 		{
 			return commandText.Append(" = ");
@@ -204,26 +204,12 @@ namespace ObjectSql.SqlServer
 		{
 			if (storageName.NameOnly)
 			{
-				return String.Format("{0}", storageName.Name);
+				return string.Format("{0}", storageName.Name);
 			}
-			else
-			{
-				return String.IsNullOrEmpty(storageName.Schema)
-						   ? String.Format("[{0}]", storageName.Name)
-						   : String.Format("[{0}].[{1}]", storageName.Schema, storageName.Name);
-			}
-		}
 
-		[DeclaringType(typeof(MsSql))]
-		public void CountBig(SqlWriterContext context, MethodCallExpression methodCall)
-		{
-			context.CommandText.Append(WriteMethodCall("COUNT_BIG", 
-				methodCall.Arguments.Select(a => 
-				{ 
-					context.UpdateTypeInContext("");
-					return context.BuildSql(a);
-				})));
-			context.UpdateTypeInContext(SqlDbType.BigInt.ToString());
+			return string.IsNullOrEmpty(storageName.Schema)
+				? string.Format("`{0}`", storageName.Name)
+				: string.Format("`{0}`.`{1}`", storageName.Schema, storageName.Name);
 		}
 
 		[DeclaringType(typeof(String))]
@@ -240,7 +226,7 @@ namespace ObjectSql.SqlServer
 			context.CommandText.Append(string.Format("LOWER({0})", parameter));
 		}
 
-		[DeclaringType(typeof(MsSql))]
+		[DeclaringType(typeof(MySql))]
 		public void IsNull(SqlWriterContext context, MethodCallExpression methodCall)
 		{
 			var placeHolder = Guid.NewGuid().ToString().Replace("-", "");
@@ -249,27 +235,22 @@ namespace ObjectSql.SqlServer
 
 			context.Context.Preparators.PreProcessors.Add(new CommandPrePostProcessor((cmd, roots) =>
 			{
-				var startReplacement = cmd.CommandText.IndexOf($"{placeHolder}");
-				var endReplacement = cmd.CommandText.LastIndexOf($"{placeHolder}");
+				var startReplacement = cmd.CommandText.IndexOf($"{placeHolder}", StringComparison.Ordinal);
+				var endReplacement = cmd.CommandText.LastIndexOf($"{placeHolder}", StringComparison.Ordinal);
 
 				var substringToAnalize = cmd.CommandText.Substring(startReplacement, endReplacement - startReplacement);
 				if (cmd.CommandText.Contains($" ({placeHolder} IS NULL") || substringToAnalize.Contains($"_"))
 				{
 					cmd.CommandText =
 						cmd.CommandText.Substring(0, startReplacement) + "1=0" +
-						cmd.CommandText.Substring(endReplacement + placeHolder.Length, cmd.CommandText.Length - endReplacement - placeHolder.Length);
+						cmd.CommandText.Substring(endReplacement + placeHolder.Length,
+							cmd.CommandText.Length - endReplacement - placeHolder.Length);
 				}
 				else
 				{
 					cmd.CommandText = cmd.CommandText.Replace($"{placeHolder}", "");
 				}
 			}));
-		}
-
-		[DeclaringType(typeof(DatePart))]
-		public void Constant(SqlWriterContext context, DatePart value)
-		{
-			context.CommandText.Append(value.ToString().ToLower());
 		}
 	}
 }
