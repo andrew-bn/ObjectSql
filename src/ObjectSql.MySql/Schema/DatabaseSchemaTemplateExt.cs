@@ -50,18 +50,26 @@ namespace ObjectSql.MySql.Schema
 			
 			if (netType == typeof(long))
 				result = "long";
+			else if (netType == typeof(ulong))
+				result = "ulong";
 			else if (netType == typeof (byte[]))
 				result = "byte[]";
 			else if (netType == typeof(Guid))
 				result = "Guid";
 			else if (netType == typeof(int))
 				result = "int";
+			else if (netType == typeof(uint))
+				result = "uint";
 			else if (netType == typeof(short))
 				result = "short";
+			else if (netType == typeof(ushort))
+				result = "ushort";
 			else if (netType == typeof(XmlReader))
 				result = "string";
 			else if (netType == typeof(byte))
 				result = "byte";
+			else if (netType == typeof(sbyte))
+				result = "sbyte";
 			else if (netType == typeof(bool))
 				result = "bool";
 			else if (netType == typeof(string))
