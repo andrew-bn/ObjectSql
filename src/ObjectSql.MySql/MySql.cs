@@ -9,7 +9,6 @@ namespace ObjectSql.MySql
 	public class MySql
 	{
 		private MySql() { }
-
 		[Sql("UPPER({0})")]
 		public static string Upper(string characterExpression) { return default(string); }
 		[Sql("LOWER({0})")]
@@ -22,5 +21,7 @@ namespace ObjectSql.MySql
 		public static DateTime GetDate() { return default(DateTime); }
 		[Sql("{0} IS NULL")]
 		public static bool IsNull(object target) { return default(bool); }
+		[Sql("{0} IS NOT NULL")]
+		public static bool IsNotNull(object target) { return default(bool); }
 	}
 }

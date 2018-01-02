@@ -217,9 +217,9 @@ namespace ObjectSql.SqlServer
 		[DeclaringType(typeof(MsSql))]
 		public void CountBig(SqlWriterContext context, MethodCallExpression methodCall)
 		{
-			context.CommandText.Append(WriteMethodCall("COUNT_BIG", 
-				methodCall.Arguments.Select(a => 
-				{ 
+			context.CommandText.Append(WriteMethodCall("COUNT_BIG",
+				methodCall.Arguments.Select(a =>
+				{
 					context.UpdateTypeInContext("");
 					return context.BuildSql(a);
 				})));
@@ -243,20 +243,32 @@ namespace ObjectSql.SqlServer
 		[DeclaringType(typeof(MsSql))]
 		public void IsNull(SqlWriterContext context, MethodCallExpression methodCall)
 		{
+			IsNull(context, methodCall, false);
+		}
+
+		[DeclaringType(typeof(MsSql))]
+		public void IsNotNull(SqlWriterContext context, MethodCallExpression methodCall)
+		{
+			IsNull(context, methodCall, true);
+		}
+
+		private void IsNull(SqlWriterContext context, MethodCallExpression methodCall, bool notNull)
+		{
+			var not = notNull ? "NOT " : string.Empty;
 			var placeHolder = Guid.NewGuid().ToString().Replace("-", "");
 			var parameter = ParameterSql(context, methodCall.Arguments.First());
-			context.CommandText.Append($" ({placeHolder}{{0}} IS NULL{placeHolder}) ", parameter);
+			context.CommandText.Append($" ({placeHolder}{{0}} IS {not}NULL{placeHolder}) ", parameter);
 
 			context.Context.Preparators.PreProcessors.Add(new CommandPrePostProcessor((cmd, roots) =>
 			{
-				var startReplacement = cmd.CommandText.IndexOf($"{placeHolder}");
-				var endReplacement = cmd.CommandText.LastIndexOf($"{placeHolder}");
+				var startReplacement = cmd.CommandText.IndexOf($"{placeHolder}", StringComparison.Ordinal);
+				var endReplacement = cmd.CommandText.LastIndexOf($"{placeHolder}", StringComparison.Ordinal);
 
 				var substringToAnalize = cmd.CommandText.Substring(startReplacement, endReplacement - startReplacement);
-				if (cmd.CommandText.Contains($" ({placeHolder} IS NULL") || substringToAnalize.Contains($"_"))
+				if (cmd.CommandText.Contains($" ({placeHolder} IS {not}NULL") || substringToAnalize.Contains($"_"))
 				{
 					cmd.CommandText =
-						cmd.CommandText.Substring(0, startReplacement) + "1=0" +
+						cmd.CommandText.Substring(0, startReplacement) + $"1={(notNull ? "1" : "0")}" +
 						cmd.CommandText.Substring(endReplacement + placeHolder.Length, cmd.CommandText.Length - endReplacement - placeHolder.Length);
 				}
 				else

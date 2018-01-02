@@ -30,5 +30,7 @@ namespace ObjectSql.SqlServer
 		public static decimal ScopeIdentity() { return default(decimal); }
 		[Sql("{0} IS NULL")]
 		public static bool IsNull(object target) { return default(bool); }
+		[Sql("{0} IS NOT NULL")]
+		public static bool IsNotNull(object target) { return default(bool); }
 	}
 }

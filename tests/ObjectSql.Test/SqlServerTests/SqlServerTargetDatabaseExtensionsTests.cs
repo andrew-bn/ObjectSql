@@ -23,10 +23,24 @@ namespace ObjectSql.Tests.SqlServerTests
 		}
 
 		[Fact]
+		public void Is_Not_Null()
+		{
+			Query.Select(() => MsSql.IsNotNull(1))
+				.Verify("SELECT (@p0 IS NOT NULL)", 1.DbType(SqlDbType.Int));
+		}
+
+		[Fact]
 		public void Is_Null_Of_Null_Value()
 		{
 			Query.Select(() => MsSql.IsNull(null))
 				.Verify("SELECT (NULL IS NULL)");
+		}
+
+		[Fact]
+		public void Is_Not_Null_Of_Null_Value()
+		{
+			Query.Select(() => MsSql.IsNotNull(null))
+				.Verify("SELECT (NULL IS NOT NULL)");
 		}
 
 		[Fact]
@@ -38,11 +52,27 @@ namespace ObjectSql.Tests.SqlServerTests
 		}
 
 		[Fact]
+		public void Is_Not_Null_Of_Empty_Array()
+		{
+			var emptyArray = new int[0];
+			Query.Select(() => MsSql.IsNotNull(emptyArray))
+				.Verify("SELECT (1=1)");
+		}
+
+		[Fact]
 		public void Is_Null_Of_Not_Empty_Array()
 		{
 			var emptyArray = new[] { 1 };
 			Query.Select(() => MsSql.IsNull(emptyArray))
 				.Verify("SELECT (1=0)", 1.Name("p0_0"));
+		}
+
+		[Fact]
+		public void Is_Not_Null_Of_Not_Empty_Array()
+		{
+			var emptyArray = new[] { 1 };
+			Query.Select(() => MsSql.IsNotNull(emptyArray))
+				.Verify("SELECT (1=1)", 1.Name("p0_0"));
 		}
 
 		[Fact]
@@ -54,12 +84,29 @@ namespace ObjectSql.Tests.SqlServerTests
 		}
 
 		[Fact]
+		public void Is_Not_Null_Array_Item()
+		{
+			var emptyArray = new[] { 1 };
+			Query.Select(() => MsSql.IsNotNull(emptyArray[0]))
+				.Verify("SELECT (@p0 IS NOT NULL)", 1.Name("p0"));
+		}
+
+		[Fact]
 		public void Is_Null_Array_Item2()
 		{
 			var emptyArray = new[] { 1 , 2, 3};
 			Query.Select(() => MsSql.IsNull(emptyArray) && MsSql.IsNull(emptyArray[0]))
 				.Verify("SELECT ((1=0) AND (@p1 IS NULL))",
 				1.Name("p0_0"), 2.Name("p0_1"), 3.Name("p0_2"), 1.Name("p1"));
+		}
+
+		[Fact]
+		public void Is_Not_Null_Array_Item2()
+		{
+			var emptyArray = new[] { 1, 2, 3 };
+			Query.Select(() => MsSql.IsNotNull(emptyArray) && MsSql.IsNotNull(emptyArray[0]))
+				.Verify("SELECT ((1=1) AND (@p1 IS NOT NULL))",
+					1.Name("p0_0"), 2.Name("p0_1"), 3.Name("p0_2"), 1.Name("p1"));
 		}
 
 		[Fact]
