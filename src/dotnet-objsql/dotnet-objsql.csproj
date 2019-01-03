@@ -1,8 +1,8 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <VersionPrefix>4.0.0</VersionPrefix>
-    <TargetFramework>netcoreapp1.0</TargetFramework>
+    <TargetFramework>netcoreapp2.1</TargetFramework>
     <AssemblyName>dotnet-objsql</AssemblyName>
     <OutputType>Exe</OutputType>
     <PackageId>dotnet-objsql</PackageId>

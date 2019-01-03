@@ -1,10 +1,10 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <Description>ObjectSql</Description>
     <VersionPrefix>4.0.0</VersionPrefix>
     <Authors>AB</Authors>
-    <TargetFrameworks>netstandard1.5</TargetFrameworks>
+    <TargetFrameworks>netstandard2.0</TargetFrameworks>
     <AssemblyName>ObjectSql</AssemblyName>
     <PackageId>ObjectSql</PackageId>
     <GenerateAssemblyTitleAttribute>false</GenerateAssemblyTitleAttribute>
@@ -22,7 +22,7 @@
   <ItemGroup>
     <PackageReference Include="System.Linq.Expressions" Version="4.3.0" />
     <PackageReference Include="System.Dynamic.Runtime" Version="4.3.0" />
-    <PackageReference Include="System.Reflection.TypeExtensions" Version="4.3.0" />
+    <PackageReference Include="System.Reflection.TypeExtensions" Version="4.5.1" />
     <PackageReference Include="System.Data.Common" Version="4.3.0" />
   </ItemGroup>
   <ItemGroup>

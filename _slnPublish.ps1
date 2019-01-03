@@ -34,5 +34,6 @@ if (Test-Path $nugetOutput){
 mkdir $nugetOutput -Force -confirm:$false -ErrorAction SilentlyContinue
 
 Push-Location
-iex 'dotnet pack /p:VersionPrefix=$versionPrefix --version-suffix "$versionSuffix" --configuration $buildConf --output "$nugetOutput"'
+
+iex 'dotnet msbuild "/t:Restore;Pack" /p:VersionSuffix=$versionSuffix /p:VersionPrefix=$versionPrefix /p:Configuration=$buildConf /p:OutputPath="$nugetOutput"'
 Pop-Location	
