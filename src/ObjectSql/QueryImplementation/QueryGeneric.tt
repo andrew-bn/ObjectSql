@@ -35,27 +35,27 @@ for (int i = 1;i<=depth; i++)
 			return this;
 		}
 <# if (i!=depth) {#>
-		public IQuery<<#=TemplatesSeq(i)#>,TNewSource> Join<TNewSource>(Expression<Func<<#=TemplatesSeq(i)#>,TNewSource, bool>> condition)
+		public IQuery<<#=TemplatesSeq(i)#>,TNewSource> Join<TNewSource>(Expression<Func<<#=TemplatesSeq(i)#>,TNewSource, bool>> condition, params object[] additions)
 		{
-			Context.SqlPart.AddQueryPart(new JoinPart(condition, JoinType.Inner));
+			Context.SqlPart.AddQueryPart(new JoinPart(condition, JoinType.Inner, additions));
 			return new Query<<#=TemplatesSeq(i)#>,TNewSource>(Context);
 		}
 
-		public IQuery<<#=TemplatesSeq(i)#>,TNewSource> LeftJoin<TNewSource>(Expression<Func<<#=TemplatesSeq(i)#>,TNewSource, bool>> condition)
+		public IQuery<<#=TemplatesSeq(i)#>,TNewSource> LeftJoin<TNewSource>(Expression<Func<<#=TemplatesSeq(i)#>,TNewSource, bool>> condition, params object[] additions)
 		{
-			Context.SqlPart.AddQueryPart(new JoinPart(condition, JoinType.Left));
+			Context.SqlPart.AddQueryPart(new JoinPart(condition, JoinType.Left, additions));
 			return new Query<<#=TemplatesSeq(i)#>,TNewSource>(Context);
 		}
 
-		public IQuery<<#=TemplatesSeq(i)#>,TNewSource> RightJoin<TNewSource>(Expression<Func<<#=TemplatesSeq(i)#>,TNewSource, bool>> condition)
+		public IQuery<<#=TemplatesSeq(i)#>,TNewSource> RightJoin<TNewSource>(Expression<Func<<#=TemplatesSeq(i)#>,TNewSource, bool>> condition, params object[] additions)
 		{
-			Context.SqlPart.AddQueryPart(new JoinPart(condition, JoinType.Right));
+			Context.SqlPart.AddQueryPart(new JoinPart(condition, JoinType.Right, additions));
 			return new Query<<#=TemplatesSeq(i)#>,TNewSource>(Context);
 		}
 
-		public IQuery<<#=TemplatesSeq(i)#>,TNewSource> FullJoin<TNewSource>(Expression<Func<<#=TemplatesSeq(i)#>,TNewSource, bool>> condition)
+		public IQuery<<#=TemplatesSeq(i)#>,TNewSource> FullJoin<TNewSource>(Expression<Func<<#=TemplatesSeq(i)#>,TNewSource, bool>> condition, params object[] additions)
 		{
-			Context.SqlPart.AddQueryPart(new JoinPart(condition, JoinType.Full));
+			Context.SqlPart.AddQueryPart(new JoinPart(condition, JoinType.Full, additions));
 			return new Query<<#=TemplatesSeq(i)#>,TNewSource>(Context);
 		}
 <#}#>

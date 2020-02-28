@@ -20,12 +20,20 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="QueryImplementation\QueryGeneric.tt" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="System.Linq.Expressions" Version="4.3.0" />
     <PackageReference Include="System.Dynamic.Runtime" Version="4.3.0" />
     <PackageReference Include="System.Reflection.TypeExtensions" Version="4.5.1" />
     <PackageReference Include="System.Data.Common" Version="4.3.0" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="QueryImplementation\QueryGeneric.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>QueryGeneric.cs</LastGenOutput>
+    </Content>
     <Content Include="QueryInterfaces\IQueryGeneric.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>IQueryGeneric.txt</LastGenOutput>
@@ -42,6 +50,11 @@
     <Service Include="{508349b6-6b84-4df5-91f0-309beebad82d}" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Update="QueryImplementation\QueryGeneric.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>QueryGeneric.tt</DependentUpon>
+    </Compile>
     <Compile Update="QueryInterfaces\IQueryGeneric.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>

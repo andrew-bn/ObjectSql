@@ -11,6 +11,28 @@ namespace ObjectSql.SqlServer
 	{
 		private MsSql() { }
 
+		public static string HoldLock { get; } = "HOLDLOCK";
+		public static string NoLock { get; } = "NOLOCK";
+		public static string NoWait { get; } = "NOWAIT";
+		public static string PagLock { get; } = "PAGLOCK";
+		public static string ReadCommitted { get; } = "READCOMMITTED";
+		public static string ReadCommittedLock { get; } = "READCOMMITTEDLOCK";
+		public static string ReadPast { get; } = "READPAST";
+		public static string RepeatableRead { get; } = "REPEATABLEREAD";
+		public static string RowLock { get; } = "ROWLOCK";
+		public static string Serializable { get; } = "SERIALIZABLE";
+		public static string Snapshot { get; } = "SNAPSHOT";
+		public static string TabLock { get; } = "TABLOCK";
+		public static string TabLockX { get; } = "TABLOCKX";
+		public static string UpdLock { get; } = "UPDLOCK";
+		public static string XLock { get; } = "XLOCK";
+		internal const string WithStatement = "WITH ";
+
+		public static string WithHint(params string[] hints)
+		{
+			return $"WITH ({string.Join(", ", hints)})";
+		}
+
 		[Sql("OBJECT_ID({0})")]
 		public static int ObjectId(string objectName) { return 0; }
 		public static long CountBig(params object[] columnSelector) { return default(long); }

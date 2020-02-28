@@ -6,7 +6,7 @@ namespace ObjectSql.QueryInterfaces
 {
 	public interface IQuery
 	{
-		IQuery<TSource> From<TSource>();
+		IQuery<TSource> From<TSource>(params object[] additions);
 		IQueryEnd<TEntity> Select<TEntity>(Expression<Func<TEntity>> select);
 
 		IInsert<TSource> Insert<TSource>(Expression<Func<TSource, object>> selector) where TSource : class;

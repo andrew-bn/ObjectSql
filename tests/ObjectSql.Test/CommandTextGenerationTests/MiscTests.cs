@@ -5,6 +5,7 @@ using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using ObjectSql.SqlServer;
 using ObjectSql.Test;
 using ObjectSql.Test.Database.TestDatabase.dbo;
 using Xunit;
@@ -57,7 +58,16 @@ namespace ObjectSql.Tests.CommandTextGenerationTests
 			.Verify("SELECT([p].[ProductName]+[p].[ProductName])AS[Fld1]" +
 						"FROM[dbo].[Products]AS[p]");
 		}
+		[Fact]
+		public void Select_With_Statement()
+		{
+			var c = "_const";
+			Query.From<Products>(MsSql.WithHint(MsSql.NoLock))
+				.Select((p) => new { Fld1 = p.ProductName + c })
+				.Verify("SELECT([p].[ProductName]+@p0)AS[Fld1]" +
+						"FROM[dbo].[Products]AS[p]WITH(NOLOCK)",
+					c.DbType(SqlDbType.NVarChar));
 
-
+		}
 	}
 }

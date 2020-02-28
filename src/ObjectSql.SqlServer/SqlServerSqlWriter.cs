@@ -27,6 +27,24 @@ namespace ObjectSql.SqlServer
 
 		public override string RightBoundary { get; } = "]";
 
+		public override void Write(BuilderContext context, FromPart part)
+		{
+			base.Write(context, part);
+			if (part.Addition.Length == 1 &&
+				part.Addition[0] is string str &&
+				str.StartsWith(MsSql.WithStatement))
+			{
+				context.Text.Append($" {str} ");
+			}
+		}
+		public override void Write(BuilderContext context, JoinPart part)
+		{
+			var joinToTable = part.Expression.Parameters.Last().Type;
+			var sql = context.AnalizeExpression(part.Expression.Parameters.ToArray(), part.Expression.Body, ExpressionAnalizerType.Expression);
+			var withStatement = part.Additions.Length == 1 && part.Additions[0] is string str && str.StartsWith(MsSql.WithStatement)
+				? str: null;
+			WriteJoin(context.Text, context.SchemaManager.GetSchema(joinToTable), part.Expression.Parameters.Last().Name, sql, part.JoinType, withStatement);
+		}
 		public override CommandText WriteUpdate(CommandText commandText, EntitySchema entity, string updateSql)
 		{
 			return commandText.Append("UPDATE {0} SET {1}", PrepareStorageName(entity), updateSql);
@@ -52,11 +70,16 @@ namespace ObjectSql.SqlServer
 
 		public override CommandText WriteJoin(CommandText commandText, EntitySchema entity, string alias, string conditionSql, JoinType joinType)
 		{
+			return WriteJoin(commandText, entity, alias, conditionSql, joinType, null);
+		}
+
+		public CommandText WriteJoin(CommandText commandText, EntitySchema entity, string alias, string conditionSql, JoinType joinType, string withHint)
+		{
 			var join = "";
 			if (joinType != JoinType.Inner)
 				join = " " + joinType.ToString().ToUpper();
 
-			return commandText.Append("{3} JOIN {0} AS [{1}] ON {2}", PrepareStorageName(entity), alias, conditionSql, join);
+			return commandText.Append($"{join} JOIN {PrepareStorageName(entity)} AS [{alias}] {withHint} ON {conditionSql}");
 		}
 
 		public override CommandText WriteWhere(CommandText commandText, string sql)

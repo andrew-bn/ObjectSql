@@ -20,10 +20,10 @@ namespace ObjectSql.QueryImplementation
 			: base(context)
 		{
 		}
-		public IQuery<TTable> From<TTable>()
+		public IQuery<TTable> From<TTable>(params object[] additions)
 		{
 			Context.SqlPart.AddQueryPart(new NextQueryPart());
-			Context.SqlPart.AddQueryPart(new FromPart(typeof(TTable)));
+			Context.SqlPart.AddQueryPart(new FromPart(typeof(TTable), additions));
 			return new Query<TTable>(Context);
 		}
 		public IQueryEnd<TValue> Select<TValue>(Expression<Func<TValue>> select)

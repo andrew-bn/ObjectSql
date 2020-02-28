@@ -17,6 +17,24 @@ namespace ObjectSql.Core.QueryBuilder
 	{
 		public abstract string LeftBoundary { get; }
 		public abstract string RightBoundary { get; }
+
+		public virtual void Write(BuilderContext context, FromPart part)
+		{
+			var index = context.Parts.IndexOf(part);
+			var selectPart = (LambdaBasedQueryPart)context.Parts[index - 1];
+
+			context.SqlWriter.WriteFrom(context.Text, context.SchemaManager.GetSchema(part.Entity));
+			context.SqlWriter.WriteAlias(context.Text, selectPart.Expression.Parameters[0].Name);
+		}
+
+		public virtual void Write(BuilderContext context, JoinPart part)
+		{
+			var joinToTable = part.Expression.Parameters.Last().Type;
+			var sql = context.AnalizeExpression(part.Expression.Parameters.ToArray(), part.Expression.Body, ExpressionAnalizerType.Expression);
+
+			context.SqlWriter.WriteJoin(context.Text, context.SchemaManager.GetSchema(joinToTable), part.Expression.Parameters.Last().Name, sql, part.JoinType);
+		}
+
 		public abstract CommandText WriteUpdate(CommandText commandText, EntitySchema entity, string updateSql);
 		public abstract CommandText WriteDelete(CommandText commandText, EntitySchema entity);
 		public abstract CommandText WriteInsert(CommandText commandText, EntitySchema entity, string fieldsSql);
