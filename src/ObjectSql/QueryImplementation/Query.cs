@@ -20,6 +20,12 @@ namespace ObjectSql.QueryImplementation
 			: base(context)
 		{
 		}
+
+		public IQuery<TTable> From<TTable>()
+		{
+			return From<TTable>(Array.Empty<object>());
+		}
+
 		public IQuery<TTable> From<TTable>(params object[] additions)
 		{
 			Context.SqlPart.AddQueryPart(new NextQueryPart());
