@@ -1,5 +1,5 @@
 param (
-    [int]$bn = 7,
+    [int]$bn = 8,
     [string]$branch = "rc3",
 	[string]$nugetApiKey = "",
 	[string]$nugetSource = "http://nuget.regery.net/v3/index.json"
